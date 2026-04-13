@@ -9,14 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Brand
-        brand: '#185FA5',
-        'brand-dark': '#124878',
-        // Stripe-inspired palette
-        ink: '#0a2540',
-        slate: '#425466',
-        edge: '#e6ebf1',
-        cloud: '#f6f9fc',
+        // Navy & Slate palette
+        brand: '#1d4ed8',
+        'brand-dark': '#1e40af',
+        'brand-light': '#3b82f6',
+        ink: '#0f2040',
+        slate: '#475569',
+        edge: '#e2e8f0',
+        cloud: '#f1f5f9',
       },
       fontFamily: {
         sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],

@@ -28,22 +28,22 @@ export default function Header() {
     href === '/lamal' ? pathname === href : pathname.startsWith(href)
 
   return (
-    <header className="bg-white border-b border-edge sticky top-0 z-50">
+    <header className="bg-[#0f2040] sticky top-0 z-50">
       <div className="container-xl">
         <div className="flex items-center justify-between h-16">
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 shrink-0">
-            <div className="w-7 h-7 bg-brand rounded-[6px] flex items-center justify-center">
+            <div className="w-7 h-7 bg-[#1d4ed8] rounded-md flex items-center justify-center">
               <ShieldIcon />
             </div>
-            <span className="font-semibold text-ink text-[15px] hidden sm:inline">
+            <span className="font-semibold text-white text-[15px] hidden sm:inline">
               My Swiss Insurance
             </span>
-            <span className="font-semibold text-ink text-[15px] sm:hidden">MSI</span>
+            <span className="font-semibold text-white text-[15px] sm:hidden">MSI</span>
           </Link>
 
-          {/* Desktop nav — centered */}
+          {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-0.5">
             {navLinks.map((link) => (
               <Link
@@ -51,8 +51,8 @@ export default function Header() {
                 href={link.href}
                 className={`px-3.5 py-2 rounded-md text-[15px] transition-colors duration-150 ${
                   isActive(link.href)
-                    ? 'text-ink font-medium'
-                    : 'text-slate hover:text-ink'
+                    ? 'text-white font-medium bg-white/10'
+                    : 'text-slate-300 hover:text-white hover:bg-white/5'
                 }`}
               >
                 {link.label}
@@ -62,7 +62,10 @@ export default function Header() {
 
           {/* Desktop CTA */}
           <div className="hidden md:block">
-            <a href="#lead-form" className="btn-primary text-[14px] py-2 px-5">
+            <a
+              href="#lead-form"
+              className="bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-[14px] font-medium px-5 py-2 rounded-md transition-colors duration-150 whitespace-nowrap"
+            >
               Comparer gratuitement
             </a>
           </div>
@@ -70,7 +73,7 @@ export default function Header() {
           {/* Mobile hamburger */}
           <button
             onClick={() => setOpen(!open)}
-            className="md:hidden p-2 text-slate hover:text-ink rounded-md transition-colors"
+            className="md:hidden p-2 text-slate-300 hover:text-white rounded-md transition-colors"
             aria-label="Menu"
           >
             {open ? (
@@ -88,22 +91,24 @@ export default function Header() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden bg-white border-t border-edge">
+        <div className="md:hidden bg-[#0f2040] border-t border-white/10">
           <div className="container-xl py-4 flex flex-col gap-1">
             <Link href="/" onClick={() => setOpen(false)}
-              className="text-[15px] text-slate hover:text-ink py-2 px-2 rounded-md hover:bg-cloud transition-colors">
+              className="text-[15px] text-slate-300 hover:text-white py-2 px-2 rounded-md hover:bg-white/5 transition-colors">
               Accueil
             </Link>
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href} onClick={() => setOpen(false)}
                 className={`text-[15px] py-2 px-2 rounded-md transition-colors ${
-                  isActive(link.href) ? 'text-ink font-medium bg-cloud' : 'text-slate hover:text-ink hover:bg-cloud'
+                  isActive(link.href)
+                    ? 'text-white font-medium bg-white/10'
+                    : 'text-slate-300 hover:text-white hover:bg-white/5'
                 }`}>
                 {link.label}
               </Link>
             ))}
             <a href="#lead-form" onClick={() => setOpen(false)}
-              className="btn-primary text-sm mt-3 py-3">
+              className="mt-3 bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-sm font-medium text-center py-3 rounded-md transition-colors">
               Comparer gratuitement
             </a>
           </div>

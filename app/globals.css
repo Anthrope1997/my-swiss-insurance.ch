@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --navy:        #0f2040;
+  --navy-light:  #1a3a6e;
+  --blue:        #1d4ed8;
+  --blue-hover:  #1e40af;
+  --blue-light:  #3b82f6;
+  --blue-tint:   #dbeafe;
+  --slate:       #475569;
+  --surface:     #f1f5f9;
+  --border:      #e2e8f0;
+  --text:        #0f2040;
+  --text-muted:  #475569;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -14,60 +28,68 @@
 }
 
 @layer components {
-  /* Buttons */
+  /* ── Buttons ── */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 bg-brand hover:bg-brand-dark text-white font-medium px-6 py-3 rounded-[6px] transition-colors duration-150 whitespace-nowrap;
+    @apply inline-flex items-center justify-center gap-2
+           bg-brand hover:bg-brand-dark text-white font-medium
+           px-6 py-3 rounded-md transition-colors duration-150 whitespace-nowrap;
   }
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 border border-brand text-brand font-medium px-6 py-3 rounded-[6px] transition-colors duration-150 whitespace-nowrap hover:bg-cloud;
-  }
-  .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 text-slate font-medium px-4 py-2 rounded-[6px] transition-colors duration-150 whitespace-nowrap hover:bg-cloud hover:text-ink;
+    @apply inline-flex items-center justify-center gap-2
+           border border-edge text-ink font-medium
+           px-6 py-3 rounded-md transition-colors duration-150 whitespace-nowrap
+           hover:bg-cloud;
   }
 
-  /* Cards */
+  /* ── Cards ── */
   .card {
-    @apply bg-white border border-edge rounded-[8px] p-8;
+    @apply bg-white border border-edge rounded-lg p-8;
   }
   .card-sm {
-    @apply bg-white border border-edge rounded-[8px] p-5;
+    @apply bg-white border border-edge rounded-lg p-5;
   }
 
-  /* Form elements */
+  /* ── Badge — blue tint ── */
+  .badge {
+    @apply inline-flex items-center text-[13px] font-medium
+           text-[#1d4ed8] bg-[#dbeafe]
+           px-3 py-1 rounded-full;
+  }
+
+  /* ── Callouts — all blue family ── */
+  .callout {
+    @apply bg-[#dbeafe] border-l-4 border-[#1d4ed8]
+           px-5 py-4 rounded-r-lg text-[#0f2040];
+  }
+  .callout-warning {
+    @apply bg-[#eff6ff] border-l-4 border-[#3b82f6]
+           px-5 py-4 rounded-r-lg text-[#0f2040];
+  }
+  .callout-success {
+    @apply bg-[#dbeafe] border-l-4 border-[#1d4ed8]
+           px-5 py-4 rounded-r-lg text-[#0f2040];
+  }
+
+  /* ── Form fields ── */
   .input-field {
-    @apply w-full border border-edge rounded-md px-4 py-3 text-ink text-[15px] bg-white
-           placeholder:text-slate/40
-           focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand
+    @apply w-full border border-edge rounded-md px-4 py-3
+           text-ink text-[15px] bg-white placeholder:text-slate/40
+           focus:outline-none focus:border-brand focus:ring-2 focus:ring-[#dbeafe]
            transition-colors duration-150;
   }
   .select-field {
-    @apply w-full border border-edge rounded-md px-4 py-3 text-ink text-[15px] bg-white
-           focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand
-           transition-colors duration-150 appearance-none;
+    @apply w-full border border-edge rounded-md px-4 py-3
+           text-ink text-[15px] bg-white appearance-none
+           focus:outline-none focus:border-brand focus:ring-2 focus:ring-[#dbeafe]
+           transition-colors duration-150;
   }
 
-  /* Badges */
-  .badge {
-    @apply inline-flex items-center text-[13px] text-slate bg-cloud border border-edge px-3 py-1 rounded-full;
-  }
-
-  /* Callout box (docs-style) */
-  .callout {
-    @apply bg-cloud border-l-4 border-brand px-5 py-4 rounded-r-lg text-slate;
-  }
-  .callout-warning {
-    @apply bg-amber-50 border-l-4 border-amber-400 px-5 py-4 rounded-r-lg text-amber-800;
-  }
-  .callout-success {
-    @apply bg-emerald-50 border-l-4 border-emerald-400 px-5 py-4 rounded-r-lg text-emerald-800;
-  }
-
-  /* Layout */
+  /* ── Layout ── */
   .container-xl {
     @apply max-w-6xl mx-auto px-6;
   }
 
-  /* Article typography */
+  /* ── Article typography ── */
   .article-h2 {
     @apply text-2xl font-semibold text-ink border-b border-edge pb-4 mb-6 mt-14 first:mt-0;
   }
@@ -78,13 +100,13 @@
     @apply text-[17px] text-slate leading-relaxed mb-4;
   }
 
-  /* TOC link */
+  /* ── TOC ── */
   .toc-link {
     @apply block text-[13.5px] text-slate hover:text-ink py-1.5 pl-4
            border-l-2 border-edge hover:border-brand transition-all duration-150;
   }
 
-  /* Table */
+  /* ── Tables ── */
   .stripe-table thead th {
     @apply bg-cloud text-[13px] font-semibold text-ink px-4 py-3 text-left border-b border-edge;
   }
@@ -95,6 +117,6 @@
     @apply border-b-0;
   }
   .stripe-table tr:hover td {
-    @apply bg-cloud/50;
+    @apply bg-cloud/60;
   }
 }

@@ -71,14 +71,14 @@ export default function LeadForm({ compact = false }: { compact?: boolean }) {
 
   if (status === 'success') {
     return (
-      <div id="lead-form" className="bg-white border border-edge rounded-[12px] p-8 text-center">
-        <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg className="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+      <div id="lead-form" className="bg-[#dbeafe] border border-[#1d4ed8]/20 rounded-xl p-8 text-center">
+        <div className="w-12 h-12 bg-[#1d4ed8] rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="font-semibold text-ink text-lg mb-1">Demande envoyée !</h3>
-        <p className="text-slate text-[15px]">
+        <h3 className="font-semibold text-[#0f2040] text-lg mb-1">Demande envoyée !</h3>
+        <p className="text-[#1d4ed8] text-[15px]">
           Un conseiller vous contacte sous 24h avec votre comparaison personnalisée.
         </p>
       </div>
@@ -86,20 +86,21 @@ export default function LeadForm({ compact = false }: { compact?: boolean }) {
   }
 
   return (
-    <div id="lead-form" className="bg-white border border-edge rounded-[12px] overflow-hidden">
-      {/* Form header */}
-      <div className="px-6 py-5 border-b border-edge">
-        <p className={`font-semibold text-ink ${compact ? 'text-[16px]' : 'text-[18px]'}`}>
+    <div id="lead-form" className="bg-white border border-[#e2e8f0] rounded-xl overflow-hidden">
+
+      {/* Header */}
+      <div className="px-6 py-5 border-b border-[#e2e8f0]">
+        <p className={`font-semibold text-[#0f2040] ${compact ? 'text-[16px]' : 'text-xl'}`}>
           Comparaison gratuite
         </p>
-        <p className="text-[13px] text-slate mt-0.5">Sans engagement · Réponse sous 24h</p>
+        <p className="text-[13px] text-[#475569] mt-0.5">Sans engagement · Réponse sous 24h</p>
       </div>
 
       <form onSubmit={handleSubmit} className="px-6 py-5 space-y-4">
 
         {/* Prénom */}
         <div>
-          <label htmlFor="prenom" className="block text-[13px] font-medium text-slate mb-1.5">
+          <label htmlFor="prenom" className="block text-sm font-medium text-[#0f2040] mb-1">
             Prénom
           </label>
           <input
@@ -113,7 +114,7 @@ export default function LeadForm({ compact = false }: { compact?: boolean }) {
 
         {/* Email */}
         <div>
-          <label htmlFor="email" className="block text-[13px] font-medium text-slate mb-1.5">
+          <label htmlFor="email" className="block text-sm font-medium text-[#0f2040] mb-1">
             Adresse email
           </label>
           <input
@@ -127,7 +128,7 @@ export default function LeadForm({ compact = false }: { compact?: boolean }) {
 
         {/* Canton */}
         <div>
-          <label htmlFor="canton" className="block text-[13px] font-medium text-slate mb-1.5">
+          <label htmlFor="canton" className="block text-sm font-medium text-[#0f2040] mb-1">
             Canton de résidence
           </label>
           <div className="relative">
@@ -142,7 +143,7 @@ export default function LeadForm({ compact = false }: { compact?: boolean }) {
                 <option key={c.code} value={c.code}>{c.name} ({c.code})</option>
               ))}
             </select>
-            <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate pointer-events-none"
+            <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#475569] pointer-events-none"
               fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
             </svg>
@@ -151,7 +152,7 @@ export default function LeadForm({ compact = false }: { compact?: boolean }) {
 
         {/* Situation */}
         <div>
-          <label htmlFor="situation" className="block text-[13px] font-medium text-slate mb-1.5">
+          <label htmlFor="situation" className="block text-sm font-medium text-[#0f2040] mb-1">
             Votre situation
           </label>
           <div className="relative">
@@ -166,25 +167,29 @@ export default function LeadForm({ compact = false }: { compact?: boolean }) {
                 <option key={s.value} value={s.value}>{s.label}</option>
               ))}
             </select>
-            <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate pointer-events-none"
+            <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#475569] pointer-events-none"
               fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
             </svg>
           </div>
         </div>
 
-        {error && <p className="text-red-600 text-[13px]">{error}</p>}
+        {error && (
+          <p className="text-red-600 text-[13px] border border-red-300 bg-red-50 rounded-md px-3 py-2">
+            {error}
+          </p>
+        )}
 
         <button
           type="submit"
           disabled={status === 'loading'}
-          className="w-full bg-brand hover:bg-brand-dark disabled:bg-slate/30 text-white font-medium
-                     py-3.5 rounded-md transition-colors duration-150 text-[15px] mt-1"
+          className="w-full bg-[#1d4ed8] hover:bg-[#1e40af] disabled:bg-[#475569] text-white
+                     font-medium py-4 rounded-md transition-colors duration-150 text-base mt-1"
         >
           {status === 'loading' ? 'Envoi en cours…' : 'Recevoir ma comparaison gratuite →'}
         </button>
 
-        <p className="text-[12px] text-slate/60 text-center">
+        <p className="text-[12px] text-[#475569]/60 text-center">
           Vos données ne sont pas revendues · RGPD conforme
         </p>
       </form>
