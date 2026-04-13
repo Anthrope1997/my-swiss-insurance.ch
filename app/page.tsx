@@ -130,14 +130,15 @@ export default function HomePage() {
             {/* Left — text */}
             <div className="max-w-xl">
               <div className="badge mb-6">
-                Mis à jour 2026 · Données OFSP officielles
+                Assurance maladie obligatoire en Suisse · Données OFSP 2026
               </div>
               <h1 className="text-5xl sm:text-6xl font-bold text-ink leading-tight mb-6">
                 Économisez sur votre assurance maladie suisse.
               </h1>
               <p className="text-xl text-slate leading-relaxed mb-10">
-                Les primes LAMal varient de CHF 309 à CHF 573 selon le canton.
-                Trouvez la meilleure caisse maladie selon votre profil — gratuit, sans engagement.
+                En Suisse, l'assurance maladie de base (LAMal) est obligatoire pour tous.
+                Ses primes varient de CHF 309 à CHF 573 selon le canton — comparez gratuitement
+                pour trouver la moins chère selon votre profil.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <a href="#lead-form" className="btn-primary text-[15px] py-3.5 px-7">
@@ -147,7 +148,7 @@ export default function HomePage() {
                   </svg>
                 </a>
                 <Link href="/lamal/guide" className="btn-secondary text-[15px] py-3.5 px-7">
-                  Lire le guide LAMal
+                  Comprendre l'assurance maladie
                 </Link>
               </div>
               <p className="mt-6 text-[13px] text-slate/60">
@@ -186,11 +187,11 @@ export default function HomePage() {
         <div className="container-xl">
           <div className="max-w-2xl mb-16">
             <h2 className="text-4xl font-bold text-ink leading-tight mb-4">
-              Tout pour optimiser votre LAMal.
+              Tout pour maîtriser votre assurance maladie suisse.
             </h2>
             <p className="text-xl text-slate leading-relaxed">
-              Informations sourcées, à jour, expliquées sans jargon.
-              Pour prendre la meilleure décision en toute confiance.
+              Guides, comparatifs et conseils sur la LAMal — l'assurance maladie obligatoire suisse.
+              Des informations sourcées, à jour, expliquées sans jargon.
             </p>
           </div>
 
@@ -250,12 +251,12 @@ export default function HomePage() {
             <div>
               <div className="badge mb-5">Guide · Mis à jour 2026</div>
               <h2 className="text-4xl font-bold text-ink leading-tight mb-5">
-                La LAMal expliquée de A à Z.
+                L'assurance maladie suisse expliquée de A à Z.
               </h2>
               <p className="text-[17px] text-slate leading-relaxed mb-8">
-                Primes 2026 par canton, comparatif des franchises avec point de break-even,
-                4 modèles d'assurance, subsides et comment changer de caisse. Le guide de référence
-                en Suisse romande.
+                La LAMal est complexe : franchises, modèles alternatifs, subsides cantonaux,
+                délais de résiliation. Notre guide couvre tout — primes 2026 par canton,
+                comparatif des franchises, et comment changer de caisse sans erreur.
               </p>
               <Link href="/lamal/guide" className="btn-primary text-[15px]">
                 Lire le guide complet →
@@ -265,7 +266,7 @@ export default function HomePage() {
               {[
                 { label: 'Primes 2026 par canton', sub: 'Tableau complet des 26 cantons · Source OFSP' },
                 { label: 'Franchises : quel choix ?', sub: 'Break-even calculé pour 300 → 2500 CHF' },
-                { label: 'Les 4 modèles LAMal', sub: 'Standard · Médecin de famille · HMO · Telmed' },
+                { label: 'Les 4 modèles d\'assurance', sub: 'Standard · Médecin de famille · HMO · Telmed' },
                 { label: 'Subsides : qui y a droit ?', sub: '25–30% de la population suisse en bénéficie' },
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-4 py-4 border-b border-edge last:border-b-0">
@@ -285,11 +286,11 @@ export default function HomePage() {
       <section className="bg-ink py-24">
         <div className="container-xl text-center max-w-2xl mx-auto">
           <h2 className="text-4xl font-bold text-white leading-tight mb-5">
-            Prêt à économiser sur votre LAMal ?
+            Prêt à économiser sur votre assurance maladie ?
           </h2>
           <p className="text-xl text-white/60 mb-10 leading-relaxed">
-            Remplissez le formulaire et recevez une comparaison personnalisée sous 24h.
-            Entièrement gratuit, sans engagement.
+            Recevez une comparaison personnalisée des caisses maladie disponibles dans votre canton.
+            Gratuit, sans engagement, réponse sous 24h.
           </p>
           <a href="#lead-form" className="inline-flex items-center gap-2 bg-brand hover:bg-brand-dark text-white font-medium px-8 py-4 rounded-[6px] text-[16px] transition-colors duration-150">
             Comparer gratuitement
