@@ -11,12 +11,32 @@ function ShieldIcon() {
 
 const columns = [
   {
-    title: 'LAMal',
+    title: 'Guides',
     links: [
       { href: '/lamal/guide', label: 'Comprendre la LAMal' },
-      { href: '/lamal/lamal-vs-lca', label: 'LAMal vs assurance complémentaire' },
-      { href: '/lamal/changer-de-caisse', label: 'Changer de caisse maladie' },
-      { href: '/lamal/par-profil', label: 'LAMal par situation de vie' },
+      { href: '/lamal/comparateur', label: 'Comparateur de caisses' },
+      { href: '/lamal/lamal-vs-lca', label: 'LAMal vs complémentaire' },
+      { href: '/lamal/changer-de-caisse', label: 'Changer de caisse' },
+    ],
+  },
+  {
+    title: 'Par canton',
+    links: [
+      { href: '/lamal/canton/vaud', label: 'Vaud' },
+      { href: '/lamal/canton/geneve', label: 'Genève' },
+      { href: '/lamal/canton/fribourg', label: 'Fribourg' },
+      { href: '/lamal/canton/valais', label: 'Valais' },
+      { href: '/lamal/canton/neuchatel', label: 'Neuchâtel' },
+      { href: '/lamal/canton/jura', label: 'Jura' },
+    ],
+  },
+  {
+    title: 'Par situation',
+    links: [
+      { href: '/lamal/salarie-independant', label: 'Salarié / Indépendant' },
+      { href: '/lamal/famille-retraite', label: 'Famille / Retraité' },
+      { href: '/lamal/expatrie-frontalier', label: 'Expatrié / Frontalier' },
+      { href: '/lamal/par-profil', label: 'Toutes les situations' },
     ],
   },
   {
@@ -32,14 +52,14 @@ const columns = [
 
 export default function Footer() {
   return (
-    <footer className="bg-ink text-white/60">
+    <footer className="bg-[#0f2040] text-white/60">
       <div className="container-xl pt-16 pb-12">
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-10 mb-14">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-10 mb-14">
 
           {/* Brand col */}
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-2.5 mb-5">
-              <div className="w-7 h-7 bg-brand rounded-[6px] flex items-center justify-center shrink-0">
+              <div className="w-7 h-7 bg-[#1d4ed8] rounded-[6px] flex items-center justify-center shrink-0">
                 <ShieldIcon />
               </div>
               <span className="text-white font-semibold text-[15px]">My Swiss Insurance</span>
@@ -59,17 +79,10 @@ export default function Footer() {
               <ul className="space-y-3">
                 {col.links.map((link) => (
                   <li key={link.href}>
-                    {'external' in link && link.external ? (
-                      <a href={link.href} target="_blank" rel="noopener noreferrer"
-                        className="text-[14px] hover:text-white transition-colors duration-150">
-                        {link.label}
-                      </a>
-                    ) : (
-                      <Link href={link.href}
-                        className="text-[14px] hover:text-white transition-colors duration-150">
-                        {link.label}
-                      </Link>
-                    )}
+                    <Link href={link.href}
+                      className="text-[14px] hover:text-white transition-colors duration-150">
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
