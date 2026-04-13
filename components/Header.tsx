@@ -28,7 +28,7 @@ export default function Header() {
 
   const handleCTA = () => {
     if (pathname === '/') {
-      document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
     } else {
       router.push('/#lead-form')
     }

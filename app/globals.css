@@ -19,6 +19,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 80px;
   }
   body {
     @apply text-ink bg-white antialiased;
