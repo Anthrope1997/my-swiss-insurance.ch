@@ -69,6 +69,22 @@ const faqSchema = {
         text: "Dans les 3 mois suivant votre prise de domicile en Suisse. Si vous respectez ce délai, la couverture est rétroactive à la date d'arrivée. Passé ce délai, les autorités cantonales vous attribuent d'office une caisse. Source : art. 3 al. 1 et art. 5 LAMal.",
       },
     },
+    {
+      '@type': 'Question',
+      name: "Quelle est la caisse maladie la moins chère en Suisse ?",
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "La caisse la moins chère dépend de votre canton, de votre âge et du modèle choisi. Pour un adulte à Nidwald, les primes débutent autour de CHF 280/mois. À Genève, elles dépassent CHF 530. Les écarts entre caisses dans un même canton atteignent CHF 100–180/mois.",
+      },
+    },
+    {
+      '@type': 'Question',
+      name: "Les prestations sont-elles identiques dans toutes les caisses maladie ?",
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: "Oui. Pour la LAMal de base, les prestations sont strictement identiques chez tous les assureurs agréés par l'OFSP. Seules les primes, la qualité du service client et les options complémentaires (LCA) diffèrent.",
+      },
+    },
   ],
 }
 
@@ -110,15 +126,35 @@ const franchises = [
   { montant: 2500, prime: 353.10, economie: 102.00, ecAnn: 1224, breakEven: '~CHF 1\'300', conseil: 'Optimal pour adultes très sains' },
 ]
 
+const assureurs = [
+  { name: 'Assura',    part: '7.2%',  note: 'Souvent la moins chère, service digital' },
+  { name: 'Concordia', part: '6.8%',  note: 'Bon service, réseau médecin de famille étendu' },
+  { name: 'CSS',       part: '14.1%', note: 'Plus grande caisse suisse, large réseau' },
+  { name: 'Helsana',   part: '13.5%', note: 'Application mobile avancée, nombreuses options' },
+  { name: 'KPT',       part: '4.2%',  note: 'Compétitive, bonne qualité de service' },
+  { name: 'Sanitas',   part: '7.9%',  note: 'Forte en télémédecine et digital' },
+  { name: 'SWICA',     part: '10.2%', note: 'Leader en médecine intégrative' },
+  { name: 'Visana',    part: '9.1%',  note: 'Forte présence Suisse romande et alémanique' },
+]
+
+const economies = [
+  { canton: 'Genève',   mensuel: '~CHF 120–180', annuel: "~CHF 1'440–2'160" },
+  { canton: 'Vaud',     mensuel: '~CHF 90–130',  annuel: "~CHF 1'080–1'560" },
+  { canton: 'Fribourg', mensuel: '~CHF 70–110',  annuel: "~CHF 840–1'320" },
+  { canton: 'Berne',    mensuel: '~CHF 60–100',  annuel: "~CHF 720–1'200" },
+]
+
 const toc = [
   { id: 'definition', label: "1. Qu'est-ce que la LAMal ?" },
   { id: 'couverture', label: '2. Ce que couvre la LAMal' },
-  { id: 'primes', label: '3. Primes 2026 par canton' },
-  { id: 'franchise', label: '4. Choisir sa franchise' },
-  { id: 'modeles', label: '5. Les 4 modèles' },
-  { id: 'changer', label: '6. Comment changer de caisse' },
-  { id: 'subsides', label: '7. Subsides' },
-  { id: 'faq', label: '8. FAQ' },
+  { id: 'primes',     label: '3. Primes 2026 par canton' },
+  { id: 'assureurs',  label: '4. Principaux assureurs' },
+  { id: 'franchise',  label: '5. Choisir sa franchise' },
+  { id: 'modeles',    label: '6. Les 4 modèles' },
+  { id: 'economies',  label: '7. Économies possibles' },
+  { id: 'changer',    label: '8. Comment changer de caisse' },
+  { id: 'subsides',   label: '9. Subsides' },
+  { id: 'faq',        label: '10. FAQ' },
 ]
 
 export default function GuideLamalPage() {
@@ -299,9 +335,44 @@ export default function GuideLamalPage() {
               </p>
             </section>
 
-            {/* 4 — Franchise */}
+            {/* 4 — Assureurs */}
+            <section id="assureurs">
+              <h2 className="article-h2">4. Principaux assureurs LAMal en Suisse</h2>
+              <p className="article-p">
+                57 caisses sont agréées par l'OFSP. Les prestations de base sont identiques
+                chez tous les assureurs — seules les primes, la qualité du service et les options
+                complémentaires diffèrent. Comparez toujours les primes pour votre canton spécifique.
+              </p>
+              <div className="overflow-x-auto border border-edge rounded-[8px] mb-4">
+                <table className="stripe-table w-full">
+                  <thead>
+                    <tr>
+                      <th>Assureur</th>
+                      <th className="text-center">Part de marché</th>
+                      <th className="hidden sm:table-cell">Caractéristiques</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {assureurs.map((a) => (
+                      <tr key={a.name}>
+                        <td className="font-semibold text-ink">{a.name}</td>
+                        <td className="text-center font-medium text-brand">{a.part}</td>
+                        <td className="hidden sm:table-cell">{a.note}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="callout text-[15px]">
+                <strong>À retenir :</strong> la caisse la moins chère dans votre canton n'est pas
+                forcément la même que celle de votre voisin. Les écarts entre assureurs dans un même
+                canton atteignent CHF 100–180/mois pour un adulte.
+              </div>
+            </section>
+
+            {/* 5 — Franchise */}
             <section id="franchise">
-              <h2 className="article-h2">4. Choisir sa franchise LAMal</h2>
+              <h2 className="article-h2">5. Choisir sa franchise LAMal</h2>
               <p className="article-p">
                 La franchise est le montant annuel que vous payez avant que l'assurance intervienne.
                 Une franchise élevée réduit la prime mensuelle mais augmente le risque financier en cas de maladie.
@@ -354,9 +425,9 @@ export default function GuideLamalPage() {
               </div>
             </section>
 
-            {/* 5 — Modèles */}
+            {/* 6 — Modèles */}
             <section id="modeles">
-              <h2 className="article-h2">5. Les 4 modèles d'assurance LAMal</h2>
+              <h2 className="article-h2">6. Les 4 modèles d'assurance LAMal</h2>
               <p className="article-p">
                 Chaque modèle impose des contraintes différentes sur l'accès aux soins.
                 Les modèles alternatifs réduisent la prime en échange d'une porte d'entrée obligatoire.
@@ -408,9 +479,36 @@ export default function GuideLamalPage() {
               </div>
             </section>
 
-            {/* 6 — Changer */}
+            {/* 7 — Économies */}
+            <section id="economies">
+              <h2 className="article-h2">7. Économies possibles en changeant de caisse</h2>
+              <p className="article-p">
+                Les écarts de primes entre caisses au sein d'un même canton sont significatifs.
+                Voici les économies mensuelles typiques en choisissant la caisse la moins chère
+                pour votre profil, par rapport à la moyenne cantonale.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                {economies.map((r) => (
+                  <div key={r.canton} className="bg-cloud border border-edge rounded-[8px] p-5">
+                    <p className="font-semibold text-ink mb-1">{r.canton}</p>
+                    <p className="text-2xl font-bold text-[#1d4ed8]">
+                      {r.mensuel}
+                      <span className="text-[14px] font-normal text-slate">/mois</span>
+                    </p>
+                    <p className="text-[14px] text-slate mt-0.5">soit {r.annuel}/an d'économie</p>
+                  </div>
+                ))}
+              </div>
+              <div className="callout-warning text-[15px]">
+                <strong>Ces chiffres sont des estimations</strong> basées sur les écarts de primes
+                constatés en 2026 pour un adulte, modèle standard, franchise 300 CHF.
+                Les économies réelles dépendent de votre profil exact.
+              </div>
+            </section>
+
+            {/* 8 — Changer */}
             <section id="changer">
-              <h2 className="article-h2">6. Comment changer de caisse maladie</h2>
+              <h2 className="article-h2">8. Comment changer de caisse maladie</h2>
 
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-6">
                 <table className="stripe-table w-full">
@@ -461,9 +559,9 @@ export default function GuideLamalPage() {
               </Link>
             </section>
 
-            {/* 7 — Subsides */}
+            {/* 9 — Subsides */}
             <section id="subsides">
-              <h2 className="article-h2">7. Subsides LAMal — qui y a droit ?</h2>
+              <h2 className="article-h2">9. Subsides LAMal — qui y a droit ?</h2>
               <p className="article-p">
                 Les <strong>subsides de primes</strong> sont des aides financières versées par les cantons
                 aux personnes dont les revenus sont modestes. Environ 25 à 30% de la population suisse en bénéficie.
@@ -484,9 +582,9 @@ export default function GuideLamalPage() {
               </div>
             </section>
 
-            {/* 8 — FAQ */}
+            {/* 10 — FAQ */}
             <section id="faq">
-              <h2 className="article-h2">8. Questions fréquentes sur la LAMal</h2>
+              <h2 className="article-h2">10. Questions fréquentes sur la LAMal</h2>
               <div className="divide-y divide-edge border border-edge rounded-[8px] overflow-hidden">
                 {faqSchema.mainEntity.map((q, i) => (
                   <details key={i} className="group bg-white">
