@@ -189,8 +189,10 @@ export default function LeadForm({ compact = false }: { compact?: boolean }) {
           {status === 'loading' ? 'Envoi en cours…' : 'Recevoir ma comparaison gratuite →'}
         </button>
 
-        <p className="text-[12px] text-[#475569]/60 text-center">
-          Vos données ne sont pas revendues · RGPD conforme
+        <p className="text-[12px] text-[#475569]/60 text-center leading-relaxed">
+          En soumettant ce formulaire, vous acceptez que vos données soient traitées conformément
+          à notre <a href="/politique-confidentialite" className="underline hover:text-[#475569] transition-colors">politique de confidentialité</a> (LPD, RS&nbsp;235.1).
+          Vous pouvez retirer votre consentement à tout moment.
         </p>
       </form>
     </div>
