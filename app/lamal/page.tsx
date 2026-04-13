@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Breadcrumb from '@/components/Breadcrumb'
 import FAQ from '@/components/FAQ'
 import Link from 'next/link'
 import LeadForm from '@/components/LeadForm'
@@ -83,11 +84,7 @@ export default function LamalHubPage() {
       {/* Page header */}
       <section className="bg-white border-b border-edge pt-12 pb-10">
         <div className="container-xl">
-          <nav className="flex items-center gap-2 text-[13px] text-slate mb-6">
-            <Link href="/" className="hover:text-ink transition-colors">Accueil</Link>
-            <span className="text-edge">/</span>
-            <span className="text-ink">LAMal</span>
-          </nav>
+          <Breadcrumb items={[{ label: 'Accueil', href: '/' }, { label: 'LAMal' }]} />
           <div className="badge mb-4">Données OFSP · Mis à jour 2026</div>
           <h1 className="text-5xl font-bold text-ink leading-tight mb-4 max-w-2xl">
             LAMal : assurance maladie de base en Suisse.

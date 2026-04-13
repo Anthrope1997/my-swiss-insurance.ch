@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import AuthorBio from '@/components/AuthorBio'
+import Breadcrumb from '@/components/Breadcrumb'
 import FAQ from '@/components/FAQ'
 import Link from 'next/link'
 import LeadForm from '@/components/LeadForm'
@@ -57,13 +58,7 @@ export default function LamalVsLcaPage() {
 
       <section className="bg-white border-b border-edge pt-12 pb-10">
         <div className="container-xl">
-          <nav className="flex items-center gap-2 text-[13px] text-slate mb-6">
-            <Link href="/" className="hover:text-ink transition-colors">Accueil</Link>
-            <span className="text-edge">/</span>
-            <Link href="/lamal" className="hover:text-ink transition-colors">LAMal</Link>
-            <span className="text-edge">/</span>
-            <span className="text-ink">LAMal vs assurance complémentaire</span>
-          </nav>
+          <Breadcrumb items={[{ label: 'Accueil', href: '/' }, { label: 'LAMal', href: '/lamal' }, { label: 'LAMal vs assurance complémentaire' }]} />
           <h1 className="text-5xl font-bold text-ink leading-tight mb-4 max-w-2xl">
             LAMal vs LCA : assurance de base et complémentaire.
           </h1>

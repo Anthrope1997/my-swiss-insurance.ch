@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Breadcrumb from '@/components/Breadcrumb'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -10,11 +11,7 @@ export const metadata: Metadata = {
 export default function PolitiqueConfidentialitePage() {
   return (
     <div className="container-xl py-16 max-w-3xl">
-      <nav className="flex items-center gap-2 text-[13px] text-slate mb-8">
-        <Link href="/" className="hover:text-ink transition-colors">Accueil</Link>
-        <span className="text-edge">/</span>
-        <span className="text-ink">Politique de confidentialité</span>
-      </nav>
+      <Breadcrumb items={[{ label: 'Accueil', href: '/' }, { label: 'Politique de confidentialité' }]} className="mb-8" />
 
       <h1 className="text-4xl font-bold text-ink mb-2">Politique de confidentialité</h1>
       <p className="text-slate text-[14px] mb-12">Dernière mise à jour : avril 2026</p>

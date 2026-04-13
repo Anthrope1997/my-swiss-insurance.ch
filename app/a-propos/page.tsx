@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Breadcrumb from '@/components/Breadcrumb'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -27,11 +28,7 @@ export default function AProposPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }} />
 
       <div className="container-xl py-16 max-w-3xl">
-        <nav className="flex items-center gap-2 text-[13px] text-slate mb-8">
-          <Link href="/" className="hover:text-ink transition-colors">Accueil</Link>
-          <span className="text-edge">/</span>
-          <span className="text-ink">À propos</span>
-        </nav>
+        <Breadcrumb items={[{ label: 'Accueil', href: '/' }, { label: 'À propos' }]} className="mb-8" />
 
         <h1 className="text-4xl font-bold text-ink mb-10">À propos de My Swiss Insurance</h1>
 
