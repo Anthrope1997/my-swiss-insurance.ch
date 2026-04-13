@@ -16,21 +16,13 @@ export const metadata: Metadata = {
     locale: 'fr_CH',
     type: 'website',
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true },
-  },
+  robots: { index: true, follow: true },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr-CH">
-      <body className="flex flex-col min-h-screen">
+      <body className="flex flex-col min-h-screen bg-white">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

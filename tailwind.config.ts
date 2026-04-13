@@ -9,18 +9,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: '#185FA5',
-        'primary-dark': '#124878',
-        'primary-light': '#EBF3FB',
+        // Brand
+        brand: '#185FA5',
+        'brand-dark': '#124878',
+        // Stripe-inspired palette
+        ink: '#0a2540',
+        slate: '#425466',
+        edge: '#e6ebf1',
+        cloud: '#f6f9fc',
       },
       fontFamily: {
-        sans: [
-          '-apple-system',
-          'BlinkMacSystemFont',
-          'Segoe UI',
-          'Roboto',
-          'sans-serif',
-        ],
+        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
       },
     },
   },

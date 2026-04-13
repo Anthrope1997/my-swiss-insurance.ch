@@ -3,12 +3,12 @@ import Link from 'next/link'
 import LeadForm from '@/components/LeadForm'
 
 export const metadata: Metadata = {
-  title: 'Comparateur de caisses maladie LAMal 2026 — Primes par canton',
+  title: 'Comparateur caisses maladie LAMal 2026 — Primes par canton',
   description:
-    'Comparez les primes LAMal 2026 par canton et par profil. Trouvez la caisse maladie la moins chère selon votre situation. Données officielles OFSP.',
+    'Comparez les primes LAMal 2026 par canton. Trouvez la caisse maladie la moins chère selon votre profil. Données officielles OFSP.',
   openGraph: {
     title: 'Comparateur caisses maladie LAMal 2026',
-    description: 'Primes LAMal 2026 par canton : comparez et économisez jusqu\'à CHF 1\'200/an.',
+    description: 'Primes LAMal 2026 par canton : comparez et économisez jusqu\'à CHF 2\'000/an.',
     url: 'https://my-swiss-insurance.ch/lamal/comparateur',
     type: 'article',
   },
@@ -32,15 +32,15 @@ const faqSchema = {
       name: 'Quelle est la caisse maladie la moins chère en Suisse ?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'La caisse maladie la moins chère dépend de votre canton de résidence, de votre âge et du modèle d\'assurance choisi. Les primes varient significativement entre cantons. Pour un adulte à Nidwald, on peut trouver des primes autour de CHF 280/mois, contre CHF 530+ à Genève. Utilisez priminfo.ch (site officiel) ou notre formulaire pour une comparaison personnalisée.',
+        text: 'La caisse la moins chère dépend de votre canton, âge et modèle choisi. Pour un adulte à Nidwald, les primes débutent autour de CHF 280/mois. À Genève, elles dépassent CHF 530. Les écarts entre caisses dans un même canton atteignent CHF 100–180/mois.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Les prestations sont-elles les mêmes dans toutes les caisses maladie ?',
+      name: 'Les prestations sont-elles identiques dans toutes les caisses ?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Oui, pour la LAMal de base, les prestations sont strictement identiques chez tous les assureurs agréés par l\'OFSP. Seules les primes, le service client et les options d\'assurances complémentaires (LCA) diffèrent entre caisses.',
+        text: 'Oui. Pour la LAMal de base, les prestations sont strictement identiques chez tous les assureurs agréés par l\'OFSP. Seules les primes, la qualité du service client et les options complémentaires diffèrent.',
       },
     },
     {
@@ -48,22 +48,42 @@ const faqSchema = {
       name: 'Comment économiser sur sa prime LAMal ?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Les principales façons d\'économiser sur la LAMal sont : (1) Choisir un modèle alternatif (médecin de famille, HMO ou Telmed) pour réduire la prime de 5 à 25%. (2) Augmenter sa franchise si vous êtes en bonne santé. (3) Changer de caisse chaque année avant le 30 novembre. (4) Vérifier votre droit aux subsides cantonaux.',
+        text: 'Trois leviers principaux : (1) choisir un modèle alternatif (médecin de famille, HMO, Telmed) pour −5 à −25% ; (2) augmenter sa franchise si vous êtes en bonne santé ; (3) changer de caisse chaque année avant le 30 novembre.',
       },
     },
   ],
 }
 
-// Top assureurs Switzerland (2026, indicatif)
+const premiumBars = [
+  { canton: 'Nidwald (NW)', prime: 308.70, pct: 54 },
+  { canton: 'Obwald (OW)', prime: 312.10, pct: 55 },
+  { canton: 'Uri (UR)', prime: 318.40, pct: 56 },
+  { canton: 'Schwyz (SZ)', prime: 325.60, pct: 57 },
+  { canton: 'Glaris (GL)', prime: 337.50, pct: 59 },
+  { canton: 'Zoug (ZG)', prime: 356.20, pct: 62 },
+  { canton: 'Lucerne (LU)', prime: 374.80, pct: 65 },
+  { canton: 'Berne (BE)', prime: 426.90, pct: 75 },
+  { canton: 'Argovie (AG)', prime: 399.60, pct: 70 },
+  { canton: 'Valais (VS)', prime: 408.90, pct: 71 },
+  { canton: 'Fribourg (FR)', prime: 449.80, pct: 79 },
+  { canton: 'Zurich (ZH)', prime: 455.10, pct: 80 },
+  { canton: 'Jura (JU)', prime: 459.30, pct: 80 },
+  { canton: 'Neuchâtel (NE)', prime: 482.70, pct: 84 },
+  { canton: 'Tessin (TI)', prime: 491.30, pct: 86 },
+  { canton: 'Vaud (VD)', prime: 520.40, pct: 91 },
+  { canton: 'Bâle-Ville (BS)', prime: 521.60, pct: 91 },
+  { canton: 'Genève (GE)', prime: 572.50, pct: 100 },
+]
+
 const assureurs = [
-  { name: 'Assura', part: '7.2%', note: 'Souvent la moins chère, service en ligne' },
+  { name: 'Assura', part: '7.2%', note: 'Souvent la moins chère, service digital' },
   { name: 'Concordia', part: '6.8%', note: 'Bon service, réseau médecin de famille étendu' },
-  { name: 'CSS', part: '14.1%', note: 'Grande caisse, large réseau de soins' },
-  { name: 'Helsana', part: '13.5%', note: 'Nombreuses options, application mobile avancée' },
+  { name: 'CSS', part: '14.1%', note: 'Plus grande caisse suisse, large réseau' },
+  { name: 'Helsana', part: '13.5%', note: 'Application mobile avancée, nombreuses options' },
   { name: 'KPT', part: '4.2%', note: 'Compétitive, bonne qualité de service' },
-  { name: 'Sanitas', part: '7.9%', note: 'Bonne couverture, fortes en télémédecine' },
-  { name: 'SWICA', part: '10.2%', note: 'Leader en médecine intégrative, réseau HMO solide' },
-  { name: 'Visana', part: '9.1%', note: 'Forte en Suisse romande et alémanique' },
+  { name: 'Sanitas', part: '7.9%', note: 'Forte en télémédecine et digital' },
+  { name: 'SWICA', part: '10.2%', note: 'Leader en médecine intégrative' },
+  { name: 'Visana', part: '9.1%', note: 'Forte présence Suisse romande et alémanique' },
 ]
 
 export default function ComparateurPage() {
@@ -72,93 +92,78 @@ export default function ComparateurPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-      <section className="bg-primary-light border-b border-blue-100 py-10">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <nav className="text-sm text-gray-500 mb-4">
-            <Link href="/" className="hover:text-primary">Accueil</Link>
-            <span className="mx-2">/</span>
-            <Link href="/lamal" className="hover:text-primary">LAMal</Link>
-            <span className="mx-2">/</span>
-            <span className="text-gray-800">Comparateur</span>
+      <section className="bg-white border-b border-edge pt-12 pb-10">
+        <div className="container-xl">
+          <nav className="flex items-center gap-2 text-[13px] text-slate mb-6">
+            <Link href="/" className="hover:text-ink transition-colors">Accueil</Link>
+            <span className="text-edge">/</span>
+            <Link href="/lamal" className="hover:text-ink transition-colors">LAMal</Link>
+            <span className="text-edge">/</span>
+            <span className="text-ink">Comparateur</span>
           </nav>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Comparateur de caisses maladie LAMal 2026
+          <h1 className="text-5xl font-bold text-ink leading-tight mb-4 max-w-2xl">
+            Comparateur de caisses maladie 2026.
           </h1>
-          <p className="text-gray-600 text-lg max-w-2xl">
-            Les primes LAMal varient jusqu'à 85% selon le canton. Comparez et trouvez
-            la caisse maladie la moins chère selon votre profil.
+          <p className="text-xl text-slate max-w-2xl leading-relaxed">
+            Les primes LAMal varient jusqu'à 85% selon le canton.
+            Identifiez les économies possibles pour votre profil.
           </p>
         </div>
       </section>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-          <div className="lg:col-span-2 space-y-10">
+      <div className="container-xl py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div className="lg:col-span-2 space-y-16">
 
-            {/* CTA comparaison personnalisée */}
-            <div className="bg-primary rounded-xl p-6 text-white">
-              <h2 className="text-white text-xl font-bold mb-2">
+            {/* CTA personnalisé */}
+            <div className="bg-cloud border border-edge rounded-[8px] p-8">
+              <h2 className="text-2xl font-semibold text-ink mb-2">
                 Comparaison personnalisée gratuite
               </h2>
-              <p className="text-blue-100 mb-4 text-sm">
-                Les primes ci-dessous sont des moyennes indicatives. Pour connaître exactement
-                la prime la moins chère dans votre canton selon votre profil, utilisez notre service.
+              <p className="text-[16px] text-slate mb-5">
+                Les données ci-dessous sont des moyennes cantonales. Pour connaître exactement
+                la prime la moins chère selon votre profil, utilisez notre service.
               </p>
-              <a href="#lead-form" className="bg-white text-primary font-bold px-5 py-2.5 rounded-lg hover:bg-blue-50 transition-colors inline-block text-sm">
-                Recevoir ma comparaison →
-              </a>
+              <a href="#lead-form" className="btn-primary">Recevoir ma comparaison →</a>
             </div>
 
-            {/* Comment comparer */}
+            {/* 3 étapes */}
             <section>
-              <h2 className="text-xl font-bold mb-4">Comment bien comparer les caisses maladie ?</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <h2 className="text-2xl font-semibold text-ink mb-8">Comment bien comparer</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
                 {[
-                  { step: '1', title: 'Votre canton', desc: 'La prime varie selon votre lieu de résidence. Genève est le canton le plus cher, Nidwald le moins cher.' },
-                  { step: '2', title: 'Votre franchise', desc: 'Plus la franchise est élevée, plus la prime est basse. Choisissez selon votre état de santé.' },
-                  { step: '3', title: 'Votre modèle', desc: 'Médecin de famille, HMO ou Telmed réduisent la prime de 5 à 25% par rapport au modèle standard.' },
+                  { n: '01', t: 'Votre canton', d: 'La prime varie selon le lieu de résidence. Genève est le canton le plus cher, Nidwald le moins cher.' },
+                  { n: '02', t: 'Votre franchise', d: 'Plus la franchise est élevée, plus la prime est basse. À choisir selon votre état de santé.' },
+                  { n: '03', t: 'Votre modèle', d: 'Médecin de famille, HMO ou Telmed réduisent la prime de 5 à 25% vs le modèle standard.' },
                 ].map((s) => (
-                  <div key={s.step} className="card text-center">
-                    <div className="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center font-bold mx-auto mb-2">
-                      {s.step}
-                    </div>
-                    <h3 className="font-semibold mb-1">{s.title}</h3>
-                    <p className="text-gray-500 text-sm">{s.desc}</p>
+                  <div key={s.n}>
+                    <div className="text-[36px] font-bold text-edge mb-3 leading-none">{s.n}</div>
+                    <h3 className="font-semibold text-ink text-[17px] mb-2">{s.t}</h3>
+                    <p className="text-[15px] text-slate leading-relaxed">{s.d}</p>
                   </div>
                 ))}
               </div>
             </section>
 
-            {/* Écart des primes */}
+            {/* Barres de primes */}
             <section>
-              <h2 className="text-xl font-bold mb-2">Écart de primes : jusqu'à 85% selon le canton</h2>
-              <p className="text-gray-600 mb-5 text-sm">
-                Primes moyennes indicatives 2026 pour un adulte, modèle standard, franchise 300 CHF (source OFSP).
+              <h2 className="text-2xl font-semibold text-ink mb-2">
+                Primes moyennes 2026 par canton
+              </h2>
+              <p className="text-[15px] text-slate mb-8">
+                Adulte 26 ans+, modèle standard, franchise 300 CHF. Source : OFSP.
               </p>
               <div className="space-y-3">
-                {[
-                  { canton: 'Nidwald (NW)', prime: 308.70, pct: 54 },
-                  { canton: 'Obwald (OW)', prime: 312.10, pct: 55 },
-                  { canton: 'Uri (UR)', prime: 318.40, pct: 56 },
-                  { canton: 'Appenzell Rh.-Int. (AI)', prime: 323.50, pct: 57 },
-                  { canton: 'Schwyz (SZ)', prime: 325.60, pct: 57 },
-                  { canton: 'Glaris (GL)', prime: 337.50, pct: 59 },
-                  { canton: 'Grisons (GR)', prime: 369.40, pct: 65 },
-                  { canton: 'Lucerne (LU)', prime: 374.80, pct: 66 },
-                  { canton: 'Zurich (ZH)', prime: 455.10, pct: 79 },
-                  { canton: 'Vaud (VD)', prime: 520.40, pct: 91 },
-                  { canton: 'Bâle-Ville (BS)', prime: 521.60, pct: 91 },
-                  { canton: 'Genève (GE)', prime: 572.50, pct: 100 },
-                ].map((row) => (
-                  <div key={row.canton} className="flex items-center gap-3">
-                    <span className="text-sm text-gray-600 w-52 flex-shrink-0">{row.canton}</span>
-                    <div className="flex-1 bg-gray-100 rounded-full h-5 relative">
+                {premiumBars.map((row) => (
+                  <div key={row.canton} className="flex items-center gap-4">
+                    <span className="text-[14px] text-slate w-44 shrink-0">{row.canton}</span>
+                    <div className="flex-1 bg-cloud rounded-full h-4 overflow-hidden">
                       <div
-                        className="bg-primary h-5 rounded-full"
+                        className="bg-brand h-4 rounded-full transition-all"
                         style={{ width: `${row.pct}%` }}
                       />
                     </div>
-                    <span className="text-sm font-semibold text-gray-800 w-20 text-right">
+                    <span className="text-[14px] font-semibold text-ink w-22 text-right shrink-0">
                       CHF {row.prime.toFixed(2)}
                     </span>
                   </div>
@@ -168,54 +173,50 @@ export default function ComparateurPage() {
 
             {/* Assureurs */}
             <section>
-              <h2 className="text-xl font-bold mb-4">Principaux assureurs LAMal en Suisse (2026)</h2>
-              <p className="text-gray-600 text-sm mb-5">
-                Il existe 57 caisses maladie agréées par l'OFSP. Voici les principales par part de marché.
-                Les primes varient selon le canton — comparez directement pour votre situation.
+              <h2 className="text-2xl font-semibold text-ink mb-2">
+                Principaux assureurs LAMal en Suisse
+              </h2>
+              <p className="text-[15px] text-slate mb-6">
+                57 caisses agréées au total. Les primes varient par canton — comparez pour votre situation.
               </p>
-              <div className="overflow-x-auto rounded-xl border border-gray-200">
-                <table className="table-auto w-full text-sm">
+              <div className="border border-edge rounded-[8px] overflow-hidden">
+                <table className="stripe-table w-full">
                   <thead>
                     <tr>
-                      <th className="bg-primary text-white px-4 py-3 text-left">Assureur</th>
-                      <th className="bg-primary text-white px-4 py-3 text-center">Part de marché</th>
-                      <th className="bg-primary text-white px-4 py-3 text-left hidden sm:table-cell">Caractéristiques</th>
+                      <th>Assureur</th>
+                      <th className="text-center">Part de marché</th>
+                      <th className="hidden sm:table-cell">Caractéristiques</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {assureurs.map((a, i) => (
-                      <tr key={a.name} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                        <td className="px-4 py-2.5 font-semibold text-gray-900">{a.name}</td>
-                        <td className="px-4 py-2.5 text-center text-primary font-medium">{a.part}</td>
-                        <td className="px-4 py-2.5 text-gray-500 hidden sm:table-cell">{a.note}</td>
+                    {assureurs.map((a) => (
+                      <tr key={a.name}>
+                        <td className="font-semibold text-ink">{a.name}</td>
+                        <td className="text-center font-medium text-brand">{a.part}</td>
+                        <td className="hidden sm:table-cell">{a.note}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-              <p className="text-xs text-gray-400 mt-2">
-                Parts de marché approximatives (assurés LAMal, 2026). Source : OFSP.
-              </p>
             </section>
 
-            {/* Économies possibles */}
+            {/* Économies */}
             <section>
-              <h2 className="text-xl font-bold mb-4">Combien peut-on économiser en changeant de caisse ?</h2>
-              <p className="text-gray-600 mb-4 text-sm">
-                Les économies sont significatives. Voici des ordres de grandeur pour un adulte dans différents
-                cantons romands en choisissant la caisse la moins chère vs la plus chère (même modèle, même franchise) :
-              </p>
+              <h2 className="text-2xl font-semibold text-ink mb-6">
+                Économies possibles en changeant de caisse
+              </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
-                  { canton: 'Genève', ecart_mensuel: '~CHF 120–180', ecart_annuel: '~CHF 1\'440–2\'160' },
-                  { canton: 'Vaud', ecart_mensuel: '~CHF 90–130', ecart_annuel: '~CHF 1\'080–1\'560' },
-                  { canton: 'Fribourg', ecart_mensuel: '~CHF 70–110', ecart_annuel: '~CHF 840–1\'320' },
-                  { canton: 'Berne', ecart_mensuel: '~CHF 60–100', ecart_annuel: '~CHF 720–1\'200' },
+                  { canton: 'Genève', mensuel: '~CHF 120–180', annuel: '~CHF 1\'440–2\'160' },
+                  { canton: 'Vaud', mensuel: '~CHF 90–130', annuel: '~CHF 1\'080–1\'560' },
+                  { canton: 'Fribourg', mensuel: '~CHF 70–110', annuel: '~CHF 840–1\'320' },
+                  { canton: 'Berne', mensuel: '~CHF 60–100', annuel: '~CHF 720–1\'200' },
                 ].map((r) => (
-                  <div key={r.canton} className="bg-green-50 border border-green-100 rounded-xl p-4">
-                    <div className="font-bold text-gray-900">{r.canton}</div>
-                    <div className="text-green-700 font-semibold text-lg">{r.ecart_mensuel}<span className="text-sm font-normal">/mois</span></div>
-                    <div className="text-sm text-gray-600">soit {r.ecart_annuel}/an d'économie possible</div>
+                  <div key={r.canton} className="bg-cloud border border-edge rounded-[8px] p-5">
+                    <p className="font-semibold text-ink mb-1">{r.canton}</p>
+                    <p className="text-2xl font-bold text-emerald-600">{r.mensuel}<span className="text-[14px] font-normal text-slate">/mois</span></p>
+                    <p className="text-[14px] text-slate mt-0.5">soit {r.annuel}/an d'économie</p>
                   </div>
                 ))}
               </div>
@@ -223,17 +224,18 @@ export default function ComparateurPage() {
 
             {/* FAQ */}
             <section>
-              <h2 className="text-xl font-bold mb-5">Questions fréquentes</h2>
-              <div className="space-y-3">
+              <h2 className="text-2xl font-semibold text-ink mb-6">Questions fréquentes</h2>
+              <div className="divide-y divide-edge border border-edge rounded-[8px] overflow-hidden">
                 {faqSchema.mainEntity.map((q, i) => (
-                  <details key={i} className="border border-gray-200 rounded-xl overflow-hidden">
-                    <summary className="px-5 py-4 font-semibold text-gray-900 cursor-pointer hover:bg-gray-50 list-none flex justify-between items-center">
-                      {q.name}
-                      <svg className="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <details key={i} className="group bg-white">
+                    <summary className="flex justify-between items-center px-6 py-5 cursor-pointer list-none hover:bg-cloud transition-colors">
+                      <span className="font-medium text-ink text-[16px] pr-4">{q.name}</span>
+                      <svg className="w-4 h-4 text-slate shrink-0 group-open:rotate-180 transition-transform duration-200"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                       </svg>
                     </summary>
-                    <div className="px-5 pb-4 text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-3">
+                    <div className="px-6 pb-5 pt-4 text-[15px] text-slate leading-relaxed border-t border-edge">
                       {q.acceptedAnswer.text}
                     </div>
                   </details>

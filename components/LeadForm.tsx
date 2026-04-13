@@ -47,12 +47,7 @@ interface FormData {
 }
 
 export default function LeadForm({ compact = false }: { compact?: boolean }) {
-  const [form, setForm] = useState<FormData>({
-    prenom: '',
-    email: '',
-    canton: '',
-    situation: '',
-  })
+  const [form, setForm] = useState<FormData>({ prenom: '', email: '', canton: '', situation: '' })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [error, setError] = useState('')
 
@@ -60,15 +55,13 @@ export default function LeadForm({ compact = false }: { compact?: boolean }) {
     e.preventDefault()
     setStatus('loading')
     setError('')
-
     try {
       const res = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       })
-
-      if (!res.ok) throw new Error('Erreur serveur')
+      if (!res.ok) throw new Error()
       setStatus('success')
     } catch {
       setStatus('error')
@@ -78,117 +71,121 @@ export default function LeadForm({ compact = false }: { compact?: boolean }) {
 
   if (status === 'success') {
     return (
-      <div id="lead-form" className="bg-green-50 border border-green-200 rounded-xl p-6 text-center">
-        <svg className="w-12 h-12 text-green-500 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <h3 className="font-bold text-green-800 text-lg mb-1">Demande envoyée !</h3>
-        <p className="text-green-700 text-sm">
-          Un conseiller vous contactera sous 24h avec votre comparaison personnalisée.
+      <div id="lead-form" className="bg-white border border-edge rounded-[12px] p-8 text-center">
+        <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg className="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h3 className="font-semibold text-ink text-lg mb-1">Demande envoyée !</h3>
+        <p className="text-slate text-[15px]">
+          Un conseiller vous contacte sous 24h avec votre comparaison personnalisée.
         </p>
       </div>
     )
   }
 
   return (
-    <div id="lead-form" className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden">
-      {/* Header */}
-      <div className="bg-primary px-5 py-4">
-        <h2 className={`text-white font-bold ${compact ? 'text-base' : 'text-lg'}`}>
-          Comparez votre LAMal gratuitement
-        </h2>
-        <p className="text-blue-100 text-xs mt-1">Sans engagement · Réponse sous 24h</p>
+    <div id="lead-form" className="bg-white border border-edge rounded-[12px] overflow-hidden">
+      {/* Form header */}
+      <div className="px-6 py-5 border-b border-edge">
+        <p className={`font-semibold text-ink ${compact ? 'text-[16px]' : 'text-[18px]'}`}>
+          Comparaison gratuite
+        </p>
+        <p className="text-[13px] text-slate mt-0.5">Sans engagement · Réponse sous 24h</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="p-5 space-y-3">
+      <form onSubmit={handleSubmit} className="px-6 py-5 space-y-4">
+
         {/* Prénom */}
         <div>
-          <label htmlFor="prenom" className="block text-xs font-semibold text-gray-600 mb-1">
+          <label htmlFor="prenom" className="block text-[13px] font-medium text-slate mb-1.5">
             Prénom
           </label>
           <input
-            id="prenom"
-            type="text"
-            required
+            id="prenom" type="text" required
             value={form.prenom}
             onChange={(e) => setForm({ ...form, prenom: e.target.value })}
             placeholder="Votre prénom"
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+            className="input-field"
           />
         </div>
 
         {/* Email */}
         <div>
-          <label htmlFor="email" className="block text-xs font-semibold text-gray-600 mb-1">
-            Email
+          <label htmlFor="email" className="block text-[13px] font-medium text-slate mb-1.5">
+            Adresse email
           </label>
           <input
-            id="email"
-            type="email"
-            required
+            id="email" type="email" required
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
             placeholder="votre@email.ch"
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+            className="input-field"
           />
         </div>
 
         {/* Canton */}
         <div>
-          <label htmlFor="canton" className="block text-xs font-semibold text-gray-600 mb-1">
-            Canton
+          <label htmlFor="canton" className="block text-[13px] font-medium text-slate mb-1.5">
+            Canton de résidence
           </label>
-          <select
-            id="canton"
-            required
-            value={form.canton}
-            onChange={(e) => setForm({ ...form, canton: e.target.value })}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white"
-          >
-            <option value="">Sélectionner votre canton</option>
-            {cantons.map((c) => (
-              <option key={c.code} value={c.code}>
-                {c.name} ({c.code})
-              </option>
-            ))}
-          </select>
+          <div className="relative">
+            <select
+              id="canton" required
+              value={form.canton}
+              onChange={(e) => setForm({ ...form, canton: e.target.value })}
+              className="select-field pr-9"
+            >
+              <option value="">Sélectionner</option>
+              {cantons.map((c) => (
+                <option key={c.code} value={c.code}>{c.name} ({c.code})</option>
+              ))}
+            </select>
+            <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate pointer-events-none"
+              fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
         </div>
 
         {/* Situation */}
         <div>
-          <label htmlFor="situation" className="block text-xs font-semibold text-gray-600 mb-1">
+          <label htmlFor="situation" className="block text-[13px] font-medium text-slate mb-1.5">
             Votre situation
           </label>
-          <select
-            id="situation"
-            required
-            value={form.situation}
-            onChange={(e) => setForm({ ...form, situation: e.target.value })}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white"
-          >
-            <option value="">Votre situation</option>
-            {situations.map((s) => (
-              <option key={s.value} value={s.value}>
-                {s.label}
-              </option>
-            ))}
-          </select>
+          <div className="relative">
+            <select
+              id="situation" required
+              value={form.situation}
+              onChange={(e) => setForm({ ...form, situation: e.target.value })}
+              className="select-field pr-9"
+            >
+              <option value="">Sélectionner</option>
+              {situations.map((s) => (
+                <option key={s.value} value={s.value}>{s.label}</option>
+              ))}
+            </select>
+            <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate pointer-events-none"
+              fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
         </div>
 
-        {error && (
-          <p className="text-red-600 text-xs">{error}</p>
-        )}
+        {error && <p className="text-red-600 text-[13px]">{error}</p>}
 
         <button
           type="submit"
           disabled={status === 'loading'}
-          className="w-full bg-primary hover:bg-primary-dark disabled:bg-gray-400 text-white font-semibold py-3 px-4 rounded-lg transition-colors text-sm"
+          className="w-full bg-brand hover:bg-brand-dark disabled:bg-slate/30 text-white font-medium
+                     py-3.5 rounded-md transition-colors duration-150 text-[15px] mt-1"
         >
           {status === 'loading' ? 'Envoi en cours…' : 'Recevoir ma comparaison gratuite →'}
         </button>
 
-        <p className="text-xs text-gray-400 text-center">
-          Vos données sont protégées · Pas de spam
+        <p className="text-[12px] text-slate/60 text-center">
+          Vos données ne sont pas revendues · RGPD conforme
         </p>
       </form>
     </div>
