@@ -539,12 +539,6 @@ export default function GuideLamalPage() {
         </div>
       </div>
 
-      {/* Mobile sticky CTA */}
-      <div className="xl:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-edge p-3 z-40">
-        <a href="#lead-form" className="btn-primary w-full justify-center py-3 text-[15px]">
-          Recevoir ma comparaison gratuite →
-        </a>
-      </div>
     </>
   )
 }
