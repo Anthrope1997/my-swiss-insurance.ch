@@ -122,10 +122,9 @@ export default function LamalHubPage() {
       </section>
 
       <div className="container-xl py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div className="flex gap-12">
 
-          {/* Main */}
-          <div className="lg:col-span-2 space-y-14">
+          <div className="flex-1 min-w-0 space-y-14">
 
             {/* Intro */}
             <div className="callout">
@@ -201,12 +200,11 @@ export default function LamalHubPage() {
 
           </div>
 
-          {/* Sidebar */}
-          <aside className="lg:col-span-1">
+          <div className="hidden lg:block w-80 flex-shrink-0">
             <div className="sticky top-24">
               <LeadForm compact />
             </div>
-          </aside>
+          </div>
         </div>
       </div>
     </>

@@ -1,8 +1,7 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 const navLinks = [
   { href: '/lamal', label: 'LAMal' },
@@ -21,11 +20,19 @@ function ShieldIcon() {
 }
 
 export default function Header() {
-  const [open, setOpen] = useState(false)
   const pathname = usePathname()
+  const router = useRouter()
 
   const isActive = (href: string) =>
     href === '/lamal' ? pathname === href : pathname.startsWith(href)
+
+  const handleCTA = () => {
+    if (pathname === '/') {
+      document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    } else {
+      router.push('/#lead-form')
+    }
+  }
 
   return (
     <header className="bg-[#0f2040] sticky top-0 z-50">
@@ -60,60 +67,16 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Desktop CTA */}
-          <div className="hidden md:block">
-            <a
-              href="#lead-form"
-              className="bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-[14px] font-medium px-5 py-2 rounded-md transition-colors duration-150 whitespace-nowrap"
-            >
-              Comparer gratuitement
-            </a>
-          </div>
-
-          {/* Mobile hamburger */}
+          {/* CTA — always visible on mobile and desktop */}
           <button
-            onClick={() => setOpen(!open)}
-            className="md:hidden p-2 text-slate-300 hover:text-white rounded-md transition-colors"
-            aria-label="Menu"
+            onClick={handleCTA}
+            className="bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-sm font-medium px-4 py-2 rounded-md transition-colors duration-150 whitespace-nowrap"
           >
-            {open ? (
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            )}
+            Comparer gratuitement
           </button>
+
         </div>
       </div>
-
-      {/* Mobile menu */}
-      {open && (
-        <div className="md:hidden bg-[#0f2040] border-t border-white/10">
-          <div className="container-xl py-4 flex flex-col gap-1">
-            <Link href="/" onClick={() => setOpen(false)}
-              className="text-[15px] text-slate-300 hover:text-white py-2 px-2 rounded-md hover:bg-white/5 transition-colors">
-              Accueil
-            </Link>
-            {navLinks.map((link) => (
-              <Link key={link.href} href={link.href} onClick={() => setOpen(false)}
-                className={`text-[15px] py-2 px-2 rounded-md transition-colors ${
-                  isActive(link.href)
-                    ? 'text-white font-medium bg-white/10'
-                    : 'text-slate-300 hover:text-white hover:bg-white/5'
-                }`}>
-                {link.label}
-              </Link>
-            ))}
-            <a href="#lead-form" onClick={() => setOpen(false)}
-              className="mt-3 bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-sm font-medium text-center py-3 rounded-md transition-colors">
-              Comparer gratuitement
-            </a>
-          </div>
-        </div>
-      )}
     </header>
   )
 }

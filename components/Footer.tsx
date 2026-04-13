@@ -24,8 +24,6 @@ const columns = [
     links: [
       { href: '/lamal/changer-de-caisse', label: 'Changer de caisse' },
       { href: '/lamal/par-profil', label: 'Par profil' },
-      { href: 'https://www.bag.admin.ch', label: 'OFSP officiel', external: true },
-      { href: 'https://www.priminfo.ch', label: 'Priminfo.ch', external: true },
     ],
   },
   {
@@ -85,16 +83,18 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 text-[13px]">
-          <p>&copy; {new Date().getFullYear()} My Swiss Insurance. Tous droits réservés.</p>
-          <p>
-            Sources :{' '}
-            <a href="https://www.bag.admin.ch" target="_blank" rel="noopener noreferrer"
-              className="hover:text-white transition-colors">OFSP</a>
+        <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+          <p className="text-[13px]">&copy; {new Date().getFullYear()} My Swiss Insurance. Tous droits réservés.</p>
+          <p className="text-slate-500 text-xs">
+            Sources officielles :{' '}
+            <a href="https://www.bag.admin.ch" target="_blank" rel="noopener"
+              className="hover:text-slate-300 transition-colors">OFSP</a>
             {' · '}
-            <a href="https://www.admin.ch" target="_blank" rel="noopener noreferrer"
-              className="hover:text-white transition-colors">admin.ch</a>
-            {' · Données indicatives 2026.'}
+            <a href="https://www.admin.ch" target="_blank" rel="noopener"
+              className="hover:text-slate-300 transition-colors">admin.ch</a>
+            {' · '}
+            <a href="https://www.priminfo.ch" target="_blank" rel="noopener"
+              className="hover:text-slate-300 transition-colors">priminfo.ch</a>
           </p>
         </div>
       </div>

@@ -153,7 +153,7 @@ export default function GuideLamalPage() {
 
       {/* 3-column docs layout */}
       <div className="container-xl py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] xl:grid-cols-[200px_1fr_280px] gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] xl:grid-cols-[200px_1fr_320px] gap-12 items-start">
 
           {/* Left TOC — sticky */}
           <aside className="hidden lg:block">
@@ -198,8 +198,7 @@ export default function GuideLamalPage() {
               </p>
               <div className="callout text-[15px]">
                 <strong className="text-ink">Source :</strong>{' '}
-                <a href="https://www.bag.admin.ch" target="_blank" rel="noopener noreferrer"
-                  className="text-brand hover:underline">OFSP — bag.admin.ch</a>
+                OFSP — bag.admin.ch
                 {' · '}art. 3 LAMal (RS 832.10)
               </div>
             </section>
@@ -534,27 +533,6 @@ export default function GuideLamalPage() {
                 </ul>
               </div>
 
-              <div className="bg-white border border-edge rounded-[8px] p-5">
-                <p className="text-[12px] font-semibold text-slate uppercase tracking-widest mb-4">Sources officielles</p>
-                <ul className="space-y-2">
-                  {[
-                    ['https://www.bag.admin.ch', 'OFSP — bag.admin.ch'],
-                    ['https://www.priminfo.ch', 'Priminfo.ch'],
-                    ['https://www.admin.ch', 'admin.ch (RS 832.10)'],
-                  ].map(([href, label]) => (
-                    <li key={href}>
-                      <a href={href} target="_blank" rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-[14px] text-slate hover:text-brand transition-colors">
-                        <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                        {label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
             </div>
           </aside>
 

@@ -112,8 +112,8 @@ export default function ComparateurPage() {
       </section>
 
       <div className="container-xl py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          <div className="lg:col-span-2 space-y-16">
+        <div className="flex gap-12">
+          <div className="flex-1 min-w-0 space-y-16">
 
             {/* CTA personnalisé */}
             <div className="bg-cloud border border-edge rounded-[8px] p-8">
@@ -137,7 +137,7 @@ export default function ComparateurPage() {
                   { n: '03', t: 'Votre modèle', d: 'Médecin de famille, HMO ou Telmed réduisent la prime de 5 à 25% vs le modèle standard.' },
                 ].map((s) => (
                   <div key={s.n}>
-                    <div className="text-[36px] font-bold text-edge mb-3 leading-none">{s.n}</div>
+                    <div className="text-[36px] font-bold text-[#1d4ed8] mb-3 leading-none">{s.n}</div>
                     <h3 className="font-semibold text-ink text-[17px] mb-2">{s.t}</h3>
                     <p className="text-[15px] text-slate leading-relaxed">{s.d}</p>
                   </div>
@@ -244,11 +244,11 @@ export default function ComparateurPage() {
             </section>
           </div>
 
-          <aside className="lg:col-span-1">
+          <div className="hidden lg:block w-80 flex-shrink-0">
             <div className="sticky top-24">
               <LeadForm compact />
             </div>
-          </aside>
+          </div>
         </div>
       </div>
     </>

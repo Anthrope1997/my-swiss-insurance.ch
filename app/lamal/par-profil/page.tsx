@@ -212,8 +212,8 @@ export default function ParProfilPage() {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          <div className="lg:col-span-2 space-y-16">
+        <div className="flex gap-12">
+          <div className="flex-1 min-w-0 space-y-16">
             {profiles.map((profile) => (
               <section key={profile.id} id={profile.id}>
                 <div className="flex items-start gap-4 mb-5">
@@ -298,11 +298,11 @@ export default function ParProfilPage() {
             </section>
           </div>
 
-          <aside className="lg:col-span-1">
+          <div className="hidden lg:block w-80 flex-shrink-0">
             <div className="sticky top-24">
               <LeadForm compact />
             </div>
-          </aside>
+          </div>
         </div>
       </div>
     </>

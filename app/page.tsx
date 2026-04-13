@@ -225,7 +225,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-4xl mx-auto">
             {steps.map((step, i) => (
               <div key={i} className="text-center">
-                <div className="text-[48px] font-bold text-edge mb-4 leading-none">{step.n}</div>
+                <div className="text-[48px] font-bold text-[#1d4ed8] mb-4 leading-none">{step.n}</div>
                 <h3 className="font-semibold text-ink text-[18px] mb-2">{step.title}</h3>
                 <p className="text-slate text-[15px] leading-relaxed">{step.desc}</p>
               </div>
