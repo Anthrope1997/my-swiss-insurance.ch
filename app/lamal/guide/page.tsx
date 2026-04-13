@@ -135,7 +135,7 @@ export default function GuideLamalPage() {
             <span className="text-edge">/</span>
             <Link href="/lamal" className="hover:text-ink transition-colors">LAMal</Link>
             <span className="text-edge">/</span>
-            <span className="text-ink">Guide complet</span>
+            <span className="text-ink">Comprendre la LAMal</span>
           </nav>
           <div className="flex flex-wrap gap-2 mb-5">
             <span className="badge">Mis à jour avril 2026</span>

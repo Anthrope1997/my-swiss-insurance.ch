@@ -56,32 +56,32 @@ const faqSchema = {
 
 const sections = [
   {
-    href: '/lamal/guide',
-    title: 'Guide complet LAMal 2026',
-    desc: 'Définition, couverture, primes 2026 par canton, franchises, modèles d\'assurance, subsides et FAQ.',
-    badge: 'Essentiel',
-  },
-  {
     href: '/lamal/comparateur',
-    title: 'Comparateur de caisses maladie',
+    title: 'Comparer les caisses 2026',
     desc: 'Primes 2026 par canton. Trouvez la caisse la moins chère selon votre profil.',
     badge: null,
   },
   {
-    href: '/lamal/lamal-vs-lca',
-    title: 'LAMal vs LCA : quelle différence ?',
-    desc: 'Couverture de base vs assurances complémentaires : ce qui est obligatoire et ce qui est facultatif.',
-    badge: null,
+    href: '/lamal/guide',
+    title: 'Comprendre la LAMal',
+    desc: 'Définition, couverture, primes 2026 par canton, franchises, modèles d\'assurance, subsides et FAQ.',
+    badge: 'Essentiel',
   },
   {
     href: '/lamal/changer-de-caisse',
-    title: 'Comment changer de caisse maladie',
+    title: 'Changer de caisse maladie',
     desc: 'Procédure de résiliation, dates limites, modèle de lettre et conseils pratiques.',
     badge: null,
   },
   {
+    href: '/lamal/lamal-vs-lca',
+    title: 'LAMal vs assurance complémentaire',
+    desc: 'Couverture de base vs assurances complémentaires : ce qui est obligatoire et ce qui est facultatif.',
+    badge: null,
+  },
+  {
     href: '/lamal/par-profil',
-    title: 'LAMal par profil',
+    title: 'LAMal par situation de vie',
     desc: 'Famille, étudiant, expatrié, retraité, indépendant : la LAMal adaptée à chaque situation.',
     badge: null,
   },

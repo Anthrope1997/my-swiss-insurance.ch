@@ -13,11 +13,11 @@ const columns = [
   {
     title: 'LAMal',
     links: [
-      { href: '/lamal/guide', label: 'Guide complet' },
-      { href: '/lamal/comparateur', label: 'Comparateur 2026' },
-      { href: '/lamal/lamal-vs-lca', label: 'LAMal vs LCA' },
-      { href: '/lamal/changer-de-caisse', label: 'Changer de caisse' },
-      { href: '/lamal/par-profil', label: 'Par profil' },
+      { href: '/lamal/comparateur', label: 'Comparer les caisses 2026' },
+      { href: '/lamal/guide', label: 'Comprendre la LAMal' },
+      { href: '/lamal/changer-de-caisse', label: 'Changer de caisse maladie' },
+      { href: '/lamal/lamal-vs-lca', label: 'LAMal vs assurance complémentaire' },
+      { href: '/lamal/par-profil', label: 'LAMal par situation de vie' },
     ],
   },
   {

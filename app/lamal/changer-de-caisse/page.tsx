@@ -67,7 +67,7 @@ export default function ChangerDeCaissePage() {
             <span className="text-edge">/</span>
             <Link href="/lamal" className="hover:text-ink transition-colors">LAMal</Link>
             <span className="text-edge">/</span>
-            <span className="text-ink">Changer de caisse</span>
+            <span className="text-ink">Changer de caisse maladie</span>
           </nav>
           <h1 className="text-5xl font-bold text-ink leading-tight mb-4 max-w-2xl">
             Comment changer de caisse maladie en Suisse.

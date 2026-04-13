@@ -4,10 +4,10 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 
 const navLinks = [
-  { href: '/lamal', label: 'LAMal' },
-  { href: '/lamal/guide', label: 'Guide' },
-  { href: '/lamal/comparateur', label: 'Comparateur' },
-  { href: '/lamal/par-profil', label: 'Par profil' },
+  { href: '/lamal/comparateur', label: 'Comparer les caisses 2026' },
+  { href: '/lamal/guide', label: 'Comprendre la LAMal' },
+  { href: '/lamal/changer-de-caisse', label: 'Changer de caisse maladie' },
+  { href: '/lamal/par-profil', label: 'LAMal par situation de vie' },
 ]
 
 function ShieldIcon() {

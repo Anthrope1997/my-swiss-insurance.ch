@@ -77,7 +77,7 @@ export default function LamalVsLcaPage() {
             <span className="text-edge">/</span>
             <Link href="/lamal" className="hover:text-ink transition-colors">LAMal</Link>
             <span className="text-edge">/</span>
-            <span className="text-ink">LAMal vs LCA</span>
+            <span className="text-ink">LAMal vs assurance complémentaire</span>
           </nav>
           <h1 className="text-5xl font-bold text-ink leading-tight mb-4 max-w-2xl">
             LAMal vs LCA : assurance de base et complémentaire.
