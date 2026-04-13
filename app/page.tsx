@@ -194,23 +194,25 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((f) => (
-              <Link key={f.href} href={f.href} className="group cursor-pointer">
+              <Link
+                key={f.href} href={f.href}
+                className="group flex flex-col bg-white border border-edge rounded-xl p-6 hover:border-[#1d4ed8] hover:shadow-md transition-all duration-200 cursor-pointer"
+              >
                 <div className="w-10 h-10 bg-[#dbeafe] border border-[#1d4ed8]/20 rounded-[8px] flex items-center justify-center text-brand mb-4 group-hover:bg-brand group-hover:text-white group-hover:border-brand transition-colors duration-200">
                   {f.icon}
                 </div>
-                <div className="flex items-center gap-1.5 mb-2">
-                  <h3 className="font-semibold text-ink text-[17px] group-hover:text-[#1d4ed8] transition-colors">
-                    {f.title}
-                  </h3>
-                  <svg
-                    className="w-4 h-4 shrink-0 text-slate/25 group-hover:text-[#1d4ed8] group-hover:translate-x-0.5 transition-all duration-200"
-                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                <h3 className="font-semibold text-ink text-[17px] mb-2 group-hover:text-[#1d4ed8] transition-colors">
+                  {f.title}
+                </h3>
+                <p className="text-slate text-[15px] leading-relaxed flex-1">{f.desc}</p>
+                <div className="flex items-center gap-1 mt-4 text-[#1d4ed8] text-[14px] font-medium">
+                  Découvrir
+                  <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                   </svg>
                 </div>
-                <p className="text-slate text-[15px] leading-relaxed">{f.desc}</p>
               </Link>
             ))}
           </div>
