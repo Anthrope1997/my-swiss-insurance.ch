@@ -58,7 +58,7 @@ const faqSchema = {
       name: 'Quelle est la différence entre LAMal et LCA ?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "La LAMal est l'assurance de base obligatoire couvrant les soins essentiels. La LCA régit les assurances complémentaires facultatives — chambre privée, médecine alternative, soins dentaires — dont les prestations varient selon l'assureur et ne sont pas standardisées.",
+        text: "La LAMal est l'assurance de base obligatoire couvrant les soins essentiels. La LCA (loi sur le contrat d'assurance) régit les assurances complémentaires facultatives : chambre privée, médecine alternative, soins dentaires. Les prestations varient selon l'assureur et ne sont pas standardisées.",
       },
     },
     {
@@ -229,12 +229,12 @@ export default function GuideLamalPage() {
               </p>
               <p className="article-p">
                 Contrairement aux assurances complémentaires (LCA), les prestations de base LAMal ne peuvent
-                être ni refusées ni exclues pour des raisons de santé — tout résident en Suisse a le droit
+                être ni refusées ni exclues pour des raisons de santé : tout résident en Suisse a le droit
                 d'être assuré, sans sélection médicale.
               </p>
               <div className="callout text-[15px]">
                 <strong className="text-ink">Source :</strong>{' '}
-                OFSP — bag.admin.ch
+                OFSP (bag.admin.ch)
                 {' · '}art. 3 LAMal (RS 832.10)
               </div>
             </section>
@@ -251,7 +251,7 @@ export default function GuideLamalPage() {
               <ul className="space-y-2 mb-6">
                 {[
                   'Médecin de famille et spécialistes (avec referral selon le modèle)',
-                  'Soins d\'urgence 24h/24 — 7j/7',
+                  'Soins d\'urgence 24h/24, 7j/7',
                   'Analyses de laboratoire et imagerie médicale prescrite',
                   'Physiothérapie (sur prescription)',
                   'Psychothérapie (psychologues agréés, depuis 2022)',
@@ -340,7 +340,7 @@ export default function GuideLamalPage() {
               <h2 className="article-h2">4. Principaux assureurs LAMal en Suisse</h2>
               <p className="article-p">
                 57 caisses sont agréées par l'OFSP. Les prestations de base sont identiques
-                chez tous les assureurs — seules les primes, la qualité du service et les options
+                chez tous les assureurs. Seules les primes, la qualité du service et les options
                 complémentaires diffèrent. Comparez toujours les primes pour votre canton spécifique.
               </p>
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-4">
@@ -561,7 +561,7 @@ export default function GuideLamalPage() {
 
             {/* 9 — Subsides */}
             <section id="subsides">
-              <h2 className="article-h2">9. Subsides LAMal — qui y a droit ?</h2>
+              <h2 className="article-h2">9. Subsides LAMal : qui y a droit ?</h2>
               <p className="article-p">
                 Les <strong>subsides de primes</strong> sont des aides financières versées par les cantons
                 aux personnes dont les revenus sont modestes. Environ 25 à 30% de la population suisse en bénéficie.

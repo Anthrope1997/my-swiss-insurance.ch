@@ -32,7 +32,7 @@ const faqSchema = {
       name: "Comment assurer sa famille en Suisse avec la LAMal ?",
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "Chaque membre de la famille a sa propre assurance LAMal individuelle — il n'y a pas d'assurance familiale groupée en Suisse. La prime enfant (0–18 ans) est nettement moins élevée. Les enfants peuvent avoir une franchise à 0 CHF. Comparez les caisses séparément pour chaque membre.",
+        text: "Chaque membre de la famille a sa propre assurance LAMal individuelle. Il n'y a pas d'assurance familiale groupée en Suisse. La prime enfant (0–18 ans) est nettement moins élevée. Les enfants peuvent avoir une franchise à 0 CHF. Comparez les caisses séparément pour chaque membre.",
       },
     },
     {
@@ -48,7 +48,7 @@ const faqSchema = {
       name: "Quel est le coût de la LAMal pour un retraité en Suisse ?",
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "La prime LAMal est identique pour les adultes dès 26 ans — il n'y a pas de réduction pour les seniors. Les retraités à revenus modestes peuvent bénéficier des subsides cantonaux. La franchise 300 CHF est généralement recommandée car les retraités ont davantage de frais médicaux réguliers.",
+        text: "La prime LAMal est identique pour les adultes dès 26 ans : il n'y a pas de réduction pour les seniors. Les retraités à revenus modestes peuvent bénéficier des subsides cantonaux. La franchise 300 CHF est recommandée, car les retraités ont davantage de frais médicaux réguliers.",
       },
     },
   ],
@@ -137,7 +137,7 @@ const profiles = [
     title: 'Retraité',
     franchise: 'Franchise 300 CHF généralement',
     modele: 'Médecin de famille recommandé',
-    intro: 'Les retraités ne bénéficient pas de prime réduite — le tarif adulte s\'applique dès 26 ans. Cependant, les personnes à revenus modestes ont souvent droit aux subsides cantonaux.',
+    intro: 'Les retraités ne bénéficient pas de prime réduite : le tarif adulte s\'applique dès 26 ans. Les personnes à revenus modestes ont souvent droit aux subsides cantonaux.',
     conseils: [
       { t: 'Franchise 300 CHF recommandée', d: 'Les retraités ont souvent des frais médicaux réguliers. La franchise basse est plus avantageuse.' },
       { t: 'Modèle médecin de famille', d: 'Assure un suivi médical coordonné, réduit la prime de 5 à 15%.' },
@@ -190,7 +190,7 @@ export default function ParProfilPage() {
             <span className="text-ink">LAMal par situation de vie</span>
           </nav>
           <h1 className="text-5xl font-bold text-ink leading-tight mb-4 max-w-2xl">
-            LAMal par profil — Conseils 2026.
+            LAMal par profil : conseils 2026.
           </h1>
           <p className="text-xl text-slate max-w-2xl leading-relaxed">
             Famille, étudiant, expatrié, retraité ou indépendant : des recommandations

@@ -87,7 +87,7 @@ const features = [
       </svg>
     ),
     title: 'Conseils par profil',
-    desc: 'Famille, étudiant, expatrié, retraité ou indépendant — des recommandations adaptées à chaque situation de vie.',
+    desc: 'Famille, étudiant, expatrié, retraité ou indépendant : des recommandations adaptées à chaque situation de vie.',
     href: '/lamal/par-profil',
   },
 ]
@@ -137,7 +137,7 @@ export default function HomePage() {
               </h1>
               <p className="text-xl text-slate leading-relaxed mb-10">
                 En Suisse, l'assurance maladie de base (LAMal) est obligatoire pour tous.
-                Ses primes varient de CHF 309 à CHF 573 selon le canton — comparez gratuitement
+                Ses primes varient de CHF 309 à CHF 573 selon le canton. Comparez gratuitement
                 pour trouver la moins chère selon votre profil.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
@@ -177,7 +177,7 @@ export default function HomePage() {
             ))}
           </div>
           <p className="text-center text-[12px] text-slate/50 mt-6">
-            Sources : OFSP — Office fédéral de la santé publique, données 2026.
+            Sources : OFSP (Office fédéral de la santé publique), données 2026.
           </p>
         </div>
       </section>
@@ -190,7 +190,7 @@ export default function HomePage() {
               Tout pour maîtriser votre assurance maladie suisse.
             </h2>
             <p className="text-xl text-slate leading-relaxed">
-              Guides, comparatifs et conseils sur la LAMal — l'assurance maladie obligatoire suisse.
+              Guides, comparatifs et conseils sur la LAMal, l'assurance maladie obligatoire suisse.
               Des informations sourcées, à jour, expliquées sans jargon.
             </p>
           </div>
@@ -255,7 +255,7 @@ export default function HomePage() {
               </h2>
               <p className="text-[17px] text-slate leading-relaxed mb-8">
                 La LAMal est complexe : franchises, modèles alternatifs, subsides cantonaux,
-                délais de résiliation. Notre guide couvre tout — primes 2026 par canton,
+                délais de résiliation. Notre guide couvre tout : primes 2026 par canton,
                 comparatif des franchises, et comment changer de caisse sans erreur.
               </p>
               <Link href="/lamal/guide" className="btn-primary text-[15px]">

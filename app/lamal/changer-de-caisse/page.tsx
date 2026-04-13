@@ -89,7 +89,7 @@ export default function ChangerDeCaissePage() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {[
                   { date: '30 novembre 2026', desc: 'Date limite de résiliation ordinaire pour changer au 1er janvier 2027' },
-                  { date: 'Octobre–novembre', desc: 'Annonce des nouvelles primes par les assureurs — vérifiez si votre prime augmente' },
+                  { date: 'Octobre–novembre', desc: 'Annonce des nouvelles primes par les assureurs. Vérifiez si votre prime augmente.' },
                   { date: '1er janvier 2027', desc: 'Prise d\'effet du nouveau contrat si résiliation dans les délais' },
                 ].map((item) => (
                   <div key={item.date} className="bg-white border border-[#e2e8f0] rounded-[6px] p-4">
@@ -153,7 +153,7 @@ export default function ChangerDeCaissePage() {
                   {
                     n: '04', title: 'Envoyez la lettre de résiliation',
                     desc: 'Si la nouvelle caisse ne le fait pas pour vous, envoyez une lettre recommandée à votre ancien assureur avant le 30 novembre.',
-                    tip: 'Lettre recommandée avec avis de réception — indispensable comme preuve.',
+                    tip: 'Lettre recommandée avec avis de réception, indispensable comme preuve.',
                   },
                   {
                     n: '05', title: 'Recevez votre nouvelle carte d\'assuré',

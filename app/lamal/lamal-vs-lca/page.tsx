@@ -96,7 +96,7 @@ export default function LamalVsLcaPage() {
             {/* Comparaison visuelle */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div className="bg-cloud border border-edge rounded-[8px] p-6">
-                <h2 className="text-[16px] font-semibold text-brand mb-4">LAMal — Assurance de base</h2>
+                <h2 className="text-[16px] font-semibold text-brand mb-4">LAMal : assurance de base</h2>
                 <ul className="space-y-2">
                   {[
                     'Obligatoire pour tous les résidents',
@@ -118,7 +118,7 @@ export default function LamalVsLcaPage() {
                 </ul>
               </div>
               <div className="bg-white border border-edge rounded-[8px] p-6">
-                <h2 className="text-[16px] font-semibold text-slate mb-4">LCA — Assurances complémentaires</h2>
+                <h2 className="text-[16px] font-semibold text-slate mb-4">LCA : assurances complémentaires</h2>
                 <ul className="space-y-2">
                   {[
                     'Facultative selon vos besoins',

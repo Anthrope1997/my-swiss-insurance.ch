@@ -40,7 +40,7 @@ const faqSchema = {
       name: 'Quelle est la différence entre LAMal et LCA ?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "La LAMal est l'assurance de base obligatoire couvrant les soins essentiels. La LCA régit les assurances complémentaires facultatives — chambre privée, médecine alternative, soins dentaires — dont les prestations varient selon l'assureur.",
+        text: "La LAMal est l'assurance de base obligatoire couvrant les soins essentiels. La LCA (loi sur le contrat d'assurance) régit les assurances complémentaires facultatives : chambre privée, médecine alternative, soins dentaires. Les prestations varient selon l'assureur.",
       },
     },
     {
@@ -106,7 +106,7 @@ export default function LamalHubPage() {
           </nav>
           <div className="badge mb-4">Données OFSP · Mis à jour 2026</div>
           <h1 className="text-5xl font-bold text-ink leading-tight mb-4 max-w-2xl">
-            LAMal — Assurance maladie de base en Suisse.
+            LAMal : assurance maladie de base en Suisse.
           </h1>
           <p className="text-xl text-slate max-w-2xl leading-relaxed">
             Tout ce qu'il faut savoir sur l'assurance maladie obligatoire suisse :
