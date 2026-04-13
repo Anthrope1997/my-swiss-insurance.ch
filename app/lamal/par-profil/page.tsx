@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import FAQ from '@/components/FAQ'
 import Link from 'next/link'
 import LeadForm from '@/components/LeadForm'
 
@@ -23,36 +24,20 @@ const articleSchema = {
   author: { '@type': 'Organization', name: 'My Swiss Insurance' },
 }
 
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: "Comment assurer sa famille en Suisse avec la LAMal ?",
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "Chaque membre de la famille a sa propre assurance LAMal individuelle. Il n'y a pas d'assurance familiale groupée en Suisse. La prime enfant (0–18 ans) est nettement moins élevée. Les enfants peuvent avoir une franchise à 0 CHF. Comparez les caisses séparément pour chaque membre.",
-      },
-    },
-    {
-      '@type': 'Question',
-      name: "Un étudiant étranger doit-il s'affilier à la LAMal ?",
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "Oui, tout étudiant résidant en Suisse doit s'affilier dans les 3 mois. Les étudiants étrangers des universités cantonales peuvent demander une exemption temporaire (max 6 ans) s'ils ont une assurance équivalente dans leur pays d'origine. Source : art. 3 LAMal.",
-      },
-    },
-    {
-      '@type': 'Question',
-      name: "Quel est le coût de la LAMal pour un retraité en Suisse ?",
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "La prime LAMal est identique pour les adultes dès 26 ans : il n'y a pas de réduction pour les seniors. Les retraités à revenus modestes peuvent bénéficier des subsides cantonaux. La franchise 300 CHF est recommandée, car les retraités ont davantage de frais médicaux réguliers.",
-      },
-    },
-  ],
-}
+const faqItems = [
+  {
+    question: "Comment assurer sa famille en Suisse avec la LAMal ?",
+    answer: "Chaque membre de la famille a sa propre assurance LAMal individuelle. Il n'y a pas d'assurance familiale groupée en Suisse. La prime enfant (0–18 ans) est nettement moins élevée. Les enfants peuvent avoir une franchise à 0 CHF. Comparez les caisses séparément pour chaque membre.",
+  },
+  {
+    question: "Un étudiant étranger doit-il s'affilier à la LAMal ?",
+    answer: "Oui, tout étudiant résidant en Suisse doit s'affilier dans les 3 mois. Les étudiants étrangers des universités cantonales peuvent demander une exemption temporaire (max 6 ans) s'ils ont une assurance équivalente dans leur pays d'origine. Source : art. 3 LAMal.",
+  },
+  {
+    question: "Quel est le coût de la LAMal pour un retraité en Suisse ?",
+    answer: "La prime LAMal est identique pour les adultes dès 26 ans : il n'y a pas de réduction pour les seniors. Les retraités à revenus modestes peuvent bénéficier des subsides cantonaux. La franchise 300 CHF est recommandée, car les retraités ont davantage de frais médicaux réguliers.",
+  },
+]
 
 const profiles = [
   {
@@ -178,7 +163,6 @@ export default function ParProfilPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       <section className="bg-white border-b border-edge pt-12 pb-10">
         <div className="container-xl">
@@ -276,26 +260,7 @@ export default function ParProfilPage() {
               </section>
             ))}
 
-            {/* FAQ */}
-            <section>
-              <h2 className="text-2xl font-semibold text-ink mb-6">Questions fréquentes</h2>
-              <div className="divide-y divide-edge border border-edge rounded-[8px] overflow-hidden">
-                {faqSchema.mainEntity.map((q, i) => (
-                  <details key={i} className="group bg-white">
-                    <summary className="flex justify-between items-center px-6 py-5 cursor-pointer list-none hover:bg-cloud transition-colors">
-                      <span className="font-medium text-ink text-[16px] pr-4">{q.name}</span>
-                      <svg className="w-4 h-4 text-slate shrink-0 group-open:rotate-180 transition-transform duration-200"
-                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </summary>
-                    <div className="px-6 pb-5 pt-4 text-[15px] text-slate leading-relaxed border-t border-edge">
-                      {q.acceptedAnswer.text}
-                    </div>
-                  </details>
-                ))}
-              </div>
-            </section>
+            <FAQ items={faqItems} />
           </div>
 
           <div className="hidden lg:block w-80 flex-shrink-0">

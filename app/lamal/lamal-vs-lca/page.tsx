@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import FAQ from '@/components/FAQ'
 import Link from 'next/link'
 import LeadForm from '@/components/LeadForm'
 
@@ -23,36 +24,20 @@ const articleSchema = {
   author: { '@type': 'Organization', name: 'My Swiss Insurance' },
 }
 
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: "La LCA est-elle obligatoire en Suisse ?",
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "Non. La LCA est entièrement facultative. Seule la LAMal est obligatoire pour tout résident en Suisse.",
-      },
-    },
-    {
-      '@type': 'Question',
-      name: "L'assureur peut-il refuser une assurance LCA ?",
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "Oui. Contrairement à la LAMal, les assureurs peuvent refuser ou imposer des exclusions pour les LCA. Maladies préexistantes, âge avancé ou risques élevés peuvent entraîner un refus ou une surprime.",
-      },
-    },
-    {
-      '@type': 'Question',
-      name: "Vaut-il la peine de souscrire une LCA en Suisse ?",
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "Dépend de vos besoins. LCA hospitalière utile pour le libre choix du médecin chef. LCA ambulatoire pertinente pour médecines alternatives, lunettes ou soins dentaires. LCA dentaire rentable pour les familles avec enfants. Comparez coûts vs prestations avant de souscrire.",
-      },
-    },
-  ],
-}
+const faqItems = [
+  {
+    question: "La LCA est-elle obligatoire en Suisse ?",
+    answer: "Non. La LCA est entièrement facultative. Seule la LAMal est obligatoire pour tout résident en Suisse.",
+  },
+  {
+    question: "L'assureur peut-il refuser une assurance LCA ?",
+    answer: "Oui. Contrairement à la LAMal, les assureurs peuvent refuser ou imposer des exclusions pour les LCA. Maladies préexistantes, âge avancé ou risques élevés peuvent entraîner un refus ou une surprime.",
+  },
+  {
+    question: "Vaut-il la peine de souscrire une LCA en Suisse ?",
+    answer: "Dépend de vos besoins. LCA hospitalière utile pour le libre choix du médecin chef. LCA ambulatoire pertinente pour médecines alternatives, lunettes ou soins dentaires. LCA dentaire rentable pour les familles avec enfants. Comparez coûts vs prestations avant de souscrire.",
+  },
+]
 
 const comparaison = [
   { aspect: 'Obligation', lamal: 'Obligatoire pour tous les résidents', lca: 'Entièrement facultative' },
@@ -68,7 +53,6 @@ export default function LamalVsLcaPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       <section className="bg-white border-b border-edge pt-12 pb-10">
         <div className="container-xl">
@@ -233,26 +217,7 @@ export default function LamalVsLcaPage() {
               </ul>
             </section>
 
-            {/* FAQ */}
-            <section>
-              <h2 className="text-2xl font-semibold text-ink mb-6">Questions fréquentes</h2>
-              <div className="divide-y divide-edge border border-edge rounded-[8px] overflow-hidden">
-                {faqSchema.mainEntity.map((q, i) => (
-                  <details key={i} className="group bg-white">
-                    <summary className="flex justify-between items-center px-6 py-5 cursor-pointer list-none hover:bg-cloud transition-colors">
-                      <span className="font-medium text-ink text-[16px] pr-4">{q.name}</span>
-                      <svg className="w-4 h-4 text-slate shrink-0 group-open:rotate-180 transition-transform duration-200"
-                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </summary>
-                    <div className="px-6 pb-5 pt-4 text-[15px] text-slate leading-relaxed border-t border-edge">
-                      {q.acceptedAnswer.text}
-                    </div>
-                  </details>
-                ))}
-              </div>
-            </section>
+            <FAQ items={faqItems} />
           </div>
 
           <div className="hidden lg:block w-80 flex-shrink-0">

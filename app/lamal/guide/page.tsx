@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import FAQ from '@/components/FAQ'
 import Link from 'next/link'
 import LeadForm from '@/components/LeadForm'
 
@@ -25,68 +26,36 @@ const articleSchema = {
   mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://my-swiss-insurance.ch/lamal/guide' },
 }
 
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'La LAMal est-elle obligatoire en Suisse ?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "Oui, la LAMal est obligatoire pour toute personne résidant en Suisse. L'affiliation doit intervenir dans les 3 mois suivant l'établissement du domicile ou la naissance. En cas de non-affiliation, les autorités cantonales assignent d'office une caisse maladie. Source : art. 3 LAMal (RS 832.10).",
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Quelle franchise LAMal choisir ?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "Choisissez la franchise 300 CHF si vos frais médicaux annuels dépassent environ CHF 1'300. Optez pour 2500 CHF si vous êtes en bonne santé : vous économisez ~CHF 100/mois sur la prime mais prenez en charge jusqu'à CHF 2'500 de frais. Le break-even se situe autour de CHF 1'300 de dépenses médicales annuelles.",
-      },
-    },
-    {
-      '@type': 'Question',
-      name: "Peut-on changer de caisse maladie en cours d'année ?",
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "En règle générale non. Le changement ordinaire se fait au 1er janvier avec un préavis avant le 30 novembre. Exception : si votre assureur annonce une hausse de prime, vous pouvez résilier dans le mois suivant la notification pour quitter au 31 décembre.",
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Quelle est la différence entre LAMal et LCA ?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "La LAMal est l'assurance de base obligatoire couvrant les soins essentiels. La LCA (loi sur le contrat d'assurance) régit les assurances complémentaires facultatives : chambre privée, médecine alternative, soins dentaires. Les prestations varient selon l'assureur et ne sont pas standardisées.",
-      },
-    },
-    {
-      '@type': 'Question',
-      name: "Quand faut-il s'inscrire à la LAMal en arrivant en Suisse ?",
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "Dans les 3 mois suivant votre prise de domicile en Suisse. Si vous respectez ce délai, la couverture est rétroactive à la date d'arrivée. Passé ce délai, les autorités cantonales vous attribuent d'office une caisse. Source : art. 3 al. 1 et art. 5 LAMal.",
-      },
-    },
-    {
-      '@type': 'Question',
-      name: "Quelle est la caisse maladie la moins chère en Suisse ?",
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "La caisse la moins chère dépend de votre canton, de votre âge et du modèle choisi. Pour un adulte à Nidwald, les primes débutent autour de CHF 280/mois. À Genève, elles dépassent CHF 530. Les écarts entre caisses dans un même canton atteignent CHF 100–180/mois.",
-      },
-    },
-    {
-      '@type': 'Question',
-      name: "Les prestations sont-elles identiques dans toutes les caisses maladie ?",
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "Oui. Pour la LAMal de base, les prestations sont strictement identiques chez tous les assureurs agréés par l'OFSP. Seules les primes, la qualité du service client et les options complémentaires (LCA) diffèrent.",
-      },
-    },
-  ],
-}
+const faqItems = [
+  {
+    question: 'La LAMal est-elle obligatoire en Suisse ?',
+    answer: "Oui, la LAMal est obligatoire pour toute personne résidant en Suisse. L'affiliation doit intervenir dans les 3 mois suivant l'établissement du domicile ou la naissance. En cas de non-affiliation, les autorités cantonales assignent d'office une caisse maladie. Source : art. 3 LAMal (RS 832.10).",
+  },
+  {
+    question: 'Quelle franchise LAMal choisir ?',
+    answer: "Choisissez la franchise 300 CHF si vos frais médicaux annuels dépassent environ CHF 1'300. Optez pour 2500 CHF si vous êtes en bonne santé : vous économisez ~CHF 100/mois sur la prime mais prenez en charge jusqu'à CHF 2'500 de frais. Le break-even se situe autour de CHF 1'300 de dépenses médicales annuelles.",
+  },
+  {
+    question: "Peut-on changer de caisse maladie en cours d'année ?",
+    answer: "En règle générale non. Le changement ordinaire se fait au 1er janvier avec un préavis avant le 30 novembre. Exception : si votre assureur annonce une hausse de prime, vous pouvez résilier dans le mois suivant la notification pour quitter au 31 décembre.",
+  },
+  {
+    question: 'Quelle est la différence entre LAMal et LCA ?',
+    answer: "La LAMal est l'assurance de base obligatoire couvrant les soins essentiels. La LCA (loi sur le contrat d'assurance) régit les assurances complémentaires facultatives : chambre privée, médecine alternative, soins dentaires. Les prestations varient selon l'assureur et ne sont pas standardisées.",
+  },
+  {
+    question: "Quand faut-il s'inscrire à la LAMal en arrivant en Suisse ?",
+    answer: "Dans les 3 mois suivant votre prise de domicile en Suisse. Si vous respectez ce délai, la couverture est rétroactive à la date d'arrivée. Passé ce délai, les autorités cantonales vous attribuent d'office une caisse. Source : art. 3 al. 1 et art. 5 LAMal.",
+  },
+  {
+    question: "Quelle est la caisse maladie la moins chère en Suisse ?",
+    answer: "La caisse la moins chère dépend de votre canton, de votre âge et du modèle choisi. Pour un adulte à Nidwald, les primes débutent autour de CHF 280/mois. À Genève, elles dépassent CHF 530. Les écarts entre caisses dans un même canton atteignent CHF 100–180/mois.",
+  },
+  {
+    question: "Les prestations sont-elles identiques dans toutes les caisses maladie ?",
+    answer: "Oui. Pour la LAMal de base, les prestations sont strictement identiques chez tous les assureurs agréés par l'OFSP. Seules les primes, la qualité du service client et les options complémentaires (LCA) diffèrent.",
+  },
+]
 
 const premiums = [
   { code: 'GE', name: 'Genève', prime: 572.50, variation: '+1.2%' },
@@ -161,7 +130,6 @@ export default function GuideLamalPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       {/* Page header */}
       <section className="bg-white border-b border-edge pt-12 pb-10">
@@ -584,23 +552,7 @@ export default function GuideLamalPage() {
 
             {/* 10 — FAQ */}
             <section id="faq">
-              <h2 className="article-h2">10. Questions fréquentes sur la LAMal</h2>
-              <div className="divide-y divide-edge border border-edge rounded-[8px] overflow-hidden">
-                {faqSchema.mainEntity.map((q, i) => (
-                  <details key={i} className="group bg-white">
-                    <summary className="flex justify-between items-center px-6 py-5 cursor-pointer list-none hover:bg-cloud transition-colors">
-                      <span className="font-medium text-ink text-[16px] pr-4">{q.name}</span>
-                      <svg className="w-4 h-4 text-slate shrink-0 group-open:rotate-180 transition-transform duration-200"
-                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </summary>
-                    <div className="px-6 pb-5 pt-4 text-[15px] text-slate leading-relaxed border-t border-edge">
-                      {q.acceptedAnswer.text}
-                    </div>
-                  </details>
-                ))}
-              </div>
+              <FAQ items={faqItems} title="10. Questions fréquentes sur la LAMal" />
             </section>
 
           </article>

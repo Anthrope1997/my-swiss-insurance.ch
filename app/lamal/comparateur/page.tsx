@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import FAQ from '@/components/FAQ'
 import Link from 'next/link'
 import LeadForm from '@/components/LeadForm'
 
@@ -23,36 +24,20 @@ const articleSchema = {
   author: { '@type': 'Organization', name: 'My Swiss Insurance' },
 }
 
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'Quelle est la caisse maladie la moins chère en Suisse ?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'La caisse la moins chère dépend de votre canton, âge et modèle choisi. Pour un adulte à Nidwald, les primes débutent autour de CHF 280/mois. À Genève, elles dépassent CHF 530. Les écarts entre caisses dans un même canton atteignent CHF 100–180/mois.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Les prestations sont-elles identiques dans toutes les caisses ?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Oui. Pour la LAMal de base, les prestations sont strictement identiques chez tous les assureurs agréés par l\'OFSP. Seules les primes, la qualité du service client et les options complémentaires diffèrent.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Comment économiser sur sa prime LAMal ?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Trois leviers principaux : (1) choisir un modèle alternatif (médecin de famille, HMO, Telmed) pour −5 à −25% ; (2) augmenter sa franchise si vous êtes en bonne santé ; (3) changer de caisse chaque année avant le 30 novembre.',
-      },
-    },
-  ],
-}
+const faqItems = [
+  {
+    question: 'Quelle est la caisse maladie la moins chère en Suisse ?',
+    answer: 'La caisse la moins chère dépend de votre canton, âge et modèle choisi. Pour un adulte à Nidwald, les primes débutent autour de CHF 280/mois. À Genève, elles dépassent CHF 530. Les écarts entre caisses dans un même canton atteignent CHF 100–180/mois.',
+  },
+  {
+    question: 'Les prestations sont-elles identiques dans toutes les caisses ?',
+    answer: "Oui. Pour la LAMal de base, les prestations sont strictement identiques chez tous les assureurs agréés par l'OFSP. Seules les primes, la qualité du service client et les options complémentaires diffèrent.",
+  },
+  {
+    question: 'Comment économiser sur sa prime LAMal ?',
+    answer: 'Trois leviers principaux : (1) choisir un modèle alternatif (médecin de famille, HMO, Telmed) pour −5 à −25% ; (2) augmenter sa franchise si vous êtes en bonne santé ; (3) changer de caisse chaque année avant le 30 novembre.',
+  },
+]
 
 const premiumBars = [
   { canton: 'Nidwald (NW)', prime: 308.70, pct: 54 },
@@ -90,7 +75,6 @@ export default function ComparateurPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       <section className="bg-white border-b border-edge pt-12 pb-10">
         <div className="container-xl">
@@ -222,26 +206,7 @@ export default function ComparateurPage() {
               </div>
             </section>
 
-            {/* FAQ */}
-            <section>
-              <h2 className="text-2xl font-semibold text-ink mb-6">Questions fréquentes</h2>
-              <div className="divide-y divide-edge border border-edge rounded-[8px] overflow-hidden">
-                {faqSchema.mainEntity.map((q, i) => (
-                  <details key={i} className="group bg-white">
-                    <summary className="flex justify-between items-center px-6 py-5 cursor-pointer list-none hover:bg-cloud transition-colors">
-                      <span className="font-medium text-ink text-[16px] pr-4">{q.name}</span>
-                      <svg className="w-4 h-4 text-slate shrink-0 group-open:rotate-180 transition-transform duration-200"
-                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </summary>
-                    <div className="px-6 pb-5 pt-4 text-[15px] text-slate leading-relaxed border-t border-edge">
-                      {q.acceptedAnswer.text}
-                    </div>
-                  </details>
-                ))}
-              </div>
-            </section>
+            <FAQ items={faqItems} />
           </div>
 
           <div className="hidden lg:block w-80 flex-shrink-0">

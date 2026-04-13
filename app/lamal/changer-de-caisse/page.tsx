@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import FAQ from '@/components/FAQ'
 import Link from 'next/link'
 import LeadForm from '@/components/LeadForm'
 
@@ -23,42 +24,25 @@ const articleSchema = {
   author: { '@type': 'Organization', name: 'My Swiss Insurance' },
 }
 
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: "Quelle est la date limite pour changer de caisse maladie ?",
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "Pour changer au 1er janvier, vous devez résilier votre contrat par courrier recommandé avant le 30 novembre. Si votre assureur annonce une hausse de prime, vous disposez d'un mois supplémentaire après la notification.",
-      },
-    },
-    {
-      '@type': 'Question',
-      name: "La nouvelle caisse peut-elle refuser de m'accepter ?",
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "Non. Pour la LAMal de base, les caisses ont l'obligation légale d'accepter tout résident en Suisse, sans sélection médicale. En revanche, pour les assurances complémentaires LCA, un refus est possible.",
-      },
-    },
-    {
-      '@type': 'Question',
-      name: "Que se passe-t-il si j'oublie de résilier avant le 30 novembre ?",
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "Votre contrat est automatiquement reconduit pour l'année suivante. Vous ne pourrez changer qu'au 1er janvier de l'année d'après, sauf si votre assureur annonce une hausse de prime en cours d'année.",
-      },
-    },
-  ],
-}
+const faqItems = [
+  {
+    question: "Quelle est la date limite pour changer de caisse maladie ?",
+    answer: "Pour changer au 1er janvier, vous devez résilier votre contrat par courrier recommandé avant le 30 novembre. Si votre assureur annonce une hausse de prime, vous disposez d'un mois supplémentaire après la notification.",
+  },
+  {
+    question: "La nouvelle caisse peut-elle refuser de m'accepter ?",
+    answer: "Non. Pour la LAMal de base, les caisses ont l'obligation légale d'accepter tout résident en Suisse, sans sélection médicale. En revanche, pour les assurances complémentaires LCA, un refus est possible.",
+  },
+  {
+    question: "Que se passe-t-il si j'oublie de résilier avant le 30 novembre ?",
+    answer: "Votre contrat est automatiquement reconduit pour l'année suivante. Vous ne pourrez changer qu'au 1er janvier de l'année d'après, sauf si votre assureur annonce une hausse de prime en cours d'année.",
+  },
+]
 
 export default function ChangerDeCaissePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       <section className="bg-white border-b border-edge pt-12 pb-10">
         <div className="container-xl">
@@ -220,26 +204,7 @@ export default function ChangerDeCaissePage() {
               </p>
             </section>
 
-            {/* FAQ */}
-            <section>
-              <h2 className="text-2xl font-semibold text-ink mb-6">Questions fréquentes</h2>
-              <div className="divide-y divide-edge border border-edge rounded-[8px] overflow-hidden">
-                {faqSchema.mainEntity.map((q, i) => (
-                  <details key={i} className="group bg-white">
-                    <summary className="flex justify-between items-center px-6 py-5 cursor-pointer list-none hover:bg-cloud transition-colors">
-                      <span className="font-medium text-ink text-[16px] pr-4">{q.name}</span>
-                      <svg className="w-4 h-4 text-slate shrink-0 group-open:rotate-180 transition-transform duration-200"
-                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </summary>
-                    <div className="px-6 pb-5 pt-4 text-[15px] text-slate leading-relaxed border-t border-edge">
-                      {q.acceptedAnswer.text}
-                    </div>
-                  </details>
-                ))}
-              </div>
-            </section>
+            <FAQ items={faqItems} />
           </div>
 
           <div className="hidden lg:block w-80 flex-shrink-0">

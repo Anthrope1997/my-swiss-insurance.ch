@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import FAQ from '@/components/FAQ'
 import Link from 'next/link'
 import LeadForm from '@/components/LeadForm'
 
@@ -23,36 +24,20 @@ const articleSchema = {
   author: { '@type': 'Organization', name: 'My Swiss Insurance' },
 }
 
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: "Qu'est-ce que la LAMal ?",
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "La LAMal est la loi fédérale sur l'assurance-maladie, en vigueur depuis le 1er janvier 1996. Elle rend l'assurance maladie de base obligatoire pour tous les résidents en Suisse et garantit un catalogue de prestations standardisées identiques chez les 57 assureurs agréés.",
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Quelle est la différence entre LAMal et LCA ?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "La LAMal est l'assurance de base obligatoire couvrant les soins essentiels. La LCA (loi sur le contrat d'assurance) régit les assurances complémentaires facultatives : chambre privée, médecine alternative, soins dentaires. Les prestations varient selon l'assureur.",
-      },
-    },
-    {
-      '@type': 'Question',
-      name: "Peut-on choisir librement sa caisse maladie ?",
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "Oui, vous êtes libre de choisir n'importe quelle caisse agréée par l'OFSP. Les assureurs ont l'obligation d'accepter tout résident en Suisse, sans sélection médicale pour la LAMal.",
-      },
-    },
-  ],
-}
+const faqItems = [
+  {
+    question: "Qu'est-ce que la LAMal ?",
+    answer: "La LAMal est la loi fédérale sur l'assurance-maladie, en vigueur depuis le 1er janvier 1996. Elle rend l'assurance maladie de base obligatoire pour tous les résidents en Suisse et garantit un catalogue de prestations standardisées identiques chez les 57 assureurs agréés.",
+  },
+  {
+    question: 'Quelle est la différence entre LAMal et LCA ?',
+    answer: "La LAMal est l'assurance de base obligatoire couvrant les soins essentiels. La LCA (loi sur le contrat d'assurance) régit les assurances complémentaires facultatives : chambre privée, médecine alternative, soins dentaires. Les prestations varient selon l'assureur.",
+  },
+  {
+    question: "Peut-on choisir librement sa caisse maladie ?",
+    answer: "Oui, vous êtes libre de choisir n'importe quelle caisse agréée par l'OFSP. Les assureurs ont l'obligation d'accepter tout résident en Suisse, sans sélection médicale pour la LAMal.",
+  },
+]
 
 const sections = [
   {
@@ -94,7 +79,6 @@ export default function LamalHubPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       {/* Page header */}
       <section className="bg-white border-b border-edge pt-12 pb-10">
@@ -171,26 +155,7 @@ export default function LamalHubPage() {
               </div>
             </div>
 
-            {/* FAQ */}
-            <div>
-              <h2 className="text-2xl font-semibold text-ink mb-6">Questions fréquentes</h2>
-              <div className="divide-y divide-edge border border-edge rounded-[8px] overflow-hidden">
-                {faqSchema.mainEntity.map((q, i) => (
-                  <details key={i} className="group bg-white">
-                    <summary className="flex justify-between items-center px-6 py-5 cursor-pointer list-none hover:bg-cloud transition-colors">
-                      <span className="font-medium text-ink text-[16px] pr-4">{q.name}</span>
-                      <svg className="w-4 h-4 text-slate shrink-0 group-open:rotate-180 transition-transform duration-200"
-                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </summary>
-                    <div className="px-6 pb-5 text-[15px] text-slate leading-relaxed border-t border-edge pt-4">
-                      {q.acceptedAnswer.text}
-                    </div>
-                  </details>
-                ))}
-              </div>
-            </div>
+            <FAQ items={faqItems} />
 
           </div>
 
