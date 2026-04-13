@@ -13,15 +13,9 @@ const columns = [
   {
     title: 'LAMal',
     links: [
-      { href: '/lamal', label: 'Hub LAMal' },
       { href: '/lamal/guide', label: 'Guide complet' },
       { href: '/lamal/comparateur', label: 'Comparateur 2026' },
       { href: '/lamal/lamal-vs-lca', label: 'LAMal vs LCA' },
-    ],
-  },
-  {
-    title: 'Ressources',
-    links: [
       { href: '/lamal/changer-de-caisse', label: 'Changer de caisse' },
       { href: '/lamal/par-profil', label: 'Par profil' },
     ],
@@ -40,7 +34,7 @@ export default function Footer() {
   return (
     <footer className="bg-ink text-white/60">
       <div className="container-xl pt-16 pb-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-10 mb-14">
 
           {/* Brand col */}
           <div className="col-span-2 md:col-span-1">
