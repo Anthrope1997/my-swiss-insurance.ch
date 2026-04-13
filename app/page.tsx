@@ -197,7 +197,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
             {features.map((f) => (
               <Link key={f.href} href={f.href} className="group">
-                <div className="w-10 h-10 bg-cloud border border-edge rounded-[8px] flex items-center justify-center text-brand mb-4 group-hover:bg-brand group-hover:text-white group-hover:border-brand transition-colors duration-200">
+                <div className="w-10 h-10 bg-[#dbeafe] border border-[#1d4ed8]/20 rounded-[8px] flex items-center justify-center text-brand mb-4 group-hover:bg-brand group-hover:text-white group-hover:border-brand transition-colors duration-200">
                   {f.icon}
                 </div>
                 <h3 className="font-semibold text-ink text-[17px] mb-2 group-hover:text-brand transition-colors">

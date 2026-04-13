@@ -85,15 +85,15 @@ export default function ChangerDeCaissePage() {
 
             {/* Dates clés */}
             <div className="callout-warning">
-              <p className="font-semibold text-amber-900 mb-4 text-[17px]">Dates clés 2026 / 2027</p>
+              <p className="font-semibold text-[#0f2040] mb-4 text-[17px]">Dates clés 2026 / 2027</p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {[
                   { date: '30 novembre 2026', desc: 'Date limite de résiliation ordinaire pour changer au 1er janvier 2027' },
                   { date: 'Octobre–novembre', desc: 'Annonce des nouvelles primes par les assureurs — vérifiez si votre prime augmente' },
                   { date: '1er janvier 2027', desc: 'Prise d\'effet du nouveau contrat si résiliation dans les délais' },
                 ].map((item) => (
-                  <div key={item.date} className="bg-white border border-amber-100 rounded-[6px] p-4">
-                    <p className="text-[12px] font-semibold text-amber-700 uppercase tracking-wide mb-1">{item.date}</p>
+                  <div key={item.date} className="bg-white border border-[#e2e8f0] rounded-[6px] p-4">
+                    <p className="text-[12px] font-semibold text-[#1d4ed8] uppercase tracking-wide mb-1">{item.date}</p>
                     <p className="text-[14px] text-slate">{item.desc}</p>
                   </div>
                 ))}

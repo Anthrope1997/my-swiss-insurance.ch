@@ -327,10 +327,10 @@ export default function GuideLamalPage() {
                           CHF {f.montant.toLocaleString('fr-CH')}
                         </td>
                         <td className="text-right text-ink">CHF {f.prime.toFixed(2)}</td>
-                        <td className="text-right text-emerald-600 font-medium">
+                        <td className="text-right text-[#1d4ed8] font-medium">
                           {f.economie > 0 ? `−CHF ${f.economie.toFixed(2)}` : '—'}
                         </td>
-                        <td className="text-right text-emerald-600 font-medium">
+                        <td className="text-right text-[#1d4ed8] font-medium">
                           {f.ecAnn > 0 ? `−CHF ${f.ecAnn}` : '—'}
                         </td>
                         <td className="text-center font-medium hidden sm:table-cell">
@@ -380,13 +380,13 @@ export default function GuideLamalPage() {
                   {
                     title: 'HMO (centre médical)',
                     reduction: '−15 à −25%',
-                    border: 'border-emerald-400',
+                    border: 'border-brand',
                     desc: 'Consultation obligatoire dans un centre HMO agréé. Réseau limité en zones rurales, mais forte réduction de prime.',
                   },
                   {
                     title: 'Telmed (hotline médicale)',
                     reduction: '−10 à −15%',
-                    border: 'border-violet-400',
+                    border: 'border-[#3b82f6]',
                     desc: 'Avant toute consultation (hors urgence), appel à une hotline médicale (Medgate, Medi24...). Disponible 24h/24 partout en Suisse.',
                   },
                 ].map((m, i) => (
@@ -394,7 +394,7 @@ export default function GuideLamalPage() {
                     <div className="flex items-center justify-between gap-3 mb-2">
                       <h3 className="font-semibold text-ink text-[16px]">{m.title}</h3>
                       {m.reduction ? (
-                        <span className="text-[12px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full shrink-0">
+                        <span className="text-[12px] font-semibold text-[#1d4ed8] bg-[#dbeafe] border border-[#1d4ed8]/20 px-2.5 py-0.5 rounded-full shrink-0">
                           {m.reduction}
                         </span>
                       ) : (
