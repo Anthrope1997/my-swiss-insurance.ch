@@ -614,8 +614,7 @@ export default function GuideLamalPage() {
                 <p className="text-[12px] font-semibold text-slate uppercase tracking-widest mb-4">Approfondir</p>
                 <ul className="space-y-2.5">
                   {[
-                    ['/lamal/comparateur', 'Comparateur 2026'],
-                    ['/lamal/changer-de-caisse', 'Changer de caisse'],
+                    ['/lamal/changer-de-caisse', 'Changer de caisse maladie'],
                     ['/lamal/lamal-vs-lca', 'LAMal vs LCA'],
                     ['/lamal/par-profil', 'Par profil'],
                   ].map(([href, label]) => (

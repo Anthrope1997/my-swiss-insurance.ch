@@ -13,10 +13,9 @@ const columns = [
   {
     title: 'LAMal',
     links: [
-      { href: '/lamal/comparateur', label: 'Comparer les caisses 2026' },
       { href: '/lamal/guide', label: 'Comprendre la LAMal' },
-      { href: '/lamal/changer-de-caisse', label: 'Changer de caisse maladie' },
       { href: '/lamal/lamal-vs-lca', label: 'LAMal vs assurance complémentaire' },
+      { href: '/lamal/changer-de-caisse', label: 'Changer de caisse maladie' },
       { href: '/lamal/par-profil', label: 'LAMal par situation de vie' },
     ],
   },

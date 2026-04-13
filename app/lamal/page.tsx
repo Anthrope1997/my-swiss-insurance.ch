@@ -56,12 +56,6 @@ const faqSchema = {
 
 const sections = [
   {
-    href: '/lamal/comparateur',
-    title: 'Comparer les caisses 2026',
-    desc: 'Primes 2026 par canton. Trouvez la caisse la moins chère selon votre profil.',
-    badge: null,
-  },
-  {
     href: '/lamal/guide',
     title: 'Comprendre la LAMal',
     desc: 'Définition, couverture, primes 2026 par canton, franchises, modèles d\'assurance, subsides et FAQ.',
