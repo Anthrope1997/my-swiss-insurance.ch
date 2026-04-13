@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import AuthorBio from '@/components/AuthorBio'
 import FAQ from '@/components/FAQ'
 import Link from 'next/link'
 import LeadForm from '@/components/LeadForm'
@@ -185,6 +186,7 @@ export default function GuideLamalPage() {
 
           {/* Article */}
           <article className="min-w-0 space-y-4">
+            <AuthorBio publishedDate="1er janvier 2026" updatedDate="13 avril 2026" />
 
             {/* 1 — Définition */}
             <section id="definition" className="pt-2">

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import AuthorBio from '@/components/AuthorBio'
 import FAQ from '@/components/FAQ'
 import Link from 'next/link'
 import LeadForm from '@/components/LeadForm'
@@ -64,6 +65,7 @@ export default function ChangerDeCaissePage() {
       </section>
 
       <div className="container-xl py-16">
+        <AuthorBio publishedDate="1er janvier 2026" updatedDate="13 avril 2026" />
         <div className="flex gap-12">
           <div className="flex-1 min-w-0 space-y-14">
 

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import AuthorBio from '@/components/AuthorBio'
 import FAQ from '@/components/FAQ'
 import Link from 'next/link'
 import LeadForm from '@/components/LeadForm'
@@ -184,6 +185,7 @@ export default function ParProfilPage() {
       </section>
 
       <div className="container-xl py-16">
+        <AuthorBio publishedDate="1er janvier 2026" updatedDate="13 avril 2026" />
         {/* Profile nav */}
         <div className="flex flex-wrap gap-2 mb-12">
           {profiles.map((p) => (

@@ -45,6 +45,17 @@ const schema = {
   ],
 }
 
+const definitionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: "Qu'est-ce que la LAMal ?",
+  description: "La LAMal est le système d'assurance maladie obligatoire suisse en vigueur depuis 1996.",
+  datePublished: '2026-01-01',
+  dateModified: '2026-04-13',
+  author: { '@type': 'Organization', name: 'La rédaction My Swiss Insurance' },
+  publisher: { '@type': 'Organization', name: 'My Swiss Insurance' },
+}
+
 const features = [
   {
     icon: (
@@ -121,6 +132,7 @@ export default function HomePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(definitionSchema) }} />
 
       {/* ─── HERO ─── */}
       <section className="bg-white pt-24 pb-20 sm:pt-32 sm:pb-28">
@@ -161,6 +173,31 @@ export default function HomePage() {
               <LeadForm />
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ─── DÉFINITION LAMAL ─── */}
+      <section id="definition-lamal" className="max-w-3xl mx-auto px-6 py-16">
+        <h2 className="text-3xl font-semibold text-[#0f2040] mb-6">
+          Qu'est-ce que la LAMal ?
+        </h2>
+        <p className="text-lg text-[#475569] leading-relaxed mb-4">
+          La LAMal — Loi fédérale sur l'Assurance Maladie (RS 832.10) — est le système d'assurance
+          maladie obligatoire suisse, en vigueur depuis le 1<sup>er</sup> janvier 1996. Elle garantit
+          à chaque résident en Suisse un accès aux soins de base, indépendamment de son âge,
+          de son état de santé ou de sa situation financière.
+        </p>
+        <p className="text-lg text-[#475569] leading-relaxed mb-4">
+          Chaque résident doit obligatoirement s'affilier à une caisse maladie agréée dans les
+          90 jours suivant son arrivée en Suisse. Les prestations de base sont strictement identiques
+          dans toutes les caisses : seul le montant de la prime varie.
+        </p>
+        <p className="text-lg text-[#475569] leading-relaxed">
+          En 2026, la prime mensuelle moyenne en Suisse s'élève à 334 CHF pour un adulte, avec
+          des variations importantes selon le canton de résidence et le modèle d'assurance choisi.
+        </p>
+        <div className="mt-6 text-sm text-[#475569]">
+          Source : Office fédéral de la santé publique (OFSP), données 2026.
         </div>
       </section>
 

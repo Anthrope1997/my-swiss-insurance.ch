@@ -3,6 +3,46 @@ import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'My Swiss Insurance',
+  url: 'https://my-swiss-insurance.ch',
+  logo: 'https://my-swiss-insurance.ch/logo.png',
+  description: 'Service indépendant de comparaison des caisses maladie suisses en Suisse romande',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Rue du Grand-Saint-Jean 4',
+    postalCode: '1003',
+    addressLocality: 'Lausanne',
+    addressRegion: 'Vaud',
+    addressCountry: 'CH',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    email: 'contact@my-swiss-insurance.ch',
+    contactType: 'customer service',
+    availableLanguage: 'French',
+  },
+  sameAs: [],
+}
+
+const editorialSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'La rédaction My Swiss Insurance',
+  description: "Service éditorial indépendant spécialisé dans l'analyse des assurances sociales suisses",
+  url: 'https://my-swiss-insurance.ch/a-propos',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Rue du Grand-Saint-Jean 4',
+    postalCode: '1003',
+    addressLocality: 'Lausanne',
+    addressRegion: 'Vaud',
+    addressCountry: 'CH',
+  },
+}
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://my-swiss-insurance.ch'),
   title: {
@@ -23,6 +63,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="fr-CH">
       <body className="flex flex-col min-h-screen bg-white">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(editorialSchema) }} />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

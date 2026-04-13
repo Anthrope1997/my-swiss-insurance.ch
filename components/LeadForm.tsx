@@ -192,7 +192,8 @@ export default function LeadForm({ compact = false }: { compact?: boolean }) {
         <p className="text-[12px] text-[#475569]/60 text-center leading-relaxed">
           En soumettant ce formulaire, vous acceptez que vos données soient traitées conformément
           à notre <a href="/politique-confidentialite" className="underline hover:text-[#475569] transition-colors">politique de confidentialité</a> (LPD, RS&nbsp;235.1).
-          Vous pouvez retirer votre consentement à tout moment.
+          Vous pouvez retirer votre consentement à tout moment en nous contactant à{' '}
+          <a href="mailto:contact@my-swiss-insurance.ch" className="underline hover:text-[#475569] transition-colors">contact@my-swiss-insurance.ch</a>.
         </p>
       </form>
     </div>
