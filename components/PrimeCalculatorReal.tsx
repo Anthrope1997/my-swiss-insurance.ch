@@ -190,6 +190,57 @@ export default function PrimeCalculatorReal() {
     <section id="calculateur" className="scroll-mt-24 space-y-6">
 
       {/* ------------------------------------------------------------------ */}
+      {/* Modèle info modal                                                   */}
+      {/* ------------------------------------------------------------------ */}
+      {showModeleInfo && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50"
+          onClick={() => setShowModeleInfo(false)}
+        >
+          <div
+            className="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg"
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between px-6 py-5 border-b border-edge">
+              <h3 className="text-[17px] font-semibold text-ink">Les 4 modèles d'assurance LAMal</h3>
+              <button
+                type="button"
+                onClick={() => setShowModeleInfo(false)}
+                className="w-8 h-8 rounded-full flex items-center justify-center text-slate hover:bg-cloud hover:text-ink transition-colors"
+                aria-label="Fermer"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="px-6 py-5 space-y-4">
+              {(Object.keys(MODELE_LABELS) as Modele[]).map(k => (
+                <div key={k} className={`rounded-lg p-4 ${k === modele ? 'bg-[#eff6ff] border border-[#bfdbfe]' : 'bg-cloud'}`}>
+                  <p className="font-semibold text-ink text-[15px] mb-1">{MODELE_LABELS[k]}</p>
+                  <p className="text-slate text-[14px] leading-relaxed">{MODELE_INFO[k]}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Footer */}
+            <div className="px-6 pb-5">
+              <button
+                type="button"
+                onClick={() => setShowModeleInfo(false)}
+                className="btn-primary w-full"
+              >
+                Fermer
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ------------------------------------------------------------------ */}
       {/* Form                                                                */}
       {/* ------------------------------------------------------------------ */}
       <div className="bg-white border border-edge rounded-xl overflow-hidden">
@@ -291,16 +342,6 @@ export default function PrimeCalculatorReal() {
                 </select>
                 <Chevron />
               </div>
-              {showModeleInfo && (
-                <div className="mt-2 border border-edge rounded-lg overflow-hidden text-[13px]">
-                  {(Object.keys(MODELE_LABELS) as Modele[]).map(k => (
-                    <div key={k} className={`flex gap-2 px-3 py-2.5 border-b border-edge last:border-0 ${k === modele ? 'bg-[#eff6ff]' : 'bg-white'}`}>
-                      <span className="font-medium text-ink shrink-0 w-40">{MODELE_LABELS[k]}</span>
-                      <span className="text-slate">{MODELE_INFO[k]}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
           </div>
 
