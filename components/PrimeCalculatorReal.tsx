@@ -79,8 +79,9 @@ export default function PrimeCalculatorReal() {
   const [calcLoading, setCalcLoading] = useState(false)
   const [calcError,   setCalcError]   = useState('')
 
-  // --- Modele tooltip ---
-  const [showModeleInfo, setShowModeleInfo] = useState(false)
+  // --- Tooltips ---
+  const [showModeleInfo,   setShowModeleInfo]   = useState(false)
+  const [showAccidentInfo, setShowAccidentInfo] = useState(false)
 
   // --- Lead gate state ---
   const [showAll,    setShowAll]    = useState(false)
@@ -231,6 +232,49 @@ export default function PrimeCalculatorReal() {
       )}
 
       {/* ------------------------------------------------------------------ */}
+      {/* Accident info modal                                                 */}
+      {/* ------------------------------------------------------------------ */}
+      {showAccidentInfo && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50"
+          onClick={() => setShowAccidentInfo(false)}
+        >
+          <div
+            className="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg"
+            onClick={e => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between px-6 py-5 border-b border-edge">
+              <h3 className="text-[17px] font-semibold text-ink">Couverture accident LAMal</h3>
+              <button
+                type="button"
+                onClick={() => setShowAccidentInfo(false)}
+                className="w-9 h-9 rounded-full flex items-center justify-center text-brand hover:bg-[#dbeafe] transition-colors"
+                aria-label="Fermer"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div className="px-6 py-5 space-y-4">
+              <div className="bg-cloud rounded-lg p-4">
+                <p className="font-semibold text-ink text-[15px] mb-1">Sans couverture accident (recommandé pour la plupart)</p>
+                <p className="text-slate text-[14px] leading-relaxed">
+                  Si vous êtes salarié à <strong>8 heures ou plus par semaine</strong> chez un même employeur, votre assurance accident est obligatoirement couverte par votre employeur (LAA). Vous ne devez pas la payer via la LAMal — cochez cette option pour une prime moins élevée.
+                </p>
+              </div>
+              <div className="bg-cloud rounded-lg p-4">
+                <p className="font-semibold text-ink text-[15px] mb-1">Avec couverture accident</p>
+                <p className="text-slate text-[14px] leading-relaxed">
+                  Si vous êtes <strong>indépendant</strong>, <strong>sans emploi</strong>, ou salarié à <strong>moins de 8 heures par semaine</strong>, vous n'êtes pas couvert par la LAA. Vous devez inclure la couverture accident dans votre LAMal. La prime sera légèrement plus élevée.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ------------------------------------------------------------------ */}
       {/* Form                                                                */}
       {/* ------------------------------------------------------------------ */}
       <div className="bg-white border border-edge rounded-xl overflow-hidden">
@@ -345,10 +389,15 @@ export default function PrimeCalculatorReal() {
                   onChange={e => setAccident(e.target.checked)}
                   className="w-4 h-4 rounded accent-brand cursor-pointer"
                 />
-                <span className="text-[14px] text-slate">
-                  Inclure la couverture accident
-                  <span className="text-slate/60 ml-1">(si non salarié ou &lt; 8h/sem.)</span>
-                </span>
+                <span className="text-[14px] text-slate">Inclure la couverture accident</span>
+                <button
+                  type="button"
+                  onClick={() => setShowAccidentInfo(v => !v)}
+                  className="w-4 h-4 rounded-full bg-brand text-white text-[10px] font-bold leading-none flex items-center justify-center shrink-0 hover:bg-brand-dark transition-colors"
+                  aria-label="Informations sur la couverture accident"
+                >
+                  i
+                </button>
               </label>
             ) : (
               <p className="text-[13px] text-slate">
