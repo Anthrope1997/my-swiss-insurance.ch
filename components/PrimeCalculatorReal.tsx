@@ -43,6 +43,13 @@ const MODELE_LABELS: Record<Modele, string> = {
   DIV:  'Télémédecine',
 }
 
+const MODELE_INFO: Record<Modele, string> = {
+  BASE: 'Accès direct à n\'importe quel médecin ou spécialiste en Suisse, sans restriction. La prime la plus élevée.',
+  HAM:  'Vous passez systématiquement par votre médecin de famille avant tout spécialiste. Réduction de prime de 10–15%.',
+  HMO:  'Vous consultez au sein d\'un réseau fermé de médecins agréés. Réduction de prime de 15–25%.',
+  DIV:  'Première consultation par téléphone ou application avant tout rendez-vous. Réduction de prime de 10–20%.',
+}
+
 const AGE_LABELS: Record<AgeGroup, string> = {
   adulte: 'Adulte (26 ans et +)',
   jeune:  'Jeune adulte (19–25 ans)',
@@ -71,6 +78,9 @@ export default function PrimeCalculatorReal() {
   const [results,     setResults]     = useState<PrimeRow[] | null>(null)
   const [calcLoading, setCalcLoading] = useState(false)
   const [calcError,   setCalcError]   = useState('')
+
+  // --- Modele tooltip ---
+  const [showModeleInfo, setShowModeleInfo] = useState(false)
 
   // --- Lead gate state ---
   const [showAll,    setShowAll]    = useState(false)
@@ -258,7 +268,17 @@ export default function PrimeCalculatorReal() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-ink mb-1">Modèle d'assurance</label>
+              <div className="flex items-center gap-1.5 mb-1">
+                <label className="block text-sm font-medium text-ink">Modèle d'assurance</label>
+                <button
+                  type="button"
+                  onClick={() => setShowModeleInfo(v => !v)}
+                  className="w-4 h-4 rounded-full bg-brand text-white text-[10px] font-bold leading-none flex items-center justify-center shrink-0 hover:bg-brand-dark transition-colors"
+                  aria-label="Informations sur les modèles"
+                >
+                  i
+                </button>
+              </div>
               <div className="relative">
                 <select
                   value={modele}
@@ -271,6 +291,16 @@ export default function PrimeCalculatorReal() {
                 </select>
                 <Chevron />
               </div>
+              {showModeleInfo && (
+                <div className="mt-2 border border-edge rounded-lg overflow-hidden text-[13px]">
+                  {(Object.keys(MODELE_LABELS) as Modele[]).map(k => (
+                    <div key={k} className={`flex gap-2 px-3 py-2.5 border-b border-edge last:border-0 ${k === modele ? 'bg-[#eff6ff]' : 'bg-white'}`}>
+                      <span className="font-medium text-ink shrink-0 w-40">{MODELE_LABELS[k]}</span>
+                      <span className="text-slate">{MODELE_INFO[k]}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 
