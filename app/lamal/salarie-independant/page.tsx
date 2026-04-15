@@ -128,7 +128,7 @@ export default function SalarieIndependantPage() {
                 {[
                   { t: 'Franchise élevée souvent avantageuse', d: 'Si votre trésorerie le permet, une franchise 2000–2500 CHF réduit la prime mensuelle de ~25–30%. Provisionnez la différence sur un compte épargne.' },
                   { t: 'Déductibilité fiscale des primes', d: 'Les primes LAMal sont partiellement déductibles de votre revenu imposable. Montant forfaitaire variable selon le canton.' },
-                  { t: 'Modèle Telmed ou HMO recommandé', d: "Réduit la prime de 15–25%. Adapté aux indépendants qui restent proactifs sur leur santé et ont accès à la téléconsultation." },
+                  { t: 'Modèle Telmed ou HMO recommandé', d: "Peut réduire la prime jusqu'à −24% selon la caisse et le canton. Adapté aux indépendants qui restent proactifs sur leur santé et ont accès à la téléconsultation." },
                   { t: 'Vérifiez les subsides chaque année', d: 'Les revenus variables des indépendants peuvent ouvrir des droits certaines années. Vérifiez chaque printemps après votre déclaration d\'impôts.' },
                 ].map((item, i) => (
                   <li key={i} className="flex gap-3">

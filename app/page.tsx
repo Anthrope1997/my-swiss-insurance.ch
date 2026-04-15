@@ -39,7 +39,7 @@ const schema = {
       name: 'Comment économiser sur sa prime LAMal ?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Choisissez un modèle alternatif (médecin de famille, HMO, Telmed) pour économiser 5 à 25%. Augmentez votre franchise si vous êtes en bonne santé. Changez de caisse chaque année avant le 30 novembre.',
+        text: 'Choisissez un modèle alternatif (médecin de famille, HMO, Telmed) pour économiser jusqu\'à 24%. Augmentez votre franchise si vous êtes en bonne santé. Changez de caisse chaque année avant le 30 novembre.',
       },
     },
   ],

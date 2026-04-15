@@ -404,19 +404,19 @@ export default function GuideLamalPage() {
                   },
                   {
                     title: 'Médecin de famille (Hausarzt)',
-                    reduction: '−5 à −15%',
+                    reduction: 'jusqu\'à −20%',
                     border: 'border-brand',
                     desc: 'Vous consultez toujours votre médecin de famille en premier avant d\'aller chez un spécialiste. Le plus populaire en Suisse romande.',
                   },
                   {
                     title: 'HMO (centre médical)',
-                    reduction: '−15 à −25%',
+                    reduction: 'jusqu\'à −20%',
                     border: 'border-brand',
                     desc: 'Consultation obligatoire dans un centre HMO agréé. Réseau limité en zones rurales, mais forte réduction de prime.',
                   },
                   {
                     title: 'Telmed (hotline médicale)',
-                    reduction: '−10 à −15%',
+                    reduction: 'jusqu\'à −24%',
                     border: 'border-[#3b82f6]',
                     desc: 'Avant toute consultation (hors urgence), appel à une hotline médicale (Medgate, Medi24...). Disponible 24h/24 partout en Suisse.',
                   },

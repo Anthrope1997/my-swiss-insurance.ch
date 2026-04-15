@@ -37,7 +37,7 @@ const faqItems = [
   },
   {
     question: 'Comment économiser sur sa prime LAMal ?',
-    answer: 'Trois leviers principaux : (1) choisir un modèle alternatif (médecin de famille, HMO, Telmed) pour −5 à −25% ; (2) augmenter sa franchise si vous êtes en bonne santé ; (3) changer de caisse chaque année avant le 30 novembre.',
+    answer: 'Trois leviers principaux : (1) choisir un modèle alternatif (médecin de famille, HMO, Telmed) pour jusqu\'à −24% selon la caisse et le canton ; (2) augmenter sa franchise si vous êtes en bonne santé ; (3) changer de caisse chaque année avant le 30 novembre.',
   },
 ]
 
@@ -123,7 +123,7 @@ export default function ComparateurPage() {
                 {[
                   { n: '01', t: 'Votre canton', d: 'La prime varie selon le lieu de résidence. Genève est le canton le plus cher, Nidwald le moins cher.' },
                   { n: '02', t: 'Votre franchise', d: 'Plus la franchise est élevée, plus la prime est basse. À choisir selon votre état de santé.' },
-                  { n: '03', t: 'Votre modèle', d: 'Médecin de famille, HMO ou Telmed réduisent la prime de 5 à 25% vs le modèle standard.' },
+                  { n: '03', t: 'Votre modèle', d: 'Médecin de famille, HMO ou Telmed peuvent réduire la prime jusqu\'à −24% vs le modèle standard.' },
                 ].map((s) => (
                   <div key={s.n}>
                     <div className="text-[36px] font-bold text-[#1d4ed8] mb-3 leading-none">{s.n}</div>
