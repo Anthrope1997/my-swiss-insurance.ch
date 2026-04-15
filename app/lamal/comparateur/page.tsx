@@ -93,7 +93,7 @@ export default function ComparateurPage() {
             Comparateur de caisses maladie 2026.
           </h1>
           <p className="text-xl text-slate max-w-2xl leading-relaxed">
-            Les primes LAMal varient jusqu'à 85% selon le canton.
+            Les primes LAMal varient jusqu'à 76% selon le canton.
             Identifiez les économies possibles pour votre profil.
           </p>
         </div>
