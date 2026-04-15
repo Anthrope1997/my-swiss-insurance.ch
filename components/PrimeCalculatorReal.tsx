@@ -322,11 +322,16 @@ export default function PrimeCalculatorReal() {
                     <tr className="bg-cloud border-b border-edge">
                       <th className="text-left py-3 px-4 font-semibold text-slate text-[12px] uppercase tracking-wide w-8">#</th>
                       <th className="text-left py-3 px-4 font-semibold text-slate text-[12px] uppercase tracking-wide">Assureur</th>
-                      <th className="text-right py-3 px-4 font-semibold text-slate text-[12px] uppercase tracking-wide">Prime nette/mois</th>
+                      <th className="text-right py-3 px-4 font-semibold text-slate text-[12px] uppercase tracking-wide">Prime mensuelle</th>
+                      <th className="text-right py-3 px-4 font-semibold text-slate text-[12px] uppercase tracking-wide hidden sm:table-cell">Prime annuelle</th>
+                      <th className="text-right py-3 px-4 font-semibold text-slate text-[12px] uppercase tracking-wide hidden md:table-cell">Économie max</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {visibleResults!.map((row, i) => (
+                    {visibleResults!.map((row, i) => {
+                      const maxNette = results![results!.length - 1].prime_nette
+                      const saving = maxNette - row.prime_nette
+                      return (
                       <tr
                         key={i}
                         className={`border-b border-edge last:border-0 transition-colors ${i === 0 ? 'bg-green-50' : 'bg-white hover:bg-cloud/60'}`}
@@ -340,8 +345,18 @@ export default function PrimeCalculatorReal() {
                         <td className={`py-3 px-4 text-right font-bold ${i === 0 ? 'text-green-600' : 'text-ink'}`}>
                           {row.prime_nette.toFixed(2)}<span className="text-[12px] font-normal text-slate"> CHF</span>
                         </td>
+                        <td className="py-3 px-4 text-right text-slate hidden sm:table-cell">
+                          {(row.prime_nette * 12).toFixed(0)} CHF
+                        </td>
+                        <td className="py-3 px-4 text-right hidden md:table-cell">
+                          {saving > 0
+                            ? <span className="text-green-600 font-medium">−{(saving * 12).toFixed(0)} CHF/an</span>
+                            : <span className="text-slate">—</span>
+                          }
+                        </td>
                       </tr>
-                    ))}
+                      )
+                    })}
                   </tbody>
                 </table>
               </div>
