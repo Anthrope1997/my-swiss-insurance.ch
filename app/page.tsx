@@ -123,7 +123,7 @@ const steps = [
 
 const stats = [
   { value: 'CHF 565', label: 'Prime moyenne 2026', sub: 'adulte · franchise 300 CHF · modèle standard' },
-  { value: '57', label: 'Caisses agréées', sub: 'en Suisse' },
+  { value: '34', label: 'Caisses comparées', sub: 'données OFSP 2026' },
   { value: '25–30%', label: 'Bénéficiaires de subsides', sub: 'de la population suisse' },
   { value: "CHF 2'753", label: 'Économie max / an', sub: 'adulte · franchise 300 CHF · modèle standard' },
 ]

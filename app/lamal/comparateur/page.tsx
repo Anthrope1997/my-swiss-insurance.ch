@@ -166,7 +166,7 @@ export default function ComparateurPage() {
                 Principaux assureurs LAMal en Suisse
               </h2>
               <p className="text-[15px] text-slate mb-6">
-                57 caisses agréées au total. Les primes varient par canton. Comparez pour votre situation exacte.
+                34 caisses comparées (données OFSP 2026). Les primes varient par canton. Comparez pour votre situation exacte.
               </p>
               <div className="border border-edge rounded-[8px] overflow-hidden">
                 <table className="stripe-table w-full">
