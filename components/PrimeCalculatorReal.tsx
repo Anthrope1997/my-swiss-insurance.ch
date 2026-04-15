@@ -135,7 +135,10 @@ export default function PrimeCalculatorReal() {
       const res = await fetch(`/api/primes?${params}`)
       if (!res.ok) throw new Error('Erreur serveur')
       const data = await res.json()
-      setResults(data.results ?? [])
+      const sorted = (data.results ?? []).slice().sort(
+        (a: PrimeRow, b: PrimeRow) => a.prime_nette - b.prime_nette
+      )
+      setResults(sorted)
     } catch {
       setCalcError('Impossible de charger les données. Réessayez.')
     } finally {
@@ -303,16 +306,13 @@ export default function PrimeCalculatorReal() {
           ) : (
             <>
               {/* Header */}
-              <div className="flex items-center justify-between mb-3">
-                <div>
-                  <h3 className="text-[17px] font-semibold text-ink">
-                    {results.length} offres disponibles
-                  </h3>
-                  <p className="text-[13px] text-slate mt-0.5">
-                    {npaInfo?.commune} · {MODELE_LABELS[modele]} · CHF {franchise} · {AGE_LABELS[ageGroup]}
-                  </p>
-                </div>
-                <span className="text-[12px] text-slate">Prime brute / nette (après remboursement)</span>
+              <div className="mb-3">
+                <h3 className="text-[17px] font-semibold text-ink">
+                  {results.length} offres disponibles
+                </h3>
+                <p className="text-[13px] text-slate mt-0.5">
+                  {npaInfo?.commune} · {MODELE_LABELS[modele]} · CHF {franchise} · {AGE_LABELS[ageGroup]}
+                </p>
               </div>
 
               {/* Table */}
@@ -322,9 +322,7 @@ export default function PrimeCalculatorReal() {
                     <tr className="bg-cloud border-b border-edge">
                       <th className="text-left py-3 px-4 font-semibold text-slate text-[12px] uppercase tracking-wide w-8">#</th>
                       <th className="text-left py-3 px-4 font-semibold text-slate text-[12px] uppercase tracking-wide">Assureur</th>
-                      <th className="text-left py-3 px-4 font-semibold text-slate text-[12px] uppercase tracking-wide hidden sm:table-cell">Plan</th>
-                      <th className="text-right py-3 px-4 font-semibold text-slate text-[12px] uppercase tracking-wide">Prime/mois</th>
-                      <th className="text-right py-3 px-4 font-semibold text-slate text-[12px] uppercase tracking-wide hidden md:table-cell">Nette</th>
+                      <th className="text-right py-3 px-4 font-semibold text-slate text-[12px] uppercase tracking-wide">Prime nette/mois</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -339,12 +337,8 @@ export default function PrimeCalculatorReal() {
                           </span>
                         </td>
                         <td className="py-3 px-4 font-semibold text-ink">{row.assureur}</td>
-                        <td className="py-3 px-4 text-slate hidden sm:table-cell">{row.modele_nom}</td>
                         <td className={`py-3 px-4 text-right font-bold ${i === 0 ? 'text-green-600' : 'text-ink'}`}>
-                          {row.prime_mensuelle.toFixed(2)}<span className="text-[12px] font-normal text-slate"> CHF</span>
-                        </td>
-                        <td className="py-3 px-4 text-right text-slate hidden md:table-cell">
-                          {row.prime_nette.toFixed(2)} CHF
+                          {row.prime_nette.toFixed(2)}<span className="text-[12px] font-normal text-slate"> CHF</span>
                         </td>
                       </tr>
                     ))}
@@ -422,11 +416,11 @@ export default function PrimeCalculatorReal() {
                   <p className="text-[14px] text-ink">
                     Écart entre la 1ère et la dernière offre :{' '}
                     <strong className="text-brand">
-                      CHF {(results[results.length - 1].prime_mensuelle - results[0].prime_mensuelle).toFixed(2)}/mois
+                      CHF {(results[results.length - 1].prime_nette - results[0].prime_nette).toFixed(2)}/mois
                     </strong>{' '}
                     soit{' '}
                     <strong className="text-brand">
-                      CHF {((results[results.length - 1].prime_mensuelle - results[0].prime_mensuelle) * 12).toFixed(0)}/an
+                      CHF {((results[results.length - 1].prime_nette - results[0].prime_nette) * 12).toFixed(0)}/an
                     </strong>{' '}
                     d'économie potentielle.
                   </p>
