@@ -37,10 +37,10 @@ const FRANCHISES: Record<AgeGroup, number[]> = {
 }
 
 const MODELE_LABELS: Record<Modele, string> = {
-  BASE: 'Standard — libre choix du médecin',
-  HAM:  'Médecin de famille — −10 à −15%',
-  HMO:  'HMO — réseau de soins fermé, −15 à −25%',
-  DIV:  'Télémédecine et modèles alternatifs',
+  BASE: 'Standard',
+  HAM:  'Médecin de famille',
+  HMO:  'HMO (réseau de soins)',
+  DIV:  'Télémédecine',
 }
 
 const AGE_LABELS: Record<AgeGroup, string> = {
