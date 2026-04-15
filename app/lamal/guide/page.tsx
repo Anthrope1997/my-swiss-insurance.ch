@@ -109,10 +109,10 @@ const assureurs = [
 ]
 
 const economies = [
-  { canton: 'Genève',  mensuel: 'CHF 229', annuel: "CHF 2'753" },
-  { canton: 'Berne',   mensuel: 'CHF 219', annuel: "CHF 2'632" },
-  { canton: 'Valais',  mensuel: 'CHF 163', annuel: "CHF 1'958" },
-  { canton: 'Vaud',    mensuel: 'CHF 155', annuel: "CHF 1'863" },
+  { canton: 'Genève',    mensuel: 'CHF 229', annuel: "CHF 2'753" },
+  { canton: 'Neuchâtel', mensuel: 'CHF 146', annuel: "CHF 1'747" },
+  { canton: 'Vaud',      mensuel: 'CHF 111', annuel: "CHF 1'330" },
+  { canton: 'Valais',    mensuel: 'CHF 95',  annuel: "CHF 1'138" },
 ]
 
 const toc = [

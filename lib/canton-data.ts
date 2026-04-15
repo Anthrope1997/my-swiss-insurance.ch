@@ -26,7 +26,7 @@ const cantons: Canton[] = [
     name: 'Vaud',
     cantonDe: 'canton de Vaud',
     primeMoyenne: 638,
-    economiePossible: "jusqu'à CHF 1'863/an",
+    economiePossible: "jusqu'à CHF 1'330/an",
     subsidesPct: '28%',
     topCaisses: [
       { name: 'Galenos', prime: 557 },
@@ -80,7 +80,7 @@ const cantons: Canton[] = [
     name: 'Valais',
     cantonDe: 'canton du Valais',
     primeMoyenne: 528,
-    economiePossible: "jusqu'à CHF 1'958/an",
+    economiePossible: "jusqu'à CHF 1'138/an",
     subsidesPct: '26%',
     topCaisses: [
       { name: 'Visperterminen', prime: 433 },

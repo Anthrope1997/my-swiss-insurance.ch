@@ -71,8 +71,9 @@ for canton, regions_data in by_canton.items():
     # Population totale du canton (somme des régions)
     total_pop = sum(pop_by_region.get(rid, 0) for rid in regions_data)
 
-    # Moyenne pondérée par région
+    # Moyenne et économie pondérées par région
     weighted_sum = 0.0
+    weighted_economie = 0.0
     all_primes = []
 
     for region_id, assureurs in regions_data.items():
@@ -81,14 +82,17 @@ for canton, regions_data in by_canton.items():
         all_primes.extend(region_primes)
         region_mean = sum(region_primes) / len(region_primes)
         weighted_sum += region_mean * pop
+        # Économie dans cette région = max − min des assureurs de CETTE région
+        region_economie = max(region_primes) - min(region_primes)
+        weighted_economie += region_economie * pop
 
     prime_moyenne = weighted_sum / total_pop if total_pop > 0 else 0
+    economie_mensuel = weighted_economie / total_pop if total_pop > 0 else 0
+    economie_annuel = economie_mensuel * 12
 
-    # Min / max sur l'ensemble du canton
+    # Min / max : pour info uniquement (pas utilisés dans l'économie)
     prime_min = min(all_primes)
     prime_max = max(all_primes)
-    economie_mensuel = prime_max - prime_min
-    economie_annuel = economie_mensuel * 12
 
     # Nombre de caisses distinctes dans le canton
     all_assureurs = set()
