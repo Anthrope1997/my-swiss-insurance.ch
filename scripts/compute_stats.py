@@ -71,10 +71,11 @@ for canton, regions_data in by_canton.items():
     # Population totale du canton (somme des régions)
     total_pop = sum(pop_by_region.get(rid, 0) for rid in regions_data)
 
-    # Moyenne et économie pondérées par région
+    # Moyenne cantonale = moyenne régionale pondérée par population
     weighted_sum = 0.0
-    weighted_economie = 0.0
     all_primes = []
+    best_region_economie = 0.0
+    best_region_id = None
 
     for region_id, assureurs in regions_data.items():
         pop = pop_by_region.get(region_id, 0)
@@ -84,13 +85,15 @@ for canton, regions_data in by_canton.items():
         weighted_sum += region_mean * pop
         # Économie dans cette région = max − min des assureurs de CETTE région
         region_economie = max(region_primes) - min(region_primes)
-        weighted_economie += region_economie * pop
+        if region_economie > best_region_economie:
+            best_region_economie = region_economie
+            best_region_id = region_id
 
     prime_moyenne = weighted_sum / total_pop if total_pop > 0 else 0
-    economie_mensuel = weighted_economie / total_pop if total_pop > 0 else 0
+    # Économie max du canton = région avec le plus grand écart
+    economie_mensuel = best_region_economie
     economie_annuel = economie_mensuel * 12
 
-    # Min / max : pour info uniquement (pas utilisés dans l'économie)
     prime_min = min(all_primes)
     prime_max = max(all_primes)
 
@@ -121,9 +124,12 @@ for canton, regions_data in by_canton.items():
     }
 
 # ---------------------------------------------------------------------------
-# Moyenne nationale pondérée par population
+# Moyenne nationale = moyenne des moyennes cantonales pondérée par population
 # ---------------------------------------------------------------------------
-total_pop_ch = sum(pop_by_region.values())
+total_pop_ch = sum(
+    sum(pop_by_region.get(rid, 0) for rid in by_canton[c])
+    for c in canton_stats
+)
 weighted_national = sum(
     canton_stats[c]['prime_moyenne'] * sum(
         pop_by_region.get(rid, 0) for rid in by_canton[c]
@@ -132,11 +138,20 @@ weighted_national = sum(
 )
 prime_nationale = weighted_national / total_pop_ch
 
-# Min / max national
-all_primes_national = [p['prime_nette'] for p in ref]
-prime_min_ch = min(all_primes_national)
-prime_max_ch = max(all_primes_national)
+# Gain max en Suisse = région avec la plus grosse différence max − min
+gain_max_ch = 0.0
+gain_max_region = None
+for canton_code, regions_data in by_canton.items():
+    for region_id, assureurs in regions_data.items():
+        primes_region = list(assureurs.values())
+        diff = max(primes_region) - min(primes_region)
+        if diff > gain_max_ch:
+            gain_max_ch = diff
+            gain_max_region = region_id
+
 nb_caisses_ch = len(set(p['assureur'] for p in primes))
+prime_min_ch = min(p['prime_nette'] for p in ref)
+prime_max_ch = max(p['prime_nette'] for p in ref)
 
 # ---------------------------------------------------------------------------
 # Table franchise (national, adulte, BASE, sans accident)
@@ -184,7 +199,9 @@ stats = {
         'prime_min': round(prime_min_ch, 2),
         'prime_max': round(prime_max_ch, 2),
         'nb_caisses': nb_caisses_ch,
-        'economie_max_annuel': round((prime_max_ch - prime_min_ch) * 12, 0),
+        'gain_max_mensuel': round(gain_max_ch, 2),
+        'gain_max_annuel': round(gain_max_ch * 12, 0),
+        'gain_max_region': gain_max_region,
     },
     'cantons': {c['code']: c for c in canton_stats.values()},
     'cantons_sorted': cantons_sorted,
@@ -201,7 +218,8 @@ print(f"  Prime moyenne  : CHF {stats['national']['prime_moyenne']}")
 print(f"  Prime min      : CHF {stats['national']['prime_min']}")
 print(f"  Prime max      : CHF {stats['national']['prime_max']}")
 print(f"  Nb caisses     : {stats['national']['nb_caisses']}")
-print(f"  Économie max   : CHF {stats['national']['economie_max_annuel']:.0f}/an")
+print(f"  Gain max       : CHF {stats['national']['gain_max_annuel']:.0f}/an "
+      f"({stats['national']['gain_max_mensuel']:.2f}/mois, région {stats['national']['gain_max_region']})")
 print(f"\n--- Cantons (du plus cher au moins cher) ---")
 for c in cantons_sorted:
     print(f"  {c['code']:2}  {c['name']:25}  CHF {c['prime_moyenne']:6.2f}  "

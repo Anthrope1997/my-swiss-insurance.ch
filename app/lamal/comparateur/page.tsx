@@ -199,8 +199,8 @@ export default function ComparateurPage() {
                 {[
                   { canton: 'Genève',    mensuel: 'CHF 229', annuel: "CHF 2'753" },
                   { canton: 'Neuchâtel', mensuel: 'CHF 146', annuel: "CHF 1'747" },
-                  { canton: 'Vaud',      mensuel: 'CHF 111', annuel: "CHF 1'330" },
-                  { canton: 'Valais',    mensuel: 'CHF 95',  annuel: "CHF 1'138" },
+                  { canton: 'Valais',    mensuel: 'CHF 120', annuel: "CHF 1'445" },
+                  { canton: 'Vaud',      mensuel: 'CHF 112', annuel: "CHF 1'347" },
                 ].map((r) => (
                   <div key={r.canton} className="bg-cloud border border-edge rounded-[8px] p-5">
                     <p className="font-semibold text-ink mb-1">{r.canton}</p>

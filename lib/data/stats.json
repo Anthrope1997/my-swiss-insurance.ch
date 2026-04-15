@@ -4,7 +4,9 @@
     "prime_min": 359.45,
     "prime_max": 862.95,
     "nb_caisses": 34,
-    "economie_max_annuel": 6042.0
+    "gain_max_mensuel": 229.4,
+    "gain_max_annuel": 2753.0,
+    "gain_max_region": "GE0"
   },
   "cantons": {
     "ZH": {
@@ -13,8 +15,8 @@
       "prime_moyenne": 530.65,
       "prime_min": 450.55,
       "prime_max": 671.55,
-      "economie_mensuel": 116.25,
-      "economie_annuel": 1395.0,
+      "economie_mensuel": 118.9,
+      "economie_annuel": 1427.0,
       "nb_caisses": 27,
       "top3": [
         {
@@ -37,8 +39,8 @@
       "prime_moyenne": 578.26,
       "prime_min": 481.35,
       "prime_max": 700.65,
-      "economie_mensuel": 118.99,
-      "economie_annuel": 1428.0,
+      "economie_mensuel": 126.55,
+      "economie_annuel": 1519.0,
       "nb_caisses": 26,
       "top3": [
         {
@@ -61,8 +63,8 @@
       "prime_moyenne": 499.87,
       "prime_min": 420.5,
       "prime_max": 590.65,
-      "economie_mensuel": 124.39,
-      "economie_annuel": 1493.0,
+      "economie_mensuel": 128.45,
+      "economie_annuel": 1541.0,
       "nb_caisses": 25,
       "top3": [
         {
@@ -301,8 +303,8 @@
       "prime_moyenne": 625.02,
       "prime_min": 538.95,
       "prime_max": 717.55,
-      "economie_mensuel": 132.29,
-      "economie_annuel": 1588.0,
+      "economie_mensuel": 136.8,
+      "economie_annuel": 1642.0,
       "nb_caisses": 23,
       "top3": [
         {
@@ -325,8 +327,8 @@
       "prime_moyenne": 535.68,
       "prime_min": 473.15,
       "prime_max": 599.45,
-      "economie_mensuel": 90.73,
-      "economie_annuel": 1089.0,
+      "economie_mensuel": 91.2,
+      "economie_annuel": 1094.0,
       "nb_caisses": 23,
       "top3": [
         {
@@ -397,8 +399,8 @@
       "prime_moyenne": 495.59,
       "prime_min": 383.25,
       "prime_max": 617.25,
-      "economie_mensuel": 108.52,
-      "economie_annuel": 1302.0,
+      "economie_mensuel": 116.6,
+      "economie_annuel": 1399.0,
       "nb_caisses": 25,
       "top3": [
         {
@@ -421,8 +423,8 @@
       "prime_moyenne": 517.47,
       "prime_min": 411.25,
       "prime_max": 615.35,
-      "economie_mensuel": 137.58,
-      "economie_annuel": 1651.0,
+      "economie_mensuel": 141.5,
+      "economie_annuel": 1698.0,
       "nb_caisses": 24,
       "top3": [
         {
@@ -493,8 +495,8 @@
       "prime_moyenne": 686.1,
       "prime_min": 590.25,
       "prime_max": 763.55,
-      "economie_mensuel": 126.48,
-      "economie_annuel": 1518.0,
+      "economie_mensuel": 146.0,
+      "economie_annuel": 1752.0,
       "nb_caisses": 21,
       "top3": [
         {
@@ -517,8 +519,8 @@
       "prime_moyenne": 637.64,
       "prime_min": 557.25,
       "prime_max": 712.5,
-      "economie_mensuel": 110.82,
-      "economie_annuel": 1330.0,
+      "economie_mensuel": 112.25,
+      "economie_annuel": 1347.0,
       "nb_caisses": 21,
       "top3": [
         {
@@ -541,8 +543,8 @@
       "prime_moyenne": 527.58,
       "prime_min": 432.8,
       "prime_max": 595.95,
-      "economie_mensuel": 94.84,
-      "economie_annuel": 1138.0,
+      "economie_mensuel": 120.45,
+      "economie_annuel": 1445.0,
       "nb_caisses": 28,
       "top3": [
         {
@@ -663,8 +665,8 @@
       "prime_moyenne": 686.1,
       "prime_min": 590.25,
       "prime_max": 763.55,
-      "economie_mensuel": 126.48,
-      "economie_annuel": 1518.0,
+      "economie_mensuel": 146.0,
+      "economie_annuel": 1752.0,
       "nb_caisses": 21,
       "top3": [
         {
@@ -735,8 +737,8 @@
       "prime_moyenne": 637.64,
       "prime_min": 557.25,
       "prime_max": 712.5,
-      "economie_mensuel": 110.82,
-      "economie_annuel": 1330.0,
+      "economie_mensuel": 112.25,
+      "economie_annuel": 1347.0,
       "nb_caisses": 21,
       "top3": [
         {
@@ -783,8 +785,8 @@
       "prime_moyenne": 625.02,
       "prime_min": 538.95,
       "prime_max": 717.55,
-      "economie_mensuel": 132.29,
-      "economie_annuel": 1588.0,
+      "economie_mensuel": 136.8,
+      "economie_annuel": 1642.0,
       "nb_caisses": 23,
       "top3": [
         {
@@ -807,8 +809,8 @@
       "prime_moyenne": 578.26,
       "prime_min": 481.35,
       "prime_max": 700.65,
-      "economie_mensuel": 118.99,
-      "economie_annuel": 1428.0,
+      "economie_mensuel": 126.55,
+      "economie_annuel": 1519.0,
       "nb_caisses": 26,
       "top3": [
         {
@@ -855,8 +857,8 @@
       "prime_moyenne": 535.68,
       "prime_min": 473.15,
       "prime_max": 599.45,
-      "economie_mensuel": 90.73,
-      "economie_annuel": 1089.0,
+      "economie_mensuel": 91.2,
+      "economie_annuel": 1094.0,
       "nb_caisses": 23,
       "top3": [
         {
@@ -879,8 +881,8 @@
       "prime_moyenne": 530.65,
       "prime_min": 450.55,
       "prime_max": 671.55,
-      "economie_mensuel": 116.25,
-      "economie_annuel": 1395.0,
+      "economie_mensuel": 118.9,
+      "economie_annuel": 1427.0,
       "nb_caisses": 27,
       "top3": [
         {
@@ -927,8 +929,8 @@
       "prime_moyenne": 527.58,
       "prime_min": 432.8,
       "prime_max": 595.95,
-      "economie_mensuel": 94.84,
-      "economie_annuel": 1138.0,
+      "economie_mensuel": 120.45,
+      "economie_annuel": 1445.0,
       "nb_caisses": 28,
       "top3": [
         {
@@ -975,8 +977,8 @@
       "prime_moyenne": 517.47,
       "prime_min": 411.25,
       "prime_max": 615.35,
-      "economie_mensuel": 137.58,
-      "economie_annuel": 1651.0,
+      "economie_mensuel": 141.5,
+      "economie_annuel": 1698.0,
       "nb_caisses": 24,
       "top3": [
         {
@@ -1047,8 +1049,8 @@
       "prime_moyenne": 499.87,
       "prime_min": 420.5,
       "prime_max": 590.65,
-      "economie_mensuel": 124.39,
-      "economie_annuel": 1493.0,
+      "economie_mensuel": 128.45,
+      "economie_annuel": 1541.0,
       "nb_caisses": 25,
       "top3": [
         {
@@ -1095,8 +1097,8 @@
       "prime_moyenne": 495.59,
       "prime_min": 383.25,
       "prime_max": 617.25,
-      "economie_mensuel": 108.52,
-      "economie_annuel": 1302.0,
+      "economie_mensuel": 116.6,
+      "economie_annuel": 1399.0,
       "nb_caisses": 25,
       "top3": [
         {

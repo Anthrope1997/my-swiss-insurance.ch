@@ -125,7 +125,7 @@ const stats = [
   { value: 'CHF 565', label: 'Prime moyenne 2026', sub: 'adulte, franchise 300 CHF' },
   { value: '57', label: 'Caisses agréées', sub: 'en Suisse' },
   { value: '25–30%', label: 'Bénéficient de subsides', sub: 'de la population suisse' },
-  { value: "CHF 6'000+", label: 'Économie possible', sub: 'en changeant de caisse' },
+  { value: "CHF 2'753", label: 'Économie possible', sub: 'en changeant de caisse / an' },
 ]
 
 export default function HomePage() {
