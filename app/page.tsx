@@ -31,7 +31,7 @@ const schema = {
       name: 'Combien coûte la LAMal en 2026 ?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'La prime LAMal moyenne est de CHF 565/mois pour un adulte en 2026 (franchise 300 CHF, modèle standard). Elle varie de CHF 403 à CHF 710 selon le canton. Source : OFSP 2026.',
+        text: 'La prime LAMal moyenne est de CHF 565/mois pour un adulte en 2026 (franchise 300 CHF, modèle standard). Elle varie de CHF 359 à CHF 863 selon le canton et la caisse choisie. Source : OFSP 2026.',
       },
     },
     {
@@ -149,7 +149,7 @@ export default function HomePage() {
               </h1>
               <p className="text-xl text-slate leading-relaxed mb-10">
                 En Suisse, l'assurance maladie de base (LAMal) est obligatoire pour tous.
-                Ses primes varient de CHF 403 à CHF 710 selon le canton. Comparez gratuitement
+                Ses primes varient de CHF 359 à CHF 863 selon le canton et la caisse choisie. Comparez gratuitement
                 pour trouver la moins chère selon votre profil.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
@@ -195,7 +195,7 @@ export default function HomePage() {
         <p className="text-lg text-[#475569] leading-relaxed">
           En 2026, la prime mensuelle moyenne en Suisse s'élève à CHF 565 pour un adulte de 35 ans
           avec une franchise de 300 CHF et le modèle standard (libre choix du médecin). Elle varie
-          de CHF 403 (Zoug) à CHF 710 (Genève) selon le canton de résidence.
+          de CHF 359 à CHF 863 selon le canton et la caisse choisie.
         </p>
         <div className="mt-6 text-sm text-[#475569]">
           Source : Office fédéral de la santé publique (OFSP), données 2026.
