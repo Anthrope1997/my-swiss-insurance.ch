@@ -346,8 +346,8 @@ export default function GuideLamalPage() {
                     <tr>
                       <th>Franchise</th>
                       <th className="text-right">Prime/mois</th>
-                      <th className="text-right">Économie/mois</th>
                       <th className="text-right">Économie/an</th>
+                      <th className="text-right hidden sm:table-cell">Économie/mois</th>
                       <th className="text-center hidden sm:table-cell">Break-even</th>
                     </tr>
                   </thead>
@@ -359,10 +359,10 @@ export default function GuideLamalPage() {
                         </td>
                         <td className="text-right text-ink">CHF {f.prime.toFixed(2)}</td>
                         <td className="text-right text-[#1d4ed8] font-medium">
-                          {f.economie > 0 ? `−CHF ${f.economie.toFixed(2)}` : '—'}
-                        </td>
-                        <td className="text-right text-[#1d4ed8] font-medium">
                           {f.ecAnn > 0 ? `−CHF ${f.ecAnn}` : '—'}
+                        </td>
+                        <td className="text-right text-[#1d4ed8] font-medium hidden sm:table-cell">
+                          {f.economie > 0 ? `−CHF ${f.economie.toFixed(2)}` : '—'}
                         </td>
                         <td className="text-center font-medium hidden sm:table-cell">
                           {f.breakEven}
@@ -453,10 +453,10 @@ export default function GuideLamalPage() {
                   <div key={r.canton} className="bg-cloud border border-edge rounded-[8px] p-5">
                     <p className="font-semibold text-ink mb-1">{r.canton}</p>
                     <p className="text-2xl font-bold text-[#1d4ed8]">
-                      {r.mensuel}
-                      <span className="text-[14px] font-normal text-slate">/mois</span>
+                      {r.annuel}
+                      <span className="text-[14px] font-normal text-slate">/an</span>
                     </p>
-                    <p className="text-[14px] text-slate mt-0.5">soit {r.annuel}/an d'économie</p>
+                    <p className="text-[14px] text-slate mt-0.5">soit {r.mensuel}/mois d'économie</p>
                   </div>
                 ))}
               </div>

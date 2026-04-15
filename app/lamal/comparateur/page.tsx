@@ -204,8 +204,8 @@ export default function ComparateurPage() {
                 ].map((r) => (
                   <div key={r.canton} className="bg-cloud border border-edge rounded-[8px] p-5">
                     <p className="font-semibold text-ink mb-1">{r.canton}</p>
-                    <p className="text-2xl font-bold text-[#1d4ed8]">{r.mensuel}<span className="text-[14px] font-normal text-slate">/mois</span></p>
-                    <p className="text-[14px] text-slate mt-0.5">soit {r.annuel}/an d'économie</p>
+                    <p className="text-2xl font-bold text-[#1d4ed8]">{r.annuel}<span className="text-[14px] font-normal text-slate">/an</span></p>
+                    <p className="text-[14px] text-slate mt-0.5">soit {r.mensuel}/mois d'économie</p>
                   </div>
                 ))}
               </div>

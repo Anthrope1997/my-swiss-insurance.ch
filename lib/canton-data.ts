@@ -26,7 +26,7 @@ const cantons: Canton[] = [
     name: 'Vaud',
     cantonDe: 'canton de Vaud',
     primeMoyenne: 638,
-    economiePossible: "jusqu'à 155 CHF/mois",
+    economiePossible: "jusqu'à CHF 1'863/an",
     subsidesPct: '28%',
     topCaisses: [
       { name: 'Galenos', prime: 557 },
@@ -44,7 +44,7 @@ const cantons: Canton[] = [
     name: 'Genève',
     cantonDe: 'canton de Genève',
     primeMoyenne: 710,
-    economiePossible: "jusqu'à 229 CHF/mois",
+    economiePossible: "jusqu'à CHF 2'753/an",
     subsidesPct: '31%',
     topCaisses: [
       { name: 'Assura', prime: 634 },
@@ -62,7 +62,7 @@ const cantons: Canton[] = [
     name: 'Fribourg',
     cantonDe: 'canton de Fribourg',
     primeMoyenne: 522,
-    economiePossible: "jusqu'à 92 CHF/mois",
+    economiePossible: "jusqu'à CHF 1'099/an",
     subsidesPct: '24%',
     topCaisses: [
       { name: 'ÖKK', prime: 489 },
@@ -80,7 +80,7 @@ const cantons: Canton[] = [
     name: 'Valais',
     cantonDe: 'canton du Valais',
     primeMoyenne: 528,
-    economiePossible: "jusqu'à 163 CHF/mois",
+    economiePossible: "jusqu'à CHF 1'958/an",
     subsidesPct: '26%',
     topCaisses: [
       { name: 'Visperterminen', prime: 433 },
@@ -98,7 +98,7 @@ const cantons: Canton[] = [
     name: 'Neuchâtel',
     cantonDe: 'canton de Neuchâtel',
     primeMoyenne: 663,
-    economiePossible: "jusqu'à 146 CHF/mois",
+    economiePossible: "jusqu'à CHF 1'747/an",
     subsidesPct: '29%',
     topCaisses: [
       { name: 'Helsana', prime: 610 },
@@ -116,7 +116,7 @@ const cantons: Canton[] = [
     name: 'Jura',
     cantonDe: 'canton du Jura',
     primeMoyenne: 633,
-    economiePossible: "jusqu'à 116 CHF/mois",
+    economiePossible: "jusqu'à CHF 1'390/an",
     subsidesPct: '22%',
     topCaisses: [
       { name: 'Atupri', prime: 592 },
