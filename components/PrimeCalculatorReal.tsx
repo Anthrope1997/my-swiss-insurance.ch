@@ -207,10 +207,10 @@ export default function PrimeCalculatorReal() {
               <button
                 type="button"
                 onClick={() => setShowModeleInfo(false)}
-                className="w-8 h-8 rounded-full flex items-center justify-center text-slate hover:bg-cloud hover:text-ink transition-colors"
+                className="w-9 h-9 rounded-full flex items-center justify-center text-brand hover:bg-[#dbeafe] transition-colors"
                 aria-label="Fermer"
               >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
