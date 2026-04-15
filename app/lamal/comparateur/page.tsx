@@ -163,10 +163,10 @@ export default function ComparateurPage() {
             {/* Assureurs */}
             <section>
               <h2 className="text-2xl font-semibold text-ink mb-2">
-                Principaux assureurs LAMal en Suisse
+                Parts de marché dans les affaires d'assurance-maladie en Suisse
               </h2>
               <p className="text-[15px] text-slate mb-6">
-                8 plus grands groupes · parts de marché assurance complémentaire (FINMA 2024). Les primes LAMal varient par canton — comparez pour votre situation exacte.
+                8 plus grands groupes d'assureurs maladie en Suisse. Source : FINMA 2024. Les primes LAMal varient par canton — comparez pour votre situation exacte.
               </p>
               <div className="border border-edge rounded-[8px] overflow-hidden">
                 <table className="stripe-table w-full">
