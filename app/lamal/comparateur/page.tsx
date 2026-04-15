@@ -42,24 +42,32 @@ const faqItems = [
 ]
 
 const premiumBars = [
-  { canton: 'Nidwald (NW)', prime: 308.70, pct: 54 },
-  { canton: 'Obwald (OW)', prime: 312.10, pct: 55 },
-  { canton: 'Uri (UR)', prime: 318.40, pct: 56 },
-  { canton: 'Schwyz (SZ)', prime: 325.60, pct: 57 },
-  { canton: 'Glaris (GL)', prime: 337.50, pct: 59 },
-  { canton: 'Zoug (ZG)', prime: 356.20, pct: 62 },
-  { canton: 'Lucerne (LU)', prime: 374.80, pct: 65 },
-  { canton: 'Berne (BE)', prime: 426.90, pct: 75 },
-  { canton: 'Argovie (AG)', prime: 399.60, pct: 70 },
-  { canton: 'Valais (VS)', prime: 408.90, pct: 71 },
-  { canton: 'Fribourg (FR)', prime: 449.80, pct: 79 },
-  { canton: 'Zurich (ZH)', prime: 455.10, pct: 80 },
-  { canton: 'Jura (JU)', prime: 459.30, pct: 80 },
-  { canton: 'Neuchâtel (NE)', prime: 482.70, pct: 84 },
-  { canton: 'Tessin (TI)', prime: 491.30, pct: 86 },
-  { canton: 'Vaud (VD)', prime: 520.40, pct: 91 },
-  { canton: 'Bâle-Ville (BS)', prime: 521.60, pct: 91 },
-  { canton: 'Genève (GE)', prime: 572.50, pct: 100 },
+  { canton: 'Zoug (ZG)',              prime: 403.06, pct: 57 },
+  { canton: 'Appenzell Rh.-Int. (AI)',prime: 424.35, pct: 60 },
+  { canton: 'Nidwald (NW)',           prime: 459.98, pct: 65 },
+  { canton: 'Uri (UR)',               prime: 463.33, pct: 65 },
+  { canton: 'Obwald (OW)',            prime: 467.13, pct: 66 },
+  { canton: 'Schwyz (SZ)',            prime: 484.88, pct: 68 },
+  { canton: 'Saint-Gall (SG)',        prime: 495.59, pct: 70 },
+  { canton: 'Glaris (GL)',            prime: 498.01, pct: 70 },
+  { canton: 'Lucerne (LU)',           prime: 499.87, pct: 70 },
+  { canton: 'Appenzell Rh.-Ext. (AR)',prime: 508.83, pct: 72 },
+  { canton: 'Thurgovie (TG)',         prime: 508.64, pct: 72 },
+  { canton: 'Grisons (GR)',           prime: 517.47, pct: 73 },
+  { canton: 'Fribourg (FR)',          prime: 522.27, pct: 73 },
+  { canton: 'Valais (VS)',            prime: 527.58, pct: 74 },
+  { canton: 'Argovie (AG)',           prime: 527.98, pct: 74 },
+  { canton: 'Zurich (ZH)',            prime: 530.65, pct: 75 },
+  { canton: 'Schaffhouse (SH)',       prime: 535.68, pct: 75 },
+  { canton: 'Soleure (SO)',           prime: 560.35, pct: 79 },
+  { canton: 'Berne (BE)',             prime: 578.26, pct: 81 },
+  { canton: 'Bâle-Campagne (BL)',     prime: 625.02, pct: 88 },
+  { canton: 'Jura (JU)',              prime: 633.21, pct: 89 },
+  { canton: 'Vaud (VD)',              prime: 637.64, pct: 90 },
+  { canton: 'Neuchâtel (NE)',         prime: 663.19, pct: 93 },
+  { canton: 'Bâle-Ville (BS)',        prime: 668.40, pct: 94 },
+  { canton: 'Tessin (TI)',            prime: 686.10, pct: 97 },
+  { canton: 'Genève (GE)',            prime: 710.41, pct: 100 },
 ]
 
 const assureurs = [
@@ -189,10 +197,10 @@ export default function ComparateurPage() {
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
-                  { canton: 'Genève', mensuel: '~CHF 120–180', annuel: '~CHF 1\'440–2\'160' },
-                  { canton: 'Vaud', mensuel: '~CHF 90–130', annuel: '~CHF 1\'080–1\'560' },
-                  { canton: 'Fribourg', mensuel: '~CHF 70–110', annuel: '~CHF 840–1\'320' },
-                  { canton: 'Berne', mensuel: '~CHF 60–100', annuel: '~CHF 720–1\'200' },
+                  { canton: 'Genève',  mensuel: 'CHF 229', annuel: "CHF 2'753" },
+                  { canton: 'Berne',   mensuel: 'CHF 219', annuel: "CHF 2'632" },
+                  { canton: 'Valais',  mensuel: 'CHF 163', annuel: "CHF 1'958" },
+                  { canton: 'Vaud',    mensuel: 'CHF 155', annuel: "CHF 1'863" },
                 ].map((r) => (
                   <div key={r.canton} className="bg-cloud border border-edge rounded-[8px] p-5">
                     <p className="font-semibold text-ink mb-1">{r.canton}</p>

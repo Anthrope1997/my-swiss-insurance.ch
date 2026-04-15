@@ -1,0 +1,1299 @@
+{
+  "national": {
+    "prime_moyenne": 564.61,
+    "prime_min": 359.45,
+    "prime_max": 862.95,
+    "nb_caisses": 34,
+    "economie_max_annuel": 6042.0
+  },
+  "cantons": {
+    "ZH": {
+      "code": "ZH",
+      "name": "Zurich",
+      "prime_moyenne": 530.65,
+      "prime_min": 450.55,
+      "prime_max": 671.55,
+      "economie_mensuel": 221.0,
+      "economie_annuel": 2652.0,
+      "nb_caisses": 27,
+      "top3": [
+        {
+          "name": "Rhenusana",
+          "prime": 450.55
+        },
+        {
+          "name": "Wädenswil",
+          "prime": 454.05
+        },
+        {
+          "name": "KKLH",
+          "prime": 464.1
+        }
+      ]
+    },
+    "BE": {
+      "code": "BE",
+      "name": "Berne",
+      "prime_moyenne": 578.26,
+      "prime_min": 481.35,
+      "prime_max": 700.65,
+      "economie_mensuel": 219.3,
+      "economie_annuel": 2632.0,
+      "nb_caisses": 26,
+      "top3": [
+        {
+          "name": "Sumiswalder",
+          "prime": 481.35
+        },
+        {
+          "name": "Agrisano",
+          "prime": 489.25
+        },
+        {
+          "name": "KKLH",
+          "prime": 491.7
+        }
+      ]
+    },
+    "LU": {
+      "code": "LU",
+      "name": "Lucerne",
+      "prime_moyenne": 499.87,
+      "prime_min": 420.5,
+      "prime_max": 590.65,
+      "economie_mensuel": 170.15,
+      "economie_annuel": 2042.0,
+      "nb_caisses": 25,
+      "top3": [
+        {
+          "name": "KKLH",
+          "prime": 420.5
+        },
+        {
+          "name": "Sumiswalder",
+          "prime": 449.45
+        },
+        {
+          "name": "Vivao Sympany",
+          "prime": 450.55
+        }
+      ]
+    },
+    "UR": {
+      "code": "UR",
+      "name": "Uri",
+      "prime_moyenne": 463.33,
+      "prime_min": 410.85,
+      "prime_max": 631.65,
+      "economie_mensuel": 220.8,
+      "economie_annuel": 2650.0,
+      "nb_caisses": 26,
+      "top3": [
+        {
+          "name": "Agrisano",
+          "prime": 410.85
+        },
+        {
+          "name": "Vivao Sympany",
+          "prime": 416.15
+        },
+        {
+          "name": "Atupri",
+          "prime": 425.65
+        }
+      ]
+    },
+    "SZ": {
+      "code": "SZ",
+      "name": "Schwyz",
+      "prime_moyenne": 484.88,
+      "prime_min": 407.75,
+      "prime_max": 541.95,
+      "economie_mensuel": 134.2,
+      "economie_annuel": 1610.0,
+      "nb_caisses": 28,
+      "top3": [
+        {
+          "name": "Einsiedeln",
+          "prime": 407.75
+        },
+        {
+          "name": "Agrisano",
+          "prime": 436.85
+        },
+        {
+          "name": "Sumiswalder",
+          "prime": 456.85
+        }
+      ]
+    },
+    "OW": {
+      "code": "OW",
+      "name": "Obwald",
+      "prime_moyenne": 467.13,
+      "prime_min": 417.65,
+      "prime_max": 528.65,
+      "economie_mensuel": 111.0,
+      "economie_annuel": 1332.0,
+      "nb_caisses": 26,
+      "top3": [
+        {
+          "name": "Agrisano",
+          "prime": 417.65
+        },
+        {
+          "name": "Sumiswalder",
+          "prime": 438.75
+        },
+        {
+          "name": "EGK",
+          "prime": 441.85
+        }
+      ]
+    },
+    "NW": {
+      "code": "NW",
+      "name": "Nidwald",
+      "prime_moyenne": 459.98,
+      "prime_min": 420.55,
+      "prime_max": 535.35,
+      "economie_mensuel": 114.8,
+      "economie_annuel": 1378.0,
+      "nb_caisses": 26,
+      "top3": [
+        {
+          "name": "Agrisano",
+          "prime": 420.55
+        },
+        {
+          "name": "Vivao Sympany",
+          "prime": 426.45
+        },
+        {
+          "name": "Assura",
+          "prime": 432.75
+        }
+      ]
+    },
+    "GL": {
+      "code": "GL",
+      "name": "Glaris",
+      "prime_moyenne": 498.01,
+      "prime_min": 473.35,
+      "prime_max": 534.05,
+      "economie_mensuel": 60.7,
+      "economie_annuel": 728.0,
+      "nb_caisses": 26,
+      "top3": [
+        {
+          "name": "Agrisano",
+          "prime": 473.35
+        },
+        {
+          "name": "Sumiswalder",
+          "prime": 474.35
+        },
+        {
+          "name": "Philos",
+          "prime": 478.45
+        }
+      ]
+    },
+    "ZG": {
+      "code": "ZG",
+      "name": "Zoug",
+      "prime_moyenne": 403.06,
+      "prime_min": 359.45,
+      "prime_max": 511.75,
+      "economie_mensuel": 152.3,
+      "economie_annuel": 1828.0,
+      "nb_caisses": 27,
+      "top3": [
+        {
+          "name": "Vivao Sympany",
+          "prime": 359.45
+        },
+        {
+          "name": "Concordia",
+          "prime": 359.45
+        },
+        {
+          "name": "SLKK",
+          "prime": 361.45
+        }
+      ]
+    },
+    "FR": {
+      "code": "FR",
+      "name": "Fribourg",
+      "prime_moyenne": 522.27,
+      "prime_min": 488.75,
+      "prime_max": 580.3,
+      "economie_mensuel": 91.55,
+      "economie_annuel": 1099.0,
+      "nb_caisses": 23,
+      "top3": [
+        {
+          "name": "ÖKK",
+          "prime": 488.75
+        },
+        {
+          "name": "Aquilana",
+          "prime": 490.15
+        },
+        {
+          "name": "SLKK",
+          "prime": 491.45
+        }
+      ]
+    },
+    "SO": {
+      "code": "SO",
+      "name": "Soleure",
+      "prime_moyenne": 560.35,
+      "prime_min": 530.65,
+      "prime_max": 592.75,
+      "economie_mensuel": 62.1,
+      "economie_annuel": 745.0,
+      "nb_caisses": 25,
+      "top3": [
+        {
+          "name": "Sumiswalder",
+          "prime": 530.65
+        },
+        {
+          "name": "Agrisano",
+          "prime": 531.95
+        },
+        {
+          "name": "Helsana",
+          "prime": 536.15
+        }
+      ]
+    },
+    "BS": {
+      "code": "BS",
+      "name": "Bâle-Ville",
+      "prime_moyenne": 668.4,
+      "prime_min": 621.45,
+      "prime_max": 769.2,
+      "economie_mensuel": 147.75,
+      "economie_annuel": 1773.0,
+      "nb_caisses": 23,
+      "top3": [
+        {
+          "name": "Assura",
+          "prime": 621.45
+        },
+        {
+          "name": "Vivao Sympany",
+          "prime": 624.55
+        },
+        {
+          "name": "CSS",
+          "prime": 630.95
+        }
+      ]
+    },
+    "BL": {
+      "code": "BL",
+      "name": "Bâle-Campagne",
+      "prime_moyenne": 625.02,
+      "prime_min": 538.95,
+      "prime_max": 717.55,
+      "economie_mensuel": 178.6,
+      "economie_annuel": 2143.0,
+      "nb_caisses": 23,
+      "top3": [
+        {
+          "name": "ÖKK",
+          "prime": 538.95
+        },
+        {
+          "name": "Agrisano",
+          "prime": 541.35
+        },
+        {
+          "name": "Visana",
+          "prime": 561.95
+        }
+      ]
+    },
+    "SH": {
+      "code": "SH",
+      "name": "Schaffhouse",
+      "prime_moyenne": 535.68,
+      "prime_min": 473.15,
+      "prime_max": 599.45,
+      "economie_mensuel": 126.3,
+      "economie_annuel": 1516.0,
+      "nb_caisses": 23,
+      "top3": [
+        {
+          "name": "Assura",
+          "prime": 473.15
+        },
+        {
+          "name": "ÖKK",
+          "prime": 473.85
+        },
+        {
+          "name": "Agrisano",
+          "prime": 474.05
+        }
+      ]
+    },
+    "AR": {
+      "code": "AR",
+      "name": "Appenzell Rh.-Ext.",
+      "prime_moyenne": 508.83,
+      "prime_min": 450.25,
+      "prime_max": 614.45,
+      "economie_mensuel": 164.2,
+      "economie_annuel": 1970.0,
+      "nb_caisses": 23,
+      "top3": [
+        {
+          "name": "Agrisano",
+          "prime": 450.25
+        },
+        {
+          "name": "ÖKK",
+          "prime": 461.75
+        },
+        {
+          "name": "Rhenusana",
+          "prime": 470.45
+        }
+      ]
+    },
+    "AI": {
+      "code": "AI",
+      "name": "Appenzell Rh.-Int.",
+      "prime_moyenne": 424.35,
+      "prime_min": 383.25,
+      "prime_max": 499.85,
+      "economie_mensuel": 116.6,
+      "economie_annuel": 1399.0,
+      "nb_caisses": 23,
+      "top3": [
+        {
+          "name": "Assura",
+          "prime": 383.25
+        },
+        {
+          "name": "Vivao Sympany",
+          "prime": 384.55
+        },
+        {
+          "name": "Agrisano",
+          "prime": 385.35
+        }
+      ]
+    },
+    "SG": {
+      "code": "SG",
+      "name": "Saint-Gall",
+      "prime_moyenne": 495.59,
+      "prime_min": 383.25,
+      "prime_max": 617.25,
+      "economie_mensuel": 234.0,
+      "economie_annuel": 2808.0,
+      "nb_caisses": 25,
+      "top3": [
+        {
+          "name": "Assura",
+          "prime": 383.25
+        },
+        {
+          "name": "Vivao Sympany",
+          "prime": 384.55
+        },
+        {
+          "name": "Agrisano",
+          "prime": 385.35
+        }
+      ]
+    },
+    "GR": {
+      "code": "GR",
+      "name": "Grisons",
+      "prime_moyenne": 517.47,
+      "prime_min": 411.25,
+      "prime_max": 615.35,
+      "economie_mensuel": 204.1,
+      "economie_annuel": 2449.0,
+      "nb_caisses": 24,
+      "top3": [
+        {
+          "name": "curaulta",
+          "prime": 411.25
+        },
+        {
+          "name": "Vita Surselva",
+          "prime": 418.3
+        },
+        {
+          "name": "Sumiswalder",
+          "prime": 424.05
+        }
+      ]
+    },
+    "AG": {
+      "code": "AG",
+      "name": "Argovie",
+      "prime_moyenne": 527.98,
+      "prime_min": 482.95,
+      "prime_max": 573.25,
+      "economie_mensuel": 90.3,
+      "economie_annuel": 1084.0,
+      "nb_caisses": 27,
+      "top3": [
+        {
+          "name": "KKLH",
+          "prime": 482.95
+        },
+        {
+          "name": "Sumiswalder",
+          "prime": 486.45
+        },
+        {
+          "name": "Agrisano",
+          "prime": 496.15
+        }
+      ]
+    },
+    "TG": {
+      "code": "TG",
+      "name": "Thurgovie",
+      "prime_moyenne": 508.64,
+      "prime_min": 469.45,
+      "prime_max": 553.75,
+      "economie_mensuel": 84.3,
+      "economie_annuel": 1012.0,
+      "nb_caisses": 23,
+      "top3": [
+        {
+          "name": "Agrisano",
+          "prime": 469.45
+        },
+        {
+          "name": "SLKK",
+          "prime": 483.35
+        },
+        {
+          "name": "Sumiswalder",
+          "prime": 485.35
+        }
+      ]
+    },
+    "TI": {
+      "code": "TI",
+      "name": "Tessin",
+      "prime_moyenne": 686.1,
+      "prime_min": 590.25,
+      "prime_max": 763.55,
+      "economie_mensuel": 173.3,
+      "economie_annuel": 2080.0,
+      "nb_caisses": 21,
+      "top3": [
+        {
+          "name": "Agrisano",
+          "prime": 590.25
+        },
+        {
+          "name": "Galenos",
+          "prime": 606.05
+        },
+        {
+          "name": "Helsana",
+          "prime": 606.85
+        }
+      ]
+    },
+    "VD": {
+      "code": "VD",
+      "name": "Vaud",
+      "prime_moyenne": 637.64,
+      "prime_min": 557.25,
+      "prime_max": 712.5,
+      "economie_mensuel": 155.25,
+      "economie_annuel": 1863.0,
+      "nb_caisses": 21,
+      "top3": [
+        {
+          "name": "Galenos",
+          "prime": 557.25
+        },
+        {
+          "name": "Assura",
+          "prime": 572.55
+        },
+        {
+          "name": "Atupri",
+          "prime": 575.35
+        }
+      ]
+    },
+    "VS": {
+      "code": "VS",
+      "name": "Valais",
+      "prime_moyenne": 527.58,
+      "prime_min": 432.8,
+      "prime_max": 595.95,
+      "economie_mensuel": 163.15,
+      "economie_annuel": 1958.0,
+      "nb_caisses": 28,
+      "top3": [
+        {
+          "name": "Visperterminen",
+          "prime": 432.8
+        },
+        {
+          "name": "ÖKK",
+          "prime": 441.25
+        },
+        {
+          "name": "Sodalis",
+          "prime": 441.35
+        }
+      ]
+    },
+    "NE": {
+      "code": "NE",
+      "name": "Neuchâtel",
+      "prime_moyenne": 663.19,
+      "prime_min": 609.65,
+      "prime_max": 755.25,
+      "economie_mensuel": 145.6,
+      "economie_annuel": 1747.0,
+      "nb_caisses": 21,
+      "top3": [
+        {
+          "name": "Helsana",
+          "prime": 609.65
+        },
+        {
+          "name": "Atupri",
+          "prime": 617.95
+        },
+        {
+          "name": "Assura",
+          "prime": 621.45
+        }
+      ]
+    },
+    "GE": {
+      "code": "GE",
+      "name": "Genève",
+      "prime_moyenne": 710.41,
+      "prime_min": 633.55,
+      "prime_max": 862.95,
+      "economie_mensuel": 229.4,
+      "economie_annuel": 2753.0,
+      "nb_caisses": 21,
+      "top3": [
+        {
+          "name": "Assura",
+          "prime": 633.55
+        },
+        {
+          "name": "Vivao Sympany",
+          "prime": 645.85
+        },
+        {
+          "name": "ÖKK",
+          "prime": 655.15
+        }
+      ]
+    },
+    "JU": {
+      "code": "JU",
+      "name": "Jura",
+      "prime_moyenne": 633.21,
+      "prime_min": 591.65,
+      "prime_max": 707.45,
+      "economie_mensuel": 115.8,
+      "economie_annuel": 1390.0,
+      "nb_caisses": 21,
+      "top3": [
+        {
+          "name": "Atupri",
+          "prime": 591.65
+        },
+        {
+          "name": "Agrisano",
+          "prime": 594.75
+        },
+        {
+          "name": "ÖKK",
+          "prime": 599.35
+        }
+      ]
+    }
+  },
+  "cantons_sorted": [
+    {
+      "code": "GE",
+      "name": "Genève",
+      "prime_moyenne": 710.41,
+      "prime_min": 633.55,
+      "prime_max": 862.95,
+      "economie_mensuel": 229.4,
+      "economie_annuel": 2753.0,
+      "nb_caisses": 21,
+      "top3": [
+        {
+          "name": "Assura",
+          "prime": 633.55
+        },
+        {
+          "name": "Vivao Sympany",
+          "prime": 645.85
+        },
+        {
+          "name": "ÖKK",
+          "prime": 655.15
+        }
+      ]
+    },
+    {
+      "code": "TI",
+      "name": "Tessin",
+      "prime_moyenne": 686.1,
+      "prime_min": 590.25,
+      "prime_max": 763.55,
+      "economie_mensuel": 173.3,
+      "economie_annuel": 2080.0,
+      "nb_caisses": 21,
+      "top3": [
+        {
+          "name": "Agrisano",
+          "prime": 590.25
+        },
+        {
+          "name": "Galenos",
+          "prime": 606.05
+        },
+        {
+          "name": "Helsana",
+          "prime": 606.85
+        }
+      ]
+    },
+    {
+      "code": "BS",
+      "name": "Bâle-Ville",
+      "prime_moyenne": 668.4,
+      "prime_min": 621.45,
+      "prime_max": 769.2,
+      "economie_mensuel": 147.75,
+      "economie_annuel": 1773.0,
+      "nb_caisses": 23,
+      "top3": [
+        {
+          "name": "Assura",
+          "prime": 621.45
+        },
+        {
+          "name": "Vivao Sympany",
+          "prime": 624.55
+        },
+        {
+          "name": "CSS",
+          "prime": 630.95
+        }
+      ]
+    },
+    {
+      "code": "NE",
+      "name": "Neuchâtel",
+      "prime_moyenne": 663.19,
+      "prime_min": 609.65,
+      "prime_max": 755.25,
+      "economie_mensuel": 145.6,
+      "economie_annuel": 1747.0,
+      "nb_caisses": 21,
+      "top3": [
+        {
+          "name": "Helsana",
+          "prime": 609.65
+        },
+        {
+          "name": "Atupri",
+          "prime": 617.95
+        },
+        {
+          "name": "Assura",
+          "prime": 621.45
+        }
+      ]
+    },
+    {
+      "code": "VD",
+      "name": "Vaud",
+      "prime_moyenne": 637.64,
+      "prime_min": 557.25,
+      "prime_max": 712.5,
+      "economie_mensuel": 155.25,
+      "economie_annuel": 1863.0,
+      "nb_caisses": 21,
+      "top3": [
+        {
+          "name": "Galenos",
+          "prime": 557.25
+        },
+        {
+          "name": "Assura",
+          "prime": 572.55
+        },
+        {
+          "name": "Atupri",
+          "prime": 575.35
+        }
+      ]
+    },
+    {
+      "code": "JU",
+      "name": "Jura",
+      "prime_moyenne": 633.21,
+      "prime_min": 591.65,
+      "prime_max": 707.45,
+      "economie_mensuel": 115.8,
+      "economie_annuel": 1390.0,
+      "nb_caisses": 21,
+      "top3": [
+        {
+          "name": "Atupri",
+          "prime": 591.65
+        },
+        {
+          "name": "Agrisano",
+          "prime": 594.75
+        },
+        {
+          "name": "ÖKK",
+          "prime": 599.35
+        }
+      ]
+    },
+    {
+      "code": "BL",
+      "name": "Bâle-Campagne",
+      "prime_moyenne": 625.02,
+      "prime_min": 538.95,
+      "prime_max": 717.55,
+      "economie_mensuel": 178.6,
+      "economie_annuel": 2143.0,
+      "nb_caisses": 23,
+      "top3": [
+        {
+          "name": "ÖKK",
+          "prime": 538.95
+        },
+        {
+          "name": "Agrisano",
+          "prime": 541.35
+        },
+        {
+          "name": "Visana",
+          "prime": 561.95
+        }
+      ]
+    },
+    {
+      "code": "BE",
+      "name": "Berne",
+      "prime_moyenne": 578.26,
+      "prime_min": 481.35,
+      "prime_max": 700.65,
+      "economie_mensuel": 219.3,
+      "economie_annuel": 2632.0,
+      "nb_caisses": 26,
+      "top3": [
+        {
+          "name": "Sumiswalder",
+          "prime": 481.35
+        },
+        {
+          "name": "Agrisano",
+          "prime": 489.25
+        },
+        {
+          "name": "KKLH",
+          "prime": 491.7
+        }
+      ]
+    },
+    {
+      "code": "SO",
+      "name": "Soleure",
+      "prime_moyenne": 560.35,
+      "prime_min": 530.65,
+      "prime_max": 592.75,
+      "economie_mensuel": 62.1,
+      "economie_annuel": 745.0,
+      "nb_caisses": 25,
+      "top3": [
+        {
+          "name": "Sumiswalder",
+          "prime": 530.65
+        },
+        {
+          "name": "Agrisano",
+          "prime": 531.95
+        },
+        {
+          "name": "Helsana",
+          "prime": 536.15
+        }
+      ]
+    },
+    {
+      "code": "SH",
+      "name": "Schaffhouse",
+      "prime_moyenne": 535.68,
+      "prime_min": 473.15,
+      "prime_max": 599.45,
+      "economie_mensuel": 126.3,
+      "economie_annuel": 1516.0,
+      "nb_caisses": 23,
+      "top3": [
+        {
+          "name": "Assura",
+          "prime": 473.15
+        },
+        {
+          "name": "ÖKK",
+          "prime": 473.85
+        },
+        {
+          "name": "Agrisano",
+          "prime": 474.05
+        }
+      ]
+    },
+    {
+      "code": "ZH",
+      "name": "Zurich",
+      "prime_moyenne": 530.65,
+      "prime_min": 450.55,
+      "prime_max": 671.55,
+      "economie_mensuel": 221.0,
+      "economie_annuel": 2652.0,
+      "nb_caisses": 27,
+      "top3": [
+        {
+          "name": "Rhenusana",
+          "prime": 450.55
+        },
+        {
+          "name": "Wädenswil",
+          "prime": 454.05
+        },
+        {
+          "name": "KKLH",
+          "prime": 464.1
+        }
+      ]
+    },
+    {
+      "code": "AG",
+      "name": "Argovie",
+      "prime_moyenne": 527.98,
+      "prime_min": 482.95,
+      "prime_max": 573.25,
+      "economie_mensuel": 90.3,
+      "economie_annuel": 1084.0,
+      "nb_caisses": 27,
+      "top3": [
+        {
+          "name": "KKLH",
+          "prime": 482.95
+        },
+        {
+          "name": "Sumiswalder",
+          "prime": 486.45
+        },
+        {
+          "name": "Agrisano",
+          "prime": 496.15
+        }
+      ]
+    },
+    {
+      "code": "VS",
+      "name": "Valais",
+      "prime_moyenne": 527.58,
+      "prime_min": 432.8,
+      "prime_max": 595.95,
+      "economie_mensuel": 163.15,
+      "economie_annuel": 1958.0,
+      "nb_caisses": 28,
+      "top3": [
+        {
+          "name": "Visperterminen",
+          "prime": 432.8
+        },
+        {
+          "name": "ÖKK",
+          "prime": 441.25
+        },
+        {
+          "name": "Sodalis",
+          "prime": 441.35
+        }
+      ]
+    },
+    {
+      "code": "FR",
+      "name": "Fribourg",
+      "prime_moyenne": 522.27,
+      "prime_min": 488.75,
+      "prime_max": 580.3,
+      "economie_mensuel": 91.55,
+      "economie_annuel": 1099.0,
+      "nb_caisses": 23,
+      "top3": [
+        {
+          "name": "ÖKK",
+          "prime": 488.75
+        },
+        {
+          "name": "Aquilana",
+          "prime": 490.15
+        },
+        {
+          "name": "SLKK",
+          "prime": 491.45
+        }
+      ]
+    },
+    {
+      "code": "GR",
+      "name": "Grisons",
+      "prime_moyenne": 517.47,
+      "prime_min": 411.25,
+      "prime_max": 615.35,
+      "economie_mensuel": 204.1,
+      "economie_annuel": 2449.0,
+      "nb_caisses": 24,
+      "top3": [
+        {
+          "name": "curaulta",
+          "prime": 411.25
+        },
+        {
+          "name": "Vita Surselva",
+          "prime": 418.3
+        },
+        {
+          "name": "Sumiswalder",
+          "prime": 424.05
+        }
+      ]
+    },
+    {
+      "code": "AR",
+      "name": "Appenzell Rh.-Ext.",
+      "prime_moyenne": 508.83,
+      "prime_min": 450.25,
+      "prime_max": 614.45,
+      "economie_mensuel": 164.2,
+      "economie_annuel": 1970.0,
+      "nb_caisses": 23,
+      "top3": [
+        {
+          "name": "Agrisano",
+          "prime": 450.25
+        },
+        {
+          "name": "ÖKK",
+          "prime": 461.75
+        },
+        {
+          "name": "Rhenusana",
+          "prime": 470.45
+        }
+      ]
+    },
+    {
+      "code": "TG",
+      "name": "Thurgovie",
+      "prime_moyenne": 508.64,
+      "prime_min": 469.45,
+      "prime_max": 553.75,
+      "economie_mensuel": 84.3,
+      "economie_annuel": 1012.0,
+      "nb_caisses": 23,
+      "top3": [
+        {
+          "name": "Agrisano",
+          "prime": 469.45
+        },
+        {
+          "name": "SLKK",
+          "prime": 483.35
+        },
+        {
+          "name": "Sumiswalder",
+          "prime": 485.35
+        }
+      ]
+    },
+    {
+      "code": "LU",
+      "name": "Lucerne",
+      "prime_moyenne": 499.87,
+      "prime_min": 420.5,
+      "prime_max": 590.65,
+      "economie_mensuel": 170.15,
+      "economie_annuel": 2042.0,
+      "nb_caisses": 25,
+      "top3": [
+        {
+          "name": "KKLH",
+          "prime": 420.5
+        },
+        {
+          "name": "Sumiswalder",
+          "prime": 449.45
+        },
+        {
+          "name": "Vivao Sympany",
+          "prime": 450.55
+        }
+      ]
+    },
+    {
+      "code": "GL",
+      "name": "Glaris",
+      "prime_moyenne": 498.01,
+      "prime_min": 473.35,
+      "prime_max": 534.05,
+      "economie_mensuel": 60.7,
+      "economie_annuel": 728.0,
+      "nb_caisses": 26,
+      "top3": [
+        {
+          "name": "Agrisano",
+          "prime": 473.35
+        },
+        {
+          "name": "Sumiswalder",
+          "prime": 474.35
+        },
+        {
+          "name": "Philos",
+          "prime": 478.45
+        }
+      ]
+    },
+    {
+      "code": "SG",
+      "name": "Saint-Gall",
+      "prime_moyenne": 495.59,
+      "prime_min": 383.25,
+      "prime_max": 617.25,
+      "economie_mensuel": 234.0,
+      "economie_annuel": 2808.0,
+      "nb_caisses": 25,
+      "top3": [
+        {
+          "name": "Assura",
+          "prime": 383.25
+        },
+        {
+          "name": "Vivao Sympany",
+          "prime": 384.55
+        },
+        {
+          "name": "Agrisano",
+          "prime": 385.35
+        }
+      ]
+    },
+    {
+      "code": "SZ",
+      "name": "Schwyz",
+      "prime_moyenne": 484.88,
+      "prime_min": 407.75,
+      "prime_max": 541.95,
+      "economie_mensuel": 134.2,
+      "economie_annuel": 1610.0,
+      "nb_caisses": 28,
+      "top3": [
+        {
+          "name": "Einsiedeln",
+          "prime": 407.75
+        },
+        {
+          "name": "Agrisano",
+          "prime": 436.85
+        },
+        {
+          "name": "Sumiswalder",
+          "prime": 456.85
+        }
+      ]
+    },
+    {
+      "code": "OW",
+      "name": "Obwald",
+      "prime_moyenne": 467.13,
+      "prime_min": 417.65,
+      "prime_max": 528.65,
+      "economie_mensuel": 111.0,
+      "economie_annuel": 1332.0,
+      "nb_caisses": 26,
+      "top3": [
+        {
+          "name": "Agrisano",
+          "prime": 417.65
+        },
+        {
+          "name": "Sumiswalder",
+          "prime": 438.75
+        },
+        {
+          "name": "EGK",
+          "prime": 441.85
+        }
+      ]
+    },
+    {
+      "code": "UR",
+      "name": "Uri",
+      "prime_moyenne": 463.33,
+      "prime_min": 410.85,
+      "prime_max": 631.65,
+      "economie_mensuel": 220.8,
+      "economie_annuel": 2650.0,
+      "nb_caisses": 26,
+      "top3": [
+        {
+          "name": "Agrisano",
+          "prime": 410.85
+        },
+        {
+          "name": "Vivao Sympany",
+          "prime": 416.15
+        },
+        {
+          "name": "Atupri",
+          "prime": 425.65
+        }
+      ]
+    },
+    {
+      "code": "NW",
+      "name": "Nidwald",
+      "prime_moyenne": 459.98,
+      "prime_min": 420.55,
+      "prime_max": 535.35,
+      "economie_mensuel": 114.8,
+      "economie_annuel": 1378.0,
+      "nb_caisses": 26,
+      "top3": [
+        {
+          "name": "Agrisano",
+          "prime": 420.55
+        },
+        {
+          "name": "Vivao Sympany",
+          "prime": 426.45
+        },
+        {
+          "name": "Assura",
+          "prime": 432.75
+        }
+      ]
+    },
+    {
+      "code": "AI",
+      "name": "Appenzell Rh.-Int.",
+      "prime_moyenne": 424.35,
+      "prime_min": 383.25,
+      "prime_max": 499.85,
+      "economie_mensuel": 116.6,
+      "economie_annuel": 1399.0,
+      "nb_caisses": 23,
+      "top3": [
+        {
+          "name": "Assura",
+          "prime": 383.25
+        },
+        {
+          "name": "Vivao Sympany",
+          "prime": 384.55
+        },
+        {
+          "name": "Agrisano",
+          "prime": 385.35
+        }
+      ]
+    },
+    {
+      "code": "ZG",
+      "name": "Zoug",
+      "prime_moyenne": 403.06,
+      "prime_min": 359.45,
+      "prime_max": 511.75,
+      "economie_mensuel": 152.3,
+      "economie_annuel": 1828.0,
+      "nb_caisses": 27,
+      "top3": [
+        {
+          "name": "Vivao Sympany",
+          "prime": 359.45
+        },
+        {
+          "name": "Concordia",
+          "prime": 359.45
+        },
+        {
+          "name": "SLKK",
+          "prime": 361.45
+        }
+      ]
+    }
+  ],
+  "franchises": [
+    {
+      "montant": 300,
+      "prime_moyenne": 564.61,
+      "economie_mensuel": 0.0,
+      "economie_annuel": 0.0
+    },
+    {
+      "montant": 500,
+      "prime_moyenne": 554.03,
+      "economie_mensuel": 10.58,
+      "economie_annuel": 127.0
+    },
+    {
+      "montant": 1000,
+      "prime_moyenne": 526.57,
+      "economie_mensuel": 38.04,
+      "economie_annuel": 456.0
+    },
+    {
+      "montant": 1500,
+      "prime_moyenne": 499.2,
+      "economie_mensuel": 65.41,
+      "economie_annuel": 785.0
+    },
+    {
+      "montant": 2000,
+      "prime_moyenne": 471.82,
+      "economie_mensuel": 92.79,
+      "economie_annuel": 1113.0
+    },
+    {
+      "montant": 2500,
+      "prime_moyenne": 444.63,
+      "economie_mensuel": 119.98,
+      "economie_annuel": 1440.0
+    }
+  ]
+}

@@ -31,7 +31,7 @@ const schema = {
       name: 'Combien coûte la LAMal en 2026 ?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'La prime LAMal moyenne est de CHF 378.70/mois pour un adulte en 2026 (franchise 300 CHF). Elle varie de CHF 309 à CHF 573 selon le canton. Source : OFSP 2026.',
+        text: 'La prime LAMal moyenne est de CHF 565/mois pour un adulte en 2026 (franchise 300 CHF, modèle standard). Elle varie de CHF 403 à CHF 710 selon le canton. Source : OFSP 2026.',
       },
     },
     {
@@ -122,10 +122,10 @@ const steps = [
 ]
 
 const stats = [
-  { value: 'CHF 378', label: 'Prime moyenne 2026', sub: 'adulte, franchise 300 CHF' },
+  { value: 'CHF 565', label: 'Prime moyenne 2026', sub: 'adulte, franchise 300 CHF' },
   { value: '57', label: 'Caisses agréées', sub: 'en Suisse' },
   { value: '25–30%', label: 'Bénéficient de subsides', sub: 'de la population suisse' },
-  { value: 'CHF 2\'000+', label: 'Économie possible', sub: 'en changeant de caisse' },
+  { value: "CHF 6'000+", label: 'Économie possible', sub: 'en changeant de caisse' },
 ]
 
 export default function HomePage() {

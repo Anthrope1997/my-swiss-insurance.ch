@@ -60,41 +60,41 @@ const faqItems = [
 ]
 
 const premiums = [
-  { code: 'GE', name: 'Genève', prime: 572.50, variation: '+1.2%' },
-  { code: 'VD', name: 'Vaud', prime: 520.40, variation: '+1.1%' },
-  { code: 'BS', name: 'Bâle-Ville', prime: 521.60, variation: '+1.1%' },
-  { code: 'TI', name: 'Tessin', prime: 491.30, variation: '+1.0%' },
-  { code: 'NE', name: 'Neuchâtel', prime: 482.70, variation: '+1.0%' },
-  { code: 'BL', name: 'Bâle-Campagne', prime: 476.40, variation: '+1.0%' },
-  { code: 'JU', name: 'Jura', prime: 459.30, variation: '+0.8%' },
-  { code: 'ZH', name: 'Zurich', prime: 455.10, variation: '+0.9%' },
-  { code: 'FR', name: 'Fribourg', prime: 449.80, variation: '+0.9%' },
-  { code: 'BE', name: 'Berne', prime: 426.90, variation: '+0.9%' },
-  { code: 'SO', name: 'Soleure', prime: 414.30, variation: '+0.8%' },
-  { code: 'VS', name: 'Valais', prime: 408.90, variation: '+0.8%' },
-  { code: 'AG', name: 'Argovie', prime: 399.60, variation: '+0.8%' },
-  { code: 'SH', name: 'Schaffhouse', prime: 398.70, variation: '+0.8%' },
-  { code: 'SG', name: 'Saint-Gall', prime: 388.10, variation: '+0.7%' },
-  { code: 'LU', name: 'Lucerne', prime: 374.80, variation: '+0.6%' },
-  { code: 'GR', name: 'Grisons', prime: 369.40, variation: '+0.7%' },
-  { code: 'TG', name: 'Thurgovie', prime: 367.20, variation: '+0.6%' },
-  { code: 'ZG', name: 'Zoug', prime: 356.20, variation: '+0.6%' },
-  { code: 'AR', name: 'Appenzell Rh.-Ext.', prime: 353.90, variation: '+0.7%' },
-  { code: 'GL', name: 'Glaris', prime: 337.50, variation: '+0.5%' },
-  { code: 'SZ', name: 'Schwyz', prime: 325.60, variation: '+0.5%' },
-  { code: 'AI', name: 'Appenzell Rh.-Int.', prime: 323.50, variation: '+0.4%' },
-  { code: 'UR', name: 'Uri', prime: 318.40, variation: '+0.4%' },
-  { code: 'OW', name: 'Obwald', prime: 312.10, variation: '+0.4%' },
-  { code: 'NW', name: 'Nidwald', prime: 308.70, variation: '+0.3%' },
+  { code: 'GE', name: 'Genève',              prime: 710.41 },
+  { code: 'TI', name: 'Tessin',              prime: 686.10 },
+  { code: 'BS', name: 'Bâle-Ville',          prime: 668.40 },
+  { code: 'NE', name: 'Neuchâtel',           prime: 663.19 },
+  { code: 'VD', name: 'Vaud',                prime: 637.64 },
+  { code: 'JU', name: 'Jura',                prime: 633.21 },
+  { code: 'BL', name: 'Bâle-Campagne',       prime: 625.02 },
+  { code: 'BE', name: 'Berne',               prime: 578.26 },
+  { code: 'SO', name: 'Soleure',             prime: 560.35 },
+  { code: 'SH', name: 'Schaffhouse',         prime: 535.68 },
+  { code: 'ZH', name: 'Zurich',              prime: 530.65 },
+  { code: 'AG', name: 'Argovie',             prime: 527.98 },
+  { code: 'VS', name: 'Valais',              prime: 527.58 },
+  { code: 'FR', name: 'Fribourg',            prime: 522.27 },
+  { code: 'GR', name: 'Grisons',             prime: 517.47 },
+  { code: 'AR', name: 'Appenzell Rh.-Ext.',  prime: 508.83 },
+  { code: 'TG', name: 'Thurgovie',           prime: 508.64 },
+  { code: 'LU', name: 'Lucerne',             prime: 499.87 },
+  { code: 'GL', name: 'Glaris',              prime: 498.01 },
+  { code: 'SG', name: 'Saint-Gall',          prime: 495.59 },
+  { code: 'SZ', name: 'Schwyz',              prime: 484.88 },
+  { code: 'OW', name: 'Obwald',              prime: 467.13 },
+  { code: 'UR', name: 'Uri',                 prime: 463.33 },
+  { code: 'NW', name: 'Nidwald',             prime: 459.98 },
+  { code: 'AI', name: 'Appenzell Rh.-Int.',  prime: 424.35 },
+  { code: 'ZG', name: 'Zoug',               prime: 403.06 },
 ]
 
 const franchises = [
-  { montant: 300,  prime: 455.10, economie: 0,      ecAnn: 0,    breakEven: '—',        conseil: 'Recommandé si frais annuels > CHF 1\'300' },
-  { montant: 500,  prime: 440.20, economie: 14.90,  ecAnn: 179,  breakEven: '~CHF 500',  conseil: 'Avantage limité' },
-  { montant: 1000, prime: 418.30, economie: 36.80,  ecAnn: 441,  breakEven: '~CHF 1\'000', conseil: 'Bon si < 1 consultation majeure/an' },
-  { montant: 1500, prime: 397.40, economie: 57.70,  ecAnn: 692,  breakEven: '~CHF 1\'200', conseil: 'Bon équilibre pour personnes saines' },
-  { montant: 2000, prime: 376.50, economie: 78.60,  ecAnn: 943,  breakEven: '~CHF 1\'050', conseil: 'Recommandé sans maladie chronique' },
-  { montant: 2500, prime: 353.10, economie: 102.00, ecAnn: 1224, breakEven: '~CHF 1\'300', conseil: 'Optimal pour adultes très sains' },
+  { montant: 300,  prime: 564.61, economie: 0,      ecAnn: 0,    breakEven: '—',          conseil: "Recommandé si frais annuels > CHF 1'300" },
+  { montant: 500,  prime: 554.03, economie: 10.58,  ecAnn: 127,  breakEven: '~CHF 200',   conseil: 'Avantage limité' },
+  { montant: 1000, prime: 526.57, economie: 38.04,  ecAnn: 456,  breakEven: "~CHF 700",   conseil: 'Bon si < 1 consultation majeure/an' },
+  { montant: 1500, prime: 499.20, economie: 65.41,  ecAnn: 785,  breakEven: "~CHF 1'000", conseil: 'Bon équilibre pour personnes saines' },
+  { montant: 2000, prime: 471.82, economie: 92.79,  ecAnn: 1113, breakEven: "~CHF 1'200", conseil: 'Recommandé sans maladie chronique' },
+  { montant: 2500, prime: 444.63, economie: 119.98, ecAnn: 1440, breakEven: "~CHF 1'440", conseil: 'Optimal pour adultes très sains' },
 ]
 
 const assureurs = [
@@ -109,10 +109,10 @@ const assureurs = [
 ]
 
 const economies = [
-  { canton: 'Genève',   mensuel: '~CHF 120–180', annuel: "~CHF 1'440–2'160" },
-  { canton: 'Vaud',     mensuel: '~CHF 90–130',  annuel: "~CHF 1'080–1'560" },
-  { canton: 'Fribourg', mensuel: '~CHF 70–110',  annuel: "~CHF 840–1'320" },
-  { canton: 'Berne',    mensuel: '~CHF 60–100',  annuel: "~CHF 720–1'200" },
+  { canton: 'Genève',  mensuel: 'CHF 229', annuel: "CHF 2'753" },
+  { canton: 'Berne',   mensuel: 'CHF 219', annuel: "CHF 2'632" },
+  { canton: 'Valais',  mensuel: 'CHF 163', annuel: "CHF 1'958" },
+  { canton: 'Vaud',    mensuel: 'CHF 155', annuel: "CHF 1'863" },
 ]
 
 const toc = [
@@ -271,7 +271,6 @@ export default function GuideLamalPage() {
                       <th>Canton</th>
                       <th className="text-right">Prime / mois</th>
                       <th className="text-right">Prime / an</th>
-                      <th className="text-right hidden sm:table-cell">Variation 2026</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -286,9 +285,6 @@ export default function GuideLamalPage() {
                         </td>
                         <td className="text-right text-slate">
                           CHF {(c.prime * 12).toLocaleString('fr-CH', { maximumFractionDigits: 0 })}
-                        </td>
-                        <td className="text-right text-[13px] text-slate hidden sm:table-cell">
-                          {c.variation}
                         </td>
                       </tr>
                     ))}

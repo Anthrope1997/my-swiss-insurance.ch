@@ -68,7 +68,7 @@ const sections = [
 ]
 
 const keyFacts = [
-  { value: 'CHF 378.70', label: 'Prime moyenne adulte', sub: '/mois, franchise 300 CHF' },
+  { value: 'CHF 564.61', label: 'Prime moyenne adulte', sub: '/mois, franchise 300 CHF' },
   { value: 'CHF 2\'500', label: 'Franchise maximale', sub: 'pour les adultes' },
   { value: 'CHF 700', label: 'Quote-part max adulte', sub: 'par année' },
   { value: '57', label: 'Assureurs agréés', sub: 'par l\'OFSP' },
