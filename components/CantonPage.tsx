@@ -78,7 +78,7 @@ export default function CantonPage({ canton }: { canton: Canton }) {
                 <div className="bg-[#f1f5f9] border border-[#e2e8f0] rounded-[8px] p-5 text-center">
                   <div className="text-3xl font-bold text-[#1d4ed8] mb-1">{canton.economiePossible}</div>
                   <div className="text-[13px] font-medium text-[#0f2040]">Économie possible</div>
-                  <div className="text-[12px] text-[#475569] mt-0.5">en changeant de caisse</div>
+                  <div className="text-[12px] text-[#475569] mt-0.5">adulte · modèle standard · franchise 300 CHF</div>
                 </div>
                 <div className="bg-[#f1f5f9] border border-[#e2e8f0] rounded-[8px] p-5 text-center">
                   <div className="text-3xl font-bold text-[#1d4ed8] mb-1">{canton.subsidesPct}</div>

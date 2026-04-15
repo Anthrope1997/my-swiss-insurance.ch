@@ -5,7 +5,7 @@ import LeadForm from '@/components/LeadForm'
 export const metadata: Metadata = {
   title: 'My Swiss Insurance — Comparez votre LAMal 2026 gratuitement',
   description:
-    'Trouvez la meilleure caisse maladie LAMal selon votre canton et votre profil. Comparaison gratuite, données OFSP 2026. Économisez jusqu\'à CHF 2\'000/an.',
+    'Trouvez la meilleure caisse maladie LAMal selon votre canton et votre profil. Comparaison gratuite, données OFSP 2026. Économisez jusqu\'à CHF 2\'753/an.',
   openGraph: {
     title: 'Comparez votre assurance maladie LAMal en Suisse — Gratuit 2026',
     description: 'Comparaison personnalisée des caisses maladie suisses. Données OFSP officielles 2026.',
@@ -122,10 +122,10 @@ const steps = [
 ]
 
 const stats = [
-  { value: 'CHF 565', label: 'Prime moyenne 2026', sub: 'adulte, franchise 300 CHF' },
+  { value: 'CHF 565', label: 'Prime moyenne 2026', sub: 'adulte · franchise 300 CHF · modèle standard' },
   { value: '57', label: 'Caisses agréées', sub: 'en Suisse' },
-  { value: '25–30%', label: 'Bénéficient de subsides', sub: 'de la population suisse' },
-  { value: "CHF 2'753", label: 'Économie possible', sub: 'en changeant de caisse / an' },
+  { value: '25–30%', label: 'Bénéficiaires de subsides', sub: 'de la population suisse' },
+  { value: "CHF 2'753", label: 'Économie max / an', sub: 'adulte · franchise 300 CHF · modèle standard' },
 ]
 
 export default function HomePage() {
@@ -149,7 +149,7 @@ export default function HomePage() {
               </h1>
               <p className="text-xl text-slate leading-relaxed mb-10">
                 En Suisse, l'assurance maladie de base (LAMal) est obligatoire pour tous.
-                Ses primes varient de CHF 309 à CHF 573 selon le canton. Comparez gratuitement
+                Ses primes varient de CHF 403 à CHF 710 selon le canton. Comparez gratuitement
                 pour trouver la moins chère selon votre profil.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
@@ -193,8 +193,9 @@ export default function HomePage() {
           dans toutes les caisses : seul le montant de la prime varie.
         </p>
         <p className="text-lg text-[#475569] leading-relaxed">
-          En 2026, la prime mensuelle moyenne en Suisse s'élève à 334 CHF pour un adulte, avec
-          des variations importantes selon le canton de résidence et le modèle d'assurance choisi.
+          En 2026, la prime mensuelle moyenne en Suisse s'élève à CHF 565 pour un adulte de 35 ans
+          avec une franchise de 300 CHF et le modèle standard (libre choix du médecin). Elle varie
+          de CHF 403 (Zoug) à CHF 710 (Genève) selon le canton de résidence.
         </p>
         <div className="mt-6 text-sm text-[#475569]">
           Source : Office fédéral de la santé publique (OFSP), données 2026.

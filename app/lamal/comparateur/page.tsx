@@ -29,7 +29,7 @@ const articleSchema = {
 const faqItems = [
   {
     question: 'Quelle est la caisse maladie la moins chère en Suisse ?',
-    answer: 'La caisse la moins chère dépend de votre canton, âge et modèle choisi. Pour un adulte à Nidwald, les primes débutent autour de CHF 280/mois. À Genève, elles dépassent CHF 530. Les écarts entre caisses dans un même canton atteignent CHF 100–180/mois.',
+    answer: 'La caisse la moins chère dépend de votre canton, âge et modèle choisi. Pour un adulte avec franchise 300 CHF et modèle standard, les primes débutent à CHF 403/mois à Zoug et atteignent CHF 710/mois à Genève. Les écarts entre caisses dans un même canton atteignent jusqu\'à CHF 229/mois.',
   },
   {
     question: 'Les prestations sont-elles identiques dans toutes les caisses ?',
@@ -192,9 +192,10 @@ export default function ComparateurPage() {
 
             {/* Économies */}
             <section>
-              <h2 className="text-2xl font-semibold text-ink mb-6">
+              <h2 className="text-2xl font-semibold text-ink mb-2">
                 Économies possibles en changeant de caisse
               </h2>
+              <p className="text-[13px] text-slate mb-6">Adulte ~35 ans · modèle standard · franchise CHF 300 · écart max−min dans la même région OFSP.</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
                   { canton: 'Genève',    mensuel: 'CHF 229', annuel: "CHF 2'753" },

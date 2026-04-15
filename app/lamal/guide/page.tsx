@@ -444,9 +444,10 @@ export default function GuideLamalPage() {
             <section id="economies">
               <h2 className="article-h2">7. Économies possibles en changeant de caisse</h2>
               <p className="article-p">
-                Les écarts de primes entre caisses au sein d'un même canton sont significatifs.
-                Voici les économies mensuelles typiques en choisissant la caisse la moins chère
-                pour votre profil, par rapport à la moyenne cantonale.
+                Les écarts de primes entre caisses au sein d'une même région OFSP sont significatifs.
+                Voici l'économie maximale réalisable en choisissant la caisse la moins chère plutôt
+                que la plus chère, dans la région la plus avantageuse du canton.
+                Profil : adulte ~35 ans · modèle standard · franchise CHF 300.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                 {economies.map((r) => (
