@@ -5,11 +5,11 @@ import { cantonBySlug } from '@/lib/canton-data'
 const canton = cantonBySlug['neuchatel']
 
 export const metadata: Metadata = {
-  title: 'Assurance maladie LAMal Neuchâtel 2026 — Primes et caisses',
-  description: `Prime moyenne ${canton.primeMoyenne} CHF/mois dans le canton de Neuchâtel. Top 3 des caisses les moins chères, subsides et calculateur personnalisé. Données OFSP 2026.`,
+  title: 'Assurance maladie à Neuchâtel 2026 : primes, caisses et subsides',
+  description: `Prime moyenne ${canton.primeMoyenne} CHF/mois à Neuchâtel. Caisse la moins chère : ${canton.topCaisses[0].name} dès ${canton.topCaisses[0].prime} CHF/mois. Économie max : CHF ${canton.economieAn}/an. Données OFSP 2026.`,
   openGraph: {
-    title: 'LAMal Neuchâtel 2026 — Primes, caisses et subsides',
-    description: `Comparez les caisses maladie dans le canton de Neuchâtel. Prime moyenne ${canton.primeMoyenne} CHF/mois.`,
+    title: 'Assurance maladie à Neuchâtel 2026 : primes, caisses et subsides',
+    description: `Prime moyenne ${canton.primeMoyenne} CHF/mois. Économisez jusqu'à CHF ${canton.economieAn}/an en changeant de caisse.`,
     url: 'https://my-swiss-insurance.ch/lamal/canton/neuchatel',
     type: 'article',
   },
