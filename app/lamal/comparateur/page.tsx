@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import AuthorBio from '@/components/AuthorBio'
 import Breadcrumb from '@/components/Breadcrumb'
 import FAQ from '@/components/FAQ'
-import Link from 'next/link'
 import LeadForm from '@/components/LeadForm'
+import PrimeCalculatorReal from '@/components/PrimeCalculatorReal'
 
 export const metadata: Metadata = {
   title: 'Comparateur caisses maladie LAMal 2026 — Primes par canton',
@@ -96,17 +96,17 @@ export default function ComparateurPage() {
         <div className="flex gap-12">
           <div className="flex-1 min-w-0 space-y-16">
 
-            {/* CTA personnalisé */}
-            <div className="bg-cloud border border-edge rounded-[8px] p-8">
+            {/* Calculateur de primes interactif */}
+            <section>
               <h2 className="text-2xl font-semibold text-ink mb-2">
-                Comparaison personnalisée gratuite
+                Calculateur de primes 2026
               </h2>
-              <p className="text-[16px] text-slate mb-5">
-                Les données ci-dessous sont des moyennes cantonales. Pour connaître exactement
-                la prime la moins chère selon votre profil, utilisez notre service.
+              <p className="text-[16px] text-slate mb-6">
+                Entrez votre code postal pour comparer toutes les caisses maladie selon votre profil.
+                Données officielles OFSP, mises à jour pour 2026.
               </p>
-              <a href="#lead-form" className="btn-primary">Recevoir ma comparaison →</a>
-            </div>
+              <PrimeCalculatorReal />
+            </section>
 
             {/* 3 étapes */}
             <section>
