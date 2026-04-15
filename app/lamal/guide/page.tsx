@@ -400,25 +400,25 @@ export default function GuideLamalPage() {
                     title: 'Standard (libre choix)',
                     reduction: null,
                     border: 'border-edge',
-                    desc: 'Liberté totale de consulter n\'importe quel médecin ou spécialiste en Suisse. Tarif de référence, aucune restriction.',
+                    desc: 'Accès direct à n\'importe quel médecin ou spécialiste en Suisse, sans restriction. C\'est le modèle le plus cher — il sert de référence pour comparer les autres.',
                   },
                   {
                     title: 'Médecin de famille (Hausarzt)',
                     reduction: 'jusqu\'à −20%',
                     border: 'border-brand',
-                    desc: 'Vous consultez toujours votre médecin de famille en premier avant d\'aller chez un spécialiste. Le plus populaire en Suisse romande.',
+                    desc: 'Vous consultez d\'abord votre médecin de famille, qui vous oriente si besoin vers un spécialiste. Réduction moyenne de 11% (jusqu\'à −20%) selon la caisse et le canton.',
                   },
                   {
                     title: 'HMO (centre médical)',
                     reduction: 'jusqu\'à −20%',
                     border: 'border-brand',
-                    desc: 'Consultation obligatoire dans un centre HMO agréé. Réseau limité en zones rurales, mais forte réduction de prime.',
+                    desc: 'Vous êtes rattaché à un réseau fermé de médecins agréés (cabinet ou centre HMO). Réseau limité en zones rurales. Réduction moyenne de 12% (de −3% à −20%) selon la région.',
                   },
                   {
                     title: 'Telmed (hotline médicale)',
                     reduction: 'jusqu\'à −24%',
                     border: 'border-[#3b82f6]',
-                    desc: 'Avant toute consultation (hors urgence), appel à une hotline médicale (Medgate, Medi24...). Disponible 24h/24 partout en Suisse.',
+                    desc: 'Première consultation par téléphone ou application avant tout rendez-vous en cabinet (Medgate, Medi24...). Disponible 24h/24. Réduction moyenne de 12% (de −5% à −24%) selon la caisse.',
                   },
                 ].map((m, i) => (
                   <div key={i} className={`bg-white border ${m.border} border-l-4 rounded-[8px] p-5`}>
