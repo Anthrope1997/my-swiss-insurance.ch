@@ -226,16 +226,6 @@ export default function PrimeCalculatorReal() {
               ))}
             </div>
 
-            {/* Footer */}
-            <div className="px-6 pb-5">
-              <button
-                type="button"
-                onClick={() => setShowModeleInfo(false)}
-                className="btn-primary w-full"
-              >
-                Fermer
-              </button>
-            </div>
           </div>
         </div>
       )}
