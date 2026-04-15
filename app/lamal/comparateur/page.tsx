@@ -71,14 +71,14 @@ const premiumBars = [
 ]
 
 const assureurs = [
-  { name: 'Assura', part: '7.2%', note: 'Souvent la moins chère, service digital' },
-  { name: 'Concordia', part: '6.8%', note: 'Bon service, réseau médecin de famille étendu' },
-  { name: 'CSS', part: '14.1%', note: 'Plus grande caisse suisse, large réseau' },
-  { name: 'Helsana', part: '13.5%', note: 'Application mobile avancée, nombreuses options' },
-  { name: 'KPT', part: '4.2%', note: 'Compétitive, bonne qualité de service' },
-  { name: 'Sanitas', part: '7.9%', note: 'Forte en télémédecine et digital' },
-  { name: 'SWICA', part: '10.2%', note: 'Leader en médecine intégrative' },
-  { name: 'Visana', part: '9.1%', note: 'Forte présence Suisse romande et alémanique' },
+  { name: 'SWICA', part: '20.5%', note: 'Leader en médecine intégrative' },
+  { name: 'Helsana', part: '18.0%', note: 'Application mobile avancée, nombreuses options' },
+  { name: 'Groupe Mutuel', part: '12.8%', note: 'Très présent en Suisse romande' },
+  { name: 'CSS', part: '12.1%', note: 'Large réseau, forte présence nationale' },
+  { name: 'Visana', part: '12.0%', note: 'Forte présence Suisse romande et alémanique' },
+  { name: 'Sanitas', part: '6.8%', note: 'Forte en télémédecine et digital' },
+  { name: 'Concordia', part: '5.0%', note: 'Bon service, réseau médecin de famille étendu' },
+  { name: 'Assura', part: '3.1%', note: 'Souvent la moins chère, service digital' },
 ]
 
 export default function ComparateurPage() {
@@ -166,7 +166,7 @@ export default function ComparateurPage() {
                 Principaux assureurs LAMal en Suisse
               </h2>
               <p className="text-[15px] text-slate mb-6">
-                34 caisses comparées (données OFSP 2026). Les primes varient par canton. Comparez pour votre situation exacte.
+                8 plus grands groupes · parts de marché assurance complémentaire (FINMA 2024). Les primes LAMal varient par canton — comparez pour votre situation exacte.
               </p>
               <div className="border border-edge rounded-[8px] overflow-hidden">
                 <table className="stripe-table w-full">
