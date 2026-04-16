@@ -1,7 +1,7 @@
 import AuthorBio from '@/components/AuthorBio'
 import Breadcrumb from '@/components/Breadcrumb'
+import EmailCTA from '@/components/EmailCTA'
 import FAQ from '@/components/FAQ'
-import LeadForm from '@/components/LeadForm'
 import Link from 'next/link'
 import type { Canton } from '@/lib/canton-data'
 import { allCantons } from '@/lib/canton-data'
@@ -218,6 +218,17 @@ export default function CantonPage({ canton }: { canton: Canton }) {
                 En passant de {canton.caissePlusChere.name} ({canton.caissePlusChere.prime} CHF/mois) à {cheapest.name} ({cheapest.prime} CHF/mois),
                 vous économisez <strong>CHF {formatChf((canton.caissePlusChere.prime - cheapest.prime) * 12)}/an</strong> pour les mêmes prestations de base.
               </p>
+
+              {/* Micro-CTA */}
+              <Link
+                href="/lamal/comparateur"
+                className="mt-4 flex items-center gap-2 bg-[#eff6ff] border border-[#bfdbfe] rounded-[8px] px-4 py-3 text-[14px] font-medium text-[#1d4ed8] hover:bg-[#dbeafe] transition-colors group"
+              >
+                <svg className="w-4 h-4 shrink-0 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+                Voir votre prime exacte selon votre code postal →
+              </Link>
             </section>
 
             {/* ── BLOC 4 — Tableau franchises ─────────────────── */}
@@ -376,22 +387,8 @@ export default function CantonPage({ canton }: { canton: Canton }) {
             {/* ── BLOC 7 — FAQ ────────────────────────────────── */}
             <FAQ items={faqItems} />
 
-            {/* ── BLOC 8 — CTA ────────────────────────────────── */}
-            <section className="bg-[#dbeafe] border border-[#1d4ed8]/20 rounded-[8px] p-8 text-center">
-              <h2 className="text-xl font-semibold text-[#0f2040] mb-2">
-                Comparez toutes les caisses à {canton.name}
-              </h2>
-              <p className="text-[15px] text-[#475569] mb-5">
-                Entrez votre code postal pour voir toutes les primes disponibles dans votre région,
-                avec votre franchise et votre modèle d'assurance.
-              </p>
-              <Link
-                href="/lamal/comparateur"
-                className="btn-primary inline-block"
-              >
-                Ouvrir le comparateur →
-              </Link>
-            </section>
+            {/* ── BLOC 8 — Medium-CTA email ───────────────────── */}
+            <EmailCTA subject={`le comparatif complet ${canton.name} 2026`} />
 
             {/* ── BLOC 9 — Maillage ───────────────────────────── */}
             <section>
@@ -432,12 +429,6 @@ export default function CantonPage({ canton }: { canton: Canton }) {
 
           </div>
 
-          {/* ── Sidebar sticky ──────────────────────────────────── */}
-          <div className="hidden lg:block w-80 flex-shrink-0">
-            <div className="sticky top-24">
-              <LeadForm compact />
-            </div>
-          </div>
         </div>
       </div>
     </>

@@ -186,7 +186,7 @@ export default function LeadForm({ compact = false }: { compact?: boolean }) {
           className="w-full bg-[#1d4ed8] hover:bg-[#1e40af] disabled:bg-[#475569] text-white
                      font-medium py-4 rounded-md transition-colors duration-150 text-base mt-1"
         >
-          {status === 'loading' ? 'Envoi en cours…' : 'Recevoir ma comparaison gratuite →'}
+          {status === 'loading' ? 'Envoi en cours…' : 'Obtenir un devis →'}
         </button>
 
         <p className="text-[12px] text-[#475569]/60 text-center leading-relaxed">

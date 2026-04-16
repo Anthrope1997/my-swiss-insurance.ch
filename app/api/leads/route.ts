@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 interface LeadPayload {
-  prenom: string
+  prenom?: string
   email: string
-  canton: string
-  situation: string
+  canton?: string
+  situation?: string
+  type?: string   // 'devis' | 'email_capture' | 'comparateur'
 }
 
 // Replace this URL with your Google Apps Script webhook URL when ready
@@ -15,10 +16,10 @@ export async function POST(req: NextRequest) {
     const body: LeadPayload = await req.json()
 
     // Validation
-    const { prenom, email, canton, situation } = body
-    if (!prenom || !email || !canton || !situation) {
+    const { prenom, email, canton, situation, type } = body
+    if (!email) {
       return NextResponse.json(
-        { error: 'Champs manquants' },
+        { error: 'Email manquant' },
         { status: 400 }
       )
     }
@@ -33,10 +34,11 @@ export async function POST(req: NextRequest) {
     }
 
     const lead = {
-      prenom,
+      prenom:    prenom    || null,
       email,
-      canton,
-      situation,
+      canton:    canton    || null,
+      situation: situation || null,
+      type:      type      || 'devis',
       timestamp: new Date().toISOString(),
       source: req.headers.get('referer') || 'direct',
     }

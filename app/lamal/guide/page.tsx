@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import AuthorBio from '@/components/AuthorBio'
 import Breadcrumb from '@/components/Breadcrumb'
+import EmailCTA from '@/components/EmailCTA'
 import FAQ from '@/components/FAQ'
 import Link from 'next/link'
 import LeadForm from '@/components/LeadForm'
@@ -386,6 +387,15 @@ export default function GuideLamalPage() {
               </div>
             </section>
 
+            {/* Micro-CTA franchise */}
+            <Link href="/lamal/comparateur"
+              className="flex items-center gap-2 bg-[#eff6ff] border border-[#bfdbfe] rounded-[8px] px-4 py-3 text-[14px] font-medium text-[#1d4ed8] hover:bg-[#dbeafe] transition-colors group">
+              <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+              Calculez votre franchise idéale avec les données de votre canton →
+            </Link>
+
             {/* 6 — Modèles */}
             <section id="modeles">
               <h2 className="article-h2">6. Les 4 modèles d'assurance LAMal</h2>
@@ -468,6 +478,15 @@ export default function GuideLamalPage() {
               </div>
             </section>
 
+            {/* Micro-CTA economies */}
+            <Link href="/lamal/comparateur"
+              className="flex items-center gap-2 bg-[#eff6ff] border border-[#bfdbfe] rounded-[8px] px-4 py-3 text-[14px] font-medium text-[#1d4ed8] hover:bg-[#dbeafe] transition-colors group">
+              <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+              Comparez les primes pour votre profil exact →
+            </Link>
+
             {/* 8 — Changer */}
             <section id="changer">
               <h2 className="article-h2">8. Comment changer de caisse maladie</h2>
@@ -548,6 +567,9 @@ export default function GuideLamalPage() {
             <section id="faq">
               <FAQ items={faqItems} title="10. Questions fréquentes sur la LAMal" />
             </section>
+
+            {/* Medium-CTA email */}
+            <EmailCTA subject="le guide LAMal 2026 et les mises à jour tarifaires" />
 
           </article>
 
