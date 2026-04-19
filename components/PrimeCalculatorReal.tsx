@@ -506,10 +506,10 @@ export default function PrimeCalculatorReal() {
                 <div className="bg-white border border-edge rounded-xl overflow-hidden">
                   <div className="px-6 py-5 border-b border-edge">
                     <p className="font-semibold text-ink text-[16px]">
-                      Voir les {hiddenCount} autres offres — gratuit
+                      Demandez à être rappelé par un courtier
                     </p>
                     <p className="text-[13px] text-slate mt-0.5">
-                      Entrez votre prénom et email pour accéder à la comparaison complète.
+                      Un courtier partenaire vous aide à choisir la meilleure caisse pour votre profil.
                     </p>
                   </div>
                   <form onSubmit={handleGate} className="px-6 py-5">
@@ -535,7 +535,7 @@ export default function PrimeCalculatorReal() {
                         disabled={gateStatus === 'loading'}
                         className="btn-primary shrink-0 disabled:opacity-50"
                       >
-                        {gateStatus === 'loading' ? 'Envoi…' : 'Voir toutes les offres →'}
+                        {gateStatus === 'loading' ? 'Envoi…' : 'Demander un rappel →'}
                       </button>
                     </div>
                     {gateStatus === 'error' && (

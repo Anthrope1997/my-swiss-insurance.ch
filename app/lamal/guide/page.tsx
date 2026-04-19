@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import AuthorBio from '@/components/AuthorBio'
 import Breadcrumb from '@/components/Breadcrumb'
-import EmailCTA from '@/components/EmailCTA'
 import FAQ from '@/components/FAQ'
 import Link from 'next/link'
 import LeadForm from '@/components/LeadForm'
@@ -174,7 +173,7 @@ export default function GuideLamalPage() {
               <div className="mt-8 px-4">
                 <a href="#lead-form"
                   className="block text-center text-[13px] font-medium text-white bg-brand hover:bg-brand-dark rounded-md py-2.5 transition-colors">
-                  Comparer gratuitement
+                  Être rappelé par un courtier
                 </a>
               </div>
             </nav>
@@ -393,7 +392,7 @@ export default function GuideLamalPage() {
               <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
-              Calculez votre franchise idéale avec les données de votre canton →
+              Comparer ma LAMal →
             </Link>
 
             {/* 6 — Modèles */}
@@ -484,7 +483,7 @@ export default function GuideLamalPage() {
               <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
-              Comparez les primes pour votre profil exact →
+              Comparer ma LAMal →
             </Link>
 
             {/* 8 — Changer */}
@@ -568,8 +567,8 @@ export default function GuideLamalPage() {
               <FAQ items={faqItems} title="10. Questions fréquentes sur la LAMal" />
             </section>
 
-            {/* Medium-CTA email */}
-            <EmailCTA subject="le guide LAMal 2026 et les mises à jour tarifaires" />
+            {/* CTA courtier */}
+            <LeadForm compact />
 
           </article>
 
