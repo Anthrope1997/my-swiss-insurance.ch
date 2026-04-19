@@ -153,15 +153,15 @@ export default function HomePage() {
                 pour trouver la moins chère selon votre profil.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
-                <a href="#lead-form" className="btn-primary text-[15px] py-3.5 px-7">
-                  Être rappelé par un courtier
+                <Link href="/lamal/comparateur" className="btn-primary text-[15px] py-3.5 px-7">
+                  Comparer ma prime LAMal
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
-                </a>
-                <Link href="/lamal/comparateur" className="btn-secondary text-[15px] py-3.5 px-7">
-                  Comparer ma LAMal
                 </Link>
+                <a href="#lead-form" className="btn-secondary text-[15px] py-3.5 px-7">
+                  Recevoir un conseil personnalisé
+                </a>
               </div>
               <p className="mt-6 text-[13px] text-slate/60">
                 Sans inscription · Données sécurisées · Réponse sous 24h
@@ -331,7 +331,7 @@ export default function HomePage() {
             Gratuit, sans engagement, réponse sous 24h.
           </p>
           <a href="#lead-form" className="inline-flex items-center gap-2 bg-brand hover:bg-brand-dark text-white font-medium px-8 py-4 rounded-[6px] text-[16px] transition-colors duration-150">
-            Être rappelé par un courtier
+            Recevoir un conseil personnalisé
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>

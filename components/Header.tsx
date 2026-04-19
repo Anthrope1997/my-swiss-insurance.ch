@@ -152,7 +152,7 @@ export default function Header() {
             onClick={handleCTA}
             className="bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-sm font-medium px-4 py-2 rounded-md transition-colors duration-150 whitespace-nowrap"
           >
-            Être rappelé par un courtier
+            Comparer ma prime LAMal
           </button>
 
         </div>

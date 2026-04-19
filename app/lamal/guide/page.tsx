@@ -171,9 +171,9 @@ export default function GuideLamalPage() {
                 ))}
               </ul>
               <div className="mt-8 px-4">
-                <a href="#lead-form"
+                <a href="/lamal/comparateur"
                   className="block text-center text-[13px] font-medium text-white bg-brand hover:bg-brand-dark rounded-md py-2.5 transition-colors">
-                  Être rappelé par un courtier
+                  Comparer ma prime LAMal
                 </a>
               </div>
             </nav>

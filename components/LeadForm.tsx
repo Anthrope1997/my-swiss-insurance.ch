@@ -79,7 +79,7 @@ export default function LeadForm({ compact = false }: { compact?: boolean }) {
         </div>
         <h3 className="font-semibold text-[#0f2040] text-lg mb-1">Demande envoyée !</h3>
         <p className="text-[#1d4ed8] text-[15px]">
-          Un courtier vous contacte sous 24h pour vous accompagner.
+          Un expert vous contacte sous 24h pour vous accompagner.
         </p>
       </div>
     )
@@ -91,7 +91,7 @@ export default function LeadForm({ compact = false }: { compact?: boolean }) {
       {/* Header */}
       <div className="px-6 py-5 border-b border-[#e2e8f0]">
         <p className={`font-semibold text-[#0f2040] ${compact ? 'text-[16px]' : 'text-xl'}`}>
-          Être rappelé par un courtier
+          Recevoir un conseil personnalisé
         </p>
         <p className="text-[13px] text-[#475569] mt-0.5">Sans engagement · Réponse sous 24h</p>
       </div>
@@ -186,7 +186,7 @@ export default function LeadForm({ compact = false }: { compact?: boolean }) {
           className="w-full bg-[#1d4ed8] hover:bg-[#1e40af] disabled:bg-[#475569] text-white
                      font-medium py-4 rounded-md transition-colors duration-150 text-base mt-1"
         >
-          {status === 'loading' ? 'Envoi en cours…' : 'Être rappelé par un courtier →'}
+          {status === 'loading' ? 'Envoi en cours…' : 'Recevoir mon conseil personnalisé →'}
         </button>
 
         <p className="text-[12px] text-[#475569]/60 text-center leading-relaxed">
