@@ -31,23 +31,26 @@ const cantons = [
   { code: 'ZH', name: 'Zurich' },
 ]
 
-const situations = [
-  { value: 'salarie', label: 'Salarié(e)' },
-  { value: 'independant', label: 'Indépendant(e)' },
-  { value: 'retraite', label: 'Retraité(e)' },
-  { value: 'etudiant', label: 'Étudiant(e)' },
-  { value: 'expatrie', label: 'Expatrié(e)' },
+const profils = [
+  { value: 'enfant',        label: 'Enfant (0–18 ans)' },
+  { value: 'jeune_adulte',  label: 'Jeune adulte (19–25 ans)' },
+  { value: 'adulte',        label: 'Adulte (26 ans et plus)' },
+  { value: 'frontalier',    label: 'Frontalier' },
 ]
 
 interface FormData {
-  prenom: string
+  nom: string
   email: string
+  telephone: string
   canton: string
-  situation: string
+  codePostal: string
+  profil: string
 }
 
 export default function LeadForm({ compact = false }: { compact?: boolean }) {
-  const [form, setForm] = useState<FormData>({ prenom: '', email: '', canton: '', situation: '' })
+  const [form, setForm] = useState<FormData>({
+    nom: '', email: '', telephone: '', canton: '', codePostal: '', profil: '',
+  })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [error, setError] = useState('')
 
@@ -98,16 +101,16 @@ export default function LeadForm({ compact = false }: { compact?: boolean }) {
 
       <form onSubmit={handleSubmit} className="px-6 py-5 space-y-4">
 
-        {/* Prénom */}
+        {/* Nom */}
         <div>
-          <label htmlFor="prenom" className="block text-sm font-medium text-[#0f2040] mb-1">
-            Prénom
+          <label htmlFor="nom" className="block text-sm font-medium text-[#0f2040] mb-1">
+            Nom
           </label>
           <input
-            id="prenom" type="text" required
-            value={form.prenom}
-            onChange={(e) => setForm({ ...form, prenom: e.target.value })}
-            placeholder="Votre prénom"
+            id="nom" type="text" required
+            value={form.nom}
+            onChange={(e) => setForm({ ...form, nom: e.target.value })}
+            placeholder="Votre nom"
             className="input-field"
           />
         </div>
@@ -126,45 +129,74 @@ export default function LeadForm({ compact = false }: { compact?: boolean }) {
           />
         </div>
 
-        {/* Canton */}
+        {/* Téléphone */}
         <div>
-          <label htmlFor="canton" className="block text-sm font-medium text-[#0f2040] mb-1">
-            Canton de résidence
+          <label htmlFor="telephone" className="block text-sm font-medium text-[#0f2040] mb-1">
+            Téléphone
           </label>
-          <div className="relative">
-            <select
-              id="canton" required
-              value={form.canton}
-              onChange={(e) => setForm({ ...form, canton: e.target.value })}
-              className="select-field pr-9"
-            >
-              <option value="">Sélectionner</option>
-              {cantons.map((c) => (
-                <option key={c.code} value={c.code}>{c.name} ({c.code})</option>
-              ))}
-            </select>
-            <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#475569] pointer-events-none"
-              fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
+          <input
+            id="telephone" type="tel" required
+            value={form.telephone}
+            onChange={(e) => setForm({ ...form, telephone: e.target.value })}
+            placeholder="+41 79 000 00 00"
+            className="input-field"
+          />
+        </div>
+
+        {/* Canton + Code postal — 2 colonnes */}
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label htmlFor="canton" className="block text-sm font-medium text-[#0f2040] mb-1">
+              Canton
+            </label>
+            <div className="relative">
+              <select
+                id="canton" required
+                value={form.canton}
+                onChange={(e) => setForm({ ...form, canton: e.target.value })}
+                className="select-field pr-9"
+              >
+                <option value="">Sélectionner</option>
+                {cantons.map((c) => (
+                  <option key={c.code} value={c.code}>{c.name} ({c.code})</option>
+                ))}
+              </select>
+              <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#475569] pointer-events-none"
+                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor="codePostal" className="block text-sm font-medium text-[#0f2040] mb-1">
+              Code postal
+            </label>
+            <input
+              id="codePostal" type="text" required
+              value={form.codePostal}
+              onChange={(e) => setForm({ ...form, codePostal: e.target.value })}
+              placeholder="1000"
+              className="input-field"
+            />
           </div>
         </div>
 
-        {/* Situation */}
+        {/* Profil */}
         <div>
-          <label htmlFor="situation" className="block text-sm font-medium text-[#0f2040] mb-1">
-            Votre situation
+          <label htmlFor="profil" className="block text-sm font-medium text-[#0f2040] mb-1">
+            Profil
           </label>
           <div className="relative">
             <select
-              id="situation" required
-              value={form.situation}
-              onChange={(e) => setForm({ ...form, situation: e.target.value })}
+              id="profil" required
+              value={form.profil}
+              onChange={(e) => setForm({ ...form, profil: e.target.value })}
               className="select-field pr-9"
             >
               <option value="">Sélectionner</option>
-              {situations.map((s) => (
-                <option key={s.value} value={s.value}>{s.label}</option>
+              {profils.map((p) => (
+                <option key={p.value} value={p.value}>{p.label}</option>
               ))}
             </select>
             <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#475569] pointer-events-none"
