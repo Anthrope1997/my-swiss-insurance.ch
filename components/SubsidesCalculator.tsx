@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 import {
-  type Canton, type Region, type Situation,
-  CANTON_NAMES, CANTON_URLS, HAS_REGION,
+  type Canton, type Situation,
+  CANTON_NAMES, CANTON_URLS,
   calculerSubsideGE, calculerSubsideVS, calculerSubsideNE,
   calculerSubsideVD, calculerSubsideFR, calculerSubsideJU,
 } from '@/lib/data/subsides-baremes'
@@ -11,13 +11,11 @@ import {
 // ─── Types ───────────────────────────────────────────────────────────────────
 
 interface FormState {
-  canton:       Canton | null
-  situation:    Situation
-  nbEnfants:    number
-  isJeune:      boolean   // adulte 19–25 ans en formation
-  revenu:       string    // CHF / an
-  region:       Region
-  prime:        string    // prime mensuelle par adulte (VD uniquement)
+  canton:    Canton | null
+  situation: Situation
+  nbEnfants: number
+  isJeune:   boolean
+  revenu:    string
 }
 
 const CANTONS: Canton[] = ['GE', 'VD', 'NE', 'FR', 'JU', 'VS']
@@ -31,14 +29,13 @@ function fmt(n: number) {
 function computeResult(s: FormState) {
   if (!s.canton) return null
   const rev = parseInt(s.revenu.replace(/['\s]/g, '')) || 0
-  const prime = parseFloat(s.prime) || 0
   if (rev <= 0) return null
 
   switch (s.canton) {
     case 'GE': return calculerSubsideGE(rev, s.situation, s.nbEnfants, s.isJeune)
-    case 'VS': return calculerSubsideVS(rev, s.situation, s.nbEnfants, s.isJeune, s.region)
+    case 'VS': return calculerSubsideVS(rev, s.situation, s.nbEnfants, s.isJeune)
     case 'NE': return calculerSubsideNE(rev, s.situation, s.nbEnfants, s.isJeune)
-    case 'VD': return calculerSubsideVD(rev, s.situation, s.nbEnfants, s.isJeune, prime)
+    case 'VD': return calculerSubsideVD(rev, s.situation, s.nbEnfants, s.isJeune)
     case 'FR': return calculerSubsideFR(rev, s.situation, s.nbEnfants)
     case 'JU': return calculerSubsideJU(rev, s.situation, s.nbEnfants)
   }
@@ -51,7 +48,7 @@ const isEligibilityOnly = (c: Canton) => c === 'FR' || c === 'JU'
 export default function SubsidesCalculator() {
   const [form, setForm] = useState<FormState>({
     canton: null, situation: 'seul', nbEnfants: 0,
-    isJeune: false, revenu: '', region: 1, prime: '',
+    isJeune: false, revenu: '',
   })
 
   const set = (patch: Partial<FormState>) => setForm(f => ({ ...f, ...patch }))
@@ -126,66 +123,24 @@ export default function SubsidesCalculator() {
           </select>
         </div>
 
-        {HAS_REGION[form.canton ?? 'GE'] && (
-          <div>
-            <label className="block text-sm font-semibold text-ink mb-2">
-              Région de primes
-              {form.canton === 'VD' && <span className="text-xs text-slate ml-1">(VD)</span>}
-              {form.canton === 'VS' && <span className="text-xs text-slate ml-1">(VS)</span>}
-            </label>
-            <select
-              value={form.region}
-              onChange={e => set({ region: parseInt(e.target.value) as Region })}
-              className="w-full border border-edge rounded-md px-3 py-2 text-sm text-ink bg-white focus:outline-none focus:ring-2 focus:ring-brand"
-            >
-              <option value={1}>
-                {form.canton === 'VD' ? 'Région 1 (Lausanne, Nyon…)' : 'Région I (Sion, Martigny…)'}
-              </option>
-              <option value={2}>
-                {form.canton === 'VD' ? 'Région 2 (Chablais, Broye…)' : 'Région II (Haut-Valais…)'}
-              </option>
-            </select>
-          </div>
-        )}
       </div>
 
       {/* ── Revenu ── */}
-      <div className="grid sm:grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-semibold text-ink mb-1">
-            Revenu déterminant annuel (CHF)
-          </label>
-          <p className="text-xs text-slate mb-2">
-            Revenu net fiscal du ménage{form.canton === 'VD' ? ' + corrections OVAM' : ''}.{' '}
-            En cas de doute, utilisez votre revenu imposable de la dernière déclaration.
-          </p>
-          <input
-            type="text"
-            inputMode="numeric"
-            placeholder="ex. 45 000"
-            value={form.revenu}
-            onChange={e => set({ revenu: e.target.value })}
-            className="w-full border border-edge rounded-md px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-brand"
-          />
-        </div>
-
-        {form.canton === 'VD' && (
-          <div>
-            <label className="block text-sm font-semibold text-ink mb-1">
-              Prime mensuelle actuelle par adulte (CHF) <span className="text-slate font-normal">— optionnel</span>
-            </label>
-            <p className="text-xs text-slate mb-2">
-              Nécessaire pour calculer le subside spécifique (si primes &gt; 10% du revenu).
-            </p>
-            <input
-              type="number"
-              placeholder="ex. 450"
-              value={form.prime}
-              onChange={e => set({ prime: e.target.value })}
-              className="w-full border border-edge rounded-md px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-brand"
-            />
-          </div>
-        )}
+      <div>
+        <label className="block text-sm font-semibold text-ink mb-1">
+          Revenu déterminant annuel (CHF)
+        </label>
+        <p className="text-xs text-slate mb-2">
+          Revenu net fiscal du ménage. En cas de doute, utilisez votre revenu imposable de la dernière déclaration.
+        </p>
+        <input
+          type="text"
+          inputMode="numeric"
+          placeholder="ex. 45 000"
+          value={form.revenu}
+          onChange={e => set({ revenu: e.target.value })}
+          className="w-full max-w-xs border border-edge rounded-md px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-brand"
+        />
       </div>
 
       {/* ── Résultat ── */}

@@ -8,7 +8,6 @@
 //   JU : ecasjura.ch (seuils revenus)
 
 export type Canton = 'GE' | 'VD' | 'NE' | 'FR' | 'JU' | 'VS'
-export type Region = 1 | 2
 export type Situation = 'seul' | 'couple'
 
 export const CANTON_NAMES: Record<Canton, string> = {
@@ -22,10 +21,6 @@ export const CANTON_URLS: Record<Canton, string> = {
   FR: 'https://www.ecasfr.ch/fr/Assurances/Reduction-des-primes-d-assurance-maladie/Reduction-des-primes-d-assurance-maladie.html',
   JU: 'https://www.ecasjura.ch/fr/Assurances/Assurance-maladie/Reduction-des-primes-d-assurance-maladie-RPI-Informations-generales-2026/Reduction-des-primes-d-assurance-maladie-RPI-Informations-generales-2026.html',
   VS: 'https://www.avsvalais.ch/fr/Assurances/RIP-Reduction-individuelle-des-primes-d-assurance-maladie/Reduction-des-primes-d-assurance-maladie/Reduction-des-primes-caisse-maladie.html',
-}
-
-export const HAS_REGION: Record<Canton, boolean> = {
-  GE: false, VD: true, NE: false, FR: false, JU: false, VS: true,
 }
 
 export interface SubsideResult {
@@ -89,8 +84,8 @@ export function calculerSubsideGE(
 // Taux × prime de référence ordinaire
 // Source : Echelle RIP 2026
 
-const VS_REF_R1 = { adulte: 561, jeune: 401, enfant: 133 }
-const VS_REF_R2 = { adulte: 481, jeune: 359, enfant: 110 }
+// Moyenne régions I et II
+const VS_REF = { adulte: 521, jeune: 380, enfant: 122 }
 
 // [tauxPct, revenuMaxAnnuel]
 const VS_SEUL_0E: [number, number][] = [[100,21000],[70,23917],[50,26833],[40,29750],[30,32667],[20,35583],[10,38500]]
@@ -118,20 +113,19 @@ function vsTable(situation: Situation, nbEnfants: number): [number, number][] {
 }
 
 export function calculerSubsideVS(
-  revenu: number, situation: Situation, nbEnfants: number, isJeune: boolean, region: Region,
+  revenu: number, situation: Situation, nbEnfants: number, isJeune: boolean,
 ): SubsideResult {
   const table = vsTable(situation, nbEnfants)
   let taux = 0
   for (const [t, max] of table) { if (revenu <= max) { taux = t; break } }
-  const ref = region === 1 ? VS_REF_R1 : VS_REF_R2
-  const adulteRef = isJeune ? ref.jeune : ref.adulte
+  const adulteRef = isJeune ? VS_REF.jeune : VS_REF.adulte
   const adulte = Math.round(taux / 100 * adulteRef)
   const nb = situation === 'couple' ? 2 : 1
 
   let enfant = 0
   if (nbEnfants > 0) {
     const limit = VS_ENFANT_MAX[situation][Math.min(nbEnfants, 4)]
-    if (revenu <= limit) enfant = Math.round(0.8 * ref.enfant)
+    if (revenu <= limit) enfant = Math.round(0.8 * VS_REF.enfant)
   }
 
   return {
@@ -211,40 +205,23 @@ export function calculerSubsideVD(
   situation: Situation,
   nbEnfants: number,
   isJeune: boolean,
-  primeParPersonne: number,  // prime mensuelle actuelle par adulte (0 = non renseignée)
 ): SubsideResult {
   const nb = situation === 'couple' ? 2 : 1
   const hasChildren = nbEnfants > 0
 
-  const adulteOrd = (() => {
+  const adulte = (() => {
     if (hasChildren || situation === 'couple') return isJeune ? vdOrdSeul1925(revenu) : vdOrdFamille26(revenu)
     return isJeune ? vdOrdSeul1925(revenu) : vdOrdSeul26(revenu)
   })()
 
-  const enfantOrd = hasChildren ? vdOrdEnfant(revenu) : 0
-  const totalOrd  = adulteOrd * nb + enfantOrd * nbEnfants
-
-  // Subside spécifique : si total primes annuelles > 10% RDU (après subside ordinaire)
-  let specifique = 0
-  if (primeParPersonne > 0) {
-    const totalAnnPrimes = primeParPersonne * 12 * (nb + nbEnfants)
-    const netAnnPrimes   = totalAnnPrimes - totalOrd * 12
-    const seuilPct10     = revenu * 0.10
-    if (netAnnPrimes > seuilPct10) {
-      specifique = Math.round((netAnnPrimes - seuilPct10) / 12)
-    }
-  }
-
-  const total = totalOrd + specifique
+  const enfant = hasChildren ? vdOrdEnfant(revenu) : 0
   return {
-    adulte: adulteOrd + Math.round(specifique / (nb + nbEnfants)),
-    enfant: enfantOrd,
-    total,
+    adulte,
+    enfant,
+    total: adulte * nb + enfant * nbEnfants,
     approx: true,
-    label: specifique > 0 ? 'Ord. + spécifique' : 'Ordinaire',
-    note: specifique > 0
-      ? `Dont CHF ${specifique}/mois de subside spécifique (primes > 10% RDU).`
-      : 'Subside ordinaire. Renseignez votre prime pour vérifier le subside spécifique.',
+    label: 'Ordinaire',
+    note: 'Subside ordinaire — estimation indicative. Un subside spécifique peut s\'ajouter si vos primes dépassent 10% du revenu.',
   }
 }
 
