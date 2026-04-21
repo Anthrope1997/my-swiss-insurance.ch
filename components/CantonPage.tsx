@@ -128,7 +128,7 @@ export default function CantonPage({ canton }: { canton: Canton }) {
           </h1>
           <p className="text-xl text-[#475569] max-w-2xl leading-relaxed mb-8">
             En comparant les caisses, les assurés {canton.cantonDe.replace('canton', 'du canton')} économisent
-            jusqu'à <strong className="text-[#16a34a]">{savingsPct}%</strong> sur leur prime annuelle —
+            jusqu'à <strong className="text-[#16a34a]">{savingsPct}%</strong> sur leur prime annuelle,
             soit <strong className="text-[#0f2040]">CHF {formatChf(canton.economieAn)}/an</strong>.
           </p>
 
