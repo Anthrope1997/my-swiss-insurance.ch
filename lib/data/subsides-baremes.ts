@@ -244,17 +244,25 @@ export function calculerSubsideFR(
 }
 
 // ─── JU — Jura ───────────────────────────────────────────────────────────────
-// Seuils de revenus (barème complet non publié)
+// Subside intégral 2026 (source : ecasjura.ch)
+// Barème partiel non publié — on utilise le subside intégral comme plafond indicatif
+
+const JU_REF = { adulte: 568, jeune: 392, enfant: 125 }
 
 export function calculerSubsideJU(
-  revenu: number, situation: Situation, nbEnfants: number,
+  revenu: number, situation: Situation, nbEnfants: number, isJeune: boolean,
 ): SubsideResult {
   const hasChildren = nbEnfants > 0
   const plafond = hasChildren ? 53000 : (situation === 'couple' ? 40000 : 27000)
   if (revenu > plafond) return { adulte: 0, enfant: 0, total: 0, approx: true, label: 'Non éligible' }
+  const nb = situation === 'couple' ? 2 : 1
+  const adulte = isJeune ? JU_REF.jeune : JU_REF.adulte
+  const enfant = JU_REF.enfant
   return {
-    adulte: 0, enfant: 0, total: 0, approx: true,
-    label: 'Probablement éligible (subside partiel)',
-    note: 'Délai de demande : 31 décembre 2026. Formulaires RPI01–RPI05 sur ecasjura.ch.',
+    adulte, enfant,
+    total: adulte * nb + enfant * nbEnfants,
+    approx: true,
+    label: 'Jusqu\'à',
+    note: 'Montant maximum 2026 (subside intégral). Le montant réel dépend de votre revenu exact — délai de demande : 31 décembre 2026.',
   }
 }

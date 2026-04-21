@@ -41,11 +41,11 @@ function computeResult(s: FormState) {
     case 'NE': return calculerSubsideNE(rev, s.situation, s.nbEnfants, s.isJeune)
     case 'VD': return calculerSubsideVD(rev, s.situation, s.nbEnfants, s.isJeune)
     case 'FR': return calculerSubsideFR(rev, s.situation, s.nbEnfants)
-    case 'JU': return calculerSubsideJU(rev, s.situation, s.nbEnfants)
+    case 'JU': return calculerSubsideJU(rev, s.situation, s.nbEnfants, s.isJeune)
   }
 }
 
-const isEligibilityOnly = (c: Canton) => c === 'FR' || c === 'JU'
+const isEligibilityOnly = (c: Canton) => c === 'FR'
 
 // ─── Component ───────────────────────────────────────────────────────────────
 
