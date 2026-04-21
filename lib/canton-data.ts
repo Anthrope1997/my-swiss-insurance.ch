@@ -37,6 +37,7 @@ export interface Canton {
   slug: string
   name: string
   cantonDe: string
+  demonym: string              // ex. "vaudois", "genevois"
   rang: number                 // rang parmi 26 cantons (1 = le moins cher)
   primeMoyenne: number         // adulte · f=300 · standard · sans accident · moyenne canton
   primeMoyenneJA: number       // jeune adulte 19-25 ans · même profil
@@ -60,6 +61,7 @@ const cantons: Canton[] = [
     slug: 'vaud',
     name: 'Vaud',
     cantonDe: 'canton de Vaud',
+    demonym: 'vaudois',
     rang: 22,
     primeMoyenne: 638,
     primeMoyenneJA: 472,
@@ -109,6 +111,7 @@ const cantons: Canton[] = [
     slug: 'geneve',
     name: 'Genève',
     cantonDe: 'canton de Genève',
+    demonym: 'genevois',
     rang: 26,
     primeMoyenne: 710,
     primeMoyenneJA: 540,
@@ -150,6 +153,7 @@ const cantons: Canton[] = [
     slug: 'fribourg',
     name: 'Fribourg',
     cantonDe: 'canton de Fribourg',
+    demonym: 'fribourgeois',
     rang: 13,
     primeMoyenne: 522,
     primeMoyenneJA: 395,
@@ -192,6 +196,7 @@ const cantons: Canton[] = [
     slug: 'valais',
     name: 'Valais',
     cantonDe: 'canton du Valais',
+    demonym: 'valaisans',
     rang: 14,
     primeMoyenne: 528,
     primeMoyenneJA: 387,
@@ -234,6 +239,7 @@ const cantons: Canton[] = [
     slug: 'neuchatel',
     name: 'Neuchâtel',
     cantonDe: 'canton de Neuchâtel',
+    demonym: 'neuchâtelois',
     rang: 23,
     primeMoyenne: 663,
     primeMoyenneJA: 499,
@@ -275,6 +281,7 @@ const cantons: Canton[] = [
     slug: 'jura',
     name: 'Jura',
     cantonDe: 'canton du Jura',
+    demonym: 'jurassiens',
     rang: 21,
     primeMoyenne: 633,
     primeMoyenneJA: 476,

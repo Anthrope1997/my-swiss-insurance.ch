@@ -1,3 +1,4 @@
+import AuthorBio from '@/components/AuthorBio'
 import Breadcrumb from '@/components/Breadcrumb'
 import FAQ from '@/components/FAQ'
 import LeadFormPopup from '@/components/LeadFormPopup'
@@ -123,56 +124,52 @@ export default function CantonPage({ canton }: { canton: Canton }) {
           ]} />
           <div className="badge mb-4">Données OFSP · 2026</div>
           <h1 className="text-4xl sm:text-5xl font-bold text-[#0f2040] leading-tight mb-3 max-w-3xl">
-            Assurance maladie dans le canton de {canton.name} en 2026
+            Assurance maladie dans le canton de {canton.name}
           </h1>
-          <p className="text-xl text-[#475569] max-w-2xl leading-relaxed mb-3">
-            En comparant les caisses, les assurés {canton.cantonDe.replace('canton', 'du canton')} économisent
-            jusqu'à <strong className="text-[#16a34a]">{savingsPct}%</strong> sur leur prime annuelle,
-            soit <strong className="text-[#0f2040]">CHF {formatChf(canton.economieAn)}/an</strong>.
+          <p className="text-xl text-[#475569] max-w-2xl leading-relaxed mb-6">
+            En changeant de caisse, les assurés {canton.demonym} peuvent économiser jusqu'à{' '}
+            <strong className="text-[#16a34a]">CHF {formatChf(canton.economieAn)}/an</strong>.
           </p>
 
-          <p className="text-[12px] text-[#94a3b8] mb-6">
-            Mis à jour le 21 avril 2026 · Source OFSP 2026
-          </p>
-
-          {/* Paragraph citeable */}
-          <p className="text-[14px] text-[#475569] leading-relaxed bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-5 py-4 mb-6">
+          {/* Summary paragraph — citeable by AI */}
+          <p className="text-[14px] text-[#475569] leading-relaxed mb-6 max-w-2xl">
             Dans le {canton.cantonDe} en 2026, la prime LAMal moyenne s'élève à{' '}
-            <strong className="text-[#0f2040]">{canton.primeMoyenne} CHF/mois</strong> pour un adulte
-            ({canton.primeMoyenneJA} CHF pour un jeune adulte, {canton.primeMoyenneEnfant} CHF pour un enfant —
-            franchise 300 CHF, modèle standard).
-            La caisse la moins chère est <strong className="text-[#0f2040]">{cheapest.name} à {cheapest.prime} CHF/mois</strong>.
-            En changeant de la plus chère ({canton.caissePlusChere.name}, {canton.caissePlusChere.prime} CHF/mois),
-            un assuré économise{' '}
-            <strong className="text-[#16a34a]">CHF {formatChf(canton.economieAn)}/an</strong> pour des prestations identiques.
-            {' '}{canton.name} se classe <strong className="text-[#0f2040]">{ordinal(canton.rang)} canton le moins cher sur 26</strong> en Suisse.
+            <strong className="text-[#0f2040]">{canton.primeMoyenne} CHF/mois</strong> pour un adulte (26 ans et plus),{' '}
+            <strong className="text-[#0f2040]">{canton.primeMoyenneJA} CHF/mois</strong> pour un jeune adulte (19–25 ans)
+            et <strong className="text-[#0f2040]">{canton.primeMoyenneEnfant} CHF/mois</strong> pour un enfant —
+            franchise 300 CHF, modèle standard, source OFSP 2026.
+            {' '}{canton.name} se classe{' '}
+            <strong className="text-[#0f2040]">{ordinal(canton.rang)} canton le moins cher sur 26</strong> en Suisse.
             {canton.subside.subsideMensuelMax
               ? <> Les subsides peuvent atteindre <strong className="text-[#0f2040]">CHF {canton.subside.subsideMensuelMax}/mois</strong> pour les ménages éligibles.</>
               : null}
           </p>
 
-          {/* Primes moyennes + classement */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
-            {[
-              { label: 'Adulte (26+)',        value: `${canton.primeMoyenne} CHF`, sub: 'prime moyenne/mois' },
-              { label: 'Jeune adulte (19–25)', value: `${canton.primeMoyenneJA} CHF`, sub: 'prime moyenne/mois' },
-              { label: 'Enfant (0–18)',        value: `${canton.primeMoyenneEnfant} CHF`, sub: 'prime moyenne/mois' },
-              { label: 'Classement suisse',    value: `${ordinal(canton.rang)} / 26`, sub: 'du moins cher au + cher' },
-            ].map(({ label, value, sub }) => (
-              <div key={label} className="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3">
-                <p className="text-[11px] text-[#94a3b8] font-medium uppercase tracking-wide mb-1">{label}</p>
-                <p className="text-[20px] font-bold text-[#0f2040] leading-none">{value}</p>
-                <p className="text-[12px] text-[#94a3b8] mt-1">{sub}</p>
-              </div>
-            ))}
+          {/* Key metrics table */}
+          <div className="border border-[#e2e8f0] rounded-[8px] overflow-hidden mb-8 max-w-lg">
+            <table className="w-full text-[14px]">
+              <thead>
+                <tr className="bg-[#f8fafc] border-b border-[#e2e8f0]">
+                  <th className="px-5 py-2.5 text-left text-[11px] font-semibold text-[#94a3b8] uppercase tracking-widest" colSpan={2}>
+                    Adulte · franchise 300 CHF · modèle standard
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ['Prime la moins chère',  `${cheapest.prime} CHF/mois — ${cheapest.name}`],
+                  ['Prime la plus chère',   `${canton.caissePlusChere.prime} CHF/mois — ${canton.caissePlusChere.name}`],
+                  ['Économie en %',         `${savingsPct}%`],
+                  ['Économie annuelle max', `CHF ${formatChf(canton.economieAn)}/an`],
+                ].map(([label, value], i) => (
+                  <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-[#f8fafc]'}>
+                    <td className="px-5 py-3 text-[#475569] w-48">{label}</td>
+                    <td className={`px-5 py-3 font-semibold ${i === 3 ? 'text-[#16a34a]' : 'text-[#0f2040]'}`}>{value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-          {subsideCanton && canton.subside.subsideMensuelMax && (
-            <p className="text-[13px] text-[#475569] mb-8">
-              Subside LAMal maximum 2026 pour un adulte seul :{' '}
-              <span className="font-semibold text-[#1d4ed8]">CHF {canton.subside.subsideMensuelMax}/mois</span>
-              {' '}(sous conditions de revenu).
-            </p>
-          )}
 
           {/* Deep dive ville principale */}
           {canton.capitale && (() => {
@@ -431,6 +428,9 @@ export default function CantonPage({ canton }: { canton: Canton }) {
             <div id="faq">
               <FAQ items={faqItems} />
             </div>
+
+            {/* ── AuthorBio ────────────────────────────────────── */}
+            <AuthorBio publishedDate="1er janvier 2026" updatedDate="21 avril 2026" />
 
             {/* ── BLOC 8 — Maillage ───────────────────────────── */}
             <section>
