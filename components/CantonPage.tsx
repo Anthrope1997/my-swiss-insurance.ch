@@ -2,9 +2,16 @@ import AuthorBio from '@/components/AuthorBio'
 import Breadcrumb from '@/components/Breadcrumb'
 import FAQ from '@/components/FAQ'
 import LeadForm from '@/components/LeadForm'
+import SubsidesCalculator from '@/components/SubsidesCalculator'
 import Link from 'next/link'
 import type { Canton } from '@/lib/canton-data'
 import { allCantons } from '@/lib/canton-data'
+import type { Canton as SubsideCanton } from '@/lib/data/subsides-baremes'
+
+const SLUG_TO_SUBSIDE: Record<string, SubsideCanton> = {
+  vaud: 'VD', geneve: 'GE', fribourg: 'FR',
+  valais: 'VS', neuchatel: 'NE', jura: 'JU',
+}
 
 function ordinal(n: number): string {
   return n === 1 ? '1er' : `${n}e`
@@ -386,6 +393,27 @@ export default function CantonPage({ canton }: { canton: Canton }) {
 
             {/* ── BLOC 7 — FAQ ────────────────────────────────── */}
             <FAQ items={faqItems} />
+
+            {/* ── BLOC 7b — Simulateur de subsides ────────────── */}
+            {SLUG_TO_SUBSIDE[canton.slug] && (
+              <section>
+                <h2 className="text-2xl font-semibold text-[#0f2040] mb-2">
+                  Simuler votre subside dans le {canton.cantonDe}
+                </h2>
+                <p className="text-[15px] text-[#475569] mb-2">
+                  Renseignez votre situation pour obtenir une estimation indicative de votre subside LAMal 2026.
+                </p>
+                <p className="text-[13px] text-[#475569] bg-[#f1f5f9] border border-[#e2e8f0] rounded-[8px] px-4 py-3 mb-6">
+                  <strong>Estimation uniquement.</strong> Ce simulateur applique les barèmes officiels 2026 au cas standard.
+                  Le montant réel de votre subside est déterminé individuellement par le canton sur la base de
+                  votre dossier fiscal complet. Consultez le{' '}
+                  <a href={canton.subside.lienOfficiel} target="_blank" rel="noopener noreferrer"
+                     className="text-[#1d4ed8] underline">site officiel du {canton.cantonDe}</a>{' '}
+                  pour connaître votre droit exact.
+                </p>
+                <SubsidesCalculator fixedCanton={SLUG_TO_SUBSIDE[canton.slug]} />
+              </section>
+            )}
 
             {/* ── BLOC 8 — CTA courtier ───────────────────────── */}
             <LeadForm compact />

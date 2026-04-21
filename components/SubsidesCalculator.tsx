@@ -20,6 +20,10 @@ interface FormState {
 
 const CANTONS: Canton[] = ['GE', 'VD', 'NE', 'FR', 'JU', 'VS']
 
+interface Props {
+  fixedCanton?: Canton
+}
+
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 function fmt(n: number) {
@@ -45,9 +49,9 @@ const isEligibilityOnly = (c: Canton) => c === 'FR' || c === 'JU'
 
 // ─── Component ───────────────────────────────────────────────────────────────
 
-export default function SubsidesCalculator() {
+export default function SubsidesCalculator({ fixedCanton }: Props = {}) {
   const [form, setForm] = useState<FormState>({
-    canton: null, situation: 'seul', nbEnfants: 0,
+    canton: fixedCanton ?? null, situation: 'seul', nbEnfants: 0,
     isJeune: false, revenu: '',
   })
 
@@ -62,26 +66,28 @@ export default function SubsidesCalculator() {
   return (
     <div className="space-y-8">
 
-      {/* ── Canton ── */}
-      <div>
-        <label className="block text-sm font-semibold text-ink mb-3">Canton</label>
-        <div className="flex flex-wrap gap-2">
-          {CANTONS.map(c => (
-            <button
-              key={c}
-              onClick={() => set({ canton: c })}
-              className={[
-                'px-4 py-2 rounded-md text-sm font-medium transition-colors',
-                form.canton === c
-                  ? 'bg-brand text-white'
-                  : 'border border-edge text-slate hover:border-brand hover:text-brand',
-              ].join(' ')}
-            >
-              {c} — {CANTON_NAMES[c]}
-            </button>
-          ))}
+      {/* ── Canton selector (hidden when fixedCanton is provided) ── */}
+      {!fixedCanton && (
+        <div>
+          <label className="block text-sm font-semibold text-ink mb-3">Canton</label>
+          <div className="flex flex-wrap gap-2">
+            {CANTONS.map(c => (
+              <button
+                key={c}
+                onClick={() => set({ canton: c })}
+                className={[
+                  'px-4 py-2 rounded-md text-sm font-medium transition-colors',
+                  form.canton === c
+                    ? 'bg-brand text-white'
+                    : 'border border-edge text-slate hover:border-brand hover:text-brand',
+                ].join(' ')}
+              >
+                {c} — {CANTON_NAMES[c]}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* ── Situation ── */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">

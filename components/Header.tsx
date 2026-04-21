@@ -40,6 +40,7 @@ export default function Header() {
   const pathname = usePathname()
   const router = useRouter()
   const [lamalOpen, setLamalOpen] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   const isLamalActive = pathname.startsWith('/lamal')
@@ -56,6 +57,7 @@ export default function Header() {
 
   useEffect(() => {
     setLamalOpen(false)
+    setMobileOpen(false)
   }, [pathname])
 
   const handleCTA = () => {
@@ -148,16 +150,70 @@ export default function Header() {
             </div>
           </nav>
 
-          {/* CTA — always visible */}
+          {/* CTA — hidden on mobile to save space */}
           <button
             onClick={handleCTA}
-            className="bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-sm font-medium px-4 py-2 rounded-md transition-colors duration-150 whitespace-nowrap"
+            className="hidden sm:block bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-sm font-medium px-4 py-2 rounded-md transition-colors duration-150 whitespace-nowrap"
           >
             Comparer ma prime LAMal
           </button>
 
+          {/* Hamburger — mobile only */}
+          <button
+            onClick={() => setMobileOpen(o => !o)}
+            className="md:hidden p-2 text-slate-300 hover:text-white"
+            aria-label={mobileOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+          >
+            {mobileOpen ? (
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </button>
+
         </div>
       </div>
+
+      {/* Mobile menu */}
+      {mobileOpen && (
+        <div className="md:hidden bg-[#0f2040] border-t border-white/10 px-4 pb-6 overflow-y-auto max-h-[calc(100vh-4rem)]">
+
+          <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest pt-5 pb-2">Guides</p>
+          {lamalGuides.map(link => (
+            <Link key={link.href} href={link.href}
+              className="block py-2.5 text-[15px] text-slate-200 hover:text-white border-b border-white/5">
+              {link.label}
+            </Link>
+          ))}
+
+          <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest pt-5 pb-2">Par canton</p>
+          {cantonLinks.map(link => (
+            <Link key={link.href} href={link.href}
+              className="block py-2.5 text-[15px] text-slate-200 hover:text-white border-b border-white/5">
+              {link.label}
+            </Link>
+          ))}
+
+          <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest pt-5 pb-2">Par situation</p>
+          {situationLinks.map(link => (
+            <Link key={link.href} href={link.href}
+              className="block py-2.5 text-[15px] text-slate-200 hover:text-white border-b border-white/5">
+              {link.label}
+            </Link>
+          ))}
+
+          <button
+            onClick={() => { setMobileOpen(false); handleCTA() }}
+            className="mt-6 w-full bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-sm font-medium px-4 py-3 rounded-md transition-colors"
+          >
+            Comparer ma prime LAMal
+          </button>
+        </div>
+      )}
     </header>
   )
 }
