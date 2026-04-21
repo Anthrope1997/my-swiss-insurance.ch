@@ -47,6 +47,7 @@ export default function CantonPage({ canton }: { canton: Canton }) {
   const rowMin = canton.franchiseTable.find((r) => r.franchise === 300)!
   const rowMax = canton.franchiseTable.find((r) => r.franchise === 2500)!
   const economieFranchise = rowMin.cout0 - rowMax.cout0
+  const savingsPct = Math.round((canton.caissePlusChere.prime - cheapest.prime) / canton.caissePlusChere.prime * 100)
 
   const tocItems = [
     { id: 'chiffres-cles', label: 'Chiffres clés' },
@@ -114,7 +115,7 @@ export default function CantonPage({ canton }: { canton: Canton }) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="bg-white border-b border-[#e2e8f0] pt-12 pb-10">
+      <section className="bg-white border-b border-[#e2e8f0] pt-12 pb-12">
         <div className="container-xl">
           <Breadcrumb items={[
             { label: 'Accueil', href: '/' },
@@ -122,27 +123,74 @@ export default function CantonPage({ canton }: { canton: Canton }) {
             { label: `Canton de ${canton.name}` },
           ]} />
           <div className="badge mb-4">Données OFSP · 2026</div>
-          <h1 className="text-4xl sm:text-5xl font-bold text-[#0f2040] leading-tight mb-3 max-w-2xl">
-            Assurance maladie à {canton.name} 2026
+          <h1 className="text-4xl sm:text-5xl font-bold text-[#0f2040] leading-tight mb-3 max-w-3xl">
+            Assurance maladie dans le canton de {canton.name} en 2026
           </h1>
-          <p className="text-xl text-[#475569] max-w-2xl leading-relaxed mb-5">
-            Prime moyenne <strong className="text-[#0f2040]">{canton.primeMoyenne} CHF/mois</strong> —
-            économisez jusqu'à <strong className="text-[#16a34a]">CHF {canton.economieMois}/mois</strong> en
-            choisissant la bonne caisse.
+          <p className="text-xl text-[#475569] max-w-2xl leading-relaxed mb-8">
+            En comparant les caisses, les assurés {canton.cantonDe.replace('canton', 'du canton')} économisent
+            jusqu'à <strong className="text-[#16a34a]">{savingsPct}%</strong> sur leur prime annuelle —
+            soit <strong className="text-[#0f2040]">CHF {formatChf(canton.economieAn)}/an</strong>.
           </p>
-          <div className="flex flex-wrap gap-2">
-            <span className="inline-flex items-center gap-1.5 text-[13px] font-medium bg-[#f1f5f9] text-[#0f2040] px-3 py-1.5 rounded-full border border-[#e2e8f0]">
-              {ordinal(canton.rang)} canton le moins cher sur 26
-            </span>
-            <span className="inline-flex items-center gap-1.5 text-[13px] font-medium bg-[#f1f5f9] text-[#0f2040] px-3 py-1.5 rounded-full border border-[#e2e8f0]">
-              Caisse la moins chère : {cheapest.name} à {cheapest.prime} CHF/mois
-            </span>
-            {subsideCanton && (
-              <span className="inline-flex items-center gap-1.5 text-[13px] font-medium bg-[#dbeafe] text-[#1d4ed8] px-3 py-1.5 rounded-full border border-[#bfdbfe]">
-                Subsides disponibles — seuil {canton.subside.seuilRevenu}
-              </span>
-            )}
+
+          {/* Primes moyennes + classement */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+            {[
+              { label: 'Adulte (26+)',        value: `${canton.primeMoyenne} CHF`, sub: 'prime moyenne/mois' },
+              { label: 'Jeune adulte (19–25)', value: `${canton.primeMoyenneJA} CHF`, sub: 'prime moyenne/mois' },
+              { label: 'Enfant (0–18)',        value: `${canton.primeMoyenneEnfant} CHF`, sub: 'prime moyenne/mois' },
+              { label: 'Classement suisse',    value: `${ordinal(canton.rang)} / 26`, sub: 'du moins cher au + cher' },
+            ].map(({ label, value, sub }) => (
+              <div key={label} className="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-4 py-3">
+                <p className="text-[11px] text-[#94a3b8] font-medium uppercase tracking-wide mb-1">{label}</p>
+                <p className="text-[20px] font-bold text-[#0f2040] leading-none">{value}</p>
+                <p className="text-[12px] text-[#94a3b8] mt-1">{sub}</p>
+              </div>
+            ))}
           </div>
+          {subsideCanton && canton.subside.subsideMensuelMax && (
+            <p className="text-[13px] text-[#475569] mb-8">
+              Subside LAMal maximum 2026 pour un adulte seul :{' '}
+              <span className="font-semibold text-[#1d4ed8]">CHF {canton.subside.subsideMensuelMax}/mois</span>
+              {' '}(sous conditions de revenu).
+            </p>
+          )}
+
+          {/* Deep dive ville principale */}
+          {canton.capitale && (() => {
+            const cap = canton.capitale!
+            const econMois = cap.mostExpensive.prime - cap.cheapest.prime
+            const econAn   = econMois * 12
+            return (
+              <div className="bg-[#f8fafc] border border-[#e2e8f0] rounded-xl p-5">
+                <p className="text-[11px] font-semibold text-[#94a3b8] uppercase tracking-widest mb-4">
+                  À {cap.name} ({cap.regionId}) — adulte 35 ans · franchise 300 CHF · modèle standard
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
+                  <div>
+                    <p className="text-[12px] text-[#94a3b8] mb-1">Prime la moins chère</p>
+                    <p className="text-[18px] font-bold text-[#1d4ed8]">{cap.cheapest.prime} CHF/mois</p>
+                    <p className="text-[13px] text-[#475569] mt-0.5">{cap.cheapest.name}</p>
+                  </div>
+                  <div>
+                    <p className="text-[12px] text-[#94a3b8] mb-1">Prime la plus chère</p>
+                    <p className="text-[18px] font-bold text-[#0f2040]">{cap.mostExpensive.prime} CHF/mois</p>
+                    <p className="text-[13px] text-[#475569] mt-0.5">{cap.mostExpensive.name}</p>
+                  </div>
+                  <div>
+                    <p className="text-[12px] text-[#94a3b8] mb-1">Économie max</p>
+                    <p className="text-[18px] font-bold text-[#16a34a]">CHF {formatChf(econAn)}/an</p>
+                    <p className="text-[13px] text-[#475569] mt-0.5">soit {econMois} CHF/mois</p>
+                  </div>
+                </div>
+                <Link
+                  href="/lamal/comparateur"
+                  className="inline-flex items-center gap-2 bg-[#1d4ed8] hover:bg-[#1e40af] text-white font-semibold text-[14px] px-5 py-2.5 rounded-md transition-colors"
+                >
+                  Trouver la caisse la moins chère →
+                </Link>
+              </div>
+            )
+          })()}
         </div>
       </section>
 
@@ -240,7 +288,7 @@ export default function CantonPage({ canton }: { canton: Canton }) {
                 En passant de {canton.caissePlusChere.name} ({canton.caissePlusChere.prime} CHF/mois) à {cheapest.name} ({cheapest.prime} CHF/mois),
                 vous économisez <strong>CHF {formatChf((canton.caissePlusChere.prime - cheapest.prime) * 12)}/an</strong> pour les mêmes prestations de base.
               </p>
-              <ComparatorCTA label="Trouvez votre caisse idéale" />
+              <ComparatorCTA label="Trouver la caisse la moins chère" />
             </section>
 
             {/* ── BLOC 3 — Franchise ──────────────────────────── */}

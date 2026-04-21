@@ -21,8 +21,16 @@ export interface RegionPrime {
 export interface SubsideInfo {
   seuilRevenu: string
   subsideMensuel: string
+  subsideMensuelMax?: number   // CHF/mois max pour un adulte seul
   automatique: boolean
   lienOfficiel: string
+}
+
+export interface CapitaleData {
+  name: string                 // nom de la ville
+  regionId: string             // ex. "VD1"
+  cheapest: TopCaisse
+  mostExpensive: TopCaisse
 }
 
 export interface Canton {
@@ -30,10 +38,10 @@ export interface Canton {
   name: string
   cantonDe: string
   rang: number                 // rang parmi 26 cantons (1 = le moins cher)
-  primeMoyenne: number         // adulte · f=300 · standard · sans accident
+  primeMoyenne: number         // adulte · f=300 · standard · sans accident · moyenne canton
   primeMoyenneJA: number       // jeune adulte 19-25 ans · même profil
   primeMoyenneEnfant: number   // enfant 0-18 ans · f=300 · standard
-  economieMois: number         // écart max−min intra-région en CHF/mois
+  economieMois: number         // écart max−min intra-canton en CHF/mois
   economieAn: number           // idem × 12
   subsidesPct: string
   nbRegions: number
@@ -43,6 +51,7 @@ export interface Canton {
   regions: RegionPrime[]
   franchiseTable: FranchiseRow[]
   subside: SubsideInfo
+  capitale?: CapitaleData      // données spécifiques à la ville principale
 }
 
 const cantons: Canton[] = [
@@ -83,8 +92,15 @@ const cantons: Canton[] = [
     subside: {
       seuilRevenu: '≈ 50 000 CHF/an (seul)',
       subsideMensuel: 'de 30 à 331 CHF/mois',
+      subsideMensuelMax: 331,
       automatique: false,
       lienOfficiel: 'https://www.vd.ch',
+    },
+    capitale: {
+      name: 'Lausanne',
+      regionId: 'VD1',
+      cheapest:      { name: 'Galenos',       prime: 591 },
+      mostExpensive: { name: 'Vita Surselva', prime: 701 },
     },
   },
 
