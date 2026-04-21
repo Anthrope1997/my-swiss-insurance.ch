@@ -124,8 +124,8 @@ export default function SubsidesCalculator({ fixedCanton }: Props = {}) {
             onChange={e => set({ isJeune: e.target.value === 'jeune' })}
             className="w-full border border-edge rounded-md px-3 py-2 text-sm text-ink bg-white focus:outline-none focus:ring-2 focus:ring-brand"
           >
-            <option value="adulte">26 ans et plus</option>
-            <option value="jeune">19–25 ans (en formation)</option>
+            <option value="adulte">Adulte (26 ans et plus)</option>
+            <option value="jeune">Jeune adulte (19–25 ans)</option>
           </select>
         </div>
 
