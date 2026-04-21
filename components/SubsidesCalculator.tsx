@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import {
   type Canton, type Situation,
-  CANTON_NAMES, CANTON_URLS,
+  CANTON_NAMES,
   calculerSubsideGE, calculerSubsideVS, calculerSubsideNE,
   calculerSubsideVD, calculerSubsideFR, calculerSubsideJU,
 } from '@/lib/data/subsides-baremes'
@@ -225,29 +225,8 @@ export default function SubsidesCalculator({ fixedCanton }: Props = {}) {
           {/* Disclaimer approximation */}
           {result.approx && !ineligible && (
             <p className="text-xs text-slate">
-              ⚠️ Estimation indicative 2026.{' '}
-              {result.total > 0 && 'Le montant réel peut différer selon votre situation exacte. '}
-              <a
-                href={CANTON_URLS[form.canton!]}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline hover:text-brand"
-              >
-                Vérifier sur le site officiel →
-              </a>
+              ⚠️ Estimation indicative 2026.{result.total > 0 && ' Le montant réel peut différer selon votre situation exacte.'}
             </p>
-          )}
-
-          {/* Lien officiel éligibilité */}
-          {(eligible || ineligible) && (
-            <a
-              href={CANTON_URLS[form.canton!]}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-sm text-brand hover:underline font-medium"
-            >
-              Faire une demande officielle →
-            </a>
           )}
         </div>
       )}
