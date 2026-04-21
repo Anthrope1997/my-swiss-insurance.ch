@@ -375,19 +375,8 @@ export default function CantonPage({ canton }: { canton: Canton }) {
                   </p>
                 )}
               </div>
-              <a
-                href={canton.subside.lienOfficiel}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 mt-3 text-[14px] font-medium text-[#1d4ed8] hover:underline"
-              >
-                Site officiel du {canton.cantonDe}
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
               <p className="text-[12px] text-[#475569]/70 mt-2">
-                Données indicatives. Vérifiez votre droit exact sur le site officiel de votre canton.
+                Données indicatives. Le montant exact est déterminé par le canton sur la base de votre dossier fiscal.
               </p>
             </section>
 
@@ -405,11 +394,7 @@ export default function CantonPage({ canton }: { canton: Canton }) {
                 </p>
                 <p className="text-[13px] text-[#475569] bg-[#f1f5f9] border border-[#e2e8f0] rounded-[8px] px-4 py-3 mb-6">
                   <strong>Estimation uniquement.</strong> Ce simulateur applique les barèmes officiels 2026 au cas standard.
-                  Le montant réel de votre subside est déterminé individuellement par le canton sur la base de
-                  votre dossier fiscal complet. Consultez le{' '}
-                  <a href={canton.subside.lienOfficiel} target="_blank" rel="noopener noreferrer"
-                     className="text-[#1d4ed8] underline">site officiel du {canton.cantonDe}</a>{' '}
-                  pour connaître votre droit exact.
+                  Le montant réel est déterminé individuellement par le canton sur la base de votre dossier fiscal complet.
                 </p>
                 <SubsidesCalculator fixedCanton={SLUG_TO_SUBSIDE[canton.slug]} />
               </section>
