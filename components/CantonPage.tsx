@@ -1,4 +1,3 @@
-import AuthorBio from '@/components/AuthorBio'
 import Breadcrumb from '@/components/Breadcrumb'
 import FAQ from '@/components/FAQ'
 import LeadFormPopup from '@/components/LeadFormPopup'
@@ -126,10 +125,30 @@ export default function CantonPage({ canton }: { canton: Canton }) {
           <h1 className="text-4xl sm:text-5xl font-bold text-[#0f2040] leading-tight mb-3 max-w-3xl">
             Assurance maladie dans le canton de {canton.name} en 2026
           </h1>
-          <p className="text-xl text-[#475569] max-w-2xl leading-relaxed mb-8">
+          <p className="text-xl text-[#475569] max-w-2xl leading-relaxed mb-3">
             En comparant les caisses, les assurés {canton.cantonDe.replace('canton', 'du canton')} économisent
             jusqu'à <strong className="text-[#16a34a]">{savingsPct}%</strong> sur leur prime annuelle,
             soit <strong className="text-[#0f2040]">CHF {formatChf(canton.economieAn)}/an</strong>.
+          </p>
+
+          <p className="text-[12px] text-[#94a3b8] mb-6">
+            Mis à jour le 21 avril 2026 · Source OFSP 2026
+          </p>
+
+          {/* Paragraph citeable */}
+          <p className="text-[14px] text-[#475569] leading-relaxed bg-[#f8fafc] border border-[#e2e8f0] rounded-lg px-5 py-4 mb-6">
+            Dans le {canton.cantonDe} en 2026, la prime LAMal moyenne s'élève à{' '}
+            <strong className="text-[#0f2040]">{canton.primeMoyenne} CHF/mois</strong> pour un adulte
+            ({canton.primeMoyenneJA} CHF pour un jeune adulte, {canton.primeMoyenneEnfant} CHF pour un enfant —
+            franchise 300 CHF, modèle standard).
+            La caisse la moins chère est <strong className="text-[#0f2040]">{cheapest.name} à {cheapest.prime} CHF/mois</strong>.
+            En changeant de la plus chère ({canton.caissePlusChere.name}, {canton.caissePlusChere.prime} CHF/mois),
+            un assuré économise{' '}
+            <strong className="text-[#16a34a]">CHF {formatChf(canton.economieAn)}/an</strong> pour des prestations identiques.
+            {' '}{canton.name} se classe <strong className="text-[#0f2040]">{ordinal(canton.rang)} canton le moins cher sur 26</strong> en Suisse.
+            {canton.subside.subsideMensuelMax
+              ? <> Les subsides peuvent atteindre <strong className="text-[#0f2040]">CHF {canton.subside.subsideMensuelMax}/mois</strong> pour les ménages éligibles.</>
+              : null}
           </p>
 
           {/* Primes moyennes + classement */}
@@ -158,8 +177,6 @@ export default function CantonPage({ canton }: { canton: Canton }) {
           {/* Deep dive ville principale */}
           {canton.capitale && (() => {
             const cap = canton.capitale!
-            const econMois = cap.mostExpensive.prime - cap.cheapest.prime
-            const econAn   = econMois * 12
             return (
               <div className="bg-[#f8fafc] border border-[#e2e8f0] rounded-xl p-5">
                 <p className="text-[11px] font-semibold text-[#94a3b8] uppercase tracking-widest mb-4">
@@ -178,8 +195,8 @@ export default function CantonPage({ canton }: { canton: Canton }) {
                   </div>
                   <div>
                     <p className="text-[12px] text-[#94a3b8] mb-1">Économie max</p>
-                    <p className="text-[18px] font-bold text-[#16a34a]">CHF {formatChf(econAn)}/an</p>
-                    <p className="text-[13px] text-[#475569] mt-0.5">soit {econMois} CHF/mois</p>
+                    <p className="text-[18px] font-bold text-[#16a34a]">CHF {formatChf(canton.economieAn)}/an</p>
+                    <p className="text-[13px] text-[#475569] mt-0.5">soit {canton.economieMois} CHF/mois</p>
                   </div>
                 </div>
                 <Link
@@ -195,8 +212,6 @@ export default function CantonPage({ canton }: { canton: Canton }) {
       </section>
 
       <div className="container-xl py-12">
-        <AuthorBio publishedDate="1er janvier 2026" updatedDate="21 avril 2026" />
-
         {/* Mobile jump-to */}
         <nav className="lg:hidden flex gap-2 overflow-x-auto pb-2 mb-8">
           {tocItems.map(item => (
