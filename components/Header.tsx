@@ -6,6 +6,7 @@ import { useState, useRef, useEffect } from 'react'
 
 const lamalGuides = [
   { href: '/lamal/guide', label: 'Comprendre la LAMal' },
+  { href: '/lamal/subsides', label: 'Calculateur de subsides' },
   { href: '/lamal/comparateur', label: 'Comparateur de caisses' },
   { href: '/lamal/lamal-vs-lca', label: 'LAMal vs complémentaire' },
   { href: '/lamal/changer-de-caisse', label: 'Changer de caisse' },

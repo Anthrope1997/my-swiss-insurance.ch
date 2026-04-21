@@ -1,0 +1,854 @@
+[
+  {
+    "canton": "AG",
+    "nom": "Argovie",
+    "url": "https://www.sva-ag.ch/pv",
+    "langue": "de",
+    "derniere_maj": "2026-04-20",
+    "conditions": {
+      "revenu_max_seul": 20000,
+      "revenu_max_couple": null,
+      "revenu_max_famille": null,
+      "residence_requise": null,
+      "autres": []
+    },
+    "montants": {
+      "adulte": 24000,
+      "enfant": null,
+      "jeune_adulte": null,
+      "details": [
+        "24000 CHF"
+      ]
+    },
+    "procedure": {
+      "automatique": true,
+      "formulaire_url": "https://www.sva-ag.ch/aenderungsantrag",
+      "documents_requis": [],
+      "delai": "31.12.2025",
+      "contact": null
+    },
+    "notes": ""
+  },
+  {
+    "canton": "AI",
+    "nom": "Appenzell Rhodes-Intérieures",
+    "url": "https://www.ai.ch/",
+    "langue": "de",
+    "derniere_maj": "2026-04-20",
+    "conditions": {
+      "revenu_max_seul": null,
+      "revenu_max_couple": null,
+      "revenu_max_famille": null,
+      "residence_requise": null,
+      "autres": []
+    },
+    "montants": {
+      "adulte": null,
+      "enfant": null,
+      "jeune_adulte": null,
+      "details": []
+    },
+    "procedure": {
+      "automatique": null,
+      "formulaire_url": "https://www.ai.ch/verwaltung/ratskanzlei/kontakt/@@contact",
+      "documents_requis": [],
+      "delai": "17.04.2026",
+      "contact": "+41 71 788 93 11"
+    },
+    "notes": ""
+  },
+  {
+    "canton": "AR",
+    "nom": "Appenzell Rhodes-Extérieures",
+    "url": "http://www.sovar.ch/",
+    "langue": "de",
+    "derniere_maj": "2026-04-20",
+    "conditions": {
+      "revenu_max_seul": null,
+      "revenu_max_couple": null,
+      "revenu_max_famille": null,
+      "residence_requise": null,
+      "autres": []
+    },
+    "montants": {
+      "adulte": null,
+      "enfant": null,
+      "jeune_adulte": null,
+      "details": []
+    },
+    "procedure": {
+      "automatique": null,
+      "formulaire_url": "https://www.sovar.ch/uploads/SOVAR/Formulare/AK/FAK/Anmeldung_Familienzulagen_SE_r_2023.pdf",
+      "documents_requis": [],
+      "delai": null,
+      "contact": null
+    },
+    "notes": ""
+  },
+  {
+    "canton": "BE",
+    "nom": "Berne",
+    "url": "https://www.asv.dij.be.ch",
+    "langue": "de",
+    "derniere_maj": "2026-04-20",
+    "conditions": {
+      "revenu_max_seul": null,
+      "revenu_max_couple": null,
+      "revenu_max_famille": null,
+      "residence_requise": null,
+      "autres": []
+    },
+    "montants": {
+      "adulte": null,
+      "enfant": null,
+      "jeune_adulte": null,
+      "details": []
+    },
+    "procedure": {
+      "automatique": true,
+      "formulaire_url": "https://www.asv.dij.be.ch/fr/start/ueber-uns/kontaktformular.html",
+      "documents_requis": [],
+      "delai": null,
+      "contact": "+41 31 636 45 00"
+    },
+    "notes": ""
+  },
+  {
+    "canton": "BL",
+    "nom": "Bâle-Campagne",
+    "url": "https://www.sva-bl.ch/",
+    "langue": "de",
+    "derniere_maj": "2026-04-20",
+    "conditions": {
+      "revenu_max_seul": null,
+      "revenu_max_couple": null,
+      "revenu_max_famille": null,
+      "residence_requise": null,
+      "autres": []
+    },
+    "montants": {
+      "adulte": null,
+      "enfant": null,
+      "jeune_adulte": null,
+      "details": []
+    },
+    "procedure": {
+      "automatique": true,
+      "formulaire_url": "https://www.akisnet.ch/ak013/gesuchsformular/anpassung/ipv",
+      "documents_requis": [],
+      "delai": "19.03.2026",
+      "contact": "info@sva-bl.ch"
+    },
+    "notes": ""
+  },
+  {
+    "canton": "BS",
+    "nom": "Bâle-Ville",
+    "url": "https://www.asb.bs.ch/",
+    "langue": "de",
+    "derniere_maj": "2026-04-20",
+    "conditions": {
+      "revenu_max_seul": null,
+      "revenu_max_couple": null,
+      "revenu_max_famille": null,
+      "residence_requise": null,
+      "autres": []
+    },
+    "montants": {
+      "adulte": null,
+      "enfant": null,
+      "jeune_adulte": null,
+      "details": []
+    },
+    "procedure": {
+      "automatique": true,
+      "formulaire_url": "https://www.asb.bs.ch/themen/finanzielle-hilfe/leistungen/praemienverbilligung",
+      "documents_requis": [],
+      "delai": "08.04.2026",
+      "contact": "Antonios.Haniotis@bs.ch"
+    },
+    "notes": ""
+  },
+  {
+    "canton": "FR",
+    "nom": "Fribourg",
+    "url": "https://www.ecasfr.ch/fr/Assurances/Reduction-des-primes-d-assurance-maladie/Reduction-des-primes-d-assurance-maladie.html",
+    "langue": "fr",
+    "derniere_maj": "2026-04-21",
+    "definition": "Réduction des primes de base LAMal pour personnes de condition économique modeste, financée par la Confédération et le canton.",
+    "retroactivite": false,
+    "conditions": {
+      "revenu_max_seul": 37000,
+      "revenu_max_couple": 65000,
+      "revenu_max_famille": 135000,
+      "fortune_max": 250000,
+      "revenu_net_max": 150000,
+      "residence_requise": "Canton de Fribourg",
+      "base_calcul": "Taxation fiscale de l'année n-2",
+      "autres": [
+        "Exclus : personnes taxées d'office",
+        "Limites famille progressives jusqu'à CHF 135'000 pour couple + 5 enfants"
+      ]
+    },
+    "montants": {
+      "adulte": null,
+      "enfant": "minimum 80% de la prime moyenne régionale",
+      "jeune_adulte": "minimum 50% (moins de 25 ans en formation)",
+      "details": [
+        "Taux variable selon écart à la limite de revenu (tableau à 60 paliers)",
+        "Maximum : 100% de la prime nette due"
+      ]
+    },
+    "procedure": {
+      "automatique": true,
+      "formulaire_url": null,
+      "documents_requis": [
+        "Certificat(s) d'assurance-maladie",
+        "Attestation du Service cantonal des contributions (si impôt à la source)",
+        "Attestation d'études ou contrat d'apprentissage (si enfant 19–25 ans)"
+      ],
+      "delai": "31 août de l'année courante",
+      "contact": "026 426 77 00 — Impasse de la Colline 1, 1762 Givisiez"
+    },
+    "notes": "Renouvellement automatique annuel (examen d'office). Non rétroactive."
+  },
+  {
+    "canton": "GE",
+    "nom": "Genève",
+    "url": "https://www.ge.ch/informations-generales-subside-assurance-maladie",
+    "langue": "fr",
+    "derniere_maj": "2026-04-21",
+    "definition": "Aide financière pour couvrir les primes d'assurance-maladie de base obligatoire (LAMal). Versé directement à la caisse-maladie, qui le déduit des primes.",
+    "retroactivite": null,
+    "conditions": {
+      "revenu_max_seul": null,
+      "revenu_max_couple": null,
+      "revenu_max_famille": null,
+      "residence_requise": "Canton de Genève",
+      "base_calcul": "Revenu (barèmes consultables en ligne)",
+      "autres": [
+        "Certaines catégories de personnes doivent soumettre une demande explicite (voir site)"
+      ]
+    },
+    "montants": {
+      "adulte": null,
+      "enfant": null,
+      "jeune_adulte": null,
+      "details": [
+        "Montants disponibles via le calculateur en ligne et les barèmes publiés sur ge.ch"
+      ]
+    },
+    "procedure": {
+      "automatique": true,
+      "formulaire_url": "https://www.ge.ch/informations-generales-subside-assurance-maladie",
+      "documents_requis": [],
+      "delai": null,
+      "contact": "Service de l'assurance-maladie — sur rendez-vous uniquement"
+    },
+    "notes": "Attribution en principe automatique selon le revenu — pas de demande nécessaire pour la majorité. Demande possible via courrier ou portail e-démarches. Calculateur en ligne disponible sur ge.ch."
+  },
+  {
+    "canton": "GL",
+    "nom": "Glaris",
+    "url": "https://www.gl.ch/",
+    "langue": "de",
+    "derniere_maj": "2026-04-20",
+    "conditions": {
+      "revenu_max_seul": null,
+      "revenu_max_couple": null,
+      "revenu_max_famille": null,
+      "residence_requise": null,
+      "autres": []
+    },
+    "montants": {
+      "adulte": null,
+      "enfant": null,
+      "jeune_adulte": null,
+      "details": []
+    },
+    "procedure": {
+      "automatique": null,
+      "formulaire_url": null,
+      "documents_requis": [],
+      "delai": null,
+      "contact": null
+    },
+    "notes": ""
+  },
+  {
+    "canton": "GR",
+    "nom": "Grisons",
+    "url": "https://www.sva.gr.ch/",
+    "langue": "de",
+    "derniere_maj": "2026-04-20",
+    "conditions": {
+      "revenu_max_seul": null,
+      "revenu_max_couple": null,
+      "revenu_max_famille": null,
+      "residence_requise": null,
+      "autres": []
+    },
+    "montants": {
+      "adulte": null,
+      "enfant": null,
+      "jeune_adulte": null,
+      "details": []
+    },
+    "procedure": {
+      "automatique": null,
+      "formulaire_url": "https://www.sva.gr.ch/onlineschalter-formulare-de.html",
+      "documents_requis": [],
+      "delai": null,
+      "contact": null
+    },
+    "notes": ""
+  },
+  {
+    "canton": "JU",
+    "nom": "Jura",
+    "url": "https://www.ecasjura.ch/fr/Assurances/Assurance-maladie/Reduction-des-primes-d-assurance-maladie-RPI-Informations-generales-2026/Reduction-des-primes-d-assurance-maladie-RPI-Informations-generales-2026.html",
+    "langue": "fr",
+    "derniere_maj": "2026-04-21",
+    "definition": "Réductions de primes d'assurance-maladie (RPI) selon les art. 65 et 66 LAMal, en vigueur depuis 1996. Subsides complets ou partiels selon la situation économique.",
+    "retroactivite": null,
+    "conditions": {
+      "revenu_max_seul": 27000,
+      "revenu_max_couple": null,
+      "revenu_max_famille": 53000,
+      "fortune_max": 150000,
+      "residence_requise": "Canton du Jura au 1er janvier",
+      "base_calcul": "Taxation fiscale définitive 2024",
+      "autres": [
+        "Exclus : personnes taxées d'office",
+        "Subsides complets : bénéficiaires PC AVS/AI ou aide sociale",
+        "Supplément famille si activité pro + enfant(s) + revenu déterminant < CHF 18'000",
+        "Règles spécifiques : imposition à la source, jeunes 18–25 ans, concubins avec enfants"
+      ]
+    },
+    "montants": {
+      "adulte": null,
+      "enfant": null,
+      "jeune_adulte": null,
+      "details": [
+        "Subsides partiels selon barème (revenu déterminant < CHF 27'000 seul / < CHF 53'000 famille)",
+        "Subsides complets pour bénéficiaires PC AVS/AI et aide sociale"
+      ]
+    },
+    "procedure": {
+      "automatique": true,
+      "formulaire_url": "https://www.ecasjura.ch/fr/Assurances/Assurance-maladie/Reduction-des-primes-d-assurance-maladie-RPI-Informations-generales-2026/Reduction-des-primes-d-assurance-maladie-RPI-Informations-generales-2026.html",
+      "documents_requis": [
+        "Formulaire RPI01 à RPI05 selon situation (si demande requise)",
+        "Attestation fiscale 2025 (si imposition à la source)"
+      ],
+      "delai": "31 décembre 2026",
+      "contact": "032 952 11 29 — amal@ecasju.ch — lun–jeu 8h15–17h00, ven 8h15–16h00"
+    },
+    "notes": "Examen d'office si taxation 2024 reçue avant décembre 2026. Demande requise sinon ou sans courrier dans les 30 jours. Situation déterminante : au 1er janvier de l'année."
+  },
+  {
+    "canton": "LU",
+    "nom": "Lucerne",
+    "url": "http://www.was-luzern.ch/ak",
+    "langue": "de",
+    "derniere_maj": "2026-04-20",
+    "conditions": {
+      "revenu_max_seul": null,
+      "revenu_max_couple": null,
+      "revenu_max_famille": null,
+      "residence_requise": null,
+      "autres": []
+    },
+    "montants": {
+      "adulte": 50000,
+      "enfant": 100000,
+      "jeune_adulte": null,
+      "details": [
+        "50000 CHF",
+        "100000 CHF"
+      ]
+    },
+    "procedure": {
+      "automatique": false,
+      "formulaire_url": "http://www.was-luzern.ch/sites/default/files/documents/AK_Anmeldung_EL_0.pdf",
+      "documents_requis": [],
+      "delai": null,
+      "contact": "+41 41 209 00 00"
+    },
+    "notes": ""
+  },
+  {
+    "canton": "NE",
+    "nom": "Neuchâtel",
+    "url": "https://www.ne.ch/themes/social/assurance-maladie/subsides-assurance-maladie-lamal",
+    "url_montants": "https://www.ne.ch/themes/social/assurance-maladie/subsides-assurance-maladie-lamal-classifications-et-montants-selon-le-revenu-determinant",
+    "langue": "fr",
+    "derniere_maj": "2026-04-21",
+    "definition": "Réduction de primes LAMal de base selon situation familiale, revenus et fortune. Versé directement à la caisse-maladie. N'inclut pas les assurances complémentaires.",
+    "retroactivite": null,
+    "conditions": {
+      "revenu_max_seul": 65089,
+      "revenu_max_couple": null,
+      "revenu_max_famille": null,
+      "residence_requise": "Canton de Neuchâtel",
+      "base_calcul": "Revenu de la déclaration fiscale + corrections (AVS-AI, pensions alimentaires, frais pro) + 30% fortune après franchise. Classifications S1 à S15.",
+      "autres": [
+        "S1 (revenu jusqu'à CHF 22'800) : subside maximum",
+        "S15 (revenu CHF 58'164–65'089) : subside minimum",
+        "Automatique dès 26 ans après taxation fiscale",
+        "Non automatique : célibataires 19–25 ans, taxés d'office ou à la source, indépendants",
+        "Changement d'assureur : subside suit automatiquement",
+        "Arrivée/départ du canton : évaluation selon domiciliation au 1er janvier"
+      ]
+    },
+    "montants": {
+      "adulte": "CHF 687/mois (PC/EL) → CHF 643/mois (prime référence) → dégressif S1–S15",
+      "enfant": "CHF 157/mois (PC/EL) → CHF 160/mois (prime référence) → dégressif S1–S15",
+      "jeune_adulte": "CHF 67–124/mois selon classification S1–S15",
+      "details": [
+        "Prestations complémentaires AVS/AI : adulte CHF 687, enfant CHF 157",
+        "Aide sociale (PARC) : adulte CHF 590, enfant CHF 133",
+        "Prime de référence standard : adulte CHF 643, enfant CHF 160",
+        "Classifications S1–S15 : adulte de CHF 484 (S1) à CHF 0 (S15+)",
+        "Barème complet selon RSN 821.102"
+      ]
+    },
+    "procedure": {
+      "automatique": true,
+      "formulaire_url": null,
+      "documents_requis": [
+        "Aucun document spécifique requis (taxation fiscale sert de base)",
+        "Coupon-réponse à retourner dans les 30 jours après avis de taxation"
+      ],
+      "delai": "30 jours après réception du coupon-réponse (délai impératif — absence = perte du droit)",
+      "contact": "Guichets Sociaux Régionaux (GSR) / OCAB"
+    },
+    "notes": "Renouvellement automatique si situation inchangée. Signaler sans délai au GSR : hausse/baisse revenus, naissance, mariage, divorce, décès."
+  },
+  {
+    "canton": "NW",
+    "nom": "Nidwald",
+    "url": "http://www.aknw.ch/",
+    "langue": "de",
+    "derniere_maj": "2026-04-20",
+    "conditions": {
+      "revenu_max_seul": null,
+      "revenu_max_couple": null,
+      "revenu_max_famille": null,
+      "residence_requise": null,
+      "autres": []
+    },
+    "montants": {
+      "adulte": 1260,
+      "enfant": null,
+      "jeune_adulte": null,
+      "details": [
+        "1260 CHF"
+      ]
+    },
+    "procedure": {
+      "automatique": null,
+      "formulaire_url": "https://www.aknw.ch/uploads/PDF-Formulare-Merkbl%C3%A4tter/FAK/Anmeldeformular-FAK-SE_neu__NW_2025_interaktiv.pdf",
+      "documents_requis": [],
+      "delai": "21.10.2025",
+      "contact": null
+    },
+    "notes": ""
+  },
+  {
+    "canton": "OW",
+    "nom": "Obwald",
+    "url": "https://www.akow.ch/ipv",
+    "langue": "de",
+    "derniere_maj": "2026-04-20",
+    "conditions": {
+      "revenu_max_seul": null,
+      "revenu_max_couple": null,
+      "revenu_max_famille": null,
+      "residence_requise": null,
+      "autres": []
+    },
+    "montants": {
+      "adulte": null,
+      "enfant": null,
+      "jeune_adulte": null,
+      "details": []
+    },
+    "procedure": {
+      "automatique": true,
+      "formulaire_url": "https://www.akow.ch/online-services/formulare",
+      "documents_requis": [],
+      "delai": null,
+      "contact": null
+    },
+    "notes": ""
+  },
+  {
+    "canton": "SG",
+    "nom": "Saint-Gall",
+    "url": "https://www.svasg.ch/ipv",
+    "langue": "de",
+    "derniere_maj": "2026-04-20",
+    "conditions": {
+      "revenu_max_seul": null,
+      "revenu_max_couple": null,
+      "revenu_max_famille": null,
+      "residence_requise": null,
+      "autres": []
+    },
+    "montants": {
+      "adulte": 1050,
+      "enfant": 1060,
+      "jeune_adulte": 4000,
+      "details": [
+        "1050 CHF",
+        "1060 CHF",
+        "4000 CHF",
+        "20000 CHF",
+        "40000 CHF",
+        "100000 CHF"
+      ]
+    },
+    "procedure": {
+      "automatique": null,
+      "formulaire_url": "https://www.svasg.ch/online-schalter/formulare/aforms/sva-kontaktformular-allgemein.php",
+      "documents_requis": [],
+      "delai": null,
+      "contact": "071 282 61 91"
+    },
+    "notes": ""
+  },
+  {
+    "canton": "SH",
+    "nom": "Schaffhouse",
+    "url": "https://www.svash.ch/",
+    "langue": "de",
+    "derniere_maj": "2026-04-20",
+    "conditions": {
+      "revenu_max_seul": null,
+      "revenu_max_couple": null,
+      "revenu_max_famille": null,
+      "residence_requise": null,
+      "autres": []
+    },
+    "montants": {
+      "adulte": 260,
+      "enfant": 520,
+      "jeune_adulte": null,
+      "details": [
+        "260 CHF",
+        "520 CHF"
+      ]
+    },
+    "procedure": {
+      "automatique": null,
+      "formulaire_url": "https://www.svash.ch/online-schalter/formulare-merkblaetter/formulare-ueberbrueckungsleistungen/",
+      "documents_requis": [],
+      "delai": null,
+      "contact": "052 632 61 11"
+    },
+    "notes": ""
+  },
+  {
+    "canton": "SO",
+    "nom": "Soleure",
+    "url": "http://www.akso.ch/",
+    "langue": "de",
+    "derniere_maj": "2026-04-20",
+    "conditions": {
+      "revenu_max_seul": null,
+      "revenu_max_couple": null,
+      "revenu_max_famille": null,
+      "residence_requise": null,
+      "autres": []
+    },
+    "montants": {
+      "adulte": null,
+      "enfant": null,
+      "jeune_adulte": null,
+      "details": []
+    },
+    "procedure": {
+      "automatique": null,
+      "formulaire_url": "https://www.akso.ch/online-services/formulare",
+      "documents_requis": [],
+      "delai": "01.01.2026",
+      "contact": "032 686 22 09"
+    },
+    "notes": ""
+  },
+  {
+    "canton": "SZ",
+    "nom": "Schwyz",
+    "url": "http://www.aksz.ch/",
+    "langue": "de",
+    "derniere_maj": "2026-04-20",
+    "conditions": {
+      "revenu_max_seul": null,
+      "revenu_max_couple": null,
+      "revenu_max_famille": null,
+      "residence_requise": null,
+      "autres": []
+    },
+    "montants": {
+      "adulte": null,
+      "enfant": null,
+      "jeune_adulte": null,
+      "details": []
+    },
+    "procedure": {
+      "automatique": null,
+      "formulaire_url": "https://www.sva-sz.ch/online-services",
+      "documents_requis": [],
+      "delai": null,
+      "contact": null
+    },
+    "notes": ""
+  },
+  {
+    "canton": "TG",
+    "nom": "Thurgovie",
+    "url": "https://gesundheit.tg.ch/",
+    "langue": "de",
+    "derniere_maj": "2026-04-20",
+    "conditions": {
+      "revenu_max_seul": null,
+      "revenu_max_couple": null,
+      "revenu_max_famille": null,
+      "residence_requise": null,
+      "autres": []
+    },
+    "montants": {
+      "adulte": null,
+      "enfant": null,
+      "jeune_adulte": null,
+      "details": []
+    },
+    "procedure": {
+      "automatique": null,
+      "formulaire_url": null,
+      "documents_requis": [],
+      "delai": null,
+      "contact": null
+    },
+    "notes": ""
+  },
+  {
+    "canton": "TI",
+    "nom": "Tessin",
+    "url": "https://www.ti.ch/",
+    "langue": "it",
+    "derniere_maj": "2026-04-20",
+    "conditions": {
+      "revenu_max_seul": null,
+      "revenu_max_couple": null,
+      "revenu_max_famille": null,
+      "residence_requise": null,
+      "autres": []
+    },
+    "montants": {
+      "adulte": null,
+      "enfant": null,
+      "jeune_adulte": null,
+      "details": []
+    },
+    "procedure": {
+      "automatique": null,
+      "formulaire_url": null,
+      "documents_requis": [],
+      "delai": "17.04.2026",
+      "contact": null
+    },
+    "notes": ""
+  },
+  {
+    "canton": "UR",
+    "nom": "Uri",
+    "url": "https://www.ur.ch/praemienverbilligung",
+    "langue": "de",
+    "derniere_maj": "2026-04-20",
+    "conditions": {
+      "revenu_max_seul": null,
+      "revenu_max_couple": null,
+      "revenu_max_famille": null,
+      "residence_requise": null,
+      "autres": []
+    },
+    "montants": {
+      "adulte": 30000,
+      "enfant": null,
+      "jeune_adulte": null,
+      "details": [
+        "30000 CHF"
+      ]
+    },
+    "procedure": {
+      "automatique": null,
+      "formulaire_url": "https://www.ur.ch/_rtr/suchformular",
+      "documents_requis": [],
+      "delai": "16.12.2024",
+      "contact": "newsletter@ur.ch"
+    },
+    "notes": ""
+  },
+  {
+    "canton": "VD",
+    "nom": "Vaud",
+    "url": "https://www.vd.ch/sante-soins-et-handicap/assurance-maladie/subside-a-lassurance-maladie",
+    "url_conditions": "https://www.vd.ch/sante-soins-et-handicap/assurance-maladie/subside-a-lassurance-maladie/conditions-doctroi",
+    "url_notice": "https://www.vd.ch/fileadmin/user_upload/themes/social/Prestations__assurance_et_soutien/Assurance_maladie/Subside/Notice_explicative_2026.pdf",
+    "langue": "fr",
+    "derniere_maj": "2026-04-21",
+    "definition": "Subside ordinaire + subside spécifique. Le subside spécifique est octroyé si le total des primes dépasse 10% du revenu déterminant unifié (RDU), après déduction du subside ordinaire.",
+    "retroactivite": "Le droit prend naissance le 1er jour du 2ème mois suivant le dépôt de la demande. Exception : bénéficiaires RI ou PC AVS/AI (dès le début des prestations).",
+    "conditions": {
+      "revenu_max_seul": 69000,
+      "revenu_max_couple": null,
+      "revenu_max_famille": 72500,
+      "fortune_franchise_seul": 59000,
+      "fortune_franchise_couple": 118000,
+      "fortune_franchise_immobilier": 300000,
+      "fortune_franchise_commerciale": 100000,
+      "residence_requise": "Canton de Vaud",
+      "base_calcul": "Revenu net (DT) + rachats 2e pilier (franchise 20'000) + versements 3e pilier A + frais entretien immeuble dépassant forfait + déduction primes maladie fiscale − déduction forfaitaire primes (2'200/adulte, 4'400/couple, +1'300/enfant) + 6.7% fortune excédant franchise − déductions enfants à charge",
+      "deductions_enfants": "1 enfant : −6'000 CHF / 2 enfants : −13'000 CHF / chaque enfant supp. : −7'000 CHF",
+      "autres": [
+        "Statuts prioritaires : bénéficiaires RI, PC AVS/AI, rente-pont cantonale",
+        "Subside refusé si capacité de gain non exploitée volontairement, dettes contractées sans contrepartie, renonciation à d'autres prestations sociales",
+        "Révision si changement de situation financière ≥ 20%",
+        "Changement de canton : nouvelle demande obligatoire dans le canton de destination"
+      ]
+    },
+    "montants": {
+      "adulte": "CHF 20 à 336/mois (subside ordinaire, région 1 et 2)",
+      "enfant": "CHF 20 à 255/mois (subside ordinaire)",
+      "jeune_adulte": "CHF 30 à 331/mois (19–25 ans en formation)",
+      "details": [
+        "SUBSIDE ORDINAIRE — Adulte 26+ seul, RDU 0–24'200 : CHF 336–300 ; RDU 24'201–55'000 : CHF 300–20 ; RDU 55'001–69'000 : CHF 20",
+        "SUBSIDE ORDINAIRE — Enfant 0–18 ans, RDU 0–16'000 : CHF 255 ; RDU 16'001–34'000 : CHF 255–20 ; RDU 34'001–39'000 : CHF 20",
+        "SUBSIDE ORDINAIRE — 19–25 ans en formation, RDU 0–17'000 : CHF 331 ; RDU 17'001–40'000 : CHF 331–30 ; RDU 40'001–50'000 : CHF 30",
+        "SUBSIDE ORDINAIRE — RI/PC AVS-AI : adulte région 1 CHF 510–557, région 2 CHF 481–526 ; enfant région 1 CHF 157–170, région 2 CHF 147–161",
+        "SUBSIDE SPÉCIFIQUE — Primes de référence adulte 26+, région 1 : CHF 563 (RDU 0–62'500) / CHF 538 (RDU 62'501–70'000) / CHF 488 (RDU 70'001+)",
+        "SUBSIDE SPÉCIFIQUE — Primes de référence adulte 26+, région 2 : CHF 527 / CHF 502 / CHF 452",
+        "SUBSIDE SPÉCIFIQUE — Primes de référence jeune 19–25, région 1 : CHF 390 / CHF 366 / CHF 318",
+        "SUBSIDE SPÉCIFIQUE — Primes de référence enfant, région 1 : CHF 161, région 2 : CHF 152",
+        "Région 1 : Lausanne, Ouest lausannois, Nyon, La Côte, Lavaux, Riviera",
+        "Région 2 : Chablais, Pays d'Enhaut, Oron, Cossonay, Broye, Vully, Gros-de-Vaud, Jura, Nord vaudois"
+      ]
+    },
+    "procedure": {
+      "automatique": false,
+      "formulaire_url": "https://www.vd.ch/sante-soins-et-handicap/assurance-maladie/subside-a-lassurance-maladie",
+      "documents_requis": [
+        "Police d'assurance-maladie",
+        "Pièce d'identité",
+        "Justificatifs de revenus actuels (si écart ≥ 20% avec la taxation)",
+        "Attestation d'études (si majeur étudiant)"
+      ],
+      "delai": "Délais actuellement prolongés (renouvellement 2026 + hausse des demandes). Changer d'assureur : délai au 30 novembre 2025.",
+      "contact": "OVAM — 021 557 47 47 — www.vd.ch/ovam"
+    },
+    "notes": "Demande en ligne (www.vd.ch/ovam) ou en agence d'assurances sociales (gratuit). Renouvellement annuel fin octobre basé sur taxation définitive au 17 octobre. Objectif : limiter la charge des primes à 10% du revenu déterminant."
+  },
+  {
+    "canton": "VS",
+    "nom": "Valais",
+    "url": "https://www.avsvalais.ch/fr/Assurances/RIP-Reduction-individuelle-des-primes-d-assurance-maladie/Reduction-des-primes-d-assurance-maladie/Reduction-des-primes-caisse-maladie.html",
+    "langue": "fr",
+    "derniere_maj": "2026-04-21",
+    "definition": "Réduction Individuelle des Primes (RIP) — subvention cantonale pour personnes de condition économique modeste assurées auprès d'un assureur LAMal autorisé.",
+    "retroactivite": null,
+    "conditions": {
+      "revenu_max_seul": null,
+      "revenu_max_couple": null,
+      "revenu_max_famille": null,
+      "fortune_max": 1000000,
+      "residence_requise": "Domicile en Valais au 1er janvier de l'année concernée",
+      "base_calcul": "Revenu net + 5% fortune + revenus immobiliers négatifs + cotisations pilier 3a − pensions alimentaires versées (taxation 2024 pour subsides 2026)",
+      "autres": [
+        "Assuré auprès d'un assureur LAMal autorisé",
+        "Fortune brute ≤ CHF 1'000'000"
+      ]
+    },
+    "montants": {
+      "adulte": null,
+      "enfant": "jusqu'à 80% des primes moyennes régionales",
+      "jeune_adulte": null,
+      "details": [
+        "5% à 70% des primes moyennes régionales selon le revenu",
+        "Jusqu'à 80% pour les enfants"
+      ]
+    },
+    "procedure": {
+      "automatique": true,
+      "formulaire_url": null,
+      "documents_requis": [
+        "Copie de la police d'assurance-maladie valable au 1er janvier (nouveaux bénéficiaires)"
+      ],
+      "delai": "31 décembre (pour personnes imposées à la source)",
+      "contact": "027 607 55 00 — Avenue de Pratifori 22, 1951 Sion — lun–ven 8h30–12h00 / 13h30–17h00"
+    },
+    "notes": "Bénéficiaires 2025 reconnus : notification automatique, aucune démarche. Nouveaux bénéficiaires : notification fin février, transmettre copie police. Personnes imposées à la source : demande personnelle requise avant le 31 décembre."
+  },
+  {
+    "canton": "ZG",
+    "nom": "Zoug",
+    "url": "https://www.akzug.ch/ipv/",
+    "langue": "de",
+    "derniere_maj": "2026-04-20",
+    "conditions": {
+      "revenu_max_seul": null,
+      "revenu_max_couple": null,
+      "revenu_max_famille": null,
+      "residence_requise": null,
+      "autres": []
+    },
+    "montants": {
+      "adulte": 20000,
+      "enfant": 148200,
+      "jeune_adulte": null,
+      "details": [
+        "20000 CHF",
+        "148200 CHF"
+      ]
+    },
+    "procedure": {
+      "automatique": true,
+      "formulaire_url": "https://www.akzug.ch/online-services/formulare/ahv-beitraege/ik-auszug-bestellen",
+      "documents_requis": [],
+      "delai": null,
+      "contact": null
+    },
+    "notes": ""
+  },
+  {
+    "canton": "ZH",
+    "nom": "Zurich",
+    "url": "https://svazurich.ch",
+    "langue": "de",
+    "derniere_maj": "2026-04-20",
+    "conditions": {
+      "revenu_max_seul": null,
+      "revenu_max_couple": null,
+      "revenu_max_famille": null,
+      "residence_requise": null,
+      "autres": []
+    },
+    "montants": {
+      "adulte": 10000,
+      "enfant": null,
+      "jeune_adulte": null,
+      "details": [
+        "10000 CHF"
+      ]
+    },
+    "procedure": {
+      "automatique": true,
+      "formulaire_url": "https://svazurich.ch/ihr-anliegen/privatpersonen/weitere-kundenanliegen/familienzulagen-beantragen.html",
+      "documents_requis": [],
+      "delai": null,
+      "contact": null
+    },
+    "notes": ""
+  }
+]
