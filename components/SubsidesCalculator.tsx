@@ -8,8 +8,6 @@ import {
   calculerSubsideVD, calculerSubsideFR, calculerSubsideJU,
 } from '@/lib/data/subsides-baremes'
 
-// ─── Types ───────────────────────────────────────────────────────────────────
-
 interface FormState {
   canton:    Canton | null
   situation: Situation
@@ -23,8 +21,6 @@ const CANTONS: Canton[] = ['GE', 'VD', 'NE', 'FR', 'JU', 'VS']
 interface Props {
   fixedCanton?: Canton
 }
-
-// ─── Helpers ─────────────────────────────────────────────────────────────────
 
 function fmt(n: number) {
   return n.toLocaleString('fr-CH', { maximumFractionDigits: 0 })
@@ -47,8 +43,6 @@ function computeResult(s: FormState) {
 
 const isEligibilityOnly = (c: Canton) => c === 'FR'
 
-// ─── Component ───────────────────────────────────────────────────────────────
-
 export default function SubsidesCalculator({ fixedCanton }: Props = {}) {
   const [form, setForm] = useState<FormState>({
     canton: fixedCanton ?? null, situation: 'seul', nbEnfants: 0,
@@ -64,12 +58,12 @@ export default function SubsidesCalculator({ fixedCanton }: Props = {}) {
   const ineligible = hasResult && result.label === 'Non éligible'
 
   return (
-    <div className="space-y-8">
+    <div className="bg-[#f8fafc] border border-[#e2e8f0] rounded-xl p-6 space-y-6">
 
-      {/* ── Canton selector (hidden when fixedCanton is provided) ── */}
+      {/* Canton selector */}
       {!fixedCanton && (
         <div>
-          <label className="block text-sm font-semibold text-ink mb-3">Canton</label>
+          <p className="text-[11px] font-semibold text-[#94a3b8] uppercase tracking-widest mb-3">Canton</p>
           <div className="flex flex-wrap gap-2">
             {CANTONS.map(c => (
               <button
@@ -78,8 +72,8 @@ export default function SubsidesCalculator({ fixedCanton }: Props = {}) {
                 className={[
                   'px-4 py-2 rounded-md text-sm font-medium transition-colors',
                   form.canton === c
-                    ? 'bg-brand text-white'
-                    : 'border border-edge text-slate hover:border-brand hover:text-brand',
+                    ? 'bg-[#0f2040] text-white'
+                    : 'bg-white border border-[#e2e8f0] text-[#475569] hover:border-[#1d4ed8] hover:text-[#1d4ed8]',
                 ].join(' ')}
               >
                 {c} — {CANTON_NAMES[c]}
@@ -89,144 +83,155 @@ export default function SubsidesCalculator({ fixedCanton }: Props = {}) {
         </div>
       )}
 
-      {/* ── Situation ── */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-
-        <div>
-          <label className="block text-sm font-semibold text-ink mb-2">Situation</label>
-          <select
-            value={form.situation}
-            onChange={e => set({ situation: e.target.value as Situation })}
-            className="w-full border border-edge rounded-md px-3 py-2 text-sm text-ink bg-white focus:outline-none focus:ring-2 focus:ring-brand"
-          >
-            <option value="seul">Personne seule</option>
-            <option value="couple">Couple</option>
-          </select>
+      {/* Situation */}
+      <div>
+        <p className="text-[11px] font-semibold text-[#94a3b8] uppercase tracking-widest mb-3">Votre situation</p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div>
+            <label className="block text-[13px] text-[#475569] mb-1.5">Situation familiale</label>
+            <select
+              value={form.situation}
+              onChange={e => set({ situation: e.target.value as Situation })}
+              className="select-field text-[14px]"
+            >
+              <option value="seul">Personne seule</option>
+              <option value="couple">Couple</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-[13px] text-[#475569] mb-1.5">Enfants à charge</label>
+            <select
+              value={form.nbEnfants}
+              onChange={e => set({ nbEnfants: parseInt(e.target.value) })}
+              className="select-field text-[14px]"
+            >
+              {[0, 1, 2, 3, 4].map(n => (
+                <option key={n} value={n}>{n === 0 ? 'Aucun' : `${n} enfant${n > 1 ? 's' : ''}`}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="block text-[13px] text-[#475569] mb-1.5">Âge</label>
+            <select
+              value={form.isJeune ? 'jeune' : 'adulte'}
+              onChange={e => set({ isJeune: e.target.value === 'jeune' })}
+              className="select-field text-[14px]"
+            >
+              <option value="adulte">Adulte (26+)</option>
+              <option value="jeune">Jeune adulte (19–25)</option>
+            </select>
+          </div>
         </div>
-
-        <div>
-          <label className="block text-sm font-semibold text-ink mb-2">Enfants à charge</label>
-          <select
-            value={form.nbEnfants}
-            onChange={e => set({ nbEnfants: parseInt(e.target.value) })}
-            className="w-full border border-edge rounded-md px-3 py-2 text-sm text-ink bg-white focus:outline-none focus:ring-2 focus:ring-brand"
-          >
-            {[0, 1, 2, 3, 4].map(n => (
-              <option key={n} value={n}>{n === 0 ? 'Aucun' : `${n} enfant${n > 1 ? 's' : ''}`}</option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <label className="block text-sm font-semibold text-ink mb-2">Âge adulte(s)</label>
-          <select
-            value={form.isJeune ? 'jeune' : 'adulte'}
-            onChange={e => set({ isJeune: e.target.value === 'jeune' })}
-            className="w-full border border-edge rounded-md px-3 py-2 text-sm text-ink bg-white focus:outline-none focus:ring-2 focus:ring-brand"
-          >
-            <option value="adulte">Adulte (26 ans et plus)</option>
-            <option value="jeune">Jeune adulte (19–25 ans)</option>
-          </select>
-        </div>
-
       </div>
 
-      {/* ── Revenu ── */}
+      {/* Revenu */}
       <div>
-        <label className="block text-sm font-semibold text-ink mb-1">
+        <p className="text-[11px] font-semibold text-[#94a3b8] uppercase tracking-widest mb-3">Revenu</p>
+        <label className="block text-[13px] text-[#475569] mb-1.5">
           Revenu déterminant annuel (CHF)
         </label>
-        <p className="text-xs text-slate mb-2">
-          Revenu net fiscal du ménage. En cas de doute, utilisez votre revenu imposable de la dernière déclaration.
+        <div className="flex items-center gap-3">
+          <input
+            type="text"
+            inputMode="numeric"
+            placeholder="ex. 45 000"
+            value={form.revenu}
+            onChange={e => set({ revenu: e.target.value })}
+            className="input-field max-w-[200px] text-[14px]"
+          />
+          <span className="text-[13px] text-[#94a3b8]">CHF / an</span>
+        </div>
+        <p className="text-[12px] text-[#94a3b8] mt-1.5">
+          Revenu net fiscal — en cas de doute, utilisez votre revenu imposable.
         </p>
-        <input
-          type="text"
-          inputMode="numeric"
-          placeholder="ex. 45 000"
-          value={form.revenu}
-          onChange={e => set({ revenu: e.target.value })}
-          className="w-full max-w-xs border border-edge rounded-md px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-brand"
-        />
       </div>
 
-      {/* ── Résultat ── */}
+      {/* Résultat */}
       {hasResult && (
         <div className={[
-          'rounded-xl border-2 p-6 space-y-4',
-          ineligible
-            ? 'border-edge bg-cloud'
-            : noSubside
-              ? 'border-edge bg-cloud'
-              : 'border-brand bg-blue-50',
+          'rounded-lg border p-5',
+          ineligible || noSubside
+            ? 'bg-white border-[#e2e8f0]'
+            : 'bg-[#0f2040] border-[#0f2040]',
         ].join(' ')}>
 
-          {/* Header */}
-          <div className="flex items-start justify-between gap-4 flex-wrap">
-            <div>
-              <p className="text-xs uppercase tracking-wide text-slate font-semibold mb-1">
-                Canton {form.canton} — {CANTON_NAMES[form.canton!]}
-                {result.label ? ` — ${result.label}` : ''}
+          {ineligible || noSubside ? (
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-[#f1f5f9] flex items-center justify-center shrink-0">
+                <svg className="w-4 h-4 text-[#94a3b8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </div>
+              <div>
+                <p className="font-semibold text-[#0f2040] text-[15px]">Revenu hors barème</p>
+                <p className="text-[13px] text-[#475569] mt-0.5">Votre revenu dépasse le seuil d'éligibilité pour ce canton.</p>
+              </div>
+            </div>
+          ) : eligible ? (
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-[#dbeafe] flex items-center justify-center shrink-0">
+                <svg className="w-4 h-4 text-[#1d4ed8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <p className="font-semibold text-[#0f2040] text-[15px]">Vous semblez éligible</p>
+                <p className="text-[13px] text-[#475569] mt-0.5">Le montant exact est calculé par le canton sur dossier.</p>
+              </div>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {/* Montant principal */}
+              <div className="flex items-end justify-between gap-4 flex-wrap">
+                <div>
+                  <p className="text-[12px] text-[#94a3b8] uppercase tracking-wide mb-1">
+                    Estimation subside mensuel{result.label && result.label !== 'Ordinaire' ? ` — ${result.label}` : ''}
+                  </p>
+                  <p className="text-4xl font-bold text-white">
+                    CHF {fmt(result.total)}
+                    <span className="text-lg font-normal text-[#94a3b8] ml-1">/mois</span>
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="text-[12px] text-[#94a3b8]">par année</p>
+                  <p className="text-xl font-semibold text-white">CHF {fmt(result.total * 12)}</p>
+                </div>
+              </div>
+
+              {/* Détail par personne */}
+              <div className={`grid gap-2 pt-3 border-t border-white/10 ${form.nbEnfants > 0 || form.situation === 'couple' ? 'grid-cols-2 sm:grid-cols-3' : 'grid-cols-1'}`}>
+                <div className="bg-white/10 rounded-lg px-4 py-3">
+                  <p className="text-[11px] text-[#94a3b8] mb-0.5">
+                    {form.situation === 'couple' ? 'Par adulte' : 'Adulte'}
+                  </p>
+                  <p className="text-[17px] font-bold text-white">CHF {fmt(result.adulte)}<span className="text-[12px] font-normal text-[#94a3b8]">/mois</span></p>
+                </div>
+                {form.nbEnfants > 0 && (
+                  <div className="bg-white/10 rounded-lg px-4 py-3">
+                    <p className="text-[11px] text-[#94a3b8] mb-0.5">Par enfant</p>
+                    <p className="text-[17px] font-bold text-white">CHF {fmt(result.enfant)}<span className="text-[12px] font-normal text-[#94a3b8]">/mois</span></p>
+                  </div>
+                )}
+                {form.situation === 'couple' && (
+                  <div className="bg-white/10 rounded-lg px-4 py-3">
+                    <p className="text-[11px] text-[#94a3b8] mb-0.5">Total ménage</p>
+                    <p className="text-[17px] font-bold text-white">CHF {fmt(result.total)}<span className="text-[12px] font-normal text-[#94a3b8]">/mois</span></p>
+                  </div>
+                )}
+              </div>
+
+              {/* Note */}
+              {result.note && (
+                <p className="text-[12px] text-[#94a3b8] leading-relaxed border-t border-white/10 pt-3">
+                  {result.note}
+                </p>
+              )}
+
+              {/* Disclaimer */}
+              <p className="text-[11px] text-[#64748b]">
+                Estimation indicative 2026 — le montant réel est déterminé par le canton sur la base de votre dossier fiscal.
               </p>
-              {ineligible ? (
-                <p className="text-xl font-bold text-ink">Revenu trop élevé — pas de subside</p>
-              ) : eligible ? (
-                <p className="text-xl font-bold text-brand">Vous semblez éligible ✓</p>
-              ) : noSubside ? (
-                <p className="text-xl font-bold text-ink">Revenu hors barème</p>
-              ) : (
-                <p className="text-3xl font-bold text-brand">
-                  CHF {fmt(result.total)}<span className="text-lg font-normal text-slate">/mois</span>
-                </p>
-              )}
             </div>
-
-            {!ineligible && !eligible && !noSubside && (
-              <div className="text-right">
-                <p className="text-xs text-slate">Soit par année</p>
-                <p className="text-2xl font-bold text-ink">CHF {fmt(result.total * 12)}</p>
-              </div>
-            )}
-          </div>
-
-          {/* Détail par personne */}
-          {!ineligible && !eligible && !noSubside && (
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 border-t border-brand/20">
-              <div className="bg-white rounded-lg p-3 text-center">
-                <p className="text-xs text-slate mb-1">
-                  {form.situation === 'couple' ? 'Par adulte' : 'Adulte'}
-                </p>
-                <p className="text-lg font-bold text-ink">CHF {fmt(result.adulte)}</p>
-                <p className="text-xs text-slate">/ mois</p>
-              </div>
-              {form.nbEnfants > 0 && (
-                <div className="bg-white rounded-lg p-3 text-center">
-                  <p className="text-xs text-slate mb-1">Par enfant</p>
-                  <p className="text-lg font-bold text-ink">CHF {fmt(result.enfant)}</p>
-                  <p className="text-xs text-slate">/ mois</p>
-                </div>
-              )}
-              {form.situation === 'couple' && (
-                <div className="bg-white rounded-lg p-3 text-center">
-                  <p className="text-xs text-slate mb-1">Total ménage</p>
-                  <p className="text-lg font-bold text-brand">CHF {fmt(result.total)}</p>
-                  <p className="text-xs text-slate">/ mois</p>
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Note */}
-          {result.note && (
-            <p className="text-xs text-slate bg-white/60 rounded-md p-3 leading-relaxed">
-              ℹ️ {result.note}
-            </p>
-          )}
-
-          {/* Disclaimer approximation */}
-          {result.approx && !ineligible && (
-            <p className="text-xs text-slate">
-              ⚠️ Estimation indicative 2026.{result.total > 0 && ' Le montant réel peut différer selon votre situation exacte.'}
-            </p>
           )}
         </div>
       )}
