@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     url: 'https://my-swiss-insurance.ch/lamal/canton/valais',
     type: 'article',
   },
+  alternates: { canonical: 'https://my-swiss-insurance.ch/lamal/canton/valais' },
 }
 
 export default function ValaisPage() {

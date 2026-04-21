@@ -15,25 +15,8 @@ interface FAQProps {
 export default function FAQ({ items, title = 'Questions fréquentes' }: FAQProps) {
   const [open, setOpen] = useState<number | null>(0)
 
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: items.map((item) => ({
-      '@type': 'Question',
-      name: item.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: item.answer,
-      },
-    })),
-  }
-
   return (
-    <section className="mt-16 mb-8">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-      />
+    <section className="mb-8">
       <h2 className="text-2xl font-semibold text-[#0f2040] mb-8">{title}</h2>
       <div className="divide-y divide-[#e2e8f0]">
         {items.map((item, i) => (

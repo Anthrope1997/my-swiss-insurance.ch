@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     url: 'https://my-swiss-insurance.ch/lamal/canton/neuchatel',
     type: 'article',
   },
+  alternates: { canonical: 'https://my-swiss-insurance.ch/lamal/canton/neuchatel' },
 }
 
 export default function NeuchatelPage() {
