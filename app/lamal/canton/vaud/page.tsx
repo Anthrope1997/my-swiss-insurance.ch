@@ -147,7 +147,7 @@ const webPageSchema = {
   description: `Comparatif complet des primes LAMal 2026 pour le canton de Vaud : caisses, franchises, subsides et simulateur.`,
   speakable: {
     '@type': 'SpeakableSpecification',
-    cssSelector: ['h1', '#chiffres-cles', '#subsides', '#faq'],
+    cssSelector: ['h1', '#top-caisses', '#subsides', '#faq'],
   },
   breadcrumb: {
     '@type': 'BreadcrumbList',
@@ -173,7 +173,7 @@ export default function VaudPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }} />
-      <CantonPage canton={c} />
+      <CantonPage canton={c} noFaqSchema />
     </>
   )
 }

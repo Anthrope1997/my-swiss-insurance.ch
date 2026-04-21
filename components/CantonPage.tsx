@@ -40,7 +40,7 @@ function ComparatorCTA({ label = 'Comparer ma prime LAMal' }: { label?: string }
   )
 }
 
-export default function CantonPage({ canton }: { canton: Canton }) {
+export default function CantonPage({ canton, noFaqSchema = false }: { canton: Canton, noFaqSchema?: boolean }) {
   const cheapest = canton.topCaisses[0]
   const subsideCanton = SLUG_TO_SUBSIDE[canton.slug]
 
@@ -50,7 +50,6 @@ export default function CantonPage({ canton }: { canton: Canton }) {
   const savingsPct = Math.round((canton.caissePlusChere.prime - cheapest.prime) / canton.caissePlusChere.prime * 100)
 
   const tocItems = [
-    { id: 'chiffres-cles', label: 'Chiffres clés' },
     { id: 'top-caisses',   label: 'Top 5 caisses' },
     { id: 'franchise',     label: 'Franchise' },
     { id: 'subsides',      label: 'Subsides' },
@@ -85,10 +84,20 @@ export default function CantonPage({ canton }: { canton: Canton }) {
 
   // ── Schemas ───────────────────────────────────────────────────────────────
 
+  const faqSchema = !noFaqSchema ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map(item => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer },
+    })),
+  } : null
+
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: `Assurance maladie LAMal dans le ${canton.cantonDe} 2026`,
+    headline: `Assurance maladie dans le canton de ${canton.name}`,
     description: `Prime LAMal moyenne ${canton.primeMoyenne} CHF/mois dans le ${canton.cantonDe}. Caisse la moins chère : ${cheapest.name} à ${cheapest.prime} CHF/mois. Économie max CHF ${canton.economieAn}/an. Subsides jusqu'à ${canton.subside.seuilRevenu}. Données OFSP 2026.`,
     datePublished: '2026-01-01',
     dateModified: new Date().toISOString().split('T')[0],
@@ -113,6 +122,7 @@ export default function CantonPage({ canton }: { canton: Canton }) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
 
       {/* ── Hero ─────────────────────────────────────────────── */}
       <section className="bg-white border-b border-[#e2e8f0] pt-12 pb-12">
@@ -224,35 +234,6 @@ export default function CantonPage({ canton }: { canton: Canton }) {
           {/* ── Main content ─────────────────────────────────── */}
           <div className="flex-1 min-w-0 space-y-16">
 
-            {/* ── BLOC 1 — Chiffres clés ──────────────────────── */}
-            <section id="chiffres-cles">
-              <h2 className="text-2xl font-semibold text-[#0f2040] border-b border-[#e2e8f0] pb-4 mb-2">
-                Chiffres clés — {canton.name} 2026
-              </h2>
-              <p className="text-[13px] text-[#94a3b8] mb-5">
-                Profil de référence : adulte ~35 ans · franchise 300 CHF · modèle standard · sans couverture accident. Source OFSP 2026.
-              </p>
-              <div className="border border-[#e2e8f0] rounded-[8px] overflow-hidden">
-                <table className="w-full text-[14px]">
-                  <tbody>
-                    {[
-                      ['Prime adulte (26+)',          `${canton.primeMoyenne} CHF/mois`],
-                      ['Prime jeune adulte (19–25)',  `${canton.primeMoyenneJA} CHF/mois`],
-                      ['Prime enfant (0–18)',         `${canton.primeMoyenneEnfant} CHF/mois`],
-                      ['Caisse la moins chère',       `${cheapest.name} — ${cheapest.prime} CHF/mois`],
-                      ['Économie max vs caisse chère',`CHF ${formatChf(canton.economieAn)}/an (${canton.economieMois} CHF/mois)`],
-                      ['Rang suisse',                 `${ordinal(canton.rang)} sur 26`],
-                    ].map(([label, value], i) => (
-                      <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-[#f8fafc]'}>
-                        <td className="px-5 py-3 text-[#475569] w-56 shrink-0">{label}</td>
-                        <td className="px-5 py-3 font-semibold text-[#0f2040]">{value}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </section>
-
             {/* ── BLOC 2 — Top 5 caisses ──────────────────────── */}
             <section id="top-caisses">
               <h2 className="text-2xl font-semibold text-[#0f2040] border-b border-[#e2e8f0] pb-4 mb-2">
@@ -298,7 +279,7 @@ export default function CantonPage({ canton }: { canton: Canton }) {
               </div>
               <p className="text-[13px] text-[#475569] mt-3 bg-[#f1f5f9] border border-[#e2e8f0] rounded px-4 py-2">
                 En passant de {canton.caissePlusChere.name} ({canton.caissePlusChere.prime} CHF/mois) à {cheapest.name} ({cheapest.prime} CHF/mois),
-                vous économisez <strong>CHF {formatChf((canton.caissePlusChere.prime - cheapest.prime) * 12)}/an</strong> pour les mêmes prestations de base.
+                vous économisez <strong>CHF {formatChf(canton.economieAn)}/an</strong> pour les mêmes prestations de base.
               </p>
               <ComparatorCTA label="Trouver la caisse la moins chère" />
             </section>
