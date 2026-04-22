@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 import AuthorBio from '@/components/ui/AuthorBio'
 import Breadcrumb from '@/components/ui/Breadcrumb'
-import FAQ from '@/components/ui/FAQ'
-import LeadForm from '@/components/ui/LeadForm'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -26,21 +24,6 @@ const articleSchema = {
   author: { '@type': 'Organization', name: 'La rédaction My Swiss Insurance' },
   publisher: { '@type': 'Organization', name: 'My Swiss Insurance' },
 }
-
-const faqItems = [
-  {
-    question: "Comment assurer sa famille en Suisse avec la LAMal ?",
-    answer: "Chaque membre de la famille a sa propre assurance LAMal individuelle. Il n'y a pas d'assurance familiale groupée en Suisse. La prime enfant (0–18 ans) est nettement moins élevée. Les enfants peuvent avoir une franchise à 0 CHF. Comparez les caisses séparément pour chaque membre.",
-  },
-  {
-    question: "Un indépendant doit-il souscrire une LAA en plus de la LAMal ?",
-    answer: "Oui. Les indépendants ne sont pas couverts automatiquement par la LAA comme les salariés. Sans LAA volontaire, les accidents professionnels et de loisirs sont à la charge de la LAMal, avec des lacunes importantes. Source : art. 3 LAA.",
-  },
-  {
-    question: "Dans quel délai un expatrié doit-il s'affilier à la LAMal ?",
-    answer: "Tout résident en Suisse doit s'affilier dans les 90 jours suivant la prise de domicile officielle. Si ce délai est respecté, la couverture est rétroactive à la date d'arrivée. Au-delà, les autorités attribuent d'office une caisse.",
-  },
-]
 
 const hubCards = [
   {
@@ -91,6 +74,23 @@ const hubCards = [
       <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75}
           d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+  },
+  {
+    href: '/lamal/maternite',
+    title: 'Maternité',
+    description:
+      'La LAMal couvre la grossesse et l\'accouchement sans franchise ni quote-part. Consultations, accouchement, soins sage-femme : tout ce qui est pris en charge.',
+    highlights: [
+      'Franchise et quote-part nulles pour les soins de maternité',
+      'Accouchement en hôpital, maison de naissance ou à domicile',
+      'Nouveau-né à affilier dans les 3 mois suivant la naissance',
+    ],
+    icon: (
+      <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75}
+          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
       </svg>
     ),
   },
@@ -162,9 +162,7 @@ export default function ParProfilPage() {
               ))}
             </div>
 
-            <FAQ items={faqItems} />
-
-            <section className="mt-14">
+            <section>
               <h3 className="text-[16px] font-semibold text-[#0f2040] mb-3">Voir aussi</h3>
               <div className="flex flex-col gap-2">
                 {[
@@ -184,11 +182,6 @@ export default function ParProfilPage() {
             </section>
           </div>
 
-          <div className="hidden lg:block w-80 flex-shrink-0">
-            <div className="sticky top-24">
-              <LeadForm compact />
-            </div>
-          </div>
         </div>
       </div>
     </>

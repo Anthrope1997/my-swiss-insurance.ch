@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import AuthorBio from '@/components/ui/AuthorBio'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
-import LeadForm from '@/components/ui/LeadForm'
+import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -39,7 +39,29 @@ const faqItems = [
     question: 'Puis-je changer de franchise en cas de chômage ?',
     answer: "Vous pouvez changer de franchise au 1er janvier de chaque année avec un préavis avant le 30 novembre. En cas de changement de situation (perte d'emploi), il est conseillé de vérifier votre droit aux subsides cantonaux rapidement — les revenus réduits ouvrent souvent des droits supplémentaires.",
   },
+  {
+    question: 'La LAMal couvre-t-elle un salarié à temps partiel ?',
+    answer: "Oui. La LAMal est obligatoire pour tout résident en Suisse, quel que soit le taux d'activité. Pour la LAA (accidents), la couverture par l'employeur s'applique dès 8h de travail par semaine pour les accidents non professionnels. En dessous de ce seuil, seuls les accidents professionnels sont couverts par la LAA.",
+  },
+  {
+    question: 'Un freelance ou micro-entrepreneur est-il traité comme un indépendant ?',
+    answer: "Oui, si vous exercez une activité indépendante au sens du droit suisse (inscription AVS comme indépendant). Dans ce cas, vous n'êtes pas automatiquement couvert par la LAA et devez la souscrire volontairement. Si vous exercez via une société (Sàrl), vous êtes alors salarié de votre propre société et bénéficiez de la LAA employeur.",
+  },
+  {
+    question: 'Que se passe-t-il pour ma LAMal si je perds mon emploi à l\'étranger et reviens en Suisse ?',
+    answer: "Dès votre retour en Suisse et la prise de domicile, vous avez 90 jours pour vous affilier à la LAMal. Si vous étiez auparavant assuré LAMal, vous pouvez reprendre le contrat avec la même caisse. Vérifiez votre droit aux subsides cantonaux selon votre revenu déclaré la première année.",
+  },
 ]
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map(item => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+}
 
 const DISCLAIMER = (
   <div className="text-xs text-[#475569] bg-[#f1f5f9] border border-[#e2e8f0] rounded px-3 py-2 mb-6">
@@ -53,6 +75,7 @@ export default function SalarieIndependantPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       <section className="bg-white border-b border-[#e2e8f0] pt-12 pb-10">
         <div className="container-xl">
@@ -196,7 +219,7 @@ export default function SalarieIndependantPage() {
 
           <div className="hidden lg:block w-80 flex-shrink-0">
             <div className="sticky top-24">
-              <LeadForm compact />
+              <MultiStepLeadForm />
             </div>
           </div>
         </div>

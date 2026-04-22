@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import AuthorBio from '@/components/ui/AuthorBio'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
-import LeadForm from '@/components/ui/LeadForm'
+import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -39,7 +39,37 @@ const faqItems = [
     question: "Peut-on être refusé par une caisse LAMal en tant qu'étranger ?",
     answer: "Non. Pour la LAMal de base, tous les assureurs agréés par l'OFSP ont l'obligation légale d'accepter toute personne résidant en Suisse, quelle que soit sa nationalité, son âge ou son état de santé. Il n'y a aucune sélection médicale pour l'assurance de base.",
   },
+  {
+    question: "Que se passe-t-il si je quitte la Suisse définitivement ?",
+    answer: "La LAMal prend fin à la date de départ de Suisse (radiation du registre des habitants). Vous devez résilier votre contrat en fournissant une preuve de départ (attestation de radiation). Un remboursement au prorata des primes déjà versées est effectué. Pensez à prolonger votre couverture quelques jours pour couvrir la transition.",
+  },
+  {
+    question: "Un détaché en Suisse doit-il s'affilier à la LAMal ?",
+    answer: "Cela dépend de la durée et de l'accord bilatéral applicable. Un détachement de courte durée (< 12 mois) depuis un pays UE/AELE permet généralement de rester dans le système du pays d'origine avec le formulaire A1. Pour une mission longue ou un changement de domicile en Suisse, la LAMal devient obligatoire.",
+  },
+  {
+    question: "Les frontaliers genevois ont-ils des droits particuliers ?",
+    answer: "Oui. Les frontaliers français travaillant dans le canton de Genève qui optent pour la couverture française peuvent bénéficier de la CMU-C (Complémentaire Santé Solidaire) en France si leurs revenus le permettent. Cette double couverture effective est une spécificité genevoise. Renseignez-vous auprès de la CPAM de Haute-Savoie ou de l'Ain.",
+  },
+  {
+    question: "Puis-je conserver ma LAMal si je deviens frontalier après avoir résidé en Suisse ?",
+    answer: "Non. La LAMal est liée à la résidence en Suisse. Si vous quittez la Suisse pour résider en France ou ailleurs mais continuez à y travailler, vous devenez frontalier et exercez votre droit d'option. Vous pouvez alors choisir de vous affilier à la LAMal côté Suisse ou de vous couvrir dans votre pays de résidence.",
+  },
+  {
+    question: "Les enfants d'un expatrié doivent-ils aussi s'affilier à la LAMal ?",
+    answer: "Oui. Tout enfant résidant en Suisse avec ses parents doit être affilié à la LAMal dans les 3 mois suivant l'établissement du domicile ou la naissance. Les primes enfants (0–18 ans) sont nettement inférieures aux primes adultes. Les parents peuvent choisir une caisse différente pour leurs enfants.",
+  },
 ]
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map(item => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+}
 
 const DISCLAIMER = (
   <div className="text-xs text-[#475569] bg-[#f1f5f9] border border-[#e2e8f0] rounded px-3 py-2 mb-6">
@@ -53,6 +83,7 @@ export default function ExpatrieFrontalierPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       <section className="bg-white border-b border-[#e2e8f0] pt-12 pb-10">
         <div className="container-xl">
@@ -165,12 +196,58 @@ export default function ExpatrieFrontalierPage() {
               </ul>
             </section>
 
+            {/* Quitter la Suisse */}
+            <section id="depart">
+              <h2 className="text-2xl font-semibold text-[#0f2040] mb-4">
+                Quitter la Suisse : résiliation de la LAMal
+              </h2>
+              <p className="text-[16px] text-[#475569] leading-relaxed mb-5">
+                La LAMal est liée à la résidence en Suisse. Votre couverture cesse automatiquement
+                à la date de radiation du registre des habitants. Voici les étapes à suivre.
+              </p>
+              <div className="space-y-4">
+                {[
+                  {
+                    n: '01',
+                    title: 'Prévenir votre caisse',
+                    desc: 'Informez votre caisse de votre départ avec une attestation de radiation de commune (obtenue à l\'office cantonal). La caisse peut vous demander une preuve de couverture dans le pays de destination.',
+                  },
+                  {
+                    n: '02',
+                    title: 'Remboursement au prorata',
+                    desc: 'Les primes payées au-delà de la date de départ vous seront remboursées automatiquement. La franchise de l\'année courante est calculée pro-rata temporis.',
+                  },
+                  {
+                    n: '03',
+                    title: 'Attention aux soins en cours',
+                    desc: 'Les soins médicaux en cours (traitement, physio) restent couverts jusqu\'à la date de départ. Transmettez toutes vos factures en cours avant de fermer votre compte.',
+                  },
+                  {
+                    n: '04',
+                    title: 'LCA : conditions de résiliation distinctes',
+                    desc: 'Les assurances complémentaires LCA ont leurs propres conditions de résiliation (délai de préavis, période d\'engagement). Vérifiez votre contrat séparément de la LAMal.',
+                  },
+                ].map(step => (
+                  <div key={step.n} className="flex gap-5">
+                    <div className="text-[26px] font-bold text-[#1d4ed8] leading-none shrink-0 w-10 text-right">
+                      {step.n}
+                    </div>
+                    <div className="pt-0.5">
+                      <h3 className="font-semibold text-[#0f2040] text-[16px] mb-1">{step.title}</h3>
+                      <p className="text-[15px] text-[#475569]">{step.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
             <FAQ items={faqItems} />
 
             <section>
               <h3 className="text-[16px] font-semibold text-[#0f2040] mb-3">Voir aussi</h3>
               <div className="flex flex-col gap-2">
                 {[
+                  { href: '/lamal/maternite', label: 'Maternité et LAMal — couverture pour les expatriées' },
                   { href: '/lamal/salarie-independant', label: 'LAMal pour salariés et indépendants' },
                   { href: '/lamal/famille-retraite', label: 'LAMal pour les familles et retraités' },
                   { href: '/lamal/guide', label: 'Guide complet LAMal 2026' },
@@ -189,7 +266,7 @@ export default function ExpatrieFrontalierPage() {
 
           <div className="hidden lg:block w-80 flex-shrink-0">
             <div className="sticky top-24">
-              <LeadForm compact />
+              <MultiStepLeadForm />
             </div>
           </div>
         </div>

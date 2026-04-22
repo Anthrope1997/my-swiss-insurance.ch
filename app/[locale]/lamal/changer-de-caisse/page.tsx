@@ -3,7 +3,7 @@ import AuthorBio from '@/components/ui/AuthorBio'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
 import Link from 'next/link'
-import LeadForm from '@/components/ui/LeadForm'
+import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
 
 export const metadata: Metadata = {
   title: 'Changer de caisse maladie en Suisse — Guide résiliation LAMal 2026',
@@ -39,12 +39,43 @@ const faqItems = [
     question: "Que se passe-t-il si j'oublie de résilier avant le 30 novembre ?",
     answer: "Votre contrat est automatiquement reconduit pour l'année suivante. Vous ne pourrez changer qu'au 1er janvier de l'année d'après, sauf si votre assureur annonce une hausse de prime en cours d'année.",
   },
+  {
+    question: "Puis-je changer de caisse si j'ai des factures médicales en cours ?",
+    answer: "Oui. Les factures en cours restent à la charge de votre ancienne caisse pour tous les soins reçus pendant la période couverte. La transition est gérée entre les deux caisses. Conservez toutes vos factures et assurez-vous qu'elles ont été transmises avant la résiliation.",
+  },
+  {
+    question: "Faut-il informer son médecin en cas de changement de caisse ?",
+    answer: "Oui, c'est recommandé. Communiquez vos nouvelles coordonnées d'assuré à votre médecin de famille et tout autre prestataire de santé. Présentez votre nouvelle carte d'assuré lors de votre première consultation. En cas de modèle médecin de famille ou HMO, vérifiez que votre médecin est dans le réseau.",
+  },
+  {
+    question: "Comment changer de caisse en cas de déménagement dans un autre canton ?",
+    answer: "Un déménagement dans un autre canton ouvre le droit à un changement de caisse immédiat, même en dehors de la période ordinaire. Signalez votre déménagement à votre caisse actuelle. Les primes s'appliquent selon le canton de domicile dès la date effective du changement.",
+  },
+  {
+    question: "La nouvelle caisse peut-elle imposer une période d'essai ?",
+    answer: "Non. Il n'y a pas de période d'essai pour la LAMal de base. La couverture est intégrale dès le 1er janvier. En revanche, pour les assurances complémentaires LCA souscrites simultanément, des délais de carence peuvent s'appliquer selon le contrat.",
+  },
+  {
+    question: "Est-il possible de changer de caisse pour ses enfants séparément ?",
+    answer: "Oui. Chaque membre de la famille dispose de son propre contrat LAMal et peut être assuré dans des caisses différentes. Il peut être stratégique de comparer séparément pour les enfants, dont les caisses les moins chères ne sont pas toujours les mêmes que pour les adultes.",
+  },
 ]
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map(item => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+}
 
 export default function ChangerDeCaissePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       <section className="bg-white border-b border-edge pt-12 pb-10">
         <div className="container-xl">
@@ -201,12 +232,66 @@ export default function ChangerDeCaissePage() {
               </p>
             </section>
 
+            {/* Cas particuliers */}
+            <section>
+              <h2 className="text-2xl font-semibold text-ink mb-6">Cas particuliers</h2>
+              <div className="space-y-4">
+                {[
+                  {
+                    titre: 'Hausse de prime annoncée',
+                    desc: 'Si votre caisse augmente sa prime pour l\'année suivante, vous disposez d\'un droit de résiliation spécial dans le mois suivant la notification. La résiliation prend effet au 31 décembre. Ce droit s\'applique même si vous avez manqué le délai ordinaire du 30 novembre.',
+                    urgence: true,
+                  },
+                  {
+                    titre: 'Déménagement dans un autre canton',
+                    desc: 'Un déménagement cantonal permet un changement de caisse immédiat en dehors du délai ordinaire. Les primes s\'appliquent selon le canton de domicile. Signalez le changement à votre caisse actuelle et comparez les primes dans votre nouveau canton.',
+                    urgence: false,
+                  },
+                  {
+                    titre: 'Arrivée en Suisse (expatrié ou déménagement)',
+                    desc: 'Vous avez 90 jours dès l\'établissement de votre domicile pour choisir et s\'affilier à une caisse. La couverture est rétroactive à la date d\'arrivée si le délai est respecté. Profitez de ces 90 jours pour comparer les caisses soigneusement.',
+                    urgence: false,
+                  },
+                  {
+                    titre: 'Naissance ou adoption',
+                    desc: 'Un nouveau-né doit être affilié dans les 3 mois suivant la naissance. Si vous respectez ce délai, la couverture est rétroactive à la naissance. Vous pouvez choisir n\'importe quelle caisse — pas forcément celle des parents.',
+                    urgence: false,
+                  },
+                ].map((cas, i) => (
+                  <div key={i} className={`border-l-4 ${cas.urgence ? 'border-[#f59e0b] bg-[#fffbeb]' : 'border-brand bg-white'} border border-edge rounded-[8px] p-5`}>
+                    <h3 className="font-semibold text-ink text-[16px] mb-2">{cas.titre}</h3>
+                    <p className="text-[15px] text-slate">{cas.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
             <FAQ items={faqItems} />
+
+            <section>
+              <h3 className="text-[16px] font-semibold text-ink mb-3">Voir aussi</h3>
+              <div className="flex flex-col gap-2">
+                {[
+                  { href: '/lamal/comparateur', label: 'Comparer ma prime LAMal' },
+                  { href: '/lamal/franchise', label: 'Choisir sa franchise' },
+                  { href: '/lamal/modeles', label: 'Les 4 modèles LAMal' },
+                  { href: '/lamal/guide', label: 'Guide complet LAMal 2026' },
+                ].map(link => (
+                  <Link key={link.href} href={link.href}
+                    className="text-[15px] text-brand hover:underline flex items-center gap-1">
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            </section>
           </div>
 
           <div className="hidden lg:block w-80 flex-shrink-0">
             <div className="sticky top-24">
-              <LeadForm compact />
+              <MultiStepLeadForm />
             </div>
           </div>
         </div>

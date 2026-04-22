@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import AuthorBio from '@/components/ui/AuthorBio'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
-import LeadForm from '@/components/ui/LeadForm'
+import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -33,13 +33,35 @@ const faqItems = [
   },
   {
     question: 'Quelle franchise choisir pour un étudiant de 19 à 25 ans ?',
-    answer: "Pour un étudiant en bonne santé, la franchise 2500 CHF est souvent recommandée car elle réduit la prime mensuelle de ~80–100 CHF. Si vous avez des soins réguliers (orthodontie, médecin fréquent), préférez la franchise 300 CHF. Le break-even se situe autour de 1 300 CHF de frais médicaux annuels.",
+    answer: "Pour un étudiant en bonne santé, la franchise 2500 CHF est souvent recommandée car elle réduit la prime mensuelle de ~80–100 CHF. Si vous avez des soins réguliers (orthodontie, médecin fréquent), préférez la franchise 300 CHF. Le break-even se situe autour de CHF 1'440 de frais médicaux annuels.",
   },
   {
     question: 'Les retraités paient-ils une prime LAMal plus élevée ?',
     answer: "Il n'existe pas de tarif spécifique \"senior\" en LAMal. Le tarif adulte s'applique dès 26 ans et ne change plus avec l'âge. En revanche, les retraités à revenus modestes peuvent bénéficier des subsides cantonaux. La franchise 300 CHF est généralement recommandée car les frais médicaux augmentent avec l'âge.",
   },
+  {
+    question: 'Les enfants ont-ils droit aux subsides cantonaux ?',
+    answer: "Oui. Les subsides enfants sont calculés séparément des subsides adultes. Dans certains cantons (VD, GE, NE), les primes enfants sont totalement prises en charge pour les familles sous un certain seuil de revenus. Les subsides enfants sont souvent plus généreux que les subsides adultes.",
+  },
+  {
+    question: 'À quel âge un enfant passe-t-il au tarif adulte ?',
+    answer: "Dès 19 ans, l'assuré bénéficie du tarif jeune adulte (19–25 ans), moins cher que le tarif adulte complet. À 26 ans, le tarif adulte standard s'applique. La franchise passe des franchises enfants (0–600 CHF) aux franchises adultes (300–2500 CHF).",
+  },
+  {
+    question: 'La LCA hospitalière est-elle utile pour les retraités ?',
+    answer: "Oui, particulièrement. La LAMal couvre uniquement la division commune. Une LCA hospitalière garantit la chambre semi-privée ou privée, le libre choix du médecin chef et un confort accru pour des hospitalisations qui deviennent plus fréquentes avec l'âge. À souscrire avant 65 ans pour des conditions optimales.",
+  },
 ]
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map(item => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+}
 
 const DISCLAIMER = (
   <div className="text-xs text-[#475569] bg-[#f1f5f9] border border-[#e2e8f0] rounded px-3 py-2 mb-6">
@@ -53,6 +75,7 @@ export default function FamilleRetraitePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       <section className="bg-white border-b border-[#e2e8f0] pt-12 pb-10">
         <div className="container-xl">
@@ -201,7 +224,7 @@ export default function FamilleRetraitePage() {
 
           <div className="hidden lg:block w-80 flex-shrink-0">
             <div className="sticky top-24">
-              <LeadForm compact />
+              <MultiStepLeadForm />
             </div>
           </div>
         </div>

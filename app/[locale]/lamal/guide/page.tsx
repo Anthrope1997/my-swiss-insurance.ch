@@ -35,7 +35,7 @@ const faqItems = [
   },
   {
     question: 'Quelle franchise LAMal choisir ?',
-    answer: "Choisissez la franchise 300 CHF si vos frais médicaux annuels dépassent environ CHF 1'300. Optez pour 2500 CHF si vous êtes en bonne santé : vous économisez ~CHF 100/mois sur la prime mais prenez en charge jusqu'à CHF 2'500 de frais. Le break-even se situe autour de CHF 1'300 de dépenses médicales annuelles.",
+    answer: "Choisissez la franchise 300 CHF si vos frais médicaux annuels dépassent environ CHF 1'440. Optez pour 2500 CHF si vous êtes en bonne santé : vous économisez ~CHF 120/mois sur la prime mais prenez en charge jusqu'à CHF 2'500 de frais. Le break-even entre les deux extrêmes se situe autour de CHF 1'440 de dépenses médicales annuelles.",
   },
   {
     question: "Peut-on changer de caisse maladie en cours d'année ?",
@@ -57,7 +57,21 @@ const faqItems = [
     question: "Les prestations sont-elles identiques dans toutes les caisses maladie ?",
     answer: "Oui. Pour la LAMal de base, les prestations sont strictement identiques chez tous les assureurs agréés par l'OFSP. Seules les primes, la qualité du service client et les options complémentaires (LCA) diffèrent.",
   },
+  {
+    question: "La maternité est-elle couverte par la LAMal ?",
+    answer: "Oui et sans reste à charge. Les consultations prénatales, l'accouchement et les soins post-partum (sage-femme jusqu'à 10 semaines) sont exonérés de franchise et de quote-part. La LAMal couvre l'accouchement en hôpital, en maison de naissance ou à domicile. Source : art. 29 LAMal.",
+  },
 ]
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map(item => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+}
 
 const premiums = [
   { code: 'GE', name: 'Genève',              prime: 710.41 },
@@ -132,6 +146,7 @@ export default function GuideLamalPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       {/* Page header */}
       <section className="bg-white border-b border-edge pt-12 pb-10">
@@ -581,9 +596,12 @@ export default function GuideLamalPage() {
                 <p className="text-[12px] font-semibold text-slate uppercase tracking-widest mb-4">Approfondir</p>
                 <ul className="space-y-2.5">
                   {[
+                    ['/lamal/franchise', 'Choisir sa franchise'],
+                    ['/lamal/modeles', 'Les 4 modèles LAMal'],
                     ['/lamal/changer-de-caisse', 'Changer de caisse maladie'],
                     ['/lamal/lamal-vs-lca', 'LAMal vs LCA'],
-                    ['/lamal/par-profil', 'Par profil'],
+                    ['/lamal/maternite', 'Maternité et LAMal'],
+                    ['/lamal/par-profil', 'Par situation de vie'],
                   ].map(([href, label]) => (
                     <li key={href}>
                       <Link href={href} className="flex items-center gap-2 text-[14px] text-slate hover:text-brand transition-colors">
