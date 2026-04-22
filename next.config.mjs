@@ -3,7 +3,7 @@ const nextConfig = {
   output: 'standalone',
   experimental: {
     outputFileTracingIncludes: {
-      '/api/primes': ['./lib/data/*.json'],
+      '/api/primes': ['./data/lamal/*.json'],
     },
   },
 }

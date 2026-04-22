@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
+import Header from '@/components/ui/Header'
+import Footer from '@/components/ui/Footer'
 
 const orgSchema = {
   '@context': 'https://schema.org',

@@ -51,7 +51,7 @@ let npaCache: Record<string, string> | null = null
 let regionsCache: Record<string, Region> | null = null
 
 function dataPath(filename: string) {
-  return path.join(process.cwd(), 'lib', 'data', filename)
+  return path.join(process.cwd(), 'data', 'lamal', filename)
 }
 
 function getPrimes(): PrimeRow[] {
