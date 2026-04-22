@@ -1,0 +1,92 @@
+{
+  "nav": {
+    "guides": "Guides",
+    "parCanton": "Par canton",
+    "parSituation": "Par situation",
+    "comparerPrime": "Comparer ma prime LAMal",
+    "ouvrirMenu": "Ouvrir le menu",
+    "fermerMenu": "Fermer le menu"
+  },
+  "hero": {
+    "badgeOfsp": "Données OFSP · 2026",
+    "noteAdulte": "Données pour un adulte de 35 ans habitant à",
+    "cta": {
+      "comparer": "Comparer ma prime →",
+      "rappel": "Être rappelé gratuitement"
+    }
+  },
+  "metrics": {
+    "meilleurePrime": "Meilleure prime",
+    "economieAnnuelle": "Économie annuelle",
+    "subsideMensuelMax": "Subside mensuel maximal",
+    "parMois": "par mois",
+    "parAn": "par an"
+  },
+  "caisses": {
+    "titre": "Meilleures caisses",
+    "rang": "Rang",
+    "caisse": "Caisse",
+    "primeMois": "Prime par mois",
+    "primeAn": "Prime par an",
+    "economieAnnuelle": "Économie annuelle",
+    "nudgeComparateur": "Comparer toutes les caisses →"
+  },
+  "franchise": {
+    "titre": "Tableau des franchises",
+    "nudge": "Pas sûr(e) de quelle franchise choisir ?",
+    "cta": "Me faire conseiller →"
+  },
+  "subsides": {
+    "titre": "Subsides LAMal",
+    "nudge": "Un courtier vérifie votre éligibilité",
+    "cta": "Vérifier mes subsides →"
+  },
+  "faq": {
+    "titre": "Questions fréquentes"
+  },
+  "form": {
+    "titre": "Recevoir un conseil gratuit",
+    "etape": "Étape",
+    "sur": "sur",
+    "labels": ["Votre objectif", "Votre situation", "Votre profil", "Vos coordonnées"],
+    "objectifs": {
+      "compare": "Trouver la caisse la moins chère",
+      "switch": "Changer de caisse facilement",
+      "subsides": "Vérifier mes subsides",
+      "conseil": "Optimiser ma franchise et mon modèle"
+    },
+    "profils": {
+      "seul": "Seul(e)",
+      "couple": "Couple",
+      "famille": "Famille avec enfants",
+      "retraite": "Retraité(e)"
+    },
+    "champs": {
+      "codePostal": "Code postal (NPA)",
+      "profil": "Profil",
+      "prenom": "Prénom",
+      "nom": "Nom",
+      "telephone": "Téléphone",
+      "email": "Adresse e-mail"
+    },
+    "submit": "Recevoir mon conseil gratuit →",
+    "loading": "Envoi en cours…",
+    "legal": "Vos données sont protégées conformément à la LPD · Sans engagement · Réponse sous 24 heures",
+    "succes": {
+      "titre": "Demande envoyée",
+      "message": "Un courtier vous contacte sous 24 heures ouvrables."
+    },
+    "retour": "← Retour",
+    "continuer": "Continuer →"
+  },
+  "stickyBar": {
+    "economie": "Économisez jusqu'à",
+    "parAn": "par an",
+    "enChangeant": "en changeant de caisse",
+    "cta": "Comparer ma prime →"
+  },
+  "footer": {
+    "droits": "Tous droits réservés",
+    "lpd": "Protection des données (LPD)"
+  }
+}
