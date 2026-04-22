@@ -8,11 +8,13 @@ const lamalGuides = [
   { href: '/lamal/guide', label: 'Comprendre la LAMal' },
   { href: '/lamal/franchise', label: 'Choisir sa franchise' },
   { href: '/lamal/modeles', label: 'Les 4 modèles LAMal' },
-  { href: '/lamal/subsides', label: 'Calculateur de subsides' },
-  { href: '/lamal/comparateur', label: 'Comparateur de caisses' },
   { href: '/lamal/lamal-vs-lca', label: 'LAMal vs complémentaire' },
   { href: '/lamal/changer-de-caisse', label: 'Changer de caisse' },
-  { href: '/lamal/maternite', label: 'Maternité et LAMal' },
+]
+
+const lamalOutils = [
+  { href: '/lamal/comparateur', label: 'Comparateur de caisses' },
+  { href: '/lamal/subsides', label: 'Calculateur de subsides' },
 ]
 
 const cantonLinks = [
@@ -28,6 +30,7 @@ const situationLinks = [
   { href: '/lamal/salarie-independant', label: 'Salarié / Indépendant' },
   { href: '/lamal/famille-retraite', label: 'Famille / Retraité' },
   { href: '/lamal/expatrie-frontalier', label: 'Expatrié / Frontalier' },
+  { href: '/lamal/maternite', label: 'Maternité' },
 ]
 
 function ShieldIcon() {
@@ -89,6 +92,14 @@ export default function Header() {
 
           <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest pt-5 pb-2">Guides</p>
           {lamalGuides.map(link => (
+            <Link key={link.href} href={link.href}
+              className="block py-2.5 text-[15px] text-slate-200 hover:text-white border-b border-white/5">
+              {link.label}
+            </Link>
+          ))}
+
+          <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest pt-5 pb-2">Outils</p>
+          {lamalOutils.map(link => (
             <Link key={link.href} href={link.href}
               className="block py-2.5 text-[15px] text-slate-200 hover:text-white border-b border-white/5">
               {link.label}

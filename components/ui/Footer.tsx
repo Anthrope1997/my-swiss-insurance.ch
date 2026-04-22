@@ -14,9 +14,12 @@ const columns = [
     title: 'Guides',
     links: [
       { href: '/lamal/guide', label: 'Comprendre la LAMal' },
-      { href: '/lamal/comparateur', label: 'Comparateur de caisses' },
+      { href: '/lamal/franchise', label: 'Choisir sa franchise' },
+      { href: '/lamal/modeles', label: 'Les 4 modèles LAMal' },
       { href: '/lamal/lamal-vs-lca', label: 'LAMal vs complémentaire' },
       { href: '/lamal/changer-de-caisse', label: 'Changer de caisse' },
+      { href: '/lamal/comparateur', label: 'Comparateur de caisses' },
+      { href: '/lamal/subsides', label: 'Calculateur de subsides' },
     ],
   },
   {
@@ -36,6 +39,7 @@ const columns = [
       { href: '/lamal/salarie-independant', label: 'Salarié / Indépendant' },
       { href: '/lamal/famille-retraite', label: 'Famille / Retraité' },
       { href: '/lamal/expatrie-frontalier', label: 'Expatrié / Frontalier' },
+      { href: '/lamal/maternite', label: 'Maternité' },
       { href: '/lamal/par-profil', label: 'Toutes les situations' },
     ],
   },
@@ -45,7 +49,6 @@ const columns = [
       { href: '/a-propos', label: 'À propos' },
       { href: '/mentions-legales', label: 'Mentions légales' },
       { href: '/politique-confidentialite', label: 'Confidentialité' },
-      { href: '/contact', label: 'Contact' },
     ],
   },
 ]
