@@ -63,7 +63,7 @@ export default function Header() {
           {/* Hamburger */}
           <button
             onClick={() => setMobileOpen(o => !o)}
-            className="p-2 text-slate-300 hover:text-white"
+            className="p-2 text-white"
             aria-label={mobileOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
           >
             {mobileOpen ? (

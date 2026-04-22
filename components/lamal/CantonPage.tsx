@@ -269,7 +269,9 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
                 {/* Ligne de référence : caisse la plus chère */}
                 <tr className="bg-cloud/70">
                   <td>
-                    <span className="text-[11px] font-medium text-slate/50 uppercase tracking-wide">Réf.</span>
+                    <span className="w-6 h-6 rounded-full bg-cloud text-slate/50 text-xs font-bold inline-flex items-center justify-center">
+                      {canton.topCaisses.length + 1}
+                    </span>
                   </td>
                   <td className="text-slate">{canton.caissePlusChere.name}</td>
                   <td className="text-right text-slate">{canton.caissePlusChere.prime} CHF</td>
@@ -348,7 +350,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
           </div>
           <div className="mt-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-cloud border border-edge rounded-xl px-5 py-4">
             <p className="text-[14px] text-slate">
-              Pas sûr(e) de quelle franchise choisir ?
+              Vous hésitez entre deux franchises ? Un expert analyse votre situation gratuitement.
             </p>
             <FormScrollButton
               intent="conseil"
@@ -410,7 +412,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
           {/* Nudge */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-[#eff6ff] border border-[#bfdbfe] rounded-xl px-5 py-4">
             <p className="text-[14px] text-ink">
-              Un courtier vérifie votre éligibilité et effectue la demande pour vous.
+              Un expert vérifie votre éligibilité et effectue la demande pour vous.
             </p>
             <FormScrollButton
               intent="subsides"
@@ -432,7 +434,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
             Recevoir un conseil personnalisé gratuit
           </h2>
           <p className="text-[15px] text-slate mb-6 max-w-xl">
-            Un courtier indépendant analyse votre situation et vous propose la meilleure solution
+            Un expert indépendant analyse votre situation et vous propose la meilleure solution
             dans le canton de {canton.name}. Sans engagement, sous 24 heures.
           </p>
           <div className="max-w-xl">

@@ -43,8 +43,9 @@ export default function StickyBar({ cantonName, economieAn }: Props) {
       <div className="container-xl">
         <div className="flex items-center justify-between gap-4 py-3">
           <p className="text-white text-[13px] sm:text-[14px] leading-snug truncate">
-            <span className="hidden sm:inline">Dans le canton de {cantonName} · </span>
-            Économisez jusqu'à{' '}
+            <span className="hidden sm:inline">Dans le canton de {cantonName}, économisez</span>
+            <span className="sm:hidden">Économisez</span>
+            {' '}jusqu'à{' '}
             <strong className="text-[#4ade80]">CHF {formatChf(economieAn)} par an</strong>
             {' '}en changeant de caisse
           </p>

@@ -54,7 +54,7 @@ export default function AProposPage() {
             </p>
             <p className="mt-3">
               Nous n'avons aucun lien capitalistique avec les caisses maladie que nous comparons.
-              Notre rémunération provient exclusivement des leads qualifiés transmis à des courtiers
+              Notre rémunération provient exclusivement des leads qualifiés transmis à des experts
               partenaires agréés, ce que nous indiquons en toute transparence.
             </p>
           </section>

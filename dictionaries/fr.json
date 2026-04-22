@@ -38,7 +38,7 @@
   },
   "subsides": {
     "titre": "Subsides LAMal",
-    "nudge": "Un courtier vérifie votre éligibilité",
+    "nudge": "Un expert vérifie votre éligibilité",
     "cta": "Vérifier mes subsides →"
   },
   "faq": {
@@ -74,7 +74,7 @@
     "legal": "Vos données sont protégées conformément à la LPD · Sans engagement · Réponse sous 24 heures",
     "succes": {
       "titre": "Demande envoyée",
-      "message": "Un courtier vous contacte sous 24 heures ouvrables."
+      "message": "Un expert vous contacte sous 24 heures ouvrables."
     },
     "retour": "← Retour",
     "continuer": "Continuer →"

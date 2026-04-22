@@ -96,7 +96,7 @@ export default function MultiStepLeadForm() {
           <CheckIcon />
         </div>
         <h3 className="font-semibold text-ink text-[18px] mb-1">Demande envoyée</h3>
-        <p className="text-slate text-[15px]">Un courtier vous contacte sous 24 heures ouvrables.</p>
+        <p className="text-slate text-[15px]">Un expert vous contacte sous 24 heures ouvrables.</p>
       </div>
     )
   }

@@ -117,6 +117,34 @@ function fmtAn(n: number): string {
   return s.slice(0, s.length - 6) + '\u2019' + s.slice(s.length - 6, s.length - 3) + '\u2019' + s.slice(s.length - 3)
 }
 
+// ─── Info tooltip ────────────────────────────────────────────────────────────
+
+function InfoTooltip({ text }: { text: string }) {
+  const [show, setShow] = useState(false)
+  return (
+    <span className="relative inline-flex ml-1.5 align-middle">
+      <button
+        type="button"
+        onMouseEnter={() => setShow(true)}
+        onMouseLeave={() => setShow(false)}
+        onFocus={() => setShow(true)}
+        onBlur={() => setShow(false)}
+        onClick={() => setShow(s => !s)}
+        className="w-4 h-4 rounded-full bg-[#e2e8f0] text-[#475569] text-[10px] font-bold flex items-center justify-center hover:bg-[#1d4ed8] hover:text-white transition-colors leading-none"
+        aria-label="Information"
+      >
+        i
+      </button>
+      {show && (
+        <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 bg-[#0f2040] text-white text-[12px] leading-relaxed rounded-lg px-3 py-2.5 shadow-xl z-50 pointer-events-none">
+          {text}
+          <span className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-[#0f2040]" />
+        </span>
+      )}
+    </span>
+  )
+}
+
 // ─── Multi-step form progress bar ────────────────────────────────────────────
 
 function ProgressBar({ step }: { step: number }) {
@@ -401,8 +429,9 @@ export default function ComparateurClient() {
 
               {/* Modèle */}
               <div>
-                <label className="block text-[13px] font-medium text-[#0f2040] mb-1.5">
+                <label className="flex items-center text-[13px] font-medium text-[#0f2040] mb-1.5">
                   Modèle d'assurance
+                  <InfoTooltip text="Standard : libre choix du médecin et spécialiste. Médecin de famille (−15 %) : passage obligatoire par votre médecin traitant. HMO (−18 %) : soins via le réseau HMO. Télémédecine (−20 %) : première consultation par téléphone. Les réductions varient selon la caisse et le canton." />
                 </label>
                 <div className="relative">
                   <select
@@ -448,8 +477,9 @@ export default function ComparateurClient() {
               {/* Couverture accident (masquée pour enfant) */}
               {profil !== 'enfant' && (
                 <div>
-                  <label className="block text-[13px] font-medium text-[#0f2040] mb-1.5">
+                  <label className="flex items-center text-[13px] font-medium text-[#0f2040] mb-1.5">
                     Couverture accident
+                    <InfoTooltip text="Les salariés travaillant plus de 8 heures par semaine chez un employeur sont couverts pour les accidents via la LAA. Si vous êtes indépendant ou travaillez moins de 8h/semaine, sélectionnez 'Avec couverture accident'." />
                   </label>
                   <div className="relative">
                     <select
@@ -506,69 +536,78 @@ export default function ComparateurClient() {
                 </p>
               </div>
 
-              {/* Liste des caisses */}
-              <div className="space-y-2">
-                {results.map((row, i) => {
-                  const isFirst = i === 0
-                  const isLast  = i === results.length - 1
-                  const economieAn = Math.round((maxPrime - row.prime_nette) * 12)
+              {/* Liste des caisses — top 5 + référence */}
+              {(() => {
+                const totalCount = results.length
+                const displayRows = totalCount > 6
+                  ? [...results.slice(0, 5), results[totalCount - 1]]
+                  : results
+                return (
+                  <div className="space-y-2">
+                    {displayRows.map((row, i) => {
+                      const isFirst   = i === 0
+                      const isRef     = i === displayRows.length - 1 && totalCount > 6
+                      const realRank  = isRef ? totalCount : i + 1
+                      const economieAn = Math.round((maxPrime - row.prime_nette) * 12)
 
-                  return (
-                    <div
-                      key={`${row.assureur}-${i}`}
-                      className={`flex items-center gap-3 sm:gap-4 px-4 py-3.5 rounded-[8px] border transition-all ${
-                        isFirst
-                          ? 'border-[#1d4ed8] bg-[#dbeafe]'
-                          : isLast
-                          ? 'border-[#e2e8f0] bg-[#f8fafc] opacity-60'
-                          : 'border-[#e2e8f0] bg-white'
-                      }`}
-                    >
-                      {/* Rang */}
-                      <div className={`w-7 h-7 shrink-0 rounded-full flex items-center justify-center text-[12px] font-bold ${
-                        isFirst ? 'bg-[#1d4ed8] text-white' : 'bg-[#e2e8f0] text-[#475569]'
-                      }`}>
-                        {i + 1}
-                      </div>
+                      return (
+                        <div
+                          key={`${row.assureur}-${i}`}
+                          className={`flex items-center gap-3 sm:gap-4 px-4 py-3.5 rounded-[8px] border transition-all ${
+                            isFirst
+                              ? 'border-[#1d4ed8] bg-[#dbeafe]'
+                              : isRef
+                              ? 'border-[#e2e8f0] bg-[#f8fafc] opacity-60'
+                              : 'border-[#e2e8f0] bg-white'
+                          }`}
+                        >
+                          {/* Rang */}
+                          <div className={`w-7 h-7 shrink-0 rounded-full flex items-center justify-center text-[12px] font-bold ${
+                            isFirst ? 'bg-[#1d4ed8] text-white' : 'bg-[#e2e8f0] text-[#475569]'
+                          }`}>
+                            {realRank}
+                          </div>
 
-                      {/* Nom + badge */}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <span className={`font-medium text-[14px] sm:text-[15px] ${isFirst ? 'text-[#1d4ed8]' : 'text-[#0f2040]'}`}>
-                            {row.assureur}
-                          </span>
-                          {isFirst && (
-                            <span className="text-[11px] font-semibold bg-[#1d4ed8] text-white px-2 py-0.5 rounded-full">
-                              Meilleur prix
-                            </span>
-                          )}
-                          {isLast && (
-                            <span className="text-[11px] text-[#94a3b8]">Référence</span>
+                          {/* Nom + badge */}
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <span className={`font-medium text-[14px] sm:text-[15px] ${isFirst ? 'text-[#1d4ed8]' : 'text-[#0f2040]'}`}>
+                                {row.assureur}
+                              </span>
+                              {isFirst && (
+                                <span className="text-[11px] font-semibold bg-[#1d4ed8] text-white px-2 py-0.5 rounded-full">
+                                  Meilleur prix
+                                </span>
+                              )}
+                              {isRef && (
+                                <span className="text-[11px] text-[#94a3b8]">Référence</span>
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Prix */}
+                          <div className="text-right shrink-0">
+                            <p className={`font-semibold text-[15px] ${isFirst ? 'text-[#1d4ed8]' : 'text-[#0f2040]'}`}>
+                              CHF {fmtChf(row.prime_nette)}
+                            </p>
+                            <p className="text-[11px] text-[#475569]">par mois</p>
+                          </div>
+
+                          {/* Économie */}
+                          {!isRef && economieAn > 0 && (
+                            <div className="text-right shrink-0 hidden sm:block">
+                              <p className="text-[13px] font-semibold text-[#16a34a]">
+                                CHF {fmtAn(economieAn)}
+                              </p>
+                              <p className="text-[11px] text-[#475569]">par an</p>
+                            </div>
                           )}
                         </div>
-                      </div>
-
-                      {/* Prix */}
-                      <div className="text-right shrink-0">
-                        <p className={`font-semibold text-[15px] ${isFirst ? 'text-[#1d4ed8]' : 'text-[#0f2040]'}`}>
-                          CHF {fmtChf(row.prime_nette)}
-                        </p>
-                        <p className="text-[11px] text-[#475569]">par mois</p>
-                      </div>
-
-                      {/* Économie */}
-                      {!isLast && economieAn > 0 && (
-                        <div className="text-right shrink-0 hidden sm:block">
-                          <p className="text-[13px] font-semibold text-[#16a34a]">
-                            CHF {fmtAn(economieAn)}
-                          </p>
-                          <p className="text-[11px] text-[#475569]">par an</p>
-                        </div>
-                      )}
-                    </div>
-                  )
-                })}
-              </div>
+                      )
+                    })}
+                  </div>
+                )
+              })()}
 
               <p className="mt-3 text-[12px] text-[#94a3b8]">
                 Source : Office fédéral de la santé publique (OFSP) 2026. Primes nettes après remboursements.
@@ -874,36 +913,46 @@ export default function ComparateurClient() {
             de francs par mois — comparez avec votre code postal pour votre profil exact.
           </p>
 
-          {/* Tableau */}
-          <div className="border border-[#e2e8f0] rounded-[8px] overflow-hidden mb-8">
-            <table className="stripe-table w-full">
-              <thead>
-                <tr>
-                  <th>Canton</th>
-                  <th className="text-right">Prime moyenne par mois</th>
-                  <th className="text-right hidden sm:table-cell">Économie annuelle possible</th>
-                </tr>
-              </thead>
-              <tbody>
-                {cantonTable.map((row, i) => (
-                  <tr key={row.code} className={i === 0 ? 'bg-[#f0fdf4]' : ''}>
-                    <td>
-                      <span className={`font-medium ${i === 0 ? 'text-[#16a34a]' : 'text-[#0f2040]'}`}>
-                        {row.canton}
+          {/* Tableau cantons avec barres */}
+          {(() => {
+            const maxP = cantonTable[cantonTable.length - 1].prime
+            return (
+              <div className="space-y-1 mb-8">
+                {cantonTable.map((row, i) => {
+                  const barPct = Math.round((row.prime / maxP) * 100)
+                  const isMin  = i === 0
+                  return (
+                    <div
+                      key={row.code}
+                      className={`flex items-center gap-3 px-4 py-2.5 rounded-lg ${isMin ? 'bg-[#f0fdf4] border border-[#86efac]' : 'bg-white border border-[#f1f5f9]'}`}
+                    >
+                      {/* Badge code */}
+                      <span className={`w-9 shrink-0 text-center py-0.5 rounded text-[11px] font-bold ${isMin ? 'bg-[#16a34a] text-white' : 'bg-[#0f2040] text-white'}`}>
+                        {row.code}
                       </span>
-                      <span className="text-[#94a3b8] text-[12px] ml-1.5">({row.code})</span>
-                    </td>
-                    <td className={`text-right font-semibold ${i === 0 ? 'text-[#16a34a]' : 'text-[#0f2040]'}`}>
-                      CHF {fmtChf(row.prime)}
-                    </td>
-                    <td className="text-right hidden sm:table-cell text-[#16a34a] font-medium">
-                      CHF {fmtAn(row.economie)} par an
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                      {/* Canton + barre */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between gap-2 mb-1">
+                          <span className={`text-[13px] font-medium truncate ${isMin ? 'text-[#166534]' : 'text-[#0f2040]'}`}>
+                            {row.canton}
+                          </span>
+                          <span className={`text-[13px] font-semibold shrink-0 ${isMin ? 'text-[#166534]' : 'text-[#0f2040]'}`}>
+                            CHF {fmtChf(row.prime)}
+                          </span>
+                        </div>
+                        <div className="h-1.5 bg-[#e2e8f0] rounded-full overflow-hidden">
+                          <div
+                            className={`h-full rounded-full ${isMin ? 'bg-[#22c55e]' : 'bg-[#1d4ed8]'}`}
+                            style={{ width: `${barPct}%` }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            )
+          })()}
 
           {/* Pills cantons avec pages */}
           <div>
