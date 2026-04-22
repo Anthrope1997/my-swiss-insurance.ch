@@ -38,6 +38,7 @@ export interface Canton {
   name: string
   cantonDe: string
   demonym: string              // ex. "vaudois", "genevois"
+  villePrincipale: string      // ex. "Lausanne", "Genève"
   rang: number                 // rang parmi 26 cantons (1 = le moins cher)
   primeMoyenne: number         // adulte · f=300 · standard · sans accident · moyenne canton
   primeMoyenneJA: number       // jeune adulte 19-25 ans · même profil
@@ -62,6 +63,7 @@ const cantons: Canton[] = [
     name: 'Vaud',
     cantonDe: 'canton de Vaud',
     demonym: 'vaudois',
+    villePrincipale: 'Lausanne',
     rang: 22,
     primeMoyenne: 638,
     primeMoyenneJA: 472,
@@ -112,6 +114,7 @@ const cantons: Canton[] = [
     name: 'Genève',
     cantonDe: 'canton de Genève',
     demonym: 'genevois',
+    villePrincipale: 'Genève',
     rang: 26,
     primeMoyenne: 710,
     primeMoyenneJA: 540,
@@ -143,6 +146,7 @@ const cantons: Canton[] = [
     subside: {
       seuilRevenu: '≈ 50 000 CHF/an (seul)',
       subsideMensuel: 'de 55 à 348 CHF/mois',
+      subsideMensuelMax: 348,
       automatique: true,
       lienOfficiel: 'https://www.ge.ch',
     },
@@ -154,6 +158,7 @@ const cantons: Canton[] = [
     name: 'Fribourg',
     cantonDe: 'canton de Fribourg',
     demonym: 'fribourgeois',
+    villePrincipale: 'Fribourg',
     rang: 13,
     primeMoyenne: 522,
     primeMoyenneJA: 395,
@@ -197,6 +202,7 @@ const cantons: Canton[] = [
     name: 'Valais',
     cantonDe: 'canton du Valais',
     demonym: 'valaisans',
+    villePrincipale: 'Sion',
     rang: 14,
     primeMoyenne: 528,
     primeMoyenneJA: 387,
@@ -229,6 +235,7 @@ const cantons: Canton[] = [
     subside: {
       seuilRevenu: '≈ 38 500 CHF/an (seul)',
       subsideMensuel: 'de 52 à 521 CHF/mois',
+      subsideMensuelMax: 521,
       automatique: false,
       lienOfficiel: 'https://www.vs.ch',
     },
@@ -240,6 +247,7 @@ const cantons: Canton[] = [
     name: 'Neuchâtel',
     cantonDe: 'canton de Neuchâtel',
     demonym: 'neuchâtelois',
+    villePrincipale: 'Neuchâtel',
     rang: 23,
     primeMoyenne: 663,
     primeMoyenneJA: 499,
@@ -271,6 +279,7 @@ const cantons: Canton[] = [
     subside: {
       seuilRevenu: '≈ 65 000 CHF/an (seul)',
       subsideMensuel: 'de 166 à 643 CHF/mois',
+      subsideMensuelMax: 643,
       automatique: true,
       lienOfficiel: 'https://www.ne.ch',
     },
@@ -282,6 +291,7 @@ const cantons: Canton[] = [
     name: 'Jura',
     cantonDe: 'canton du Jura',
     demonym: 'jurassiens',
+    villePrincipale: 'Delémont',
     rang: 21,
     primeMoyenne: 633,
     primeMoyenneJA: 476,
@@ -313,6 +323,7 @@ const cantons: Canton[] = [
     subside: {
       seuilRevenu: '≈ 27 000 CHF/an (seul)',
       subsideMensuel: "jusqu'à 568 CHF/mois",
+      subsideMensuelMax: 568,
       automatique: false,
       lienOfficiel: 'https://www.jura.ch',
     },

@@ -1,8 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
-import { useState, useRef, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
+import { useState, useEffect } from 'react'
 
 const lamalGuides = [
   { href: '/lamal/guide', label: 'Comprendre la LAMal' },
@@ -38,35 +38,11 @@ function ShieldIcon() {
 
 export default function Header() {
   const pathname = usePathname()
-  const router = useRouter()
-  const [lamalOpen, setLamalOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const dropdownRef = useRef<HTMLDivElement>(null)
-
-  const isLamalActive = pathname.startsWith('/lamal')
 
   useEffect(() => {
-    function handleClick(e: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setLamalOpen(false)
-      }
-    }
-    document.addEventListener('mousedown', handleClick)
-    return () => document.removeEventListener('mousedown', handleClick)
-  }, [])
-
-  useEffect(() => {
-    setLamalOpen(false)
     setMobileOpen(false)
   }, [pathname])
-
-  const handleCTA = () => {
-    if (pathname === '/') {
-      document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
-    } else {
-      router.push('/#lead-form')
-    }
-  }
 
   return (
     <header className="bg-[#0f2040] sticky top-0 z-50">
@@ -84,84 +60,10 @@ export default function Header() {
             <span className="font-semibold text-white text-[15px] sm:hidden">MSI</span>
           </Link>
 
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-0.5">
-            {/* LAMal dropdown */}
-            <div className="relative" ref={dropdownRef}>
-              <button
-                onClick={() => setLamalOpen((o) => !o)}
-                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-md text-[15px] transition-colors duration-150 ${
-                  isLamalActive
-                    ? 'text-white font-medium bg-white/10'
-                    : 'text-slate-300 hover:text-white hover:bg-white/5'
-                }`}
-              >
-                LAMal
-                <svg
-                  className={`w-3.5 h-3.5 transition-transform duration-150 ${lamalOpen ? 'rotate-180' : ''}`}
-                  fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-
-              {lamalOpen && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-[12px] shadow-xl border border-[#e2e8f0] w-[520px] p-5 z-50">
-
-                  {/* Guides */}
-                  <p className="text-[10px] font-semibold text-[#94a3b8] uppercase tracking-widest mb-2.5">Guides</p>
-                  <div className="grid grid-cols-2 gap-0.5 mb-4">
-                    {lamalGuides.map((link) => (
-                      <Link key={link.href} href={link.href}
-                        className="text-[14px] text-[#0f2040] hover:text-[#1d4ed8] hover:bg-[#f1f5f9] px-3 py-2 rounded-md transition-colors">
-                        {link.label}
-                      </Link>
-                    ))}
-                  </div>
-
-                  <div className="border-t border-[#e2e8f0] mb-4" />
-
-                  {/* Par canton */}
-                  <p className="text-[10px] font-semibold text-[#94a3b8] uppercase tracking-widest mb-2.5">Par canton</p>
-                  <div className="grid grid-cols-3 gap-0.5 mb-4">
-                    {cantonLinks.map((link) => (
-                      <Link key={link.href} href={link.href}
-                        className="text-[14px] text-[#0f2040] hover:text-[#1d4ed8] hover:bg-[#f1f5f9] px-3 py-2 rounded-md transition-colors">
-                        {link.label}
-                      </Link>
-                    ))}
-                  </div>
-
-                  <div className="border-t border-[#e2e8f0] mb-4" />
-
-                  {/* Par situation */}
-                  <p className="text-[10px] font-semibold text-[#94a3b8] uppercase tracking-widest mb-2.5">Par situation</p>
-                  <div className="grid grid-cols-3 gap-0.5">
-                    {situationLinks.map((link) => (
-                      <Link key={link.href} href={link.href}
-                        className="text-[14px] text-[#0f2040] hover:text-[#1d4ed8] hover:bg-[#f1f5f9] px-3 py-2 rounded-md transition-colors">
-                        {link.label}
-                      </Link>
-                    ))}
-                  </div>
-
-                </div>
-              )}
-            </div>
-          </nav>
-
-          {/* CTA — hidden on mobile to save space */}
-          <button
-            onClick={handleCTA}
-            className="hidden sm:block bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-sm font-medium px-4 py-2 rounded-md transition-colors duration-150 whitespace-nowrap"
-          >
-            Comparer ma prime LAMal
-          </button>
-
-          {/* Hamburger — mobile only */}
+          {/* Hamburger */}
           <button
             onClick={() => setMobileOpen(o => !o)}
-            className="md:hidden p-2 text-slate-300 hover:text-white"
+            className="p-2 text-slate-300 hover:text-white"
             aria-label={mobileOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
           >
             {mobileOpen ? (
@@ -206,12 +108,13 @@ export default function Header() {
             </Link>
           ))}
 
-          <button
-            onClick={() => { setMobileOpen(false); handleCTA() }}
-            className="mt-6 w-full bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-sm font-medium px-4 py-3 rounded-md transition-colors"
+          <Link
+            href="/lamal/comparateur"
+            onClick={() => setMobileOpen(false)}
+            className="mt-6 block w-full text-center bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-sm font-medium px-4 py-3 rounded-md transition-colors"
           >
             Comparer ma prime LAMal
-          </button>
+          </Link>
         </div>
       )}
     </header>
