@@ -72,6 +72,14 @@ export interface SubsideFormule {
     revenuMaxAn: number   // borne supérieure de la tranche (utiliser Infinity pour la dernière)
     tauxPct:     number   // taux Selbstbehalt applicable dans cette tranche (%)
   }[]
+  // ZG : réduction progressive du subside calculé entre deux seuils de revenu
+  // Au-delà de seuilHaut, le droit s'éteint complètement.
+  // réduction = reductionPctPar100 % par CHF 100 de revenu au-dessus de seuilBas
+  reductionProgressive?: {
+    seuilBas:           number   // ZG: 70 000 — revenu à partir duquel la réduction démarre
+    seuilHaut:          number   // ZG: 89 900 — revenu au-delà duquel plus de droit
+    reductionPctPar100: number   // ZG: 0.5 — % de réduction du subside par CHF 100 au-dessus
+  }
   // ── Fortune ───────────────────────────────────────────────────────────────
   coeffFortune:              number   // LU: 0.10 / UR: 0.15 — part de fortune ajoutée au revenu
   // ── Seuil revenu au-delà duquel les minima garantis enfants/JA n'existent plus ──
@@ -584,6 +592,49 @@ const subsidesCantons: SubsideCantonData[] = [
         { label: 'Déductions procédure partielle (Teileinkünfte)',                signe: '+' },
         { label: 'Entretien immeuble net (− 15 % revenus immobiliers privés)',    signe: '+' },
         { label: '20 % du Reinvermögen',                           ziffer: '470', signe: '+' },
+      ],
+    },
+  },
+
+  /* ─── ZOUG (ZG) ──────────────────────────────────────────────────────── */
+  // Sources : https://www.akzug.ch/dienstleistungen/praemienverbilligung
+  //           Broschuere_IPV_2026.pdf (8 p., Ausgleichskasse Zug)
+  // Scrapé le 23 avril 2026
+  //
+  // Modèle formule proportionnelle avec Selbstbehalt plat 8 % et réduction progressive :
+  //   Subside = Σ Richtprämien − 8 % × massgebendes Einkommen
+  //   Si revenu ∈ [70 000 ; 89 900] : subside × (1 − (revenu − 70 000) / 100 × 0.5 %)
+  //   Si revenu > 89 900 : aucun droit
+  //   Personnes seules / ménages à une seule personne adulte : Obergrenze inférieure (montant non publié dans la brochure)
+  {
+    code:         'ZG',
+    nom:          'Zoug',
+    automatique:  false,   // lettre d'invitation envoyée début fév. si éligible selon données fiscales ; EL/Sozialhilfe = auto
+    nbRegions:    1,
+    lienOfficiel: 'https://www.akzug.ch/dienstleistungen/praemienverbilligung',
+    annee:        2026,
+    delaiDemande: '30 avril 2026',
+    noteGenerale: 'Minimum de versement : CHF 50/an. EL AHV/IV : attribution automatique. JA en formation (2001–2007) : inclus avec les parents si Kinderabzug accordé en 2024 (code 403) ; le revenu du JA est additionné. Couples concubins : enfants déclarés sur le formulaire de la mère. Personnes seules et ménages à une seule personne adulte : Grenzwerte inférieurs à 89 900 CHF (montants exacts non publiés dans la brochure). Entretien extraordinaire d\'immeuble dépassant 20 % des revenus locatifs imposables : excédent réintégré dans le revenu déterminant.',
+    formule: {
+      type:         'proportionnel',
+      selbstbehaltPct: 8,
+      coeffFortune: 0,   // non mentionné dans la brochure ; base = revenu imposable de la taxation 2024
+      reductionProgressive: {
+        seuilBas:           70_000,
+        seuilHaut:          89_900,
+        reductionPctPar100: 0.5,
+      },
+      pctRichtprämieEnfant:      80,
+      pctFixeEnfant:             80,
+      pctRichtprämieJAFormation: 50,
+      pctFixeJAFormation:        50,
+      // Richtprämien 2026 — source : Broschuere_IPV_2026.pdf p. 4
+      richtprämienAn: [
+        { region: 'unique', adulte: 4_984.80, jeuneAdulteFormation: 3_472.80, enfant: 1_224.00 },
+      ],
+      composantesRevenu: [
+        { label: 'Revenu imposable (définitive Steuerveranlagung 2024)',     signe: '+' },
+        { label: 'Entretien extraordinaire d\'immeuble (> 20 % rev. locatifs)', signe: '+' },
       ],
     },
   },
