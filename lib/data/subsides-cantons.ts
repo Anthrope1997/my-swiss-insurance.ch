@@ -52,6 +52,24 @@ export interface DeductionSociale {
   montant: number
 }
 
+// Modèle LU : calcul proportionnel (subside = Richtprämien − quote-part propre)
+// Quote-part propre = (partFixePct + coeffVariable × revenuDet) × revenuDet / 100
+export interface SubsideFormule {
+  type:                      'proportionnel'
+  partFixePct:               number   // 10.0 — part fixe obligatoire (%)
+  coeffVariable:             number   // 0.00006 — coefficient du revenu variable (pts % par CHF)
+  pctRichtprämieEnfant:      number   // 80 — % de la prime de référence alloué aux enfants
+  pctRichtprämieJAFormation: number   // 50 — % de la prime de référence pour JA en formation
+  seuilEnfantSeulParent:     number   // revenu déterminant max (1 parent) pour prime enfant fixe
+  seuilEnfantDeuxParents:    number   // revenu déterminant max (2 parents) pour prime enfant fixe
+  // Composantes du revenu déterminant (Massgebendes Einkommen)
+  composantesRevenu: {
+    label:    string
+    ziffer?:  string   // numéro de la case dans la déclaration fiscale
+    signe:    '+' | '-'
+  }[]
+}
+
 export interface SubsideCantonData {
   code:              string
   nom:               string
@@ -62,12 +80,15 @@ export interface SubsideCantonData {
   delaiDemande?:        string
   limiteFortuneSeul?:   number
   limiteFortuneCouple?: number
+  limiteFortuneParEnfant?: number    // majoration de la limite par enfant/JA en formation
   // Modèle ZH : seuils de revenu au-delà desquels le droit s'éteint
   seuilsRevenu?:        SubsideSeuil[]
   // Modèle BE : barème montant par tranche de revenu déterminant
   montantsSubside?:     SubsideMontant[]
   // Déductions sociales pour calcul du revenu déterminant (modèle BE)
   deductionsSociales?:  DeductionSociale[]
+  // Modèle LU : formule proportionnelle
+  formule?:             SubsideFormule
   noteGenerale?:        string
 }
 
@@ -239,6 +260,50 @@ const subsidesCantons: SubsideCantonData[] = [
       // ── Région 3 — Enfants ─────────────────────────────────────────────
       { region: '3', profil: 'enfant', revenuMaxAn: 45_000, montantMois:  99.35 },
     ],
+  },
+
+  /* ─── LUCERNE (LU) ────────────────────────────────────────────────────── */
+  // Sources : https://www.was-luzern.ch/praemienverbilligung
+  //           AK_Merkblatt_IPV_0.pdf (Merkblatt Nr. 02/25, août 2025)
+  //           AK_IPV_Merkblatt_Berechnungsbeispiel_2026.pdf
+  // Scrapé le 23 avril 2026
+  //
+  // Modèle formule proportionnelle :
+  //   Revenu déterminant = Nettoeinkommen + 10 % Reinvermögen + Aufrechnungen − Abzüge
+  //   Subside = Σ Richtprämien (adulte:100%, enfant:80%, JA formation:50%)
+  //             − quote-part propre (10% + 0,00006 × revenu) × revenu
+  //
+  // Richtprämien 2026 (Regierungsrat) non publiées en CHF dans les documents
+  // disponibles — le montant effectif varie selon la prime de référence régionale.
+  {
+    code:         'LU',
+    nom:          'Lucerne',
+    automatique:  false,
+    nbRegions:    3,
+    lienOfficiel: 'https://www.was-luzern.ch/praemienverbilligung',
+    annee:        2026,
+    delaiDemande: '31 octobre 2025',
+    limiteFortuneSeul:      100_000,
+    limiteFortuneCouple:    200_000,
+    limiteFortuneParEnfant:  50_000,   // majoration par enfant ou JA en formation
+    noteGenerale: 'Demande annuelle obligatoire avant le 31 octobre. Pas de rétroactivité (droit au mois suivant la demande si tardive). Versement direct à la caisse maladie. Recalcul possible si revenus baissent de plus de 25 % ou naissance.',
+    formule: {
+      type:                      'proportionnel',
+      partFixePct:               10,
+      coeffVariable:             0.00006,
+      pctRichtprämieEnfant:      80,
+      pctRichtprämieJAFormation: 50,
+      seuilEnfantSeulParent:     77_114,
+      seuilEnfantDeuxParents:    96_392,
+      composantesRevenu: [
+        { label: 'Revenu net (Nettoeinkommen)',                              ziffer: '310', signe: '+' },
+        { label: 'Cotisations pilier 3a',                                   ziffer: '260+261', signe: '+' },
+        { label: 'Pertes commerciales reportables des années précédentes',  ziffer: '290', signe: '+' },
+        { label: '10 % du Reinvermögen (fortune nette)',                    ziffer: '470 × 10 %', signe: '+' },
+        { label: 'Frais maladie, accident et invalidité déductibles',       ziffer: '320', signe: '-' },
+        { label: 'Déduction par enfant (Freibetrag)',                       ziffer: 'CHF 9\'000/enfant', signe: '-' },
+      ],
+    },
   },
 
 ]
