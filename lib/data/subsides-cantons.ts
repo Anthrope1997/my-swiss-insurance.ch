@@ -539,6 +539,50 @@ const subsidesCantons: SubsideCantonData[] = [
     },
   },
 
+  /* ─── NIDWALD (NW) ───────────────────────────────────────────────────── */
+  // Sources : https://www.aknw.ch/dienstleistungen/praemienverbilligung-ipv
+  //           Merkblatt-Praemienverbilligung-2026.pdf (2 pages, février 2026)
+  // Scrapé le 23 avril 2026
+  //
+  // Modèle formule proportionnelle (Selbstbehalt plat 10 %) :
+  //   Summe der Steuerwerte = Reineinkommen (Code 330) + aufrechnungen + 20 % × Reinvermögen (Code 470)
+  //   Subside = Σ Richtprämien − 10 % × Steuerwerte
+  //   NB : Richtprämien = Durchschnittsprämien fixées par le Regierungsrat (pas de réduction à 90 %)
+  {
+    code:         'NW',
+    nom:          'Nidwald',
+    automatique:  false,   // formulaire envoyé fin mars 2026 aux probables éligibles ; EL AHV/IV = auto
+    nbRegions:    1,
+    lienOfficiel: 'https://www.aknw.ch/dienstleistungen/praemienverbilligung-ipv',
+    annee:        2026,
+    delaiDemande: '30 avril 2026',   // délai de déchéance (Poststempel)
+    noteGenerale: 'Rentiers EL AHV/IV : attribution automatique (prime moyenne versée directement). Minimum de versement CHF 100/an. Enfants : 80 % garanti si Steuerwerte des parents ≤ CHF 100 000 (besondere PV) ; si le droit général est plus élevé, c\'est lui qui s\'applique. JA en formation : 50 % garanti ; droit éteint si Reineinkommen du JA > CHF 30 240. Richtprämien = Durchschnittsprämien intégrales (non réduites à 90 %). Plafonné aux primes effectives KVG.',
+    formule: {
+      type:              'proportionnel',
+      selbstbehaltPct:   10,
+      coeffFortune:      0.20,   // 20 % du Reinvermögen — le plus élevé des cantons traités
+      pctRichtprämieEnfant:      80,
+      pctFixeEnfant:             80,
+      seuilEnfantSeulParent:     100_000,   // Steuerwerte (= revenu + 20 % fortune) des parents
+      seuilEnfantDeuxParents:    100_000,
+      pctRichtprämieJAFormation: 50,
+      pctFixeJAFormation:        50,
+      // Richtprämien 2026 = Durchschnittsprämien fixées par le Regierungsrat (région unique)
+      richtprämienAn: [
+        { region: 'unique', adulte: 5_400, jeuneAdulteFormation: 3_912, enfant: 1_260 },
+      ],
+      // Composantes des Steuerwerte (Summe der Steuerwerte = revenu déterminant NW)
+      composantesRevenu: [
+        { label: 'Reineinkommen (taxation cantonale)',              ziffer: '330', signe: '+' },
+        { label: 'Revenus procédure simplifiée (à réintégrer)',                   signe: '+' },
+        { label: 'Rachat prévoyance professionnelle',                             signe: '+' },
+        { label: 'Déductions procédure partielle (Teileinkünfte)',                signe: '+' },
+        { label: 'Entretien immeuble net (− 15 % revenus immobiliers privés)',    signe: '+' },
+        { label: '20 % du Reinvermögen',                           ziffer: '470', signe: '+' },
+      ],
+    },
+  },
+
 ]
 
 export default subsidesCantons
