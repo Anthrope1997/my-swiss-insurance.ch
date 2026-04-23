@@ -76,6 +76,21 @@ export interface SubsideFormule {
   // ── Seuils LU pour prime enfant fixe ─────────────────────────────────────
   seuilEnfantSeulParent?:    number
   seuilEnfantDeuxParents?:   number
+  // ── Freibeträge : abattements sur la fortune avant application du coefficient ──
+  freibetraegeVermogen?: {
+    label:   string
+    montant: number
+  }[]
+  // ── Höchsteinkommen (SZ) : seuils revenu par composition du ménage ────────
+  // valeurs minimales (Mietzinsregion la moins chère, enfants < 11 ans) ;
+  // les seuils réels peuvent être plus élevés selon région et âge des enfants
+  hoechsteinkommen?: {
+    statut:                     'seul' | 'couple'
+    enfants:                    number
+    revenuMaxAn:                number   // seuil général d'éligibilité
+    revenuMaxAnGarantiEnfant?:  number   // seuil élargi pour minima garantis enfants/JA
+    augmentationParJAFormation?: number  // CHF ajoutés par JA en formation
+  }[]
   // ── Primes de référence annuelles par région ──────────────────────────────
   richtprämienAn: {
     region:                      string
@@ -393,6 +408,73 @@ const subsidesCantons: SubsideCantonData[] = [
         { label: 'Frais maladie et accident',                               ziffer: '3440',      signe: '-' },
         { label: 'Frais liés au handicap',                                  ziffer: '3460',      signe: '-' },
         { label: '15 % de la fortune imposable (Reinvermögen)',             ziffer: '4800 × 15 %', signe: '+' },
+      ],
+    },
+  },
+
+  /* ─── SCHWYZ (SZ) ────────────────────────────────────────────────────── */
+  // Sources : https://www.sva-sz.ch/dienstleistungen/prämienverbilligung-ipv
+  //           2026-Praemienverbilligung-Kanton-Schwyz.pdf (Merkblatt 16 p.)
+  //           Grenzwerte-IPV-2026.pdf (Richtprämien + Höchsteinkommen 2026)
+  // Scrapé le 23 avril 2026
+  //
+  // Modèle formule proportionnelle (Selbstbehalt plat 11 %) :
+  //   Revenu déterminant = Reineinkommen (Code 820) + 10 % × (Reinvermögen − Freibetrag)
+  //                        + rachats 2e pilier + entretien extraordinaire immeuble
+  //   Subside = Σ Richtprämien − 11 % × revenu déterminant
+  //   Minima garantis : enfants ≥ 80 % Richtprämie, JA formation ≥ 50 %
+  {
+    code:         'SZ',
+    nom:          'Schwyz',
+    automatique:  false,   // semi-auto : bénéficiaires 2025 réinscrits d'office ; rentiers EL auto
+    nbRegions:    3,        // 3 Mietzinsregionen (affectent seuils, pas les Richtprämien)
+    lienOfficiel: 'https://www.sva-sz.ch/dienstleistungen/pr%C3%A4mienverbilligung-ipv',
+    annee:        2026,
+    delaiDemande: '31 décembre 2026',
+    limiteFortuneSeul:   250_000,
+    limiteFortuneCouple: 500_000,
+    noteGenerale: 'Bénéficiaires 2025 automatiquement réinscrits (confirmation envoyée). Rentiers avec EL AHV/IV : attribution automatique. Nouveaux candidats probables : formulaire envoyé d\'office. Les Höchsteinkommen indiqués sont les valeurs minimales (Mietzinsregion 3, enfants < 11 ans) ; les seuils réels peuvent être plus élevés selon région et âge des enfants. Subside plafonné aux primes effectives KVG. Minimum CHF 50/an, sinon pas de versement.',
+    formule: {
+      type:              'proportionnel',
+      selbstbehaltPct:   11,
+      coeffFortune:      0.10,
+      pctRichtprämieEnfant:      80,   // minimum garanti
+      pctFixeEnfant:             80,
+      pctRichtprämieJAFormation: 50,   // minimum garanti
+      pctFixeJAFormation:        50,
+      // Freibeträge sur le Reinvermögen avant application du coefficient 10 %
+      freibetraegeVermogen: [
+        { label: 'Alleinstehende Person',             montant:  25_000 },
+        { label: 'Ehepaar',                           montant:  50_000 },
+        { label: 'Kind (bis 18 Jahre)',               montant:  15_000 },
+        { label: 'Junge Erwachsene in Ausbildung',   montant:  15_000 },
+      ],
+      // Höchsteinkommen 2026 — valeurs minimales (Mietzinsregion 3, enfants < 11 ans)
+      // Source : Grenzwerte-IPV-2026.pdf
+      hoechsteinkommen: [
+        // ── Seuil général d'éligibilité ─────────────────────────────────────
+        { statut: 'seul',   enfants: 0, revenuMaxAn:  43_554, revenuMaxAnGarantiEnfant:  43_554, augmentationParJAFormation: 3_024 },
+        { statut: 'seul',   enfants: 1, revenuMaxAn:  56_052, revenuMaxAnGarantiEnfant:  63_117, augmentationParJAFormation: 3_024 },
+        { statut: 'seul',   enfants: 2, revenuMaxAn:  65_845, revenuMaxAnGarantiEnfant:  74_491, augmentationParJAFormation: 3_024 },
+        { statut: 'seul',   enfants: 3, revenuMaxAn:  74_343, revenuMaxAnGarantiEnfant:  84_307, augmentationParJAFormation: 3_024 },
+        { statut: 'seul',   enfants: 4, revenuMaxAn:  80_161, revenuMaxAnGarantiEnfant:  91_222, augmentationParJAFormation: 3_024 },
+        { statut: 'couple', enfants: 0, revenuMaxAn:  63_573, revenuMaxAnGarantiEnfant:  63_573, augmentationParJAFormation: 3_024 },
+        { statut: 'couple', enfants: 1, revenuMaxAn:  74_631, revenuMaxAnGarantiEnfant:  84_280, augmentationParJAFormation: 3_024 },
+        { statut: 'couple', enfants: 2, revenuMaxAn:  84_184, revenuMaxAnGarantiEnfant:  95_414, augmentationParJAFormation: 3_024 },
+        { statut: 'couple', enfants: 3, revenuMaxAn:  90_882, revenuMaxAnGarantiEnfant: 103_430, augmentationParJAFormation: 3_024 },
+        { statut: 'couple', enfants: 4, revenuMaxAn:  96_700, revenuMaxAnGarantiEnfant: 110_345, augmentationParJAFormation: 3_024 },
+      ],
+      // Richtprämien 2026 = 90 % des Durchschnittsprämien — source : Grenzwerte-IPV-2026.pdf
+      // NB : pas de variation régionale sur les Richtprämien ; les Mietzinsregionen
+      //      n'affectent que les Höchsteinkommen (non modélisés ici en détail)
+      richtprämienAn: [
+        { region: 'unique', adulte: 5_583.60, jeuneAdulteFormation: 3_931.20, enfant: 1_285.20 },
+      ],
+      composantesRevenu: [
+        { label: 'Reineinkommen (impôt fédéral direct)',            ziffer: '820',      signe: '+' },
+        { label: '10 % du Reinvermögen après Freibetrag',          ziffer: '970 − FB', signe: '+' },
+        { label: 'Rachats volontaires 2e pilier',                               signe: '+' },
+        { label: 'Entretien extraordinaire d\'immeuble',                        signe: '+' },
       ],
     },
   },
