@@ -62,6 +62,13 @@ export interface SubsideFormule {
   pctRichtprämieJAFormation: number   // 50 — % de la prime de référence pour JA en formation
   seuilEnfantSeulParent:     number   // revenu déterminant max (1 parent) pour prime enfant fixe
   seuilEnfantDeuxParents:    number   // revenu déterminant max (2 parents) pour prime enfant fixe
+  // Primes de référence annuelles par région (Richtprämien, fixées par le Regierungsrat)
+  richtprämienAn: {
+    region:                string
+    adulte:                number
+    jeuneAdulteFormation:  number   // catégorie 19–25 ans en formation (≠ % adulte)
+    enfant:                number
+  }[]
   // Composantes du revenu déterminant (Massgebendes Einkommen)
   composantesRevenu: {
     label:    string
@@ -295,6 +302,14 @@ const subsidesCantons: SubsideCantonData[] = [
       pctRichtprämieJAFormation: 50,
       seuilEnfantSeulParent:     77_114,
       seuilEnfantDeuxParents:    96_392,
+      // Richtprämien 2026 — source : was-luzern.ch/berechnung-ipv
+      // NB : pour les enfants, anrechenbare Prämie = 80 % × Richtprämie enfant
+      //      pour JA en formation, anrechenbare Prämie = 50 % × Richtprämie JA formation
+      richtprämienAn: [
+        { region: '1', adulte: 5_628, jeuneAdulteFormation: 4_044, enfant: 1_308 },
+        { region: '2', adulte: 5_304, jeuneAdulteFormation: 3_780, enfant: 1_224 },
+        { region: '3', adulte: 5_100, jeuneAdulteFormation: 3_660, enfant: 1_176 },
+      ],
       composantesRevenu: [
         { label: 'Revenu net (Nettoeinkommen)',                              ziffer: '310', signe: '+' },
         { label: 'Cotisations pilier 3a',                                   ziffer: '260+261', signe: '+' },
