@@ -36,10 +36,9 @@ const columns = [
   {
     title: 'Par situation',
     links: [
-      { href: '/lamal/salarie-independant', label: 'Salarié / Indépendant' },
-      { href: '/lamal/famille-retraite', label: 'Famille / Retraité' },
-      { href: '/lamal/expatrie-frontalier', label: 'Expatrié / Frontalier' },
-      { href: '/lamal/maternite', label: 'Maternité' },
+      { href: '/lamal/ma-situation', label: 'Ma situation professionnelle' },
+      { href: '/lamal/ma-famille', label: 'Ma famille' },
+      { href: '/lamal/frontalier', label: 'Frontaliers' },
       { href: '/lamal/par-profil', label: 'Toutes les situations' },
     ],
   },

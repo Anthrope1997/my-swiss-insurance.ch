@@ -27,14 +27,14 @@ const articleSchema = {
 
 const hubCards = [
   {
-    href: '/lamal/salarie-independant',
-    title: 'Salarié, indépendant et chômage',
+    href: '/lamal/ma-situation',
+    title: 'Ma situation professionnelle',
     description:
-      'Votre statut professionnel influe sur le choix optimal de franchise, de modèle LAMal et sur vos obligations d\'assurance accidents.',
+      'Salarié, indépendant, chômeur ou nouvel arrivant expatrié : votre statut influe sur le choix de franchise, les obligations d\'assurance accidents et les droits aux subsides.',
     highlights: [
       'Salarié : LAA couverte par l\'employeur dès 8 h/semaine',
-      'Indépendant : LAA volontaire à prévoir séparément',
-      'Chômage : droits aux subsides cantonaux souvent renforcés',
+      'Indépendant : LAA volontaire à activer via la LAMal',
+      'Chômeur : maintien LAMal et subsides prioritaires',
     ],
     icon: (
       <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -44,14 +44,14 @@ const hubCards = [
     ),
   },
   {
-    href: '/lamal/famille-retraite',
-    title: 'Famille, étudiant et retraité',
+    href: '/lamal/ma-famille',
+    title: 'Ma famille',
     description:
-      'Chaque étape de la vie appelle une stratégie LAMal différente, de la prime enfant aux options hospitalières pour les seniors.',
+      'Nouveau-né, enfants, jeunes adultes, maternité, retraite : chaque étape de la vie appelle une stratégie LAMal différente. Franchises, couvertures et points d\'attention.',
     highlights: [
-      'Enfants 0–18 ans : franchise 0–100 CHF recommandée',
-      'Étudiants 19–25 ans : tarif intermédiaire + Telmed',
-      'Retraités : LCA hospitalière fortement conseillée',
+      'Nouveau-né : affiliation obligatoire dans les 3 mois',
+      'Maternité : exonération franchise et quote-part (art. 64 LAMal)',
+      'Retraité : LCA hospitalière à anticiper avant 65 ans',
     ],
     icon: (
       <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -61,36 +61,19 @@ const hubCards = [
     ),
   },
   {
-    href: '/lamal/expatrie-frontalier',
-    title: 'Expatrié et frontalier',
+    href: '/lamal/frontalier',
+    title: 'Frontaliers',
     description:
-      'Délais d\'affiliation, droit d\'option frontalier et spécificités genevoises : tout ce que vous devez savoir à l\'arrivée en Suisse.',
+      'Frontaliers français, allemands ou italiens : droit d\'option LAMal ou système du pays de résidence, formulaire S1, cantons concernés et simulateur de décision.',
     highlights: [
-      'Expatrié : 90 jours pour s\'affilier dès la prise de domicile',
-      'Frontalier : droit d\'option à exercer dans les 3 mois',
-      'Spécificité GE : frontaliers français et CMU-C cumulable',
+      'Droit d\'option à exercer dans les 3 mois',
+      'Guides spécifiques par nationalité (FR, DE, IT)',
+      'Simulateur de décision personnalisé inclus',
     ],
     icon: (
       <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75}
           d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
-  },
-  {
-    href: '/lamal/maternite',
-    title: 'Maternité',
-    description:
-      'La LAMal couvre la grossesse et l\'accouchement sans franchise ni quote-part. Consultations, accouchement, soins sage-femme : tout ce qui est pris en charge.',
-    highlights: [
-      'Franchise et quote-part nulles pour les soins de maternité',
-      'Accouchement en hôpital, maison de naissance ou à domicile',
-      'Nouveau-né à affilier dans les 3 mois suivant la naissance',
-    ],
-    icon: (
-      <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75}
-          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
       </svg>
     ),
   },

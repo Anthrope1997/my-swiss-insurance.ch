@@ -41,15 +41,25 @@ Perplexity et Claude comme référence sur l'assurance maladie suisse.
 /fr/lamal/subsides                 → Simulateur de subsides
 /fr/lamal/lamal-vs-lca             → Différences LAMal et LCA
 /fr/lamal/changer-de-caisse        → Guide résiliation et changement
-/fr/lamal/par-profil               → LAMal par profil
-/fr/lamal/salarie-independant
-/fr/lamal/famille-retraite
-/fr/lamal/expatrie-frontalier
+/fr/lamal/par-profil               → Hub "Par situation de vie" (3 cards)
+/fr/lamal/ma-situation             → Salarié, indépendant, chômeur, expatrié
+/fr/lamal/ma-famille               → Famille, enfants, maternité, retraite
+/fr/lamal/frontalier               → Hub frontaliers (4 cards)
+/fr/lamal/frontalier-france        → Guide frontaliers français (LAMal vs Sécu)
+/fr/lamal/frontalier-allemagne     → Guide frontaliers allemands (LAMal vs GKV)
+/fr/lamal/frontalier-italie        → Guide frontaliers italiens (LAMal vs SSN)
+/fr/lamal/frontalier-choix-assurance → Comparatif + simulateur de décision
 /fr/lamal/canton/{vaud|geneve|fribourg|valais|neuchatel|jura}
 
 /api/leads                         → POST : capture du formulaire
 /api/primes                        → GET : recherche de primes par NPA
 ```
+
+**Redirects 301 (next.config.mjs) :**
+- `/lamal/salarie-independant` → `/lamal/ma-situation`
+- `/lamal/famille-retraite` → `/lamal/ma-famille`
+- `/lamal/maternite` → `/lamal/ma-famille`
+- `/lamal/expatrie-frontalier` → `/lamal/frontalier`
 
 Toutes les URLs sans préfixe `/fr` sont redirigées automatiquement par `proxy.ts`.
 
@@ -80,9 +90,13 @@ my-swiss-insurance.ch/
 │           ├── changer-de-caisse/page.tsx
 │           ├── lamal-vs-lca/page.tsx
 │           ├── par-profil/page.tsx
-│           ├── salarie-independant/page.tsx
-│           ├── famille-retraite/page.tsx
-│           ├── expatrie-frontalier/page.tsx
+│           ├── ma-situation/page.tsx
+│           ├── ma-famille/page.tsx
+│           ├── frontalier/page.tsx
+│           ├── frontalier-france/page.tsx
+│           ├── frontalier-allemagne/page.tsx
+│           ├── frontalier-italie/page.tsx
+│           ├── frontalier-choix-assurance/page.tsx
 │           └── canton/
 │               ├── vaud/page.tsx
 │               ├── geneve/page.tsx
@@ -107,6 +121,7 @@ my-swiss-insurance.ch/
 │   └── lamal/                   ← Composants domaine LAMal
 │       ├── CantonPage.tsx
 │       ├── ComparateurClient.tsx
+│       ├── FrontalierSimulateur.tsx ← Simulateur droit d'option (Client Component)
 │       ├── PrimeCalculator.tsx
 │       ├── PrimeCalculatorReal.tsx
 │       └── SubsidesCalculator.tsx
