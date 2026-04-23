@@ -624,6 +624,76 @@ const subsidesCantons: SubsideCantonData[] = [
     },
   },
 
+  /* ─── BÂLE-CAMPAGNE (BL) ────────────────────────────────────────────── */
+  // Sources : https://www.sva-bl.ch/de/ausgleichskasse/individuelle-praemienverbilligung-ipv
+  //           SVA BL Kennzahlen per 01.01.2026 (PDF) — Richtprämies confirmées
+  //           https://www.sva-bl.ch/fileadmin/user_upload/formulare_merkblaetter/AK/Allgemein/Kennzahlen_per_01.01.2026.pdf
+  //           LRV 2024/602 (Interpellation) — formule, Obergrenzen, Kinderabzug 5 000
+  //           Vorlage neues Prämienverbilligungssystem BL (2025) — confirmation formule
+  //           hellosafe.ch/de/krankenversicherung/praemienverbilligung/baselland — Obergrenzen
+  // Scrapé le 23 avril 2026
+  //
+  // Modèle proportionnel avec Einkommensobergrenzen (seuils DURS, effet falaise) :
+  //   massgebendes Einkommen = Zwischentotal Einkünfte (Ziffer 399)
+  //                           − Unterhaltsbeiträge − CHF 5 000/enfant
+  //   Subside = max(Mindestanspruch, Richtprämie − 7.75 % × revenuDet)
+  //   Si revenuDet > Einkommensobergrenze : aucun droit (coupure nette)
+  //
+  // Prozentanteil 7.75 % confirmé par rétro-calcul :
+  //   Richtprämie seulParent+2enf 2025 = 4'368 + 2×1'884 = 8'136
+  //   Mindestanspruch 2 enf = 2 × 80 % × 1'884 = 3'014
+  //   → 8'136 − 7.75 % × 66'085 = 3'014 ✓ (source : LRV neues System p. 7)
+  //
+  // Nouveau système prévu ~2027-2028 (Sozialziel sans Obergrenzen fixes)
+  {
+    code:         'BL',
+    nom:          'Bâle-Campagne',
+    automatique:  false,
+    nbRegions:    1,
+    lienOfficiel: 'https://www.sva-bl.ch/de/ausgleichskasse/individuelle-praemienverbilligung-ipv',
+    annee:        2026,
+    delaiDemande: '31 décembre 2026',
+    noteGenerale: 'Prozentanteil 7.75 % fixe sur tout le revenu déterminant. Obergrenzen DURES (effet falaise) : au-delà du seuil, droit = 0 même si la formule donnerait un montant positif. Déductions du revenu déterminant : CHF 5 000 par enfant + pensions alimentaires versées (Unterhaltsbeiträge). Pas de Vermögenszuschlag séparé (revenus du capital inclus dans Ziffer 399). JA en formation rattachés aux parents : revenu des parents utilisé. Nouveau système BL en préparation (~2027-2028) : Sozialziel/Eigenanteilssatz, sans Obergrenzen fixes.',
+    // Einkommensobergrenzen — Dekret SGS 362.1 ; par tranche de +11 000 au-delà du 2e enfant
+    // Seul : seul+0=31k / +1=52k (+21k) / +2=68k (+16k) / +3=79k (+11k) / +4=90k
+    // Couple : couple+0=51k / +1=72k (+21k) / +2=88k (+16k) / +3=99k / +4=110k
+    seuilsRevenu: [
+      { statut: 'seul',   profil: 'adulte', enfants: 0, region: 'unique', revenuMaxAn:  31_000 },
+      { statut: 'seul',   profil: 'adulte', enfants: 1, region: 'unique', revenuMaxAn:  52_000 },
+      { statut: 'seul',   profil: 'adulte', enfants: 2, region: 'unique', revenuMaxAn:  68_000 },
+      { statut: 'seul',   profil: 'adulte', enfants: 3, region: 'unique', revenuMaxAn:  79_000 },
+      { statut: 'seul',   profil: 'adulte', enfants: 4, region: 'unique', revenuMaxAn:  90_000 },
+      { statut: 'couple', profil: 'adulte', enfants: 0, region: 'unique', revenuMaxAn:  51_000 },
+      { statut: 'couple', profil: 'adulte', enfants: 1, region: 'unique', revenuMaxAn:  72_000 },
+      { statut: 'couple', profil: 'adulte', enfants: 2, region: 'unique', revenuMaxAn:  88_000 },
+      { statut: 'couple', profil: 'adulte', enfants: 3, region: 'unique', revenuMaxAn:  99_000 },
+      { statut: 'couple', profil: 'adulte', enfants: 4, region: 'unique', revenuMaxAn: 110_000 },
+    ],
+    formule: {
+      type:            'proportionnel',
+      selbstbehaltPct: 7.75,
+      coeffFortune:    0,     // pas de Vermögenszuschlag séparé ; revenus du capital inclus dans Ziffer 399
+      pctRichtprämieEnfant:      80,
+      pctFixeEnfant:             80,   // Mindestanspruch enfant ≥ 80 % Richtprämie
+      pctRichtprämieJAFormation: 50,
+      pctFixeJAFormation:        50,   // Mindestanspruch JA formation ≥ 50 % Richtprämie
+      // Richtprämien 2026 — SVA BL Kennzahlen per 01.01.2026 (kantonale Richtprämie, unique)
+      richtprämienAn: [
+        {
+          region:               'unique',
+          adulte:               4_596,
+          jeuneAdulteFormation: 3_816,
+          enfant:               1_968,
+        },
+      ],
+      composantesRevenu: [
+        { label: 'Zwischentotal des revenus (Ziffer 399, déclaration fiscale)',  signe: '+' },
+        { label: 'Pensions alimentaires versées (Unterhaltsbeiträge)',            signe: '-' },
+        { label: 'CHF 5 000 par enfant mineur à charge',                          signe: '-' },
+      ],
+    },
+  },
+
   /* ─── BÂLE-VILLE (BS) ────────────────────────────────────────────────── */
   // Sources : https://www.bs.ch/themen/finanzielle-hilfe/leistungen/praemienverbilligung
   //           Bericht über die Prämienverbilligung 2026, Amt für Sozialbeiträge,
