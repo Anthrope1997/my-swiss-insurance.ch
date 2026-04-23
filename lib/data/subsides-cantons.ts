@@ -67,6 +67,11 @@ export interface SubsideFormule {
   // taux = selbstbehaltPct + max(0, revenu − selbstbehaltProgressifSeuil) / 100 × selbstbehaltProgressifIncrPour100
   selbstbehaltProgressifSeuil?:        number   // OW: 35 000 — revenu à partir duquel le taux monte
   selbstbehaltProgressifIncrPour100?:  number   // OW: 0.01 — pts % ajoutés par CHF 100 au-dessus du seuil
+  // GL : Selbstbehalt par tranches (barème en escalier)
+  selbstbehaltTranches?: {
+    revenuMaxAn: number   // borne supérieure de la tranche (utiliser Infinity pour la dernière)
+    tauxPct:     number   // taux Selbstbehalt applicable dans cette tranche (%)
+  }[]
   // ── Fortune ───────────────────────────────────────────────────────────────
   coeffFortune:              number   // LU: 0.10 / UR: 0.15 — part de fortune ajoutée au revenu
   // ── Seuil revenu au-delà duquel les minima garantis enfants/JA n'existent plus ──
@@ -579,6 +584,59 @@ const subsidesCantons: SubsideCantonData[] = [
         { label: 'Déductions procédure partielle (Teileinkünfte)',                signe: '+' },
         { label: 'Entretien immeuble net (− 15 % revenus immobiliers privés)',    signe: '+' },
         { label: '20 % du Reinvermögen',                           ziffer: '470', signe: '+' },
+      ],
+    },
+  },
+
+  /* ─── GLARIS (GL) ────────────────────────────────────────────────────── */
+  // Sources : gl.ch (Merkblatt IPV 2026, 2 p., octobre 2025)
+  //           suedostschweiz.ch/ipv-2026 (Richtprämien + barème Selbstbehalt 2026)
+  // Scrapé le 23 avril 2026
+  //
+  // Modèle formule proportionnelle avec Selbstbehalt en tranches (barème en escalier) :
+  //   AEK = Total revenus + 10 % Vermögen + charges immeuble + Nebenerwerbe
+  //         − valeur locative − CHF 5 000/enfant − pensions alimentaires
+  //   Subside = Σ Richtprämien − selbstbehalt(AEK) × AEK
+  {
+    code:         'GL',
+    nom:          'Glaris',
+    automatique:  false,   // formulaire envoyé fin nov. 2025 à tous les ménages ; EL/Sozialhilfe = auto
+    nbRegions:    1,
+    lienOfficiel: 'https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/individuelle-praemienverbilligung-ipv.html/502',
+    annee:        2026,
+    delaiDemande: '31 janvier 2026',   // tardif → IPV à partir du mois suivant l'entrée
+    noteGenerale: 'EL/Sozialhilfe : attribution automatique. JA en formation inclus avec parents si Nettoerwerbseinkommen ≤ CHF 14 000 et Kinderabzug accordé ; sinon demande séparée. Richtprämien publiées dans l\'Amtsblatt et sur my.gl.ch. Minimum de versement non précisé. Plafonné aux primes effectives KVG.',
+    formule: {
+      type:          'proportionnel',
+      coeffFortune:  0.10,
+      // Selbstbehalt en tranches — source : suedostschweiz.ch/ipv-2026
+      selbstbehaltTranches: [
+        { revenuMaxAn:  40_000, tauxPct:  9 },
+        { revenuMaxAn:  50_000, tauxPct: 10 },
+        { revenuMaxAn:  60_000, tauxPct: 11 },
+        { revenuMaxAn:  70_000, tauxPct: 12 },
+        { revenuMaxAn:  80_000, tauxPct: 13 },
+        { revenuMaxAn: Infinity, tauxPct: 14 },
+      ],
+      pctRichtprämieEnfant:      80,
+      pctFixeEnfant:             80,
+      seuilEnfantSeulParent:     85_000,
+      seuilEnfantDeuxParents:    85_000,
+      pctRichtprämieJAFormation: 50,
+      pctFixeJAFormation:        50,
+      // Richtprämien 2026 — source : suedostschweiz.ch/ipv-2026
+      richtprämienAn: [
+        { region: 'unique', adulte: 5_447, jeuneAdulteFormation: 3_896, enfant: 1_500 },
+      ],
+      // Composantes du revenu déterminant (anrechenbares Einkommen = AEK)
+      composantesRevenu: [
+        { label: 'Total des revenus (Einkünfte)',                                   signe: '+' },
+        { label: '10 % du patrimoine imposable (steuerbares Vermögen)',            signe: '+' },
+        { label: 'Frais d\'entretien d\'immeubles (Unterhaltskosten)',              signe: '+' },
+        { label: 'Revenus annexes décomptés via AHV (Nebenerwerbe)',               signe: '+' },
+        { label: 'Valeur locative du logement propre (Mietwert)',                  signe: '-' },
+        { label: 'CHF 5 000 par enfant mineur',                                   signe: '-' },
+        { label: 'Pensions alimentaires (ex-conjoint et enfants mineurs)',         signe: '-' },
       ],
     },
   },
