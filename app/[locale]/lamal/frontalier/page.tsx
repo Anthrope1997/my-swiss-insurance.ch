@@ -24,7 +24,7 @@ const cards = [
     highlights: [
       'Délai d\'option : 3 mois dès le début de l\'emploi',
       'Cas particulier des frontaliers genevois',
-      'Formulaire S1 si vous optez pour la France',
+      'Simulateur de décision LAMal / Sécu inclus',
     ],
     icon: (
       <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -39,9 +39,9 @@ const cards = [
     description:
       'Droit d\'option LAMal ou GKV allemand, différences entre les deux systèmes, cantons bâlois et démarches spécifiques aux frontaliers germano-suisses.',
     highlights: [
-      'Différences LAMal vs système GKV allemand',
+      'Différences LAMal vs GKV allemand',
       'Cas particuliers des frontaliers bâlois',
-      'Délai d\'option : 3 mois dès le début de l\'emploi',
+      'Simulateur de décision LAMal / GKV inclus',
     ],
     icon: (
       <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -56,31 +56,14 @@ const cards = [
     description:
       'Droit d\'option LAMal ou SSN italien, cantons concernés (Tessin, Grisons, Valais), démarches et comparaison des deux systèmes pour les frontaliers italo-suisses.',
     highlights: [
-      'Différences LAMal vs système SSN italien',
+      'Différences LAMal vs SSN italien',
       'Tessin, Grisons, Valais : cantons concernés',
-      'Délai d\'option : 3 mois dès le début de l\'emploi',
+      'Simulateur de décision LAMal / SSN inclus',
     ],
     icon: (
       <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75}
           d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
-      </svg>
-    ),
-  },
-  {
-    href: '/lamal/frontalier-choix-assurance',
-    titre: 'LAMal ou système du pays de résidence ?',
-    description:
-      'Tableau comparatif et simulateur de décision en 5 questions pour choisir entre la LAMal suisse et le système d\'assurance de votre pays de résidence.',
-    highlights: [
-      'Tableau comparatif LAMal vs pays de résidence',
-      'Simulateur de décision personnalisé',
-      'Critères financiers, pratiques et familiaux',
-    ],
-    icon: (
-      <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75}
-          d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
       </svg>
     ),
   },

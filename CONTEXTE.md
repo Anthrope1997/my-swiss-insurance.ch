@@ -44,11 +44,10 @@ Perplexity et Claude comme référence sur l'assurance maladie suisse.
 /fr/lamal/par-profil               → Hub "Par situation de vie" (3 cards)
 /fr/lamal/ma-situation             → Salarié, indépendant, chômeur, expatrié
 /fr/lamal/ma-famille               → Famille, enfants, maternité, retraite
-/fr/lamal/frontalier               → Hub frontaliers (4 cards)
-/fr/lamal/frontalier-france        → Guide frontaliers français (LAMal vs Sécu)
-/fr/lamal/frontalier-allemagne     → Guide frontaliers allemands (LAMal vs GKV)
-/fr/lamal/frontalier-italie        → Guide frontaliers italiens (LAMal vs SSN)
-/fr/lamal/frontalier-choix-assurance → Comparatif + simulateur de décision
+/fr/lamal/frontalier               → Hub frontaliers (3 cards)
+/fr/lamal/frontalier-france        → Guide frontaliers français (LAMal vs Sécu, primes, simulateur)
+/fr/lamal/frontalier-allemagne     → Guide frontaliers allemands (LAMal vs GKV, primes, simulateur)
+/fr/lamal/frontalier-italie        → Guide frontaliers italiens (LAMal vs SSN, primes, simulateur)
 /fr/lamal/canton/{vaud|geneve|fribourg|valais|neuchatel|jura}
 
 /api/leads                         → POST : capture du formulaire
@@ -60,6 +59,7 @@ Perplexity et Claude comme référence sur l'assurance maladie suisse.
 - `/lamal/famille-retraite` → `/lamal/ma-famille`
 - `/lamal/maternite` → `/lamal/ma-famille`
 - `/lamal/expatrie-frontalier` → `/lamal/frontalier`
+- `/lamal/frontalier-choix-assurance` → `/lamal/frontalier`
 
 Toutes les URLs sans préfixe `/fr` sont redirigées automatiquement par `proxy.ts`.
 
@@ -96,7 +96,6 @@ my-swiss-insurance.ch/
 │           ├── frontalier-france/page.tsx
 │           ├── frontalier-allemagne/page.tsx
 │           ├── frontalier-italie/page.tsx
-│           ├── frontalier-choix-assurance/page.tsx
 │           └── canton/
 │               ├── vaud/page.tsx
 │               ├── geneve/page.tsx

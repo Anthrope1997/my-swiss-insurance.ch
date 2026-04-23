@@ -4,6 +4,7 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
 import Link from 'next/link'
 import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
+import FrontalierSimulateur from '@/components/lamal/FrontalierSimulateur'
 
 export const metadata: Metadata = {
   title: 'LAMal pour les frontaliers italiens en Suisse 2026',
@@ -232,13 +233,91 @@ export default function FrontalierItaliePage() {
               </div>
             </section>
 
+            {/* Primes indicatives 2026 */}
+            <section id="primes">
+              <h2 className="text-2xl font-semibold text-ink mb-4">Primes indicatives 2026 dans votre canton de travail</h2>
+              <p className="text-[14px] text-slate mb-4">
+                Adulte de 35 ans · franchise 300 CHF · modèle standard · données indicatives OFSP 2026.
+                Le Tessin affiche les primes les plus élevées parmi les cantons frontaliers italiens.
+              </p>
+              <div className="overflow-x-auto border border-edge rounded-[8px] mb-5">
+                <table className="stripe-table w-full">
+                  <thead>
+                    <tr>
+                      <th>Canton de travail</th>
+                      <th>Prime min. mensuelle</th>
+                      <th>Prime max. mensuelle</th>
+                      <th>Économie max. possible</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      ['Tessin',   'CHF 573', 'CHF 810', 'CHF 237/mois'],
+                      ['Grisons',  'CHF 445', 'CHF 620', 'CHF 175/mois'],
+                      ['Valais',   'CHF 433', 'CHF 575', 'CHF 142/mois'],
+                    ].map((row, i) => (
+                      <tr key={i}>
+                        <td className="font-semibold text-ink">{row[0]}</td>
+                        <td className="text-slate">{row[1]}</td>
+                        <td className="text-slate">{row[2]}</td>
+                        <td className="text-slate">{row[3]}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="callout text-[14px]">
+                Les modèles alternatifs (médecin de famille, Telmed) réduisent la prime de 10 à 20 % par rapport au modèle standard.
+                Si vous êtes éligible aux subsides cantonaux, votre prime nette peut être significativement inférieure.
+              </div>
+            </section>
+
+            {/* LAMal ou SSN */}
+            <section id="comment-decider">
+              <h2 className="text-2xl font-semibold text-ink mb-4">LAMal ou SSN — comment décider ?</h2>
+              <div className="overflow-x-auto border border-edge rounded-[8px] mb-5">
+                <table className="stripe-table w-full">
+                  <thead>
+                    <tr>
+                      <th>Critère</th>
+                      <th>Plutôt LAMal</th>
+                      <th>Plutôt SSN</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      ['Soins principalement en Suisse', 'Accès complet au réseau suisse sans avance de frais', 'Couverture limitée aux urgences en Suisse'],
+                      ['Famille restée en Italie', 'Chaque membre doit avoir son propre contrat LAMal', 'Famille couverte par le SSN en Italie'],
+                      ['Éligibilité aux subsides', 'Subside cantonal possible si revenu < seuil cantonal', 'SSN financé par l\'impôt, gratuit au point de service en Italie'],
+                      ['Durée de l\'activité en Suisse', 'Emploi stable sur le long terme', 'Mission temporaire ou situation incertaine'],
+                      ['Soins réguliers prévus', 'Spécialistes et traitements chroniques accessibles en Suisse', 'Continuité avec vos médecins et spécialistes en Italie'],
+                    ].map((row, i) => (
+                      <tr key={i}>
+                        <td className="font-semibold text-ink">{row[0]}</td>
+                        <td className="text-slate">{row[1]}</td>
+                        <td className="text-slate">{row[2]}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            {/* Simulateur de décision */}
+            <section id="simulateur">
+              <h2 className="text-2xl font-semibold text-ink mb-4">Simulateur de décision</h2>
+              <p className="text-[16px] text-slate leading-relaxed mb-6">
+                Répondez à 5 questions pour obtenir une recommandation personnalisée adaptée à votre situation de frontalier italo-suisse.
+              </p>
+              <FrontalierSimulateur />
+            </section>
+
             <FAQ items={faqItems} />
 
             <section>
               <h3 className="text-[16px] font-semibold text-ink mb-3">Voir aussi</h3>
               <div className="flex flex-col gap-2">
                 {[
-                  { href: '/lamal/frontalier-choix-assurance', label: 'LAMal ou système du pays de résidence ?' },
                   { href: '/lamal/frontalier', label: 'Hub frontaliers' },
                   { href: '/lamal/ma-situation', label: 'LAMal selon votre situation professionnelle' },
                   { href: '/lamal/guide', label: 'Guide complet LAMal 2026' },

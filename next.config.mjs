@@ -12,6 +12,7 @@ const nextConfig = {
       { source: '/lamal/famille-retraite', destination: '/lamal/ma-famille', permanent: true },
       { source: '/lamal/maternite', destination: '/lamal/ma-famille', permanent: true },
       { source: '/lamal/expatrie-frontalier', destination: '/lamal/frontalier', permanent: true },
+      { source: '/lamal/frontalier-choix-assurance', destination: '/lamal/frontalier', permanent: true },
     ]
   },
 }
