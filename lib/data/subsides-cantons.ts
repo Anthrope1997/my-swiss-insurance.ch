@@ -596,6 +596,60 @@ const subsidesCantons: SubsideCantonData[] = [
     },
   },
 
+  /* ─── SOLEURE (SO) ───────────────────────────────────────────────────── */
+  // Sources : https://www.akso.ch/dienstleistungen/praemienverbilligung-ipv
+  //           Verfügung Parameters IPV 2026 du 27.01.2026 (Departement des Innern)
+  //           Regierungsratsvorlage SGB 0226/2025 du 28.10.2025
+  //           Merkblatt IPV 2026 (1 p.)
+  // Scrapé le 23 avril 2026
+  //
+  // Modèle formule proportionnelle avec Eigenanteil linéaire :
+  //   massgebendes Einkommen = revenu fiscal + 50 % du satzbestimmendes Vermögen
+  //   Eigenanteil (%) = 10 + (6/74 000) × revenuDet   [10 % à revenu 0 → 16 % à 74 000]
+  //   Selbstbehalt (CHF) = Eigenanteil(%) × revenuDet / 100
+  //   Subside = Σ Richtprämien − Selbstbehalt  (≥ 0 ; plafonné aux primes effectives)
+  //   Si revenuDet > 74 000 : aucun droit
+  //   Minimum versé : CHF 240/an par adulte éligible
+  //
+  // Richtprämien = 70 % de la Durchschnittsprämie (abattement 30 % vs 10 % légal)
+  // Durchschnittsprämie 2026 SO : adulte 602 / JA 435 / enfant 139 CHF/mois
+  {
+    code:         'SO',
+    nom:          'Soleure',
+    automatique:  false,   // formulaire pré-rempli envoyé à tous les ménages potentiellement éligibles ; EL/FamEL/Sozialhilfe = auto
+    nbRegions:    1,
+    lienOfficiel: 'https://www.akso.ch/dienstleistungen/praemienverbilligung-ipv',
+    annee:        2026,
+    delaiDemande: '31 juillet 2026',
+    noteGenerale: 'Minimum versé : CHF 240/an par adulte éligible. EL/FamEL/Sozialhilfe : attribution automatique. Concubinage : revenus des deux partenaires cumulés si demi-déduction sociale (Ziffer 630) accordée aux deux — calcul manuel par AKSO. Hausse revenus > 20 % ou fortune ≥ CHF 20 000 en 2025 vs 2024 : dossier suspendu jusqu\'à taxation 2025.',
+    formule: {
+      type:          'proportionnel',
+      // Eigenanteil linéaire : taux = 10 % + (6/74 000) × revenu
+      // même structure que LU : (partFixePct + coeffVariable × revenu) × revenu / 100
+      partFixePct:   10,
+      coeffVariable: 6 / 74_000,   // ≈ 0.0000811 pts%/CHF — linéaire 10 %→16 % sur 0–74 000 CHF
+      coeffFortune:  0.50,          // 50 % du satzbestimmendes Vermögen — taux max légal, Verfügung 27.01.2026
+      obergrenzeEinkommen: 74_000,
+      pctRichtprämieEnfant:      80,
+      pctFixeEnfant:             80,
+      pctRichtprämieJAFormation: 50,
+      pctFixeJAFormation:        50,
+      // Richtprämien 2026 = Durchschnittsprämie × 70 % (abattement 30 %) — Verfügung 27.01.2026
+      richtprämienAn: [
+        {
+          region: 'unique',
+          adulte:               5_064,   // 422 CHF/mois × 12
+          jeuneAdulteFormation: 3_660,   // 305 CHF/mois × 12
+          enfant:               1_176,   // 98 CHF/mois × 12
+        },
+      ],
+      composantesRevenu: [
+        { label: 'Revenu fiscal (satzbestimmendes Einkommen, taxation 2024)',  signe: '+' },
+        { label: '50 % du satzbestimmendes Vermögen (fortune imposable 2024)', signe: '+' },
+      ],
+    },
+  },
+
   /* ─── ZOUG (ZG) ──────────────────────────────────────────────────────── */
   // Sources : https://www.akzug.ch/dienstleistungen/praemienverbilligung
   //           Broschuere_IPV_2026.pdf (8 p., Ausgleichskasse Zug)
