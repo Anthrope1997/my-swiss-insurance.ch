@@ -52,27 +52,42 @@ export interface DeductionSociale {
   montant: number
 }
 
-// Modèle LU : calcul proportionnel (subside = Richtprämien − quote-part propre)
-// Quote-part propre = (partFixePct + coeffVariable × revenuDet) × revenuDet / 100
+// Modèle LU/UR : calcul proportionnel (subside = Richtprämien − Selbstbehalt)
+//
+// Deux variantes de Selbstbehalt :
+//   LU (variable) : (partFixePct + coeffVariable × revenuDet) × revenuDet / 100
+//   UR (plat)     : selbstbehaltPct × revenuDet / 100
 export interface SubsideFormule {
   type:                      'proportionnel'
-  partFixePct:               number   // 10.0 — part fixe obligatoire (%)
-  coeffVariable:             number   // 0.00006 — coefficient du revenu variable (pts % par CHF)
-  pctRichtprämieEnfant:      number   // 80 — % de la prime de référence alloué aux enfants
-  pctRichtprämieJAFormation: number   // 50 — % de la prime de référence pour JA en formation
-  seuilEnfantSeulParent:     number   // revenu déterminant max (1 parent) pour prime enfant fixe
-  seuilEnfantDeuxParents:    number   // revenu déterminant max (2 parents) pour prime enfant fixe
-  // Primes de référence annuelles par région (Richtprämien, fixées par le Regierungsrat)
+  // ── Selbstbehalt (quote-part propre) ──────────────────────────────────────
+  partFixePct?:              number   // LU: 10.0 — composante fixe (%)
+  coeffVariable?:            number   // LU: 0.00006 — pts % par CHF de revenu
+  selbstbehaltPct?:          number   // UR: 8.5 — taux plat (%)
+  // ── Fortune ───────────────────────────────────────────────────────────────
+  coeffFortune:              number   // LU: 0.10 / UR: 0.15 — part de fortune ajoutée au revenu
+  // ── Seuil revenu au-delà duquel les minima garantis enfants/JA n'existent plus ──
+  obergrenzeEinkommen?:      number   // UR: 90 000
+  // ── Primes de référence : % entrant dans le pool anrechenbare ─────────────
+  pctRichtprämieEnfant:      number   // LU: 80 / UR: 20 (anrechenbare) + 80 garanti
+  pctRichtprämieJAFormation: number   // LU: 50 / UR: 50
+  // ── Minima garantis (appliqués si revenu ≤ obergrenzeEinkommen) ───────────
+  pctFixeEnfant?:            number   // UR: 80 — subside minimum garanti enfant (%)
+  pctFixeJAFormation?:       number   // UR: 50 — subside minimum garanti JA formation (%)
+  // ── Seuils LU pour prime enfant fixe ─────────────────────────────────────
+  seuilEnfantSeulParent?:    number
+  seuilEnfantDeuxParents?:   number
+  // ── Primes de référence annuelles par région ──────────────────────────────
   richtprämienAn: {
-    region:                string
-    adulte:                number
-    jeuneAdulteFormation:  number   // catégorie 19–25 ans en formation (≠ % adulte)
-    enfant:                number
+    region:                      string
+    adulte:                      number
+    jeuneAdulteHorsFormation?:   number   // UR: catégorie 19–25 hors formation
+    jeuneAdulteFormation:        number
+    enfant:                      number
   }[]
-  // Composantes du revenu déterminant (Massgebendes Einkommen)
+  // ── Composantes du revenu déterminant ─────────────────────────────────────
   composantesRevenu: {
     label:    string
-    ziffer?:  string   // numéro de la case dans la déclaration fiscale
+    ziffer?:  string
     signe:    '+' | '-'
   }[]
 }
@@ -298,6 +313,7 @@ const subsidesCantons: SubsideCantonData[] = [
       type:                      'proportionnel',
       partFixePct:               10,
       coeffVariable:             0.00006,
+      coeffFortune:              0.10,
       pctRichtprämieEnfant:      80,
       pctRichtprämieJAFormation: 50,
       seuilEnfantSeulParent:     77_114,
@@ -317,6 +333,66 @@ const subsidesCantons: SubsideCantonData[] = [
         { label: '10 % du Reinvermögen (fortune nette)',                    ziffer: '470 × 10 %', signe: '+' },
         { label: 'Frais maladie, accident et invalidité déductibles',       ziffer: '320', signe: '-' },
         { label: 'Déduction par enfant (Freibetrag)',                       ziffer: 'CHF 9\'000/enfant', signe: '-' },
+      ],
+    },
+  },
+
+  /* ─── URI (UR) ────────────────────────────────────────────────────────── */
+  // Sources : https://www.svsuri.ch/dienstleistungen/prämienverbilligung-ipv
+  //           SVS.Uri_Antrag.Praemienverbilligung.2026.pdf
+  //           SVS.Uri.IPV.Berechnungsformular_2026.xlsx (données extraites)
+  // Scrapé le 23 avril 2026
+  //
+  // Modèle formule proportionnelle (Selbstbehalt plat 8,5 %) :
+  //   PV-Einkommen = Nettoeinkünfte + 15 % × Reinvermögen − déductions
+  //   Subside = Σ anrechenbare Prämien − 8,5 % × PV-Einkommen + minima garantis
+  //   Si PV-Einkommen ≤ 90 000 : enfants → 80 % fixe garanti + 20 % anrechenbare
+  //                               JA en formation → 50 % fixe garanti + 50 % anrechenbare
+  {
+    code:         'UR',
+    nom:          'Uri',
+    automatique:  false,
+    nbRegions:    1,
+    lienOfficiel: 'https://www.svsuri.ch/dienstleistungen/pr%C3%A4mienverbilligung-ipv',
+    annee:        2026,
+    delaiDemande: '31 décembre 2026',
+    noteGenerale: 'Demande annuelle par formulaire papier ou en ligne. Base de calcul : dernière taxation fiscale valide (max 4 ans). Retraités Ergänzungsleistungen AHV/IV : subside automatique via EL.',
+    formule: {
+      type:                    'proportionnel',
+      selbstbehaltPct:         8.5,
+      coeffFortune:            0.15,
+      obergrenzeEinkommen:     90_000,
+      // Si PV-Einkommen ≤ 90 000 : 20 % entre dans le pool, 80 % = minimum garanti
+      pctRichtprämieEnfant:    20,
+      pctFixeEnfant:           80,
+      // Si PV-Einkommen ≤ 90 000 : 50 % dans le pool, 50 % = minimum garanti
+      pctRichtprämieJAFormation: 50,
+      pctFixeJAFormation:      50,
+      // Richtprämien 2026 — région unique (source : Berechnungsformular_2026.xlsx)
+      richtprämienAn: [
+        {
+          region:                    'unique',
+          adulte:                    4_368,
+          jeuneAdulteHorsFormation:  2_844,
+          jeuneAdulteFormation:      2_844,
+          enfant:                    1_104,
+        },
+      ],
+      // Composantes du PV-Einkommen (massgebendes Einkommen)
+      composantesRevenu: [
+        { label: 'Revenus (hors immobilier)',                               ziffer: '1000–1700', signe: '+' },
+        { label: 'Déductions rentes prévoyance (à réintégrer)',             ziffer: 'annexe',    signe: '+' },
+        { label: 'Valeur locative logement propre',                         ziffer: '1800',      signe: '+' },
+        { label: 'Revenus locatifs et fermages',                            ziffer: '1820',      signe: '+' },
+        { label: 'Produit droit d\'habitation / usufruit',                  ziffer: '1830+1840', signe: '+' },
+        { label: 'Entretien immeuble',                                      ziffer: '2460',      signe: '-' },
+        { label: 'Intérêts passifs',                                        ziffer: '2500',      signe: '-' },
+        { label: 'Frais professionnels',                                    ziffer: '2010–2340', signe: '-' },
+        { label: 'Frais de formation professionnelle',                      ziffer: '2880+2890', signe: '-' },
+        { label: 'Contributions d\'entretien versées',                      ziffer: '2540–2560', signe: '-' },
+        { label: 'Frais maladie et accident',                               ziffer: '3440',      signe: '-' },
+        { label: 'Frais liés au handicap',                                  ziffer: '3460',      signe: '-' },
+        { label: '15 % de la fortune imposable (Reinvermögen)',             ziffer: '4800 × 15 %', signe: '+' },
       ],
     },
   },
