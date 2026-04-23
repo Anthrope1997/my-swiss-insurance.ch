@@ -62,7 +62,11 @@ export interface SubsideFormule {
   // ── Selbstbehalt (quote-part propre) ──────────────────────────────────────
   partFixePct?:              number   // LU: 10.0 — composante fixe (%)
   coeffVariable?:            number   // LU: 0.00006 — pts % par CHF de revenu
-  selbstbehaltPct?:          number   // UR: 8.5 — taux plat (%)
+  selbstbehaltPct?:          number   // UR/SZ: taux plat (%)
+  // OW : Selbstbehalt progressif au-delà d'un seuil
+  // taux = selbstbehaltPct + max(0, revenu − selbstbehaltProgressifSeuil) / 100 × selbstbehaltProgressifIncrPour100
+  selbstbehaltProgressifSeuil?:        number   // OW: 35 000 — revenu à partir duquel le taux monte
+  selbstbehaltProgressifIncrPour100?:  number   // OW: 0.01 — pts % ajoutés par CHF 100 au-dessus du seuil
   // ── Fortune ───────────────────────────────────────────────────────────────
   coeffFortune:              number   // LU: 0.10 / UR: 0.15 — part de fortune ajoutée au revenu
   // ── Seuil revenu au-delà duquel les minima garantis enfants/JA n'existent plus ──
@@ -475,6 +479,62 @@ const subsidesCantons: SubsideCantonData[] = [
         { label: '10 % du Reinvermögen après Freibetrag',          ziffer: '970 − FB', signe: '+' },
         { label: 'Rachats volontaires 2e pilier',                               signe: '+' },
         { label: 'Entretien extraordinaire d\'immeuble',                        signe: '+' },
+      ],
+    },
+  },
+
+  /* ─── OBWALD (OW) ────────────────────────────────────────────────────── */
+  // Sources : https://www.akow.ch/dienstleistungen/praemienverbilligung
+  //           IPV26_Merkblatt_2026-01.pdf (2 pages, stand janvier 2026)
+  // Scrapé le 23 avril 2026
+  //
+  // Modèle formule proportionnelle avec Selbstbehalt PROGRESSIF :
+  //   Selbstbehalt = 9.5 % jusqu'à CHF 35 000, puis + 0.01 % par CHF 100 supplémentaires
+  //   Subside = Richtprämie − Selbstbehalt(revenu)
+  //   Taux 2026 non encore confirmé (fixé par le canton en 1re moitié 2026)
+  {
+    code:         'OW',
+    nom:          'Obwald',
+    automatique:  false,   // invitation auto en nov. 2025 si éligible ; EL/Sozialhilfe = auto
+    nbRegions:    1,
+    lienOfficiel: 'https://www.akow.ch/dienstleistungen/praemienverbilligung',
+    annee:        2026,
+    delaiDemande: '31 mai 2026',   // délai de déchéance — passé ce délai, droit perdu
+    noteGenerale: 'Délai de forclusion au 31 mai 2026 (non prorogeable). Taux Selbstbehalt 2026 fixé par le canton en première moitié 2026 (9.5 % = valeur 2025 indicative). À partir du 4e enfant : subside minimum 100 % de la Richtprämie (au lieu de 80 %). JA en formation : minimum 50 % si revenu < CHF 25 000. Imposés à la source : revenu = 75 % du revenu brut 2024.',
+    formule: {
+      type:                             'proportionnel',
+      selbstbehaltPct:                  9.5,
+      selbstbehaltProgressifSeuil:      35_000,
+      selbstbehaltProgressifIncrPour100: 0.01,
+      coeffFortune:                     0.10,
+      // Seuils d'éligibilité globaux
+      obergrenzeEinkommen:              50_000,   // sans enfants
+      // Minima garantis enfants
+      pctRichtprämieEnfant:             80,
+      pctFixeEnfant:                    80,
+      // Seuil élargi avec enfants : < 50 000 (80 % garanti) ; 4e enfant+ : 100 %
+      // JA en formation : minimum 50 % si revenu < 25 000
+      pctRichtprämieJAFormation:        50,
+      pctFixeJAFormation:               50,
+      seuilEnfantSeulParent:            50_000,   // revenu < 50k → 80 % garanti
+      seuilEnfantDeuxParents:           50_000,
+      // Richtprämien 2026 — région unique
+      richtprämienAn: [
+        { region: 'unique', adulte: 5_018.40, jeuneAdulteFormation: 3_570.00, enfant: 1_380.00 },
+      ],
+      // Composantes du revenu déterminant (anrechenbares Einkommen)
+      composantesRevenu: [
+        { label: 'Total des revenus',                                  ziffer: '1990', signe: '+' },
+        { label: 'Frais professionnels (Berufsauslagen)',                              signe: '-' },
+        { label: 'Contributions d\'entretien et charges durables',                     signe: '-' },
+        { label: 'Déduction assurances (Versicherungsabzug)',                          signe: '-' },
+        { label: 'Frais maladie, accident, invalidité',                                signe: '-' },
+        { label: 'Frais de garde d\'enfants par des tiers',                            signe: '-' },
+        { label: 'Intérêts passifs (≤ revenu immobilier)',                             signe: '-' },
+        { label: 'Déduction couple marié (CHF 7 000)',                                 signe: '-' },
+        { label: 'Déduction par enfant avec droit au subside (CHF 7 000/enfant)',      signe: '-' },
+        { label: 'Pertes immobilières',                                                signe: '+' },
+        { label: '10 % du patrimoine imposable (steuerbares Vermögen)',               signe: '+' },
       ],
     },
   },
