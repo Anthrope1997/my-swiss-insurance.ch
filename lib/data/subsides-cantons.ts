@@ -124,6 +124,28 @@ export interface SubsideFormule {
   }[]
 }
 
+// BS : barème lookup (22 groupes de revenus × 8 tailles de ménage)
+// Chaque groupe définit le plafond de revenu déterminant par taille de ménage
+// et les montants de subside mensuel par catégorie d'assuré.
+export interface SubsideEinkommensgruppe {
+  gruppe:               number     // numéro du groupe (1–22)
+  limites:              number[]   // plafond revenu déterminant par taille ménage [1PH, 2PH, ..., 8PH]
+  enfantMois:           number     // CHF/mois, assurance standard
+  jeuneAdulteMois:      number     // CHF/mois, assurance standard (indépendamment de la formation)
+  adulteMois:           number     // CHF/mois, assurance standard
+  enfantAltMois?:       number     // CHF/mois, modèle alternatif (HMO, Telmed, etc.)
+  jeuneAdulteAltMois?:  number
+  adulteAltMois?:       number
+}
+
+// Abattements sur la fortune avant calcul de la composante fortune du revenu déterminant
+export interface FreibetragFortune {
+  seul:         number    // BS: 37 500
+  couple:       number    // BS: 60 000
+  parEnfant:    number    // BS: 15 000 par enfant / JA < 25 ans
+  tauxAuDessus: number    // BS: 0.10 — fraction du patrimoine net au-delà de l'abattement ajoutée au revenu
+}
+
 export interface SubsideCantonData {
   code:              string
   nom:               string
@@ -135,6 +157,10 @@ export interface SubsideCantonData {
   limiteFortuneSeul?:   number
   limiteFortuneCouple?: number
   limiteFortuneParEnfant?: number    // majoration de la limite par enfant/JA en formation
+  // BS : abattements fortune + taux au-delà
+  freibetragFortune?:   FreibetragFortune
+  // BS : revenu hypothétique imputé si un adulte ne justifie pas d'une activité ≥ 80 %
+  hypothetischesEinkommen?: number
   // Modèle ZH : seuils de revenu au-delà desquels le droit s'éteint
   seuilsRevenu?:        SubsideSeuil[]
   // Modèle BE : barème montant par tranche de revenu déterminant
@@ -143,6 +169,8 @@ export interface SubsideCantonData {
   deductionsSociales?:  DeductionSociale[]
   // Modèle LU : formule proportionnelle
   formule?:             SubsideFormule
+  // Modèle BS : barème lookup par groupe de revenus et taille de ménage
+  einkommensgruppen?:   SubsideEinkommensgruppe[]
   noteGenerale?:        string
 }
 
@@ -594,6 +622,73 @@ const subsidesCantons: SubsideCantonData[] = [
         { label: '20 % du Reinvermögen',                           ziffer: '470', signe: '+' },
       ],
     },
+  },
+
+  /* ─── BÂLE-VILLE (BS) ────────────────────────────────────────────────── */
+  // Sources : https://www.bs.ch/themen/finanzielle-hilfe/leistungen/praemienverbilligung
+  //           Bericht über die Prämienverbilligung 2026, Amt für Sozialbeiträge,
+  //           Oktober 2025 — Anhang 2 : tableau 2026 complet (22 groupes × 8 tailles ménage)
+  //           https://media.bs.ch/original_file/6728c0b091999dea9afc2a4c778dcb753b90e1d7/kvo2026-bericht-pv-0.pdf
+  // Scrapé le 23 avril 2026
+  //
+  // Modèle barème lookup par groupe de revenus et taille de ménage (PH = Personenhaushalt) :
+  //   massgebliches Einkommen = Nettoeinkommen
+  //                           + 10 % × max(0, Reinvermögen − Freibetrag)
+  //                           + Sozialleistungen (unterhalt, alimentation, Mietbeiträge)
+  //   → chercher le groupe (01–22) selon taille ménage, lire subside mensuel par catégorie
+  //
+  // Richtprämie = 90 % de la Durchschnittsprämie (§ 21 Abs. 2 KVO)
+  //   Adulte : 693.50 × 90 % = 624.15 CHF/mois
+  //   JA     : 507.10 × 90 % = 456.39 CHF/mois → min 50 % = 228.20 ≈ 229 CHF/mois (groupes 07–22)
+  //   Enfant : 171.90 × 90 % = 154.71 CHF/mois → min 80 % = 123.77 ≈ 124 CHF/mois (groupes 05–22)
+  //
+  // JA (19–25 ans) : même montant que formation ou non (note a du tableau)
+  // Bonus modèle alternatif (HMO/Telmed) : +30 CHF adulte, +6 CHF enfant/JA (groupes 01–21)
+  //   Exception groupe 22 : +9 CHF adulte uniquement (plafonnement)
+  {
+    code:         'BS',
+    nom:          'Bâle-Ville',
+    automatique:  false,   // courriers envoyés aux ménages potentiellement éligibles ; EL/Sozialhilfe = auto
+    nbRegions:    1,
+    lienOfficiel: 'https://www.bs.ch/themen/finanzielle-hilfe/leistungen/praemienverbilligung',
+    annee:        2026,
+    // pas de délai annuel fixe ; nouveaux arrivants étrangers : demande dans les 3 mois suivant l'arrivée
+    noteGenerale: 'Richtprämie = 90 % de la Durchschnittsprämie (§ 21 Abs. 2 KVO). JA (19–25 ans) : montant identique formation ou non. Bonus modèle alternatif (HMO/Telmed) : +30 CHF adulte, +6 CHF enfant/JA (groupes 01–21) ; groupe 22 : +9 CHF adulte uniquement. Revenu hypothétique 28 800 CHF/an imputé par adulte ne justifiant pas d\'une activité ≥ 80 %. Nouveaux arrivants étrangers : demande dans les 3 mois. EL/Sozialhilfe : attribution automatique (EL = jusqu\'à 90 % de la Durchschnittsprämie).',
+    freibetragFortune: {
+      seul:         37_500,
+      couple:       60_000,
+      parEnfant:    15_000,   // par enfant / JA < 25 ans
+      tauxAuDessus: 0.10,
+    },
+    hypothetischesEinkommen: 28_800,   // CHF/an par adulte sans justification d'emploi ≥ 80 %
+    // Barème 2026 — Anhang 2 du Bericht, en vigueur au 1er janvier 2026
+    // Colonne limites : [1PH, 2PH, 3PH, 4PH, 5PH, 6PH, 7PH, 8PH]
+    // T3 = assurance standard ; T4 = modèle alternatif
+    einkommensgruppen: [
+      { gruppe:  1, limites: [23_125, 37_000, 47_000, 55_000, 61_000, 65_000, 69_000,  73_000], enfantMois: 157, jeuneAdulteMois: 329, adulteMois: 444, enfantAltMois: 163, jeuneAdulteAltMois: 335, adulteAltMois: 474 },
+      { gruppe:  2, limites: [24_375, 39_000, 49_000, 57_000, 63_000, 67_000, 71_000,  75_000], enfantMois: 146, jeuneAdulteMois: 308, adulteMois: 415, enfantAltMois: 152, jeuneAdulteAltMois: 314, adulteAltMois: 445 },
+      { gruppe:  3, limites: [25_625, 41_000, 51_000, 59_000, 65_000, 69_000, 73_000,  77_000], enfantMois: 137, jeuneAdulteMois: 289, adulteMois: 385, enfantAltMois: 143, jeuneAdulteAltMois: 295, adulteAltMois: 415 },
+      { gruppe:  4, limites: [26_875, 43_000, 53_000, 61_000, 67_000, 71_000, 75_000,  79_000], enfantMois: 129, jeuneAdulteMois: 266, adulteMois: 352, enfantAltMois: 135, jeuneAdulteAltMois: 272, adulteAltMois: 382 },
+      { gruppe:  5, limites: [28_125, 45_000, 55_000, 63_000, 69_000, 73_000, 77_000,  81_000], enfantMois: 124, jeuneAdulteMois: 247, adulteMois: 325, enfantAltMois: 130, jeuneAdulteAltMois: 253, adulteAltMois: 355 },
+      { gruppe:  6, limites: [29_375, 47_000, 57_000, 65_000, 71_000, 75_000, 79_000,  83_000], enfantMois: 124, jeuneAdulteMois: 232, adulteMois: 296, enfantAltMois: 130, jeuneAdulteAltMois: 238, adulteAltMois: 326 },
+      { gruppe:  7, limites: [30_625, 49_000, 59_000, 67_000, 73_000, 77_000, 81_000,  85_000], enfantMois: 124, jeuneAdulteMois: 229, adulteMois: 266, enfantAltMois: 130, jeuneAdulteAltMois: 235, adulteAltMois: 296 },
+      { gruppe:  8, limites: [31_875, 51_000, 61_000, 69_000, 75_000, 79_000, 83_000,  87_000], enfantMois: 124, jeuneAdulteMois: 229, adulteMois: 237, enfantAltMois: 130, jeuneAdulteAltMois: 235, adulteAltMois: 267 },
+      { gruppe:  9, limites: [33_125, 53_000, 63_000, 71_000, 77_000, 81_000, 85_000,  89_000], enfantMois: 124, jeuneAdulteMois: 229, adulteMois: 210, enfantAltMois: 130, jeuneAdulteAltMois: 235, adulteAltMois: 240 },
+      { gruppe: 10, limites: [34_375, 55_000, 65_000, 73_000, 79_000, 83_000, 87_000,  91_000], enfantMois: 124, jeuneAdulteMois: 229, adulteMois: 179, enfantAltMois: 130, jeuneAdulteAltMois: 235, adulteAltMois: 209 },
+      { gruppe: 11, limites: [35_625, 57_000, 67_000, 75_000, 81_000, 85_000, 89_000,  93_000], enfantMois: 124, jeuneAdulteMois: 229, adulteMois: 148, enfantAltMois: 130, jeuneAdulteAltMois: 235, adulteAltMois: 178 },
+      { gruppe: 12, limites: [36_875, 59_000, 69_000, 77_000, 83_000, 87_000, 91_000,  95_000], enfantMois: 124, jeuneAdulteMois: 229, adulteMois: 118, enfantAltMois: 130, jeuneAdulteAltMois: 235, adulteAltMois: 148 },
+      { gruppe: 13, limites: [38_125, 61_000, 71_000, 79_000, 85_000, 89_000, 93_000,  97_000], enfantMois: 124, jeuneAdulteMois: 229, adulteMois:  91, enfantAltMois: 130, jeuneAdulteAltMois: 235, adulteAltMois: 121 },
+      { gruppe: 14, limites: [39_375, 63_000, 73_000, 81_000, 87_000, 91_000, 95_000,  99_000], enfantMois: 124, jeuneAdulteMois: 229, adulteMois:  61, enfantAltMois: 130, jeuneAdulteAltMois: 235, adulteAltMois:  91 },
+      { gruppe: 15, limites: [40_625, 65_000, 75_000, 83_000, 89_000, 93_000, 97_000, 101_000], enfantMois: 124, jeuneAdulteMois: 229, adulteMois:  43, enfantAltMois: 130, jeuneAdulteAltMois: 235, adulteAltMois:  73 },
+      { gruppe: 16, limites: [41_875, 67_000, 77_000, 85_000, 91_000, 95_000, 99_000, 103_000], enfantMois: 124, jeuneAdulteMois: 229, adulteMois:  37, enfantAltMois: 130, jeuneAdulteAltMois: 235, adulteAltMois:  67 },
+      { gruppe: 17, limites: [43_125, 69_000, 79_000, 87_000, 93_000, 97_000,101_000, 105_000], enfantMois: 124, jeuneAdulteMois: 229, adulteMois:  33, enfantAltMois: 130, jeuneAdulteAltMois: 235, adulteAltMois:  63 },
+      { gruppe: 18, limites: [44_375, 71_000, 81_000, 89_000, 95_000, 99_000,103_000, 107_000], enfantMois: 124, jeuneAdulteMois: 229, adulteMois:  30, enfantAltMois: 130, jeuneAdulteAltMois: 235, adulteAltMois:  60 },
+      { gruppe: 19, limites: [45_625, 73_000, 83_000, 91_000, 97_000,101_000,105_000, 109_000], enfantMois: 124, jeuneAdulteMois: 229, adulteMois:  26, enfantAltMois: 130, jeuneAdulteAltMois: 235, adulteAltMois:  56 },
+      { gruppe: 20, limites: [46_875, 75_000, 85_000, 93_000, 99_000,103_000,107_000, 111_000], enfantMois: 124, jeuneAdulteMois: 229, adulteMois:  23, enfantAltMois: 130, jeuneAdulteAltMois: 235, adulteAltMois:  53 },
+      { gruppe: 21, limites: [48_125, 77_000, 87_000, 95_000,101_000,105_000,109_000, 113_000], enfantMois: 124, jeuneAdulteMois: 229, adulteMois:  20, enfantAltMois: 130, jeuneAdulteAltMois: 235, adulteAltMois:  50 },
+      { gruppe: 22, limites: [49_375, 79_000, 89_000, 97_000,103_000,107_000,111_000, 115_000], enfantMois: 124, jeuneAdulteMois: 229, adulteMois:  17, enfantAltMois: 124, jeuneAdulteAltMois: 229, adulteAltMois:  26 },
+      //                                                                                          ^enfant min 80%   ^JA min 50%                          ^groupe 22 : pas de bonus enfant/JA ; adulte +9 seulement
+    ],
   },
 
   /* ─── SOLEURE (SO) ───────────────────────────────────────────────────── */
