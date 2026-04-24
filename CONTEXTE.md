@@ -34,7 +34,7 @@ Perplexity et Claude comme référence sur l'assurance maladie suisse.
 ## Architecture des pages
 
 ```
-/fr                                → Homepage (6 sections : Hero, Guides LAMal, Par situation, Par canton, À propos, Formulaire)
+/fr                                → Homepage (6 sections : Hero, Guides LAMal, Par situation, Par canton, À propos, Formulaire) — CTAs hero et guides scrollent vers #formulaire
 /fr/merci                          → Page de confirmation après soumission du formulaire (robots: noindex)
 /fr/lamal                          → Hub LAMal
 /fr/lamal/guide                    → Guide complet (page GEO prioritaire)
@@ -49,7 +49,7 @@ Perplexity et Claude comme référence sur l'assurance maladie suisse.
 /fr/lamal/frontalier-france        → Guide frontaliers français (LAMal vs Sécu, primes, simulateur)
 /fr/lamal/frontalier-allemagne     → Guide frontaliers allemands (LAMal vs GKV, primes, simulateur)
 /fr/lamal/frontalier-italie        → Guide frontaliers italiens (LAMal vs SSN, primes, simulateur)
-/fr/lamal/canton/{vaud|geneve|fribourg|valais|neuchatel|jura}
+/fr/lamal/canton/{vaud|geneve|fribourg|valais|neuchatel|jura|zurich|berne}
 
 /api/leads                         → POST : capture du formulaire
 /api/primes                        → GET : recherche de primes par NPA
@@ -104,7 +104,9 @@ my-swiss-insurance.ch/
 │               ├── fribourg/page.tsx
 │               ├── valais/page.tsx
 │               ├── neuchatel/page.tsx
-│               └── jura/page.tsx
+│               ├── jura/page.tsx
+│               ├── zurich/page.tsx
+│               └── berne/page.tsx
 │
 ├── components/
 │   ├── ui/                      ← Composants génériques
@@ -116,10 +118,10 @@ my-swiss-insurance.ch/
 │   │   ├── StickyBar.tsx
 │   │   ├── AuthorBio.tsx
 │   │   ├── EmailCTA.tsx
-│   │   ├── CantonSearch.tsx     ← Autocomplete 26 cantons → navigation ou notice "bientôt"
+│   │   ├── CantonSearch.tsx     ← Autocomplete 26 cantons → navigation vers /lamal/canton/{slug}
 │   │   ├── LeadForm.tsx
 │   │   ├── LeadFormPopup.tsx
-│   │   └── MultiStepLeadForm.tsx  ← Prop optionnelle redirectOnSuccess?: string
+│   │   └── MultiStepLeadForm.tsx  ← Formulaire 4 étapes animé (stepIn animation) ; prop optionnelle redirectOnSuccess?: string
 │   └── lamal/                   ← Composants domaine LAMal
 │       ├── CantonPage.tsx
 │       ├── ComparateurClient.tsx
@@ -174,7 +176,7 @@ Pour ajouter une section `/menage` (assurance ménage) :
 2. **Créer les pages** suivant le même pattern que `app/[locale]/lamal/` :
    - `app/[locale]/menage/page.tsx` — Hub ménage
    - `app/[locale]/menage/guide/page.tsx` — Guide complet
-3. **Ajouter la navigation** dans `components/ui/Header.tsx`
+3. **Ajouter la navigation** dans `components/ui/Header.tsx` — menu hamburger en accordéon 2 niveaux : LAMal et Comparateur (liens directs), Par situation et Par canton (sections expandables avec chevron)
 4. **Ajouter les liens** dans `components/ui/Footer.tsx`
 5. **Ajouter une card** sur la homepage `app/[locale]/page.tsx`
 6. **Réutiliser** `<LeadForm />` (`components/ui/LeadForm.tsx`) dans chaque page

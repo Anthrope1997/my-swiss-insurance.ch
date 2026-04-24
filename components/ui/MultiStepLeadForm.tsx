@@ -3,13 +3,11 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
-type Intent = 'compare' | 'switch' | 'subsides' | 'conseil' | null
-
 const STEP1_OPTIONS = [
-  { id: 'compare',  label: 'Trouver la caisse la moins chère' },
-  { id: 'switch',   label: 'Changer de caisse facilement' },
-  { id: 'subsides', label: 'Vérifier mes subsides' },
-  { id: 'conseil',  label: 'Optimiser ma franchise et mon modèle' },
+  { id: 'compare',  label: 'Trouver la caisse la moins chère', icon: '🔍' },
+  { id: 'switch',   label: 'Changer de caisse facilement',    icon: '🔄' },
+  { id: 'subsides', label: 'Vérifier mes subsides',           icon: '💰' },
+  { id: 'conseil',  label: 'Ajuster mon contrat',             icon: '✏️' },
 ]
 
 const STEP3_OPTIONS = [
@@ -20,6 +18,13 @@ const STEP3_OPTIONS = [
 ]
 
 const STEP_LABELS = ['Votre objectif', 'Votre situation', 'Votre profil', 'Vos coordonnées']
+
+const STEP_CONTEXT = [
+  'Dites-nous ce que vous recherchez',
+  'Quelques infos sur votre situation',
+  'Votre profil familial',
+  'Pour vous recontacter sous 24h',
+]
 
 interface FormData {
   intent: string
@@ -106,6 +111,14 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
 
   return (
     <div className="card-sm">
+      <style>{`
+        @keyframes stepIn {
+          from { opacity: 0; transform: translateY(8px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .step-anim { animation: stepIn 0.18s ease-out; }
+      `}</style>
+
       {/* Progress bar */}
       <div className="flex gap-1.5 mb-5">
         {[1, 2, 3, 4].map(i => (
@@ -116,35 +129,46 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
         ))}
       </div>
 
-      {/* Step label */}
+      {/* Step label + context */}
       <p className="text-[11px] font-semibold text-slate uppercase tracking-widest mb-1">
         Étape {step} sur 4
       </p>
-      <p className="text-[18px] font-semibold text-ink mb-6">{STEP_LABELS[step - 1]}</p>
+      <p className="text-[18px] font-semibold text-ink mb-1">{STEP_LABELS[step - 1]}</p>
+      <p className="text-[13px] text-slate mb-6">{STEP_CONTEXT[step - 1]}</p>
 
       {/* Step 1 — Objectif */}
       {step === 1 && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {STEP1_OPTIONS.map(opt => (
-            <button
-              key={opt.id}
-              onClick={() => { set({ intent: opt.id }); setStep(2) }}
-              className={[
-                'text-left px-4 py-4 rounded-lg border-2 transition-colors duration-150 text-[14px] font-medium',
-                form.intent === opt.id
-                  ? 'border-brand bg-[#eff6ff] text-brand'
-                  : 'border-edge bg-white text-ink hover:border-brand hover:bg-[#f8fbff]',
-              ].join(' ')}
-            >
-              {opt.label}
-            </button>
-          ))}
+        <div className="step-anim">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+            {STEP1_OPTIONS.map(opt => (
+              <button
+                key={opt.id}
+                onClick={() => set({ intent: opt.id })}
+                className={[
+                  'text-left px-4 py-4 rounded-lg border-2 transition-colors duration-150 text-[14px] font-medium',
+                  form.intent === opt.id
+                    ? 'border-brand bg-[#eff6ff] text-brand'
+                    : 'border-edge bg-white text-ink hover:border-brand hover:bg-[#f8fbff]',
+                ].join(' ')}
+              >
+                <span className="mr-2 text-[16px]">{opt.icon}</span>
+                {opt.label}
+              </button>
+            ))}
+          </div>
+          <button
+            onClick={() => setStep(2)}
+            disabled={!form.intent}
+            className="btn-primary text-[14px] px-6 py-2.5 disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            Commencer →
+          </button>
         </div>
       )}
 
       {/* Step 2 — Situation */}
       {step === 2 && (
-        <div className="space-y-4">
+        <div className="step-anim space-y-4">
           <div>
             <label className="block text-[13px] font-medium text-ink mb-1.5">Code postal (NPA)</label>
             <input
@@ -187,12 +211,12 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
 
       {/* Step 3 — Profil de ménage */}
       {step === 3 && (
-        <div>
+        <div className="step-anim">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
             {STEP3_OPTIONS.map(opt => (
               <button
                 key={opt.id}
-                onClick={() => { set({ situation: opt.id }); setStep(4) }}
+                onClick={() => set({ situation: opt.id })}
                 className={[
                   'text-left px-4 py-4 rounded-lg border-2 transition-colors duration-150 text-[14px] font-medium',
                   form.situation === opt.id
@@ -204,15 +228,24 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
               </button>
             ))}
           </div>
-          <button onClick={() => setStep(2)} className="btn-secondary text-[14px] px-5 py-2.5">
-            ← Retour
-          </button>
+          <div className="flex gap-3">
+            <button onClick={() => setStep(2)} className="btn-secondary text-[14px] px-5 py-2.5">
+              ← Retour
+            </button>
+            <button
+              onClick={() => setStep(4)}
+              disabled={!form.situation}
+              className="btn-primary text-[14px] px-6 py-2.5 disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              Continuer →
+            </button>
+          </div>
         </div>
       )}
 
       {/* Step 4 — Coordonnées */}
       {step === 4 && (
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form className="step-anim space-y-4" onSubmit={handleSubmit}>
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-[13px] font-medium text-ink mb-1.5">Prénom</label>
@@ -263,7 +296,7 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
             disabled={status === 'loading'}
             className="w-full btn-primary py-4 text-[15px] mt-1 disabled:opacity-60"
           >
-            {status === 'loading' ? 'Envoi en cours…' : 'Recevoir mon conseil gratuit →'}
+            {status === 'loading' ? 'Envoi en cours…' : 'Envoyer ma demande →'}
           </button>
           <p className="text-[12px] text-slate/60 text-center leading-relaxed">
             Vos données sont protégées conformément à la LPD · Sans engagement · Réponse sous 24 heures

@@ -170,14 +170,14 @@ const cantonCards = [
     nom: 'Zurich',
     primeMin: '412',
     economieAn: "1'243",
-    href: null,
+    href: '/lamal/canton/zurich',
   },
   {
     rang: '2e',
     nom: 'Berne',
     primeMin: '389',
     economieAn: '987',
-    href: null,
+    href: '/lamal/canton/berne',
   },
   {
     rang: '3e',
@@ -224,7 +224,7 @@ export default function HomePage() {
 
       {/* ── 1. HERO ────────────────────────────────────────────────────────── */}
       <section className="bg-white pt-20 pb-16 sm:pt-28 sm:pb-20">
-        <div className="container-xl max-w-4xl">
+        <div className="container-xl">
 
           <div className="badge mb-5">Données OFSP · Suisse · 2026</div>
 
@@ -261,9 +261,9 @@ export default function HomePage() {
               <span className="text-[12px] text-slate/60 pl-1">Résultat immédiat, sans inscription</span>
             </div>
             <div className="flex flex-col items-start gap-1.5">
-              <Link href="/merci" className="btn-secondary text-[15px] py-3.5 px-7">
+              <a href="#formulaire" className="btn-secondary text-[15px] py-3.5 px-7">
                 Être rappelé par un expert sous 24h
-              </Link>
+              </a>
               <span className="text-[12px] text-slate/60 pl-1">Gratuit, sans engagement</span>
             </div>
           </div>
@@ -324,9 +324,9 @@ export default function HomePage() {
                 Un expert s'en occupe pour vous : démarches, résiliation et souscription incluses
               </p>
             </div>
-            <Link href="/merci" className="btn-primary text-[14px] whitespace-nowrap shrink-0">
+            <a href="#formulaire" className="btn-primary text-[14px] whitespace-nowrap shrink-0">
               Prendre rendez-vous →
-            </Link>
+            </a>
           </div>
 
         </div>
@@ -417,18 +417,10 @@ export default function HomePage() {
                     {c.economieAn} CHF/an
                   </p>
                 </div>
-                {c.href
-                  ? (
-                    <Link href={c.href}
-                      className="mt-auto text-[13px] font-medium text-brand hover:underline">
-                      Consulter la page canton →
-                    </Link>
-                  ) : (
-                    <span className="mt-auto text-[13px] text-slate/50">
-                      Page bientôt disponible
-                    </span>
-                  )
-                }
+                <Link href={c.href}
+                  className="mt-auto text-[13px] font-medium text-brand hover:underline">
+                  Consulter la page canton →
+                </Link>
               </div>
             ))}
           </div>
@@ -476,7 +468,7 @@ export default function HomePage() {
       </section>
 
       {/* ── 6. FORMULAIRE ───────────────────────────────────────────────────── */}
-      <section id="formulaire" className="bg-cloud border-y border-edge py-20">
+      <section id="formulaire" className="bg-cloud border-y border-edge py-20 scroll-mt-16">
         <div className="container-xl max-w-2xl">
 
           <div className="text-center mb-10">

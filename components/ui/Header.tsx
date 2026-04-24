@@ -4,52 +4,21 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 
-const lamalGuides = [
-  { href: '/lamal/guide', label: 'Comprendre la LAMal' },
-  { href: '/lamal/franchise', label: 'Choisir sa franchise' },
-  { href: '/lamal/modeles', label: 'Les 4 modèles LAMal' },
-  { href: '/lamal/lamal-vs-lca', label: 'LAMal vs complémentaire' },
-  { href: '/lamal/changer-de-caisse', label: 'Changer de caisse' },
-]
-
-const lamalOutils = [
-  { href: '/lamal/comparateur', label: 'Comparateur de caisses' },
-  { href: '/lamal/subsides', label: 'Calculateur de subsides' },
-]
-
-const cantonLinks = [
-  { href: '/lamal/canton/argovie', label: 'Argovie' },
-  { href: '/lamal/canton/appenzell-rhodes-exterieures', label: 'Appenzell Rh.-Ext.' },
-  { href: '/lamal/canton/appenzell-rhodes-interieures', label: 'Appenzell Rh.-Int.' },
-  { href: '/lamal/canton/bale-campagne', label: 'Bâle-Campagne' },
-  { href: '/lamal/canton/bale-ville', label: 'Bâle-Ville' },
-  { href: '/lamal/canton/berne', label: 'Berne' },
-  { href: '/lamal/canton/fribourg', label: 'Fribourg' },
-  { href: '/lamal/canton/geneve', label: 'Genève' },
-  { href: '/lamal/canton/glaris', label: 'Glaris' },
-  { href: '/lamal/canton/grisons', label: 'Grisons' },
-  { href: '/lamal/canton/jura', label: 'Jura' },
-  { href: '/lamal/canton/lucerne', label: 'Lucerne' },
-  { href: '/lamal/canton/neuchatel', label: 'Neuchâtel' },
-  { href: '/lamal/canton/nidwald', label: 'Nidwald' },
-  { href: '/lamal/canton/obwald', label: 'Obwald' },
-  { href: '/lamal/canton/saint-gall', label: 'Saint-Gall' },
-  { href: '/lamal/canton/schaffhouse', label: 'Schaffhouse' },
-  { href: '/lamal/canton/schwyz', label: 'Schwyz' },
-  { href: '/lamal/canton/soleure', label: 'Soleure' },
-  { href: '/lamal/canton/tessin', label: 'Tessin' },
-  { href: '/lamal/canton/thurgovie', label: 'Thurgovie' },
-  { href: '/lamal/canton/uri', label: 'Uri' },
-  { href: '/lamal/canton/valais', label: 'Valais' },
-  { href: '/lamal/canton/vaud', label: 'Vaud' },
-  { href: '/lamal/canton/zoug', label: 'Zoug' },
-  { href: '/lamal/canton/zurich', label: 'Zurich' },
-]
-
 const situationLinks = [
   { href: '/lamal/ma-situation', label: 'Ma situation professionnelle' },
   { href: '/lamal/ma-famille', label: 'Ma famille' },
   { href: '/lamal/frontalier', label: 'Frontaliers' },
+]
+
+const hamburgerCantonLinks = [
+  { href: '/lamal/canton/geneve',    label: 'Genève' },
+  { href: '/lamal/canton/vaud',      label: 'Vaud' },
+  { href: '/lamal/canton/fribourg',  label: 'Fribourg' },
+  { href: '/lamal/canton/valais',    label: 'Valais' },
+  { href: '/lamal/canton/neuchatel', label: 'Neuchâtel' },
+  { href: '/lamal/canton/jura',      label: 'Jura' },
+  { href: '/lamal/canton/zurich',    label: 'Zurich' },
+  { href: '/lamal/canton/berne',     label: 'Berne' },
 ]
 
 function ShieldIcon() {
@@ -61,13 +30,30 @@ function ShieldIcon() {
   )
 }
 
+function ChevronDown({ rotated }: { rotated: boolean }) {
+  return (
+    <svg
+      className={`w-4 h-4 transition-transform duration-200 ${rotated ? 'rotate-180' : ''}`}
+      fill="none" stroke="currentColor" viewBox="0 0 24 24"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+    </svg>
+  )
+}
+
 export default function Header() {
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [expandedSection, setExpandedSection] = useState<string | null>(null)
 
   useEffect(() => {
     setMobileOpen(false)
+    setExpandedSection(null)
   }, [pathname])
+
+  function toggleSection(name: string) {
+    setExpandedSection(s => s === name ? null : name)
+  }
 
   return (
     <header className="bg-[#0f2040] sticky top-0 z-50">
@@ -85,7 +71,7 @@ export default function Header() {
             <span className="font-semibold text-white text-[15px] sm:hidden">MSI</span>
           </Link>
 
-          {/* Hamburger */}
+          {/* Hamburger button */}
           <button
             onClick={() => setMobileOpen(o => !o)}
             className="p-2 text-white"
@@ -109,40 +95,61 @@ export default function Header() {
       {mobileOpen && (
         <div className="md:hidden bg-[#0f2040] border-t border-white/10 px-4 pb-6 overflow-y-auto max-h-[calc(100vh-4rem)]">
 
-          <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest pt-5 pb-2">Guides</p>
-          {lamalGuides.map(link => (
-            <Link key={link.href} href={link.href}
-              className="block py-2.5 text-[15px] text-slate-200 hover:text-white border-b border-white/5">
-              {link.label}
-            </Link>
-          ))}
+          {/* LAMal */}
+          <Link href="/lamal"
+            className="flex items-center py-3.5 text-[15px] text-slate-200 hover:text-white border-b border-white/10">
+            LAMal
+          </Link>
 
-          <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest pt-5 pb-2">Outils</p>
-          {lamalOutils.map(link => (
-            <Link key={link.href} href={link.href}
-              className="block py-2.5 text-[15px] text-slate-200 hover:text-white border-b border-white/5">
-              {link.label}
-            </Link>
-          ))}
+          {/* Comparateur */}
+          <Link href="/lamal/comparateur"
+            className="flex items-center py-3.5 text-[15px] text-slate-200 hover:text-white border-b border-white/10">
+            Comparateur
+          </Link>
 
-          <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest pt-5 pb-2">Par canton</p>
-          <div className="grid grid-cols-2 gap-x-4">
-            {cantonLinks.map(link => (
-              <Link key={link.href} href={link.href}
-                className="block py-2 text-[14px] text-slate-200 hover:text-white border-b border-white/5">
-                {link.label}
+          {/* Par situation — expandable */}
+          <button
+            onClick={() => toggleSection('situation')}
+            className="w-full flex items-center justify-between py-3.5 text-[15px] text-slate-200 hover:text-white border-b border-white/10"
+          >
+            Par situation
+            <ChevronDown rotated={expandedSection === 'situation'} />
+          </button>
+          {expandedSection === 'situation' && (
+            <div className="bg-white/5 border-b border-white/10">
+              {situationLinks.map(link => (
+                <Link key={link.href} href={link.href}
+                  className="block pl-5 py-2.5 text-[14px] text-slate-300 hover:text-white border-b border-white/5 last:border-0">
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          )}
+
+          {/* Par canton — expandable */}
+          <button
+            onClick={() => toggleSection('canton')}
+            className="w-full flex items-center justify-between py-3.5 text-[15px] text-slate-200 hover:text-white border-b border-white/10"
+          >
+            Par canton
+            <ChevronDown rotated={expandedSection === 'canton'} />
+          </button>
+          {expandedSection === 'canton' && (
+            <div className="bg-white/5 border-b border-white/10">
+              {hamburgerCantonLinks.map(link => (
+                <Link key={link.href} href={link.href}
+                  className="block pl-5 py-2.5 text-[14px] text-slate-300 hover:text-white border-b border-white/5">
+                  {link.label}
+                </Link>
+              ))}
+              <Link href="/lamal/comparateur"
+                className="block pl-5 py-2.5 text-[14px] text-[#93c5fd] hover:text-white border-t border-white/5">
+                Autres cantons →
               </Link>
-            ))}
-          </div>
+            </div>
+          )}
 
-          <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest pt-5 pb-2">Par situation</p>
-          {situationLinks.map(link => (
-            <Link key={link.href} href={link.href}
-              className="block py-2.5 text-[15px] text-slate-200 hover:text-white border-b border-white/5">
-              {link.label}
-            </Link>
-          ))}
-
+          {/* CTA */}
           <Link
             href="/lamal/comparateur"
             onClick={() => setMobileOpen(false)}
