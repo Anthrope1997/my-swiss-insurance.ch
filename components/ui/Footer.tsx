@@ -9,7 +9,12 @@ function ShieldIcon() {
   )
 }
 
-const columns: { title: string; wide?: boolean; links: { href: string; label: string }[] }[] = [
+const columns: {
+  title: string
+  wide?: boolean
+  ctaLink?: { href: string; label: string }
+  links: { href: string; label: string }[]
+}[] = [
   {
     title: 'Guides',
     links: [
@@ -25,42 +30,28 @@ const columns: { title: string; wide?: boolean; links: { href: string; label: st
   {
     title: 'Par canton',
     wide: true,
+    ctaLink: { href: '/lamal/comparateur', label: 'Autres cantons →' },
     links: [
-      { href: '/lamal/canton/argovie', label: 'Argovie' },
-      { href: '/lamal/canton/appenzell-rhodes-exterieures', label: 'Appenzell Rh.-Ext.' },
-      { href: '/lamal/canton/appenzell-rhodes-interieures', label: 'Appenzell Rh.-Int.' },
-      { href: '/lamal/canton/bale-campagne', label: 'Bâle-Campagne' },
-      { href: '/lamal/canton/bale-ville', label: 'Bâle-Ville' },
-      { href: '/lamal/canton/berne', label: 'Berne' },
-      { href: '/lamal/canton/fribourg', label: 'Fribourg' },
-      { href: '/lamal/canton/geneve', label: 'Genève' },
-      { href: '/lamal/canton/glaris', label: 'Glaris' },
-      { href: '/lamal/canton/grisons', label: 'Grisons' },
-      { href: '/lamal/canton/jura', label: 'Jura' },
-      { href: '/lamal/canton/lucerne', label: 'Lucerne' },
+      { href: '/lamal/canton/berne',     label: 'Berne'     },
+      { href: '/lamal/canton/fribourg',  label: 'Fribourg'  },
+      { href: '/lamal/canton/geneve',    label: 'Genève'    },
+      { href: '/lamal/canton/jura',      label: 'Jura'      },
       { href: '/lamal/canton/neuchatel', label: 'Neuchâtel' },
-      { href: '/lamal/canton/nidwald', label: 'Nidwald' },
-      { href: '/lamal/canton/obwald', label: 'Obwald' },
-      { href: '/lamal/canton/saint-gall', label: 'Saint-Gall' },
-      { href: '/lamal/canton/schaffhouse', label: 'Schaffhouse' },
-      { href: '/lamal/canton/schwyz', label: 'Schwyz' },
-      { href: '/lamal/canton/soleure', label: 'Soleure' },
-      { href: '/lamal/canton/tessin', label: 'Tessin' },
-      { href: '/lamal/canton/thurgovie', label: 'Thurgovie' },
-      { href: '/lamal/canton/uri', label: 'Uri' },
-      { href: '/lamal/canton/valais', label: 'Valais' },
-      { href: '/lamal/canton/vaud', label: 'Vaud' },
-      { href: '/lamal/canton/zoug', label: 'Zoug' },
-      { href: '/lamal/canton/zurich', label: 'Zurich' },
+      { href: '/lamal/canton/valais',    label: 'Valais'    },
+      { href: '/lamal/canton/vaud',      label: 'Vaud'      },
+      { href: '/lamal/canton/zurich',    label: 'Zurich'    },
     ],
   },
   {
-    title: 'Par situation',
+    title: 'Par situation de vie',
     links: [
-      { href: '/lamal/ma-situation', label: 'Ma situation professionnelle' },
-      { href: '/lamal/ma-famille', label: 'Ma famille' },
-      { href: '/lamal/frontalier', label: 'Frontaliers' },
-      { href: '/lamal/par-profil', label: 'Toutes les situations' },
+      { href: '/lamal/guide',                label: 'Choisir sa LAMal'        },
+      { href: '/lamal/ma-situation',         label: 'Ma situation'            },
+      { href: '/lamal/ma-famille',           label: 'Ma famille'              },
+      { href: '/lamal/frontalier',           label: 'Frontaliers'             },
+      { href: '/lamal/frontalier-france',    label: 'Frontalier français'     },
+      { href: '/lamal/frontalier-allemagne', label: 'Frontalier allemand'     },
+      { href: '/lamal/frontalier-italie',    label: 'Frontalier italien'      },
     ],
   },
   {
@@ -100,16 +91,24 @@ export default function Footer() {
                 {col.title}
               </h3>
               {col.wide ? (
-                <ul className="grid grid-cols-2 gap-x-6 gap-y-2.5">
-                  {col.links.map((link) => (
-                    <li key={link.href}>
-                      <Link href={link.href}
-                        className="text-[13px] hover:text-white transition-colors duration-150">
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                <>
+                  <ul className="grid grid-cols-2 gap-x-6 gap-y-2.5 mb-3">
+                    {col.links.map((link) => (
+                      <li key={link.href}>
+                        <Link href={link.href}
+                          className="text-[13px] hover:text-white transition-colors duration-150">
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                  {col.ctaLink && (
+                    <Link href={col.ctaLink.href}
+                      className="text-[13px] text-[#93c5fd] hover:text-white transition-colors duration-150">
+                      {col.ctaLink.label}
+                    </Link>
+                  )}
+                </>
               ) : (
                 <ul className="space-y-3">
                   {col.links.map((link) => (

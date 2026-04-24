@@ -165,34 +165,10 @@ const situations = [
 ]
 
 const cantonCards = [
-  {
-    rang: '1er',
-    nom: 'Zurich',
-    primeMin: '412',
-    economieAn: "1'243",
-    href: '/lamal/canton/zurich',
-  },
-  {
-    rang: '2e',
-    nom: 'Berne',
-    primeMin: '389',
-    economieAn: '987',
-    href: '/lamal/canton/berne',
-  },
-  {
-    rang: '3e',
-    nom: 'Vaud',
-    primeMin: '591',
-    economieAn: "1'347",
-    href: '/lamal/canton/vaud',
-  },
-  {
-    rang: '4e',
-    nom: 'Genève',
-    primeMin: '594',
-    economieAn: "2'753",
-    href: '/lamal/canton/geneve',
-  },
+  { nom: 'Zurich',  primeMin: '412', economieAn: "1'243", href: '/lamal/canton/zurich' },
+  { nom: 'Berne',   primeMin: '389', economieAn: '987',   href: '/lamal/canton/berne'  },
+  { nom: 'Vaud',    primeMin: '591', economieAn: "1'347", href: '/lamal/canton/vaud'   },
+  { nom: 'Genève',  primeMin: '594', economieAn: "2'753", href: '/lamal/canton/geneve' },
 ]
 
 const aproposFaits = [
@@ -400,14 +376,10 @@ export default function HomePage() {
           {/* 4 cantons les plus peuplés */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
             {cantonCards.map(c => (
-              <div key={c.nom}
-                className="bg-white border border-edge rounded-xl p-6 flex flex-col">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-[12px] font-semibold text-slate/60 uppercase tracking-wide">
-                    {c.rang} canton
-                  </span>
-                </div>
-                <p className="font-bold text-ink text-[20px] mb-1">{c.nom}</p>
+              <Link key={c.nom} href={c.href}
+                className="group bg-white border border-edge rounded-xl p-6 flex flex-col
+                           hover:border-brand hover:shadow-md transition-all duration-200">
+                <p className="font-bold text-ink text-[22px] mb-1">{c.nom}</p>
                 <p className="text-slate text-[13px] mb-4">
                   À partir de <span className="font-semibold text-ink">{c.primeMin} CHF</span>/mois
                 </p>
@@ -417,11 +389,14 @@ export default function HomePage() {
                     {c.economieAn} CHF/an
                   </p>
                 </div>
-                <Link href={c.href}
-                  className="mt-auto text-[13px] font-medium text-brand hover:underline">
-                  Consulter la page canton →
-                </Link>
-              </div>
+                <div className="mt-auto flex items-center gap-1 text-[13px] font-medium text-brand">
+                  Consulter la page canton
+                  <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200"
+                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </Link>
             ))}
           </div>
 

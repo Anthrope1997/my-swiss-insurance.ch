@@ -176,7 +176,7 @@ Pour ajouter une section `/menage` (assurance ménage) :
 2. **Créer les pages** suivant le même pattern que `app/[locale]/lamal/` :
    - `app/[locale]/menage/page.tsx` — Hub ménage
    - `app/[locale]/menage/guide/page.tsx` — Guide complet
-3. **Ajouter la navigation** dans `components/ui/Header.tsx` — menu hamburger en accordéon 2 niveaux : LAMal et Comparateur (liens directs), Par situation et Par canton (sections expandables avec chevron)
+3. **Ajouter la navigation** dans `components/ui/Header.tsx` — menu hamburger en accordéon 2 niveaux : LAMal et Comparateur (liens directs), Par situation (Ma situation, Ma famille, Frontaliers) et Par canton (8 cantons + Autres cantons) expandables avec chevron ; visible sur toutes tailles d'écran
 4. **Ajouter les liens** dans `components/ui/Footer.tsx`
 5. **Ajouter une card** sur la homepage `app/[locale]/page.tsx`
 6. **Réutiliser** `<LeadForm />` (`components/ui/LeadForm.tsx`) dans chaque page

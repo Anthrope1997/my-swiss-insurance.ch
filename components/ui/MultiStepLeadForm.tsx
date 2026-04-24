@@ -3,11 +3,47 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
-const STEP1_OPTIONS = [
-  { id: 'compare',  label: 'Trouver la caisse la moins chère', icon: '🔍' },
-  { id: 'switch',   label: 'Changer de caisse facilement',    icon: '🔄' },
-  { id: 'subsides', label: 'Vérifier mes subsides',           icon: '💰' },
-  { id: 'conseil',  label: 'Ajuster mon contrat',             icon: '✏️' },
+const STEP1_OPTIONS: { id: string; label: string; icon: React.ReactNode }[] = [
+  {
+    id: 'compare',
+    label: 'Trouver la caisse la moins chère',
+    icon: (
+      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+          d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
+      </svg>
+    ),
+  },
+  {
+    id: 'switch',
+    label: 'Changer de caisse facilement',
+    icon: (
+      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+          d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+      </svg>
+    ),
+  },
+  {
+    id: 'subsides',
+    label: 'Vérifier mes subsides',
+    icon: (
+      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+          d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+  },
+  {
+    id: 'conseil',
+    label: 'Ajuster mon contrat',
+    icon: (
+      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+          d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+      </svg>
+    ),
+  },
 ]
 
 const STEP3_OPTIONS = [
@@ -145,13 +181,18 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
                 key={opt.id}
                 onClick={() => set({ intent: opt.id })}
                 className={[
-                  'text-left px-4 py-4 rounded-lg border-2 transition-colors duration-150 text-[14px] font-medium',
+                  'flex items-center gap-3 text-left px-4 py-4 rounded-lg border-2 transition-colors duration-150 text-[14px] font-medium',
                   form.intent === opt.id
                     ? 'border-brand bg-[#eff6ff] text-brand'
                     : 'border-edge bg-white text-ink hover:border-brand hover:bg-[#f8fbff]',
                 ].join(' ')}
               >
-                <span className="mr-2 text-[16px]">{opt.icon}</span>
+                <span className={[
+                  'w-7 h-7 rounded-md flex items-center justify-center shrink-0 transition-colors duration-150',
+                  form.intent === opt.id ? 'bg-brand text-white' : 'bg-[#dbeafe] text-brand',
+                ].join(' ')}>
+                  {opt.icon}
+                </span>
                 {opt.label}
               </button>
             ))}

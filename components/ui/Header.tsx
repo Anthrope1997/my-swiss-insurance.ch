@@ -93,7 +93,7 @@ export default function Header() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-[#0f2040] border-t border-white/10 px-4 pb-6 overflow-y-auto max-h-[calc(100vh-4rem)]">
+        <div className="bg-[#0f2040] border-t border-white/10 px-4 pb-6 overflow-y-auto max-h-[calc(100vh-4rem)]">
 
           {/* LAMal */}
           <Link href="/lamal"
