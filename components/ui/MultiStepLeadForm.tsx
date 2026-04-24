@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 type Intent = 'compare' | 'switch' | 'subsides' | 'conseil' | null
 
@@ -39,7 +40,8 @@ function CheckIcon() {
   )
 }
 
-export default function MultiStepLeadForm() {
+export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuccess?: string } = {}) {
+  const router = useRouter()
   const [step, setStep] = useState(1)
   const [form, setForm] = useState<FormData>({
     intent: '', codePostal: '', profil: '', situation: '',
@@ -83,6 +85,7 @@ export default function MultiStepLeadForm() {
       })
       if (!res.ok) throw new Error()
       setStatus('success')
+      if (redirectOnSuccess) router.push(redirectOnSuccess)
     } catch {
       setStatus('error')
       setError('Une erreur est survenue. Veuillez réessayer.')

@@ -34,7 +34,8 @@ Perplexity et Claude comme référence sur l'assurance maladie suisse.
 ## Architecture des pages
 
 ```
-/fr                                → Homepage
+/fr                                → Homepage (6 sections : Hero, Guides LAMal, Par situation, Par canton, À propos, Formulaire)
+/fr/merci                          → Page de confirmation après soumission du formulaire (robots: noindex)
 /fr/lamal                          → Hub LAMal
 /fr/lamal/guide                    → Guide complet (page GEO prioritaire)
 /fr/lamal/comparateur              → Comparateur de caisses maladie
@@ -80,6 +81,7 @@ my-swiss-insurance.ch/
 │       ├── layout.tsx           ← Layout locale (passthrough)
 │       ├── page.tsx             ← Homepage /fr
 │       ├── a-propos/page.tsx
+│       ├── merci/page.tsx           ← Page de confirmation (robots: noindex)
 │       ├── mentions-legales/page.tsx
 │       ├── politique-confidentialite/page.tsx
 │       └── lamal/
@@ -114,9 +116,10 @@ my-swiss-insurance.ch/
 │   │   ├── StickyBar.tsx
 │   │   ├── AuthorBio.tsx
 │   │   ├── EmailCTA.tsx
+│   │   ├── CantonSearch.tsx     ← Autocomplete 26 cantons → navigation ou notice "bientôt"
 │   │   ├── LeadForm.tsx
 │   │   ├── LeadFormPopup.tsx
-│   │   └── MultiStepLeadForm.tsx
+│   │   └── MultiStepLeadForm.tsx  ← Prop optionnelle redirectOnSuccess?: string
 │   └── lamal/                   ← Composants domaine LAMal
 │       ├── CantonPage.tsx
 │       ├── ComparateurClient.tsx
@@ -141,10 +144,12 @@ my-swiss-insurance.ch/
 │   └── fr.json                  ← Chaînes UI en français (infrastructure i18n)
 │
 ├── lib/
+│   ├── data/
+│   │   └── subsides-cantons.ts  ← Base de données subsides unifiée (26 cantons, source de vérité)
 │   ├── i18n/
 │   │   └── get-dictionary.ts    ← Chargeur de dictionnaire par locale
 │   └── lamal/
-│       ├── calcul-subside.ts    ← Calculs de subsides par canton (source de vérité)
+│       ├── calcul-subside.ts    ← Fonctions de calcul (consomme subsides-cantons.ts)
 │       └── calcul-prime.ts      ← Coefficients et helper d'estimation de prime
 │
 ├── scripts/                     ← Scripts de scraping et calcul (ne pas modifier)
@@ -196,7 +201,8 @@ const faqSchema = { '@type': 'FAQPage', mainEntity: [...] }
 ## Comment mettre à jour le contenu
 
 ### Données cantons (primes, franchises, subsides)
-Modifier `data/lamal/cantons.ts` — source de vérité pour toutes les pages canton.
+Modifier `data/lamal/cantons.ts` — source de vérité pour les pages canton (primes, franchises).
+Modifier `lib/data/subsides-cantons.ts` — source de vérité pour les subsides IPV (26 cantons, données 2026).
 
 ### Données tarifaires brutes
 Les JSON dans `data/lamal/` sont générés par les scripts Python dans `scripts/`.
