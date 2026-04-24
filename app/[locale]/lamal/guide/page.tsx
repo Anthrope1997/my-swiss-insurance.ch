@@ -3,12 +3,12 @@ import AuthorBio from '@/components/ui/AuthorBio'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
 import Link from 'next/link'
-import LeadForm from '@/components/ui/LeadForm'
+import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
 
 export const metadata: Metadata = {
   title: 'Guide complet LAMal 2026 — Primes, franchises, modèles et subsides',
   description:
-    'Guide LAMal 2026 : primes par canton (OFSP), franchises 300–2500 CHF avec break-even, 4 modèles d\'assurance, changement de caisse et subsides.',
+    "Guide LAMal 2026 : primes par canton (OFSP), franchises 300–2500 CHF avec break-even, 4 modèles d'assurance, changement de caisse et subsides.",
   openGraph: {
     title: 'Guide complet LAMal 2026 — Primes, franchises et subsides',
     description: 'La référence LAMal 2026 : primes par canton, franchises, modèles et subsides. Données OFSP.',
@@ -142,35 +142,122 @@ const toc = [
   { id: 'faq',        label: '10. FAQ' },
 ]
 
+const heroStats = [
+  {
+    value: '34',
+    label: 'Caisses agréées',
+    sub: 'données OFSP 2026',
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75}
+          d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+      </svg>
+    ),
+  },
+  {
+    value: "2'753 CHF",
+    label: 'Économie max. possible',
+    sub: 'à Genève, adulte 35 ans',
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75}
+          d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+      </svg>
+    ),
+  },
+  {
+    value: '26',
+    label: 'Cantons couverts',
+    sub: 'primes officielles OFSP',
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75}
+          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0zM15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    ),
+  },
+]
+
+// ── Reusable CTA blocks ──────────────────────────────────────────────────────
+
+function CtaLink({ href, title, sub }: { href: string; title: string; sub: string }) {
+  return (
+    <div className="bg-cloud border border-edge rounded-xl px-6 py-5 flex flex-col sm:flex-row
+                    sm:items-center justify-between gap-4 my-6">
+      <div>
+        <p className="font-semibold text-ink text-[15px]">{title}</p>
+        <p className="text-slate text-[14px] mt-0.5">{sub}</p>
+      </div>
+      <Link href={href} className="btn-primary text-[14px] whitespace-nowrap shrink-0">
+        Voir →
+      </Link>
+    </div>
+  )
+}
+
+function CtaExpert({ title, sub }: { title: string; sub: string }) {
+  return (
+    <div className="bg-[#eff6ff] border border-[#bfdbfe] rounded-xl px-6 py-5 flex flex-col sm:flex-row
+                    sm:items-center justify-between gap-4 my-6">
+      <div>
+        <p className="font-semibold text-[#1d4ed8] text-[15px]">{title}</p>
+        <p className="text-slate text-[14px] mt-0.5">{sub}</p>
+      </div>
+      <a href="#contact" className="btn-primary text-[14px] whitespace-nowrap shrink-0">
+        Être contacté gratuitement →
+      </a>
+    </div>
+  )
+}
+
 export default function GuideLamalPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-      {/* Page header */}
-      <section className="bg-white border-b border-edge pt-12 pb-10">
+      {/* ── Hero ── */}
+      <section className="bg-white border-b border-edge pt-12 pb-14">
         <div className="container-xl">
           <Breadcrumb items={[{ label: 'Accueil', href: '/' }, { label: 'LAMal', href: '/lamal' }, { label: 'Comprendre la LAMal' }]} />
+
           <div className="flex flex-wrap gap-2 mb-5">
             <span className="badge">Mis à jour avril 2026</span>
             <span className="badge">Source : OFSP</span>
           </div>
-          <h1 className="text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
-            Guide complet LAMal 2026.
+
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
+            Guide complet LAMal 2026
           </h1>
-          <p className="text-xl text-slate max-w-2xl leading-relaxed">
+          <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
             Primes par canton, franchises avec break-even, 4 modèles d'assurance,
             changement de caisse et subsides. La référence LAMal en Suisse romande.
           </p>
+
+          {/* Stats strip */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {heroStats.map(s => (
+              <div key={s.label} className="flex items-start gap-3 bg-cloud/60 border border-edge rounded-xl px-5 py-4">
+                <div className="w-9 h-9 bg-[#dbeafe] border border-[#1d4ed8]/20 rounded-lg
+                                flex items-center justify-center text-brand shrink-0">
+                  {s.icon}
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
+                  <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
+                  <div className="text-[12px] text-slate mt-0.5">{s.sub}</div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* 3-column docs layout */}
+      {/* ── 3-column layout ── */}
       <div className="container-xl py-12">
         <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] xl:grid-cols-[200px_1fr_320px] gap-12 items-start">
 
-          {/* Left TOC — sticky */}
+          {/* Left TOC */}
           <aside className="hidden lg:block">
             <nav className="sticky top-24">
               <p className="text-[11px] font-semibold text-slate uppercase tracking-widest mb-4 px-4">
@@ -179,17 +266,15 @@ export default function GuideLamalPage() {
               <ul className="space-y-0.5">
                 {toc.map((item) => (
                   <li key={item.id}>
-                    <a href={`#${item.id}`} className="toc-link">
-                      {item.label}
-                    </a>
+                    <a href={`#${item.id}`} className="toc-link">{item.label}</a>
                   </li>
                 ))}
               </ul>
               <div className="mt-8 px-4">
-                <a href="/lamal/comparateur"
+                <Link href="/lamal/comparateur"
                   className="block text-center text-[13px] font-medium text-white bg-brand hover:bg-brand-dark rounded-md py-2.5 transition-colors">
-                  Comparer ma prime LAMal
-                </a>
+                  Comparer ma prime →
+                </Link>
               </div>
             </nav>
           </aside>
@@ -205,7 +290,7 @@ export default function GuideLamalPage() {
                 La <strong>loi fédérale sur l'assurance-maladie (LAMal)</strong> est la loi suisse qui rend
                 l'assurance maladie de base obligatoire pour toute personne résidant en Suisse, en vigueur
                 depuis le 1<sup>er</sup> janvier 1996. Elle garantit à chaque assuré un catalogue de
-                prestations standardisées, identiques chez les 57 caisses agréées par l'OFSP.
+                prestations standardisées, identiques chez les 34 caisses agréées par l'OFSP.
               </p>
               <p className="article-p">
                 Contrairement aux assurances complémentaires (LCA), les prestations de base LAMal ne peuvent
@@ -214,9 +299,14 @@ export default function GuideLamalPage() {
               </p>
               <div className="callout text-[15px]">
                 <strong className="text-ink">Source :</strong>{' '}
-                OFSP (bag.admin.ch)
-                {' · '}art. 3 LAMal (RS 832.10)
+                OFSP (bag.admin.ch) · art. 3 LAMal (RS 832.10)
               </div>
+
+              <CtaLink
+                href="/lamal/comparateur"
+                title="Comparez les primes des 34 caisses pour votre profil"
+                sub="Résultat immédiat, sans inscription"
+              />
             </section>
 
             {/* 2 — Couverture */}
@@ -231,7 +321,7 @@ export default function GuideLamalPage() {
               <ul className="space-y-2 mb-6">
                 {[
                   'Médecin de famille et spécialistes (avec referral selon le modèle)',
-                  'Soins d\'urgence 24h/24, 7j/7',
+                  "Soins d'urgence 24h/24, 7j/7",
                   'Analyses de laboratoire et imagerie médicale prescrite',
                   'Physiothérapie (sur prescription)',
                   'Psychothérapie (psychologues agréés, depuis 2022)',
@@ -269,6 +359,12 @@ export default function GuideLamalPage() {
                 médecine alternative non prescrite, chambre privée à l'hôpital.
                 Ces prestations relèvent des assurances complémentaires LCA.
               </div>
+
+              <CtaLink
+                href="/lamal/lamal-vs-lca"
+                title="LAMal vs complémentaire (LCA) : quelle différence ?"
+                sub="Quand souscrire une LCA et pour quel profil"
+              />
             </section>
 
             {/* 3 — Primes */}
@@ -289,15 +385,13 @@ export default function GuideLamalPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {premiums.map((c, i) => (
+                    {premiums.map((c) => (
                       <tr key={c.code}>
                         <td className="font-medium text-ink">
                           <span className="text-slate/60 text-[12px] mr-2">{c.code}</span>
                           {c.name}
                         </td>
-                        <td className="text-right font-semibold text-ink">
-                          CHF {c.prime.toFixed(2)}
-                        </td>
+                        <td className="text-right font-semibold text-ink">CHF {c.prime.toFixed(2)}</td>
                         <td className="text-right text-slate">
                           CHF {(c.prime * 12).toLocaleString('fr-CH', { maximumFractionDigits: 0 })}
                         </td>
@@ -309,13 +403,19 @@ export default function GuideLamalPage() {
               <p className="text-[13px] text-slate/60 mt-3">
                 Adultes 26 ans et +, modèle standard, franchise 300 CHF. Source : OFSP, primes moyennes cantonales 2026.
               </p>
+
+              <CtaLink
+                href="/lamal/comparateur"
+                title="Trouvez la caisse la moins chère pour votre canton"
+                sub="Comparaison des 34 caisses, résultat immédiat"
+              />
             </section>
 
             {/* 4 — Assureurs */}
             <section id="assureurs">
               <h2 className="article-h2">4. Principaux assureurs LAMal en Suisse</h2>
               <p className="article-p">
-                57 caisses sont agréées par l'OFSP. Les prestations de base sont identiques
+                34 caisses sont agréées par l'OFSP. Les prestations de base sont identiques
                 chez tous les assureurs. Seules les primes, la qualité du service et les options
                 complémentaires diffèrent. Comparez toujours les primes pour votre canton spécifique.
               </p>
@@ -344,6 +444,11 @@ export default function GuideLamalPage() {
                 forcément la même que celle de votre voisin. Les écarts entre assureurs dans un même
                 canton atteignent CHF 100–180/mois pour un adulte.
               </div>
+
+              <CtaExpert
+                title="Un expert vous trouve la meilleure caisse pour votre profil"
+                sub="Gratuit · Sans engagement · Réponse sous 24h"
+              />
             </section>
 
             {/* 5 — Franchise */}
@@ -369,9 +474,7 @@ export default function GuideLamalPage() {
                   <tbody>
                     {franchises.map((f) => (
                       <tr key={f.montant}>
-                        <td className="font-bold text-brand">
-                          CHF {f.montant.toLocaleString('fr-CH')}
-                        </td>
+                        <td className="font-bold text-brand">CHF {f.montant.toLocaleString('fr-CH')}</td>
                         <td className="text-right text-ink">CHF {f.prime.toFixed(2)}</td>
                         <td className="text-right text-[#1d4ed8] font-medium">
                           {f.ecAnn > 0 ? `−CHF ${f.ecAnn}` : '—'}
@@ -379,9 +482,7 @@ export default function GuideLamalPage() {
                         <td className="text-right text-[#1d4ed8] font-medium hidden sm:table-cell">
                           {f.economie > 0 ? `−CHF ${f.economie.toFixed(2)}` : '—'}
                         </td>
-                        <td className="text-center font-medium hidden sm:table-cell">
-                          {f.breakEven}
-                        </td>
+                        <td className="text-center font-medium hidden sm:table-cell">{f.breakEven}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -399,16 +500,13 @@ export default function GuideLamalPage() {
                   Si vos frais annuels dépassent <strong>CHF 976</strong>, la franchise 300 CHF est plus avantageuse.
                 </p>
               </div>
-            </section>
 
-            {/* Micro-CTA franchise */}
-            <Link href="/lamal/comparateur"
-              className="flex items-center gap-2 bg-[#eff6ff] border border-[#bfdbfe] rounded-[8px] px-4 py-3 text-[14px] font-medium text-[#1d4ed8] hover:bg-[#dbeafe] transition-colors group">
-              <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-              Comparer ma LAMal →
-            </Link>
+              <CtaLink
+                href="/lamal/franchise"
+                title="Guide détaillé : choisir sa franchise LAMal"
+                sub="Simulateur break-even et conseils par profil"
+              />
+            </section>
 
             {/* 6 — Modèles */}
             <section id="modeles">
@@ -424,23 +522,23 @@ export default function GuideLamalPage() {
                     title: 'Standard (libre choix)',
                     reduction: null,
                     border: 'border-edge',
-                    desc: 'Accès direct à n\'importe quel médecin ou spécialiste en Suisse, sans restriction. C\'est le modèle le plus cher — il sert de référence pour comparer les autres.',
+                    desc: "Accès direct à n'importe quel médecin ou spécialiste en Suisse, sans restriction. C'est le modèle le plus cher — il sert de référence pour comparer les autres.",
                   },
                   {
                     title: 'Médecin de famille (Hausarzt)',
-                    reduction: 'jusqu\'à −20%',
+                    reduction: "jusqu'à −20%",
                     border: 'border-brand',
-                    desc: 'Vous consultez d\'abord votre médecin de famille, qui vous oriente si besoin vers un spécialiste. Réduction moyenne de 11% (jusqu\'à −20%) selon la caisse et le canton.',
+                    desc: "Vous consultez d'abord votre médecin de famille, qui vous oriente si besoin vers un spécialiste. Réduction moyenne de 11% (jusqu'à −20%) selon la caisse et le canton.",
                   },
                   {
                     title: 'HMO (centre médical)',
-                    reduction: 'jusqu\'à −20%',
+                    reduction: "jusqu'à −20%",
                     border: 'border-brand',
-                    desc: 'Vous êtes rattaché à un réseau fermé de médecins agréés (cabinet ou centre HMO). Réseau limité en zones rurales. Réduction moyenne de 12% (de −3% à −20%) selon la région.',
+                    desc: "Vous êtes rattaché à un réseau fermé de médecins agréés (cabinet ou centre HMO). Réseau limité en zones rurales. Réduction moyenne de 12% (de −3% à −20%) selon la région.",
                   },
                   {
                     title: 'Telmed (hotline médicale)',
-                    reduction: 'jusqu\'à −24%',
+                    reduction: "jusqu'à −24%",
                     border: 'border-[#3b82f6]',
                     desc: 'Première consultation par téléphone ou application avant tout rendez-vous en cabinet (Medgate, Medi24...). Disponible 24h/24. Réduction moyenne de 12% (de −5% à −24%) selon la caisse.',
                   },
@@ -462,6 +560,12 @@ export default function GuideLamalPage() {
                   </div>
                 ))}
               </div>
+
+              <CtaLink
+                href="/lamal/modeles"
+                title="Quel modèle choisir selon votre profil ?"
+                sub="Comparatif détaillé des 4 modèles LAMal"
+              />
             </section>
 
             {/* 7 — Économies */}
@@ -490,16 +594,12 @@ export default function GuideLamalPage() {
                 constatés en 2026 pour un adulte, modèle standard, franchise 300 CHF.
                 Les économies réelles dépendent de votre profil exact.
               </div>
-            </section>
 
-            {/* Micro-CTA economies */}
-            <Link href="/lamal/comparateur"
-              className="flex items-center gap-2 bg-[#eff6ff] border border-[#bfdbfe] rounded-[8px] px-4 py-3 text-[14px] font-medium text-[#1d4ed8] hover:bg-[#dbeafe] transition-colors group">
-              <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-              Comparer ma LAMal →
-            </Link>
+              <CtaExpert
+                title="Un expert compare pour vous et gère le changement"
+                sub="Gratuit · Sans engagement · Réponse sous 24h"
+              />
+            </section>
 
             {/* 8 — Changer */}
             <section id="changer">
@@ -518,7 +618,7 @@ export default function GuideLamalPage() {
                     {[
                       ['Changement ordinaire', '30 novembre', '1er janvier'],
                       ['Hausse de prime annoncée', '30 nov. (1 mois après notif.)', '31 décembre'],
-                      ['Changement de canton', 'Dès effectivité du changement', 'Selon accord'],
+                      ['Changement de canton', "Dès effectivité du changement", 'Selon accord'],
                     ].map((row, i) => (
                       <tr key={i}>
                         {row.map((cell, j) => (
@@ -530,12 +630,12 @@ export default function GuideLamalPage() {
                 </table>
               </div>
 
-              <ol className="space-y-4 mb-4">
+              <ol className="space-y-4 mb-6">
                 {[
                   { n: '1', t: 'Comparez les primes', d: 'Dès octobre, comparez sur priminfo.ch ou via notre service.' },
                   { n: '2', t: 'Inscrivez-vous à la nouvelle caisse', d: 'Elle gère souvent la résiliation à votre place.' },
                   { n: '3', t: 'Envoyez la résiliation', d: 'Lettre recommandée à votre ancien assureur avant le 30 novembre.' },
-                  { n: '4', t: 'Recevez votre carte d\'assuré', d: 'Valide dès le 1er janvier de l\'année suivante.' },
+                  { n: '4', t: "Recevez votre carte d'assuré", d: "Valide dès le 1er janvier de l'année suivante." },
                 ].map((s) => (
                   <li key={s.n} className="flex gap-4">
                     <span className="w-7 h-7 bg-brand text-white rounded-full flex items-center justify-center text-[13px] font-semibold shrink-0 mt-0.5">
@@ -549,9 +649,11 @@ export default function GuideLamalPage() {
                 ))}
               </ol>
 
-              <Link href="/lamal/changer-de-caisse" className="text-brand hover:underline text-[15px] font-medium">
-                Guide complet : changer de caisse maladie →
-              </Link>
+              <CtaLink
+                href="/lamal/changer-de-caisse"
+                title="Guide complet : changer de caisse maladie"
+                sub="Délais, démarches et modèle de lettre de résiliation"
+              />
             </section>
 
             {/* 9 — Subsides */}
@@ -575,6 +677,12 @@ export default function GuideLamalPage() {
                 contactez votre caisse maladie ou le service cantonal. Les subsides non réclamés ne sont
                 pas versés rétroactivement dans la plupart des cantons.
               </div>
+
+              <CtaLink
+                href="/lamal/subsides"
+                title="Calculez vos subsides LAMal en ligne"
+                sub="Simulateur gratuit, données cantonales 2026"
+              />
             </section>
 
             {/* 10 — FAQ */}
@@ -582,15 +690,30 @@ export default function GuideLamalPage() {
               <FAQ items={faqItems} title="10. Questions fréquentes sur la LAMal" />
             </section>
 
-            {/* CTA courtier */}
-            <LeadForm compact />
+            <CtaExpert
+              title="Vous voulez qu'un expert s'en occupe pour vous ?"
+              sub="Changement de caisse, franchise, subsides — tout inclus. Gratuit."
+            />
+
+            {/* Contact form */}
+            <div id="contact" className="scroll-mt-20">
+              <MultiStepLeadForm />
+            </div>
 
           </article>
 
           {/* Right sidebar */}
           <aside className="hidden xl:block">
             <div className="sticky top-24 space-y-6">
-              <LeadForm compact />
+
+              <div className="bg-white border border-edge rounded-xl p-5">
+                <p className="text-[13px] font-semibold text-ink mb-1">Être rappelé par un expert</p>
+                <p className="text-[13px] text-slate mb-4">Gratuit, sans engagement, sous 24h</p>
+                <a href="#contact"
+                  className="block text-center text-[13px] font-medium text-white bg-brand hover:bg-brand-dark rounded-md py-2.5 transition-colors">
+                  Prendre contact →
+                </a>
+              </div>
 
               <div className="bg-white border border-edge rounded-[8px] p-5">
                 <p className="text-[12px] font-semibold text-slate uppercase tracking-widest mb-4">Approfondir</p>
@@ -600,7 +723,7 @@ export default function GuideLamalPage() {
                     ['/lamal/modeles', 'Les 4 modèles LAMal'],
                     ['/lamal/changer-de-caisse', 'Changer de caisse maladie'],
                     ['/lamal/lamal-vs-lca', 'LAMal vs LCA'],
-                    ['/lamal/maternite', 'Maternité et LAMal'],
+                    ['/lamal/subsides', 'Calculer mes subsides'],
                     ['/lamal/par-profil', 'Par situation de vie'],
                   ].map(([href, label]) => (
                     <li key={href}>
@@ -620,7 +743,6 @@ export default function GuideLamalPage() {
 
         </div>
       </div>
-
     </>
   )
 }

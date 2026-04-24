@@ -28,7 +28,7 @@ const articleSchema = {
 const faqItems = [
   {
     question: "Qu'est-ce que la LAMal ?",
-    answer: "La LAMal est la loi fédérale sur l'assurance-maladie, en vigueur depuis le 1er janvier 1996. Elle rend l'assurance maladie de base obligatoire pour tous les résidents en Suisse et garantit un catalogue de prestations standardisées identiques chez les 57 assureurs agréés.",
+    answer: "La LAMal est la loi fédérale sur l'assurance-maladie, en vigueur depuis le 1er janvier 1996. Elle rend l'assurance maladie de base obligatoire pour tous les résidents en Suisse et garantit un catalogue de prestations standardisées identiques chez les 34 caisses agréées.",
   },
   {
     question: 'Quelle est la différence entre LAMal et LCA ?',
