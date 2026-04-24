@@ -79,8 +79,7 @@ export default function Footer() {
               <span className="text-white font-semibold text-[15px]">My Swiss Insurance</span>
             </Link>
             <p className="text-[14px] leading-relaxed">
-              Comparez les caisses maladie suisses et optimisez votre LAMal. Service gratuit
-              pour la Suisse romande.
+              Comparez les caisses maladie suisses et optimisez votre LAMal. Service gratuit.
             </p>
           </div>
 

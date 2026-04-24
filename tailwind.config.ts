@@ -13,7 +13,7 @@ const config: Config = {
         brand: '#1d4ed8',
         'brand-dark': '#1e40af',
         'brand-light': '#3b82f6',
-        ink: '#0f2040',
+        ink: '#1a1a1a',
         slate: '#475569',
         edge: '#e2e8f0',
         cloud: '#f1f5f9',

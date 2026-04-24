@@ -24,7 +24,7 @@
   body {
     @apply text-ink bg-white antialiased;
     font-size: 16px;
-    line-height: 1.65;
+    line-height: 1.6;
   }
 }
 
@@ -71,18 +71,20 @@
            px-5 py-4 rounded-r-lg text-[#0f2040];
   }
 
-  /* ── Form fields ── */
+  /* ── Form fields — 44px height ── */
   .input-field {
-    @apply w-full border border-edge rounded-md px-4 py-3
-           text-ink text-[15px] bg-white placeholder:text-slate/40
+    @apply w-full border border-edge rounded-md px-3 py-[10px]
+           text-ink text-base bg-white placeholder:text-slate/40
            focus:outline-none focus:border-brand focus:ring-2 focus:ring-[#dbeafe]
            transition-colors duration-150;
+    min-height: 44px;
   }
   .select-field {
-    @apply w-full border border-edge rounded-md px-4 py-3
-           text-ink text-[15px] bg-white appearance-none
+    @apply w-full border border-edge rounded-md px-3 py-[10px]
+           text-ink text-base bg-white appearance-none
            focus:outline-none focus:border-brand focus:ring-2 focus:ring-[#dbeafe]
            transition-colors duration-150;
+    min-height: 44px;
   }
 
   /* ── Layout ── */
