@@ -18,12 +18,32 @@ const lamalOutils = [
 ]
 
 const cantonLinks = [
-  { href: '/lamal/canton/vaud', label: 'Vaud' },
-  { href: '/lamal/canton/geneve', label: 'Genève' },
+  { href: '/lamal/canton/argovie', label: 'Argovie' },
+  { href: '/lamal/canton/appenzell-rhodes-exterieures', label: 'Appenzell Rh.-Ext.' },
+  { href: '/lamal/canton/appenzell-rhodes-interieures', label: 'Appenzell Rh.-Int.' },
+  { href: '/lamal/canton/bale-campagne', label: 'Bâle-Campagne' },
+  { href: '/lamal/canton/bale-ville', label: 'Bâle-Ville' },
+  { href: '/lamal/canton/berne', label: 'Berne' },
   { href: '/lamal/canton/fribourg', label: 'Fribourg' },
-  { href: '/lamal/canton/valais', label: 'Valais' },
-  { href: '/lamal/canton/neuchatel', label: 'Neuchâtel' },
+  { href: '/lamal/canton/geneve', label: 'Genève' },
+  { href: '/lamal/canton/glaris', label: 'Glaris' },
+  { href: '/lamal/canton/grisons', label: 'Grisons' },
   { href: '/lamal/canton/jura', label: 'Jura' },
+  { href: '/lamal/canton/lucerne', label: 'Lucerne' },
+  { href: '/lamal/canton/neuchatel', label: 'Neuchâtel' },
+  { href: '/lamal/canton/nidwald', label: 'Nidwald' },
+  { href: '/lamal/canton/obwald', label: 'Obwald' },
+  { href: '/lamal/canton/saint-gall', label: 'Saint-Gall' },
+  { href: '/lamal/canton/schaffhouse', label: 'Schaffhouse' },
+  { href: '/lamal/canton/schwyz', label: 'Schwyz' },
+  { href: '/lamal/canton/soleure', label: 'Soleure' },
+  { href: '/lamal/canton/tessin', label: 'Tessin' },
+  { href: '/lamal/canton/thurgovie', label: 'Thurgovie' },
+  { href: '/lamal/canton/uri', label: 'Uri' },
+  { href: '/lamal/canton/valais', label: 'Valais' },
+  { href: '/lamal/canton/vaud', label: 'Vaud' },
+  { href: '/lamal/canton/zoug', label: 'Zoug' },
+  { href: '/lamal/canton/zurich', label: 'Zurich' },
 ]
 
 const situationLinks = [
@@ -106,12 +126,14 @@ export default function Header() {
           ))}
 
           <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest pt-5 pb-2">Par canton</p>
-          {cantonLinks.map(link => (
-            <Link key={link.href} href={link.href}
-              className="block py-2.5 text-[15px] text-slate-200 hover:text-white border-b border-white/5">
-              {link.label}
-            </Link>
-          ))}
+          <div className="grid grid-cols-2 gap-x-4">
+            {cantonLinks.map(link => (
+              <Link key={link.href} href={link.href}
+                className="block py-2 text-[14px] text-slate-200 hover:text-white border-b border-white/5">
+                {link.label}
+              </Link>
+            ))}
+          </div>
 
           <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest pt-5 pb-2">Par situation</p>
           {situationLinks.map(link => (

@@ -9,7 +9,7 @@ function ShieldIcon() {
   )
 }
 
-const columns = [
+const columns: { title: string; wide?: boolean; links: { href: string; label: string }[] }[] = [
   {
     title: 'Guides',
     links: [
@@ -24,13 +24,34 @@ const columns = [
   },
   {
     title: 'Par canton',
+    wide: true,
     links: [
-      { href: '/lamal/canton/vaud', label: 'Vaud' },
-      { href: '/lamal/canton/geneve', label: 'Genève' },
+      { href: '/lamal/canton/argovie', label: 'Argovie' },
+      { href: '/lamal/canton/appenzell-rhodes-exterieures', label: 'Appenzell Rh.-Ext.' },
+      { href: '/lamal/canton/appenzell-rhodes-interieures', label: 'Appenzell Rh.-Int.' },
+      { href: '/lamal/canton/bale-campagne', label: 'Bâle-Campagne' },
+      { href: '/lamal/canton/bale-ville', label: 'Bâle-Ville' },
+      { href: '/lamal/canton/berne', label: 'Berne' },
       { href: '/lamal/canton/fribourg', label: 'Fribourg' },
-      { href: '/lamal/canton/valais', label: 'Valais' },
-      { href: '/lamal/canton/neuchatel', label: 'Neuchâtel' },
+      { href: '/lamal/canton/geneve', label: 'Genève' },
+      { href: '/lamal/canton/glaris', label: 'Glaris' },
+      { href: '/lamal/canton/grisons', label: 'Grisons' },
       { href: '/lamal/canton/jura', label: 'Jura' },
+      { href: '/lamal/canton/lucerne', label: 'Lucerne' },
+      { href: '/lamal/canton/neuchatel', label: 'Neuchâtel' },
+      { href: '/lamal/canton/nidwald', label: 'Nidwald' },
+      { href: '/lamal/canton/obwald', label: 'Obwald' },
+      { href: '/lamal/canton/saint-gall', label: 'Saint-Gall' },
+      { href: '/lamal/canton/schaffhouse', label: 'Schaffhouse' },
+      { href: '/lamal/canton/schwyz', label: 'Schwyz' },
+      { href: '/lamal/canton/soleure', label: 'Soleure' },
+      { href: '/lamal/canton/tessin', label: 'Tessin' },
+      { href: '/lamal/canton/thurgovie', label: 'Thurgovie' },
+      { href: '/lamal/canton/uri', label: 'Uri' },
+      { href: '/lamal/canton/valais', label: 'Valais' },
+      { href: '/lamal/canton/vaud', label: 'Vaud' },
+      { href: '/lamal/canton/zoug', label: 'Zoug' },
+      { href: '/lamal/canton/zurich', label: 'Zurich' },
     ],
   },
   {
@@ -56,7 +77,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#0f2040] text-white/60">
       <div className="container-xl pt-16 pb-12">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-10 mb-14">
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-8 md:gap-10 mb-14">
 
           {/* Brand col */}
           <div className="col-span-2 md:col-span-1">
@@ -74,20 +95,33 @@ export default function Footer() {
 
           {/* Link columns */}
           {columns.map((col) => (
-            <div key={col.title}>
+            <div key={col.title} className={col.wide ? 'md:col-span-2' : undefined}>
               <h3 className="text-white font-semibold text-[12px] uppercase tracking-widest mb-5">
                 {col.title}
               </h3>
-              <ul className="space-y-3">
-                {col.links.map((link) => (
-                  <li key={link.href}>
-                    <Link href={link.href}
-                      className="text-[14px] hover:text-white transition-colors duration-150">
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              {col.wide ? (
+                <ul className="grid grid-cols-2 gap-x-6 gap-y-2.5">
+                  {col.links.map((link) => (
+                    <li key={link.href}>
+                      <Link href={link.href}
+                        className="text-[13px] hover:text-white transition-colors duration-150">
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <ul className="space-y-3">
+                  {col.links.map((link) => (
+                    <li key={link.href}>
+                      <Link href={link.href}
+                        className="text-[14px] hover:text-white transition-colors duration-150">
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           ))}
         </div>

@@ -3,40 +3,39 @@
 import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
-const CANTONS: { nom: string; code: string; slug: string | null }[] = [
-  { nom: 'Argovie',             code: 'AG', slug: null },
-  { nom: 'Appenzell Rh.-Int.',  code: 'AI', slug: null },
-  { nom: 'Appenzell Rh.-Ext.', code: 'AR', slug: null },
-  { nom: 'Bâle-Campagne',      code: 'BL', slug: null },
-  { nom: 'Bâle-Ville',         code: 'BS', slug: null },
-  { nom: 'Berne',              code: 'BE', slug: null },
-  { nom: 'Fribourg',           code: 'FR', slug: 'fribourg' },
-  { nom: 'Genève',             code: 'GE', slug: 'geneve' },
-  { nom: 'Glaris',             code: 'GL', slug: null },
-  { nom: 'Grisons',            code: 'GR', slug: null },
-  { nom: 'Jura',               code: 'JU', slug: 'jura' },
-  { nom: 'Lucerne',            code: 'LU', slug: null },
-  { nom: 'Neuchâtel',          code: 'NE', slug: 'neuchatel' },
-  { nom: 'Nidwald',            code: 'NW', slug: null },
-  { nom: 'Obwald',             code: 'OW', slug: null },
-  { nom: 'Saint-Gall',         code: 'SG', slug: null },
-  { nom: 'Schaffhouse',        code: 'SH', slug: null },
-  { nom: 'Schwyz',             code: 'SZ', slug: null },
-  { nom: 'Soleure',            code: 'SO', slug: null },
-  { nom: 'Tessin',             code: 'TI', slug: null },
-  { nom: 'Thurgovie',          code: 'TG', slug: null },
-  { nom: 'Uri',                code: 'UR', slug: null },
-  { nom: 'Valais',             code: 'VS', slug: 'valais' },
-  { nom: 'Vaud',               code: 'VD', slug: 'vaud' },
-  { nom: 'Zoug',               code: 'ZG', slug: null },
-  { nom: 'Zurich',             code: 'ZH', slug: null },
+const CANTONS: { nom: string; code: string; slug: string }[] = [
+  { nom: 'Argovie',                       code: 'AG', slug: 'argovie' },
+  { nom: 'Appenzell Rh.-Int.',            code: 'AI', slug: 'appenzell-rhodes-interieures' },
+  { nom: 'Appenzell Rh.-Ext.',            code: 'AR', slug: 'appenzell-rhodes-exterieures' },
+  { nom: 'Bâle-Campagne',                code: 'BL', slug: 'bale-campagne' },
+  { nom: 'Bâle-Ville',                   code: 'BS', slug: 'bale-ville' },
+  { nom: 'Berne',                         code: 'BE', slug: 'berne' },
+  { nom: 'Fribourg',                      code: 'FR', slug: 'fribourg' },
+  { nom: 'Genève',                        code: 'GE', slug: 'geneve' },
+  { nom: 'Glaris',                        code: 'GL', slug: 'glaris' },
+  { nom: 'Grisons',                       code: 'GR', slug: 'grisons' },
+  { nom: 'Jura',                          code: 'JU', slug: 'jura' },
+  { nom: 'Lucerne',                       code: 'LU', slug: 'lucerne' },
+  { nom: 'Neuchâtel',                     code: 'NE', slug: 'neuchatel' },
+  { nom: 'Nidwald',                       code: 'NW', slug: 'nidwald' },
+  { nom: 'Obwald',                        code: 'OW', slug: 'obwald' },
+  { nom: 'Saint-Gall',                    code: 'SG', slug: 'saint-gall' },
+  { nom: 'Schaffhouse',                   code: 'SH', slug: 'schaffhouse' },
+  { nom: 'Schwyz',                        code: 'SZ', slug: 'schwyz' },
+  { nom: 'Soleure',                       code: 'SO', slug: 'soleure' },
+  { nom: 'Tessin',                        code: 'TI', slug: 'tessin' },
+  { nom: 'Thurgovie',                     code: 'TG', slug: 'thurgovie' },
+  { nom: 'Uri',                           code: 'UR', slug: 'uri' },
+  { nom: 'Valais',                        code: 'VS', slug: 'valais' },
+  { nom: 'Vaud',                          code: 'VD', slug: 'vaud' },
+  { nom: 'Zoug',                          code: 'ZG', slug: 'zoug' },
+  { nom: 'Zurich',                        code: 'ZH', slug: 'zurich' },
 ]
 
 export default function CantonSearch() {
   const router = useRouter()
   const [query, setQuery] = useState('')
   const [open, setOpen] = useState(false)
-  const [notice, setNotice] = useState<string | null>(null)
   const ref = useRef<HTMLDivElement>(null)
 
   const results = query.length > 0
@@ -59,11 +58,7 @@ export default function CantonSearch() {
   function select(c: typeof CANTONS[number]) {
     setQuery(c.nom)
     setOpen(false)
-    if (c.slug) {
-      router.push(`/lamal/canton/${c.slug}`)
-    } else {
-      setNotice(`La page pour ${c.nom} est en cours de rédaction. Revenez bientôt.`)
-    }
+    router.push(`/lamal/canton/${c.slug}`)
   }
 
   return (
@@ -80,7 +75,7 @@ export default function CantonSearch() {
           type="text"
           placeholder="Rechercher votre canton..."
           value={query}
-          onChange={e => { setQuery(e.target.value); setOpen(true); setNotice(null) }}
+          onChange={e => { setQuery(e.target.value); setOpen(true) }}
           onFocus={() => { if (query.length > 0) setOpen(true) }}
           className="input-field pl-10"
         />
@@ -99,10 +94,7 @@ export default function CantonSearch() {
                   <span className="text-[11px] font-semibold text-slate/60 uppercase tracking-wide">
                     {c.code}
                   </span>
-                  {c.slug
-                    ? <span className="text-[11px] text-brand font-medium">Voir →</span>
-                    : <span className="text-[11px] text-slate/50">Bientôt</span>
-                  }
+                  <span className="text-[11px] text-brand font-medium">Voir →</span>
                 </span>
               </button>
             </li>
@@ -110,11 +102,6 @@ export default function CantonSearch() {
         </ul>
       )}
 
-      {notice && (
-        <p className="mt-2 text-[13px] text-slate bg-cloud border border-edge rounded-md px-3 py-2">
-          {notice}
-        </p>
-      )}
     </div>
   )
 }
