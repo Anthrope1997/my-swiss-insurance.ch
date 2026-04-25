@@ -53,6 +53,24 @@ const STEP3_OPTIONS = [
   { id: 'retraite', label: 'Retraité(e)' },
 ]
 
+const CANTONS = [
+  'Argovie', 'Appenzell Rhodes-Extérieures', 'Appenzell Rhodes-Intérieures',
+  'Bâle-Campagne', 'Bâle-Ville', 'Berne', 'Fribourg', 'Genève', 'Glaris',
+  'Grisons', 'Jura', 'Lucerne', 'Neuchâtel', 'Nidwald', 'Obwald',
+  'Saint-Gall', 'Schaffhouse', 'Schwyz', 'Soleure', 'Tessin',
+  'Thurgovie', 'Uri', 'Valais', 'Vaud', 'Zoug', 'Zurich',
+]
+
+const PAYS_FRONTALIERS = [
+  'France', 'Allemagne', 'Italie', 'Autriche', 'Liechtenstein',
+]
+
+const TRANCHES_AGE = [
+  { value: 'enfant',       label: 'Enfant (0 à 18 ans)'        },
+  { value: 'jeune_adulte', label: 'Jeune adulte (19 à 25 ans)' },
+  { value: 'adulte',       label: 'Adulte (26 ans et plus)'    },
+]
+
 const STEP_LABELS = ['Votre objectif', 'Votre situation', 'Votre profil', 'Vos coordonnées']
 
 const STEP_CONTEXT = [
@@ -64,8 +82,12 @@ const STEP_CONTEXT = [
 
 interface FormData {
   intent: string
+  residenceType: 'resident' | 'frontalier'
+  canton: string
   codePostal: string
-  profil: string
+  pays: string
+  cantonTravail: string
+  trancheAge: string
   situation: string
   prenom: string
   nom: string
@@ -85,7 +107,10 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
   const router = useRouter()
   const [step, setStep] = useState(1)
   const [form, setForm] = useState<FormData>({
-    intent: '', codePostal: '', profil: '', situation: '',
+    intent: '',
+    residenceType: 'resident',
+    canton: '', codePostal: '', pays: '', cantonTravail: '', trancheAge: '',
+    situation: '',
     prenom: '', nom: '', telephone: '', email: '',
   })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
@@ -105,6 +130,10 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
     setForm(f => ({ ...f, ...patch }))
   }
 
+  const step2Valid = form.residenceType === 'resident'
+    ? (form.canton !== '' && form.codePostal !== '' && form.trancheAge !== '')
+    : (form.pays !== '' && form.cantonTravail !== '' && form.trancheAge !== '')
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setStatus('loading')
@@ -117,11 +146,14 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
           nom: `${form.prenom} ${form.nom}`.trim(),
           email: form.email,
           telephone: form.telephone,
-          codePostal: form.codePostal,
-          profil: form.profil,
+          ...(form.residenceType === 'resident'
+            ? { codePostal: form.codePostal, canton: form.canton }
+            : { pays: form.pays, cantonTravail: form.cantonTravail }
+          ),
+          profil: form.trancheAge,
           situation: form.situation,
           intention: form.intent,
-          type: 'canton',
+          type: form.residenceType === 'frontalier' ? 'frontalier' : 'canton',
         }),
       })
       if (!res.ok) throw new Error()
@@ -210,38 +242,138 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
       {/* Step 2 — Situation */}
       {step === 2 && (
         <div className="step-anim space-y-4">
-          <div>
-            <label className="block text-[13px] font-medium text-ink mb-1.5">Code postal (NPA)</label>
-            <input
-              type="text"
-              inputMode="numeric"
-              placeholder="1000"
-              value={form.codePostal}
-              onChange={e => set({ codePostal: e.target.value })}
-              className="input-field"
-              maxLength={4}
-            />
-          </div>
-          <div>
-            <label className="block text-[13px] font-medium text-ink mb-1.5">Profil</label>
-            <select
-              value={form.profil}
-              onChange={e => set({ profil: e.target.value })}
-              className="select-field"
+
+          {/* Toggle Résident / Frontalier */}
+          <div className="flex rounded-lg border border-edge overflow-hidden">
+            <button
+              type="button"
+              onClick={() => set({ residenceType: 'resident' })}
+              className={[
+                'flex-1 py-2.5 text-[13px] font-medium transition-colors duration-150',
+                form.residenceType === 'resident'
+                  ? 'bg-brand text-white'
+                  : 'bg-white text-slate hover:bg-cloud',
+              ].join(' ')}
             >
-              <option value="">Sélectionner</option>
-              <option value="adulte">Adulte (26 ans et plus)</option>
-              <option value="jeune_adulte">Jeune adulte (19 à 25 ans)</option>
-              <option value="enfant">Enfant (0 à 18 ans)</option>
-            </select>
+              Résident suisse
+            </button>
+            <button
+              type="button"
+              onClick={() => set({ residenceType: 'frontalier' })}
+              className={[
+                'flex-1 py-2.5 text-[13px] font-medium border-l border-edge transition-colors duration-150',
+                form.residenceType === 'frontalier'
+                  ? 'bg-brand text-white border-l-brand'
+                  : 'bg-white text-slate hover:bg-cloud',
+              ].join(' ')}
+            >
+              Frontalier
+            </button>
           </div>
+
+          {/* Résident branch */}
+          {form.residenceType === 'resident' && (
+            <div className="space-y-3">
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[13px] font-medium text-ink mb-1.5">Canton</label>
+                  <input
+                    type="text"
+                    list="cantons-residence-list"
+                    placeholder="Vaud"
+                    value={form.canton}
+                    onChange={e => set({ canton: e.target.value })}
+                    className="input-field !h-11"
+                  />
+                  <datalist id="cantons-residence-list">
+                    {CANTONS.map(c => <option key={c} value={c} />)}
+                  </datalist>
+                </div>
+                <div>
+                  <label className="block text-[13px] font-medium text-ink mb-1.5">NPA</label>
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    placeholder="1000"
+                    value={form.codePostal}
+                    onChange={e => set({ codePostal: e.target.value })}
+                    className="input-field !h-11"
+                    maxLength={4}
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-[13px] font-medium text-ink mb-1.5">Tranche d'âge</label>
+                <select
+                  value={form.trancheAge}
+                  onChange={e => set({ trancheAge: e.target.value })}
+                  className="select-field !h-11"
+                >
+                  <option value="">Sélectionner</option>
+                  {TRANCHES_AGE.map(t => (
+                    <option key={t.value} value={t.value}>{t.label}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          )}
+
+          {/* Frontalier branch */}
+          {form.residenceType === 'frontalier' && (
+            <div className="space-y-3">
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[13px] font-medium text-ink mb-1.5">Pays</label>
+                  <input
+                    type="text"
+                    list="pays-frontaliers-list"
+                    placeholder="France"
+                    value={form.pays}
+                    onChange={e => set({ pays: e.target.value })}
+                    className="input-field !h-11"
+                  />
+                  <datalist id="pays-frontaliers-list">
+                    {PAYS_FRONTALIERS.map(p => <option key={p} value={p} />)}
+                  </datalist>
+                </div>
+                <div>
+                  <label className="block text-[13px] font-medium text-ink mb-1.5">Canton de travail</label>
+                  <input
+                    type="text"
+                    list="cantons-travail-list"
+                    placeholder="Genève"
+                    value={form.cantonTravail}
+                    onChange={e => set({ cantonTravail: e.target.value })}
+                    className="input-field !h-11"
+                  />
+                  <datalist id="cantons-travail-list">
+                    {CANTONS.map(c => <option key={c} value={c} />)}
+                  </datalist>
+                </div>
+              </div>
+              <div>
+                <label className="block text-[13px] font-medium text-ink mb-1.5">Tranche d'âge</label>
+                <select
+                  value={form.trancheAge}
+                  onChange={e => set({ trancheAge: e.target.value })}
+                  className="select-field !h-11"
+                >
+                  <option value="">Sélectionner</option>
+                  {TRANCHES_AGE.map(t => (
+                    <option key={t.value} value={t.value}>{t.label}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          )}
+
           <div className="flex gap-3 pt-2">
             <button onClick={() => setStep(1)} className="btn-secondary text-[14px] px-5 py-2.5">
               ← Retour
             </button>
             <button
               onClick={() => setStep(3)}
-              disabled={!form.codePostal || !form.profil}
+              disabled={!step2Valid}
               className="btn-primary text-[14px] px-6 py-2.5 disabled:opacity-40 disabled:cursor-not-allowed"
             >
               Continuer →
