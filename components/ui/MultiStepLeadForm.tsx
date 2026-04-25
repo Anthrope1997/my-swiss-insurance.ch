@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import CantonCombobox, { CANTON_NAMES } from '@/components/ui/CantonCombobox'
 
 const STEP1_OPTIONS: { id: string; label: string; icon: React.ReactNode }[] = [
   {
@@ -53,45 +54,6 @@ const STEP3_OPTIONS = [
   { id: 'retraite', label: 'Retraité(e)' },
 ]
 
-const CANTONS_WITH_CODES: { name: string; code: string }[] = [
-  { name: 'Argovie',                       code: 'AG' },
-  { name: 'Appenzell Rhodes-Extérieures',  code: 'AR' },
-  { name: 'Appenzell Rhodes-Intérieures',  code: 'AI' },
-  { name: 'Bâle-Campagne',                 code: 'BL' },
-  { name: 'Bâle-Ville',                    code: 'BS' },
-  { name: 'Berne',                          code: 'BE' },
-  { name: 'Fribourg',                       code: 'FR' },
-  { name: 'Genève',                         code: 'GE' },
-  { name: 'Glaris',                         code: 'GL' },
-  { name: 'Grisons',                        code: 'GR' },
-  { name: 'Jura',                           code: 'JU' },
-  { name: 'Lucerne',                        code: 'LU' },
-  { name: 'Neuchâtel',                      code: 'NE' },
-  { name: 'Nidwald',                        code: 'NW' },
-  { name: 'Obwald',                         code: 'OW' },
-  { name: 'Saint-Gall',                     code: 'SG' },
-  { name: 'Schaffhouse',                    code: 'SH' },
-  { name: 'Schwyz',                         code: 'SZ' },
-  { name: 'Soleure',                        code: 'SO' },
-  { name: 'Tessin',                         code: 'TI' },
-  { name: 'Thurgovie',                      code: 'TG' },
-  { name: 'Uri',                            code: 'UR' },
-  { name: 'Valais',                         code: 'VS' },
-  { name: 'Vaud',                           code: 'VD' },
-  { name: 'Zoug',                           code: 'ZG' },
-  { name: 'Zurich',                         code: 'ZH' },
-]
-
-function resolveCantonName(input: string): string {
-  const clean = input.trim()
-  // "Vaud (VD)" → "Vaud"
-  const withCode = clean.match(/^(.+?)\s*\([A-Z]{2}\)$/)
-  if (withCode) return withCode[1].trim()
-  // "VD" → "Vaud"
-  const byCode = CANTONS_WITH_CODES.find(c => c.code === clean.toUpperCase())
-  if (byCode) return byCode.name
-  return clean
-}
 
 const PAYS_FRONTALIERS = [
   'France', 'Allemagne', 'Italie', 'Autriche', 'Liechtenstein',
@@ -162,9 +124,10 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
     setForm(f => ({ ...f, ...patch }))
   }
 
+  const isValidCanton = (v: string) => CANTON_NAMES.some(n => n.toLowerCase() === v.toLowerCase())
   const step2Valid = form.residenceType === 'resident'
-    ? (form.canton !== '' && form.codePostal !== '' && form.trancheAge !== '')
-    : (form.pays !== '' && form.cantonTravail !== '' && form.trancheAge !== '')
+    ? (isValidCanton(form.canton) && form.codePostal !== '' && form.trancheAge !== '')
+    : (form.pays !== '' && isValidCanton(form.cantonTravail) && form.trancheAge !== '')
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -309,27 +272,11 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-[13px] font-medium text-ink mb-1.5">Canton</label>
-                  <input
-                    type="text"
-                    list="cantons-residence-list"
-                    placeholder="Vaud ou VD"
+                  <CantonCombobox
                     value={form.canton}
-                    onChange={e => {
-                      const v = e.target.value
-                      if (v.length === 2) {
-                        const resolved = resolveCantonName(v)
-                        if (resolved !== v) { set({ canton: resolved }); return }
-                      }
-                      set({ canton: v })
-                    }}
-                    onBlur={e => set({ canton: resolveCantonName(e.target.value) })}
-                    className="input-field !h-11 !text-[14px]"
+                    onChange={v => set({ canton: v })}
+                    placeholder="Vaud ou VD"
                   />
-                  <datalist id="cantons-residence-list">
-                    {CANTONS_WITH_CODES.map(c => (
-                      <option key={c.name} value={`${c.name} (${c.code})`} />
-                    ))}
-                  </datalist>
                 </div>
                 <div>
                   <label className="block text-[13px] font-medium text-ink mb-1.5">NPA</label>
@@ -386,27 +333,11 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
                 </div>
                 <div>
                   <label className="block text-[13px] font-medium text-ink mb-1.5">Canton de travail</label>
-                  <input
-                    type="text"
-                    list="cantons-travail-list"
-                    placeholder="Genève ou GE"
+                  <CantonCombobox
                     value={form.cantonTravail}
-                    onChange={e => {
-                      const v = e.target.value
-                      if (v.length === 2) {
-                        const resolved = resolveCantonName(v)
-                        if (resolved !== v) { set({ cantonTravail: resolved }); return }
-                      }
-                      set({ cantonTravail: v })
-                    }}
-                    onBlur={e => set({ cantonTravail: resolveCantonName(e.target.value) })}
-                    className="input-field !h-11 !text-[14px]"
+                    onChange={v => set({ cantonTravail: v })}
+                    placeholder="Genève ou GE"
                   />
-                  <datalist id="cantons-travail-list">
-                    {CANTONS_WITH_CODES.map(c => (
-                      <option key={c.name} value={`${c.name} (${c.code})`} />
-                    ))}
-                  </datalist>
                 </div>
               </div>
               <div>
