@@ -53,13 +53,40 @@ const STEP3_OPTIONS = [
   { id: 'retraite', label: 'Retraité(e)' },
 ]
 
-const CANTONS = [
-  'Argovie', 'Appenzell Rhodes-Extérieures', 'Appenzell Rhodes-Intérieures',
-  'Bâle-Campagne', 'Bâle-Ville', 'Berne', 'Fribourg', 'Genève', 'Glaris',
-  'Grisons', 'Jura', 'Lucerne', 'Neuchâtel', 'Nidwald', 'Obwald',
-  'Saint-Gall', 'Schaffhouse', 'Schwyz', 'Soleure', 'Tessin',
-  'Thurgovie', 'Uri', 'Valais', 'Vaud', 'Zoug', 'Zurich',
+const CANTONS_WITH_CODES: { name: string; code: string }[] = [
+  { name: 'Argovie',                       code: 'AG' },
+  { name: 'Appenzell Rhodes-Extérieures',  code: 'AR' },
+  { name: 'Appenzell Rhodes-Intérieures',  code: 'AI' },
+  { name: 'Bâle-Campagne',                 code: 'BL' },
+  { name: 'Bâle-Ville',                    code: 'BS' },
+  { name: 'Berne',                          code: 'BE' },
+  { name: 'Fribourg',                       code: 'FR' },
+  { name: 'Genève',                         code: 'GE' },
+  { name: 'Glaris',                         code: 'GL' },
+  { name: 'Grisons',                        code: 'GR' },
+  { name: 'Jura',                           code: 'JU' },
+  { name: 'Lucerne',                        code: 'LU' },
+  { name: 'Neuchâtel',                      code: 'NE' },
+  { name: 'Nidwald',                        code: 'NW' },
+  { name: 'Obwald',                         code: 'OW' },
+  { name: 'Saint-Gall',                     code: 'SG' },
+  { name: 'Schaffhouse',                    code: 'SH' },
+  { name: 'Schwyz',                         code: 'SZ' },
+  { name: 'Soleure',                        code: 'SO' },
+  { name: 'Tessin',                         code: 'TI' },
+  { name: 'Thurgovie',                      code: 'TG' },
+  { name: 'Uri',                            code: 'UR' },
+  { name: 'Valais',                         code: 'VS' },
+  { name: 'Vaud',                           code: 'VD' },
+  { name: 'Zoug',                           code: 'ZG' },
+  { name: 'Zurich',                         code: 'ZH' },
 ]
+
+function resolveCantonName(input: string): string {
+  const upper = input.trim().toUpperCase()
+  const byCode = CANTONS_WITH_CODES.find(c => c.code === upper)
+  return byCode ? byCode.name : input
+}
 
 const PAYS_FRONTALIERS = [
   'France', 'Allemagne', 'Italie', 'Autriche', 'Liechtenstein',
@@ -273,20 +300,29 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
 
           {/* Résident branch */}
           {form.residenceType === 'resident' && (
-            <div className="rounded-xl border border-edge bg-[#f8fafc] p-4 space-y-3">
+            <div className="rounded-md border border-edge bg-white p-4 space-y-3">
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-[13px] font-medium text-ink mb-1.5">Canton</label>
                   <input
                     type="text"
                     list="cantons-residence-list"
-                    placeholder="Vaud"
+                    placeholder="Vaud ou VD"
                     value={form.canton}
-                    onChange={e => set({ canton: e.target.value })}
+                    onChange={e => {
+                      const v = e.target.value
+                      if (v.length === 2) {
+                        const resolved = resolveCantonName(v)
+                        if (resolved !== v) { set({ canton: resolved }); return }
+                      }
+                      set({ canton: v })
+                    }}
+                    onBlur={e => set({ canton: resolveCantonName(e.target.value) })}
                     className="input-field !h-11"
                   />
                   <datalist id="cantons-residence-list">
-                    {CANTONS.map(c => <option key={c} value={c} />)}
+                    {CANTONS_WITH_CODES.map(c => <option key={c.name} value={c.name} />)}
+                    {CANTONS_WITH_CODES.map(c => <option key={`${c.code}-r`} value={c.code} label={c.name} />)}
                   </datalist>
                 </div>
                 <div>
@@ -326,7 +362,7 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
 
           {/* Frontalier branch */}
           {form.residenceType === 'frontalier' && (
-            <div className="rounded-xl border border-edge bg-[#f8fafc] p-4 space-y-3">
+            <div className="rounded-md border border-edge bg-white p-4 space-y-3">
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-[13px] font-medium text-ink mb-1.5">Pays</label>
@@ -347,13 +383,22 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
                   <input
                     type="text"
                     list="cantons-travail-list"
-                    placeholder="Genève"
+                    placeholder="Genève ou GE"
                     value={form.cantonTravail}
-                    onChange={e => set({ cantonTravail: e.target.value })}
+                    onChange={e => {
+                      const v = e.target.value
+                      if (v.length === 2) {
+                        const resolved = resolveCantonName(v)
+                        if (resolved !== v) { set({ cantonTravail: resolved }); return }
+                      }
+                      set({ cantonTravail: v })
+                    }}
+                    onBlur={e => set({ cantonTravail: resolveCantonName(e.target.value) })}
                     className="input-field !h-11"
                   />
                   <datalist id="cantons-travail-list">
-                    {CANTONS.map(c => <option key={c} value={c} />)}
+                    {CANTONS_WITH_CODES.map(c => <option key={c.name} value={c.name} />)}
+                    {CANTONS_WITH_CODES.map(c => <option key={`${c.code}-t`} value={c.code} label={c.name} />)}
                   </datalist>
                 </div>
               </div>
