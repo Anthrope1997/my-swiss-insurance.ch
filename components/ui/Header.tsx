@@ -208,9 +208,9 @@ export default function Header() {
                   {link.label}
                 </Link>
               ))}
-              <Link href="/lamal/comparateur" onClick={close}
+              <Link href="/lamal/cantons" onClick={close}
                 className="block pl-5 py-2.5 text-[14px] text-white hover:text-blue-300 border-t border-white/5">
-                Autres cantons →
+                Tous les cantons →
               </Link>
             </div>
           )}

@@ -241,18 +241,18 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
 
       {/* Step 2 — Situation */}
       {step === 2 && (
-        <div className="step-anim space-y-4">
+        <div className="step-anim space-y-3">
 
-          {/* Toggle Résident / Frontalier */}
-          <div className="flex rounded-lg border border-edge overflow-hidden">
+          {/* Segmented control */}
+          <div className="flex bg-cloud rounded-lg p-1 gap-1">
             <button
               type="button"
               onClick={() => set({ residenceType: 'resident' })}
               className={[
-                'flex-1 py-2.5 text-[13px] font-medium transition-colors duration-150',
+                'flex-1 py-2 text-[13px] font-medium rounded-md transition-all duration-150',
                 form.residenceType === 'resident'
-                  ? 'bg-brand text-white'
-                  : 'bg-white text-slate hover:bg-cloud',
+                  ? 'bg-white text-brand shadow-sm'
+                  : 'text-slate hover:text-ink',
               ].join(' ')}
             >
               Résident suisse
@@ -261,10 +261,10 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
               type="button"
               onClick={() => set({ residenceType: 'frontalier' })}
               className={[
-                'flex-1 py-2.5 text-[13px] font-medium border-l border-edge transition-colors duration-150',
+                'flex-1 py-2 text-[13px] font-medium rounded-md transition-all duration-150',
                 form.residenceType === 'frontalier'
-                  ? 'bg-brand text-white border-l-brand'
-                  : 'bg-white text-slate hover:bg-cloud',
+                  ? 'bg-white text-brand shadow-sm'
+                  : 'text-slate hover:text-ink',
               ].join(' ')}
             >
               Frontalier
@@ -273,7 +273,7 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
 
           {/* Résident branch */}
           {form.residenceType === 'resident' && (
-            <div className="space-y-3">
+            <div className="rounded-xl border border-edge bg-[#f8fafc] p-4 space-y-3">
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-[13px] font-medium text-ink mb-1.5">Canton</label>
@@ -304,23 +304,29 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
               </div>
               <div>
                 <label className="block text-[13px] font-medium text-ink mb-1.5">Tranche d'âge</label>
-                <select
-                  value={form.trancheAge}
-                  onChange={e => set({ trancheAge: e.target.value })}
-                  className="select-field !h-11"
-                >
-                  <option value="">Sélectionner</option>
-                  {TRANCHES_AGE.map(t => (
-                    <option key={t.value} value={t.value}>{t.label}</option>
-                  ))}
-                </select>
+                <div className="relative">
+                  <select
+                    value={form.trancheAge}
+                    onChange={e => set({ trancheAge: e.target.value })}
+                    className="select-field !h-11 pr-9"
+                  >
+                    <option value="">Sélectionner</option>
+                    {TRANCHES_AGE.map(t => (
+                      <option key={t.value} value={t.value}>{t.label}</option>
+                    ))}
+                  </select>
+                  <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate pointer-events-none"
+                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
               </div>
             </div>
           )}
 
           {/* Frontalier branch */}
           {form.residenceType === 'frontalier' && (
-            <div className="space-y-3">
+            <div className="rounded-xl border border-edge bg-[#f8fafc] p-4 space-y-3">
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-[13px] font-medium text-ink mb-1.5">Pays</label>
@@ -353,21 +359,27 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
               </div>
               <div>
                 <label className="block text-[13px] font-medium text-ink mb-1.5">Tranche d'âge</label>
-                <select
-                  value={form.trancheAge}
-                  onChange={e => set({ trancheAge: e.target.value })}
-                  className="select-field !h-11"
-                >
-                  <option value="">Sélectionner</option>
-                  {TRANCHES_AGE.map(t => (
-                    <option key={t.value} value={t.value}>{t.label}</option>
-                  ))}
-                </select>
+                <div className="relative">
+                  <select
+                    value={form.trancheAge}
+                    onChange={e => set({ trancheAge: e.target.value })}
+                    className="select-field !h-11 pr-9"
+                  >
+                    <option value="">Sélectionner</option>
+                    {TRANCHES_AGE.map(t => (
+                      <option key={t.value} value={t.value}>{t.label}</option>
+                    ))}
+                  </select>
+                  <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate pointer-events-none"
+                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
               </div>
             </div>
           )}
 
-          <div className="flex gap-3 pt-2">
+          <div className="flex gap-3 pt-1">
             <button onClick={() => setStep(1)} className="btn-secondary text-[14px] px-5 py-2.5">
               ← Retour
             </button>
