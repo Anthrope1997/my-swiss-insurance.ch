@@ -83,9 +83,14 @@ const CANTONS_WITH_CODES: { name: string; code: string }[] = [
 ]
 
 function resolveCantonName(input: string): string {
-  const upper = input.trim().toUpperCase()
-  const byCode = CANTONS_WITH_CODES.find(c => c.code === upper)
-  return byCode ? byCode.name : input
+  const clean = input.trim()
+  // "Vaud (VD)" → "Vaud"
+  const withCode = clean.match(/^(.+?)\s*\([A-Z]{2}\)$/)
+  if (withCode) return withCode[1].trim()
+  // "VD" → "Vaud"
+  const byCode = CANTONS_WITH_CODES.find(c => c.code === clean.toUpperCase())
+  if (byCode) return byCode.name
+  return clean
 }
 
 const PAYS_FRONTALIERS = [
@@ -318,11 +323,12 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
                       set({ canton: v })
                     }}
                     onBlur={e => set({ canton: resolveCantonName(e.target.value) })}
-                    className="input-field !h-11"
+                    className="input-field !h-11 !text-[14px]"
                   />
                   <datalist id="cantons-residence-list">
-                    {CANTONS_WITH_CODES.map(c => <option key={c.name} value={c.name} />)}
-                    {CANTONS_WITH_CODES.map(c => <option key={`${c.code}-r`} value={c.code} label={c.name} />)}
+                    {CANTONS_WITH_CODES.map(c => (
+                      <option key={c.name} value={`${c.name} (${c.code})`} />
+                    ))}
                   </datalist>
                 </div>
                 <div>
@@ -333,7 +339,7 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
                     placeholder="1000"
                     value={form.codePostal}
                     onChange={e => set({ codePostal: e.target.value })}
-                    className="input-field !h-11"
+                    className="input-field !h-11 !text-[14px]"
                     maxLength={4}
                   />
                 </div>
@@ -344,7 +350,7 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
                   <select
                     value={form.trancheAge}
                     onChange={e => set({ trancheAge: e.target.value })}
-                    className="select-field !h-11 pr-9"
+                    className="select-field !h-11 !text-[14px] pr-9"
                   >
                     <option value="">Sélectionner</option>
                     {TRANCHES_AGE.map(t => (
@@ -372,7 +378,7 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
                     placeholder="France"
                     value={form.pays}
                     onChange={e => set({ pays: e.target.value })}
-                    className="input-field !h-11"
+                    className="input-field !h-11 !text-[14px]"
                   />
                   <datalist id="pays-frontaliers-list">
                     {PAYS_FRONTALIERS.map(p => <option key={p} value={p} />)}
@@ -394,11 +400,12 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
                       set({ cantonTravail: v })
                     }}
                     onBlur={e => set({ cantonTravail: resolveCantonName(e.target.value) })}
-                    className="input-field !h-11"
+                    className="input-field !h-11 !text-[14px]"
                   />
                   <datalist id="cantons-travail-list">
-                    {CANTONS_WITH_CODES.map(c => <option key={c.name} value={c.name} />)}
-                    {CANTONS_WITH_CODES.map(c => <option key={`${c.code}-t`} value={c.code} label={c.name} />)}
+                    {CANTONS_WITH_CODES.map(c => (
+                      <option key={c.name} value={`${c.name} (${c.code})`} />
+                    ))}
                   </datalist>
                 </div>
               </div>
@@ -408,7 +415,7 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
                   <select
                     value={form.trancheAge}
                     onChange={e => set({ trancheAge: e.target.value })}
-                    className="select-field !h-11 pr-9"
+                    className="select-field !h-11 !text-[14px] pr-9"
                   >
                     <option value="">Sélectionner</option>
                     {TRANCHES_AGE.map(t => (
