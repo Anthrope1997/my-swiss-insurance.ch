@@ -82,7 +82,7 @@ export default function LeadForm({ compact = false }: { compact?: boolean }) {
         </div>
         <h3 className="font-semibold text-[#0f2040] text-lg mb-1">Demande envoyée !</h3>
         <p className="text-[#1d4ed8] text-[15px]">
-          Un expert vous contacte sous 24h pour vous accompagner.
+          Un expert vous contacte sous 24 heures pour vous accompagner.
         </p>
       </div>
     )
@@ -96,7 +96,7 @@ export default function LeadForm({ compact = false }: { compact?: boolean }) {
         <p className={`font-semibold text-[#0f2040] ${compact ? 'text-[16px]' : 'text-xl'}`}>
           Recevoir un conseil personnalisé
         </p>
-        <p className="text-[13px] text-[#475569] mt-0.5">Sans engagement · Réponse sous 24h</p>
+        <p className="text-[13px] text-[#475569] mt-0.5">Sans engagement, réponse sous 24 heures</p>
       </div>
 
       <form onSubmit={handleSubmit} className="px-6 py-5 space-y-4">

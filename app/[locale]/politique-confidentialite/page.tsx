@@ -56,10 +56,10 @@ export default function PolitiqueConfidentialitePage() {
           <p>
             Vos données sont traitées sur la base de votre <strong className="text-ink">consentement (LPD art. 6)</strong>{' '}
             dans le but de vous fournir une comparaison personnalisée des caisses maladie et de vous
-            mettre en relation avec un courtier ou conseiller en assurance maladie.
+            mettre en relation avec un expert en assurance maladie.
           </p>
           <p className="mt-3">
-            Vos données peuvent être transmises à des courtiers en assurance maladie agréés en Suisse
+            Vos données peuvent être transmises à des experts en assurance maladie agréés en Suisse
             dans le cadre de ce service. Ces tiers sont soumis aux mêmes obligations de confidentialité.
           </p>
         </section>

@@ -59,7 +59,7 @@ const STEP_CONTEXT = [
   'Dites-nous ce que vous recherchez',
   'Quelques infos sur votre situation',
   'Votre profil familial',
-  'Pour vous recontacter sous 24h',
+  'Pour vous recontacter sous 24 heures',
 ]
 
 interface FormData {
@@ -218,7 +218,7 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
               placeholder="1000"
               value={form.codePostal}
               onChange={e => set({ codePostal: e.target.value })}
-              className="input-field max-w-[160px]"
+              className="input-field"
               maxLength={4}
             />
           </div>
@@ -227,7 +227,7 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
             <select
               value={form.profil}
               onChange={e => set({ profil: e.target.value })}
-              className="select-field max-w-xs"
+              className="select-field"
             >
               <option value="">Sélectionner</option>
               <option value="adulte">Adulte (26 ans et plus)</option>
@@ -335,12 +335,12 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="w-full btn-primary py-4 text-[15px] mt-1 disabled:opacity-60"
+            className="w-full btn-primary h-12 text-[15px] mt-1 disabled:opacity-60"
           >
             {status === 'loading' ? 'Envoi en cours…' : 'Envoyer ma demande →'}
           </button>
           <p className="text-[12px] text-slate/60 text-center leading-relaxed">
-            Vos données sont protégées conformément à la LPD · Sans engagement · Réponse sous 24 heures
+            Vos données sont protégées conformément à la LPD, sans engagement, réponse sous 24 heures.
           </p>
           <button type="button" onClick={() => setStep(3)} className="block text-[13px] text-slate hover:text-ink">
             ← Retour

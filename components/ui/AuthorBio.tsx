@@ -14,10 +14,10 @@ export default function AuthorBio({ publishedDate, updatedDate }: AuthorBioProps
           La rédaction My Swiss Insurance
         </p>
         <p className="text-xs text-[#475569] mt-0.5">
-          Service éditorial indépendant · Lausanne, Suisse romande
+          Service éditorial indépendant, Lausanne, Suisse romande
         </p>
         <p className="text-xs text-[#475569] mt-0.5">
-          Publié le {publishedDate} · Mis à jour le {updatedDate}
+          Publié le {publishedDate}, mis à jour le {updatedDate}
         </p>
       </div>
       <div className="flex-shrink-0">

@@ -11,55 +11,47 @@ function ShieldIcon() {
 
 const columns: {
   title: string
-  wide?: boolean
   ctaLink?: { href: string; label: string }
   links: { href: string; label: string }[]
 }[] = [
   {
     title: 'Guides',
     links: [
-      { href: '/lamal/guide', label: 'Comprendre la LAMal' },
-      { href: '/lamal/franchise', label: 'Choisir sa franchise' },
-      { href: '/lamal/modeles', label: 'Les 4 modèles LAMal' },
-      { href: '/lamal/lamal-vs-lca', label: 'LAMal vs complémentaire' },
-      { href: '/lamal/changer-de-caisse', label: 'Changer de caisse' },
-      { href: '/lamal/comparateur', label: 'Comparateur de caisses' },
-      { href: '/lamal/subsides', label: 'Calculateur de subsides' },
+      { href: '/lamal/guide',            label: 'Comprendre la LAMal'   },
+      { href: '/lamal/franchise',        label: 'Choisir sa franchise'  },
+      { href: '/lamal/modeles',          label: 'Les 4 modèles LAMal'   },
+      { href: '/lamal/lamal-vs-lca',     label: 'LAMal vs complémentaire' },
+      { href: '/lamal/changer-de-caisse', label: 'Changer de caisse'    },
+      { href: '/lamal/comparateur',      label: 'Comparateur de caisses' },
+      { href: '/lamal/subsides',         label: 'Calculateur de subsides' },
     ],
   },
   {
     title: 'Par canton',
-    wide: true,
-    ctaLink: { href: '/lamal/comparateur', label: 'Autres cantons →' },
+    ctaLink: { href: '/lamal/cantons', label: 'Tous les cantons →' },
     links: [
-      { href: '/lamal/canton/berne',     label: 'Berne'     },
-      { href: '/lamal/canton/fribourg',  label: 'Fribourg'  },
-      { href: '/lamal/canton/geneve',    label: 'Genève'    },
-      { href: '/lamal/canton/jura',      label: 'Jura'      },
-      { href: '/lamal/canton/neuchatel', label: 'Neuchâtel' },
-      { href: '/lamal/canton/valais',    label: 'Valais'    },
-      { href: '/lamal/canton/vaud',      label: 'Vaud'      },
       { href: '/lamal/canton/zurich',    label: 'Zurich'    },
+      { href: '/lamal/canton/berne',     label: 'Berne'     },
+      { href: '/lamal/canton/vaud',      label: 'Vaud'      },
+      { href: '/lamal/canton/argovie',   label: 'Argovie'   },
+      { href: '/lamal/canton/saint-gall', label: 'Saint-Gall' },
+      { href: '/lamal/canton/geneve',    label: 'Genève'    },
     ],
   },
   {
     title: 'Par situation de vie',
     links: [
-      { href: '/lamal/guide',                label: 'Choisir sa LAMal'        },
-      { href: '/lamal/ma-situation',         label: 'Ma situation'            },
-      { href: '/lamal/ma-famille',           label: 'Ma famille'              },
-      { href: '/lamal/frontalier',           label: 'Frontaliers'             },
-      { href: '/lamal/frontalier-france',    label: 'Frontalier français'     },
-      { href: '/lamal/frontalier-allemagne', label: 'Frontalier allemand'     },
-      { href: '/lamal/frontalier-italie',    label: 'Frontalier italien'      },
+      { href: '/lamal/ma-situation', label: 'Ma situation' },
+      { href: '/lamal/ma-famille',   label: 'Ma famille'   },
+      { href: '/lamal/frontalier',   label: 'Frontaliers'  },
     ],
   },
   {
     title: 'Légal',
     links: [
-      { href: '/a-propos', label: 'À propos' },
-      { href: '/mentions-legales', label: 'Mentions légales' },
-      { href: '/politique-confidentialite', label: 'Confidentialité' },
+      { href: '/a-propos',           label: 'À propos'          },
+      { href: '/mentions-legales',   label: 'Mentions légales'  },
+      { href: '/confidentialite',    label: 'Confidentialité'   },
     ],
   },
 ]
@@ -68,7 +60,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#0f2040] text-white/60">
       <div className="container-xl pt-16 pb-12">
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-8 md:gap-10 mb-14">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-10 mb-14">
 
           {/* Brand col */}
           <div className="col-span-2 md:col-span-1">
@@ -85,40 +77,25 @@ export default function Footer() {
 
           {/* Link columns */}
           {columns.map((col) => (
-            <div key={col.title} className={col.wide ? 'md:col-span-2' : undefined}>
+            <div key={col.title}>
               <h3 className="text-white font-semibold text-[12px] uppercase tracking-widest mb-5">
                 {col.title}
               </h3>
-              {col.wide ? (
-                <>
-                  <ul className="grid grid-cols-2 gap-x-6 gap-y-2.5 mb-3">
-                    {col.links.map((link) => (
-                      <li key={link.href}>
-                        <Link href={link.href}
-                          className="text-[13px] hover:text-white transition-colors duration-150">
-                          {link.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                  {col.ctaLink && (
-                    <Link href={col.ctaLink.href}
-                      className="text-[13px] text-[#93c5fd] hover:text-white transition-colors duration-150">
-                      {col.ctaLink.label}
+              <ul className="space-y-3">
+                {col.links.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href}
+                      className="text-[14px] hover:text-white transition-colors duration-150">
+                      {link.label}
                     </Link>
-                  )}
-                </>
-              ) : (
-                <ul className="space-y-3">
-                  {col.links.map((link) => (
-                    <li key={link.href}>
-                      <Link href={link.href}
-                        className="text-[14px] hover:text-white transition-colors duration-150">
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                  </li>
+                ))}
+              </ul>
+              {col.ctaLink && (
+                <Link href={col.ctaLink.href}
+                  className="inline-block mt-3 text-[13px] text-[#93c5fd] hover:text-white transition-colors duration-150">
+                  {col.ctaLink.label}
+                </Link>
               )}
             </div>
           ))}
@@ -130,10 +107,10 @@ export default function Footer() {
             Sources officielles :{' '}
             <a href="https://www.bag.admin.ch" target="_blank" rel="noopener"
               className="hover:text-slate-300 transition-colors">OFSP</a>
-            {' · '}
+            {' / '}
             <a href="https://www.admin.ch" target="_blank" rel="noopener"
               className="hover:text-slate-300 transition-colors">admin.ch</a>
-            {' · '}
+            {' / '}
             <a href="https://www.priminfo.ch" target="_blank" rel="noopener"
               className="hover:text-slate-300 transition-colors">priminfo.ch</a>
           </p>

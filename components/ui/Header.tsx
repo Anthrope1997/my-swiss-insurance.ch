@@ -136,7 +136,7 @@ export default function Header() {
 
           {/* LAMal */}
           <Link href="/lamal" onClick={close}
-            className="flex items-center gap-3 py-3 text-[15px] text-slate-200 hover:text-white border-b border-white/10">
+            className="flex items-center gap-3 py-3 text-[15px] text-slate-200 hover:text-blue-300 border-b border-white/10">
             <span className="w-7 h-7 rounded-md bg-white/10 flex items-center justify-center shrink-0">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
@@ -148,7 +148,7 @@ export default function Header() {
 
           {/* Comparateur */}
           <Link href="/lamal/comparateur" onClick={close}
-            className="flex items-center gap-3 py-3 text-[15px] text-slate-200 hover:text-white border-b border-white/10">
+            className="flex items-center gap-3 py-3 text-[15px] text-slate-200 hover:text-blue-300 border-b border-white/10">
             <span className="w-7 h-7 rounded-md bg-white/10 flex items-center justify-center shrink-0">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
@@ -161,7 +161,7 @@ export default function Header() {
           {/* Par situation — expandable */}
           <button
             onClick={() => toggleSection('situation')}
-            className="w-full flex items-center gap-3 py-3 text-[15px] text-slate-200 hover:text-white border-b border-white/10"
+            className="w-full flex items-center gap-3 py-3 text-[15px] text-slate-200 hover:text-blue-300 border-b border-white/10"
           >
             <span className="w-7 h-7 rounded-md bg-white/10 flex items-center justify-center shrink-0">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -176,7 +176,7 @@ export default function Header() {
             <div className="bg-white/5 border-b border-white/10">
               {situationLinks.map(link => (
                 <Link key={link.href} href={link.href} onClick={close}
-                  className="flex items-center gap-3 pl-5 py-2.5 text-[14px] text-slate-300 hover:text-white border-b border-white/5 last:border-0">
+                  className="flex items-center gap-3 pl-5 py-2.5 text-[14px] text-slate-300 hover:text-blue-300 border-b border-white/5 last:border-0">
                   <span className="text-white/40">{link.icon}</span>
                   {link.label}
                 </Link>
@@ -187,7 +187,7 @@ export default function Header() {
           {/* Par canton — expandable */}
           <button
             onClick={() => toggleSection('canton')}
-            className="w-full flex items-center gap-3 py-3 text-[15px] text-slate-200 hover:text-white border-b border-white/10"
+            className="w-full flex items-center gap-3 py-3 text-[15px] text-slate-200 hover:text-blue-300 border-b border-white/10"
           >
             <span className="w-7 h-7 rounded-md bg-white/10 flex items-center justify-center shrink-0">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -204,12 +204,12 @@ export default function Header() {
             <div className="bg-white/5 border-b border-white/10">
               {hamburgerCantonLinks.map(link => (
                 <Link key={link.href} href={link.href} onClick={close}
-                  className="block pl-5 py-2.5 text-[14px] text-slate-300 hover:text-white border-b border-white/5">
+                  className="block pl-5 py-2.5 text-[14px] text-slate-300 hover:text-blue-300 border-b border-white/5">
                   {link.label}
                 </Link>
               ))}
               <Link href="/lamal/comparateur" onClick={close}
-                className="block pl-5 py-2.5 text-[14px] text-[#93c5fd] hover:text-white border-t border-white/5">
+                className="block pl-5 py-2.5 text-[14px] text-[#93c5fd] hover:text-blue-300 border-t border-white/5">
                 Autres cantons →
               </Link>
             </div>

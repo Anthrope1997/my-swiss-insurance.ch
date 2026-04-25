@@ -299,7 +299,7 @@ export default function GuideLamalPage() {
               </p>
               <div className="callout text-[15px]">
                 <strong className="text-ink">Source :</strong>{' '}
-                OFSP (bag.admin.ch) · art. 3 LAMal (RS 832.10)
+                OFSP (bag.admin.ch), art. 3 LAMal (RS 832.10)
               </div>
 
               <CtaLink
@@ -447,7 +447,7 @@ export default function GuideLamalPage() {
 
               <CtaExpert
                 title="Un expert vous trouve la meilleure caisse pour votre profil"
-                sub="Gratuit · Sans engagement · Réponse sous 24h"
+                sub="Gratuit, sans engagement, réponse sous 24 heures."
               />
             </section>
 
@@ -575,7 +575,7 @@ export default function GuideLamalPage() {
                 Les écarts de primes entre caisses au sein d'une même région OFSP sont significatifs.
                 Voici l'économie maximale réalisable en choisissant la caisse la moins chère plutôt
                 que la plus chère, dans la région la plus avantageuse du canton.
-                Profil : adulte ~35 ans · modèle standard · franchise CHF 300.
+                Profil : adulte 35 ans, modèle standard, franchise 300 CHF.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                 {economies.map((r) => (
@@ -597,7 +597,7 @@ export default function GuideLamalPage() {
 
               <CtaExpert
                 title="Un expert compare pour vous et gère le changement"
-                sub="Gratuit · Sans engagement · Réponse sous 24h"
+                sub="Gratuit, sans engagement, réponse sous 24 heures."
               />
             </section>
 
@@ -708,7 +708,7 @@ export default function GuideLamalPage() {
 
               <div className="bg-white border border-edge rounded-xl p-5">
                 <p className="text-[13px] font-semibold text-ink mb-1">Être rappelé par un expert</p>
-                <p className="text-[13px] text-slate mb-4">Gratuit, sans engagement, sous 24h</p>
+                <p className="text-[13px] text-slate mb-4">Gratuit, sans engagement, réponse sous 24 heures</p>
                 <a href="#contact"
                   className="block text-center text-[13px] font-medium text-white bg-brand hover:bg-brand-dark rounded-md py-2.5 transition-colors">
                   Prendre contact →

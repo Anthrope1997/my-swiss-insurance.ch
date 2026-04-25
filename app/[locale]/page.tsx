@@ -64,39 +64,9 @@ const webSiteSchema = {
 // ── Données ──────────────────────────────────────────────────────────────────
 
 const stats = [
-  {
-    value: "2'753 CHF",
-    label: 'Économie annuelle possible',
-    sub: 'à Genève, adulte 35 ans',
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75}
-          d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-      </svg>
-    ),
-  },
-  {
-    value: '34',
-    label: 'Caisses comparées',
-    sub: 'données OFSP 2026',
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75}
-          d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-      </svg>
-    ),
-  },
-  {
-    value: '25 à 30 %',
-    label: 'Bénéficiaires de subsides',
-    sub: 'de la population suisse',
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75}
-          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-      </svg>
-    ),
-  },
+  { value: "2'753 CHF", label: 'Économie annuelle possible', sub: 'à Genève, adulte 35 ans' },
+  { value: '34',        label: 'Caisses comparées',          sub: 'données OFSP 2026'        },
+  { value: '25 à 30 %', label: 'Bénéficiaires de subsides',  sub: 'de la population suisse'  },
 ]
 
 const guides = [
@@ -220,7 +190,7 @@ export default function HomePage() {
       <section className="bg-white pt-20 pb-16 sm:pt-28 sm:pb-20">
         <div className="container-xl">
 
-          <div className="badge mb-5">Données OFSP · Suisse · 2026</div>
+          <div className="badge mb-5">Données OFSP 2026</div>
 
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-5 max-w-2xl">
             Économisez sur votre assurance maladie suisse en 2026
@@ -235,16 +205,10 @@ export default function HomePage() {
           {/* Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10 pb-10 border-b border-edge">
             {stats.map(s => (
-              <div key={s.label} className="flex items-start gap-3 bg-cloud/60 border border-edge rounded-xl px-5 py-4">
-                <div className="w-9 h-9 bg-[#dbeafe] border border-[#1d4ed8]/20 rounded-lg
-                                flex items-center justify-center text-brand shrink-0">
-                  {s.icon}
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
-                  <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
-                  <div className="text-[12px] text-slate mt-0.5">{s.sub}</div>
-                </div>
+              <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
+                <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
+                <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
+                <div className="text-[12px] text-slate mt-0.5">{s.sub}</div>
               </div>
             ))}
           </div>
@@ -262,7 +226,7 @@ export default function HomePage() {
             </div>
             <div className="flex flex-col items-start gap-1.5">
               <a href="#formulaire" className="btn-secondary text-[15px] py-3.5 px-7">
-                Être rappelé par un expert sous 24h
+                Être rappelé par un expert sous 24 heures
               </a>
               <span className="text-[12px] text-slate/60 pl-1">Gratuit, sans engagement</span>
             </div>
@@ -287,23 +251,19 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
-            {guides.map((g, idx) => (
+            {guides.map(g => (
               <Link
                 key={g.href} href={g.href}
                 className="group flex flex-col bg-white border border-edge rounded-xl p-6
                            hover:border-brand hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
               >
-                <div className="flex items-start justify-between mb-4">
+                <div className="mb-4">
                   <div className="w-9 h-9 bg-[#dbeafe] border border-[#1d4ed8]/20 rounded-lg
                                   flex items-center justify-center text-brand
                                   group-hover:bg-brand group-hover:text-white group-hover:border-brand
                                   transition-colors duration-200">
                     {g.icon}
                   </div>
-                  <span className="w-6 h-6 rounded-full bg-cloud border border-edge
-                                   flex items-center justify-center text-[11px] font-bold text-slate/50">
-                    {idx + 1}
-                  </span>
                 </div>
                 <h3 className="font-semibold text-ink text-[16px] mb-2
                                group-hover:text-brand transition-colors">
