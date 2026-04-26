@@ -6,12 +6,12 @@ import Link from 'next/link'
 import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
 
 export const metadata: Metadata = {
-  title: 'Franchise LAMal 2026 : quel montant choisir ? Break-even calculé',
+  title: 'Franchise LAMal 2026 : quel montant choisir ? Seuils d\'équilibre calculés',
   description:
-    'Franchise LAMal 300 à 2500 CHF : tableau break-even, différence avec la quote-part, franchise enfant et changement. Guide complet 2026.',
+    'Franchise LAMal 300 à 2500 CHF : tableau des seuils d\'équilibre, différence avec la quote-part, franchise enfant et changement. Guide complet 2026.',
   openGraph: {
     title: 'Franchise LAMal 2026 : quel montant choisir ?',
-    description: 'Franchise LAMal : break-even, quote-part, enfants. Guide 2026.',
+    description: 'Franchise LAMal : seuils d\'équilibre, quote-part, enfants. Guide 2026.',
     url: 'https://my-swiss-insurance.ch/lamal/franchise',
     type: 'article',
   },
@@ -32,7 +32,7 @@ const faqItems = [
   {
     question: 'Quelle franchise LAMal choisir en 2026 ?',
     answer:
-      "Choisissez la franchise 300 CHF si vos frais médicaux annuels dépassent environ CHF 1'440. Optez pour 2500 CHF si vous êtes en bonne santé : vous économisez ~CHF 120/mois sur la prime mais assumez jusqu'à CHF 2'500 de frais. Le break-even entre les deux franchises extrêmes se situe autour de CHF 1'440 de dépenses médicales annuelles.",
+      "Choisissez la franchise 300 CHF si vos frais médicaux annuels dépassent environ CHF 1'440. Optez pour 2500 CHF si vous êtes en bonne santé : vous économisez ~CHF 120/mois sur la prime mais assumez jusqu'à CHF 2'500 de frais. Le seuil d'équilibre entre les deux franchises extrêmes se situe autour de CHF 1'440 de dépenses médicales annuelles.",
   },
   {
     question: "Peut-on changer de franchise en cours d'année ?",
@@ -149,13 +149,13 @@ export default function FranchisePage() {
               </div>
             </section>
 
-            {/* Tableau break-even */}
+            {/* Tableau seuil d'équilibre */}
             <section id="tableau">
               <h2 className="text-2xl font-semibold text-ink mb-4">
-                Tableau des franchises avec break-even (Zurich, adulte, modèle standard)
+                Tableau des franchises avec seuil d'équilibre (Zurich, adulte, modèle standard)
               </h2>
               <p className="text-[15px] text-slate mb-5">
-                Le <strong>break-even</strong> indique le niveau de frais médicaux annuels à partir
+                Le <strong>seuil d'équilibre</strong> indique le niveau de frais médicaux annuels à partir
                 duquel il vaut mieux avoir la franchise 300 CHF plutôt que la franchise indiquée.
                 En dessous de ce seuil, la franchise élevée est plus avantageuse.
               </p>
@@ -167,7 +167,7 @@ export default function FranchisePage() {
                       <th className="text-right">Prime/mois</th>
                       <th className="text-right">Éco. prime/mois</th>
                       <th className="text-right hidden sm:table-cell">Éco. prime/an</th>
-                      <th className="text-center hidden sm:table-cell">Break-even</th>
+                      <th className="text-center hidden sm:table-cell">Seuil d'équilibre</th>
                       <th className="hidden md:table-cell">Profil recommandé</th>
                     </tr>
                   </thead>
@@ -194,7 +194,7 @@ export default function FranchisePage() {
               </p>
 
               <div className="callout">
-                <p className="font-semibold text-ink mb-2">Comment lire le break-even ?</p>
+                <p className="font-semibold text-ink mb-2">Comment lire le seuil d'équilibre ?</p>
                 <p className="text-[15px] mb-2">
                   <strong>Franchise 300 vs 2500 CHF :</strong> économie annuelle sur la prime = CHF 1'440.
                   Si vos frais médicaux annuels dépassent CHF 1'440, la franchise 300 CHF est plus avantageuse.

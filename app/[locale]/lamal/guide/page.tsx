@@ -8,7 +8,7 @@ import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
 export const metadata: Metadata = {
   title: 'Guide complet LAMal 2026 — Primes, franchises, modèles et subsides',
   description:
-    "Guide LAMal 2026 : primes par canton (OFSP), franchises 300–2500 CHF avec break-even, 4 modèles d'assurance, changement de caisse et subsides.",
+    "Guide LAMal 2026 : primes par canton (OFSP), franchises 300–2500 CHF avec seuil d'équilibre, 4 modèles d'assurance, changement de caisse et subsides.",
   openGraph: {
     title: 'Guide complet LAMal 2026 — Primes, franchises et subsides',
     description: 'La référence LAMal 2026 : primes par canton, franchises, modèles et subsides. Données OFSP.',
@@ -35,7 +35,7 @@ const faqItems = [
   },
   {
     question: 'Quelle franchise LAMal choisir ?',
-    answer: "Choisissez la franchise 300 CHF si vos frais médicaux annuels dépassent environ CHF 1'440. Optez pour 2500 CHF si vous êtes en bonne santé : vous économisez ~CHF 120/mois sur la prime mais prenez en charge jusqu'à CHF 2'500 de frais. Le break-even entre les deux extrêmes se situe autour de CHF 1'440 de dépenses médicales annuelles.",
+    answer: "Choisissez la franchise 300 CHF si vos frais médicaux annuels dépassent environ CHF 1'440. Optez pour 2500 CHF si vous êtes en bonne santé : vous économisez ~CHF 120/mois sur la prime mais prenez en charge jusqu'à CHF 2'500 de frais. Le seuil d'équilibre entre les deux extrêmes se situe autour de CHF 1'440 de dépenses médicales annuelles.",
   },
   {
     question: "Peut-on changer de caisse maladie en cours d'année ?",
@@ -143,39 +143,9 @@ const toc = [
 ]
 
 const heroStats = [
-  {
-    value: '34',
-    label: 'Caisses agréées',
-    sub: 'données OFSP 2026',
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75}
-          d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-      </svg>
-    ),
-  },
-  {
-    value: "2'753 CHF",
-    label: 'Économie max. possible',
-    sub: 'à Genève, adulte 35 ans',
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75}
-          d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-      </svg>
-    ),
-  },
-  {
-    value: '26',
-    label: 'Cantons couverts',
-    sub: 'primes officielles OFSP',
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75}
-          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0zM15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-      </svg>
-    ),
-  },
+  { value: '34',       label: 'Caisses agréées',        sub: 'données OFSP 2026'          },
+  { value: "2'753 CHF", label: 'Économie max. possible', sub: 'à Genève, adulte 35 ans'    },
+  { value: '26',       label: 'Cantons couverts',        sub: 'primes officielles OFSP'    },
 ]
 
 // ── Reusable CTA blocks ──────────────────────────────────────────────────────
@@ -230,23 +200,17 @@ export default function GuideLamalPage() {
             Guide complet LAMal 2026
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
-            Primes par canton, franchises avec break-even, 4 modèles d'assurance,
+            Primes par canton, franchises et seuil d'équilibre, 4 modèles d'assurance,
             changement de caisse et subsides. La référence LAMal en Suisse romande.
           </p>
 
           {/* Stats strip */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {heroStats.map(s => (
-              <div key={s.label} className="flex items-start gap-3 bg-cloud/60 border border-edge rounded-xl px-5 py-4">
-                <div className="w-9 h-9 bg-[#dbeafe] border border-[#1d4ed8]/20 rounded-lg
-                                flex items-center justify-center text-brand shrink-0">
-                  {s.icon}
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
-                  <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
-                  <div className="text-[12px] text-slate mt-0.5">{s.sub}</div>
-                </div>
+              <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
+                <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
+                <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
+                <div className="text-[12px] text-slate mt-0.5">{s.sub}</div>
               </div>
             ))}
           </div>
@@ -468,7 +432,7 @@ export default function GuideLamalPage() {
                       <th className="text-right">Prime/mois</th>
                       <th className="text-right">Économie/an</th>
                       <th className="text-right hidden sm:table-cell">Économie/mois</th>
-                      <th className="text-center hidden sm:table-cell">Break-even</th>
+                      <th className="text-center hidden sm:table-cell">Seuil d'équilibre</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -490,13 +454,13 @@ export default function GuideLamalPage() {
               </div>
 
               <div className="callout">
-                <p className="font-semibold text-ink mb-2">Comment calculer le break-even ?</p>
+                <p className="font-semibold text-ink mb-2">Comment calculer le seuil d'équilibre ?</p>
                 <p className="text-[15px] mb-2">
-                  <strong>Formule :</strong> Break-even = Différence de franchise − Économie annuelle sur la prime
+                  <strong>Formule :</strong> Seuil d'équilibre = Différence de franchise − Économie annuelle sur la prime
                 </p>
                 <p className="text-[15px]">
                   <strong>Exemple 300 vs 2500 CHF :</strong> différence = CHF 2'200,
-                  économie annuelle = CHF 1'224. Break-even = CHF 976.
+                  économie annuelle = CHF 1'224. Seuil d'équilibre = CHF 976.
                   Si vos frais annuels dépassent <strong>CHF 976</strong>, la franchise 300 CHF est plus avantageuse.
                 </p>
               </div>
@@ -504,7 +468,7 @@ export default function GuideLamalPage() {
               <CtaLink
                 href="/lamal/franchise"
                 title="Guide détaillé : choisir sa franchise LAMal"
-                sub="Simulateur break-even et conseils par profil"
+                sub="Tableau des seuils d'équilibre et conseils par profil"
               />
             </section>
 
@@ -668,7 +632,7 @@ export default function GuideLamalPage() {
                 seuils, résidence permanente en Suisse, familles monoparentales prioritaires.
               </p>
               <p className="article-p">
-                Dans plusieurs cantons (VD, GE, NE, BE), les subsides sont attribués automatiquement sur
+                Dans certains cantons, les subsides sont attribués automatiquement sur
                 la base de la déclaration d'impôts. Pour les autres, une demande est à déposer auprès du
                 service cantonal compétent, généralement avant le 31 mars.
               </p>

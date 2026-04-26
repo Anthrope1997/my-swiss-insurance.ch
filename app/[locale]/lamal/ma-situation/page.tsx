@@ -178,7 +178,7 @@ export default function MaSituationPage() {
                     <Link href="/lamal/franchise" className="text-brand hover:underline">
                       page franchise
                     </Link>{' '}
-                    pour le tableau break-even complet.
+                    pour le tableau des seuils d'équilibre complet.
                   </p>
                 </div>
               </div>
