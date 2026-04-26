@@ -384,10 +384,10 @@ export default function PageSlug() {
             ))}
           </div>
 
-          {/* CTA hero — vers comparateur */}
-          <Link href="/lamal/comparateur" className="btn-primary text-[15px]">
-            Comparer les primes dans mon canton →
-          </Link>
+          {/* CTA hero — unique point de conversion, scroll vers formulaire */}
+          <a href="#contact" className="btn-primary text-[15px]">
+            Être conseillé gratuitement →
+          </a>
 
         </div>
       </section>
@@ -409,12 +409,7 @@ export default function PageSlug() {
                   </li>
                 ))}
               </ul>
-              <div className="mt-8 px-4">
-                <Link href="/lamal/comparateur"
-                  className="block text-center text-[13px] font-medium text-white bg-brand hover:bg-brand-dark rounded-md py-2.5 transition-colors">
-                  Comparer ma prime →
-                </Link>
-              </div>
+              {/* Pas de bouton de conversion dans le TOC — value first */}
             </nav>
           </aside>
 
@@ -427,12 +422,12 @@ export default function PageSlug() {
               <p className="article-p">{intro_section}</p>
               {/* Contenu : article-p, article-h3, stripe-table, callout */}
 
-              {/* CTA section — un seul par section */}
-              <div className="mt-6">
-                <Link href="{dest}" className="btn-secondary text-[14px]">
-                  {texte_cta} →
+              {/* Liens texte vers autres pages — PAS de bouton de conversion */}
+              <p className="article-p">
+                <Link href="{dest}" className="text-brand hover:underline">
+                  {texte_lien} →
                 </Link>
-              </div>
+              </p>
             </section>
 
             {/* Tableau stripe-table */}
@@ -558,35 +553,38 @@ Structure :
 
 ## 6. Formulaire multi-étapes — invariants
 
-**Titre (immuable) :** `Vous préférez qu'on s'occupe de tout ?`
+Formulaire fixe en bas de chaque page, juste avant le footer.
+Position dans le layout : après les guides associés, avant `</main>`.
 
-**Sous-titre (immuable) :** `Un expert analyse votre profil, trouve la meilleure caisse pour votre situation et gère le changement de votre côté. Gratuit, sans engagement, réponse sous 24 heures.`
+**Titre (immuable) :** `Besoin d'aide ?`
 
-**Code minimal :**
+**Sous-titre (immuable) :** `Un expert vous rappelle sous 24 heures pour établir avec vous une solution personnalisée. Gratuit, sans engagement.`
+
+**Code minimal (pages guides) :**
 ```tsx
-<div id="contact" className="scroll-mt-20">
+<div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4">
   <h2 className="text-2xl font-semibold text-ink mb-3">
-    Vous préférez qu'on s'occupe de tout ?
+    Besoin d'aide ?
   </h2>
   <p className="text-[16px] text-slate mb-6 leading-relaxed">
-    Un expert analyse votre profil, trouve la meilleure caisse pour votre situation
-    et gère le changement de votre côté. Gratuit, sans engagement, réponse sous 24 heures.
+    Un expert vous rappelle sous 24 heures pour établir avec vous une solution
+    personnalisée. Gratuit, sans engagement.
   </p>
   <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
 </div>
 ```
 
-**Section formulaire sur la homepage :**
+**Code minimal (homepage) :**
 ```tsx
 <section id="formulaire" className="bg-cloud border-y border-edge py-10 sm:py-16 scroll-mt-16">
   <div className="container-xl max-w-2xl">
     <div className="text-center mb-6">
       <h2 className="text-2xl sm:text-3xl font-bold text-ink leading-tight mb-3">
-        Vous préférez qu'on s'occupe de tout ?
+        Besoin d'aide ?
       </h2>
       <p className="text-[15px] sm:text-[17px] text-slate leading-relaxed">
-        Un expert analyse votre profil, trouve la meilleure caisse pour votre situation
-        et gère le changement de votre côté. Gratuit, sans engagement, réponse sous 24 heures.
+        Un expert vous rappelle sous 24 heures pour établir avec vous une solution
+        personnalisée. Gratuit, sans engagement.
       </p>
     </div>
     <MultiStepLeadForm redirectOnSuccess="/merci" />
@@ -599,20 +597,47 @@ Hauteur champs standalone (`input-field` par défaut) : `h-12` (48px).
 
 ---
 
-## 7. Logique CTA
+## 7. Logique CTA — value first
 
-Un seul CTA par section. Jamais deux boutons côte à côte dans une section article.
+**Philosophie :** on apporte de la valeur, on laisse l'utilisateur venir naturellement au formulaire.
+Deux points de conversion par page, pas un de plus.
 
-| Intention | Composant | Destination |
+### Point 1 — Hero (unique bouton de conversion visible)
+
+```tsx
+<a href="#contact" className="btn-primary text-[15px]">
+  Être conseillé gratuitement →
+</a>
+```
+
+Un seul bouton `btn-primary` dans le hero. Il scrolle vers le formulaire en bas de page.
+Jamais de bouton hero vers `/lamal/comparateur` ou une autre page.
+
+### Point 2 — Formulaire fixe en bas de page
+
+Voir section 6. Titre et sous-titre immuables. Soumission → /fr/merci.
+
+### Dans le corps des sections : liens texte uniquement
+
+```tsx
+{/* Lien texte vers une autre page de contenu */}
+<Link href="/lamal/franchise" className="text-brand hover:underline">
+  Comprendre les franchises LAMal →
+</Link>
+```
+
+- **Aucun bouton** (`btn-primary`, `btn-secondary`) dans le corps des sections article
+- **Aucun nudge sombre** (`bg-[#0f2040]`, `bg-ink`, etc.)
+- **Aucun nudge intermédiaire** (encadrés `bg-cloud` avec `btn-primary`) entre les sections
+- Les liens texte pointent uniquement vers d'autres pages de contenu (guides, cantons, situations)
+- Ils ne pointent jamais vers `#contact` ou `/lamal/comparateur` depuis le corps d'une section
+
+| Zone | Type | Exemple |
 |---|---|---|
-| Comparateur de primes | `btn-primary` (Link) | /lamal/comparateur |
-| Formulaire expert | `btn-primary` (Link ou `<a href="#contact">`) | #contact |
-| Guide détaillé | `btn-secondary` (Link) | /lamal/{slug} |
-| Pas d'action pertinente | Aucun | — |
-
-CTA hero : toujours `btn-primary` vers `/lamal/comparateur`.
-CTA formulaire (dans article) : `<a href="#contact">` avec `btn-primary`.
-CTA navigation : `btn-secondary`.
+| Hero | `btn-primary` → `#contact` | `Être conseillé gratuitement →` |
+| Corps section | Lien texte `text-brand` | `Comprendre les franchises →` |
+| TOC sidebar | Aucun bouton | — |
+| Formulaire | `btn-primary` submit | `Envoyer ma demande →` |
 
 ---
 
@@ -664,12 +689,17 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 - [ ] Aucun mot anglais, point médian, tiret long, abréviation
 - [ ] CHF suivi de "par mois" ou "par an"
 - [ ] Jamais "courtier" (→ "expert"), jamais "+" dans les labels
-- [ ] Un seul CTA par section
+
+**CTAs**
+- [ ] Hero : un seul `btn-primary` → `#contact` ("Être conseillé gratuitement →")
+- [ ] Corps des sections : liens texte `text-brand` uniquement, jamais de bouton
+- [ ] Aucun nudge sombre ou intermédiaire entre les sections
+- [ ] TOC sidebar : aucun bouton de conversion
 
 **Structure**
 - [ ] Bandeau MSI entre `<Breadcrumb>` et `<h1>`
 - [ ] FAQ avant le formulaire
-- [ ] Formulaire avec titre/sous-titre immuables, `redirectOnSuccess="/fr/merci"`
+- [ ] Formulaire titre "Besoin d'aide ?", sous-titre immuable, `redirectOnSuccess="/fr/merci"`
 - [ ] Ancre `id="contact"` avec `scroll-mt-20` sur le formulaire
 
 **SEO**
