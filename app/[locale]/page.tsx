@@ -65,7 +65,7 @@ const webSiteSchema = {
 
 const stats = [
   { value: "2'753 CHF", label: 'Économie annuelle possible', sub: 'à Genève, adulte 35 ans' },
-  { value: '34',        label: 'Caisses comparées',          sub: 'données OFSP 2026'        },
+  { value: '34',        label: 'Caisses agréées',            sub: 'données OFSP 2026'        },
   { value: '25 à 30 %', label: 'Bénéficiaires de subsides',  sub: 'de la population suisse'  },
 ]
 
@@ -216,7 +216,7 @@ export default function HomePage() {
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-3 sm:items-start">
             <div className="flex flex-col items-start gap-1.5">
-              <Link href="/lamal/comparateur" className="btn-primary text-[15px] py-3.5 px-7">
+              <Link href="/lamal/comparateur" className="btn-primary text-[15px] py-3.5 px-7 w-full sm:w-auto">
                 Comparer les primes gratuitement
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -225,7 +225,7 @@ export default function HomePage() {
               <span className="text-[12px] text-slate/60 pl-1">Résultat immédiat, sans inscription</span>
             </div>
             <div className="flex flex-col items-start gap-1.5">
-              <a href="#formulaire" className="btn-secondary text-[15px] py-3.5 px-7">
+              <a href="#formulaire" className="btn-secondary text-[15px] py-3.5 px-7 w-full sm:w-auto">
                 Être rappelé par un expert sous 24 heures
               </a>
               <span className="text-[12px] text-slate/60 pl-1">Gratuit, sans engagement</span>
@@ -433,14 +433,14 @@ export default function HomePage() {
       </section>
 
       {/* ── 6. FORMULAIRE ───────────────────────────────────────────────────── */}
-      <section id="formulaire" className="bg-cloud border-y border-edge py-20 scroll-mt-16">
+      <section id="formulaire" className="bg-cloud border-y border-edge py-10 sm:py-16 scroll-mt-16">
         <div className="container-xl max-w-2xl">
 
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
+          <div className="text-center mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold text-ink leading-tight mb-3">
               Vous préférez qu'on s'occupe de tout ?
             </h2>
-            <p className="text-[17px] text-slate leading-relaxed">
+            <p className="text-[15px] sm:text-[17px] text-slate leading-relaxed">
               Un expert analyse votre profil, trouve la meilleure caisse pour votre situation
               et gère le changement de votre côté. Gratuit, sans engagement, réponse sous
               24 heures.
