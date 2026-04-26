@@ -31,7 +31,7 @@ const faqItems = [
   {
     question: 'Quelle franchise LAMal choisir en 2026 ?',
     answer:
-      "Choisissez la franchise 300 CHF si vos frais médicaux annuels dépassent environ CHF 1'440 par an. Optez pour la franchise 2 500 CHF si vous êtes en bonne santé : vous économisez environ CHF 120 par mois sur la prime mais vous assumez jusqu'à CHF 2'500 par an de frais médicaux. Le seuil d'équilibre entre les deux franchises extrêmes se situe autour de CHF 1'440 par an.",
+      "Choisissez la franchise 300 CHF si vos frais médicaux annuels dépassent environ CHF 1 440 par an. Optez pour la franchise 2 500 CHF si vous êtes en bonne santé : vous économisez environ CHF 120 par mois sur la prime mais vous assumez jusqu'à CHF 2 500 par an de frais médicaux. Le seuil d'équilibre entre les deux franchises extrêmes se situe autour de CHF 1 440 par an.",
   },
   {
     question: "Peut-on changer de franchise en cours d'année ?",
@@ -72,16 +72,16 @@ const faqSchema = {
 
 const franchises = [
   { montant: 300,  prime: 564.61, ecMois: 0,      ecAnn: 0,    seuilEquilibre: 'Réf.',        conseil: 'Franchise minimale, référence' },
-  { montant: 500,  prime: 554.03, ecMois: 10.58,  ecAnn: 127,  seuilEquilibre: '~CHF 300',    conseil: 'Avantage limité' },
-  { montant: 1000, prime: 526.57, ecMois: 38.04,  ecAnn: 456,  seuilEquilibre: '~CHF 800',    conseil: 'Adapté aux personnes peu malades' },
-  { montant: 1500, prime: 499.20, ecMois: 65.41,  ecAnn: 785,  seuilEquilibre: "~CHF 1'100",  conseil: 'Bon équilibre pour personnes saines' },
-  { montant: 2000, prime: 471.82, ecMois: 92.79,  ecAnn: 1113, seuilEquilibre: "~CHF 1'300",  conseil: 'Recommandé sans maladie chronique' },
-  { montant: 2500, prime: 444.63, ecMois: 119.98, ecAnn: 1440, seuilEquilibre: "~CHF 1'440",  conseil: 'Optimal pour adultes très sains' },
+  { montant: 500,  prime: 554.03, ecMois: 10.58,  ecAnn: 127,  seuilEquilibre: 'env. CHF 300', conseil: 'Avantage limité' },
+  { montant: 1000, prime: 526.57, ecMois: 38.04,  ecAnn: 456,  seuilEquilibre: 'env. CHF 800', conseil: 'Adapté aux personnes peu malades' },
+  { montant: 1500, prime: 499.20, ecMois: 65.41,  ecAnn: 785,  seuilEquilibre: 'env. CHF 1 100', conseil: 'Bon équilibre pour personnes saines' },
+  { montant: 2000, prime: 471.82, ecMois: 92.79,  ecAnn: 1113, seuilEquilibre: 'env. CHF 1 300', conseil: 'Recommandé sans maladie chronique' },
+  { montant: 2500, prime: 444.63, ecMois: 119.98, ecAnn: 1440, seuilEquilibre: 'env. CHF 1 440', conseil: 'Optimal pour adultes très sains' },
 ]
 
 const heroStats = [
   { value: '6',         label: 'Niveaux de franchise',       sub: 'de 300 à 2 500 CHF par an'         },
-  { value: "CHF 1'440", label: "Seuil d'équilibre maximum",  sub: 'franchise 300 vs 2 500 CHF par an' },
+  { value: 'CHF 1 440', label: "Seuil d'équilibre maximum",  sub: 'franchise 300 vs 2 500 CHF par an' },
   { value: 'CHF 120',   label: 'Économie maximum par mois',  sub: 'sur la prime à Zurich, adulte'     },
 ]
 
@@ -251,6 +251,13 @@ export default function FranchisePage() {
                 En dessous de ce seuil, la franchise élevée est préférable.
               </p>
 
+              <div className="callout-warning text-[15px] mb-4">
+                <strong>Données à titre indicatif :</strong> les primes ci-dessous correspondent
+                à un adulte de 26 ans et plus à Zurich, modèle standard (source : OFSP 2026).
+                Les montants varient selon votre canton. Pour votre situation précise, consultez
+                directement les données de votre canton.
+              </div>
+
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-4">
                 <table className="stripe-table w-full">
                   <thead>
@@ -287,15 +294,11 @@ export default function FranchisePage() {
                   </tbody>
                 </table>
               </div>
-              <p className="text-[13px] text-slate/60 mb-6">
-                Primes indicatives 2026, adulte 26 ans et plus, Zurich, modèle standard. Source : OFSP.
-              </p>
-
               <div className="callout text-[15px]">
                 <p className="font-semibold text-ink mb-2">Comment calculer le seuil d'équilibre</p>
                 <p>
                   Franchise 300 CHF vs 2 500 CHF par an : l'économie annuelle sur la prime est de{' '}
-                  CHF 1'440 par an. Si vos frais médicaux annuels dépassent CHF 1'440 par an, la
+                  CHF 1 440 par an. Si vos frais médicaux annuels dépassent CHF 1 440 par an, la
                   franchise 300 CHF est plus avantageuse. En dessous, la franchise 2 500 CHF vous
                   permet d'économiser davantage au total.
                 </p>
@@ -404,19 +407,6 @@ export default function FranchisePage() {
                 </Link>
               </div>
             </section>
-
-            {/* Nudge intermédiaire */}
-            <div className="bg-cloud border border-edge rounded-xl px-6 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div>
-                <p className="font-semibold text-ink text-[16px]">Vous souhaitez changer de franchise et de caisse en même temps ?</p>
-                <p className="text-slate text-[14px] mt-0.5">
-                  Un expert gère l'ensemble des démarches pour vous : choix de la franchise optimale, résiliation et inscription. Gratuit, sans engagement.
-                </p>
-              </div>
-              <a href="#contact" className="btn-primary text-[14px] whitespace-nowrap shrink-0">
-                Prendre rendez-vous →
-              </a>
-            </div>
 
             {/* 5 — FAQ */}
             <section id="faq">
