@@ -34,7 +34,7 @@ const faqItems = [
   },
   {
     question: 'Quelle franchise LAMal choisir ?',
-    answer: "Choisissez la franchise 300 CHF si vos frais médicaux annuels dépassent environ CHF 1'440. Optez pour 2500 CHF si vous êtes en bonne santé : vous économisez environ CHF 120/mois sur la prime mais prenez en charge jusqu'à CHF 2'500 de frais. Le seuil d'équilibre entre les deux extrêmes se situe autour de CHF 1'440 de dépenses médicales annuelles.",
+    answer: "Choisissez la franchise 300 CHF si vos frais médicaux annuels dépassent environ CHF 1 440. Optez pour 2 500 CHF si vous êtes en bonne santé : vous économisez environ CHF 120 par mois sur la prime mais prenez en charge jusqu'à CHF 2 500 de frais. Le seuil d'équilibre entre les deux extrêmes se situe autour de CHF 1 440 de dépenses médicales annuelles.",
   },
   {
     question: "Peut-on changer de caisse maladie en cours d'année ?",
@@ -50,7 +50,7 @@ const faqItems = [
   },
   {
     question: "Quelle est la caisse maladie la moins chère en Suisse ?",
-    answer: "La caisse la moins chère dépend de votre canton, de votre âge et du modèle choisi. Pour un adulte à Nidwald, les primes débutent autour de CHF 280/mois. À Genève, elles dépassent CHF 530. Les écarts entre caisses dans un même canton atteignent CHF 100 à 180/mois.",
+    answer: "La caisse la moins chère dépend de votre canton, de votre âge et du modèle choisi. Pour un adulte à Nidwald, les primes débutent autour de CHF 280 par mois. À Genève, elles dépassent CHF 530 par mois. Les écarts entre caisses dans un même canton atteignent CHF 100 à 180 par mois.",
   },
   {
     question: "Les prestations sont-elles identiques dans toutes les caisses maladie ?",
@@ -102,12 +102,12 @@ const premiums = [
 ]
 
 const franchises = [
-  { montant: 300,  prime: 564.61, economie: 0,      ecAnn: 0,    breakEven: 'Réf.',        conseil: "Recommandé si frais annuels > CHF 1'300" },
-  { montant: 500,  prime: 554.03, economie: 10.58,  ecAnn: 127,  breakEven: '~CHF 200',    conseil: 'Avantage limité' },
-  { montant: 1000, prime: 526.57, economie: 38.04,  ecAnn: 456,  breakEven: "~CHF 700",    conseil: 'Bon si moins d\'une consultation majeure par an' },
-  { montant: 1500, prime: 499.20, economie: 65.41,  ecAnn: 785,  breakEven: "~CHF 1'000",  conseil: 'Bon équilibre pour personnes saines' },
-  { montant: 2000, prime: 471.82, economie: 92.79,  ecAnn: 1113, breakEven: "~CHF 1'200",  conseil: 'Recommandé sans maladie chronique' },
-  { montant: 2500, prime: 444.63, economie: 119.98, ecAnn: 1440, breakEven: "~CHF 1'440",  conseil: 'Optimal pour adultes très sains' },
+  { montant: 300,  prime: 564.61, economie: 0,      ecAnn: 0,    breakEven: 'Réf.',          conseil: 'Recommandé si frais médicaux dépassent CHF 1 300 par an' },
+  { montant: 500,  prime: 554.03, economie: 10.58,  ecAnn: 127,  breakEven: 'env. CHF 200',  conseil: 'Avantage limité' },
+  { montant: 1000, prime: 526.57, economie: 38.04,  ecAnn: 456,  breakEven: 'env. CHF 700',  conseil: "Bon si moins d'une consultation majeure par an" },
+  { montant: 1500, prime: 499.20, economie: 65.41,  ecAnn: 785,  breakEven: 'env. CHF 1 000', conseil: 'Bon équilibre pour personnes saines' },
+  { montant: 2000, prime: 471.82, economie: 92.79,  ecAnn: 1113, breakEven: 'env. CHF 1 200', conseil: 'Recommandé sans maladie chronique' },
+  { montant: 2500, prime: 444.63, economie: 119.98, ecAnn: 1440, breakEven: 'env. CHF 1 440', conseil: 'Optimal pour adultes très sains' },
 ]
 
 const assureurs = [
@@ -122,10 +122,10 @@ const assureurs = [
 ]
 
 const economies = [
-  { canton: 'Genève',    mensuel: 'CHF 229', annuel: "CHF 2'753" },
-  { canton: 'Neuchâtel', mensuel: 'CHF 146', annuel: "CHF 1'747" },
-  { canton: 'Valais',    mensuel: 'CHF 120', annuel: "CHF 1'445" },
-  { canton: 'Vaud',      mensuel: 'CHF 112', annuel: "CHF 1'347" },
+  { canton: 'Genève',    mensuel: 'CHF 229', annuel: 'CHF 2 753' },
+  { canton: 'Neuchâtel', mensuel: 'CHF 146', annuel: 'CHF 1 747' },
+  { canton: 'Valais',    mensuel: 'CHF 120', annuel: 'CHF 1 445' },
+  { canton: 'Vaud',      mensuel: 'CHF 112', annuel: 'CHF 1 347' },
 ]
 
 const toc = [
@@ -143,7 +143,7 @@ const toc = [
 
 const heroStats = [
   { value: '34',        label: 'Caisses agréées',        sub: 'données OFSP 2026'       },
-  { value: "2'753 CHF", label: 'Économie max. possible',  sub: 'à Genève, adulte 35 ans' },
+  { value: 'CHF 2 753', label: 'Économie max. possible',  sub: 'à Genève, adulte 35 ans' },
   { value: '26',        label: 'Cantons couverts',        sub: 'primes officielles OFSP' },
 ]
 
@@ -160,7 +160,7 @@ export default function GuideLamalPage() {
 
           {/* Bandeau MSI */}
           <div className="bg-cloud border-b border-edge flex items-center gap-3 py-3 mt-4 mb-7">
-            <div className="w-7 h-7 rounded-full bg-[#0F4C8A] flex items-center justify-center text-white text-[10px] font-bold shrink-0">
+            <div className="w-7 h-7 rounded-full bg-[#0f2040] flex items-center justify-center text-white text-[10px] font-bold shrink-0">
               MSI
             </div>
             <p className="text-[11px] text-slate leading-snug">
@@ -191,12 +191,11 @@ export default function GuideLamalPage() {
             ))}
           </div>
 
-          <Link href="/lamal/comparateur" className="btn-primary text-[15px]">
-            Comparer les primes dans mon canton →
-          </Link>
+          <a href="#contact" className="btn-primary text-[15px]">
+            Être conseillé gratuitement →
+          </a>
         </div>
       </section>
-
 
       {/* ── 3-column layout ── */}
       <div className="container-xl py-12">
@@ -215,12 +214,6 @@ export default function GuideLamalPage() {
                   </li>
                 ))}
               </ul>
-              <div className="mt-8 px-4">
-                <Link href="/lamal/comparateur"
-                  className="block text-center text-[13px] font-medium text-white bg-brand hover:bg-brand-dark rounded-md py-2.5 transition-colors">
-                  Comparer ma prime →
-                </Link>
-              </div>
             </nav>
           </aside>
 
@@ -299,7 +292,7 @@ export default function GuideLamalPage() {
               </div>
 
               <div className="mt-6">
-                <Link href="/lamal/lamal-vs-lca" className="btn-secondary text-[14px]">
+                <Link href="/lamal/lamal-vs-lca" className="text-brand hover:underline text-[15px] font-medium">
                   Comprendre la différence LAMal et complémentaire →
                 </Link>
               </div>
@@ -318,8 +311,8 @@ export default function GuideLamalPage() {
                   <thead>
                     <tr>
                       <th>Canton</th>
-                      <th className="text-right">Prime / mois</th>
-                      <th className="text-right">Prime / an</th>
+                      <th className="text-right">Prime par mois</th>
+                      <th className="text-right">Prime par an</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -331,7 +324,7 @@ export default function GuideLamalPage() {
                         </td>
                         <td className="text-right font-semibold text-ink">CHF {c.prime.toFixed(2)}</td>
                         <td className="text-right text-slate">
-                          CHF {(c.prime * 12).toLocaleString('fr-CH', { maximumFractionDigits: 0 })}
+                          CHF {(c.prime * 12).toLocaleString('fr-CH', { maximumFractionDigits: 0 }).replace(/['\u2019\u202F]/g, ' ')}
                         </td>
                       </tr>
                     ))}
@@ -343,7 +336,7 @@ export default function GuideLamalPage() {
               </p>
 
               <div className="mt-6">
-                <Link href="/lamal/comparateur" className="btn-primary text-[14px]">
+                <Link href="/lamal/comparateur" className="text-brand hover:underline text-[15px] font-medium">
                   Trouver la caisse la moins chère dans mon canton →
                 </Link>
               </div>
@@ -380,14 +373,9 @@ export default function GuideLamalPage() {
               <div className="callout text-[15px]">
                 <strong>À retenir :</strong> la caisse la moins chère dans votre canton n'est pas
                 forcément la même que celle de votre voisin. Les écarts entre assureurs dans un même
-                canton atteignent CHF 100 à 180/mois pour un adulte.
+                canton atteignent CHF 100 à 180 par mois pour un adulte.
               </div>
 
-              <div className="mt-6">
-                <a href="#contact" className="btn-primary text-[14px]">
-                  Trouver la meilleure caisse pour mon profil →
-                </a>
-              </div>
             </section>
 
             {/* 5 — Franchise */}
@@ -404,9 +392,9 @@ export default function GuideLamalPage() {
                   <thead>
                     <tr>
                       <th>Franchise</th>
-                      <th className="text-right">Prime/mois</th>
-                      <th className="text-right">Économie/an</th>
-                      <th className="text-right hidden sm:table-cell">Économie/mois</th>
+                      <th className="text-right">Prime par mois</th>
+                      <th className="text-right">Économie par an</th>
+                      <th className="text-right hidden sm:table-cell">Économie par mois</th>
                       <th className="text-center hidden sm:table-cell">Seuil d'équilibre</th>
                     </tr>
                   </thead>
@@ -429,20 +417,17 @@ export default function GuideLamalPage() {
               </div>
 
               <div className="callout">
-                <p className="font-semibold text-ink mb-2">Comment calculer le seuil d'équilibre ?</p>
-                <p className="text-[15px] mb-2">
-                  <strong>Formule :</strong> Seuil d'équilibre = Différence de franchise − Économie annuelle sur la prime
-                </p>
+                <p className="font-semibold text-ink mb-2">Comment lire le tableau ?</p>
                 <p className="text-[15px]">
-                  <strong>Exemple 300 vs 2500 CHF :</strong> différence = CHF 2'200,
-                  économie annuelle = CHF 1'224. Seuil d'équilibre = CHF 976.
-                  Si vos frais annuels dépassent <strong>CHF 976</strong>, la franchise 300 CHF est plus avantageuse.
+                  <strong>Exemple 300 vs 2 500 CHF par an :</strong> l'économie annuelle sur la prime est de CHF 1 440.
+                  Si vos frais médicaux annuels dépassent <strong>CHF 1 440</strong>, la franchise 300 CHF est plus avantageuse.
+                  En dessous, la franchise 2 500 CHF vous fait économiser davantage au total.
                 </p>
               </div>
 
               <div className="mt-6">
-                <Link href="/lamal/franchise" className="btn-secondary text-[14px]">
-                  Calculer la franchise la plus avantageuse pour moi →
+                <Link href="/lamal/franchise" className="text-brand hover:underline text-[15px] font-medium">
+                  Guide complet : choisir sa franchise LAMal →
                 </Link>
               </div>
             </section>
@@ -501,7 +486,7 @@ export default function GuideLamalPage() {
               </div>
 
               <div className="mt-6">
-                <Link href="/lamal/modeles" className="btn-secondary text-[14px]">
+                <Link href="/lamal/modeles" className="text-brand hover:underline text-[15px] font-medium">
                   Comparer les 4 modèles en détail →
                 </Link>
               </div>
@@ -522,9 +507,9 @@ export default function GuideLamalPage() {
                     <p className="font-semibold text-ink mb-1">{r.canton}</p>
                     <p className="text-2xl font-bold text-[#1d4ed8]">
                       {r.annuel}
-                      <span className="text-[14px] font-normal text-slate">/an</span>
+                      <span className="text-[14px] font-normal text-slate"> par an</span>
                     </p>
-                    <p className="text-[14px] text-slate mt-0.5">soit {r.mensuel}/mois d'économie</p>
+                    <p className="text-[14px] text-slate mt-0.5">soit {r.mensuel} par mois d'économie</p>
                   </div>
                 ))}
               </div>
@@ -534,11 +519,6 @@ export default function GuideLamalPage() {
                 Les économies réelles dépendent de votre profil exact.
               </div>
 
-              <div className="mt-6">
-                <a href="#contact" className="btn-primary text-[14px]">
-                  Un expert compare et gère le changement pour moi →
-                </a>
-              </div>
             </section>
 
             {/* 8 — Changer */}
@@ -590,7 +570,7 @@ export default function GuideLamalPage() {
               </ol>
 
               <div className="mt-6">
-                <Link href="/lamal/changer-de-caisse" className="btn-secondary text-[14px]">
+                <Link href="/lamal/changer-de-caisse" className="text-brand hover:underline text-[15px] font-medium">
                   Guide complet : changer de caisse avant le 30 novembre →
                 </Link>
               </div>
@@ -619,7 +599,7 @@ export default function GuideLamalPage() {
               </div>
 
               <div className="mt-6">
-                <Link href="/lamal/subsides" className="btn-secondary text-[14px]">
+                <Link href="/lamal/subsides" className="text-brand hover:underline text-[15px] font-medium">
                   Calculer mes subsides LAMal →
                 </Link>
               </div>
@@ -631,13 +611,13 @@ export default function GuideLamalPage() {
             </section>
 
             {/* Formulaire contact */}
-            <div id="contact" className="scroll-mt-20">
+            <div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4">
               <h2 className="text-2xl font-semibold text-ink mb-3">
-                Vous préférez qu'on s'occupe de tout ?
+                Besoin d'aide ?
               </h2>
               <p className="text-[16px] text-slate mb-6 leading-relaxed">
-                Un expert analyse votre profil, trouve la meilleure caisse pour votre situation
-                et gère le changement de votre côté. Gratuit, sans engagement, réponse sous 24 heures.
+                Un expert vous rappelle sous 24 heures pour établir avec vous une solution
+                personnalisée. Gratuit, sans engagement.
               </p>
               <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
             </div>

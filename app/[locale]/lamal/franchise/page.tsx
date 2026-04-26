@@ -152,9 +152,9 @@ export default function FranchisePage() {
             ))}
           </div>
 
-          <Link href="/lamal/comparateur" className="btn-primary text-[15px]">
-            Comparer les primes dans mon canton →
-          </Link>
+          <a href="#contact" className="btn-primary text-[15px]">
+            Être conseillé gratuitement →
+          </a>
         </div>
       </section>
 
@@ -175,12 +175,6 @@ export default function FranchisePage() {
                   </li>
                 ))}
               </ul>
-              <div className="mt-8 px-4">
-                <Link href="/lamal/comparateur"
-                  className="block text-center text-[13px] font-medium text-white bg-brand hover:bg-brand-dark rounded-md py-2.5 transition-colors">
-                  Comparer ma prime →
-                </Link>
-              </div>
             </nav>
           </aside>
 
@@ -305,24 +299,11 @@ export default function FranchisePage() {
               </div>
 
               <div className="mt-6">
-                <Link href="/lamal/comparateur" className="btn-primary text-[14px]">
-                  Trouver la caisse la moins chère dans mon canton →
+                <Link href="/lamal/comparateur" className="text-brand hover:underline text-[15px] font-medium">
+                  Comparer les primes LAMal par canton →
                 </Link>
               </div>
             </section>
-
-            {/* Nudge intermédiaire */}
-            <div className="bg-cloud border border-edge rounded-xl px-6 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div>
-                <p className="font-semibold text-ink text-[16px]">Vous ne savez pas quelle franchise choisir ?</p>
-                <p className="text-slate text-[14px] mt-0.5">
-                  Un expert calcule la configuration la plus avantageuse selon vos dépenses médicales habituelles. Gratuit, réponse sous 24 heures.
-                </p>
-              </div>
-              <a href="#contact" className="btn-primary text-[14px] whitespace-nowrap shrink-0">
-                Être conseillé →
-              </a>
-            </div>
 
             {/* 3 — Enfants */}
             <section id="enfants">
@@ -402,7 +383,7 @@ export default function FranchisePage() {
               </ol>
 
               <div className="mt-6">
-                <Link href="/lamal/changer-de-caisse" className="btn-secondary text-[14px]">
+                <Link href="/lamal/changer-de-caisse" className="text-brand hover:underline text-[15px] font-medium">
                   Guide complet : changer de caisse maladie →
                 </Link>
               </div>
@@ -414,13 +395,13 @@ export default function FranchisePage() {
             </section>
 
             {/* Formulaire */}
-            <div id="contact" className="scroll-mt-20">
+            <div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4">
               <h2 className="text-2xl font-semibold text-ink mb-3">
-                Vous préférez qu'on s'occupe de tout ?
+                Besoin d'aide ?
               </h2>
               <p className="text-[16px] text-slate mb-6 leading-relaxed">
-                Un expert analyse votre profil, trouve la meilleure caisse pour votre situation
-                et gère le changement de votre côté. Gratuit, sans engagement, réponse sous 24 heures.
+                Un expert vous rappelle sous 24 heures pour établir avec vous une solution
+                personnalisée. Gratuit, sans engagement.
               </p>
               <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
             </div>

@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import AuthorBio from '@/components/ui/AuthorBio'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
 import Link from 'next/link'
@@ -8,7 +7,7 @@ import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
 export const metadata: Metadata = {
   title: 'Modèles LAMal 2026 : standard, médecin de famille, HMO, Telmed',
   description:
-    'Les 4 modèles d\'assurance LAMal en Suisse : standard, médecin de famille, HMO et Telmed. Économies, contraintes et conseils pour choisir. Guide 2026.',
+    "Les 4 modèles d'assurance LAMal en Suisse : standard, médecin de famille, HMO et Telmed. Économies, contraintes et conseils pour choisir. Guide 2026.",
   openGraph: {
     title: 'Modèles LAMal 2026 : quel modèle choisir ?',
     description: 'Comparez les 4 modèles LAMal : standard, Hausarzt, HMO, Telmed. Économies et conseils.',
@@ -23,7 +22,7 @@ const articleSchema = {
   headline: 'Modèles LAMal 2026 : standard, médecin de famille, HMO et Telmed',
   datePublished: '2026-01-01',
   dateModified: '2026-04-22',
-  author: { '@type': 'Organization', name: 'My Swiss Insurance' },
+  author: { '@type': 'Organization', name: 'My Swiss Insurance', url: 'https://my-swiss-insurance.ch' },
   publisher: { '@type': 'Organization', name: 'My Swiss Insurance' },
   mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://my-swiss-insurance.ch/lamal/modeles' },
 }
@@ -32,12 +31,12 @@ const faqItems = [
   {
     question: 'Quel est le meilleur modèle LAMal pour économiser ?',
     answer:
-      "Le modèle Telmed offre la plus grande réduction de prime (jusqu'à −24%) selon la caisse et le canton. Le modèle médecin de famille offre jusqu'à −20%. Les économies réelles dépendent de votre caisse et de votre région. Le HMO peut être très avantageux en ville mais son réseau est limité en zone rurale.",
+      "Le modèle Telmed offre la plus grande réduction de prime (jusqu'à 24%) selon la caisse et le canton. Le modèle médecin de famille offre jusqu'à 20%. Les économies réelles dépendent de votre caisse et de votre région. Le HMO peut être très avantageux en ville mais son réseau est limité en zone rurale.",
   },
   {
-    question: 'Peut-on changer de modèle LAMal en cours d\'année ?',
+    question: "Peut-on changer de modèle LAMal en cours d'année ?",
     answer:
-      "Non. Le changement de modèle n'est possible qu'au 1er janvier avec un préavis avant le 30 novembre. Cette règle s'applique aussi en cas de changement de caisse — vous choisissez votre nouveau modèle au moment de l'inscription.",
+      "Non. Le changement de modèle n'est possible qu'au 1er janvier avec un préavis avant le 30 novembre. Cette règle s'applique aussi en cas de changement de caisse : vous choisissez votre nouveau modèle au moment de l'inscription.",
   },
   {
     question: 'Les prestations sont-elles identiques dans tous les modèles ?',
@@ -45,9 +44,9 @@ const faqItems = [
       "Oui. Tous les modèles LAMal couvrent les mêmes prestations définies par l'OFSP. La différence porte uniquement sur la porte d'entrée dans le système de soins (libre choix ou porte d'entrée obligatoire). Les remboursements sont identiques une fois le parcours de soins respecté.",
   },
   {
-    question: 'Qu\'est-ce que le modèle Telmed ?',
+    question: "Qu'est-ce que le modèle Telmed ?",
     answer:
-      "Le modèle Telmed impose de passer par une hotline médicale (Medgate, Medi24 ou équivalent) avant toute consultation en cabinet ou aux urgences non vitales. La consultation téléphonique ou par app est disponible 24h/24. Ce modèle est particulièrement adapté aux personnes à l'aise avec le numérique.",
+      "Le modèle Telmed impose de passer par une hotline médicale (Medgate, Medi24 ou équivalent) avant toute consultation en cabinet ou aux urgences non vitales. La consultation téléphonique ou par application est disponible 24 heures sur 24. Ce modèle est particulièrement adapté aux personnes à l'aise avec le numérique.",
   },
   {
     question: 'Le modèle HMO est-il disponible partout en Suisse ?',
@@ -76,50 +75,66 @@ const modeles = [
     id: 'standard',
     title: 'Standard (libre choix)',
     reduction: null,
-    badge: 'Référence',
     badgeStyle: 'bg-cloud text-slate border-edge',
     borderColor: 'border-edge',
-    desc: 'Accès direct à n\'importe quel médecin ou spécialiste en Suisse, sans restriction ni porte d\'entrée obligatoire. C\'est le modèle le plus cher — il sert de référence pour comparer les autres.',
+    desc: "Accès direct à n'importe quel médecin ou spécialiste en Suisse, sans restriction ni porte d'entrée obligatoire. C'est le modèle le plus cher : il sert de référence pour comparer les autres.",
     avantages: ['Liberté totale de choix du médecin', 'Accès direct aux spécialistes', 'Aucune contrainte de réseau'],
-    inconvenients: ['Prime la plus élevée', 'Pas d\'économie possible'],
+    inconvenients: ['Prime la plus élevée', 'Aucune réduction disponible'],
     ideal: 'Vous consultez régulièrement plusieurs spécialistes ou souhaitez un accès direct sans filtrage.',
   },
   {
     id: 'hausarzt',
     title: 'Médecin de famille (Hausarzt)',
-    reduction: 'jusqu\'à −20%',
-    badge: null,
+    reduction: "jusqu'à −20%",
     badgeStyle: '',
     borderColor: 'border-brand',
-    desc: 'Vous consultez d\'abord votre médecin de famille, qui vous oriente si besoin vers un spécialiste. La consultation chez le généraliste est toujours prioritaire. Réduction moyenne de 11% (jusqu\'à −20%) selon la caisse et le canton.',
-    avantages: ['Suivi médical coordonné', 'Réduction de prime jusqu\'à −20%', 'Médecin de confiance établi'],
-    inconvenients: ['Passage obligatoire par le médecin de famille', 'Moins flexible pour accéder aux spécialistes'],
+    desc: "Vous consultez d'abord votre médecin de famille, qui vous oriente si besoin vers un spécialiste. La consultation chez le généraliste est toujours prioritaire. Réduction moyenne de 11% (jusqu'à 20%) selon la caisse et le canton.",
+    avantages: ['Suivi médical coordonné', 'Réduction de prime jusqu\'à 20%', 'Médecin de confiance établi'],
+    inconvenients: ['Passage obligatoire par le médecin de famille', 'Accès aux spécialistes moins direct'],
     ideal: 'Vous avez déjà un médecin de famille et souhaitez maintenir une relation de confiance tout en économisant.',
   },
   {
     id: 'hmo',
     title: 'HMO (centre médical)',
-    reduction: 'jusqu\'à −20%',
-    badge: null,
+    reduction: "jusqu'à −20%",
     badgeStyle: '',
     borderColor: 'border-brand',
-    desc: 'Vous êtes rattaché à un réseau fermé de médecins agréés (cabinet de groupe ou centre HMO). La porte d\'entrée est un médecin du réseau. Réduction moyenne de 12% (de −3% à −20%) selon la région.',
-    avantages: ['Réduction de prime jusqu\'à −20%', 'Coordination interne des soins', 'Qualité homogène du réseau'],
+    desc: "Vous êtes rattaché à un réseau fermé de médecins agréés (cabinet de groupe ou centre HMO). La porte d'entrée est un médecin du réseau. Réduction moyenne de 12% (de 3% à 20%) selon la région.",
+    avantages: ['Réduction de prime jusqu\'à 20%', 'Coordination interne des soins', 'Qualité homogène du réseau'],
     inconvenients: ['Réseau limité en zones rurales', 'Liberté de choix réduite', 'Changement de médecin complexe'],
-    ideal: 'Vous habitez une grande ville avec un réseau HMO dense et appréciez la médecine de groupe.',
+    ideal: "Vous habitez une grande ville avec un réseau HMO dense et appréciez la médecine de groupe.",
   },
   {
     id: 'telmed',
     title: 'Telmed (téléconsultation)',
-    reduction: 'jusqu\'à −24%',
-    badge: null,
+    reduction: "jusqu'à −24%",
     badgeStyle: '',
     borderColor: 'border-[#3b82f6]',
-    desc: 'Première consultation par téléphone ou application (Medgate, Medi24, Doctorline…) avant tout rendez-vous en cabinet ou aux urgences non vitales. Disponible 24h/24, 7j/7. Réduction moyenne de 12% (de −5% à −24%) selon la caisse.',
-    avantages: ['Plus grande réduction de prime (jusqu\'à −24%)', 'Disponible 24h/24', 'Pratique pour les actifs et familles'],
+    desc: "Première consultation par téléphone ou application (Medgate, Medi24, Doctorline...) avant tout rendez-vous en cabinet ou aux urgences non vitales. Disponible 24 heures sur 24, 7 jours sur 7. Réduction moyenne de 12% (de 5% à 24%) selon la caisse.",
+    avantages: ['Plus grande réduction de prime (jusqu\'à 24%)', 'Disponible 24 heures sur 24', 'Pratique pour les actifs et familles'],
     inconvenients: ['Passage obligatoire par la hotline', 'Dépendance aux outils numériques', 'Pas toujours adapté aux urgences'],
-    ideal: 'Vous êtes à l\'aise avec la technologie, rarement malade ou cherchez la réduction maximale.',
+    ideal: "Vous êtes à l'aise avec la technologie, rarement malade ou cherchez la réduction maximale.",
   },
+]
+
+const heroStats = [
+  { value: '4',      label: "Modèles d'assurance",  sub: 'standard, Hausarzt, HMO, Telmed'          },
+  { value: '−24%',   label: 'Réduction maximum',     sub: 'modèle Telmed selon caisse et canton'     },
+  { value: '−11%',   label: 'Réduction moyenne',     sub: 'médecin de famille, toutes caisses'       },
+]
+
+const toc = [
+  { id: 'comparatif', label: '1. Comparatif des 4 modèles' },
+  { id: 'details',    label: '2. Les 4 modèles en détail'  },
+  { id: 'changement', label: '3. Comment changer'           },
+  { id: 'faq',        label: '4. Questions fréquentes'      },
+]
+
+const guidesAssocies = [
+  { href: '/lamal/franchise',         label: 'Choisir sa franchise'      },
+  { href: '/lamal/guide',             label: 'Guide complet LAMal 2026'  },
+  { href: '/lamal/comparateur',       label: 'Comparer ma prime LAMal'   },
+  { href: '/lamal/changer-de-caisse', label: 'Changer de caisse maladie' },
 ]
 
 export default function ModelesPage() {
@@ -128,38 +143,79 @@ export default function ModelesPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-      <section className="bg-white border-b border-edge pt-12 pb-10">
+      {/* ── Hero ── */}
+      <section className="bg-white border-b border-edge pt-12 pb-14">
         <div className="container-xl">
-          <Breadcrumb
-            items={[
-              { label: 'Accueil', href: '/' },
-              { label: 'LAMal', href: '/lamal' },
-              { label: 'Modèles LAMal' },
-            ]}
-          />
-          <div className="flex flex-wrap gap-2 mb-5">
-            <span className="badge">Données OFSP · 2026</span>
+          <Breadcrumb items={[
+            { label: 'Accueil', href: '/' },
+            { label: 'LAMal', href: '/lamal' },
+            { label: 'Modèles LAMal' },
+          ]} />
+
+          <div className="bg-cloud border-b border-edge flex items-center gap-3 py-3 mt-4 mb-7">
+            <div className="w-7 h-7 rounded-full bg-[#0f2040] flex items-center justify-center text-white text-[10px] font-bold shrink-0">
+              MSI
+            </div>
+            <p className="text-[11px] text-slate leading-snug">
+              La rédaction My Swiss Insurance / Service éditorial indépendant, Lausanne /
+              Publié le 1er janvier 2026, mis à jour le 22 avril 2026 / Données OFSP 2026
+            </p>
           </div>
-          <h1 className="text-5xl font-bold text-ink leading-tight mb-4 max-w-2xl">
+
+          <div className="flex flex-wrap gap-2 mb-5">
+            <span className="badge">Mis à jour avril 2026</span>
+            <span className="badge">Source : OFSP</span>
+          </div>
+
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
             Modèles LAMal 2026 : lequel choisir ?
           </h1>
-          <p className="text-xl text-slate max-w-2xl leading-relaxed">
+          <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
             La LAMal propose quatre modèles d'assurance. Le modèle standard offre le plus de liberté,
             les modèles alternatifs réduisent la prime de 10 à 24% en échange d'une porte d'entrée
             obligatoire dans le système de soins.
           </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+            {heroStats.map(s => (
+              <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
+                <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
+                <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
+                <div className="text-[12px] text-slate mt-0.5">{s.sub}</div>
+              </div>
+            ))}
+          </div>
+
+          <a href="#contact" className="btn-primary text-[15px]">
+            Être conseillé gratuitement →
+          </a>
         </div>
       </section>
 
-      <div className="container-xl py-16">
-        <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
+      {/* ── Layout 2 colonnes ── */}
+      <div className="container-xl py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-12 items-start">
 
-        <div className="flex gap-12">
-          <div className="flex-1 min-w-0 space-y-14">
+          <aside className="hidden lg:block">
+            <nav className="sticky top-24">
+              <p className="text-[11px] font-semibold text-slate uppercase tracking-widest mb-4 px-4">
+                Sommaire
+              </p>
+              <ul className="space-y-0.5">
+                {toc.map(item => (
+                  <li key={item.id}>
+                    <a href={`#${item.id}`} className="toc-link">{item.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </aside>
 
-            {/* Présentation rapide */}
-            <section id="comparatif">
-              <h2 className="text-2xl font-semibold text-ink mb-6">Comparatif des 4 modèles</h2>
+          <article className="min-w-0 space-y-4">
+
+            {/* 1 — Comparatif */}
+            <section id="comparatif" className="pt-2">
+              <h2 className="article-h2">1. Comparatif des 4 modèles</h2>
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-6">
                 <table className="stripe-table w-full">
                   <thead>
@@ -172,10 +228,10 @@ export default function ModelesPage() {
                   </thead>
                   <tbody>
                     {[
-                      ['Standard', '—', 'Libre', 'Partout'],
-                      ['Médecin de famille', 'jusqu\'à −20%', 'Médecin généraliste attitré', 'Très large'],
-                      ['HMO', 'jusqu\'à −20%', 'Réseau de cabinets agréés', 'Grandes villes'],
-                      ['Telmed', 'jusqu\'à −24%', 'Hotline médicale (app/téléphone)', 'Partout'],
+                      ['Standard', 'Aucune', 'Libre', 'Partout'],
+                      ["Médecin de famille", "jusqu'à −20%", 'Médecin généraliste attitré', 'Très large'],
+                      ['HMO', "jusqu'à −20%", 'Réseau de cabinets agréés', 'Grandes villes'],
+                      ['Telmed', "jusqu'à −24%", 'Hotline médicale (application ou téléphone)', 'Partout'],
                     ].map(([modele, reduction, entree, dispo], i) => (
                       <tr key={i}>
                         <td className="font-semibold text-ink">{modele}</td>
@@ -193,9 +249,9 @@ export default function ModelesPage() {
               </div>
             </section>
 
-            {/* Les 4 modèles en détail */}
+            {/* 2 — Détails */}
             <section id="details">
-              <h2 className="text-2xl font-semibold text-ink mb-6">Les 4 modèles en détail</h2>
+              <h2 className="article-h2">2. Les 4 modèles en détail</h2>
               <div className="space-y-6">
                 {modeles.map((m) => (
                   <div key={m.id} className={`bg-white border ${m.borderColor} border-l-4 rounded-[8px] p-6`}>
@@ -251,10 +307,10 @@ export default function ModelesPage() {
               </div>
             </section>
 
-            {/* Comment changer */}
+            {/* 3 — Changement */}
             <section id="changement">
-              <h2 className="text-2xl font-semibold text-ink mb-4">Comment changer de modèle ?</h2>
-              <p className="text-[16px] text-slate leading-relaxed mb-5">
+              <h2 className="article-h2">3. Comment changer de modèle</h2>
+              <p className="article-p">
                 Le modèle se choisit une fois par an. Le changement est possible à chaque renouvellement
                 annuel, indépendamment d'un éventuel changement de caisse.
               </p>
@@ -263,42 +319,48 @@ export default function ModelesPage() {
                 pour une prise d'effet au 1er janvier. Passé ce délai, votre modèle actuel est reconduit.
               </div>
               <div className="mt-5">
-                <Link href="/lamal/changer-de-caisse"
-                  className="text-brand hover:underline text-[15px] font-medium">
+                <Link href="/lamal/changer-de-caisse" className="text-brand hover:underline text-[15px] font-medium">
                   Guide complet : changer de caisse et de modèle →
                 </Link>
               </div>
             </section>
 
-            <FAQ items={faqItems} />
+            {/* 4 — FAQ */}
+            <section id="faq">
+              <FAQ items={faqItems} title="4. Questions fréquentes sur les modèles LAMal" />
+            </section>
 
-            <section>
-              <h3 className="text-[16px] font-semibold text-ink mb-3">Voir aussi</h3>
-              <div className="flex flex-col gap-2">
-                {[
-                  { href: '/lamal/franchise', label: 'Franchise LAMal : quel montant choisir ?' },
-                  { href: '/lamal/guide', label: 'Guide complet LAMal 2026' },
-                  { href: '/lamal/comparateur', label: 'Comparer ma prime LAMal' },
-                  { href: '/lamal/changer-de-caisse', label: 'Changer de caisse maladie' },
-                ].map(link => (
-                  <Link key={link.href} href={link.href}
-                    className="text-[15px] text-brand hover:underline flex items-center gap-1">
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {/* Formulaire */}
+            <div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4">
+              <h2 className="text-2xl font-semibold text-ink mb-3">
+                Besoin d'aide ?
+              </h2>
+              <p className="text-[16px] text-slate mb-6 leading-relaxed">
+                Un expert vous rappelle sous 24 heures pour établir avec vous une solution
+                personnalisée. Gratuit, sans engagement.
+              </p>
+              <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
+            </div>
+
+            {/* Guides associés */}
+            <section className="pt-8 border-t border-edge mt-4">
+              <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
+                Guides associés
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {guidesAssocies.map(({ href, label }) => (
+                  <Link key={href} href={href}
+                    className="flex items-center gap-2 text-[14px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                    <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
-                    {link.label}
+                    {label}
                   </Link>
                 ))}
               </div>
             </section>
 
-          </div>
-
-          <div className="hidden lg:block w-80 flex-shrink-0">
-            <div className="sticky top-24">
-              <MultiStepLeadForm />
-            </div>
-          </div>
+          </article>
         </div>
       </div>
     </>

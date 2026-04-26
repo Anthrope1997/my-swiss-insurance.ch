@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import AuthorBio from '@/components/ui/AuthorBio'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
 import Link from 'next/link'
@@ -11,7 +10,7 @@ export const metadata: Metadata = {
     'Comment changer de caisse maladie : délais, procédure, modèle de lettre de résiliation. Date limite 30 novembre. Guide complet 2026.',
   openGraph: {
     title: 'Changer de caisse maladie — Résiliation LAMal 2026',
-    description: 'Procédure complète pour changer d\'assureur LAMal : dates, étapes et modèle de lettre.',
+    description: "Procédure complète pour changer d'assureur LAMal : dates, étapes et modèle de lettre.",
     url: 'https://my-swiss-insurance.ch/lamal/changer-de-caisse',
     type: 'article',
   },
@@ -23,7 +22,9 @@ const articleSchema = {
   headline: 'Changer de caisse maladie LAMal en Suisse — Guide 2026',
   datePublished: '2026-01-01',
   dateModified: '2026-04-01',
-  author: { '@type': 'Organization', name: 'My Swiss Insurance' },
+  author: { '@type': 'Organization', name: 'My Swiss Insurance', url: 'https://my-swiss-insurance.ch' },
+  publisher: { '@type': 'Organization', name: 'My Swiss Insurance' },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://my-swiss-insurance.ch/lamal/changer-de-caisse' },
 }
 
 const faqItems = [
@@ -71,50 +72,124 @@ const faqSchema = {
   })),
 }
 
+const heroStats = [
+  { value: '30 novembre', label: 'Date limite ordinaire', sub: 'pour changer au 1er janvier suivant' },
+  { value: '5',           label: 'Étapes',                sub: 'de la comparaison à la nouvelle carte' },
+  { value: 'CHF 2 000',   label: 'Économie possible',     sub: 'par an selon canton et profil'        },
+]
+
+const toc = [
+  { id: 'dates',       label: '1. Dates clés 2026/2027'  },
+  { id: 'delais',      label: '2. Délais et situations'  },
+  { id: 'etapes',      label: '3. Les 5 étapes'          },
+  { id: 'lettre',      label: '4. Modèle de lettre'      },
+  { id: 'cas',         label: '5. Cas particuliers'      },
+  { id: 'faq',         label: '6. Questions fréquentes'  },
+]
+
+const guidesAssocies = [
+  { href: '/lamal/comparateur',  label: 'Comparer ma prime LAMal'  },
+  { href: '/lamal/franchise',    label: 'Choisir sa franchise'     },
+  { href: '/lamal/modeles',      label: 'Les 4 modèles LAMal'      },
+  { href: '/lamal/guide',        label: 'Guide complet LAMal 2026' },
+]
+
 export default function ChangerDeCaissePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-      <section className="bg-white border-b border-edge pt-12 pb-10">
+      {/* ── Hero ── */}
+      <section className="bg-white border-b border-edge pt-12 pb-14">
         <div className="container-xl">
-          <Breadcrumb items={[{ label: 'Accueil', href: '/' }, { label: 'LAMal', href: '/lamal' }, { label: 'Changer de caisse maladie' }]} />
-          <h1 className="text-5xl font-bold text-ink leading-tight mb-4 max-w-2xl">
-            Comment changer de caisse maladie en Suisse.
+          <Breadcrumb items={[
+            { label: 'Accueil', href: '/' },
+            { label: 'LAMal', href: '/lamal' },
+            { label: 'Changer de caisse maladie' },
+          ]} />
+
+          <div className="bg-cloud border-b border-edge flex items-center gap-3 py-3 mt-4 mb-7">
+            <div className="w-7 h-7 rounded-full bg-[#0f2040] flex items-center justify-center text-white text-[10px] font-bold shrink-0">
+              MSI
+            </div>
+            <p className="text-[11px] text-slate leading-snug">
+              La rédaction My Swiss Insurance / Service éditorial indépendant, Lausanne /
+              Publié le 1er janvier 2026, mis à jour le 13 avril 2026
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-2 mb-5">
+            <span className="badge">Mis à jour avril 2026</span>
+          </div>
+
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
+            Comment changer de caisse maladie en Suisse
           </h1>
-          <p className="text-xl text-slate max-w-2xl leading-relaxed">
+          <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
             Procédure complète, dates clés et modèle de lettre pour changer d'assureur
-            sans erreur. Économisez jusqu'à CHF 2'000/an.
+            sans erreur. Économisez jusqu'à CHF 2 000 par an.
           </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+            {heroStats.map(s => (
+              <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
+                <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
+                <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
+                <div className="text-[12px] text-slate mt-0.5">{s.sub}</div>
+              </div>
+            ))}
+          </div>
+
+          <a href="#contact" className="btn-primary text-[15px]">
+            Être conseillé gratuitement →
+          </a>
         </div>
       </section>
 
-      <div className="container-xl py-16">
-        <AuthorBio publishedDate="1er janvier 2026" updatedDate="13 avril 2026" />
-        <div className="flex gap-12">
-          <div className="flex-1 min-w-0 space-y-14">
+      {/* ── Layout 2 colonnes ── */}
+      <div className="container-xl py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-12 items-start">
 
-            {/* Dates clés */}
-            <div className="callout-warning">
-              <p className="font-semibold text-[#0f2040] mb-4 text-[17px]">Dates clés 2026 / 2027</p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {[
-                  { date: '30 novembre 2026', desc: 'Date limite de résiliation ordinaire pour changer au 1er janvier 2027' },
-                  { date: 'Octobre–novembre', desc: 'Annonce des nouvelles primes par les assureurs. Vérifiez si votre prime augmente.' },
-                  { date: '1er janvier 2027', desc: 'Prise d\'effet du nouveau contrat si résiliation dans les délais' },
-                ].map((item) => (
-                  <div key={item.date} className="bg-white border border-[#e2e8f0] rounded-[6px] p-4">
-                    <p className="text-[12px] font-semibold text-[#1d4ed8] uppercase tracking-wide mb-1">{item.date}</p>
-                    <p className="text-[14px] text-slate">{item.desc}</p>
-                  </div>
+          <aside className="hidden lg:block">
+            <nav className="sticky top-24">
+              <p className="text-[11px] font-semibold text-slate uppercase tracking-widest mb-4 px-4">
+                Sommaire
+              </p>
+              <ul className="space-y-0.5">
+                {toc.map(item => (
+                  <li key={item.id}>
+                    <a href={`#${item.id}`} className="toc-link">{item.label}</a>
+                  </li>
                 ))}
-              </div>
-            </div>
+              </ul>
+            </nav>
+          </aside>
 
-            {/* Tableau délais */}
-            <section>
-              <h2 className="text-2xl font-semibold text-ink mb-6">Délais et situations</h2>
+          <article className="min-w-0 space-y-4">
+
+            {/* 1 — Dates clés */}
+            <section id="dates" className="pt-2">
+              <h2 className="article-h2">1. Dates clés 2026/2027</h2>
+              <div className="callout-warning">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  {[
+                    { date: '30 novembre 2026', desc: 'Date limite de résiliation ordinaire pour changer au 1er janvier 2027' },
+                    { date: 'Octobre à novembre', desc: 'Annonce des nouvelles primes par les assureurs. Vérifiez si votre prime augmente.' },
+                    { date: '1er janvier 2027', desc: "Prise d'effet du nouveau contrat si résiliation dans les délais" },
+                  ].map((item) => (
+                    <div key={item.date} className="bg-white border border-edge rounded-[6px] p-4">
+                      <p className="text-[12px] font-semibold text-brand uppercase tracking-wide mb-1">{item.date}</p>
+                      <p className="text-[14px] text-slate">{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* 2 — Délais */}
+            <section id="delais">
+              <h2 className="article-h2">2. Délais et situations</h2>
               <div className="border border-edge rounded-[8px] overflow-hidden">
                 <table className="stripe-table w-full">
                   <thead>
@@ -128,7 +203,7 @@ export default function ChangerDeCaissePage() {
                     {[
                       ['Changement ordinaire', '30 novembre', '1er janvier'],
                       ['Hausse de prime annoncée', '1 mois après notification', '31 décembre'],
-                      ['Changement de canton', 'Dès l\'effectivité', 'Selon accord assureur'],
+                      ['Changement de canton', "Dès l'effectivité", 'Selon accord assureur'],
                       ['Changement de franchise', '30 novembre', '1er janvier'],
                     ].map((row, i) => (
                       <tr key={i}>
@@ -142,39 +217,39 @@ export default function ChangerDeCaissePage() {
               </div>
             </section>
 
-            {/* Étapes */}
-            <section>
-              <h2 className="text-2xl font-semibold text-ink mb-8">Les 5 étapes pour changer</h2>
+            {/* 3 — Étapes */}
+            <section id="etapes">
+              <h2 className="article-h2">3. Les 5 étapes pour changer</h2>
               <div className="space-y-6">
                 {[
                   {
                     n: '01', title: 'Comparez les primes dès octobre',
-                    desc: 'Dès l\'annonce des nouvelles primes (automne), comparez sur priminfo.ch ou via notre service. Notez les économies potentielles.',
-                    tip: 'Comparez à modèle équivalent (standard vs standard) pour une comparaison juste.',
+                    desc: "Dès l'annonce des nouvelles primes (automne), comparez sur priminfo.ch ou via notre service. Notez les économies potentielles.",
+                    tip: 'Comparez à modèle équivalent (standard contre standard) pour une comparaison juste.',
                   },
                   {
                     n: '02', title: 'Vérifiez vos factures en cours',
-                    desc: 'Assurez-vous que toutes les factures médicales de l\'année ont été transmises et remboursées par votre assureur actuel.',
+                    desc: "Assurez-vous que toutes les factures médicales de l'année ont été transmises et remboursées par votre assureur actuel.",
                     tip: null,
                   },
                   {
                     n: '03', title: 'Adhérez à la nouvelle caisse',
-                    desc: 'Inscrivez-vous auprès de la nouvelle caisse avant fin novembre. Dans la plupart des cas, elle se charge d\'envoyer la résiliation à votre place.',
-                    tip: 'Certaines caisses permettent l\'inscription 100% en ligne en 5 minutes.',
+                    desc: 'Inscrivez-vous auprès de la nouvelle caisse avant fin novembre. Dans la plupart des cas, elle se charge de la résiliation à votre place.',
+                    tip: 'Certaines caisses permettent l\'inscription entièrement en ligne, sans courrier.',
                   },
                   {
                     n: '04', title: 'Envoyez la lettre de résiliation',
-                    desc: 'Si la nouvelle caisse ne le fait pas pour vous, envoyez une lettre recommandée à votre ancien assureur avant le 30 novembre.',
+                    desc: "Si la nouvelle caisse ne le fait pas pour vous, envoyez une lettre recommandée à votre ancien assureur avant le 30 novembre.",
                     tip: 'Lettre recommandée avec avis de réception, indispensable comme preuve.',
                   },
                   {
-                    n: '05', title: 'Recevez votre nouvelle carte d\'assuré',
+                    n: '05', title: "Recevez votre nouvelle carte d'assuré",
                     desc: 'En décembre ou début janvier, vous recevrez votre nouvelle carte d\'assurance, valide dès le 1er janvier.',
                     tip: null,
                   },
                 ].map((step) => (
                   <div key={step.n} className="flex gap-5">
-                    <div className="text-[28px] font-bold text-[#1d4ed8] leading-none shrink-0 w-12 text-right">
+                    <div className="text-[28px] font-bold text-brand leading-none shrink-0 w-12 text-right">
                       {step.n}
                     </div>
                     <div className="pt-1">
@@ -182,7 +257,7 @@ export default function ChangerDeCaissePage() {
                       <p className="text-[15px] text-slate mb-2">{step.desc}</p>
                       {step.tip && (
                         <p className="text-[13px] text-brand bg-cloud border border-edge rounded-md px-3 py-1.5 inline-block">
-                          💡 {step.tip}
+                          {step.tip}
                         </p>
                       )}
                     </div>
@@ -191,10 +266,10 @@ export default function ChangerDeCaissePage() {
               </div>
             </section>
 
-            {/* Modèle lettre */}
-            <section>
-              <h2 className="text-2xl font-semibold text-ink mb-4">Modèle de lettre de résiliation</h2>
-              <p className="text-[15px] text-slate mb-5">
+            {/* 4 — Lettre */}
+            <section id="lettre">
+              <h2 className="article-h2">4. Modèle de lettre de résiliation</h2>
+              <p className="article-p">
                 À envoyer par courrier recommandé avant le 30 novembre. Adaptez les champs entre crochets.
               </p>
               <div className="bg-cloud border border-edge rounded-[8px] p-7 font-mono text-[14px] leading-relaxed text-slate">
@@ -222,7 +297,7 @@ export default function ChangerDeCaissePage() {
                   <strong className="text-ink">Date de naissance :</strong> [JJ.MM.AAAA]
                 </p>
                 <p className="mb-5">
-                  Je vous saurais gré de bien vouloir me confirmer la prise en compte de cette résiliation.
+                  Veuillez confirmer la prise en compte de cette résiliation.
                 </p>
                 <p className="mb-1">Meilleures salutations,</p>
                 <p>[Votre signature]</p>
@@ -232,29 +307,29 @@ export default function ChangerDeCaissePage() {
               </p>
             </section>
 
-            {/* Cas particuliers */}
-            <section>
-              <h2 className="text-2xl font-semibold text-ink mb-6">Cas particuliers</h2>
+            {/* 5 — Cas particuliers */}
+            <section id="cas">
+              <h2 className="article-h2">5. Cas particuliers</h2>
               <div className="space-y-4">
                 {[
                   {
                     titre: 'Hausse de prime annoncée',
-                    desc: 'Si votre caisse augmente sa prime pour l\'année suivante, vous disposez d\'un droit de résiliation spécial dans le mois suivant la notification. La résiliation prend effet au 31 décembre. Ce droit s\'applique même si vous avez manqué le délai ordinaire du 30 novembre.',
+                    desc: "Si votre caisse augmente sa prime pour l'année suivante, vous disposez d'un droit de résiliation spécial dans le mois suivant la notification. La résiliation prend effet au 31 décembre. Ce droit s'applique même si vous avez manqué le délai ordinaire du 30 novembre.",
                     urgence: true,
                   },
                   {
                     titre: 'Déménagement dans un autre canton',
-                    desc: 'Un déménagement cantonal permet un changement de caisse immédiat en dehors du délai ordinaire. Les primes s\'appliquent selon le canton de domicile. Signalez le changement à votre caisse actuelle et comparez les primes dans votre nouveau canton.',
+                    desc: "Un déménagement cantonal permet un changement de caisse immédiat en dehors du délai ordinaire. Les primes s'appliquent selon le canton de domicile. Signalez le changement à votre caisse actuelle et comparez les primes dans votre nouveau canton.",
                     urgence: false,
                   },
                   {
-                    titre: 'Arrivée en Suisse (expatrié ou déménagement)',
-                    desc: 'Vous avez 90 jours dès l\'établissement de votre domicile pour choisir et s\'affilier à une caisse. La couverture est rétroactive à la date d\'arrivée si le délai est respecté. Profitez de ces 90 jours pour comparer les caisses soigneusement.',
+                    titre: 'Arrivée en Suisse',
+                    desc: "Vous avez 90 jours dès l'établissement de votre domicile pour choisir et vous affilier à une caisse. La couverture est rétroactive à la date d'arrivée si le délai est respecté. Profitez de ces 90 jours pour comparer les caisses soigneusement.",
                     urgence: false,
                   },
                   {
                     titre: 'Naissance ou adoption',
-                    desc: 'Un nouveau-né doit être affilié dans les 3 mois suivant la naissance. Si vous respectez ce délai, la couverture est rétroactive à la naissance. Vous pouvez choisir n\'importe quelle caisse — pas forcément celle des parents.',
+                    desc: "Un nouveau-né doit être affilié dans les 3 mois suivant la naissance. Si vous respectez ce délai, la couverture est rétroactive à la naissance. Vous pouvez choisir n'importe quelle caisse, pas forcément celle des parents.",
                     urgence: false,
                   },
                 ].map((cas, i) => (
@@ -266,34 +341,42 @@ export default function ChangerDeCaissePage() {
               </div>
             </section>
 
-            <FAQ items={faqItems} />
+            {/* 6 — FAQ */}
+            <section id="faq">
+              <FAQ items={faqItems} title="6. Questions fréquentes sur le changement de caisse" />
+            </section>
 
-            <section>
-              <h3 className="text-[16px] font-semibold text-ink mb-3">Voir aussi</h3>
-              <div className="flex flex-col gap-2">
-                {[
-                  { href: '/lamal/comparateur', label: 'Comparer ma prime LAMal' },
-                  { href: '/lamal/franchise', label: 'Choisir sa franchise' },
-                  { href: '/lamal/modeles', label: 'Les 4 modèles LAMal' },
-                  { href: '/lamal/guide', label: 'Guide complet LAMal 2026' },
-                ].map(link => (
-                  <Link key={link.href} href={link.href}
-                    className="text-[15px] text-brand hover:underline flex items-center gap-1">
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {/* Formulaire */}
+            <div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4">
+              <h2 className="text-2xl font-semibold text-ink mb-3">
+                Besoin d'aide ?
+              </h2>
+              <p className="text-[16px] text-slate mb-6 leading-relaxed">
+                Un expert vous rappelle sous 24 heures pour établir avec vous une solution
+                personnalisée. Gratuit, sans engagement.
+              </p>
+              <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
+            </div>
+
+            {/* Guides associés */}
+            <section className="pt-8 border-t border-edge mt-4">
+              <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
+                Guides associés
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {guidesAssocies.map(({ href, label }) => (
+                  <Link key={href} href={href}
+                    className="flex items-center gap-2 text-[14px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                    <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
-                    {link.label}
+                    {label}
                   </Link>
                 ))}
               </div>
             </section>
-          </div>
 
-          <div className="hidden lg:block w-80 flex-shrink-0">
-            <div className="sticky top-24">
-              <MultiStepLeadForm />
-            </div>
-          </div>
+          </article>
         </div>
       </div>
     </>
