@@ -1,0 +1,706 @@
+---
+name: my-swiss-insurance-ui
+description: >
+  Design system, composants, templates et règles éditoriales pour
+  my-swiss-insurance.ch (Next.js 16, TypeScript, Tailwind CSS).
+  Lire ce skill AVANT toute modification, même mineure.
+  L'objectif est que le développeur ne fournisse que le contenu :
+  structure, style, composants, SEO et CTAs sont dans ce skill.
+---
+
+# My Swiss Insurance — UI Skill
+
+> **Règle d'or :** avant de créer un composant, vérifier qu'il existe. Avant de choisir une couleur, consulter la palette ci-dessous. En cas de conflit skill / code existant, le code fait foi.
+
+---
+
+## 1. Stack & contexte
+
+| Point | Valeur |
+|---|---|
+| Framework | Next.js 16, App Router, TypeScript |
+| CSS | Tailwind CSS (aucune librairie UI externe) |
+| Déploiement | Vercel |
+| Production | https://my-swiss-insurance.ch |
+| Locale par défaut | /fr — segment `[locale]` dans app/ |
+| Rendu | SSR dynamique (toutes les pages) |
+| API | POST /api/leads · GET /api/primes |
+
+Toutes les pages sont des Server Components sauf les composants marqués `'use client'`.
+
+---
+
+## 2. Design system réel
+
+### 2.1 Tokens Tailwind (tailwind.config.ts)
+
+| Classe Tailwind | Hex | Usage principal |
+|---|---|---|
+| `text-ink` / `bg-ink` | #1a1a1a | Texte principal, titres |
+| `text-slate` / `bg-slate` | #475569 | Texte secondaire, descriptions |
+| `border-edge` | #e2e8f0 | Toutes les bordures de cartes, dividers |
+| `bg-cloud` | #f1f5f9 | Fonds de sections alternées, TOC, bandeau MSI |
+| `text-brand` / `bg-brand` | #1d4ed8 | Boutons primaires, liens actifs, icônes CTA |
+| `hover:bg-brand-dark` | #1e40af | Hover des boutons primaires |
+| `text-brand-light` | #3b82f6 | Accents secondaires |
+
+Variables CSS complémentaires (globals.css) :
+- `--navy: #0f2040` → Header, Footer (`bg-[#0f2040]`)
+- `--blue-tint: #dbeafe` → bg des badges, callouts, hover sélection
+- `--blue: #1d4ed8` → identique à `brand`
+
+### 2.2 Classes utilitaires (globals.css)
+
+```css
+/* Boutons */
+.btn-primary   → bg-brand hover:bg-brand-dark text-white font-medium px-6 py-3 rounded-md
+.btn-secondary → border border-edge text-ink font-medium px-6 py-3 rounded-md hover:bg-cloud
+
+/* Cartes */
+.card    → bg-white border border-edge rounded-lg p-8
+.card-sm → bg-white border border-edge rounded-lg p-5
+
+/* Badge */
+.badge → text-[13px] font-medium text-[#1d4ed8] bg-[#dbeafe] px-3 py-1 rounded-full
+
+/* Callouts */
+.callout         → bg-[#dbeafe] border-l-4 border-[#1d4ed8] px-5 py-4 rounded-r-lg text-[#0f2040]
+.callout-warning → bg-[#eff6ff] border-l-4 border-[#3b82f6] px-5 py-4 rounded-r-lg text-[#0f2040]
+.callout-success → bg-[#dbeafe] border-l-4 border-[#1d4ed8] px-5 py-4 rounded-r-lg text-[#0f2040]
+
+/* Champs — hauteur par défaut h-12 (48px) */
+.input-field  → w-full h-12 border border-edge rounded-md px-3 text-ink text-base bg-white
+                focus:border-brand focus:ring-2 focus:ring-[#dbeafe]
+.select-field → identique + appearance-none
+
+/* Layout */
+.container-xl → max-w-6xl mx-auto px-6
+
+/* Article typography */
+.article-h2 → text-2xl font-semibold text-ink border-b border-edge pb-4 mb-6 mt-14 first:mt-0
+.article-h3 → text-[18px] font-semibold text-ink mb-3 mt-8
+.article-p  → text-[17px] text-slate leading-relaxed mb-4
+
+/* Navigation TOC */
+.toc-link → text-[13.5px] text-slate hover:text-ink py-1.5 pl-4
+            border-l-2 border-edge hover:border-brand transition-all
+
+/* Tableau */
+.stripe-table thead th → bg-cloud text-[13px] font-semibold text-ink px-4 py-3 border-b border-edge
+.stripe-table td       → px-4 py-3 text-[14px] text-slate border-b border-edge
+.stripe-table tr:hover td → bg-cloud/60
+```
+
+### 2.3 Typographie réelle (observée dans les pages)
+
+| Élément | Classes Tailwind utilisées |
+|---|---|
+| H1 hero (guide, franchise) | `text-4xl sm:text-5xl font-bold text-ink leading-tight` |
+| H2 section | `.article-h2` |
+| H3 sous-section | `.article-h3` |
+| Intro hero | `text-[18px] text-slate max-w-2xl leading-relaxed` |
+| Corps article | `.article-p` (text-[17px] text-slate) |
+| Labels formulaire | `text-[13px] font-medium text-ink mb-1.5` |
+| Badges | `.badge` |
+| Métadonnées | `text-[13px] text-slate/60` |
+
+---
+
+## 3. Composants — catalogue réel
+
+### 3.1 `<Breadcrumb>` — components/ui/Breadcrumb.tsx
+
+**Émet automatiquement le JSON-LD BreadcrumbList.** Ne pas l'ajouter manuellement.
+
+```tsx
+import Breadcrumb from '@/components/ui/Breadcrumb'
+
+<Breadcrumb items={[
+  { label: 'Accueil', href: '/' },
+  { label: 'LAMal', href: '/lamal' },
+  { label: 'Choisir sa franchise' },  // dernier item : pas de href
+]} />
+// className?: string  (défaut : mb-6)
+```
+
+---
+
+### 3.2 `<FAQ>` — components/ui/FAQ.tsx
+
+Client Component. Accordéon, premier item ouvert par défaut.
+
+```tsx
+import FAQ from '@/components/ui/FAQ'
+
+const faqItems = [
+  { question: 'La LAMal est-elle obligatoire ?', answer: 'Oui...' },
+]
+
+<FAQ items={faqItems} title="10. Questions fréquentes sur la LAMal" />
+// title?: string  (défaut: 'Questions fréquentes')
+```
+
+Règle : toujours placer `<FAQ>` **avant** le formulaire.
+
+---
+
+### 3.3 `<MultiStepLeadForm>` — components/ui/MultiStepLeadForm.tsx
+
+Client Component. 4 étapes : Objectif → Situation → Profil → Coordonnées.
+Soumission POST /api/leads, puis redirection vers `redirectOnSuccess`.
+
+```tsx
+import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
+
+<MultiStepLeadForm redirectOnSuccess="/fr/merci" />
+// redirectOnSuccess?: string
+```
+
+Étapes internes (non configurables) :
+- Étape 1 : 4 objectifs (comparer, changer, subsides, ajuster)
+- Étape 2 : Résident (canton + NPA + âge) ou Frontalier (pays + canton travail + âge)
+- Étape 3 : Situation familiale (seul, couple, famille, retraité)
+- Étape 4 : Prénom, Nom, Téléphone, Email
+
+---
+
+### 3.4 `<FormScrollButton>` — components/ui/FormScrollButton.tsx
+
+Client Component. Scroll vers `#formulaire`. Dispatche `canton-form-intent` si `intent` fourni.
+
+```tsx
+import FormScrollButton from '@/components/ui/FormScrollButton'
+
+<FormScrollButton intent="compare" className="btn-primary text-[14px]">
+  Comparer ma prime →
+</FormScrollButton>
+// intent?: string | children: ReactNode | className?: string
+```
+
+---
+
+### 3.5 `<StickyBar>` — components/ui/StickyBar.tsx
+
+Client Component. Barre fixe (bas mobile, sous header desktop), apparaît à 40 % de scroll.
+Scroll vers `#formulaire`, dispatche intent "compare".
+
+```tsx
+import StickyBar from '@/components/ui/StickyBar'
+
+<StickyBar cantonName="Vaud" economieAn={1347} />
+// cantonName: string | economieAn: number
+```
+
+---
+
+### 3.6 `<EmailCTA>` — components/ui/EmailCTA.tsx
+
+Client Component. Capture email seul, POST /api/leads.
+
+```tsx
+import EmailCTA from '@/components/ui/EmailCTA'
+
+<EmailCTA subject="le guide complet franchise 2026" />
+// subject: string  (ex: "le comparatif complet Genève 2026")
+```
+
+---
+
+### 3.7 `<LeadForm>` — components/ui/LeadForm.tsx
+
+Client Component. Formulaire simple (pas multi-étapes) : Nom, Email, Téléphone, Canton, NPA, Profil.
+
+```tsx
+import LeadForm from '@/components/ui/LeadForm'
+
+<LeadForm />         // version standard
+<LeadForm compact /> // titre plus petit
+// compact?: boolean
+```
+
+---
+
+### 3.8 `<CantonSearch>` — components/ui/CantonSearch.tsx
+
+Client Component. Sans props. Recherche par nom ou code → navigation vers `/lamal/canton/{slug}`.
+
+```tsx
+import CantonSearch from '@/components/ui/CantonSearch'
+<CantonSearch />
+```
+
+---
+
+### 3.9 `<CantonCombobox>` — components/ui/CantonCombobox.tsx
+
+Client Component. Autocomplétion canton pour usage dans des formulaires.
+
+```tsx
+import CantonCombobox, { CANTON_NAMES } from '@/components/ui/CantonCombobox'
+
+<CantonCombobox
+  value={form.canton}
+  onChange={v => set({ canton: v })}
+  placeholder="Vaud ou VD"
+  id="canton"
+/>
+// value: string | onChange: (v: string) => void | placeholder?: string | id?: string
+```
+
+---
+
+### 3.10 Composants domaine LAMal — components/lamal/
+
+| Composant | Fichier | Usage |
+|---|---|---|
+| `<CantonPage>` | CantonPage.tsx | Template complet pages canton |
+| `<ComparateurClient>` | ComparateurClient.tsx | Comparateur interactif de caisses |
+| `<FrontalierSimulateur>` | FrontalierSimulateur.tsx | Simulateur droit d'option frontalier |
+| `<PrimeCalculator>` | PrimeCalculator.tsx | Calcul prime par profil |
+| `<PrimeCalculatorReal>` | PrimeCalculatorReal.tsx | Calcul prime avec données réelles |
+| `<SubsidesCalculator>` | SubsidesCalculator.tsx | Calculateur subsides LAMal |
+
+---
+
+## 4. Règles éditoriales — permanentes et sans exception
+
+1. **Jamais "courtier"** → toujours **"expert"**
+2. **Jamais de tirets longs (—)** → virgule ou deux-points
+3. **Jamais de points médians (·)** → virgule ou retour à la ligne
+4. **Jamais d'abréviations** : `24h` → "24 heures", `max` → "maximum"
+5. **Jamais le symbole "+"** dans les labels ou tuiles
+6. **Jamais de mots anglais** : `break-even` → "seuil d'équilibre"
+7. **CHF toujours suivi** de "par mois" ou "par an"
+8. **Jamais "à Vaud"** → "dans le canton de Vaud"
+9. **Ton** : informatif, neutre, professionnel
+
+---
+
+## 5. Templates
+
+### Template A — Page Guide
+
+Source de référence : `app/[locale]/lamal/guide/page.tsx`
+
+**Input nécessaire :**
+- slug, titre H1, intro (2-3 phrases)
+- datePublished, dateModified (format YYYY-MM-DD)
+- sections[] : { id, h2, contenu, ctaType, ctaDest }
+- heroStats[3] : { value, label, sub }
+- faqItems[] : { question, answer }
+- guidesAssocies[2-4] : { href, label }
+
+**Structure complète :**
+
+```tsx
+import type { Metadata } from 'next'
+import Breadcrumb from '@/components/ui/Breadcrumb'
+import FAQ from '@/components/ui/FAQ'
+import Link from 'next/link'
+import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
+
+export const metadata: Metadata = {
+  title: '{Titre H1} — My Swiss Insurance',
+  description: '...', // 150-160 caractères
+  openGraph: {
+    title: '...',
+    description: '...',
+    url: 'https://my-swiss-insurance.ch/{path}',
+    type: 'article',
+  },
+}
+
+// JSON-LD : Article + FAQPage
+// BreadcrumbList est émis automatiquement par <Breadcrumb>
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: '...',
+  datePublished: 'YYYY-MM-DD',
+  dateModified: 'YYYY-MM-DD',
+  author: { '@type': 'Organization', name: 'My Swiss Insurance', url: 'https://my-swiss-insurance.ch' },
+  publisher: { '@type': 'Organization', name: 'My Swiss Insurance' },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://my-swiss-insurance.ch/{path}' },
+}
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map(item => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+}
+
+export default function PageSlug() {
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+
+      {/* ── HERO ── */}
+      <section className="bg-white border-b border-edge pt-12 pb-14">
+        <div className="container-xl">
+
+          {/* Breadcrumb — émet BreadcrumbList JSON-LD */}
+          <Breadcrumb items={[
+            { label: 'Accueil', href: '/' },
+            { label: 'LAMal', href: '/lamal' },
+            { label: '{Titre page}' },
+          ]} />
+
+          {/* Bandeau MSI — TOUJOURS entre breadcrumb et h1 */}
+          <div className="bg-cloud border-b border-edge flex items-center gap-3 py-3 mt-4 mb-7">
+            <div className="w-7 h-7 rounded-full bg-[#0f2040] flex items-center justify-center text-white text-[10px] font-bold shrink-0">
+              MSI
+            </div>
+            <p className="text-[11px] text-slate leading-snug">
+              La rédaction My Swiss Insurance / Service éditorial indépendant, Lausanne /
+              Publié le {publishedDate}, mis à jour le {updatedDate} / Données OFSP 2026
+            </p>
+          </div>
+
+          {/* Badges */}
+          <div className="flex flex-wrap gap-2 mb-5">
+            <span className="badge">Mis à jour {moisAnnée}</span>
+            <span className="badge">Source : OFSP</span>
+          </div>
+
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
+            {titreH1}
+          </h1>
+          <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
+            {intro}
+          </p>
+
+          {/* StatsGrid — 3 métriques clés */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+            {heroStats.map(s => (
+              <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
+                <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
+                <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
+                <div className="text-[12px] text-slate mt-0.5">{s.sub}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA hero — vers comparateur */}
+          <Link href="/lamal/comparateur" className="btn-primary text-[15px]">
+            Comparer les primes dans mon canton →
+          </Link>
+
+        </div>
+      </section>
+
+      {/* ── LAYOUT 2 COLONNES ── */}
+      <div className="container-xl py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-12 items-start">
+
+          {/* TOC sticky — masqué mobile */}
+          <aside className="hidden lg:block">
+            <nav className="sticky top-24">
+              <p className="text-[11px] font-semibold text-slate uppercase tracking-widest mb-4 px-4">
+                Sommaire
+              </p>
+              <ul className="space-y-0.5">
+                {toc.map(item => (
+                  <li key={item.id}>
+                    <a href={`#${item.id}`} className="toc-link">{item.label}</a>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-8 px-4">
+                <Link href="/lamal/comparateur"
+                  className="block text-center text-[13px] font-medium text-white bg-brand hover:bg-brand-dark rounded-md py-2.5 transition-colors">
+                  Comparer ma prime →
+                </Link>
+              </div>
+            </nav>
+          </aside>
+
+          {/* Article */}
+          <article className="min-w-0 space-y-4">
+
+            {/* Section type */}
+            <section id="{id}">
+              <h2 className="article-h2">{N}. {titreSSection}</h2>
+              <p className="article-p">{intro_section}</p>
+              {/* Contenu : article-p, article-h3, stripe-table, callout */}
+
+              {/* CTA section — un seul par section */}
+              <div className="mt-6">
+                <Link href="{dest}" className="btn-secondary text-[14px]">
+                  {texte_cta} →
+                </Link>
+              </div>
+            </section>
+
+            {/* Tableau stripe-table */}
+            <div className="overflow-x-auto border border-edge rounded-[8px]">
+              <table className="stripe-table w-full">
+                <thead><tr><th>Col1</th><th>Col2</th></tr></thead>
+                <tbody>
+                  {rows.map((r, i) => (
+                    <tr key={i}><td>{r.a}</td><td>{r.b}</td></tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* FAQ — TOUJOURS avant le formulaire */}
+            <section id="faq">
+              <FAQ items={faqItems} title="{N}. Questions fréquentes sur {sujet}" />
+            </section>
+
+            {/* Formulaire — ancre #contact, titre/sous-titre immuables */}
+            <div id="contact" className="scroll-mt-20">
+              <h2 className="text-2xl font-semibold text-ink mb-3">
+                Vous préférez qu'on s'occupe de tout ?
+              </h2>
+              <p className="text-[16px] text-slate mb-6 leading-relaxed">
+                Un expert analyse votre profil, trouve la meilleure caisse pour votre situation
+                et gère le changement de votre côté. Gratuit, sans engagement, réponse sous 24 heures.
+              </p>
+              <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
+            </div>
+
+            {/* Guides associés */}
+            <section className="pt-8 border-t border-edge mt-4">
+              <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
+                Guides associés
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {guidesAssocies.map(({ href, label }) => (
+                  <Link key={href} href={href}
+                    className="flex items-center gap-2 text-[14px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                    <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                    {label}
+                  </Link>
+                ))}
+              </div>
+            </section>
+
+          </article>
+        </div>
+      </div>
+    </>
+  )
+}
+```
+
+---
+
+### Template B — Page Canton
+
+Source de référence : `app/[locale]/lamal/canton/{slug}/page.tsx`
+
+Utilise le composant `<CantonPage>` depuis `@/components/lamal/CantonPage`.
+Les données proviennent de `data/lamal/cantons.ts` (source de vérité par canton).
+
+---
+
+### Template C — Page Par Situation
+
+Source de référence : `app/[locale]/lamal/ma-situation/page.tsx`
+
+Structure identique à Template A mais sans `<StatsGrid>` dans le hero.
+Hero plus court, pas de bandeau MSI obligatoire.
+
+---
+
+### Template D — Page Hub Navigation
+
+Source de référence : `app/[locale]/lamal/page.tsx`
+
+Structure :
+- Hero simple : H1, intro, pas de stats
+- Grille de cartes (Link, 2 ou 4 colonnes, icon + titre + desc + "Lire →")
+- Pas de TOC
+- Formulaire en bas
+
+Carte type :
+```tsx
+<Link href="{href}"
+  className="group flex flex-col bg-white border border-edge rounded-xl p-6
+             hover:border-brand hover:shadow-md transition-all duration-200">
+  <div className="w-9 h-9 bg-[#dbeafe] border border-[#1d4ed8]/20 rounded-lg
+                  flex items-center justify-center text-brand mb-4
+                  group-hover:bg-brand group-hover:text-white group-hover:border-brand
+                  transition-colors duration-200">
+    {icon}
+  </div>
+  <h3 className="font-semibold text-ink text-[16px] mb-2 group-hover:text-brand transition-colors">
+    {titre}
+  </h3>
+  <p className="text-slate text-[14px] leading-relaxed flex-1">{desc}</p>
+  <div className="flex items-center gap-1 mt-4 text-brand text-[13px] font-medium">
+    Lire le guide
+    <svg ...>...</svg>
+  </div>
+</Link>
+```
+
+---
+
+### Template E — Page Outil
+
+Source de référence : `app/[locale]/lamal/comparateur/page.tsx`, `subsides/page.tsx`
+
+Structure :
+- Hero : H1, intro
+- Composant interactif Client (`<ComparateurClient>`, `<SubsidesCalculator>`, etc.)
+- Section FAQ
+- Formulaire
+
+---
+
+## 6. Formulaire multi-étapes — invariants
+
+**Titre (immuable) :** `Vous préférez qu'on s'occupe de tout ?`
+
+**Sous-titre (immuable) :** `Un expert analyse votre profil, trouve la meilleure caisse pour votre situation et gère le changement de votre côté. Gratuit, sans engagement, réponse sous 24 heures.`
+
+**Code minimal :**
+```tsx
+<div id="contact" className="scroll-mt-20">
+  <h2 className="text-2xl font-semibold text-ink mb-3">
+    Vous préférez qu'on s'occupe de tout ?
+  </h2>
+  <p className="text-[16px] text-slate mb-6 leading-relaxed">
+    Un expert analyse votre profil, trouve la meilleure caisse pour votre situation
+    et gère le changement de votre côté. Gratuit, sans engagement, réponse sous 24 heures.
+  </p>
+  <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
+</div>
+```
+
+**Section formulaire sur la homepage :**
+```tsx
+<section id="formulaire" className="bg-cloud border-y border-edge py-10 sm:py-16 scroll-mt-16">
+  <div className="container-xl max-w-2xl">
+    <div className="text-center mb-6">
+      <h2 className="text-2xl sm:text-3xl font-bold text-ink leading-tight mb-3">
+        Vous préférez qu'on s'occupe de tout ?
+      </h2>
+      <p className="text-[15px] sm:text-[17px] text-slate leading-relaxed">
+        Un expert analyse votre profil, trouve la meilleure caisse pour votre situation
+        et gère le changement de votre côté. Gratuit, sans engagement, réponse sous 24 heures.
+      </p>
+    </div>
+    <MultiStepLeadForm redirectOnSuccess="/merci" />
+  </div>
+</section>
+```
+
+Hauteur champs internes au formulaire : `h-11` (44px) via `!h-11` override.
+Hauteur champs standalone (`input-field` par défaut) : `h-12` (48px).
+
+---
+
+## 7. Logique CTA
+
+Un seul CTA par section. Jamais deux boutons côte à côte dans une section article.
+
+| Intention | Composant | Destination |
+|---|---|---|
+| Comparateur de primes | `btn-primary` (Link) | /lamal/comparateur |
+| Formulaire expert | `btn-primary` (Link ou `<a href="#contact">`) | #contact |
+| Guide détaillé | `btn-secondary` (Link) | /lamal/{slug} |
+| Pas d'action pertinente | Aucun | — |
+
+CTA hero : toujours `btn-primary` vers `/lamal/comparateur`.
+CTA formulaire (dans article) : `<a href="#contact">` avec `btn-primary`.
+CTA navigation : `btn-secondary`.
+
+---
+
+## 8. SEO & GEO
+
+**JSON-LD selon le type de page :**
+
+| Type de page | JSON-LD requis |
+|---|---|
+| Toutes | BreadcrumbList (émis par `<Breadcrumb>`) |
+| Pages éditoriales | Article (datePublished + dateModified) |
+| Pages avec FAQ | FAQPage |
+| Homepage | WebSite + FAQPage |
+
+**Règle GEO :** chaque section commence par une réponse directe en 2 phrases.
+Les chiffres clés apparaissent dans le texte brut, pas uniquement dans les tableaux.
+
+**Titre pages :** `{H1} — My Swiss Insurance`
+**Meta description :** 150-160 caractères, commence par un chiffre clé.
+
+**Bandeau MSI :** TOUJOURS entre `<Breadcrumb>` et `<h1>`.
+**FAQ :** TOUJOURS avant le formulaire.
+
+---
+
+## 9. Navigation & structure de pages
+
+**Header** (`components/ui/Header.tsx`) — fond `bg-[#0f2040]`, hamburger animated.
+Sections menu : Guides, Par canton, Par situation de vie.
+CTA header : `Comparer ma prime LAMal` → /lamal/comparateur.
+
+**Footer** (`components/ui/Footer.tsx`) — fond `bg-[#0f2040]`.
+Colonnes : Guides · Par canton · Par situation de vie · Légal.
+Texte brandmark : `Comparez les caisses maladie suisses et optimisez votre LAMal. Service gratuit.`
+Sources officielles : OFSP · admin.ch · priminfo.ch.
+
+Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
+
+---
+
+## 10. Checklist de livraison
+
+**Composants**
+- [ ] Composant existant utilisé (pas recréé)
+- [ ] Import path correct (`@/components/ui/...` ou `@/components/lamal/...`)
+- [ ] Template correspondant au type de page utilisé
+
+**Éditorial**
+- [ ] Aucun mot anglais, point médian, tiret long, abréviation
+- [ ] CHF suivi de "par mois" ou "par an"
+- [ ] Jamais "courtier" (→ "expert"), jamais "+" dans les labels
+- [ ] Un seul CTA par section
+
+**Structure**
+- [ ] Bandeau MSI entre `<Breadcrumb>` et `<h1>`
+- [ ] FAQ avant le formulaire
+- [ ] Formulaire avec titre/sous-titre immuables, `redirectOnSuccess="/fr/merci"`
+- [ ] Ancre `id="contact"` avec `scroll-mt-20` sur le formulaire
+
+**SEO**
+- [ ] `export const metadata` avec title et description
+- [ ] JSON-LD Article + FAQPage (si applicable)
+- [ ] `<Breadcrumb>` présent (émet BreadcrumbList JSON-LD)
+- [ ] Dates datePublished / dateModified cohérentes avec le bandeau MSI
+
+**Build**
+- [ ] `npm run build` passe sans erreur avant commit
+
+---
+
+## 11. Sources consultées
+
+| Fichier | Rôle |
+|---|---|
+| `tailwind.config.ts` | Tokens Tailwind officiels |
+| `app/globals.css` | Classes utilitaires (btn-primary, article-h2, etc.) |
+| `CONTEXTE.md` | Architecture, stack, modèle économique |
+| `components/ui/Breadcrumb.tsx` | Props, BreadcrumbList auto |
+| `components/ui/FAQ.tsx` | Props, comportement accordéon |
+| `components/ui/MultiStepLeadForm.tsx` | Étapes, options, POST /api/leads |
+| `components/ui/FormScrollButton.tsx` | Props, CustomEvent |
+| `components/ui/StickyBar.tsx` | Props, seuil d'apparition |
+| `components/ui/EmailCTA.tsx` | Props |
+| `components/ui/LeadForm.tsx` | Props, compact |
+| `components/ui/CantonSearch.tsx` | Navigation automatique |
+| `components/ui/CantonCombobox.tsx` | Props, CANTON_NAMES export |
+| `components/ui/Header.tsx` | Structure menu, couleurs |
+| `components/ui/Footer.tsx` | Structure, colonnes |
+| `app/[locale]/lamal/guide/page.tsx` | Référence Template A |
+| `app/[locale]/page.tsx` | Référence Template D + section formulaire homepage |
+| `dictionaries/fr.json` | Labels UI officiels |
