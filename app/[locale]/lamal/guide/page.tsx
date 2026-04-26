@@ -154,14 +154,12 @@ export default function GuideLamalPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       {/* ── Hero ── */}
-      <section className="bg-white border-b border-edge">
-        <div className="container-xl pt-12">
+      <section className="bg-white border-b border-edge pt-12 pb-14">
+        <div className="container-xl">
           <Breadcrumb items={[{ label: 'Accueil', href: '/' }, { label: 'LAMal', href: '/lamal' }, { label: 'Comprendre la LAMal' }]} />
-        </div>
 
-        {/* Bandeau MSI */}
-        <div className="bg-cloud border-b border-edge">
-          <div className="container-xl flex items-center gap-3 py-3">
+          {/* Bandeau MSI */}
+          <div className="bg-cloud border-b border-edge flex items-center gap-3 py-3 mt-4 mb-7">
             <div className="w-7 h-7 rounded-full bg-[#0F4C8A] flex items-center justify-center text-white text-[10px] font-bold shrink-0">
               MSI
             </div>
@@ -169,9 +167,7 @@ export default function GuideLamalPage() {
               La rédaction My Swiss Insurance / Service éditorial indépendant, Lausanne / Publié le 1er janvier 2026, mis à jour le 22 avril 2026 / Données OFSP 2026
             </p>
           </div>
-        </div>
 
-        <div className="container-xl pt-8 pb-14">
           <div className="flex flex-wrap gap-2 mb-5">
             <span className="badge">Mis à jour avril 2026</span>
             <span className="badge">Source : OFSP</span>
@@ -201,9 +197,10 @@ export default function GuideLamalPage() {
         </div>
       </section>
 
+
       {/* ── 3-column layout ── */}
       <div className="container-xl py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] xl:grid-cols-[200px_1fr_320px] gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-12 items-start">
 
           {/* Left TOC */}
           <aside className="hidden lg:block">
@@ -631,11 +628,6 @@ export default function GuideLamalPage() {
             {/* 10 — FAQ */}
             <section id="faq">
               <FAQ items={faqItems} title="10. Questions fréquentes sur la LAMal" />
-              <div className="mt-6">
-                <a href="#contact" className="btn-primary text-[14px]">
-                  Vous avez une question spécifique ? Parlez à un expert →
-                </a>
-              </div>
             </section>
 
             {/* Formulaire contact */}
@@ -674,45 +666,6 @@ export default function GuideLamalPage() {
             </section>
 
           </article>
-
-          {/* Right sidebar */}
-          <aside className="hidden xl:block">
-            <div className="sticky top-24 space-y-6">
-
-              <div className="bg-white border border-edge rounded-xl p-5">
-                <p className="text-[13px] font-semibold text-ink mb-1">Être rappelé par un expert</p>
-                <p className="text-[13px] text-slate mb-4">Gratuit, sans engagement, réponse sous 24 heures</p>
-                <a href="#contact"
-                  className="block text-center text-[13px] font-medium text-white bg-brand hover:bg-brand-dark rounded-md py-2.5 transition-colors">
-                  Prendre contact →
-                </a>
-              </div>
-
-              <div className="bg-white border border-edge rounded-[8px] p-5">
-                <p className="text-[12px] font-semibold text-slate uppercase tracking-widest mb-4">Approfondir</p>
-                <ul className="space-y-2.5">
-                  {[
-                    ['/lamal/franchise',        'Choisir sa franchise'],
-                    ['/lamal/modeles',           'Les 4 modèles LAMal'],
-                    ['/lamal/changer-de-caisse', 'Changer de caisse maladie'],
-                    ['/lamal/lamal-vs-lca',      'LAMal vs LCA'],
-                    ['/lamal/subsides',          'Calculer mes subsides'],
-                    ['/lamal/par-profil',        'Par situation de vie'],
-                  ].map(([href, label]) => (
-                    <li key={href}>
-                      <Link href={href} className="flex items-center gap-2 text-[14px] text-slate hover:text-brand transition-colors">
-                        <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                        {label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-            </div>
-          </aside>
 
         </div>
       </div>
