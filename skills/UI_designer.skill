@@ -749,15 +749,25 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 
 > **Standard global** : s'applique à **tous** les tableaux sur **toutes** les pages du site, sans exception.
 
-- **Valeurs numériques alignées à droite.** Appliquer `text-right` sur chaque `<th>` et `<td>` numérique.
-- **Trier toujours les lignes du plus grand au plus petit** selon la donnée la plus importante de la page (économie, part de marché, coût, prime...). Ne jamais trier alphabétiquement si une donnée quantitative est disponible.
+**Limite de colonnes :**
+- Maximum **4 colonnes** affichées sur mobile.
+- Maximum **6 colonnes** sur desktop.
+- Si un tableau dépasse ce seuil, supprimer ou fusionner les colonnes les moins essentielles. Déplacer les données retirées dans un encadré texte séparé sous le tableau (`bg-cloud border border-edge rounded-lg`).
+- **Jamais de cellule dont le contenu se coupe sur deux lignes.**
+
+**Alignement et formatage :**
+- Valeurs numériques : `text-right` + `whitespace-nowrap` sur `<th>` et `<td>`.
+- Colonne texte (ex. "Profil recommandé") : `text-left`, largeur auto (prend l'espace restant).
+- Trier les lignes du plus grand au plus petit selon la donnée principale de la page.
 
 ```tsx
-// En-tête numérique
-<th className="... text-right">Prime par mois</th>
-// Cellule numérique
-<td className="... text-right">CHF 320</td>
+<th className="text-right whitespace-nowrap">Prime par mois</th>
+<td className="text-right whitespace-nowrap">CHF 320</td>
 ```
+
+**Exemple appliqué — tableau franchise (4 colonnes) :**
+Colonnes conservées : Franchise · Prime par mois · Économie par an · Profil recommandé.
+Colonnes déplacées dans un encadré texte : Économie par mois · Seuil d'équilibre.
 
 ---
 
@@ -775,21 +785,20 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 **Usage réservé :** astuces et remarques utiles à l'utilisateur.
 **Jamais** pour des sources, références, mentions légales ou informations purement factuelles sans valeur conseil.
 
-Chaque encadré bleu doit comporter une **icône ampoule SVG** à gauche du texte :
-- Style : trait fin (`strokeWidth={1.5}`), référence Lucide ou Heroicons outline
-- Taille : **16px** (`w-4 h-4`)
+Chaque encadré bleu doit comporter une **icône ampoule Heroicons** à gauche du texte :
+- Composant de référence : `LightBulbIcon` (Heroicons outline)
+- Taille : **20px** (`w-5 h-5`)
 - Couleur : `text-brand` (#1d4ed8)
 - **Jamais un emoji. Jamais une image raster.**
+- Reproduire en SVG inline avec ce path exact (Heroicons `LightBulbIcon` outline) :
 
 ```tsx
 <div className="callout flex gap-3">
-  {/* Icône ampoule — SVG trait fin 16px, couleur brand */}
-  <svg className="w-4 h-4 text-brand shrink-0 mt-0.5" fill="none" stroke="currentColor"
+  {/* LightBulbIcon — Heroicons outline 20px */}
+  <svg className="w-5 h-5 text-brand shrink-0 mt-0.5" fill="none" stroke="currentColor"
        strokeWidth={1.5} viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round"
-      d="M12 2a7 7 0 0 1 4.9 11.95c-.74.8-1.15 1.84-1.15 2.92V17a1 1 0 0 1-1 1h-5.5
-         a1 1 0 0 1-1-1v-.13c0-1.08-.4-2.12-1.15-2.92A7 7 0 0 1 12 2Z
-         M9.5 21h5M10.5 18h3" />
+      d="M9 18h6m-3-3v3m0-3a6 6 0 10-6-6h12a6 6 0 00-6 6z" />
   </svg>
   <div>
     <p className="font-semibold text-ink mb-1">{titre_astuce}</p>

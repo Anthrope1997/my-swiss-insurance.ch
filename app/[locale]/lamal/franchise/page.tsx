@@ -229,10 +229,10 @@ export default function FranchisePage() {
               </div>
 
               <div className="callout flex gap-3">
-                <svg className="w-4 h-4 text-brand shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                <svg className="w-5 h-5 text-brand shrink-0 mt-0.5" fill="none" stroke="currentColor"
                      strokeWidth={1.5} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round"
-                    d="M12 2a7 7 0 0 1 4.9 11.95c-.74.8-1.15 1.84-1.15 2.92V17a1 1 0 0 1-1 1h-5.5a1 1 0 0 1-1-1v-.13c0-1.08-.4-2.12-1.15-2.92A7 7 0 0 1 12 2ZM9.5 21h5M10.5 18h3" />
+                    d="M9 18h6m-3-3v3m0-3a6 6 0 10-6-6h12a6 6 0 00-6 6z" />
                 </svg>
                 <p className="text-[15px]">
                   <strong>Exemple concret : </strong>
@@ -261,43 +261,51 @@ export default function FranchisePage() {
                 <table className="stripe-table w-full">
                   <thead>
                     <tr>
-                      <th>Franchise</th>
-                      <th className="text-right">Prime par mois</th>
-                      <th className="text-right hidden sm:table-cell">Éco. par mois</th>
-                      <th className="text-right hidden sm:table-cell">Éco. par an</th>
-                      <th className="text-right hidden md:table-cell">Seuil par an</th>
-                      <th className="hidden lg:table-cell">Profil adapté</th>
+                      <th className="whitespace-nowrap">Franchise</th>
+                      <th className="text-right whitespace-nowrap">Prime par mois</th>
+                      <th className="text-right whitespace-nowrap">Économie par an</th>
+                      <th>Profil recommandé</th>
                     </tr>
                   </thead>
                   <tbody>
                     {franchises.map((f) => (
                       <tr key={f.montant} className={f.montant === 300 ? 'bg-[#eff6ff]' : ''}>
-                        <td className="font-semibold text-brand">
+                        <td className="font-semibold text-brand whitespace-nowrap">
                           CHF {f.montant.toLocaleString('fr-CH')}
                         </td>
-                        <td className="text-right font-medium text-ink">
+                        <td className="text-right font-medium text-ink whitespace-nowrap">
                           CHF {f.prime.toFixed(2)}
                         </td>
-                        <td className="text-right text-brand hidden sm:table-cell">
-                          {f.ecMois > 0 ? `−CHF ${f.ecMois.toFixed(2)}` : '-'}
+                        <td className="text-right text-brand whitespace-nowrap">
+                          {f.ecAnn > 0 ? `−CHF ${f.ecAnn}` : 'Référence'}
                         </td>
-                        <td className="text-right text-brand hidden sm:table-cell">
-                          {f.ecAnn > 0 ? `−CHF ${f.ecAnn}` : '-'}
-                        </td>
-                        <td className="text-right font-medium hidden md:table-cell">
-                          {f.seuilEquilibre}
-                        </td>
-                        <td className="hidden lg:table-cell">{f.conseil}</td>
+                        <td className="text-slate">{f.conseil}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
+
+              {/* Données complémentaires — colonnes retirées du tableau */}
+              <div className="bg-cloud border border-edge rounded-lg px-5 py-4 mb-4 text-[14px] text-slate space-y-2">
+                <p>
+                  <span className="font-medium text-ink">Économie mensuelle sur la prime</span>{' '}
+                  par rapport à la franchise 300 CHF : 500 CHF → −CHF 10.58 ; 1 000 CHF → −CHF 38.04 ;
+                  1 500 CHF → −CHF 65.41 ; 2 000 CHF → −CHF 92.79 ; 2 500 CHF → −CHF 119.98 par mois.
+                </p>
+                <p>
+                  <span className="font-medium text-ink">Seuils d'équilibre</span>{' '}
+                  (frais médicaux annuels à partir desquels la franchise 300 CHF devient avantageuse) :
+                  500 CHF → env. CHF 300 ; 1 000 CHF → env. CHF 800 ; 1 500 CHF → env. CHF 1 100 ;
+                  2 000 CHF → env. CHF 1 300 ; 2 500 CHF → env. CHF 1 440.
+                </p>
+              </div>
+
               <div className="callout flex gap-3">
-                <svg className="w-4 h-4 text-brand shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                <svg className="w-5 h-5 text-brand shrink-0 mt-0.5" fill="none" stroke="currentColor"
                      strokeWidth={1.5} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round"
-                    d="M12 2a7 7 0 0 1 4.9 11.95c-.74.8-1.15 1.84-1.15 2.92V17a1 1 0 0 1-1 1h-5.5a1 1 0 0 1-1-1v-.13c0-1.08-.4-2.12-1.15-2.92A7 7 0 0 1 12 2ZM9.5 21h5M10.5 18h3" />
+                    d="M9 18h6m-3-3v3m0-3a6 6 0 10-6-6h12a6 6 0 00-6 6z" />
                 </svg>
                 <div>
                   <p className="font-semibold text-ink mb-1">Comment calculer le seuil d'équilibre</p>
@@ -326,10 +334,10 @@ export default function FranchisePage() {
               </p>
 
               <div className="callout-success flex gap-3 mb-6">
-                <svg className="w-4 h-4 text-brand shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                <svg className="w-5 h-5 text-brand shrink-0 mt-0.5" fill="none" stroke="currentColor"
                      strokeWidth={1.5} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round"
-                    d="M12 2a7 7 0 0 1 4.9 11.95c-.74.8-1.15 1.84-1.15 2.92V17a1 1 0 0 1-1 1h-5.5a1 1 0 0 1-1-1v-.13c0-1.08-.4-2.12-1.15-2.92A7 7 0 0 1 12 2ZM9.5 21h5M10.5 18h3" />
+                    d="M9 18h6m-3-3v3m0-3a6 6 0 10-6-6h12a6 6 0 00-6 6z" />
                 </svg>
                 <p className="text-[15px]">
                   <strong>Recommandation :</strong> la franchise 0 CHF par an est conseillée pour les
