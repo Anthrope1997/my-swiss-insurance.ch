@@ -665,14 +665,27 @@ Les chiffres clés apparaissent dans le texte brut, pas uniquement dans les tabl
 
 ## 9. Navigation & structure de pages
 
-**Header** (`components/ui/Header.tsx`) — fond `bg-[#0f2040]`, hamburger animated.
+### 9.1 Header — Standard global, toutes les pages
 
-Structure gauche à droite : **hamburger → logo → CTA aligné à droite.**
-Sections menu : Guides, Par canton, Par situation de vie. **Aucun CTA dans le menu hamburger.**
+> **Composant global** : `components/ui/Header.tsx`. Le modifier une fois l'applique sur l'intégralité du site. Ne jamais dupliquer ou surcharger ce composant dans une page.
 
-**CTA header :** `"Recevez les meilleures offres"` — bouton aligné à droite.
-Au clic : overlay sombre sur l'arrière-plan, formulaire centré à l'écran, précédé du sous-titre :
-`"Un expert analyse votre profil et revient vers vous sous 24 heures avec les meilleures offres personnalisées. Gratuit, sans engagement."`
+**Structure de la barre — gauche à droite :**
+```
+[ hamburger ]  [ logo My Swiss Insurance ]  ················  [ Recevez les meilleures offres ]
+```
+
+- Hamburger : extrême gauche, ouvre le menu déroulant
+- Logo : juste après le hamburger, lien vers `/`
+- Bouton CTA : extrême droite, libellé `"Recevez les meilleures offres"`
+
+**Comportement du CTA header :**
+Au clic → overlay sombre (`bg-black/60`) sur tout l'écran + modal centré contenant :
+1. Sous-titre (immuable) : `"Un expert analyse votre profil et revient vers vous sous 24 heures avec les meilleures offres personnalisées. Gratuit, sans engagement."`
+2. `<MultiStepLeadForm redirectOnSuccess="/fr/merci" />`
+3. Bouton de fermeture (×) en haut à droite de la modal
+4. Clic sur l'overlay ferme la modal
+
+**Menu hamburger :** aucun CTA de conversion à l'intérieur. Uniquement des liens de navigation.
 
 **Footer** (`components/ui/Footer.tsx`) — fond `bg-[#0f2040]`.
 Colonnes : Guides · Par canton · Par situation de vie · Légal.
@@ -732,7 +745,9 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 
 ## 11. Règles visuelles — tableaux, graphiques, encadrés, icônes
 
-### 11.1 Tableaux (`stripe-table`)
+### 11.1 Tableaux (`stripe-table`) — Standard global, toutes les pages
+
+> **Standard global** : s'applique à **tous** les tableaux sur **toutes** les pages du site, sans exception.
 
 - **Valeurs numériques alignées à droite.** Appliquer `text-right` sur chaque `<th>` et `<td>` numérique.
 - **Trier toujours les lignes du plus grand au plus petit** selon la donnée la plus importante de la page (économie, part de marché, coût, prime...). Ne jamais trier alphabétiquement si une donnée quantitative est disponible.
@@ -753,17 +768,23 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 
 ---
 
-### 11.3 Encadrés bleus (`.callout`)
+### 11.3 Encadrés bleus (`.callout`) — Standard global, toutes les pages
+
+> **Standard global** : s'applique à **tous** les encadrés bleus sur **toutes** les pages du site.
 
 **Usage réservé :** astuces et remarques utiles à l'utilisateur.
 **Jamais** pour des sources, références, mentions légales ou informations purement factuelles sans valeur conseil.
 
-Chaque encadré bleu doit comporter une **icône ampoule sobre** en haut à gauche :
+Chaque encadré bleu doit comporter une **icône ampoule SVG** à gauche du texte :
+- Style : trait fin (`strokeWidth={1.5}`), référence Lucide ou Heroicons outline
+- Taille : **16px** (`w-4 h-4`)
+- Couleur : `text-brand` (#1d4ed8)
+- **Jamais un emoji. Jamais une image raster.**
 
 ```tsx
 <div className="callout flex gap-3">
-  {/* Icône ampoule — trait fin, couleur brand */}
-  <svg className="w-5 h-5 text-brand shrink-0 mt-0.5" fill="none" stroke="currentColor"
+  {/* Icône ampoule — SVG trait fin 16px, couleur brand */}
+  <svg className="w-4 h-4 text-brand shrink-0 mt-0.5" fill="none" stroke="currentColor"
        strokeWidth={1.5} viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round"
       d="M12 2a7 7 0 0 1 4.9 11.95c-.74.8-1.15 1.84-1.15 2.92V17a1 1 0 0 1-1 1h-5.5

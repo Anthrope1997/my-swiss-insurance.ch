@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
+import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
 
 const menuSections: {
   id: string
@@ -92,115 +93,154 @@ export default function Header() {
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [expandedSection, setExpandedSection] = useState<string | null>(null)
+  const [offerOpen, setOfferOpen] = useState(false)
 
   useEffect(() => {
     setMobileOpen(false)
     setExpandedSection(null)
   }, [pathname])
 
+  useEffect(() => {
+    document.body.style.overflow = offerOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [offerOpen])
+
   function close() {
     setMobileOpen(false)
     setExpandedSection(null)
   }
 
-  function toggleSection(name: string) {
-    setExpandedSection(s => s === name ? null : name)
+  function toggleSection(id: string) {
+    setExpandedSection(s => s === id ? null : id)
   }
 
   return (
-    <header className="bg-[#0f2040] sticky top-0 z-50">
-      <style>{`
-        @keyframes slideDown {
-          from { opacity: 0; transform: translateY(-8px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        .menu-slide { animation: slideDown 0.22s ease-out; }
-      `}</style>
+    <>
+      <header className="bg-[#0f2040] sticky top-0 z-50">
+        <style>{`
+          @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-8px); }
+            to   { opacity: 1; transform: translateY(0); }
+          }
+          .menu-slide { animation: slideDown 0.22s ease-out; }
+        `}</style>
 
-      <div className="container-xl">
-        <div className="flex items-center justify-between h-16">
+        <div className="container-xl">
+          <div className="flex items-center h-16 gap-3">
 
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 shrink-0">
-            <div className="w-7 h-7 bg-[#1d4ed8] rounded-md flex items-center justify-center">
-              <ShieldIcon />
-            </div>
-            <span className="font-semibold text-white text-[15px] hidden sm:inline">
-              My Swiss Insurance
-            </span>
-            <span className="font-semibold text-white text-[15px] sm:hidden">MSI</span>
-          </Link>
+            {/* Hamburger — LEFT */}
+            <button
+              onClick={() => setMobileOpen(o => !o)}
+              className="p-2 flex flex-col justify-center items-center gap-[5px] shrink-0"
+              aria-label={mobileOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+            >
+              <span className={`block w-5 h-[2px] bg-white rounded-full transition-all duration-300 origin-center
+                ${mobileOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
+              <span className={`block w-5 h-[2px] bg-white rounded-full transition-all duration-300
+                ${mobileOpen ? 'opacity-0 scale-x-0' : ''}`} />
+              <span className={`block w-5 h-[2px] bg-white rounded-full transition-all duration-300 origin-center
+                ${mobileOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
+            </button>
 
-          {/* Hamburger — animated 3-lines → X */}
-          <button
-            onClick={() => setMobileOpen(o => !o)}
-            className="p-2 flex flex-col justify-center items-center gap-[5px]"
-            aria-label={mobileOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
-          >
-            <span className={`block w-5 h-[2px] bg-white rounded-full transition-all duration-300 origin-center
-              ${mobileOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
-            <span className={`block w-5 h-[2px] bg-white rounded-full transition-all duration-300
-              ${mobileOpen ? 'opacity-0 scale-x-0' : ''}`} />
-            <span className={`block w-5 h-[2px] bg-white rounded-full transition-all duration-300 origin-center
-              ${mobileOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
-          </button>
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-2.5 flex-1">
+              <div className="w-7 h-7 bg-[#1d4ed8] rounded-md flex items-center justify-center shrink-0">
+                <ShieldIcon />
+              </div>
+              <span className="font-semibold text-white text-[15px] hidden sm:inline">
+                My Swiss Insurance
+              </span>
+              <span className="font-semibold text-white text-[15px] sm:hidden">MSI</span>
+            </Link>
 
+            {/* CTA — RIGHT */}
+            <button
+              onClick={() => setOfferOpen(true)}
+              className="shrink-0 bg-[#1d4ed8] hover:bg-[#1e40af] text-white font-medium
+                         px-4 py-2 rounded-md text-[13px] transition-colors"
+            >
+              <span className="hidden sm:inline">Recevez les meilleures offres</span>
+              <span className="sm:hidden text-[12px]">Nos offres</span>
+            </button>
+
+          </div>
         </div>
-      </div>
 
-      {/* Dropdown menu */}
-      {mobileOpen && (
-        <div className="menu-slide bg-[#0f2040]/95 backdrop-blur-sm border-t border-white/10
-                        px-4 pb-6 overflow-y-auto"
-          style={{ maxHeight: '85vh' }}>
+        {/* Dropdown menu — navigation only, no CTA */}
+        {mobileOpen && (
+          <div className="menu-slide bg-[#0f2040]/95 backdrop-blur-sm border-t border-white/10
+                          px-4 pb-6 overflow-y-auto"
+            style={{ maxHeight: '85vh' }}>
 
-          {menuSections.map(section => (
-            <div key={section.id}>
-              <button
-                onClick={() => toggleSection(section.id)}
-                className="w-full flex items-center gap-3 py-3 text-[15px] text-white hover:text-blue-300 border-b border-white/10"
-              >
-                <span className="w-7 h-7 rounded-md bg-white/10 flex items-center justify-center shrink-0">
-                  {section.icon}
-                </span>
-                <span className="flex-1 text-left">{section.label}</span>
-                <ChevronDown rotated={expandedSection === section.id} />
-              </button>
-              {expandedSection === section.id && (
-                <div className="bg-white/5 border-b border-white/10">
-                  {section.links.map((link, i) => (
-                    <Link key={link.href} href={link.href} onClick={close}
-                      className={`block pl-5 py-2.5 text-[14px] text-white hover:text-blue-300
-                        ${i < section.links.length - 1 ? 'border-b border-white/5' : ''}`}>
-                      {link.label}
-                    </Link>
-                  ))}
-                  {section.ctaLink && (
-                    <Link href={section.ctaLink.href} onClick={close}
-                      className="block pl-5 py-2.5 text-[14px] text-white hover:text-blue-300 border-t border-white/5">
-                      {section.ctaLink.label}
-                    </Link>
-                  )}
-                </div>
-              )}
-            </div>
-          ))}
+            {menuSections.map(section => (
+              <div key={section.id}>
+                <button
+                  onClick={() => toggleSection(section.id)}
+                  className="w-full flex items-center gap-3 py-3 text-[15px] text-white hover:text-blue-300 border-b border-white/10"
+                >
+                  <span className="w-7 h-7 rounded-md bg-white/10 flex items-center justify-center shrink-0">
+                    {section.icon}
+                  </span>
+                  <span className="flex-1 text-left">{section.label}</span>
+                  <ChevronDown rotated={expandedSection === section.id} />
+                </button>
+                {expandedSection === section.id && (
+                  <div className="bg-white/5 border-b border-white/10">
+                    {section.links.map((link, i) => (
+                      <Link key={link.href} href={link.href} onClick={close}
+                        className={`block pl-5 py-2.5 text-[14px] text-white hover:text-blue-300
+                          ${i < section.links.length - 1 ? 'border-b border-white/5' : ''}`}>
+                        {link.label}
+                      </Link>
+                    ))}
+                    {section.ctaLink && (
+                      <Link href={section.ctaLink.href} onClick={close}
+                        className="block pl-5 py-2.5 text-[14px] text-white hover:text-blue-300 border-t border-white/5">
+                        {section.ctaLink.label}
+                      </Link>
+                    )}
+                  </div>
+                )}
+              </div>
+            ))}
 
-          {/* CTA */}
-          <Link
-            href="/lamal/comparateur"
-            onClick={close}
-            className="mt-5 flex items-center justify-center gap-2 w-full bg-[#1d4ed8] hover:bg-[#1e40af]
-                       text-white text-[14px] font-medium px-4 py-3 rounded-md transition-colors"
+          </div>
+        )}
+      </header>
+
+      {/* Modal overlay — "Recevez les meilleures offres" */}
+      {offerOpen && (
+        <div
+          className="fixed inset-0 bg-black/60 z-[60] flex items-center justify-center p-4"
+          onClick={() => setOfferOpen(false)}
+        >
+          <div
+            className="bg-white rounded-xl w-full max-w-lg max-h-[90vh] overflow-y-auto"
+            onClick={e => e.stopPropagation()}
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-            </svg>
-            Comparer ma prime LAMal
-          </Link>
+            <div className="px-8 pt-8 pb-4">
+              <div className="flex items-start justify-between gap-4 mb-6">
+                <p className="text-[15px] text-slate leading-relaxed">
+                  Un expert analyse votre profil et revient vers vous sous 24 heures
+                  avec les meilleures offres personnalisées. Gratuit, sans engagement.
+                </p>
+                <button
+                  onClick={() => setOfferOpen(false)}
+                  className="shrink-0 text-slate hover:text-ink transition-colors mt-0.5"
+                  aria-label="Fermer"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div className="px-8 pb-8">
+              <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
+            </div>
+          </div>
         </div>
       )}
-    </header>
+    </>
   )
 }
