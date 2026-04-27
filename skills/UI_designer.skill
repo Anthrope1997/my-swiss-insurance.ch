@@ -728,7 +728,7 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 - [ ] Dates datePublished / dateModified cohérentes avec le bandeau MSI
 
 **Visuels**
-- [ ] Valeurs numériques dans les tableaux alignées à droite (`text-right`)
+- [ ] Toutes les cellules de tableau : `text-left`, `whitespace-nowrap`
 - [ ] Lignes triées du plus grand au plus petit (donnée principale)
 - [ ] Graphiques triés du plus grand au plus petit
 - [ ] Encadrés bleus réservés aux astuces : icône ampoule outline présente, jamais pour des sources
@@ -756,8 +756,8 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 - Si un tableau dépasse 4 colonnes, supprimer les colonnes moins essentielles et les déplacer dans un paragraphe texte sous le tableau.
 
 ```tsx
-<th className="text-right whitespace-nowrap">Prime par mois</th>
-<td className="text-right whitespace-nowrap">CHF 320</td>
+<th className="whitespace-nowrap">Prime par mois</th>
+<td className="whitespace-nowrap">CHF 320</td>
 ```
 
 **Exemple appliqué — tableau franchise (4 colonnes) :**
