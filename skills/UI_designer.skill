@@ -626,10 +626,11 @@ Voir section 6. Titre et sous-titre immuables. Soumission → /fr/merci.
 
 | Zone | Type | Exemple |
 |---|---|---|
-| Hero | `btn-primary` → `#contact` | `Être conseillé gratuitement →` |
+| Header | `btn-primary` → modal formulaire | `Recevez les meilleures offres` |
+| Hero page contenu | Aucun bouton | — |
 | Corps section | Lien texte `text-brand` | `Comprendre les franchises →` |
 | TOC sidebar | Aucun bouton | — |
-| Formulaire | `btn-primary` submit | `Envoyer ma demande →` |
+| Formulaire bas de page | `btn-primary` submit | `Envoyer ma demande →` |
 
 ---
 
