@@ -229,12 +229,12 @@ export default function FranchisePage() {
               </div>
 
               <div className="callout flex gap-3">
-                <svg className="text-brand shrink-0 mt-0.5" width="18" height="18"
-                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}
+                <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
                      strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10" />
-                  <line x1="12" y1="16" x2="12" y2="12" />
-                  <line x1="12" y1="8" x2="12.01" y2="8" />
+                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
+                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
+                  <line x1="10" y1="21" x2="14" y2="21" />
                 </svg>
                 <p className="text-[15px]">
                   <strong>Exemple concret : </strong>
@@ -263,25 +263,25 @@ export default function FranchisePage() {
                 <table className="stripe-table w-full">
                   <thead>
                     <tr>
-                      <th className="text-right whitespace-nowrap">Franchise</th>
-                      <th className="text-right whitespace-nowrap">Prime par mois</th>
-                      <th className="text-right whitespace-nowrap">Économie par an</th>
-                      <th>Profil recommandé</th>
+                      <th className="whitespace-nowrap">Franchise</th>
+                      <th className="whitespace-nowrap">Prime par mois</th>
+                      <th className="whitespace-nowrap">Économie par an</th>
+                      <th className="whitespace-nowrap">Profil recommandé</th>
                     </tr>
                   </thead>
                   <tbody>
                     {franchises.map((f) => (
                       <tr key={f.montant} className={f.montant === 300 ? 'bg-[#eff6ff]' : ''}>
-                        <td className="text-right font-semibold text-brand whitespace-nowrap">
+                        <td className="font-semibold text-brand whitespace-nowrap">
                           CHF {f.montant.toLocaleString('fr-CH')}
                         </td>
-                        <td className="text-right font-medium text-ink whitespace-nowrap">
+                        <td className="font-medium text-ink whitespace-nowrap">
                           CHF {f.prime.toFixed(2)}
                         </td>
-                        <td className="text-right text-brand whitespace-nowrap">
+                        <td className="text-brand whitespace-nowrap">
                           {f.ecAnn > 0 ? `−CHF ${f.ecAnn}` : 'Référence'}
                         </td>
-                        <td className="text-slate">{f.conseil}</td>
+                        <td className="text-slate whitespace-nowrap">{f.conseil}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -304,12 +304,12 @@ export default function FranchisePage() {
               </div>
 
               <div className="callout flex gap-3">
-                <svg className="text-brand shrink-0 mt-0.5" width="18" height="18"
-                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}
+                <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
                      strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10" />
-                  <line x1="12" y1="16" x2="12" y2="12" />
-                  <line x1="12" y1="8" x2="12.01" y2="8" />
+                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
+                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
+                  <line x1="10" y1="21" x2="14" y2="21" />
                 </svg>
                 <div>
                   <p className="font-semibold text-ink mb-1">Comment calculer le seuil d'équilibre</p>
@@ -338,12 +338,12 @@ export default function FranchisePage() {
               </p>
 
               <div className="callout-success flex gap-3 mb-6">
-                <svg className="text-brand shrink-0 mt-0.5" width="18" height="18"
-                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}
+                <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
                      strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10" />
-                  <line x1="12" y1="16" x2="12" y2="12" />
-                  <line x1="12" y1="8" x2="12.01" y2="8" />
+                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
+                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
+                  <line x1="10" y1="21" x2="14" y2="21" />
                 </svg>
                 <p className="text-[15px]">
                   <strong>Recommandation :</strong> la franchise 0 CHF par an est conseillée pour les
@@ -356,20 +356,20 @@ export default function FranchisePage() {
                 <table className="stripe-table w-full">
                   <thead>
                     <tr>
-                      <th className="text-right whitespace-nowrap">Franchise par an</th>
-                      <th>Profil adapté</th>
+                      <th className="whitespace-nowrap">Franchise par an</th>
+                      <th className="whitespace-nowrap">Profil adapté</th>
                     </tr>
                   </thead>
                   <tbody>
                     {[
-                      ['CHF 0',          'Nourrissons et enfants en bas âge, consultations fréquentes'],
-                      ['CHF 100',        'Enfants avec quelques consultations par an'],
-                      ['CHF 200 à 300',  'Enfants en bonne santé, quelques visites annuelles'],
                       ['CHF 400 à 600',  'Adolescents robustes, rarement malades'],
+                      ['CHF 200 à 300',  'Enfants en bonne santé, quelques visites annuelles'],
+                      ['CHF 100',        'Enfants avec quelques consultations par an'],
+                      ['CHF 0',          'Nourrissons et enfants en bas âge, consultations fréquentes'],
                     ].map(([fr, profil], i) => (
                       <tr key={i}>
-                        <td className="text-right font-semibold text-ink whitespace-nowrap">{fr}</td>
-                        <td>{profil}</td>
+                        <td className="font-semibold text-ink whitespace-nowrap">{fr}</td>
+                        <td className="whitespace-nowrap">{profil}</td>
                       </tr>
                     ))}
                   </tbody>
