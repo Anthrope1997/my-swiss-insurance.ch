@@ -273,6 +273,7 @@ import CantonCombobox, { CANTON_NAMES } from '@/components/ui/CantonCombobox'
 7. **CHF toujours suivi** de "par mois" ou "par an"
 8. **Jamais "à Vaud"** → "dans le canton de Vaud"
 9. **Ton** : informatif, neutre, professionnel
+10. **Français exclusif dans tout texte visible** : remplacer tout mot non français sans exception — textes, labels, boutons, titres, placeholders, messages d'erreur. Exemples : `top` → "meilleur", `check` → "vérifier", `dashboard` → "tableau de bord". Les termes intégrés au français courant sont acceptables : "profil", "standard", "email". En cas de doute, toujours privilégier le mot français.
 
 ---
 
@@ -750,9 +751,8 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 > **Standard global** : s'applique à **tous** les tableaux sur **toutes** les pages du site, sans exception.
 
 **Limite de colonnes :**
-- Maximum **4 colonnes** affichées sur mobile.
-- Maximum **6 colonnes** sur desktop.
-- Si un tableau dépasse ce seuil, supprimer ou fusionner les colonnes les moins essentielles. Déplacer les données retirées dans un encadré texte séparé sous le tableau (`bg-cloud border border-edge rounded-lg`).
+- Maximum **4 colonnes** dans tous les cas, mobile et desktop.
+- Si un tableau source contient plus de 4 colonnes, supprimer les colonnes les moins essentielles ou les déplacer dans un encadré texte séparé sous le tableau (`bg-cloud border border-edge rounded-lg`).
 - **Jamais de cellule dont le contenu se coupe sur deux lignes.**
 
 **Alignement et formatage :**
