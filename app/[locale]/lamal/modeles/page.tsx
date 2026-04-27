@@ -185,10 +185,6 @@ export default function ModelesPage() {
               </div>
             ))}
           </div>
-
-          <a href="#contact" className="btn-primary text-[15px]">
-            Être conseillé gratuitement →
-          </a>
         </div>
       </section>
 

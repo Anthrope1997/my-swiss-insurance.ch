@@ -385,11 +385,6 @@ export default function PageSlug() {
             ))}
           </div>
 
-          {/* CTA hero — unique point de conversion, scroll vers formulaire */}
-          <a href="#contact" className="btn-primary text-[15px]">
-            Être conseillé gratuitement →
-          </a>
-
         </div>
       </section>
 
@@ -603,16 +598,12 @@ Hauteur champs standalone (`input-field` par défaut) : `h-12` (48px).
 **Philosophie :** on apporte de la valeur, on laisse l'utilisateur venir naturellement au formulaire.
 Deux points de conversion par page, pas un de plus.
 
-### Point 1 — Hero (unique bouton de conversion visible)
+### Point 1 — Header CTA (unique point de conversion en haut de page)
 
-```tsx
-<a href="#contact" className="btn-primary text-[15px]">
-  Être conseillé gratuitement →
-</a>
-```
+Le seul point de conversion en haut de page est le bouton **"Recevez les meilleures offres"** dans le header (`components/ui/Header.tsx`).
 
-Un seul bouton `btn-primary` dans le hero. Il scrolle vers le formulaire en bas de page.
-Jamais de bouton hero vers `/lamal/comparateur` ou une autre page.
+**Aucun bouton** `btn-primary` ni `btn-secondary` dans la section hero ou sous le titre des pages de contenu (Templates A, C, E).
+Supprimer tout bouton "Être conseillé gratuitement" ou équivalent placé sous un titre de page.
 
 ### Point 2 — Formulaire fixe en bas de page
 
@@ -678,6 +669,7 @@ Les chiffres clés apparaissent dans le texte brut, pas uniquement dans les tabl
 - Hamburger : extrême gauche, ouvre le menu déroulant
 - Logo : juste après le hamburger, lien vers `/`
 - Bouton CTA : extrême droite, libellé `"Recevez les meilleures offres"`
+- **Toujours visible**, mobile et desktop. Ne jamais masquer avec `hidden`, `sm:hidden` ou toute autre classe responsive.
 
 **Comportement du CTA header :**
 Au clic → overlay sombre (`bg-black/60`) sur tout l'écran + modal centré contenant :
@@ -710,7 +702,7 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 - [ ] Jamais "courtier" (→ "expert"), jamais "+" dans les labels
 
 **CTAs**
-- [ ] Hero : un seul `btn-primary` → `#contact` ("Être conseillé gratuitement →")
+- [ ] Aucun `btn-primary` ni `btn-secondary` dans le hero des pages de contenu
 - [ ] Corps des sections : liens texte `text-brand` uniquement, jamais de bouton
 - [ ] Aucun nudge sombre ou intermédiaire entre les sections
 - [ ] TOC sidebar : aucun bouton de conversion
