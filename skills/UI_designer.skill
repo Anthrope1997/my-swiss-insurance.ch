@@ -731,7 +731,7 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 - [ ] Valeurs numériques dans les tableaux alignées à droite (`text-right`)
 - [ ] Lignes triées du plus grand au plus petit (donnée principale)
 - [ ] Graphiques triés du plus grand au plus petit
-- [ ] Encadrés bleus réservés aux astuces : icône ampoule présente, jamais pour des sources
+- [ ] Encadrés bleus réservés aux astuces : icône info cercle présente, jamais pour des sources
 - [ ] Icônes : trait fin, couleur brand, max 4-5 par page, non décoratives
 
 **Header**
@@ -750,15 +750,11 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 
 > **Standard global** : s'applique à **tous** les tableaux sur **toutes** les pages du site, sans exception.
 
-**Limite de colonnes :**
-- Maximum **4 colonnes** dans tous les cas, mobile et desktop.
-- Si un tableau source contient plus de 4 colonnes, supprimer les colonnes les moins essentielles ou les déplacer dans un encadré texte séparé sous le tableau (`bg-cloud border border-edge rounded-lg`).
-- **Jamais de cellule dont le contenu se coupe sur deux lignes.**
-
-**Alignement et formatage :**
-- Valeurs numériques : `text-right` + `whitespace-nowrap` sur `<th>` et `<td>`.
-- Colonne texte (ex. "Profil recommandé") : `text-left`, largeur auto (prend l'espace restant).
-- Trier les lignes du plus grand au plus petit selon la donnée principale de la page.
+- Maximum **4 colonnes** dans tous les cas.
+- Colonnes numériques (CHF, pourcentages, montants) : `text-right` + `whitespace-nowrap` sur `<th>` et `<td>`.
+- Colonne texte descriptif : `text-left`.
+- Trier du plus grand au plus petit selon la donnée principale.
+- Si un tableau dépasse 4 colonnes, supprimer les colonnes moins essentielles et les déplacer dans un paragraphe texte sous le tableau.
 
 ```tsx
 <th className="text-right whitespace-nowrap">Prime par mois</th>
@@ -785,20 +781,21 @@ Colonnes déplacées dans un encadré texte : Économie par mois · Seuil d'équ
 **Usage réservé :** astuces et remarques utiles à l'utilisateur.
 **Jamais** pour des sources, références, mentions légales ou informations purement factuelles sans valeur conseil.
 
-Chaque encadré bleu doit comporter une **icône ampoule Heroicons** à gauche du texte :
-- Composant de référence : `LightBulbIcon` (Heroicons outline)
-- Taille : **20px** (`w-5 h-5`)
+Chaque encadré bleu doit comporter une **icône info cercle** à gauche du texte :
+- Taille : **18px** (`width="18" height="18"`)
 - Couleur : `text-brand` (#1d4ed8)
 - **Jamais un emoji. Jamais une image raster.**
-- Reproduire en SVG inline avec ce path exact (Heroicons `LightBulbIcon` outline) :
+- Reproduire en SVG inline avec ce code exact :
 
 ```tsx
 <div className="callout flex gap-3">
-  {/* LightBulbIcon — Heroicons outline 20px */}
-  <svg className="w-5 h-5 text-brand shrink-0 mt-0.5" fill="none" stroke="currentColor"
-       strokeWidth={1.5} viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round"
-      d="M9 18h6m-3-3v3m0-3a6 6 0 10-6-6h12a6 6 0 00-6 6z" />
+  {/* Info cercle — 18px */}
+  <svg className="text-brand shrink-0 mt-0.5" width="18" height="18"
+       viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}
+       strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <line x1="12" y1="16" x2="12" y2="12" />
+    <line x1="12" y1="8" x2="12.01" y2="8" />
   </svg>
   <div>
     <p className="font-semibold text-ink mb-1">{titre_astuce}</p>
