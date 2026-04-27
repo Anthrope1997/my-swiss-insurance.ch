@@ -71,12 +71,12 @@ const faqSchema = {
 }
 
 const franchises = [
-  { montant: 300,  prime: 564.61, ecMois: 0,      ecAnn: 0,    seuilEquilibre: 'Réf.',        conseil: 'Franchise minimale, référence' },
-  { montant: 500,  prime: 554.03, ecMois: 10.58,  ecAnn: 127,  seuilEquilibre: 'env. CHF 300', conseil: 'Avantage limité' },
-  { montant: 1000, prime: 526.57, ecMois: 38.04,  ecAnn: 456,  seuilEquilibre: 'env. CHF 800', conseil: 'Adapté aux personnes peu malades' },
-  { montant: 1500, prime: 499.20, ecMois: 65.41,  ecAnn: 785,  seuilEquilibre: 'env. CHF 1 100', conseil: 'Bon équilibre pour personnes saines' },
-  { montant: 2000, prime: 471.82, ecMois: 92.79,  ecAnn: 1113, seuilEquilibre: 'env. CHF 1 300', conseil: 'Recommandé sans maladie chronique' },
   { montant: 2500, prime: 444.63, ecMois: 119.98, ecAnn: 1440, seuilEquilibre: 'env. CHF 1 440', conseil: 'Optimal pour adultes très sains' },
+  { montant: 2000, prime: 471.82, ecMois: 92.79,  ecAnn: 1113, seuilEquilibre: 'env. CHF 1 300', conseil: 'Recommandé sans maladie chronique' },
+  { montant: 1500, prime: 499.20, ecMois: 65.41,  ecAnn: 785,  seuilEquilibre: 'env. CHF 1 100', conseil: 'Bon équilibre pour personnes saines' },
+  { montant: 1000, prime: 526.57, ecMois: 38.04,  ecAnn: 456,  seuilEquilibre: 'env. CHF 800',   conseil: 'Adapté aux personnes peu malades' },
+  { montant: 500,  prime: 554.03, ecMois: 10.58,  ecAnn: 127,  seuilEquilibre: 'env. CHF 300',   conseil: 'Avantage limité' },
+  { montant: 300,  prime: 564.61, ecMois: 0,      ecAnn: 0,    seuilEquilibre: 'Réf.',           conseil: 'Franchise minimale, référence' },
 ]
 
 const heroStats = [
@@ -201,7 +201,7 @@ export default function FranchisePage() {
                     ].map((item, i) => (
                       <li key={i} className="flex gap-3 text-[15px] text-slate">
                         <svg className="w-4 h-4 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
                         </svg>
                         {item}
                       </li>
@@ -219,7 +219,7 @@ export default function FranchisePage() {
                     ].map((item, i) => (
                       <li key={i} className="flex gap-3 text-[15px] text-slate">
                         <svg className="w-4 h-4 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
                         </svg>
                         {item}
                       </li>
@@ -228,11 +228,18 @@ export default function FranchisePage() {
                 </div>
               </div>
 
-              <div className="callout text-[15px]">
-                <strong>Exemple concret : </strong>
-                Avec une franchise de 1 500 CHF par an et CHF 2 000 de frais médicaux dans l'année :
-                vous payez CHF 1 500 (franchise) + 10% de CHF 500 = CHF 50 (quote-part), soit{' '}
-                <strong>CHF 1 550 au total</strong>. Votre caisse prend en charge CHF 450.
+              <div className="callout flex gap-3">
+                <svg className="w-5 h-5 text-brand shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                     strokeWidth={1.5} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round"
+                    d="M12 2a7 7 0 0 1 4.9 11.95c-.74.8-1.15 1.84-1.15 2.92V17a1 1 0 0 1-1 1h-5.5a1 1 0 0 1-1-1v-.13c0-1.08-.4-2.12-1.15-2.92A7 7 0 0 1 12 2ZM9.5 21h5M10.5 18h3" />
+                </svg>
+                <p className="text-[15px]">
+                  <strong>Exemple concret : </strong>
+                  avec une franchise de 1 500 CHF par an et CHF 2 000 de frais médicaux dans l'année,
+                  vous payez CHF 1 500 (franchise) + 10% de CHF 500 = CHF 50 (quote-part), soit{' '}
+                  <strong>CHF 1 550 au total</strong>. Votre caisse prend en charge CHF 450.
+                </p>
               </div>
             </section>
 
@@ -245,12 +252,10 @@ export default function FranchisePage() {
                 En dessous de ce seuil, la franchise élevée est préférable.
               </p>
 
-              <div className="callout-warning text-[15px] mb-4">
-                <strong>Données à titre indicatif :</strong> les primes ci-dessous correspondent
-                à un adulte de 26 ans et plus à Zurich, modèle standard (source : OFSP 2026).
-                Les montants varient selon votre canton. Pour votre situation précise, consultez
-                directement les données de votre canton.
-              </div>
+              <p className="text-[13px] text-slate/60 italic mb-4">
+                Primes indicatives pour un adulte de 26 ans et plus à Zurich, modèle standard
+                (source : OFSP 2026). Les montants varient selon votre canton.
+              </p>
 
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-4">
                 <table className="stripe-table w-full">
@@ -260,14 +265,14 @@ export default function FranchisePage() {
                       <th className="text-right">Prime par mois</th>
                       <th className="text-right hidden sm:table-cell">Éco. par mois</th>
                       <th className="text-right hidden sm:table-cell">Éco. par an</th>
-                      <th className="text-center hidden md:table-cell">Seuil par an</th>
+                      <th className="text-right hidden md:table-cell">Seuil par an</th>
                       <th className="hidden lg:table-cell">Profil adapté</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {franchises.map((f, i) => (
-                      <tr key={f.montant} className={i === 0 ? 'bg-[#eff6ff]' : ''}>
-                        <td className={`font-semibold ${i === 0 ? 'text-brand' : 'text-brand'}`}>
+                    {franchises.map((f) => (
+                      <tr key={f.montant} className={f.montant === 300 ? 'bg-[#eff6ff]' : ''}>
+                        <td className="font-semibold text-brand">
                           CHF {f.montant.toLocaleString('fr-CH')}
                         </td>
                         <td className="text-right font-medium text-ink">
@@ -279,7 +284,7 @@ export default function FranchisePage() {
                         <td className="text-right text-brand hidden sm:table-cell">
                           {f.ecAnn > 0 ? `−CHF ${f.ecAnn}` : '-'}
                         </td>
-                        <td className="text-center font-medium hidden md:table-cell">
+                        <td className="text-right font-medium hidden md:table-cell">
                           {f.seuilEquilibre}
                         </td>
                         <td className="hidden lg:table-cell">{f.conseil}</td>
@@ -288,14 +293,21 @@ export default function FranchisePage() {
                   </tbody>
                 </table>
               </div>
-              <div className="callout text-[15px]">
-                <p className="font-semibold text-ink mb-2">Comment calculer le seuil d'équilibre</p>
-                <p>
-                  Franchise 300 CHF vs 2 500 CHF par an : l'économie annuelle sur la prime est de{' '}
-                  CHF 1 440 par an. Si vos frais médicaux annuels dépassent CHF 1 440 par an, la
-                  franchise 300 CHF est plus avantageuse. En dessous, la franchise 2 500 CHF vous
-                  permet d'économiser davantage au total.
-                </p>
+              <div className="callout flex gap-3">
+                <svg className="w-5 h-5 text-brand shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                     strokeWidth={1.5} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round"
+                    d="M12 2a7 7 0 0 1 4.9 11.95c-.74.8-1.15 1.84-1.15 2.92V17a1 1 0 0 1-1 1h-5.5a1 1 0 0 1-1-1v-.13c0-1.08-.4-2.12-1.15-2.92A7 7 0 0 1 12 2ZM9.5 21h5M10.5 18h3" />
+                </svg>
+                <div>
+                  <p className="font-semibold text-ink mb-1">Comment calculer le seuil d'équilibre</p>
+                  <p className="text-[15px]">
+                    Franchise 300 CHF vs 2 500 CHF par an : l'économie annuelle sur la prime est de
+                    CHF 1 440 par an. Si vos frais médicaux annuels dépassent CHF 1 440 par an, la
+                    franchise 300 CHF est plus avantageuse. En dessous, la franchise 2 500 CHF vous
+                    permet d'économiser davantage au total.
+                  </p>
+                </div>
               </div>
 
               <div className="mt-6">
@@ -313,10 +325,17 @@ export default function FranchisePage() {
                 par an et la quote-part est plafonnée à CHF 350 par an, contre CHF 700 par an pour un adulte.
               </p>
 
-              <div className="callout-success text-[15px] mb-6">
-                <strong>Recommandation :</strong> la franchise 0 CHF par an est conseillée pour les jeunes
-                enfants qui consultent fréquemment. À partir de l'adolescence (15 à 18 ans), une franchise
-                plus élevée peut être envisagée si l'enfant est en bonne santé.
+              <div className="callout-success flex gap-3 mb-6">
+                <svg className="w-5 h-5 text-brand shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                     strokeWidth={1.5} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round"
+                    d="M12 2a7 7 0 0 1 4.9 11.95c-.74.8-1.15 1.84-1.15 2.92V17a1 1 0 0 1-1 1h-5.5a1 1 0 0 1-1-1v-.13c0-1.08-.4-2.12-1.15-2.92A7 7 0 0 1 12 2ZM9.5 21h5M10.5 18h3" />
+                </svg>
+                <p className="text-[15px]">
+                  <strong>Recommandation :</strong> la franchise 0 CHF par an est conseillée pour les
+                  jeunes enfants qui consultent fréquemment. À partir de l'adolescence (15 à 18 ans),
+                  une franchise plus élevée peut être envisagée si l'enfant est en bonne santé.
+                </p>
               </div>
 
               <div className="overflow-x-auto border border-edge rounded-[8px]">

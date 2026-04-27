@@ -447,14 +447,14 @@ export default function PageSlug() {
               <FAQ items={faqItems} title="{N}. Questions fréquentes sur {sujet}" />
             </section>
 
-            {/* Formulaire — ancre #contact, titre/sous-titre immuables */}
-            <div id="contact" className="scroll-mt-20">
+            {/* Formulaire — ancre #contact, titre/sous-titre immuables (voir section 6) */}
+            <div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4">
               <h2 className="text-2xl font-semibold text-ink mb-3">
-                Vous préférez qu'on s'occupe de tout ?
+                Besoin d'aide ?
               </h2>
               <p className="text-[16px] text-slate mb-6 leading-relaxed">
-                Un expert analyse votre profil, trouve la meilleure caisse pour votre situation
-                et gère le changement de votre côté. Gratuit, sans engagement, réponse sous 24 heures.
+                Un expert vous rappelle sous 24 heures pour établir avec vous une solution
+                personnalisée. Gratuit, sans engagement.
               </p>
               <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
             </div>
@@ -666,8 +666,13 @@ Les chiffres clés apparaissent dans le texte brut, pas uniquement dans les tabl
 ## 9. Navigation & structure de pages
 
 **Header** (`components/ui/Header.tsx`) — fond `bg-[#0f2040]`, hamburger animated.
-Sections menu : Guides, Par canton, Par situation de vie.
-CTA header : `Comparer ma prime LAMal` → /lamal/comparateur.
+
+Structure gauche à droite : **hamburger → logo → CTA aligné à droite.**
+Sections menu : Guides, Par canton, Par situation de vie. **Aucun CTA dans le menu hamburger.**
+
+**CTA header :** `"Recevez les meilleures offres"` — bouton aligné à droite.
+Au clic : overlay sombre sur l'arrière-plan, formulaire centré à l'écran, précédé du sous-titre :
+`"Un expert analyse votre profil et revient vers vous sous 24 heures avec les meilleures offres personnalisées. Gratuit, sans engagement."`
 
 **Footer** (`components/ui/Footer.tsx`) — fond `bg-[#0f2040]`.
 Colonnes : Guides · Par canton · Par situation de vie · Légal.
@@ -708,12 +713,91 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 - [ ] `<Breadcrumb>` présent (émet BreadcrumbList JSON-LD)
 - [ ] Dates datePublished / dateModified cohérentes avec le bandeau MSI
 
+**Visuels**
+- [ ] Valeurs numériques dans les tableaux alignées à droite (`text-right`)
+- [ ] Lignes triées du plus grand au plus petit (donnée principale)
+- [ ] Graphiques triés du plus grand au plus petit
+- [ ] Encadrés bleus réservés aux astuces : icône ampoule présente, jamais pour des sources
+- [ ] Icônes : trait fin, couleur brand, max 4-5 par page, non décoratives
+
+**Header**
+- [ ] Structure : hamburger → logo → CTA "Recevez les meilleures offres" à droite
+- [ ] Aucun CTA dans le menu hamburger
+- [ ] CTA ouvre overlay avec formulaire + sous-titre canonique
+
 **Build**
 - [ ] `npm run build` passe sans erreur avant commit
 
 ---
 
-## 11. Sources consultées
+## 11. Règles visuelles — tableaux, graphiques, encadrés, icônes
+
+### 11.1 Tableaux (`stripe-table`)
+
+- **Valeurs numériques alignées à droite.** Appliquer `text-right` sur chaque `<th>` et `<td>` numérique.
+- **Trier toujours les lignes du plus grand au plus petit** selon la donnée la plus importante de la page (économie, part de marché, coût, prime...). Ne jamais trier alphabétiquement si une donnée quantitative est disponible.
+
+```tsx
+// En-tête numérique
+<th className="... text-right">Prime par mois</th>
+// Cellule numérique
+<td className="... text-right">CHF 320</td>
+```
+
+---
+
+### 11.2 Graphiques
+
+- **Trier toujours les entrées du plus grand au plus petit** selon la donnée principale de la page.
+- Même règle que les tableaux : jamais de tri alphabétique si une valeur quantitative est disponible.
+
+---
+
+### 11.3 Encadrés bleus (`.callout`)
+
+**Usage réservé :** astuces et remarques utiles à l'utilisateur.
+**Jamais** pour des sources, références, mentions légales ou informations purement factuelles sans valeur conseil.
+
+Chaque encadré bleu doit comporter une **icône ampoule sobre** en haut à gauche :
+
+```tsx
+<div className="callout flex gap-3">
+  {/* Icône ampoule — trait fin, couleur brand */}
+  <svg className="w-5 h-5 text-brand shrink-0 mt-0.5" fill="none" stroke="currentColor"
+       strokeWidth={1.5} viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round"
+      d="M12 2a7 7 0 0 1 4.9 11.95c-.74.8-1.15 1.84-1.15 2.92V17a1 1 0 0 1-1 1h-5.5
+         a1 1 0 0 1-1-1v-.13c0-1.08-.4-2.12-1.15-2.92A7 7 0 0 1 12 2Z
+         M9.5 21h5M10.5 18h3" />
+  </svg>
+  <div>
+    <p className="font-semibold text-ink mb-1">{titre_astuce}</p>
+    <p className="text-[15px]">{contenu}</p>
+  </div>
+</div>
+```
+
+---
+
+### 11.4 Icônes
+
+- **Style :** trait fin (`strokeWidth={1.5}`), pas de remplissage (`fill="none"`), couleur `text-brand` ou `text-brand-light`.
+- **Usage :** une icône par concept clé, jamais décorative. Ne pas répéter la même icône deux fois sur la même page.
+- **Parcimonie :** maximum 4-5 icônes par page. Préférer l'absence d'icône à une icône générique.
+- **Palette :** uniquement les bleus du design system (`text-brand` #1d4ed8, `text-brand-light` #3b82f6).
+- Utiliser `heroicons` (outline) comme référence stylistique ; reproduire en SVG inline si nécessaire.
+
+Exemple d'usage correct (section stats, liste avantages) :
+```tsx
+<svg className="w-5 h-5 text-brand shrink-0" fill="none" stroke="currentColor"
+     strokeWidth={1.5} viewBox="0 0 24 24">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+</svg>
+```
+
+---
+
+## 12. Sources consultées
 
 | Fichier | Rôle |
 |---|---|
