@@ -72,11 +72,11 @@ const faqSchema = {
 }
 
 const franchises = [
-  { montant: 2500, prime: 444.63, ecMois: 119.98, ecAnn: 1440, seuilEquilibre: 'env. CHF 1 440', conseil: 'Optimal pour adultes très sains' },
-  { montant: 2000, prime: 471.82, ecMois: 92.79,  ecAnn: 1113, seuilEquilibre: 'env. CHF 1 300', conseil: 'Recommandé sans maladie chronique' },
-  { montant: 1500, prime: 499.20, ecMois: 65.41,  ecAnn: 785,  seuilEquilibre: 'env. CHF 1 100', conseil: 'Bon équilibre pour personnes saines' },
-  { montant: 1000, prime: 526.57, ecMois: 38.04,  ecAnn: 456,  seuilEquilibre: 'env. CHF 800',   conseil: 'Adapté aux personnes peu malades' },
-  { montant: 500,  prime: 554.03, ecMois: 10.58,  ecAnn: 127,  seuilEquilibre: 'env. CHF 300',   conseil: 'Avantage limité' },
+  { montant: 2500, prime: 444.63, ecMois: 119.98, ecAnn: 1440, seuilEquilibre: 'environ CHF 1 440', conseil: 'Optimal pour adultes très sains' },
+  { montant: 2000, prime: 471.82, ecMois: 92.79,  ecAnn: 1113, seuilEquilibre: 'environ CHF 1 300', conseil: 'Recommandé sans maladie chronique' },
+  { montant: 1500, prime: 499.20, ecMois: 65.41,  ecAnn: 785,  seuilEquilibre: 'environ CHF 1 100', conseil: 'Bon équilibre pour personnes saines' },
+  { montant: 1000, prime: 526.57, ecMois: 38.04,  ecAnn: 456,  seuilEquilibre: 'environ CHF 800',   conseil: 'Adapté aux personnes peu malades' },
+  { montant: 500,  prime: 554.03, ecMois: 10.58,  ecAnn: 127,  seuilEquilibre: 'environ CHF 300',   conseil: 'Avantage limité' },
   { montant: 300,  prime: 564.61, ecMois: 0,      ecAnn: 0,    seuilEquilibre: 'Réf.',           conseil: 'Franchise minimale, référence' },
 ]
 
@@ -252,13 +252,13 @@ export default function FranchisePage() {
                   <tbody>
                     {franchises.map((f) => (
                       <tr key={f.montant} className={f.montant === 300 ? 'bg-[#eff6ff]' : ''}>
-                        <td className="font-semibold text-brand whitespace-nowrap">
+                        <td className="font-semibold text-ink whitespace-nowrap">
                           CHF {f.montant.toLocaleString('fr-CH')}
                         </td>
                         <td className="font-medium text-ink whitespace-nowrap">
                           CHF {f.prime.toFixed(2)}
                         </td>
-                        <td className="text-brand whitespace-nowrap">
+                        <td className="text-ink whitespace-nowrap">
                           {f.ecAnn > 0 ? `−CHF ${f.ecAnn}` : 'Référence'}
                         </td>
                         <td className="text-slate whitespace-nowrap">{f.conseil}</td>
@@ -278,8 +278,8 @@ export default function FranchisePage() {
                 <p>
                   <span className="font-medium text-ink">Seuils d'équilibre</span>{' '}
                   (frais médicaux annuels à partir desquels la franchise 300 CHF devient avantageuse) :
-                  500 CHF → env. CHF 300 ; 1 000 CHF → env. CHF 800 ; 1 500 CHF → env. CHF 1 100 ;
-                  2 000 CHF → env. CHF 1 300 ; 2 500 CHF → env. CHF 1 440.
+                  500 CHF → environ CHF 300 ; 1 000 CHF → environ CHF 800 ; 1 500 CHF → environ CHF 1 100 ;
+                  2 000 CHF → environ CHF 1 300 ; 2 500 CHF → environ CHF 1 440.
                 </p>
               </div>
 
