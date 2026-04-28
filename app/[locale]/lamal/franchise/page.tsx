@@ -130,8 +130,8 @@ export default function FranchisePage() {
             {heroStats.map(s => (
               <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
                 <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
-                <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
-                <div className="text-[13px] text-slate mt-0.5">{s.sub}</div>
+                <div className="text-[15px] font-medium text-ink/70 mt-0.5">{s.label}</div>
+                <div className="text-[15px] text-slate mt-0.5">{s.sub}</div>
               </div>
             ))}
           </div>
@@ -234,7 +234,7 @@ export default function FranchisePage() {
                 En dessous de ce seuil, la franchise élevée est préférable.
               </p>
 
-              <p className="text-[13px] text-slate/60 italic mb-4">
+              <p className="text-[15px] text-slate/60 italic mb-4">
                 Primes indicatives pour un adulte de 26 ans et plus à Zurich, modèle standard
                 (source : OFSP 2026). Les montants varient selon votre canton.
               </p>
@@ -269,7 +269,7 @@ export default function FranchisePage() {
               </div>
 
               {/* Données complémentaires — colonnes retirées du tableau */}
-              <div className="bg-cloud border border-edge rounded-lg px-5 py-4 mb-4 text-[14px] text-slate space-y-2">
+              <div className="bg-cloud border border-edge rounded-lg px-5 py-4 mb-4 text-[15px] text-slate space-y-2">
                 <p>
                   <span className="font-medium text-ink">Économie mensuelle sur la prime</span>{' '}
                   par rapport à la franchise 300 CHF : 500 CHF → −CHF 10.58 ; 1 000 CHF → −CHF 38.04 ;
@@ -384,7 +384,7 @@ export default function FranchisePage() {
                   },
                 ].map(s => (
                   <li key={s.n} className="flex gap-4">
-                    <span className="w-7 h-7 bg-brand text-white rounded-full flex items-center justify-center text-[13px] font-semibold shrink-0 mt-0.5">
+                    <span className="w-7 h-7 bg-brand text-white rounded-full flex items-center justify-center text-[15px] font-semibold shrink-0 mt-0.5">
                       {s.n}
                     </span>
                     <div>
@@ -424,13 +424,13 @@ export default function FranchisePage() {
 
             {/* Guides associés */}
             <section className="pt-8 border-t border-edge mt-4">
-              <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
+              <p className="text-[15px] font-semibold text-slate uppercase tracking-widest mb-4">
                 Guides associés
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {guidesAssocies.map(({ href, label }) => (
                   <Link key={href} href={href}
-                    className="flex items-center gap-2 text-[14px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                    className="flex items-center gap-2 text-[15px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
                     <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
