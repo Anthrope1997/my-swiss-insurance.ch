@@ -144,7 +144,7 @@ const toc = [
 
 const heroStats = [
   { value: '34',        label: 'Caisses agréées',        sub: 'données OFSP 2026'       },
-  { value: 'CHF 2 753', label: 'Économie max. possible',  sub: 'à Genève, adulte 35 ans' },
+  { value: 'CHF 2 753', label: 'Économie maximale possible',  sub: 'à Genève, adulte 35 ans' },
   { value: '26',        label: 'Cantons couverts',        sub: 'primes officielles OFSP' },
 ]
 
@@ -453,7 +453,7 @@ export default function GuideLamalPage() {
                     desc: "Accès direct à n'importe quel médecin ou spécialiste en Suisse, sans restriction. C'est le modèle le plus cher, la référence pour comparer les alternatives.",
                   },
                   {
-                    title: 'Médecin de famille (Hausarzt)',
+                    title: 'Médecin de famille',
                     reduction: "jusqu'à −20%",
                     border: 'border-brand',
                     desc: "Vous consultez d'abord votre médecin de famille, qui vous oriente si besoin vers un spécialiste. Réduction moyenne de 11% (jusqu'à −20%) selon la caisse et le canton.",
