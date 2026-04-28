@@ -118,6 +118,26 @@ Variables CSS complémentaires (globals.css) :
 | Badges | `.badge` |
 | Métadonnées | `text-[13px] text-slate/60` |
 
+### 2.4 Tailles minimales sur mobile (< 768px) — `app/globals.css`
+
+Règle globale via media query — **ne pas modifier ces valeurs dans les composants** :
+
+| Catégorie | Taille minimale | Classe(s) concernée(s) |
+|---|---|---|
+| Corps de texte | 15px | `.article-p` (déjà 17px) |
+| Textes secondaires, notes | 13px | `.text-xs`, `.text-[12px]` |
+| Labels uppercase | 12px | `.text-[11px]` |
+| Cellules de tableau | 14px | `.stripe-table th` (td déjà 14px) |
+
+```css
+@media (max-width: 767px) {
+  .text-\[11px\] { font-size: 12px; }
+  .text-xs       { font-size: 13px; }
+  .text-\[12px\] { font-size: 13px; }
+  .stripe-table th { font-size: 14px; }
+}
+```
+
 ---
 
 ## 3. Composants — catalogue réel
@@ -655,6 +675,10 @@ Les chiffres clés apparaissent dans le texte brut, pas uniquement dans les tabl
 **Meta description :** 150-160 caractères, commence par un chiffre clé.
 
 **Bandeau MSI :** TOUJOURS dans l'`<article>`, après le formulaire (`</div>` fermant `#contact`), avant les guides associés. Utiliser le composant `<AuthorBio publishedDate="..." updatedDate="..." />` (importé depuis `@/components/ui/AuthorBio`). Jamais de div custom à la place. Jamais dans le hero. Jamais en dehors de l'article.
+
+**AuthorBio — layout responsive :**
+- **Desktop (≥768px) :** `flex-row items-center` — avatar | bloc texte (titre + 2 lignes) | badge à droite
+- **Mobile (<768px) :** `flex-col` — (1) avatar + "La rédaction My Swiss Insurance" sur la même ligne ; (2) "Service éditorial..." ; (3) "Publié le..." ; (4) badge "Données OFSP 2026" aligné à gauche. Aucun élément compressé.
 **FAQ :** TOUJOURS avant le formulaire.
 **Ordre bas de page (Template A) :** Formulaire (#contact) → Bandeau MSI → Guides associés → Footer.
 
@@ -675,10 +699,11 @@ Les chiffres clés apparaissent dans le texte brut, pas uniquement dans les tabl
 | Très petit `<380px` | hamburger → badge MSI → CTA "Être conseillé" |
 
 Implémentation :
-- Badge logo : `<div className="w-7 h-7 bg-[#1d4ed8] rounded-md ...">` — toujours visible
+- Badge logo : `<div className="w-9 h-9 bg-[#1d4ed8] rounded-md ...">` — `w-9 h-9` (36px) pour matcher exactement la hauteur du bouton CTA
 - Texte "My Swiss Insurance" : `hidden md:inline` (masqué sous 768px)
 - Ne jamais afficher "MSI" comme texte séparé à côté du badge
 - CTA libellés : `hidden min-[380px]:inline` / `min-[380px]:hidden` (jamais `sm:hidden`)
+- Aligner `items-center` sur le conteneur flex du header pour centrage vertical badge/CTA
 
 **Comportement du CTA header :**
 Au clic → overlay sombre (`bg-black/60`) sur tout l'écran + modal centré contenant :
@@ -746,12 +771,18 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 - [ ] Icônes : trait fin, couleur brand, max 4-5 par page, non décoratives
 
 **Header**
+- [ ] Badge logo : `w-9 h-9` (36px) — même hauteur que le bouton CTA
 - [ ] Mobile (<768px) : badge seul, texte "My Swiss Insurance" masqué (`hidden md:inline`)
 - [ ] Desktop (≥768px) : badge + "My Swiss Insurance" visible
 - [ ] CTA ≥380px : "Recevez les meilleures offres" ; <380px : "Être conseillé"
 - [ ] Classes breakpoints CTA : `hidden min-[380px]:inline` / `min-[380px]:hidden`
 - [ ] Aucun CTA dans le menu hamburger
 - [ ] CTA ouvre overlay avec formulaire + sous-titre canonique
+
+**Typographie mobile**
+- [ ] Ne pas utiliser `text-[11px]` sans vérifier le résultat mobile (remonte à 12px via globals.css)
+- [ ] `text-xs` et `text-[12px]` remontent à 13px sur mobile — ne pas utiliser pour du texte important
+- [ ] Pour les tableaux, ne pas descendre sous `text-[13px]` (en-têtes) ni `text-[14px]` (cellules)
 
 **Build**
 - [ ] `npm run build` passe sans erreur avant commit

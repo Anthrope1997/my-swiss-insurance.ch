@@ -144,7 +144,7 @@ export default function Header() {
 
             {/* Logo — badge seul sur mobile (<768px), badge + texte sur desktop (≥768px) */}
             <Link href="/lamal" className="flex items-center gap-2.5 flex-1">
-              <div className="w-7 h-7 bg-[#1d4ed8] rounded-md flex items-center justify-center shrink-0">
+              <div className="w-9 h-9 bg-[#1d4ed8] rounded-md flex items-center justify-center shrink-0">
                 <ShieldIcon />
               </div>
               <span className="font-semibold text-white text-[15px] hidden md:inline">
