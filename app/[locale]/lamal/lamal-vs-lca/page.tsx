@@ -86,6 +86,8 @@ const comparaison = [
 
 const heroStats = [
   { value: 'Dès CHF 60 par mois', label: "coût moyen d'une complémentaire en Suisse", sub: '' },
+  { value: 'Facultative',          label: 'non obligatoire',                            sub: '' },
+  { value: '4 types',              label: 'de complémentaires',                         sub: '' },
 ]
 
 const toc = [
@@ -128,7 +130,7 @@ export default function LamalVsLcaPage() {
             une vraie différence selon votre situation.
           </p>
 
-          <div className="grid grid-cols-1 max-w-sm gap-4 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 max-w-2xl gap-4 mb-8">
             {heroStats.map(s => (
               <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
                 <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>

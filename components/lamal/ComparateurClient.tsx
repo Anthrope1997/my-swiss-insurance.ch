@@ -863,7 +863,7 @@ export default function ComparateurClient() {
             {assureurs.slice(0, 4).map(a => (
               <div key={a.name} className="bg-white border border-[#e2e8f0] rounded-xl p-5">
                 <p className="font-semibold text-[#0f2040] text-[16px] mb-1">{a.name}</p>
-                <p className="text-2xl font-bold text-[#16a34a] mb-2">{a.part}%</p>
+                <p className="text-2xl font-bold text-[#0f2040] mb-2">{a.part}%</p>
                 <p className="text-[13px] text-[#475569] leading-snug">{a.note}</p>
               </div>
             ))}
