@@ -130,8 +130,8 @@ export default function FranchisePage() {
             {heroStats.map(s => (
               <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
                 <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
-                <div className="text-[16px] font-medium text-ink/70 mt-0.5">{s.label}</div>
-                <div className="text-[16px] text-slate mt-0.5">{s.sub}</div>
+                <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
+                <div className="text-[12px] text-slate mt-0.5">{s.sub}</div>
               </div>
             ))}
           </div>
@@ -402,9 +402,8 @@ export default function FranchisePage() {
                 Besoin d'aide ?
               </h2>
               <p className="text-[16px] text-slate mb-6 leading-relaxed">
-                Choisir le bon contrat est complexe : caisse maladie, franchise et modèle.
-                Un conseiller spécialisé prend le temps d'analyser votre situation et vous
-                propose la solution la mieux adaptée. C'est gratuit et sans engagement.
+                Un expert vous rappelle sous 24 heures pour établir avec vous une solution
+                personnalisée. Gratuit, sans engagement.
               </p>
               <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
             </div>
@@ -414,13 +413,13 @@ export default function FranchisePage() {
 
             {/* Guides associés */}
             <section className="pt-8 border-t border-edge mt-4">
-              <p className="text-[16px] font-semibold text-slate uppercase tracking-widest mb-4">
+              <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
                 Guides associés
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {guidesAssocies.map(({ href, label }) => (
                   <Link key={href} href={href}
-                    className="flex items-center gap-2 text-[16px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                    className="flex items-center gap-2 text-[14px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
                     <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
