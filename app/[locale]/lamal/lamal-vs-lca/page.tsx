@@ -221,9 +221,9 @@ export default function LamalVsLcaPage() {
                 <table className="stripe-table w-full">
                   <thead>
                     <tr>
-                      <th className="whitespace-nowrap">Aspect</th>
-                      <th className="whitespace-nowrap">LAMal (base)</th>
-                      <th className="whitespace-nowrap">LCA (complémentaire)</th>
+                      <th className="text-left whitespace-nowrap">Aspect</th>
+                      <th className="text-left whitespace-nowrap">LAMal (base)</th>
+                      <th className="text-left whitespace-nowrap">LCA (complémentaire)</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -281,13 +281,22 @@ export default function LamalVsLcaPage() {
             {/* 4 — Quand souscrire */}
             <section id="quand">
               <h2 className="article-h2">4. Quand souscrire une LCA ?</h2>
-              <div className="callout-warning mb-6">
-                <p className="font-semibold mb-1">Le moment de souscription compte</p>
-                <p className="text-[15px]">
-                  Plus vous souscrivez tôt, lorsque vous êtes en bonne santé, moins vous risquez d'exclusions.
-                  Une maladie diagnostiquée avant la souscription peut être exclue définitivement.
-                  La LAMal, elle, ne peut jamais imposer d'exclusions.
-                </p>
+              <div className="callout-warning flex gap-3 mb-6">
+                <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
+                     strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
+                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
+                  <line x1="10" y1="21" x2="14" y2="21" />
+                </svg>
+                <div>
+                  <p className="font-semibold mb-1">Le moment de souscription compte</p>
+                  <p className="text-[15px]">
+                    Plus vous souscrivez tôt, lorsque vous êtes en bonne santé, moins vous risquez d'exclusions.
+                    Une maladie diagnostiquée avant la souscription peut être exclue définitivement.
+                    La LAMal, elle, ne peut jamais imposer d'exclusions.
+                  </p>
+                </div>
               </div>
               <ul className="space-y-3">
                 {[
