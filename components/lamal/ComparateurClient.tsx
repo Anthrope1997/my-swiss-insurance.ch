@@ -364,7 +364,6 @@ export default function ComparateurClient() {
           <p className="text-xl text-[#475569] leading-relaxed">
             En Suisse, les primes LAMal varient jusqu'à 97% au sein d'une même région selon l'assureur choisi.
             Comparez toutes les caisses selon votre code postal, votre franchise et votre modèle d'assurance.
-            Données officielles OFSP 2026 — adulte 35 ans, toutes franchises et tous modèles.
           </p>
         </div>
       </section>
@@ -855,7 +854,7 @@ export default function ComparateurClient() {
           </h2>
           <p className="text-[16px] text-[#475569] leading-relaxed mb-10 max-w-2xl">
             En Suisse, 8 grands groupes se partagent l'essentiel du marché de l'assurance maladie obligatoire.
-            Les prestations LAMal sont strictement identiques chez tous les assureurs agréés — la différence
+            Les prestations LAMal sont strictement identiques chez tous les assureurs agréés. La différence
             porte uniquement sur le prix et la qualité du service.
           </p>
 
@@ -909,18 +908,17 @@ export default function ComparateurClient() {
           </h2>
           <p className="text-[16px] text-[#475569] leading-relaxed mb-8 max-w-2xl">
             Primes de référence pour un adulte de 35 ans, modèle standard, franchise 300 CHF, sans couverture accident.
-            Source : OFSP 2026. Les écarts entre caisses au sein d'un même canton peuvent atteindre plusieurs centaines
-            de francs par mois — comparez avec votre code postal pour votre profil exact.
+            Les écarts entre caisses au sein d'un même canton peuvent atteindre plusieurs centaines de francs par mois.
           </p>
 
           {/* Tableau cantons avec barres */}
           {(() => {
             const maxP = cantonTable[cantonTable.length - 1].prime
             return (
-              <div className="space-y-1 mb-8">
+              <div className="space-y-1 mb-4">
                 {cantonTable.map((row, i) => {
                   const barPct = Math.round((row.prime / maxP) * 100)
-                  const isMin  = i === 0
+                  const isMin  = false
                   return (
                     <div
                       key={row.code}
@@ -953,6 +951,8 @@ export default function ComparateurClient() {
               </div>
             )
           })()}
+
+          <p className="text-[12px] text-[#94a3b8] mb-6">Source : OFSP 2026.</p>
 
           {/* Pills cantons avec pages */}
           <div>
