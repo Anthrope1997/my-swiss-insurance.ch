@@ -50,7 +50,7 @@ export default function CantonHubPage() {
 
       <div className="mb-10">
         <span className="badge mb-4">Données OFSP 2026</span>
-        <h1 className="text-4xl font-bold text-brand mb-4">Primes LAMal par canton</h1>
+        <h1 className="text-4xl font-bold text-ink mb-4">Primes LAMal par canton</h1>
         <p className="text-slate text-[17px] leading-relaxed max-w-2xl">
           En Suisse, les primes LAMal varient selon votre canton de résidence. Sélectionnez votre
           canton pour consulter les primes 2026 et trouver la caisse maladie la moins chère.

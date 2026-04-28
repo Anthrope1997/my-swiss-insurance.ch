@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
 import Link from 'next/link'
+import AuthorBio from '@/components/ui/AuthorBio'
 import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
 
 export const metadata: Metadata = {
@@ -110,7 +111,7 @@ export default function ChangerDeCaissePage() {
             { label: 'Changer de caisse maladie' },
           ]} />
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-brand leading-tight mb-4 max-w-3xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
             Comment changer de caisse maladie en Suisse
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
@@ -121,7 +122,7 @@ export default function ChangerDeCaissePage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
             {heroStats.map(s => (
               <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
-                <div className="text-2xl font-medium text-brand leading-none">{s.value}</div>
+                <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
                 <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
                 <div className="text-[12px] text-slate mt-0.5">{s.sub}</div>
               </div>
@@ -342,12 +343,7 @@ export default function ChangerDeCaissePage() {
             </div>
 
             {/* Bandeau MSI */}
-            <div className="bg-cloud border-t border-edge py-4 mt-4">
-              <p className="text-[11px] text-slate">La rédaction My Swiss Insurance</p>
-              <p className="text-[11px] text-slate">Service éditorial indépendant, Lausanne</p>
-              <p className="text-[11px] text-slate">Publié le 1er janvier 2026, mis à jour le 22 avril 2026</p>
-              <p className="text-[11px] text-slate">Données officielles OFSP 2026</p>
-            </div>
+            <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
 
             {/* Guides associés */}
             <section className="pt-8 border-t border-edge mt-4">

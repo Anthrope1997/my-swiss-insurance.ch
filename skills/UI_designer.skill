@@ -10,6 +10,7 @@ present_files:
   - tailwind.config.ts
   - app/globals.css
   - next.config.mjs
+  - components/ui/AuthorBio.tsx
   - components/ui/Breadcrumb.tsx
   - components/ui/FAQ.tsx
   - components/ui/MultiStepLeadForm.tsx
@@ -108,7 +109,7 @@ Variables CSS complémentaires (globals.css) :
 
 | Élément | Classes Tailwind utilisées |
 |---|---|
-| H1 hero (guide, franchise) | `text-4xl sm:text-5xl font-bold text-brand leading-tight` |
+| H1 hero (guide, franchise) | `text-4xl sm:text-5xl font-bold text-ink leading-tight` |
 | H2 section | `.article-h2` |
 | H3 sous-section | `.article-h3` |
 | Intro hero | `text-[18px] text-slate max-w-2xl leading-relaxed` |
@@ -364,7 +365,7 @@ export default function PageSlug() {
             { label: '{Titre page}' },
           ]} />
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-brand leading-tight mb-4 max-w-3xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
             {titreH1}
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
@@ -375,7 +376,7 @@ export default function PageSlug() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
             {heroStats.map(s => (
               <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
-                <div className="text-2xl font-medium text-brand leading-none">{s.value}</div>
+                <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
                 <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
                 <div className="text-[12px] text-slate mt-0.5">{s.sub}</div>
               </div>
@@ -453,13 +454,8 @@ export default function PageSlug() {
             </div>
 
             {/* Bandeau MSI — TOUJOURS après le formulaire, avant les guides associés */}
-            {/* Texte sans séparateur spécial ni slash — 4 lignes distinctes */}
-            <div className="bg-cloud border-t border-edge py-4 mt-4">
-              <p className="text-[11px] text-slate">La rédaction My Swiss Insurance</p>
-              <p className="text-[11px] text-slate">Service éditorial indépendant, Lausanne</p>
-              <p className="text-[11px] text-slate">Publié le {publishedDate}, mis à jour le {updatedDate}</p>
-              <p className="text-[11px] text-slate">Données officielles OFSP 2026</p>
-            </div>
+            {/* Utiliser le composant AuthorBio — jamais de div custom */}
+            <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
 
             {/* Guides associés */}
             <section className="pt-8 border-t border-edge mt-4">
@@ -658,7 +654,7 @@ Les chiffres clés apparaissent dans le texte brut, pas uniquement dans les tabl
 **Titre pages :** `{H1} — My Swiss Insurance`
 **Meta description :** 150-160 caractères, commence par un chiffre clé.
 
-**Bandeau MSI :** TOUJOURS dans l'`<article>`, après le formulaire (`</div>` fermant `#contact`), avant les guides associés. Jamais dans le hero. Jamais en dehors de l'article à la racine de la page. Format : 4 `<p>` distincts, aucun séparateur `/` ni caractère spécial entre les items.
+**Bandeau MSI :** TOUJOURS dans l'`<article>`, après le formulaire (`</div>` fermant `#contact`), avant les guides associés. Utiliser le composant `<AuthorBio publishedDate="..." updatedDate="..." />` (importé depuis `@/components/ui/AuthorBio`). Jamais de div custom à la place. Jamais dans le hero. Jamais en dehors de l'article.
 **FAQ :** TOUJOURS avant le formulaire.
 **Ordre bas de page (Template A) :** Formulaire (#contact) → Bandeau MSI → Guides associés → Footer.
 
@@ -734,8 +730,8 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 - [ ] Dates datePublished / dateModified cohérentes avec le bandeau MSI
 
 **Titres et chiffres clés**
-- [ ] H1 : `text-brand` (#1d4ed8) — jamais `text-ink` pour les titres de page
-- [ ] Valeurs numériques hero stats : `font-medium text-brand` — jamais `font-bold text-ink`
+- [ ] H1 : `text-ink` — jamais `text-brand` sur les titres de page
+- [ ] Valeurs numériques hero stats : `font-bold text-ink` — jamais de couleur bleue sur les chiffres
 - [ ] Texte explicatif sous les valeurs : couleur standard (`text-slate`, `text-ink/70`)
 
 **Visuels**
@@ -842,6 +838,7 @@ Exemple d'usage correct (section stats, liste avantages) :
 | `tailwind.config.ts` | Tokens Tailwind officiels |
 | `app/globals.css` | Classes utilitaires (btn-primary, article-h2, etc.) |
 | `CONTEXTE.md` | Architecture, stack, modèle économique |
+| `components/ui/AuthorBio.tsx` | Bandeau MSI — composant de référence (props: publishedDate, updatedDate) |
 | `components/ui/Breadcrumb.tsx` | Props, BreadcrumbList auto |
 | `components/ui/FAQ.tsx` | Props, comportement accordéon |
 | `components/ui/MultiStepLeadForm.tsx` | Étapes, options, POST /api/leads |

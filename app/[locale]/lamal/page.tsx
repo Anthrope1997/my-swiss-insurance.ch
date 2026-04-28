@@ -198,7 +198,7 @@ export default function LamalPage() {
 
           <div className="badge mb-5">Données OFSP 2026</div>
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-brand leading-tight mb-5 max-w-2xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-5 max-w-2xl">
             Économisez sur votre prime LAMal en 2026
           </h1>
 
