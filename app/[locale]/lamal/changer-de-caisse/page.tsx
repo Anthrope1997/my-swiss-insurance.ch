@@ -178,9 +178,9 @@ export default function ChangerDeCaissePage() {
                 <table className="stripe-table w-full">
                   <thead>
                     <tr>
-                      <th className="whitespace-nowrap">Situation</th>
-                      <th className="whitespace-nowrap">Date limite</th>
-                      <th className="whitespace-nowrap">Prise d'effet</th>
+                      <th className="text-left whitespace-nowrap">Situation</th>
+                      <th className="text-left whitespace-nowrap">Date limite</th>
+                      <th className="text-left whitespace-nowrap">Prise d'effet</th>
                     </tr>
                   </thead>
                   <tbody>
