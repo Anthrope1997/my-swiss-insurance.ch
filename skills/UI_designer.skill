@@ -666,15 +666,19 @@ Les chiffres clés apparaissent dans le texte brut, pas uniquement dans les tabl
 
 > **Composant global** : `components/ui/Header.tsx`. Le modifier une fois l'applique sur l'intégralité du site. Ne jamais dupliquer ou surcharger ce composant dans une page.
 
-**Structure de la barre — gauche à droite :**
-```
-[ hamburger ]  [ logo My Swiss Insurance ]  ················  [ Recevez les meilleures offres ]
-```
+**Structure responsive — gauche à droite :**
 
-- Hamburger : extrême gauche, ouvre le menu déroulant
-- Logo : juste après le hamburger, lien vers `/lamal` (et non vers `/`)
-- Bouton CTA : extrême droite, libellé `"Recevez les meilleures offres"`
-- **Toujours visible**, mobile et desktop. Ne jamais masquer avec `hidden`, `sm:hidden` ou toute autre classe responsive.
+| Breakpoint | Contenu |
+|---|---|
+| Desktop `≥768px` | hamburger → badge MSI → "My Swiss Insurance" → CTA "Recevez les meilleures offres" |
+| Mobile `<768px` | hamburger → badge MSI (sans texte) → CTA |
+| Très petit `<380px` | hamburger → badge MSI → CTA "Être conseillé" |
+
+Implémentation :
+- Badge logo : `<div className="w-7 h-7 bg-[#1d4ed8] rounded-md ...">` — toujours visible
+- Texte "My Swiss Insurance" : `hidden md:inline` (masqué sous 768px)
+- Ne jamais afficher "MSI" comme texte séparé à côté du badge
+- CTA libellés : `hidden min-[380px]:inline` / `min-[380px]:hidden` (jamais `sm:hidden`)
 
 **Comportement du CTA header :**
 Au clic → overlay sombre (`bg-black/60`) sur tout l'écran + modal centré contenant :
@@ -742,7 +746,10 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 - [ ] Icônes : trait fin, couleur brand, max 4-5 par page, non décoratives
 
 **Header**
-- [ ] Structure : hamburger → logo → CTA "Recevez les meilleures offres" à droite
+- [ ] Mobile (<768px) : badge seul, texte "My Swiss Insurance" masqué (`hidden md:inline`)
+- [ ] Desktop (≥768px) : badge + "My Swiss Insurance" visible
+- [ ] CTA ≥380px : "Recevez les meilleures offres" ; <380px : "Être conseillé"
+- [ ] Classes breakpoints CTA : `hidden min-[380px]:inline` / `min-[380px]:hidden`
 - [ ] Aucun CTA dans le menu hamburger
 - [ ] CTA ouvre overlay avec formulaire + sous-titre canonique
 

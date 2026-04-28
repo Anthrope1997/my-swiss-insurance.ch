@@ -142,25 +142,24 @@ export default function Header() {
                 ${mobileOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
             </button>
 
-            {/* Logo */}
+            {/* Logo — badge seul sur mobile (<768px), badge + texte sur desktop (≥768px) */}
             <Link href="/lamal" className="flex items-center gap-2.5 flex-1">
               <div className="w-7 h-7 bg-[#1d4ed8] rounded-md flex items-center justify-center shrink-0">
                 <ShieldIcon />
               </div>
-              <span className="font-semibold text-white text-[15px] hidden sm:inline">
+              <span className="font-semibold text-white text-[15px] hidden md:inline">
                 My Swiss Insurance
               </span>
-              <span className="font-semibold text-white text-[15px] sm:hidden">MSI</span>
             </Link>
 
-            {/* CTA — RIGHT */}
+            {/* CTA — "Recevez les meilleures offres" ≥380px, "Être conseillé" <380px */}
             <button
               onClick={() => setOfferOpen(true)}
               className="shrink-0 bg-[#1d4ed8] hover:bg-[#1e40af] text-white font-medium
                          px-4 py-2 rounded-md text-[13px] transition-colors"
             >
-              <span className="hidden sm:inline">Recevez les meilleures offres</span>
-              <span className="sm:hidden text-[12px]">Nos offres</span>
+              <span className="hidden min-[380px]:inline">Recevez les meilleures offres</span>
+              <span className="min-[380px]:hidden">Être conseillé</span>
             </button>
 
           </div>
