@@ -110,7 +110,7 @@ export default function ChangerDeCaissePage() {
             { label: 'Changer de caisse maladie' },
           ]} />
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-brand leading-tight mb-4 max-w-3xl">
             Comment changer de caisse maladie en Suisse
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
@@ -121,7 +121,7 @@ export default function ChangerDeCaissePage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
             {heroStats.map(s => (
               <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
-                <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
+                <div className="text-2xl font-medium text-brand leading-none">{s.value}</div>
                 <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
                 <div className="text-[12px] text-slate mt-0.5">{s.sub}</div>
               </div>
@@ -341,6 +341,14 @@ export default function ChangerDeCaissePage() {
               <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
             </div>
 
+            {/* Bandeau MSI */}
+            <div className="bg-cloud border-t border-edge py-4 mt-4">
+              <p className="text-[11px] text-slate">La rédaction My Swiss Insurance</p>
+              <p className="text-[11px] text-slate">Service éditorial indépendant, Lausanne</p>
+              <p className="text-[11px] text-slate">Publié le 1er janvier 2026, mis à jour le 22 avril 2026</p>
+              <p className="text-[11px] text-slate">Données officielles OFSP 2026</p>
+            </div>
+
             {/* Guides associés */}
             <section className="pt-8 border-t border-edge mt-4">
               <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
@@ -360,21 +368,6 @@ export default function ChangerDeCaissePage() {
             </section>
 
           </article>
-        </div>
-      </div>
-
-      {/* Bandeau MSI */}
-      <div className="bg-cloud border-t border-edge">
-        <div className="container-xl">
-          <div className="flex items-center gap-3 py-3">
-            <div className="w-7 h-7 rounded-full bg-[#0f2040] flex items-center justify-center text-white text-[10px] font-bold shrink-0">
-              MSI
-            </div>
-            <p className="text-[11px] text-slate leading-snug">
-              La rédaction My Swiss Insurance / Service éditorial indépendant, Lausanne /
-              Publié le 1er janvier 2026, mis à jour le 13 avril 2026 / Données OFSP 2026
-            </p>
-          </div>
         </div>
       </div>
     </>

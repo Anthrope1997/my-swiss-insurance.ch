@@ -198,7 +198,7 @@ export default function LamalPage() {
 
           <div className="badge mb-5">Données OFSP 2026</div>
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-5 max-w-2xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-brand leading-tight mb-5 max-w-2xl">
             Économisez sur votre prime LAMal en 2026
           </h1>
 
@@ -212,7 +212,7 @@ export default function LamalPage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10 pb-10 border-b border-edge">
             {stats.map(s => (
               <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
-                <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
+                <div className="text-2xl font-medium text-brand leading-none">{s.value}</div>
                 <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
                 <div className="text-[12px] text-slate mt-0.5">{s.sub}</div>
               </div>

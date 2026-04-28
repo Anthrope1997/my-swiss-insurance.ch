@@ -103,7 +103,7 @@ export default function MaFamillePage() {
           <div className="flex flex-wrap gap-2 mb-5">
             <span className="badge">Données OFSP · 2026</span>
           </div>
-          <h1 className="text-5xl font-bold text-ink leading-tight mb-4 max-w-2xl">
+          <h1 className="text-5xl font-bold text-brand leading-tight mb-4 max-w-2xl">
             LAMal pour votre famille en 2026.
           </h1>
           <p className="text-xl text-slate max-w-2xl leading-relaxed">

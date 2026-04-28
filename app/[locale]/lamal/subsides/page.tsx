@@ -56,7 +56,7 @@ export default function PageSubsides() {
       <section className="bg-cloud border-b border-edge py-12 px-4">
         <div className="max-w-3xl mx-auto">
           <p className="text-sm font-semibold text-brand uppercase tracking-wide mb-2">Subsides LAMal 2026</p>
-          <h1 className="text-3xl sm:text-4xl font-bold text-ink mb-4 leading-tight">
+          <h1 className="text-3xl sm:text-4xl font-bold text-brand mb-4 leading-tight">
             Calculez votre réduction de primes
           </h1>
           <p className="text-lg text-slate leading-relaxed">
