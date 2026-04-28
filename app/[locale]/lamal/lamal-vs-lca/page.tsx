@@ -319,7 +319,7 @@ export default function LamalVsLcaPage() {
                     profil: 'Famille avec deux enfants',
                     lamal: 'LAMal médecin de famille pour les adultes, franchise 300 CHF par an pour les enfants.',
                     lca: 'LCA dentaire très pertinente pour les frais orthodontiques. LCA ambulatoire pour la médecine préventive.',
-                    conseil: 'Comparez les offres LCA dentaire : les remboursements varient fortement d'un assureur à l'autre, comparez avant de souscrire.',
+                    conseil: "Comparez les offres LCA dentaire : les remboursements varient fortement d'un assureur à l'autre, comparez avant de souscrire.",
                   },
                   {
                     profil: 'Retraité ou retraitée',
