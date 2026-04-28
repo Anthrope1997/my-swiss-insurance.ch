@@ -204,10 +204,10 @@ export default function ModelesPage() {
                 <table className="stripe-table w-full">
                   <thead>
                     <tr>
-                      <th className="whitespace-nowrap">Modèle</th>
-                      <th className="whitespace-nowrap">Réduction prime</th>
-                      <th className="hidden sm:table-cell whitespace-nowrap">Porte d'entrée</th>
-                      <th className="hidden md:table-cell whitespace-nowrap">Disponibilité</th>
+                      <th className="text-left whitespace-nowrap">Modèle</th>
+                      <th className="text-left whitespace-nowrap">Réduction prime</th>
+                      <th className="hidden sm:table-cell text-left whitespace-nowrap">Porte d'entrée</th>
+                      <th className="hidden md:table-cell text-left whitespace-nowrap">Disponibilité</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -307,9 +307,18 @@ export default function ModelesPage() {
                 Le modèle se choisit une fois par an. Le changement est possible à chaque renouvellement
                 annuel, indépendamment d'un éventuel changement de caisse.
               </p>
-              <div className="callout-warning text-[15px]">
-                <strong>Date limite :</strong> avis de changement à envoyer avant le <strong>30 novembre</strong>
-                pour une prise d'effet au 1er janvier. Passé ce délai, votre modèle actuel est reconduit.
+              <div className="callout-warning flex gap-3">
+                <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
+                     strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
+                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
+                  <line x1="10" y1="21" x2="14" y2="21" />
+                </svg>
+                <p className="text-[15px]">
+                  <strong>Date limite :</strong> avis de changement à envoyer avant le <strong>30 novembre</strong>
+                  pour une prise d'effet au 1er janvier. Passé ce délai, votre modèle actuel est reconduit.
+                </p>
               </div>
               <div className="mt-5">
                 <Link href="/lamal/changer-de-caisse" className="text-brand hover:underline text-[15px] font-medium">
