@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import ComparateurClient from '@/components/lamal/ComparateurClient'
+import Breadcrumb from '@/components/ui/Breadcrumb'
 
 export const metadata: Metadata = {
   title: 'Comparateur caisses maladie LAMal 2026 — Primes par canton',
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
     url: 'https://my-swiss-insurance.ch/lamal/comparateur',
     type: 'article',
   },
+  alternates: { canonical: 'https://my-swiss-insurance.ch/lamal/comparateur' },
 }
 
 const articleSchema = {
@@ -75,6 +77,15 @@ export default function ComparateurPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <div className="bg-white border-b border-edge">
+        <div className="container-xl py-3">
+          <Breadcrumb items={[
+            { label: 'Accueil', href: '/' },
+            { label: 'LAMal', href: '/lamal' },
+            { label: 'Comparateur de caisses' },
+          ]} />
+        </div>
+      </div>
       <ComparateurClient />
     </>
   )

@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import SubsidesCalculator from '@/components/lamal/SubsidesCalculator'
+import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
 import LeadForm from '@/components/ui/LeadForm'
+import FAQ from '@/components/ui/FAQ'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -14,6 +16,7 @@ export const metadata: Metadata = {
     url: 'https://my-swiss-insurance.ch/lamal/subsides',
     type: 'article',
   },
+  alternates: { canonical: 'https://my-swiss-insurance.ch/lamal/subsides' },
 }
 
 const faqItems = [

@@ -110,28 +110,11 @@ export default function FranchisePage() {
       <section className="bg-white border-b border-edge pt-12 pb-14">
         <div className="container-xl">
 
-          {/* Breadcrumb — émet BreadcrumbList JSON-LD */}
           <Breadcrumb items={[
             { label: 'Accueil', href: '/' },
             { label: 'LAMal', href: '/lamal' },
             { label: 'Franchise LAMal' },
           ]} />
-
-          {/* Bandeau MSI */}
-          <div className="bg-cloud border-b border-edge flex items-center gap-3 py-3 mt-4 mb-7">
-            <div className="w-7 h-7 rounded-full bg-[#0f2040] flex items-center justify-center text-white text-[10px] font-bold shrink-0">
-              MSI
-            </div>
-            <p className="text-[11px] text-slate leading-snug">
-              La rédaction My Swiss Insurance / Service éditorial indépendant, Lausanne /
-              Publié le 1er janvier 2026, mis à jour le 22 avril 2026 / Données OFSP 2026
-            </p>
-          </div>
-
-          <div className="flex flex-wrap gap-2 mb-5">
-            <span className="badge">Mis à jour avril 2026</span>
-            <span className="badge">Source : OFSP</span>
-          </div>
 
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
             Franchise LAMal : quel montant choisir en 2026 ?
@@ -454,6 +437,21 @@ export default function FranchisePage() {
             </section>
 
           </article>
+        </div>
+      </div>
+
+      {/* Bandeau MSI */}
+      <div className="bg-cloud border-t border-edge">
+        <div className="container-xl">
+          <div className="flex items-center gap-3 py-3">
+            <div className="w-7 h-7 rounded-full bg-[#0f2040] flex items-center justify-center text-white text-[10px] font-bold shrink-0">
+              MSI
+            </div>
+            <p className="text-[11px] text-slate leading-snug">
+              La rédaction My Swiss Insurance / Service éditorial indépendant, Lausanne /
+              Publié le 1er janvier 2026, mis à jour le 22 avril 2026 / Données OFSP 2026
+            </p>
+          </div>
         </div>
       </div>
     </>

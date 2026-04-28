@@ -8,6 +8,7 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      { source: '/fr', destination: '/fr/lamal', permanent: true },
       { source: '/lamal/salarie-independant', destination: '/lamal/ma-situation', permanent: true },
       { source: '/lamal/famille-retraite', destination: '/lamal/ma-famille', permanent: true },
       { source: '/lamal/maternite', destination: '/lamal/ma-famille', permanent: true },

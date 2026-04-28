@@ -6,6 +6,19 @@ description: >
   Lire ce skill AVANT toute modification, même mineure.
   L'objectif est que le développeur ne fournisse que le contenu :
   structure, style, composants, SEO et CTAs sont dans ce skill.
+present_files:
+  - tailwind.config.ts
+  - app/globals.css
+  - next.config.mjs
+  - components/ui/Breadcrumb.tsx
+  - components/ui/FAQ.tsx
+  - components/ui/MultiStepLeadForm.tsx
+  - components/ui/FormScrollButton.tsx
+  - components/ui/StickyBar.tsx
+  - components/ui/Header.tsx
+  - components/ui/Footer.tsx
+  - app/[locale]/lamal/guide/page.tsx
+  - app/[locale]/lamal/franchise/page.tsx
 ---
 
 # My Swiss Insurance — UI Skill
@@ -110,7 +123,8 @@ Variables CSS complémentaires (globals.css) :
 
 ### 3.1 `<Breadcrumb>` — components/ui/Breadcrumb.tsx
 
-**Émet automatiquement le JSON-LD BreadcrumbList.** Ne pas l'ajouter manuellement.
+**Émet uniquement le JSON-LD BreadcrumbList.** Aucun affichage visuel — le `<nav>` a été supprimé.
+Ne jamais ajouter un breadcrumb visuel en HTML ; le composant suffit pour le SEO.
 
 ```tsx
 import Breadcrumb from '@/components/ui/Breadcrumb'
@@ -120,7 +134,7 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
   { label: 'LAMal', href: '/lamal' },
   { label: 'Choisir sa franchise' },  // dernier item : pas de href
 ]} />
-// className?: string  (défaut : mb-6)
+// className?: string  (acceptée mais ignorée — pas d'élément visuel)
 ```
 
 ---
@@ -343,29 +357,12 @@ export default function PageSlug() {
       <section className="bg-white border-b border-edge pt-12 pb-14">
         <div className="container-xl">
 
-          {/* Breadcrumb — émet BreadcrumbList JSON-LD */}
+          {/* Breadcrumb — émet BreadcrumbList JSON-LD uniquement, pas d'affichage visuel */}
           <Breadcrumb items={[
             { label: 'Accueil', href: '/' },
             { label: 'LAMal', href: '/lamal' },
             { label: '{Titre page}' },
           ]} />
-
-          {/* Bandeau MSI — TOUJOURS entre breadcrumb et h1 */}
-          <div className="bg-cloud border-b border-edge flex items-center gap-3 py-3 mt-4 mb-7">
-            <div className="w-7 h-7 rounded-full bg-[#0f2040] flex items-center justify-center text-white text-[10px] font-bold shrink-0">
-              MSI
-            </div>
-            <p className="text-[11px] text-slate leading-snug">
-              La rédaction My Swiss Insurance / Service éditorial indépendant, Lausanne /
-              Publié le {publishedDate}, mis à jour le {updatedDate} / Données OFSP 2026
-            </p>
-          </div>
-
-          {/* Badges */}
-          <div className="flex flex-wrap gap-2 mb-5">
-            <span className="badge">Mis à jour {moisAnnée}</span>
-            <span className="badge">Source : OFSP</span>
-          </div>
 
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
             {titreH1}
@@ -474,6 +471,21 @@ export default function PageSlug() {
             </section>
 
           </article>
+        </div>
+      </div>
+
+      {/* Bandeau MSI — TOUJOURS en bas de page, après les guides associés, avant le footer */}
+      <div className="bg-cloud border-t border-edge">
+        <div className="container-xl">
+          <div className="flex items-center gap-3 py-3">
+            <div className="w-7 h-7 rounded-full bg-[#0f2040] flex items-center justify-center text-white text-[10px] font-bold shrink-0">
+              MSI
+            </div>
+            <p className="text-[11px] text-slate leading-snug">
+              La rédaction My Swiss Insurance / Service éditorial indépendant, Lausanne /
+              Publié le {publishedDate}, mis à jour le {updatedDate} / Données OFSP 2026
+            </p>
+          </div>
         </div>
       </div>
     </>
@@ -651,7 +663,7 @@ Les chiffres clés apparaissent dans le texte brut, pas uniquement dans les tabl
 **Titre pages :** `{H1} — My Swiss Insurance`
 **Meta description :** 150-160 caractères, commence par un chiffre clé.
 
-**Bandeau MSI :** TOUJOURS entre `<Breadcrumb>` et `<h1>`.
+**Bandeau MSI :** TOUJOURS en bas de page, après les guides associés, avant le footer. Jamais dans le hero.
 **FAQ :** TOUJOURS avant le formulaire.
 
 ---
@@ -668,7 +680,7 @@ Les chiffres clés apparaissent dans le texte brut, pas uniquement dans les tabl
 ```
 
 - Hamburger : extrême gauche, ouvre le menu déroulant
-- Logo : juste après le hamburger, lien vers `/`
+- Logo : juste après le hamburger, lien vers `/lamal` (et non vers `/`)
 - Bouton CTA : extrême droite, libellé `"Recevez les meilleures offres"`
 - **Toujours visible**, mobile et desktop. Ne jamais masquer avec `hidden`, `sm:hidden` ou toute autre classe responsive.
 
@@ -685,6 +697,9 @@ Au clic → overlay sombre (`bg-black/60`) sur tout l'écran + modal centré con
 Colonnes : Guides · Par canton · Par situation de vie · Légal.
 Texte brandmark : `Comparez les caisses maladie suisses et optimisez votre LAMal. Service gratuit.`
 Sources officielles : OFSP · admin.ch · priminfo.ch.
+Logo footer : lien vers `/lamal` (et non vers `/`).
+
+**Redirection** : `/fr` → `/fr/lamal` (301, dans `next.config.mjs`). Tous les liens internes (logo, footer, hamburger) pointent vers `/lamal`.
 
 Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 
@@ -709,15 +724,16 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 - [ ] TOC sidebar : aucun bouton de conversion
 
 **Structure**
-- [ ] Bandeau MSI entre `<Breadcrumb>` et `<h1>`
+- [ ] Pas de breadcrumb visuel en HTML — `<Breadcrumb>` est JSON-LD uniquement
 - [ ] FAQ avant le formulaire
 - [ ] Formulaire titre "Besoin d'aide ?", sous-titre immuable, `redirectOnSuccess="/fr/merci"`
 - [ ] Ancre `id="contact"` avec `scroll-mt-20` sur le formulaire
+- [ ] Bandeau MSI en bas de page, après les guides associés, avant la fermeture `</>`
 
 **SEO**
 - [ ] `export const metadata` avec title et description
 - [ ] JSON-LD Article + FAQPage (si applicable)
-- [ ] `<Breadcrumb>` présent (émet BreadcrumbList JSON-LD)
+- [ ] `<Breadcrumb>` présent (émet BreadcrumbList JSON-LD, aucun visuel)
 - [ ] Dates datePublished / dateModified cohérentes avec le bandeau MSI
 
 **Visuels**

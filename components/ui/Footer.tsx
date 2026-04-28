@@ -64,7 +64,7 @@ export default function Footer() {
 
           {/* Brand col */}
           <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="flex items-center gap-2.5 mb-5">
+            <Link href="/lamal" className="flex items-center gap-2.5 mb-5">
               <div className="w-7 h-7 bg-[#1d4ed8] rounded-[6px] flex items-center justify-center shrink-0">
                 <ShieldIcon />
               </div>

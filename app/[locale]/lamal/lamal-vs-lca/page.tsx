@@ -14,6 +14,7 @@ export const metadata: Metadata = {
     url: 'https://my-swiss-insurance.ch/lamal/lamal-vs-lca',
     type: 'article',
   },
+  alternates: { canonical: 'https://my-swiss-insurance.ch/lamal/lamal-vs-lca' },
 }
 
 const articleSchema = {
@@ -118,20 +119,6 @@ export default function LamalVsLcaPage() {
             { label: 'LAMal vs assurance complémentaire' },
           ]} />
 
-          <div className="bg-cloud border-b border-edge flex items-center gap-3 py-3 mt-4 mb-7">
-            <div className="w-7 h-7 rounded-full bg-[#0f2040] flex items-center justify-center text-white text-[10px] font-bold shrink-0">
-              MSI
-            </div>
-            <p className="text-[11px] text-slate leading-snug">
-              La rédaction My Swiss Insurance / Service éditorial indépendant, Lausanne /
-              Publié le 1er janvier 2026, mis à jour le 13 avril 2026
-            </p>
-          </div>
-
-          <div className="flex flex-wrap gap-2 mb-5">
-            <span className="badge">Mis à jour avril 2026</span>
-          </div>
-
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
             LAMal vs LCA : assurance de base et complémentaire
           </h1>
@@ -175,7 +162,7 @@ export default function LamalVsLcaPage() {
 
             {/* 1 — Comparaison visuelle */}
             <section id="comparaison" className="pt-2">
-              <h2 className="article-h2">1. LAMal et LCA en un coup d'oeil</h2>
+              <h2 className="article-h2">1. LAMal et LCA en un coup d'œil</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div className="bg-cloud border border-edge rounded-[8px] p-6">
                   <h3 className="article-h3 mt-0">LAMal : assurance de base</h3>
@@ -231,17 +218,17 @@ export default function LamalVsLcaPage() {
                 <table className="stripe-table w-full">
                   <thead>
                     <tr>
-                      <th>Aspect</th>
-                      <th>LAMal (base)</th>
-                      <th>LCA (complémentaire)</th>
+                      <th className="whitespace-nowrap">Aspect</th>
+                      <th className="whitespace-nowrap">LAMal (base)</th>
+                      <th className="whitespace-nowrap">LCA (complémentaire)</th>
                     </tr>
                   </thead>
                   <tbody>
                     {comparaison.map((row, i) => (
                       <tr key={i}>
-                        <td className="font-semibold text-ink">{row.aspect}</td>
-                        <td>{row.lamal}</td>
-                        <td>{row.lca}</td>
+                        <td className="font-semibold text-ink whitespace-nowrap">{row.aspect}</td>
+                        <td className="whitespace-nowrap">{row.lamal}</td>
+                        <td className="whitespace-nowrap">{row.lca}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -402,6 +389,21 @@ export default function LamalVsLcaPage() {
             </section>
 
           </article>
+        </div>
+      </div>
+
+      {/* Bandeau MSI */}
+      <div className="bg-cloud border-t border-edge">
+        <div className="container-xl">
+          <div className="flex items-center gap-3 py-3">
+            <div className="w-7 h-7 rounded-full bg-[#0f2040] flex items-center justify-center text-white text-[10px] font-bold shrink-0">
+              MSI
+            </div>
+            <p className="text-[11px] text-slate leading-snug">
+              La rédaction My Swiss Insurance / Service éditorial indépendant, Lausanne /
+              Publié le 1er janvier 2026, mis à jour le 13 avril 2026 / Données OFSP 2026
+            </p>
+          </div>
         </div>
       </div>
     </>

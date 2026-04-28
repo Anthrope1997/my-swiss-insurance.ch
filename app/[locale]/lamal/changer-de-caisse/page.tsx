@@ -14,6 +14,7 @@ export const metadata: Metadata = {
     url: 'https://my-swiss-insurance.ch/lamal/changer-de-caisse',
     type: 'article',
   },
+  alternates: { canonical: 'https://my-swiss-insurance.ch/lamal/changer-de-caisse' },
 }
 
 const articleSchema = {
@@ -109,20 +110,6 @@ export default function ChangerDeCaissePage() {
             { label: 'Changer de caisse maladie' },
           ]} />
 
-          <div className="bg-cloud border-b border-edge flex items-center gap-3 py-3 mt-4 mb-7">
-            <div className="w-7 h-7 rounded-full bg-[#0f2040] flex items-center justify-center text-white text-[10px] font-bold shrink-0">
-              MSI
-            </div>
-            <p className="text-[11px] text-slate leading-snug">
-              La rédaction My Swiss Insurance / Service éditorial indépendant, Lausanne /
-              Publié le 1er janvier 2026, mis à jour le 13 avril 2026
-            </p>
-          </div>
-
-          <div className="flex flex-wrap gap-2 mb-5">
-            <span className="badge">Mis à jour avril 2026</span>
-          </div>
-
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
             Comment changer de caisse maladie en Suisse
           </h1>
@@ -190,9 +177,9 @@ export default function ChangerDeCaissePage() {
                 <table className="stripe-table w-full">
                   <thead>
                     <tr>
-                      <th>Situation</th>
-                      <th>Date limite</th>
-                      <th>Prise d'effet</th>
+                      <th className="whitespace-nowrap">Situation</th>
+                      <th className="whitespace-nowrap">Date limite</th>
+                      <th className="whitespace-nowrap">Prise d'effet</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -203,9 +190,9 @@ export default function ChangerDeCaissePage() {
                       ['Changement de franchise', '30 novembre', '1er janvier'],
                     ].map((row, i) => (
                       <tr key={i}>
-                        <td className="font-medium text-ink">{row[0]}</td>
-                        <td>{row[1]}</td>
-                        <td>{row[2]}</td>
+                        <td className="font-medium text-ink whitespace-nowrap">{row[0]}</td>
+                        <td className="whitespace-nowrap">{row[1]}</td>
+                        <td className="whitespace-nowrap">{row[2]}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -373,6 +360,21 @@ export default function ChangerDeCaissePage() {
             </section>
 
           </article>
+        </div>
+      </div>
+
+      {/* Bandeau MSI */}
+      <div className="bg-cloud border-t border-edge">
+        <div className="container-xl">
+          <div className="flex items-center gap-3 py-3">
+            <div className="w-7 h-7 rounded-full bg-[#0f2040] flex items-center justify-center text-white text-[10px] font-bold shrink-0">
+              MSI
+            </div>
+            <p className="text-[11px] text-slate leading-snug">
+              La rédaction My Swiss Insurance / Service éditorial indépendant, Lausanne /
+              Publié le 1er janvier 2026, mis à jour le 13 avril 2026 / Données OFSP 2026
+            </p>
+          </div>
         </div>
       </div>
     </>

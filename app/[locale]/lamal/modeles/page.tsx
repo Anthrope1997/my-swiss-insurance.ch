@@ -14,6 +14,7 @@ export const metadata: Metadata = {
     url: 'https://my-swiss-insurance.ch/lamal/modeles',
     type: 'article',
   },
+  alternates: { canonical: 'https://my-swiss-insurance.ch/lamal/modeles' },
 }
 
 const articleSchema = {
@@ -152,21 +153,6 @@ export default function ModelesPage() {
             { label: 'Modèles LAMal' },
           ]} />
 
-          <div className="bg-cloud border-b border-edge flex items-center gap-3 py-3 mt-4 mb-7">
-            <div className="w-7 h-7 rounded-full bg-[#0f2040] flex items-center justify-center text-white text-[10px] font-bold shrink-0">
-              MSI
-            </div>
-            <p className="text-[11px] text-slate leading-snug">
-              La rédaction My Swiss Insurance / Service éditorial indépendant, Lausanne /
-              Publié le 1er janvier 2026, mis à jour le 22 avril 2026 / Données OFSP 2026
-            </p>
-          </div>
-
-          <div className="flex flex-wrap gap-2 mb-5">
-            <span className="badge">Mis à jour avril 2026</span>
-            <span className="badge">Source : OFSP</span>
-          </div>
-
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
             Modèles LAMal 2026 : lequel choisir ?
           </h1>
@@ -216,32 +202,41 @@ export default function ModelesPage() {
                 <table className="stripe-table w-full">
                   <thead>
                     <tr>
-                      <th>Modèle</th>
-                      <th className="text-center">Réduction prime</th>
-                      <th className="hidden sm:table-cell">Porte d'entrée</th>
-                      <th className="hidden md:table-cell">Disponibilité</th>
+                      <th className="whitespace-nowrap">Modèle</th>
+                      <th className="whitespace-nowrap">Réduction prime</th>
+                      <th className="hidden sm:table-cell whitespace-nowrap">Porte d'entrée</th>
+                      <th className="hidden md:table-cell whitespace-nowrap">Disponibilité</th>
                     </tr>
                   </thead>
                   <tbody>
                     {[
-                      ['Standard', 'Aucune', 'Libre', 'Partout'],
-                      ["Médecin de famille", "jusqu'à −20%", 'Médecin généraliste attitré', 'Très large'],
-                      ['HMO', "jusqu'à −20%", 'Réseau de cabinets agréés', 'Grandes villes'],
                       ['Telmed', "jusqu'à −24%", 'Hotline médicale (application ou téléphone)', 'Partout'],
+                      ['HMO', "jusqu'à −20%", 'Réseau de cabinets agréés', 'Grandes villes'],
+                      ["Médecin de famille", "jusqu'à −20%", 'Médecin généraliste attitré', 'Très large'],
+                      ['Standard', 'Aucune', 'Libre', 'Partout'],
                     ].map(([modele, reduction, entree, dispo], i) => (
                       <tr key={i}>
-                        <td className="font-semibold text-ink">{modele}</td>
-                        <td className="text-center font-medium text-brand">{reduction}</td>
-                        <td className="hidden sm:table-cell text-slate">{entree}</td>
-                        <td className="hidden md:table-cell text-slate">{dispo}</td>
+                        <td className="font-semibold text-ink whitespace-nowrap">{modele}</td>
+                        <td className="font-medium text-brand whitespace-nowrap">{reduction}</td>
+                        <td className="hidden sm:table-cell text-slate whitespace-nowrap">{entree}</td>
+                        <td className="hidden md:table-cell text-slate whitespace-nowrap">{dispo}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-              <div className="callout text-[15px]">
-                <strong>À retenir :</strong> toutes les prestations médicales sont identiques quel que soit le modèle.
-                Seule la porte d'entrée dans le système de soins diffère. Les remboursements sont les mêmes.
+              <div className="callout flex gap-3">
+                <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
+                     strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
+                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
+                  <line x1="10" y1="21" x2="14" y2="21" />
+                </svg>
+                <div>
+                  <p className="font-semibold text-ink mb-1">À retenir</p>
+                  <p className="text-[15px]">Toutes les prestations médicales sont identiques quel que soit le modèle. Seule la porte d'entrée dans le système de soins diffère. Les remboursements sont les mêmes.</p>
+                </div>
               </div>
             </section>
 
@@ -357,6 +352,21 @@ export default function ModelesPage() {
             </section>
 
           </article>
+        </div>
+      </div>
+
+      {/* Bandeau MSI */}
+      <div className="bg-cloud border-t border-edge">
+        <div className="container-xl">
+          <div className="flex items-center gap-3 py-3">
+            <div className="w-7 h-7 rounded-full bg-[#0f2040] flex items-center justify-center text-white text-[10px] font-bold shrink-0">
+              MSI
+            </div>
+            <p className="text-[11px] text-slate leading-snug">
+              La rédaction My Swiss Insurance / Service éditorial indépendant, Lausanne /
+              Publié le 1er janvier 2026, mis à jour le 22 avril 2026 / Données OFSP 2026
+            </p>
+          </div>
         </div>
       </div>
     </>
