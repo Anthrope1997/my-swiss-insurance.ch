@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     "Les 4 modèles d'assurance LAMal en Suisse : standard, médecin de famille, HMO et Telmed. Économies, contraintes et conseils pour choisir. Guide 2026.",
   openGraph: {
     title: 'Modèles LAMal 2026 : quel modèle choisir ?',
-    description: 'Comparez les 4 modèles LAMal : standard, Hausarzt, HMO, Telmed. Économies et conseils.',
+    description: 'Comparez les 4 modèles LAMal : standard, médecin de famille, HMO, téléconsultation. Économies et conseils.',
     url: 'https://my-swiss-insurance.ch/lamal/modeles',
     type: 'article',
   },
@@ -78,7 +78,7 @@ const modeles = [
     title: 'Standard (libre choix)',
     reduction: null,
     badgeStyle: 'bg-cloud text-slate border-edge',
-    borderColor: 'border-edge',
+    borderColor: 'border-brand',
     desc: "Accès direct à n'importe quel médecin ou spécialiste en Suisse, sans restriction ni porte d'entrée obligatoire. C'est le modèle le plus cher : il sert de référence pour comparer les autres.",
     avantages: ['Liberté totale de choix du médecin', 'Accès direct aux spécialistes', 'Aucune contrainte de réseau'],
     inconvenients: ['Prime la plus élevée', 'Aucune réduction disponible'],
@@ -86,7 +86,7 @@ const modeles = [
   },
   {
     id: 'hausarzt',
-    title: 'Médecin de famille (Hausarzt)',
+    title: 'Médecin de famille',
     reduction: "jusqu'à −20%",
     badgeStyle: '',
     borderColor: 'border-brand',
@@ -111,7 +111,7 @@ const modeles = [
     title: 'Telmed (téléconsultation)',
     reduction: "jusqu'à −24%",
     badgeStyle: '',
-    borderColor: 'border-[#3b82f6]',
+    borderColor: 'border-brand',
     desc: "Première consultation par téléphone ou application (Medgate, Medi24, Doctorline...) avant tout rendez-vous en cabinet ou aux urgences non vitales. Disponible 24 heures sur 24, 7 jours sur 7. Réduction moyenne de 12% (de 5% à 24%) selon la caisse.",
     avantages: ['Plus grande réduction de prime (jusqu\'à 24%)', 'Disponible 24 heures sur 24', 'Pratique pour les actifs et familles'],
     inconvenients: ['Passage obligatoire par la hotline', 'Dépendance aux outils numériques', 'Pas toujours adapté aux urgences'],
@@ -120,7 +120,7 @@ const modeles = [
 ]
 
 const heroStats = [
-  { value: '4',      label: "Modèles d'assurance",  sub: 'standard, Hausarzt, HMO, Telmed'          },
+  { value: '4',      label: "Modèles d'assurance",  sub: 'standard, médecin de famille, HMO, téléconsultation' },
   { value: '−24%',   label: 'Réduction maximum',     sub: 'modèle Telmed selon caisse et canton'     },
   { value: '−11%',   label: 'Réduction moyenne',     sub: 'médecin de famille, toutes caisses'       },
 ]
@@ -158,9 +158,10 @@ export default function ModelesPage() {
             Modèles LAMal 2026 : lequel choisir ?
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
-            La LAMal propose quatre modèles d'assurance. Le modèle standard offre le plus de liberté,
-            les modèles alternatifs réduisent la prime de 10 à 24% en échange d'une porte d'entrée
-            obligatoire dans le système de soins.
+            La LAMal propose quatre modèles d'assurance. Le modèle standard offre le plus de liberté.
+            Les trois modèles alternatifs (médecin de famille, HMO, Telmed) réduisent la prime jusqu'à
+            24 pour cent en échange d'un interlocuteur médical imposé avant toute consultation chez
+            un spécialiste.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
