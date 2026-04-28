@@ -71,8 +71,8 @@ const menuSections: {
 
 function ShieldIcon() {
   return (
-    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5}
+    <svg className="w-7 h-7 text-white shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
         d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
     </svg>
   )
@@ -142,11 +142,9 @@ export default function Header() {
                 ${mobileOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
             </button>
 
-            {/* Logo — badge seul sur mobile (<768px), badge + texte sur desktop (≥768px) */}
+            {/* Logo — bouclier seul sur mobile (<768px), bouclier + texte sur desktop (≥768px) */}
             <Link href="/lamal" className="flex items-center gap-2.5 flex-1">
-              <div className="w-9 h-9 bg-[#1d4ed8] rounded-md flex items-center justify-center shrink-0">
-                <ShieldIcon />
-              </div>
+              <ShieldIcon />
               <span className="font-semibold text-white text-[15px] hidden md:inline">
                 My Swiss Insurance
               </span>
@@ -214,18 +212,20 @@ export default function Header() {
           onClick={() => setOfferOpen(false)}
         >
           <div
-            className="bg-white rounded-xl w-full max-w-lg max-h-[90vh] overflow-y-auto"
+            className="bg-white rounded-xl w-[95%] max-w-[600px] max-h-[90vh] overflow-y-auto"
             onClick={e => e.stopPropagation()}
           >
             <div className="px-8 pt-8 pb-4">
               <div className="flex items-start justify-between gap-4 mb-6">
                 <p className="text-[15px] text-slate leading-relaxed">
-                  Un expert analyse votre profil et revient vers vous sous 24 heures
-                  avec les meilleures offres personnalisées. Gratuit, sans engagement.
+                  Un conseiller spécialisé compare les caisses adaptées à votre situation
+                  et vous présente les offres les plus avantageuses{' '}
+                  <strong>sous 24 heures</strong>.
+                  C'est <strong>gratuit et sans engagement</strong>.
                 </p>
                 <button
                   onClick={() => setOfferOpen(false)}
-                  className="shrink-0 text-slate hover:text-ink transition-colors mt-0.5"
+                  className="shrink-0 text-slate hover:text-ink transition-colors -mt-2"
                   aria-label="Fermer"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">

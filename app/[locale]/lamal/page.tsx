@@ -242,7 +242,7 @@ export default function LamalPage() {
       </section>
 
       {/* ── 2. GUIDES LAMAL ─────────────────────────────────────────────────── */}
-      <section className="bg-cloud border-y border-edge py-20">
+      <section className="bg-white py-20">
         <div className="container-xl">
 
           <div className="max-w-2xl mb-12">
@@ -351,7 +351,7 @@ export default function LamalPage() {
       </section>
 
       {/* ── 4. PAR CANTON ───────────────────────────────────────────────────── */}
-      <section className="bg-cloud border-y border-edge py-20">
+      <section className="bg-white py-20">
         <div className="container-xl">
 
           <div className="max-w-2xl mb-8">
@@ -439,7 +439,7 @@ export default function LamalPage() {
       </section>
 
       {/* ── 6. FORMULAIRE ───────────────────────────────────────────────────── */}
-      <section id="formulaire" className="bg-cloud border-y border-edge py-10 sm:py-16 scroll-mt-16">
+      <section id="formulaire" className="bg-white py-10 sm:py-16 scroll-mt-16">
         <div className="container-xl max-w-2xl">
 
           <div className="text-center mb-6">

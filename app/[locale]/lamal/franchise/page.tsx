@@ -413,8 +413,9 @@ export default function FranchisePage() {
                 Besoin d'aide ?
               </h2>
               <p className="text-[16px] text-slate mb-6 leading-relaxed">
-                Un expert vous rappelle sous 24 heures pour établir avec vous une solution
-                personnalisée. Gratuit, sans engagement.
+                Choisir le bon contrat est complexe : caisse maladie, franchise et modèle.
+                Un conseiller spécialisé prend le temps d'analyser votre situation et vous
+                propose la solution la mieux adaptée. C'est gratuit et sans engagement.
               </p>
               <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
             </div>

@@ -681,9 +681,11 @@ Les chiffres clés apparaissent dans le texte brut, pas uniquement dans les tabl
 
 **Bandeau MSI :** TOUJOURS dans l'`<article>`, après le formulaire (`</div>` fermant `#contact`), avant les guides associés. Utiliser le composant `<AuthorBio publishedDate="..." updatedDate="..." />` (importé depuis `@/components/ui/AuthorBio`). Jamais de div custom à la place. Jamais dans le hero. Jamais en dehors de l'article.
 
-**AuthorBio — layout responsive :**
-- **Desktop (≥768px) :** `flex-row items-center` — avatar | bloc texte (titre + 2 lignes) | badge à droite
-- **Mobile (<768px) :** `flex-col` — (1) avatar + "La rédaction My Swiss Insurance" sur la même ligne ; (2) "Service éditorial..." ; (3) "Publié le..." ; (4) badge "Données OFSP 2026" aligné à gauche. Aucun élément compressé.
+**AuthorBio — layout :**
+- `flex-row items-center gap-3` — logo bouclier | bloc texte
+- Logo : carré bleu `bg-[#1d4ed8] rounded-md w-9 h-9` avec shield SVG blanc `w-5 h-5` — jamais d'avatar rond, jamais de texte "MSI"
+- Bloc texte : "My Swiss Insurance" (`text-sm font-semibold`) / "Service éditorial indépendant" (`text-sm`) / "Publié le..." (`text-sm`)
+- Pas de badge "Données OFSP 2026"
 **FAQ :** TOUJOURS avant le formulaire.
 **Ordre bas de page (Template A) :** Formulaire (#contact) → Bandeau MSI → Guides associés → Footer.
 
@@ -699,23 +701,24 @@ Les chiffres clés apparaissent dans le texte brut, pas uniquement dans les tabl
 
 | Breakpoint | Contenu |
 |---|---|
-| Desktop `≥768px` | hamburger → badge MSI → "My Swiss Insurance" → CTA "Recevez les meilleures offres" |
-| Mobile `<768px` | hamburger → badge MSI (sans texte) → CTA |
-| Très petit `<380px` | hamburger → badge MSI → CTA "Être conseillé" |
+| Desktop `≥768px` | hamburger → bouclier MSI → "My Swiss Insurance" → CTA "Recevez les meilleures offres" |
+| Mobile `<768px` | hamburger → bouclier MSI (sans texte) → CTA |
+| Très petit `<380px` | hamburger → bouclier MSI → CTA "Être conseillé" |
 
 Implémentation :
-- Badge logo : `<div className="w-9 h-9 bg-[#1d4ed8] rounded-md ...">` — `w-9 h-9` (36px) pour matcher exactement la hauteur du bouton CTA
+- Logo : SVG bouclier blanc `w-7 h-7` **directement** sur le fond `#0f2040` — **pas de conteneur bleu**, pas de `rounded-md bg-[#1d4ed8]`
 - Texte "My Swiss Insurance" : `hidden md:inline` (masqué sous 768px)
-- Ne jamais afficher "MSI" comme texte séparé à côté du badge
+- Ne jamais afficher "MSI" comme texte séparé
 - CTA libellés : `hidden min-[380px]:inline` / `min-[380px]:hidden` (jamais `sm:hidden`)
-- Aligner `items-center` sur le conteneur flex du header pour centrage vertical badge/CTA
+- Aligner `items-center` sur le conteneur flex du header pour centrage vertical
 
 **Comportement du CTA header :**
 Au clic → overlay sombre (`bg-black/60`) sur tout l'écran + modal centré contenant :
-1. Sous-titre (immuable) : `"Un expert analyse votre profil et revient vers vous sous 24 heures avec les meilleures offres personnalisées. Gratuit, sans engagement."`
+1. Texte (immuable) : `"Un conseiller spécialisé compare les caisses adaptées à votre situation et vous présente les offres les plus avantageuses `**`sous 24 heures`**`. C'est `**`gratuit et sans engagement`**`."`
 2. `<MultiStepLeadForm redirectOnSuccess="/fr/merci" />`
-3. Bouton de fermeture (×) en haut à droite de la modal
-4. Clic sur l'overlay ferme la modal
+3. Bouton de fermeture (×) en haut à droite, `-mt-2` (8px au-dessus de l'alignement normal)
+4. Modal : `w-[95%] max-w-[600px]`
+5. Clic sur l'overlay ferme la modal
 
 **Menu hamburger :** aucun CTA de conversion à l'intérieur. Uniquement des liens de navigation.
 
@@ -754,7 +757,7 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 - [ ] FAQ avant le formulaire
 - [ ] Formulaire titre "Besoin d'aide ?", sous-titre immuable, `redirectOnSuccess="/fr/merci"`
 - [ ] Ancre `id="contact"` avec `scroll-mt-20` sur le formulaire
-- [ ] Bandeau MSI dans `<article>`, après le formulaire, avant les guides associés (4 `<p>` séparés, sans `/`)
+- [ ] Bandeau MSI dans `<article>`, après le formulaire, avant les guides associés (logo bouclier bleu, pas de badge OFSP, pas d'avatar rond)
 - [ ] Ordre bas de page : Formulaire → Bandeau MSI → Guides associés → Footer
 
 **SEO**
@@ -776,9 +779,9 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 - [ ] Icônes : trait fin, couleur brand, max 4-5 par page, non décoratives
 
 **Header**
-- [ ] Badge logo : `w-9 h-9` (36px) — même hauteur que le bouton CTA
-- [ ] Mobile (<768px) : badge seul, texte "My Swiss Insurance" masqué (`hidden md:inline`)
-- [ ] Desktop (≥768px) : badge + "My Swiss Insurance" visible
+- [ ] Logo : SVG bouclier blanc `w-7 h-7` sans conteneur bleu (`bg-[#1d4ed8] rounded-md` supprimé)
+- [ ] Mobile (<768px) : bouclier seul, texte "My Swiss Insurance" masqué (`hidden md:inline`)
+- [ ] Desktop (≥768px) : bouclier + "My Swiss Insurance" visible
 - [ ] CTA ≥380px : "Recevez les meilleures offres" ; <380px : "Être conseillé"
 - [ ] Classes breakpoints CTA : `hidden min-[380px]:inline` / `min-[380px]:hidden`
 - [ ] Aucun CTA dans le menu hamburger
