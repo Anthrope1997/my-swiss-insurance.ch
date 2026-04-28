@@ -124,14 +124,17 @@
 
 /* ─── Tailles de police minimales sur mobile (< 768px) ─── */
 @media (max-width: 767px) {
-  /* Labels uppercase — 13px minimum */
-  .text-\[11px\] { font-size: 13px; }
+  /* Labels uppercase — 14px minimum */
+  .text-\[11px\] { font-size: 14px; }
 
-  /* Textes secondaires, notes, métadonnées — 14px minimum */
-  .text-xs       { font-size: 14px; }
-  .text-\[12px\] { font-size: 14px; }
-  .text-\[13px\] { font-size: 14px; }
+  /* Textes secondaires, notes, métadonnées — 15px minimum */
+  .text-xs        { font-size: 15px; }
+  .text-sm        { font-size: 15px; }
+  .text-\[12px\]  { font-size: 15px; }
+  .text-\[13px\]  { font-size: 15px; }
+  .text-\[14px\]  { font-size: 15px; }
 
-  /* En-têtes de tableau — 14px minimum (alignement avec les cellules) */
-  .stripe-table th { font-size: 14px; }
+  /* En-têtes et cellules de tableau — 15px minimum */
+  .stripe-table th { font-size: 15px; }
+  .stripe-table td { font-size: 15px; }
 }
