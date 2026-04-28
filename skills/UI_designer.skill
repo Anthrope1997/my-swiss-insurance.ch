@@ -125,20 +125,21 @@ Règle globale via media query — **ne pas modifier ces valeurs dans les compos
 | Catégorie | Taille minimale | Classe(s) concernée(s) |
 |---|---|---|
 | Corps de texte | 15px | `.article-p` (déjà 17px) |
-| Textes secondaires, notes, métadonnées | 15px | `.text-xs`, `.text-sm`, `.text-[12px]`, `.text-[13px]`, `.text-[14px]` |
+| Textes secondaires, notes, métadonnées | 16px | `.text-xs`, `.text-sm`, `.text-[12px]`, `.text-[13px]`, `.text-[14px]`, `.text-[15px]` |
 | Labels uppercase | 14px | `.text-[11px]` |
-| Tableaux | 15px | `.stripe-table th` et `.stripe-table td` |
+| Tableaux | 16px | `.stripe-table th` et `.stripe-table td` |
 
 ```css
 @media (max-width: 767px) {
   .text-\[11px\]  { font-size: 14px; }
-  .text-xs        { font-size: 15px; }
-  .text-sm        { font-size: 15px; }
-  .text-\[12px\]  { font-size: 15px; }
-  .text-\[13px\]  { font-size: 15px; }
-  .text-\[14px\]  { font-size: 15px; }
-  .stripe-table th { font-size: 15px; }
-  .stripe-table td { font-size: 15px; }
+  .text-xs        { font-size: 16px; }
+  .text-sm        { font-size: 16px; }
+  .text-\[12px\]  { font-size: 16px; }
+  .text-\[13px\]  { font-size: 16px; }
+  .text-\[14px\]  { font-size: 16px; }
+  .text-\[15px\]  { font-size: 16px; }
+  .stripe-table th { font-size: 16px; }
+  .stripe-table td { font-size: 16px; }
 }
 ```
 
@@ -784,7 +785,7 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 - [ ] CTA ouvre overlay avec formulaire + sous-titre canonique
 
 **Typographie mobile**
-- [ ] Minimum mobile effectif : **15px** pour tout texte de contenu (14px pour labels uppercase)
+- [ ] Minimum mobile effectif : **16px** pour tout texte de contenu (14px pour labels uppercase)
 - [ ] `text-xs`, `text-sm`, `text-[12px]`, `text-[13px]`, `text-[14px]` remontent à 15px via globals.css
 - [ ] Tableaux : th et td remontent à 15px sur mobile
 

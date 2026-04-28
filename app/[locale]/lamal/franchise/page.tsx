@@ -130,8 +130,8 @@ export default function FranchisePage() {
             {heroStats.map(s => (
               <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
                 <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
-                <div className="text-[15px] font-medium text-ink/70 mt-0.5">{s.label}</div>
-                <div className="text-[15px] text-slate mt-0.5">{s.sub}</div>
+                <div className="text-[16px] font-medium text-ink/70 mt-0.5">{s.label}</div>
+                <div className="text-[16px] text-slate mt-0.5">{s.sub}</div>
               </div>
             ))}
           </div>
@@ -179,7 +179,7 @@ export default function FranchisePage() {
                       'Choisie une fois par an, avant le 30 novembre',
                       'Plus la franchise est élevée, plus la prime mensuelle est basse',
                     ].map((item, i) => (
-                      <li key={i} className="flex gap-3 text-[15px] text-slate">
+                      <li key={i} className="flex gap-3 text-[16px] text-slate">
                         <svg className="w-4 h-4 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
                         </svg>
@@ -197,7 +197,7 @@ export default function FranchisePage() {
                       'Automatique, non modifiable',
                       'Coût maximum total : franchise + CHF 700 par an',
                     ].map((item, i) => (
-                      <li key={i} className="flex gap-3 text-[15px] text-slate">
+                      <li key={i} className="flex gap-3 text-[16px] text-slate">
                         <svg className="w-4 h-4 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
                         </svg>
@@ -216,7 +216,7 @@ export default function FranchisePage() {
                   <line x1="9.5" y1="18" x2="14.5" y2="18" />
                   <line x1="10" y1="21" x2="14" y2="21" />
                 </svg>
-                <p className="text-[15px]">
+                <p className="text-[16px]">
                   <strong>Exemple concret : </strong>
                   avec une franchise de 1 500 CHF par an et CHF 2 000 de frais médicaux dans l'année,
                   vous payez CHF 1 500 (franchise) + 10% de CHF 500 = CHF 50 (quote-part), soit{' '}
@@ -234,7 +234,7 @@ export default function FranchisePage() {
                 En dessous de ce seuil, la franchise élevée est préférable.
               </p>
 
-              <p className="text-[15px] text-slate/60 italic mb-4">
+              <p className="text-[16px] text-slate/60 italic mb-4">
                 Primes indicatives pour un adulte de 26 ans et plus à Zurich, modèle standard
                 (source : OFSP 2026). Les montants varient selon votre canton.
               </p>
@@ -269,7 +269,7 @@ export default function FranchisePage() {
               </div>
 
               {/* Données complémentaires — colonnes retirées du tableau */}
-              <div className="bg-cloud border border-edge rounded-lg px-5 py-4 mb-4 text-[15px] text-slate space-y-2">
+              <div className="bg-cloud border border-edge rounded-lg px-5 py-4 mb-4 text-[16px] text-slate space-y-2">
                 <p>
                   <span className="font-medium text-ink">Économie mensuelle sur la prime</span>{' '}
                   par rapport à la franchise 300 CHF : 500 CHF → −CHF 10.58 ; 1 000 CHF → −CHF 38.04 ;
@@ -293,7 +293,7 @@ export default function FranchisePage() {
                 </svg>
                 <div>
                   <p className="font-semibold text-ink mb-1">Comment calculer le seuil d'équilibre</p>
-                  <p className="text-[15px]">
+                  <p className="text-[16px]">
                     Franchise 300 CHF vs 2 500 CHF par an : l'économie annuelle sur la prime est de
                     CHF 1 440 par an. Si vos frais médicaux annuels dépassent CHF 1 440 par an, la
                     franchise 300 CHF est plus avantageuse. En dessous, la franchise 2 500 CHF vous
@@ -303,7 +303,7 @@ export default function FranchisePage() {
               </div>
 
               <div className="mt-6">
-                <Link href="/lamal/comparateur" className="text-brand hover:underline text-[15px] font-medium">
+                <Link href="/lamal/comparateur" className="text-brand hover:underline text-[16px] font-medium">
                   Comparer les primes LAMal par canton →
                 </Link>
               </div>
@@ -325,7 +325,7 @@ export default function FranchisePage() {
                   <line x1="9.5" y1="18" x2="14.5" y2="18" />
                   <line x1="10" y1="21" x2="14" y2="21" />
                 </svg>
-                <p className="text-[15px]">
+                <p className="text-[16px]">
                   <strong>Recommandation :</strong> la franchise 0 CHF par an est conseillée pour les
                   jeunes enfants qui consultent fréquemment. À partir de l'adolescence (15 à 18 ans),
                   une franchise plus élevée peut être envisagée si l'enfant est en bonne santé.
@@ -384,19 +384,19 @@ export default function FranchisePage() {
                   },
                 ].map(s => (
                   <li key={s.n} className="flex gap-4">
-                    <span className="w-7 h-7 bg-brand text-white rounded-full flex items-center justify-center text-[15px] font-semibold shrink-0 mt-0.5">
+                    <span className="w-7 h-7 bg-brand text-white rounded-full flex items-center justify-center text-[16px] font-semibold shrink-0 mt-0.5">
                       {s.n}
                     </span>
                     <div>
-                      <span className="font-semibold text-ink text-[15px]">{s.t} : </span>
-                      <span className="text-slate text-[15px]">{s.d}</span>
+                      <span className="font-semibold text-ink text-[16px]">{s.t} : </span>
+                      <span className="text-slate text-[16px]">{s.d}</span>
                     </div>
                   </li>
                 ))}
               </ol>
 
               <div className="mt-6">
-                <Link href="/lamal/changer-de-caisse" className="text-brand hover:underline text-[15px] font-medium">
+                <Link href="/lamal/changer-de-caisse" className="text-brand hover:underline text-[16px] font-medium">
                   Guide complet : changer de caisse maladie →
                 </Link>
               </div>
@@ -424,13 +424,13 @@ export default function FranchisePage() {
 
             {/* Guides associés */}
             <section className="pt-8 border-t border-edge mt-4">
-              <p className="text-[15px] font-semibold text-slate uppercase tracking-widest mb-4">
+              <p className="text-[16px] font-semibold text-slate uppercase tracking-widest mb-4">
                 Guides associés
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {guidesAssocies.map(({ href, label }) => (
                   <Link key={href} href={href}
-                    className="flex items-center gap-2 text-[15px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                    className="flex items-center gap-2 text-[16px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
                     <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>

@@ -127,14 +127,15 @@
   /* Labels uppercase — 14px minimum */
   .text-\[11px\] { font-size: 14px; }
 
-  /* Textes secondaires, notes, métadonnées — 15px minimum */
-  .text-xs        { font-size: 15px; }
-  .text-sm        { font-size: 15px; }
-  .text-\[12px\]  { font-size: 15px; }
-  .text-\[13px\]  { font-size: 15px; }
-  .text-\[14px\]  { font-size: 15px; }
+  /* Textes secondaires, notes, métadonnées — 16px minimum */
+  .text-xs        { font-size: 16px; }
+  .text-sm        { font-size: 16px; }
+  .text-\[12px\]  { font-size: 16px; }
+  .text-\[13px\]  { font-size: 16px; }
+  .text-\[14px\]  { font-size: 16px; }
+  .text-\[15px\]  { font-size: 16px; }
 
-  /* En-têtes et cellules de tableau — 15px minimum */
-  .stripe-table th { font-size: 15px; }
-  .stripe-table td { font-size: 15px; }
+  /* En-têtes et cellules de tableau — 16px minimum */
+  .stripe-table th { font-size: 16px; }
+  .stripe-table td { font-size: 16px; }
 }
