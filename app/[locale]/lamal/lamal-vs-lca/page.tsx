@@ -40,7 +40,7 @@ const faqItems = [
   },
   {
     question: "Vaut-il la peine de souscrire une LCA en Suisse ?",
-    answer: "Cela dépend de vos besoins. La LCA hospitalière est utile pour le libre choix du médecin chef. La LCA ambulatoire est pertinente pour les médecines alternatives, les lunettes ou les soins dentaires. La LCA dentaire est souvent rentable pour les familles avec enfants. Comparez les coûts et les prestations avant de souscrire.",
+    answer: "Cela dépend de vos besoins. La LCA hospitalière est utile pour le libre choix du médecin-chef. La LCA ambulatoire est pertinente pour les médecines alternatives, les lunettes ou les soins dentaires. La LCA dentaire est souvent rentable pour les familles avec enfants. Comparez les coûts et les prestations avant de souscrire.",
   },
   {
     question: "Peut-on souscrire une LCA après un diagnostic de maladie ?",
@@ -85,9 +85,7 @@ const comparaison = [
 ]
 
 const heroStats = [
-  { value: '7',          label: 'Points de différence clés', sub: 'obligation, admission, changement...' },
-  { value: '4',          label: 'Types de LCA',              sub: 'hospitalière, ambulatoire, dentaire, internationale' },
-  { value: 'Facultative', label: 'Nature de la LCA',         sub: 'contrairement à la LAMal obligatoire' },
+  { value: 'Dès CHF 60 par mois', label: "coût moyen d'une complémentaire en Suisse", sub: '' },
 ]
 
 const toc = [
@@ -121,14 +119,16 @@ export default function LamalVsLcaPage() {
           ]} />
 
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
-            LAMal vs LCA : assurance de base et complémentaire
+            Assurance de base et complémentaire : quelles différences ?
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
-            La LAMal couvre les soins essentiels obligatoires. La LCA complète avec des
-            prestations facultatives. Comprenez les différences pour faire le bon choix.
+            La LAMal rembourse les soins essentiels : médecin, hôpital, médicaments sur ordonnance.
+            L'assurance complémentaire couvre ce qu'elle exclut : chambre privée à l'hôpital,
+            médecine alternative, soins dentaires, lunettes. Elle est facultative, mais peut faire
+            une vraie différence selon votre situation.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+          <div className="grid grid-cols-1 max-w-sm gap-4 mb-8">
             {heroStats.map(s => (
               <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
                 <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
@@ -171,7 +171,7 @@ export default function LamalVsLcaPage() {
                     {[
                       'Obligatoire pour tous les résidents',
                       'Prestations identiques chez tous les assureurs',
-                      'Admission impossible à refuser',
+                      'Admission garantie, aucun refus possible',
                       'Médecine générale et spécialistes',
                       'Hospitalisation en division commune',
                       'Maternité complète',
@@ -195,7 +195,7 @@ export default function LamalVsLcaPage() {
                       'Prestations variables par assureur',
                       'Refus ou exclusions possibles',
                       'Chambre privée ou semi-privée',
-                      'Libre choix du médecin chef',
+                      'Libre choix du médecin-chef',
                       'Médecine alternative reconnue',
                       'Soins dentaires et orthodontie',
                       'Lunettes et lentilles',
@@ -245,7 +245,7 @@ export default function LamalVsLcaPage() {
                   {
                     title: 'LCA hospitalière',
                     cost: 'CHF 40 à 200 par mois',
-                    desc: "Chambre semi-privée ou privée, libre choix du médecin chef, hôpital de votre choix en Suisse ou à l'étranger.",
+                    desc: "Chambre semi-privée ou privée, libre choix du médecin-chef, hôpital de votre choix en Suisse ou à l'étranger.",
                   },
                   {
                     title: 'LCA ambulatoire',
@@ -290,7 +290,7 @@ export default function LamalVsLcaPage() {
               <ul className="space-y-3">
                 {[
                   "Souscrivez la LCA hospitalière pendant que vous êtes en bonne santé pour éviter les surprimes liées à l'âge.",
-                  'Pour les enfants, une LCA dentaire peut être rentable dès le bas âge.',
+                  'Pour les enfants, une LCA dentaire peut être rentable dès le plus jeune âge.',
                   'Voyageurs fréquents et expatriés : une LCA internationale est souvent indispensable.',
                   'Comparez les offres : les écarts pour des prestations similaires peuvent dépasser 50%.',
                 ].map((item, i) => (
@@ -312,23 +312,23 @@ export default function LamalVsLcaPage() {
                   {
                     profil: 'Jeune actif en bonne santé',
                     lamal: 'LAMal standard ou Telmed, franchise 2 500 CHF par an.',
-                    lca: "LCA hospitalière souscrite tôt, avant 30 ans, pour bloquer les conditions avantageuses. LCA ambulatoire optionnelle.",
+                    lca: "LCA hospitalière souscrite tôt, avant 30 ans, pour figer les conditions avantageuses. LCA ambulatoire optionnelle.",
                     conseil: "Priorité à la LCA hospitalière en bonne santé : c'est le moment idéal pour éviter les exclusions.",
                   },
                   {
                     profil: 'Famille avec deux enfants',
                     lamal: 'LAMal médecin de famille pour les adultes, franchise 300 CHF par an pour les enfants.',
                     lca: 'LCA dentaire très pertinente pour les frais orthodontiques. LCA ambulatoire pour la médecine préventive.',
-                    conseil: 'Comparez les offres LCA dentaire : les remboursements varient fortement selon l\'assureur.',
+                    conseil: 'Comparez les offres LCA dentaire : les remboursements varient fortement d'un assureur à l'autre, comparez avant de souscrire.',
                   },
                   {
                     profil: 'Retraité ou retraitée',
                     lamal: 'LAMal médecin de famille, franchise 300 CHF par an (frais médicaux fréquents).',
-                    lca: 'LCA hospitalière recommandée pour le libre choix du médecin chef. À souscrire avant 65 ans pour des conditions optimales.',
+                    lca: 'LCA hospitalière recommandée pour le libre choix du médecin-chef. À souscrire avant 65 ans pour des conditions optimales.',
                     conseil: "Après 65 ans, certaines LCA hospitalières deviennent inaccessibles ou très chères. Anticipez.",
                   },
                   {
-                    profil: "Expatrié ou expatriée fréquemment à l'étranger",
+                    profil: "Personne expatriée ou voyageant fréquemment à l'étranger",
                     lamal: 'LAMal standard avec franchise 300 CHF ou 500 CHF par an.',
                     lca: "LCA internationale indispensable pour les soins hors Suisse, le rapatriement et les urgences à l'étranger.",
                     conseil: 'Vérifiez que votre LCA internationale couvre votre pays de résidence habituel et vos destinations fréquentes.',
@@ -338,7 +338,7 @@ export default function LamalVsLcaPage() {
                     <p className="font-semibold text-ink text-[16px] mb-3">{cas.profil}</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
                       <div className="bg-cloud border border-edge rounded-md px-3 py-2">
-                        <p className="text-[11px] font-semibold text-slate uppercase tracking-wide mb-1">LAMal recommandée</p>
+                        <p className="text-[11px] font-semibold text-slate mb-1">LAMal recommandée</p>
                         <p className="text-[13px] text-ink">{cas.lamal}</p>
                       </div>
                       <div className="bg-[#eff6ff] border border-[#bfdbfe] rounded-md px-3 py-2">
