@@ -187,7 +187,7 @@ export default function ChangerDeCaissePage() {
                     {[
                       ['Changement ordinaire', '30 novembre', '1er janvier'],
                       ['Hausse de prime annoncée', '1 mois après notification', '31 décembre'],
-                      ['Changement de canton', "Dès l'effectivité", 'Selon accord assureur'],
+                      ['Changement de canton', 'Dès le déménagement', 'Selon accord assureur'],
                       ['Changement de franchise', '30 novembre', '1er janvier'],
                     ].map((row, i) => (
                       <tr key={i}>
@@ -209,7 +209,7 @@ export default function ChangerDeCaissePage() {
                   {
                     n: '01', title: 'Comparez les primes dès octobre',
                     desc: "Dès l'annonce des nouvelles primes (automne), comparez sur priminfo.ch ou via notre service. Notez les économies potentielles.",
-                    tip: 'Comparez à modèle équivalent (standard contre standard) pour une comparaison juste.',
+                    tip: 'Privilégiez des modèles équivalents pour une comparaison valable.',
                   },
                   {
                     n: '02', title: 'Vérifiez vos factures en cours',
@@ -224,7 +224,7 @@ export default function ChangerDeCaissePage() {
                   {
                     n: '04', title: 'Envoyez la lettre de résiliation',
                     desc: "Si la nouvelle caisse ne le fait pas pour vous, envoyez une lettre recommandée à votre ancien assureur avant le 30 novembre.",
-                    tip: 'Lettre recommandée avec avis de réception, indispensable comme preuve.',
+                    tip: "Envoyez votre lettre en recommandé avec accusé de réception, c'est votre seule preuve en cas de litige.",
                   },
                   {
                     n: '05', title: "Recevez votre nouvelle carte d'assuré",
