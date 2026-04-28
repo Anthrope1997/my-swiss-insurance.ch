@@ -91,7 +91,7 @@ const faqItems = [
     answer: "Trois leviers principaux : choisir un modèle alternatif (médecin de famille, HMO, Télémédecine) pour jusqu'à 24% de réduction selon la caisse et le canton ; augmenter sa franchise si vous êtes en bonne santé ; changer de caisse chaque année avant le 30 novembre.",
   },
   {
-    question: 'Frontalier ou expatrié — suis-je concerné par la LAMal ?',
+    question: 'Frontalier ou expatrié, suis-je concerné par la LAMal ?',
     answer: "Les frontaliers travaillant en Suisse ont en principe le choix entre la LAMal suisse et une assurance dans leur pays de résidence. Ce droit d'option doit être exercé dans les trois mois suivant le début de l'activité. Les expatriés résidant en Suisse sont soumis à l'obligation d'affiliation dans les 90 jours suivant leur arrivée, sauf exceptions prévues par les accords bilatéraux.",
   },
   {
@@ -157,7 +157,7 @@ function ProgressBar({ step }: { step: number }) {
         ))}
       </div>
       <p className="text-[12px] text-[#475569]">
-        Étape {step} sur 4 — <span className="font-medium text-[#0f2040]">{labels[step - 1]}</span>
+        Étape {step} sur 4 : <span className="font-medium text-[#0f2040]">{labels[step - 1]}</span>
       </p>
     </div>
   )
@@ -337,10 +337,10 @@ export default function ComparateurClient() {
           <div className="container-xl py-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
             <p className="text-white text-[13px] sm:text-[14px] leading-snug">
               <span className="font-semibold">{stickyData.name}</span>
-              {' · '}CHF {fmtChf(stickyData.prime)} par mois pour votre profil
+              {', '}CHF {fmtChf(stickyData.prime)} par mois pour votre profil
               {stickyData.economie > 0 && (
                 <span className="text-[#86efac]">
-                  {' · '}CHF {fmtAn(stickyData.economie)} par an économisés
+                  {', '}CHF {fmtAn(stickyData.economie)} par an économisés
                 </span>
               )}
             </p>
@@ -357,7 +357,7 @@ export default function ComparateurClient() {
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
       <section className="bg-white border-b border-[#e2e8f0] pt-14 pb-12">
         <div className="container-xl max-w-3xl">
-          <div className="badge mb-5">Données OFSP · Suisse · 2026</div>
+          <div className="badge mb-5">Données OFSP, Suisse, 2026</div>
           <h1 className="text-5xl sm:text-6xl font-bold text-[#0f2040] leading-tight mb-5">
             Comparateur de caisses maladie LAMal 2026
           </h1>
@@ -397,7 +397,7 @@ export default function ComparateurClient() {
                 </div>
                 {npaInfo && (
                   <p className="mt-1 text-[12px] text-[#1d4ed8] font-medium">
-                    {npaInfo.ville} — région {npaInfo.regionId}
+                    {npaInfo.ville}, région {npaInfo.regionId}
                   </p>
                 )}
                 {npaError && <p className="mt-1 text-[12px] text-red-500">{npaError}</p>}
@@ -527,8 +527,8 @@ export default function ComparateurClient() {
                 <p className="text-[14px] text-[#475569]">
                   <span className="font-semibold text-[#0f2040]">{npaInfo?.ville}</span>
                   {npaInfo && <> ({npaInfo.regionId})</>}
-                  {' · '}Franchise {franchise.toLocaleString('fr-CH')} CHF
-                  {' · '}{MODELE_LABELS[modele]}
+                  {', '}Franchise {franchise.toLocaleString('fr-CH')} CHF
+                  {', '}{MODELE_LABELS[modele]}
                 </p>
                 <p className="text-[13px] font-medium text-[#475569] shrink-0">
                   {results.length} caisses comparées
@@ -626,13 +626,13 @@ export default function ComparateurClient() {
               {/* Header bloc */}
               <div className="px-6 sm:px-8 pt-7 pb-5 border-b border-[#bbf7d0]">
                 <p className="text-[12px] font-semibold text-[#16a34a] uppercase tracking-wider mb-2">
-                  {stickyData.name} est CHF {fmtAn(stickyData.economie)} par an moins chère — passez à l'action
+                  {stickyData.name} est CHF {fmtAn(stickyData.economie)} par an moins chère : passez à l'action
                 </p>
                 <h2 className="text-2xl font-bold text-[#0f2040] mb-2">
                   Un expert gère le changement gratuitement
                 </h2>
                 <p className="text-[15px] text-[#475569] leading-relaxed">
-                  Laissez vos coordonnées — un expert confirme la meilleure caisse pour votre profil exact,
+                  Laissez vos coordonnées : un expert confirme la meilleure caisse pour votre profil exact,
                   vérifie vos droits aux subsides et s'occupe de la résiliation si vous le souhaitez.
                 </p>
               </div>
@@ -822,7 +822,7 @@ export default function ComparateurClient() {
                         </button>
 
                         <p className="text-[11px] text-[#475569]/70 text-center leading-relaxed">
-                          Vos données sont protégées conformément à la LPD · Sans engagement · Réponse sous 24 heures
+                          Vos données sont protégées conformément à la LPD. Sans engagement. Réponse sous 24 heures.
                         </p>
 
                         <button
@@ -847,7 +847,7 @@ export default function ComparateurClient() {
         <div className="container-xl max-w-5xl">
 
           <p className="text-[11px] font-semibold text-[#94a3b8] uppercase tracking-widest mb-3">
-            Parts de marché · 8 principaux assureurs · FINMA 2024
+            Parts de marché, 8 principaux assureurs, FINMA 2024
           </p>
           <h2 className="text-3xl font-bold text-[#0f2040] mb-4">
             Les principaux assureurs maladie en Suisse
@@ -901,10 +901,10 @@ export default function ComparateurClient() {
         <div className="container-xl max-w-5xl">
 
           <p className="text-[11px] font-semibold text-[#94a3b8] uppercase tracking-widest mb-3">
-            Données de référence · primes moyennes 2026
+            Données de référence, primes moyennes 2026
           </p>
           <h2 className="text-3xl font-bold text-[#0f2040] mb-4">
-            Primes moyennes par canton — adulte 35 ans
+            Primes moyennes par canton, adulte 35 ans
           </h2>
           <p className="text-[16px] text-[#475569] leading-relaxed mb-8 max-w-2xl">
             Primes de référence pour un adulte de 35 ans, modèle standard, franchise 300 CHF, sans couverture accident.
@@ -983,7 +983,7 @@ export default function ComparateurClient() {
       <section className="bg-white py-8">
         <div className="container-xl max-w-3xl">
           <p className="text-[13px] text-[#94a3b8]">
-            Dernière mise à jour : avril 2026 · Données OFSP 2026 · 34 caisses comparées
+            Dernière mise à jour : avril 2026, Données OFSP 2026, 34 caisses comparées
           </p>
         </div>
       </section>

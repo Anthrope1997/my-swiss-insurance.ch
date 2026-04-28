@@ -55,7 +55,7 @@ const faqSchema = {
     },
     {
       '@type': 'Question',
-      name:    "Frontalier ou expatrié — suis-je concerné par la LAMal ?",
+      name:    "Frontalier ou expatrié, suis-je concerné par la LAMal ?",
       acceptedAnswer: {
         '@type': 'Answer',
         text:    "Les frontaliers travaillant en Suisse ont en principe le choix entre la LAMal suisse et une assurance dans leur pays de résidence. Les expatriés résidant en Suisse sont soumis à l'obligation d'affiliation dans les 90 jours suivant leur arrivée.",
