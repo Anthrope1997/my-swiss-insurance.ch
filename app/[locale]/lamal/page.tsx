@@ -188,7 +188,7 @@ export default function LamalPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }} />
 
       {/* ── 1. HERO ────────────────────────────────────────────────────────── */}
-      <section className="bg-white pt-20 pb-16 sm:pt-28 sm:pb-20">
+      <section className="bg-white pt-[7.5rem] pb-24 sm:pt-[10.5rem] sm:pb-[7.5rem]">
         <div className="container-xl">
 
           <Breadcrumb items={[
@@ -242,7 +242,7 @@ export default function LamalPage() {
       </section>
 
       {/* ── 2. GUIDES LAMAL ─────────────────────────────────────────────────── */}
-      <section className="bg-white py-20">
+      <section className="bg-white border-t border-edge py-[7.5rem]">
         <div className="container-xl">
 
           <div className="max-w-2xl mb-12">
@@ -305,7 +305,7 @@ export default function LamalPage() {
       </section>
 
       {/* ── 3. PAR SITUATION DE VIE ─────────────────────────────────────────── */}
-      <section className="bg-white py-20">
+      <section className="bg-white border-t border-edge py-[7.5rem]">
         <div className="container-xl">
 
           <div className="max-w-2xl mb-12">
@@ -351,7 +351,7 @@ export default function LamalPage() {
       </section>
 
       {/* ── 4. PAR CANTON ───────────────────────────────────────────────────── */}
-      <section className="bg-white py-20">
+      <section className="bg-white border-t border-edge py-[7.5rem]">
         <div className="container-xl">
 
           <div className="max-w-2xl mb-8">
@@ -410,7 +410,7 @@ export default function LamalPage() {
       </section>
 
       {/* ── 5. À PROPOS ─────────────────────────────────────────────────────── */}
-      <section className="bg-white py-20">
+      <section className="bg-white border-t border-edge py-[7.5rem]">
         <div className="container-xl">
 
           <div className="max-w-2xl mb-12">
@@ -439,7 +439,7 @@ export default function LamalPage() {
       </section>
 
       {/* ── 6. FORMULAIRE ───────────────────────────────────────────────────── */}
-      <section id="formulaire" className="bg-white py-10 sm:py-16 scroll-mt-16">
+      <section id="formulaire" className="bg-white border-t border-edge py-[3.75rem] sm:py-24 scroll-mt-16">
         <div className="container-xl max-w-2xl">
 
           <div className="text-center mb-6">

@@ -72,12 +72,12 @@ const faqSchema = {
 }
 
 const franchises = [
-  { montant: 2500, prime: 444.63, ecMois: 119.98, ecAnn: 1440, seuilEquilibre: 'environ CHF 1 440', conseil: 'Optimal pour adultes très sains' },
-  { montant: 2000, prime: 471.82, ecMois: 92.79,  ecAnn: 1113, seuilEquilibre: 'environ CHF 1 300', conseil: 'Recommandé sans maladie chronique' },
-  { montant: 1500, prime: 499.20, ecMois: 65.41,  ecAnn: 785,  seuilEquilibre: 'environ CHF 1 100', conseil: 'Bon équilibre pour personnes saines' },
-  { montant: 1000, prime: 526.57, ecMois: 38.04,  ecAnn: 456,  seuilEquilibre: 'environ CHF 800',   conseil: 'Adapté aux personnes peu malades' },
-  { montant: 500,  prime: 554.03, ecMois: 10.58,  ecAnn: 127,  seuilEquilibre: 'environ CHF 300',   conseil: 'Avantage limité' },
-  { montant: 300,  prime: 564.61, ecMois: 0,      ecAnn: 0,    seuilEquilibre: 'Réf.',           conseil: 'Franchise minimale, référence' },
+  { montant: 2500, prime: 444.65, seuil: 'CHF 1 440', conseil: "Aucune consultation prévue dans l'année" },
+  { montant: 2000, prime: 471.80, seuil: 'CHF 1 114', conseil: '1 à 2 consultations par an maximum' },
+  { montant: 1500, prime: 499.20, seuil: 'CHF 785',   conseil: 'Quelques consultations, pas de traitement régulier' },
+  { montant: 1000, prime: 526.55, seuil: 'CHF 456',   conseil: 'Consultations occasionnelles' },
+  { montant: 500,  prime: 554.05, seuil: 'CHF 127',   conseil: 'Suivi médical régulier' },
+  { montant: 300,  prime: 564.60, seuil: 'Référence',  conseil: 'Traitement chronique, médicaments réguliers, grossesse' },
 ]
 
 const heroStats = [
@@ -88,7 +88,7 @@ const heroStats = [
 
 const toc = [
   { id: 'definition', label: "1. Franchise et quote-part"         },
-  { id: 'tableau',    label: "2. Tableau des seuils d'équilibre"  },
+  { id: 'tableau',    label: "2. Quelle franchise choisir ?"        },
   { id: 'enfants',    label: "3. Franchise enfant"                },
   { id: 'changement', label: "4. Changer de franchise"            },
   { id: 'faq',        label: "5. Questions fréquentes"            },
@@ -122,8 +122,8 @@ export default function FranchisePage() {
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
             La franchise est le montant annuel que vous payez avant que votre caisse intervienne.
-            Bien choisir sa franchise peut vous faire économiser jusqu'à CHF 120 par mois sur votre prime,
-            ou vous exposer à un reste à charge élevé en cas de maladie.
+            Plus elle est élevée, plus votre prime baisse, jusqu'à CHF 120 par mois,
+            mais plus vous payez de votre poche en cas de soins. Tout est question d'équilibre.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
@@ -216,27 +216,33 @@ export default function FranchisePage() {
                   <line x1="9.5" y1="18" x2="14.5" y2="18" />
                   <line x1="10" y1="21" x2="14" y2="21" />
                 </svg>
-                <p className="text-[16px]">
-                  <strong>Exemple concret : </strong>
-                  avec une franchise de 1 500 CHF par an et CHF 2 000 de frais médicaux dans l'année,
-                  vous payez CHF 1 500 (franchise) + 10% de CHF 500 = CHF 50 (quote-part), soit{' '}
-                  <strong>CHF 1 550 au total</strong>. Votre caisse prend en charge CHF 450.
-                </p>
+                <div>
+                  <p className="text-[16px] mb-2">
+                    <strong>Exemple concret : </strong>
+                    franchise de CHF 1 500 par an, CHF 2 000 de frais médicaux dans l'année.
+                  </p>
+                  <ul className="space-y-1">
+                    <li className="text-[16px] flex gap-2">
+                      <span className="shrink-0">✓</span>
+                      <span>Vous payez CHF 1 550 : CHF 1 500 (franchise) + CHF 50 (10 pour cent de quote-part sur les CHF 500 restants).</span>
+                    </li>
+                    <li className="text-[16px] flex gap-2">
+                      <span className="shrink-0">✓</span>
+                      <span>Votre caisse prend en charge CHF 450 : les 90 pour cent au-dessus de la franchise.</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </section>
 
             {/* 2 — Tableau */}
             <section id="tableau">
-              <h2 className="article-h2">2. Tableau des seuils d'équilibre par franchise</h2>
+              <h2 className="article-h2">2. Quelle franchise choisir selon vos frais médicaux annuels ?</h2>
               <p className="article-p">
-                Le seuil d'équilibre indique le montant de frais médicaux annuels à partir duquel
-                la franchise 300 CHF devient plus avantageuse que la franchise indiquée.
-                En dessous de ce seuil, la franchise élevée est préférable.
-              </p>
-
-              <p className="text-[16px] text-slate/60 italic mb-4">
-                Primes indicatives pour un adulte de 26 ans et plus à Zurich, modèle standard
-                (source : OFSP 2026). Les montants varient selon votre canton.
+                Une franchise élevée réduit votre prime mensuelle, mais augmente votre reste à charge en cas de maladie.
+                Le tableau ci-dessous indique, pour chaque franchise, le niveau de frais médicaux annuels à ne pas dépasser
+                pour qu'elle reste avantageuse par rapport à la franchise minimale de CHF 300.
+                Primes pour un adulte (26 ans et plus) à Zurich, modèle standard, OFSP 2026. Les montants varient selon le canton.
               </p>
 
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-4">
@@ -245,42 +251,25 @@ export default function FranchisePage() {
                     <tr>
                       <th className="text-left whitespace-nowrap">Franchise</th>
                       <th className="text-left whitespace-nowrap">Prime par mois</th>
-                      <th className="text-left whitespace-nowrap">Économie par an</th>
-                      <th className="text-left whitespace-nowrap">Profil recommandé</th>
+                      <th className="text-left whitespace-nowrap">Avantageuse si frais annuels inférieurs à</th>
+                      <th className="text-left whitespace-nowrap">Profil concerné</th>
                     </tr>
                   </thead>
                   <tbody>
                     {franchises.map((f) => (
                       <tr key={f.montant} className={f.montant === 300 ? 'bg-[#eff6ff]' : ''}>
                         <td className="font-semibold text-ink whitespace-nowrap">
-                          CHF {f.montant.toLocaleString('fr-CH')}
+                          CHF {f.montant.toLocaleString('fr-CH')} par an
                         </td>
                         <td className="font-medium text-ink whitespace-nowrap">
                           CHF {f.prime.toFixed(2)}
                         </td>
-                        <td className="text-ink whitespace-nowrap">
-                          {f.ecAnn > 0 ? `−CHF ${f.ecAnn}` : 'Référence'}
-                        </td>
+                        <td className="text-ink whitespace-nowrap">{f.seuil}</td>
                         <td className="text-slate whitespace-nowrap">{f.conseil}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
-              </div>
-
-              {/* Données complémentaires — colonnes retirées du tableau */}
-              <div className="bg-cloud border border-edge rounded-lg px-5 py-4 mb-4 text-[16px] text-slate space-y-2">
-                <p>
-                  <span className="font-medium text-ink">Économie mensuelle sur la prime</span>{' '}
-                  par rapport à la franchise 300 CHF : 500 CHF → −CHF 10.58 ; 1 000 CHF → −CHF 38.04 ;
-                  1 500 CHF → −CHF 65.41 ; 2 000 CHF → −CHF 92.79 ; 2 500 CHF → −CHF 119.98 par mois.
-                </p>
-                <p>
-                  <span className="font-medium text-ink">Seuils d'équilibre</span>{' '}
-                  (frais médicaux annuels à partir desquels la franchise 300 CHF devient avantageuse) :
-                  500 CHF → environ CHF 300 ; 1 000 CHF → environ CHF 800 ; 1 500 CHF → environ CHF 1 100 ;
-                  2 000 CHF → environ CHF 1 300 ; 2 500 CHF → environ CHF 1 440.
-                </p>
               </div>
 
               <div className="callout flex gap-3">
@@ -292,12 +281,12 @@ export default function FranchisePage() {
                   <line x1="10" y1="21" x2="14" y2="21" />
                 </svg>
                 <div>
-                  <p className="font-semibold text-ink mb-1">Comment calculer le seuil d'équilibre</p>
+                  <p className="font-semibold text-ink mb-1">Vous hésitez entre CHF 2 500 et CHF 300 ?</p>
                   <p className="text-[16px]">
-                    Franchise 300 CHF vs 2 500 CHF par an : l'économie annuelle sur la prime est de
-                    CHF 1 440 par an. Si vos frais médicaux annuels dépassent CHF 1 440 par an, la
-                    franchise 300 CHF est plus avantageuse. En dessous, la franchise 2 500 CHF vous
-                    permet d'économiser davantage au total.
+                    Avec la franchise CHF 2 500, vous économisez CHF 1 440 par an sur votre prime (CHF 120 par mois).
+                    En contrepartie, vous payez jusqu'à CHF 2 500 de votre poche en cas de maladie.
+                    Le point de bascule se situe à CHF 1 440 de frais médicaux annuels : en dessous, la franchise CHF 2 500
+                    est gagnante. Au-dessus, c'est la franchise CHF 300.
                   </p>
                 </div>
               </div>
