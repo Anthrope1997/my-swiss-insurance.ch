@@ -131,7 +131,7 @@ export default function FranchisePage() {
               <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
                 <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
                 <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
-                <div className="text-[12px] text-slate mt-0.5">{s.sub}</div>
+                <div className="text-[13px] text-slate mt-0.5">{s.sub}</div>
               </div>
             ))}
           </div>

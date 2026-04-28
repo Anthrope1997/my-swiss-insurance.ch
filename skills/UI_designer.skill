@@ -125,15 +125,16 @@ Règle globale via media query — **ne pas modifier ces valeurs dans les compos
 | Catégorie | Taille minimale | Classe(s) concernée(s) |
 |---|---|---|
 | Corps de texte | 15px | `.article-p` (déjà 17px) |
-| Textes secondaires, notes | 13px | `.text-xs`, `.text-[12px]` |
-| Labels uppercase | 12px | `.text-[11px]` |
+| Textes secondaires, notes, métadonnées | 14px | `.text-xs`, `.text-[12px]`, `.text-[13px]` |
+| Labels uppercase | 13px | `.text-[11px]` |
 | Cellules de tableau | 14px | `.stripe-table th` (td déjà 14px) |
 
 ```css
 @media (max-width: 767px) {
-  .text-\[11px\] { font-size: 12px; }
-  .text-xs       { font-size: 13px; }
-  .text-\[12px\] { font-size: 13px; }
+  .text-\[11px\] { font-size: 13px; }
+  .text-xs       { font-size: 14px; }
+  .text-\[12px\] { font-size: 14px; }
+  .text-\[13px\] { font-size: 14px; }
   .stripe-table th { font-size: 14px; }
 }
 ```
@@ -780,8 +781,8 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 - [ ] CTA ouvre overlay avec formulaire + sous-titre canonique
 
 **Typographie mobile**
-- [ ] Ne pas utiliser `text-[11px]` sans vérifier le résultat mobile (remonte à 12px via globals.css)
-- [ ] `text-xs` et `text-[12px]` remontent à 13px sur mobile — ne pas utiliser pour du texte important
+- [ ] Ne pas utiliser `text-[11px]` sans vérifier le résultat mobile (remonte à 13px via globals.css)
+- [ ] `text-xs`, `text-[12px]`, `text-[13px]` remontent à 14px sur mobile — ne pas utiliser pour du texte important
 - [ ] Pour les tableaux, ne pas descendre sous `text-[13px]` (en-têtes) ni `text-[14px]` (cellules)
 
 **Build**
