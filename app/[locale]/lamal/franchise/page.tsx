@@ -243,10 +243,10 @@ export default function FranchisePage() {
                 <table className="stripe-table w-full">
                   <thead>
                     <tr>
-                      <th className="whitespace-nowrap">Franchise</th>
-                      <th className="whitespace-nowrap">Prime par mois</th>
-                      <th className="whitespace-nowrap">Économie par an</th>
-                      <th className="whitespace-nowrap">Profil recommandé</th>
+                      <th className="text-left whitespace-nowrap">Franchise</th>
+                      <th className="text-left whitespace-nowrap">Prime par mois</th>
+                      <th className="text-left whitespace-nowrap">Économie par an</th>
+                      <th className="text-left whitespace-nowrap">Profil recommandé</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -336,8 +336,8 @@ export default function FranchisePage() {
                 <table className="stripe-table w-full">
                   <thead>
                     <tr>
-                      <th className="whitespace-nowrap">Franchise par an</th>
-                      <th className="whitespace-nowrap">Profil adapté</th>
+                      <th className="text-left whitespace-nowrap">Franchise par an</th>
+                      <th className="text-left whitespace-nowrap">Profil adapté</th>
                     </tr>
                   </thead>
                   <tbody>

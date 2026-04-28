@@ -216,10 +216,9 @@ export default function GuideLamalPage() {
                 être ni refusées ni exclues pour des raisons de santé : tout résident en Suisse a le droit
                 d'être assuré, sans sélection médicale.
               </p>
-              <div className="callout text-[15px]">
-                <strong className="text-ink">Source :</strong>{' '}
-                OFSP (bag.admin.ch), art. 3 LAMal (RS 832.10)
-              </div>
+              <p className="text-[13px] text-slate/60 mt-3">
+                Source : OFSP (bag.admin.ch), art. 3 LAMal (RS 832.10)
+              </p>
             </section>
 
             {/* 2 — Couverture */}
@@ -266,11 +265,20 @@ export default function GuideLamalPage() {
                 ))}
               </ul>
 
-              <div className="callout-warning text-[14px]">
-                <strong>Non couvert par la LAMal de base :</strong>{' '}
-                soins dentaires (sauf accident/maladie grave), lunettes/lentilles,
-                médecine alternative non prescrite, chambre privée à l'hôpital.
-                Ces prestations relèvent des assurances complémentaires LCA.
+              <div className="callout-warning flex gap-3">
+                <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
+                     strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
+                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
+                  <line x1="10" y1="21" x2="14" y2="21" />
+                </svg>
+                <p className="text-[14px]">
+                  <strong>Non couvert par la LAMal de base :</strong>{' '}
+                  soins dentaires (sauf accident ou maladie grave), lunettes et lentilles,
+                  médecine alternative non prescrite, chambre privée à l'hôpital.
+                  Ces prestations relèvent des assurances complémentaires LCA.
+                </p>
               </div>
 
               <div className="mt-6">
@@ -292,20 +300,20 @@ export default function GuideLamalPage() {
                 <table className="stripe-table w-full">
                   <thead>
                     <tr>
-                      <th>Canton</th>
-                      <th className="text-right">Prime par mois</th>
-                      <th className="text-right">Prime par an</th>
+                      <th className="text-left whitespace-nowrap">Canton</th>
+                      <th className="text-left whitespace-nowrap">Prime par mois</th>
+                      <th className="text-left whitespace-nowrap">Prime par an</th>
                     </tr>
                   </thead>
                   <tbody>
                     {premiums.map((c) => (
                       <tr key={c.code}>
-                        <td className="font-medium text-ink">
+                        <td className="font-medium text-ink whitespace-nowrap">
                           <span className="text-slate/60 text-[12px] mr-2">{c.code}</span>
                           {c.name}
                         </td>
-                        <td className="text-right font-semibold text-ink">CHF {c.prime.toFixed(2)}</td>
-                        <td className="text-right text-slate">
+                        <td className="font-semibold text-ink whitespace-nowrap">CHF {c.prime.toFixed(2)}</td>
+                        <td className="text-slate whitespace-nowrap">
                           CHF {(c.prime * 12).toLocaleString('fr-CH', { maximumFractionDigits: 0 }).replace(/['\u2019\u202F]/g, ' ')}
                         </td>
                       </tr>
@@ -336,26 +344,35 @@ export default function GuideLamalPage() {
                 <table className="stripe-table w-full">
                   <thead>
                     <tr>
-                      <th>Assureur</th>
-                      <th className="text-center">Part de marché</th>
-                      <th className="hidden sm:table-cell">Caractéristiques</th>
+                      <th className="text-left whitespace-nowrap">Assureur</th>
+                      <th className="text-left whitespace-nowrap">Part de marché</th>
+                      <th className="text-left whitespace-nowrap hidden sm:table-cell">Caractéristiques</th>
                     </tr>
                   </thead>
                   <tbody>
                     {assureurs.map((a) => (
                       <tr key={a.name}>
-                        <td className="font-semibold text-ink">{a.name}</td>
-                        <td className="text-center font-medium text-brand">{a.part}</td>
+                        <td className="font-semibold text-ink whitespace-nowrap">{a.name}</td>
+                        <td className="font-medium text-brand whitespace-nowrap">{a.part}</td>
                         <td className="hidden sm:table-cell">{a.note}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-              <div className="callout text-[15px]">
-                <strong>À retenir :</strong> la caisse la moins chère dans votre canton n'est pas
-                forcément la même que celle de votre voisin. Les écarts entre assureurs dans un même
-                canton atteignent CHF 100 à 180 par mois pour un adulte.
+              <div className="callout flex gap-3">
+                <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
+                     strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
+                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
+                  <line x1="10" y1="21" x2="14" y2="21" />
+                </svg>
+                <p className="text-[15px]">
+                  <strong>À retenir :</strong> la caisse la moins chère dans votre canton n'est pas
+                  forcément la même que celle de votre voisin. Les écarts entre assureurs dans un même
+                  canton atteignent CHF 100 à 180 par mois pour un adulte.
+                </p>
               </div>
 
             </section>
@@ -373,38 +390,43 @@ export default function GuideLamalPage() {
                 <table className="stripe-table w-full">
                   <thead>
                     <tr>
-                      <th>Franchise</th>
-                      <th className="text-right">Prime par mois</th>
-                      <th className="text-right">Économie par an</th>
-                      <th className="text-right hidden sm:table-cell">Économie par mois</th>
-                      <th className="text-center hidden sm:table-cell">Seuil d'équilibre</th>
+                      <th className="text-left whitespace-nowrap">Franchise</th>
+                      <th className="text-left whitespace-nowrap">Prime par mois</th>
+                      <th className="text-left whitespace-nowrap">Économie par an</th>
+                      <th className="text-left whitespace-nowrap">Seuil d'équilibre</th>
                     </tr>
                   </thead>
                   <tbody>
                     {franchises.map((f) => (
                       <tr key={f.montant}>
-                        <td className="font-bold text-brand">CHF {f.montant.toLocaleString('fr-CH')}</td>
-                        <td className="text-right text-ink">CHF {f.prime.toFixed(2)}</td>
-                        <td className="text-right text-[#1d4ed8] font-medium">
+                        <td className="font-bold text-brand whitespace-nowrap">CHF {f.montant.toLocaleString('fr-CH')}</td>
+                        <td className="text-ink whitespace-nowrap">CHF {f.prime.toFixed(2)}</td>
+                        <td className="text-[#1d4ed8] font-medium whitespace-nowrap">
                           {f.ecAnn > 0 ? `−CHF ${f.ecAnn}` : '-'}
                         </td>
-                        <td className="text-right text-[#1d4ed8] font-medium hidden sm:table-cell">
-                          {f.economie > 0 ? `−CHF ${f.economie.toFixed(2)}` : '-'}
-                        </td>
-                        <td className="text-center font-medium hidden sm:table-cell">{f.breakEven}</td>
+                        <td className="font-medium whitespace-nowrap">{f.breakEven}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
 
-              <div className="callout">
-                <p className="font-semibold text-ink mb-2">Comment lire le tableau ?</p>
-                <p className="text-[15px]">
-                  <strong>Exemple 300 vs 2 500 CHF par an :</strong> l'économie annuelle sur la prime est de CHF 1 440.
-                  Si vos frais médicaux annuels dépassent <strong>CHF 1 440</strong>, la franchise 300 CHF est plus avantageuse.
-                  En dessous, la franchise 2 500 CHF vous fait économiser davantage au total.
-                </p>
+              <div className="callout flex gap-3">
+                <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
+                     strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
+                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
+                  <line x1="10" y1="21" x2="14" y2="21" />
+                </svg>
+                <div>
+                  <p className="font-semibold text-ink mb-2">Comment lire le tableau ?</p>
+                  <p className="text-[15px]">
+                    <strong>Exemple 300 vs 2 500 CHF par an :</strong> l'économie annuelle sur la prime est de CHF 1 440.
+                    Si vos frais médicaux annuels dépassent <strong>CHF 1 440</strong>, la franchise 300 CHF est plus avantageuse.
+                    En dessous, la franchise 2 500 CHF vous fait économiser davantage au total.
+                  </p>
+                </div>
               </div>
 
               <div className="mt-6">
@@ -495,10 +517,19 @@ export default function GuideLamalPage() {
                   </div>
                 ))}
               </div>
-              <div className="callout-warning text-[15px]">
-                <strong>Ces chiffres sont des estimations</strong> basées sur les écarts de primes
-                constatés en 2026 pour un adulte, modèle standard, franchise 300 CHF.
-                Les économies réelles dépendent de votre profil exact.
+              <div className="callout-warning flex gap-3">
+                <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
+                     strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
+                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
+                  <line x1="10" y1="21" x2="14" y2="21" />
+                </svg>
+                <p className="text-[15px]">
+                  <strong>Ces chiffres sont des estimations</strong> basées sur les écarts de primes
+                  constatés en 2026 pour un adulte, modèle standard, franchise 300 CHF.
+                  Les économies réelles dépendent de votre profil exact.
+                </p>
               </div>
 
             </section>
@@ -511,20 +542,20 @@ export default function GuideLamalPage() {
                 <table className="stripe-table w-full">
                   <thead>
                     <tr>
-                      <th>Situation</th>
-                      <th>Date limite</th>
-                      <th>Prise d'effet</th>
+                      <th className="text-left whitespace-nowrap">Situation</th>
+                      <th className="text-left whitespace-nowrap">Date limite</th>
+                      <th className="text-left whitespace-nowrap">Prise d'effet</th>
                     </tr>
                   </thead>
                   <tbody>
                     {[
                       ['Changement ordinaire', '30 novembre', '1er janvier'],
-                      ['Hausse de prime annoncée', '30 nov. (1 mois après notif.)', '31 décembre'],
+                      ['Hausse de prime annoncée', '30 novembre (1 mois après notification)', '31 décembre'],
                       ['Changement de canton', 'Dès effectivité du changement', 'Selon accord'],
                     ].map((row, i) => (
                       <tr key={i}>
                         {row.map((cell, j) => (
-                          <td key={j} className={j === 0 ? 'font-medium text-ink' : ''}>{cell}</td>
+                          <td key={j} className={j === 0 ? 'font-medium text-ink whitespace-nowrap' : 'whitespace-nowrap'}>{cell}</td>
                         ))}
                       </tr>
                     ))}
@@ -574,10 +605,19 @@ export default function GuideLamalPage() {
                 la base de la déclaration d'impôts. Pour les autres, une demande est à déposer auprès du
                 service cantonal compétent, généralement avant le 31 mars.
               </p>
-              <div className="callout-success text-[15px]">
-                <strong>Astuce :</strong> Si vous pensez avoir droit à un subside mais n'en avez pas reçu,
-                contactez votre caisse maladie ou le service cantonal. Les subsides non réclamés ne sont
-                pas versés rétroactivement dans la plupart des cantons.
+              <div className="callout-success flex gap-3">
+                <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
+                     strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
+                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
+                  <line x1="10" y1="21" x2="14" y2="21" />
+                </svg>
+                <p className="text-[15px]">
+                  <strong>Astuce :</strong> Si vous pensez avoir droit à un subside mais n'en avez pas reçu,
+                  contactez votre caisse maladie ou le service cantonal. Les subsides non réclamés ne sont
+                  pas versés rétroactivement dans la plupart des cantons.
+                </p>
               </div>
 
               <div className="mt-6">
