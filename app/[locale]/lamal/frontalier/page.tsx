@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import AuthorBio from '@/components/ui/AuthorBio'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import Link from 'next/link'
-import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
+import NeedHelpSection from '@/components/ui/NeedHelpSection'
 
 export const metadata: Metadata = {
   title: 'LAMal pour les frontaliers en Suisse romande 2026',
@@ -134,17 +134,7 @@ export default function FrontalierPage() {
         </div>
 
         {/* Contact */}
-        <div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4 max-w-3xl">
-          <h2 className="text-2xl font-semibold text-ink border-b border-edge pb-4 mb-6">
-            Besoin d'aide ?
-          </h2>
-          <p className="text-[15px] text-slate mb-6 max-w-xl">
-            Un expert vous rappelle sous 24 heures pour vous aider à trouver l'assurance maladie la plus adaptée à votre situation. C'est gratuit et sans engagement.
-          </p>
-          <div className="max-w-xl">
-            <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
-          </div>
-        </div>
+        <NeedHelpSection className="max-w-3xl" />
 
         <div className="max-w-3xl">
           <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import SubsidesCalculator from '@/components/lamal/SubsidesCalculator'
-import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
+import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import FAQ from '@/components/ui/FAQ'
 import AuthorBio from '@/components/ui/AuthorBio'
 import Link from 'next/link'
@@ -489,15 +489,7 @@ export default function PageSubsides() {
             </section>
 
             {/* Contact */}
-            <div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4">
-              <h2 className="text-2xl font-semibold text-ink mb-3">
-                Besoin d'aide ?
-              </h2>
-              <p className="text-[16px] text-slate mb-6 leading-relaxed">
-                Un expert vous rappelle sous 24 heures pour vous aider à trouver l'assurance maladie la plus adaptée à votre situation. C'est gratuit et sans engagement.
-              </p>
-              <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
-            </div>
+            <NeedHelpSection />
 
             {/* AuthorBio */}
             <AuthorBio publishedDate="1er janvier 2026" updatedDate="29 avril 2026" />

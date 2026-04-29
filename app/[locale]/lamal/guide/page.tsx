@@ -3,7 +3,7 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
 import Link from 'next/link'
 import AuthorBio from '@/components/ui/AuthorBio'
-import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
+import NeedHelpSection from '@/components/ui/NeedHelpSection'
 
 export const metadata: Metadata = {
   title: 'Guide complet LAMal 2026 — Primes, franchises, modèles et subsides',
@@ -633,15 +633,7 @@ export default function GuideLamalPage() {
             </section>
 
             {/* Formulaire contact */}
-            <div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4">
-              <h2 className="text-2xl font-semibold text-ink mb-3">
-                Besoin d'aide ?
-              </h2>
-              <p className="text-[16px] text-slate mb-6 leading-relaxed">
-                Un expert vous rappelle sous 24 heures pour vous aider à trouver l'assurance maladie la plus adaptée à votre situation. C'est gratuit et sans engagement.
-              </p>
-              <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
-            </div>
+            <NeedHelpSection />
 
             {/* Bandeau MSI */}
             <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
