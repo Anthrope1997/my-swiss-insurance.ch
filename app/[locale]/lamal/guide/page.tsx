@@ -35,7 +35,7 @@ const faqItems = [
   },
   {
     question: 'Quelle franchise LAMal choisir ?',
-    answer: "Choisissez la franchise 300 CHF si vos frais médicaux annuels dépassent environ CHF 1 440. Optez pour 2 500 CHF si vous êtes en bonne santé : vous économisez environ CHF 120 par mois sur la prime mais prenez en charge jusqu'à CHF 2 500 de frais. Le seuil d'équilibre entre les deux extrêmes se situe autour de CHF 1 440 de dépenses médicales annuelles.",
+    answer: "Choisissez la franchise 2 500 CHF si vous êtes en bonne santé et consultez peu : vous économisez environ CHF 120 par mois sur la prime. Optez pour la franchise 300 CHF si vos dépenses annuelles dépassent CHF 1 440.",
   },
   {
     question: "Peut-on changer de caisse maladie en cours d'année ?",
@@ -112,14 +112,14 @@ const franchises = [
 ]
 
 const assureurs = [
-  { name: 'Assura',    part: '7.2%',  note: 'Souvent la moins chère, service numérique' },
-  { name: 'Concordia', part: '6.8%',  note: 'Bon service, réseau médecin de famille étendu' },
   { name: 'CSS',       part: '14.1%', note: 'Plus grande caisse suisse, large réseau' },
   { name: 'Helsana',   part: '13.5%', note: 'Application mobile avancée, nombreuses options' },
-  { name: 'KPT',       part: '4.2%',  note: 'Compétitive, bonne qualité de service' },
-  { name: 'Sanitas',   part: '7.9%',  note: 'Forte en télémédecine et en services numériques' },
   { name: 'SWICA',     part: '10.2%', note: 'Leader en médecine intégrative' },
   { name: 'Visana',    part: '9.1%',  note: 'Forte présence Suisse romande et alémanique' },
+  { name: 'Sanitas',   part: '7.9%',  note: 'Forte en télémédecine et en services numériques' },
+  { name: 'Assura',    part: '7.2%',  note: 'Souvent la moins chère, service numérique' },
+  { name: 'Concordia', part: '6.8%',  note: 'Bon service, réseau médecin de famille étendu' },
+  { name: 'KPT',       part: '4.2%',  note: 'Compétitive, bonne qualité de service' },
 ]
 
 const economies = [
@@ -163,8 +163,8 @@ export default function GuideLamalPage() {
             Guide complet LAMal 2026
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
-            Primes par canton, franchises et seuil d'équilibre, 4 modèles d'assurance,
-            changement de caisse et subsides. La référence LAMal en Suisse romande.
+            Choisissez la bonne franchise et le bon modèle, vérifiez vos droits aux subsides,
+            et économisez sur votre assurance maladie.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
@@ -252,7 +252,7 @@ export default function GuideLamalPage() {
               <h3 className="article-h3">Hospitalisation</h3>
               <ul className="space-y-2 mb-6">
                 {[
-                  'Division commune dans tout hôpital de la liste cantonale',
+                  'Chambre commune, dans tout hôpital agréé par le canton',
                   'Chirurgie, soins intensifs, réhabilitation',
                   'Maternité (accouchement, soins pré et post-partum)',
                 ].map((item, i) => (
@@ -338,7 +338,7 @@ export default function GuideLamalPage() {
               <p className="article-p">
                 34 caisses sont agréées par l'OFSP. Les prestations de base sont identiques
                 chez tous les assureurs. Seules les primes, la qualité du service et les options
-                complémentaires diffèrent. Comparez toujours les primes pour votre canton spécifique.
+                complémentaires diffèrent. Comparez toujours les primes dans votre canton.
               </p>
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-4">
                 <table className="stripe-table w-full">
@@ -369,9 +369,9 @@ export default function GuideLamalPage() {
                   <line x1="10" y1="21" x2="14" y2="21" />
                 </svg>
                 <p className="text-[15px]">
-                  <strong>À retenir :</strong> la caisse la moins chère dans votre canton n'est pas
-                  forcément la même que celle de votre voisin. Les écarts entre assureurs dans un même
-                  canton atteignent CHF 100 à 180 par mois pour un adulte.
+                  La caisse la moins chère dans votre canton n'est pas forcément la même que celle de
+                  votre voisin. Les écarts entre assureurs dans un même canton atteignent jusqu'à
+                  CHF 180 par mois pour un adulte.
                 </p>
               </div>
 
@@ -449,7 +449,7 @@ export default function GuideLamalPage() {
                   {
                     title: 'Standard (libre choix)',
                     reduction: null,
-                    border: 'border-edge',
+                    border: 'border-brand',
                     desc: "Accès direct à n'importe quel médecin ou spécialiste en Suisse, sans restriction. C'est le modèle le plus cher, la référence pour comparer les alternatives.",
                   },
                   {
@@ -474,13 +474,9 @@ export default function GuideLamalPage() {
                   <div key={i} className={`bg-white border ${m.border} border-l-4 rounded-[8px] p-5`}>
                     <div className="flex items-center justify-between gap-3 mb-2">
                       <h3 className="font-semibold text-ink text-[16px]">{m.title}</h3>
-                      {m.reduction ? (
+                      {m.reduction && (
                         <span className="text-[12px] font-semibold text-[#1d4ed8] bg-[#dbeafe] border border-[#1d4ed8]/20 px-2.5 py-0.5 rounded-full shrink-0">
                           {m.reduction}
-                        </span>
-                      ) : (
-                        <span className="text-[12px] text-slate bg-cloud border border-edge px-2.5 py-0.5 rounded-full shrink-0">
-                          Référence
                         </span>
                       )}
                     </div>
@@ -500,10 +496,10 @@ export default function GuideLamalPage() {
             <section id="economies">
               <h2 className="article-h2">7. Économies possibles en changeant de caisse</h2>
               <p className="article-p">
-                Les écarts de primes entre caisses au sein d'une même région OFSP sont significatifs.
-                Voici l'économie maximale réalisable en choisissant la caisse la moins chère plutôt
-                que la plus chère, dans la région la plus avantageuse du canton.
-                Profil : adulte 35 ans, modèle standard, franchise 300 CHF.
+                Certains cantons sont en effet divisés en plusieurs régions de prime. Les écarts de
+                primes entre caisses au sein d'une même région sont significatifs. Voici l'économie
+                maximale réalisable en choisissant la caisse la moins chère plutôt que la plus chère,
+                au sein de la même région, pour les cantons ci-dessous :
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                 {economies.map((r) => (
@@ -517,6 +513,9 @@ export default function GuideLamalPage() {
                   </div>
                 ))}
               </div>
+              <p className="text-[13px] text-slate/60 mb-6">
+                Profil : adulte 35 ans, modèle standard, franchise 300 CHF.
+              </p>
               <div className="callout-warning flex gap-3">
                 <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
                      viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
@@ -526,9 +525,9 @@ export default function GuideLamalPage() {
                   <line x1="10" y1="21" x2="14" y2="21" />
                 </svg>
                 <p className="text-[15px]">
-                  <strong>Ces chiffres sont des estimations</strong> basées sur les écarts de primes
+                  <strong>Ces chiffres sont des estimations</strong> reposant sur les écarts de primes
                   constatés en 2026 pour un adulte, modèle standard, franchise 300 CHF.
-                  Les économies réelles dépendent de votre profil exact.
+                  Les économies réelles dépendent de votre situation individuelle.
                 </p>
               </div>
 
@@ -597,8 +596,10 @@ export default function GuideLamalPage() {
                 aux personnes dont les revenus sont modestes. Environ 25 à 30% de la population suisse en bénéficie.
               </p>
               <p className="article-p">
-                Les critères varient selon le canton. En règle générale : revenu imposable inférieur à certains
-                seuils, résidence permanente en Suisse, familles monoparentales prioritaires.
+                Les critères d'éligibilité varient selon le canton. En règle générale, les subsides sont
+                accordés aux personnes dont le revenu imposable, et parfois la fortune, sont inférieurs
+                à certains seuils cantonaux. Les familles monoparentales et les ménages à faibles revenus
+                sont prioritaires.
               </p>
               <p className="article-p">
                 Dans certains cantons, les subsides sont attribués automatiquement sur
