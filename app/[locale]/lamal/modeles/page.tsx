@@ -315,7 +315,7 @@ export default function ModelesPage() {
                   <line x1="10" y1="21" x2="14" y2="21" />
                 </svg>
                 <p className="text-[15px]">
-                  <strong>Date limite :</strong> avis de changement à envoyer avant le <strong>30 novembre</strong>
+                  <strong>Date limite :</strong> avis de changement à envoyer avant le <strong>30 novembre</strong>{' '}
                   pour une prise d'effet au 1er janvier. Passé ce délai, votre modèle actuel est reconduit.
                 </p>
               </div>

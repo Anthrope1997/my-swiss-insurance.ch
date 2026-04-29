@@ -270,7 +270,7 @@ export default function FranchisePage() {
                   </tbody>
                 </table>
               </div>
-              <p className="text-[13px] text-slate/60 mb-4">
+              <p className="text-[13px] text-slate/60 mt-3 mb-4">
                 Primes pour un adulte (26 ans et plus) à Zurich, modèle standard, OFSP 2026.
               </p>
 

@@ -31,36 +31,36 @@ const articleSchema = {
 
 const faqItems = [
   {
-    question: "La LCA est-elle obligatoire en Suisse ?",
-    answer: "Non. La LCA est entièrement facultative. Seule la LAMal est obligatoire pour tout résident en Suisse.",
+    question: "La complémentaire est-elle obligatoire en Suisse ?",
+    answer: "Non. La complémentaire est entièrement facultative. Seule la LAMal est obligatoire pour tout résident en Suisse.",
   },
   {
-    question: "L'assureur peut-il refuser une assurance LCA ?",
-    answer: "Oui. Contrairement à la LAMal, les assureurs peuvent refuser ou imposer des exclusions pour les LCA. Maladies préexistantes, âge avancé ou risques élevés peuvent entraîner un refus ou une surprime.",
+    question: "L'assureur peut-il refuser une complémentaire ?",
+    answer: "Oui. Contrairement à la LAMal, les assureurs peuvent refuser ou imposer des exclusions pour les complémentaires. Maladies préexistantes, âge avancé ou risques élevés peuvent entraîner un refus ou une surprime.",
   },
   {
-    question: "Vaut-il la peine de souscrire une LCA en Suisse ?",
-    answer: "Cela dépend de vos besoins. La LCA hospitalière est utile pour le libre choix du médecin-chef. La LCA ambulatoire est pertinente pour les médecines alternatives, les lunettes ou les soins dentaires. La LCA dentaire est souvent rentable pour les familles avec enfants. Comparez les coûts et les prestations avant de souscrire.",
+    question: "Vaut-il la peine de souscrire une complémentaire en Suisse ?",
+    answer: "Cela dépend de vos besoins. La complémentaire hospitalière est utile pour le libre choix du médecin-chef. La complémentaire ambulatoire est pertinente pour les médecines alternatives, les lunettes ou les soins dentaires. La complémentaire dentaire est souvent rentable pour les familles avec enfants. Comparez les coûts et les prestations avant de souscrire.",
   },
   {
-    question: "Peut-on souscrire une LCA après un diagnostic de maladie ?",
-    answer: "Techniquement oui, mais avec des risques élevés d'exclusion ou de refus. Les assureurs LCA peuvent exclure définitivement les affections préexistantes connues au moment de la souscription. Il est fortement conseillé de souscrire lorsque vous êtes en bonne santé.",
+    question: "Peut-on souscrire une complémentaire après un diagnostic de maladie ?",
+    answer: "Techniquement oui, mais avec des risques élevés d'exclusion ou de refus. Les assureurs de complémentaires peuvent exclure définitivement les affections préexistantes connues au moment de la souscription. Il est fortement conseillé de souscrire lorsque vous êtes en bonne santé.",
   },
   {
-    question: "La LCA couvre-t-elle les soins à l'étranger ?",
-    answer: "La LAMal de base prend en charge les soins urgents à l'étranger, dans la limite du double du tarif suisse. Pour une couverture complète hors Suisse (rapatriement, soins non urgents), une LCA internationale est nécessaire. Elle est indispensable pour les grands voyageurs et les personnes résidant à l'étranger.",
+    question: "La complémentaire couvre-t-elle les soins à l'étranger ?",
+    answer: "La LAMal de base prend en charge les soins urgents à l'étranger, dans la limite du double du tarif suisse. Pour une couverture complète hors Suisse (rapatriement, soins non urgents), une complémentaire internationale est nécessaire. Elle est indispensable pour les grands voyageurs et les personnes résidant à l'étranger.",
   },
   {
-    question: "Peut-on cumuler plusieurs LCA chez différents assureurs ?",
-    answer: "Oui. Vous pouvez avoir une LCA hospitalière chez un assureur et une LCA dentaire chez un autre. En revanche, en cas de double couverture pour la même prestation, chaque assureur ne paie qu'une part proportionnelle : vous ne pouvez pas percevoir plus que le coût réel des soins.",
+    question: "Peut-on cumuler plusieurs complémentaires chez différents assureurs ?",
+    answer: "Oui. Vous pouvez avoir une complémentaire hospitalière chez un assureur et une complémentaire dentaire chez un autre. En revanche, en cas de double couverture pour la même prestation, chaque assureur ne paie qu'une part proportionnelle : vous ne pouvez pas percevoir plus que le coût réel des soins.",
   },
   {
-    question: "La LCA suit-elle les mêmes règles de résiliation que la LAMal ?",
-    answer: "Non. Les conditions de résiliation d'une LCA sont définies dans le contrat lui-même, pas par la loi. Certains contrats ont des périodes d'engagement de 3 à 5 ans. Lisez attentivement les conditions de résiliation avant de signer, notamment la durée minimale et le préavis.",
+    question: "La complémentaire suit-elle les mêmes règles de résiliation que la LAMal ?",
+    answer: "Non. Les conditions de résiliation d'une complémentaire sont définies dans le contrat lui-même, pas par la loi. Certains contrats ont des périodes d'engagement de 3 à 5 ans. Lisez attentivement les conditions de résiliation avant de signer, notamment la durée minimale et le préavis.",
   },
   {
-    question: "Quelle LCA est la plus utile pour une famille avec enfants ?",
-    answer: "La LCA dentaire est souvent la plus rentable pour les familles, car les soins dentaires et orthodontiques pour enfants peuvent être coûteux. La LCA ambulatoire est utile pour les soins préventifs et les médecines alternatives. À souscrire tôt, avant que les enfants ne développent des problèmes de santé.",
+    question: "Quelle complémentaire est la plus utile pour une famille avec enfants ?",
+    answer: "La complémentaire dentaire est souvent la plus rentable pour les familles, car les soins dentaires et orthodontiques pour enfants peuvent être coûteux. La complémentaire ambulatoire est utile pour les soins préventifs et les médecines alternatives. À souscrire tôt, avant que les enfants ne développent des problèmes de santé.",
   },
 ]
 
@@ -124,7 +124,7 @@ export default function LamalVsLcaPage() {
             Assurance de base et complémentaire : quelles différences ?
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
-            La LAMal rembourse les soins essentiels : médecin, hôpital, médicaments sur ordonnance.
+            L'assurance de base LAMal rembourse les soins essentiels : médecin, hôpital, médicaments sur ordonnance.
             L'assurance complémentaire couvre ce qu'elle exclut : chambre privée à l'hôpital,
             médecine alternative, soins dentaires, lunettes. Elle est facultative, mais peut faire
             une vraie différence selon votre situation.
@@ -165,7 +165,7 @@ export default function LamalVsLcaPage() {
 
             {/* 1 — Comparaison visuelle */}
             <section id="comparaison" className="pt-2">
-              <h2 className="article-h2">1. LAMal et LCA en un coup d'œil</h2>
+              <h2 className="article-h2">1. Assurance maladie LAMal et complémentaire en un coup d'œil</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div className="bg-cloud border border-edge rounded-[8px] p-6">
                   <h3 className="article-h3 mt-0">LAMal : assurance de base</h3>
@@ -245,22 +245,22 @@ export default function LamalVsLcaPage() {
               <div className="space-y-4">
                 {[
                   {
-                    title: 'LCA hospitalière',
+                    title: 'Complémentaire hospitalière',
                     cost: 'CHF 40 à 200 par mois',
                     desc: "Chambre semi-privée ou privée, libre choix du médecin-chef, hôpital de votre choix en Suisse ou à l'étranger.",
                   },
                   {
-                    title: 'LCA ambulatoire',
+                    title: 'Complémentaire ambulatoire',
                     cost: 'CHF 15 à 60 par mois',
                     desc: 'Médecines alternatives (acupuncture, ostéopathie), lunettes et lentilles, prévention renforcée, fitness.',
                   },
                   {
-                    title: 'LCA dentaire',
+                    title: 'Complémentaire dentaire',
                     cost: 'CHF 20 à 80 par mois',
                     desc: 'Détartrage, plombages, couronnes, orthodontie. Non couvert par la LAMal sauf en cas d\'accident.',
                   },
                   {
-                    title: 'LCA internationale',
+                    title: 'Complémentaire internationale',
                     cost: 'CHF 30 à 120 par mois',
                     desc: "Soins médicaux hors de Suisse, rapatriement sanitaire. Indispensable pour les grands voyageurs et les expatriés.",
                   },
@@ -280,7 +280,7 @@ export default function LamalVsLcaPage() {
 
             {/* 4 — Quand souscrire */}
             <section id="quand">
-              <h2 className="article-h2">4. Quand souscrire une LCA ?</h2>
+              <h2 className="article-h2">4. Quand souscrire une complémentaire ?</h2>
               <div className="callout-warning flex gap-3 mb-6">
                 <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
                      viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
@@ -292,17 +292,18 @@ export default function LamalVsLcaPage() {
                 <div>
                   <p className="font-semibold mb-1">Le moment de souscription compte</p>
                   <p className="text-[15px]">
-                    Plus vous souscrivez tôt, lorsque vous êtes en bonne santé, moins vous risquez d'exclusions.
-                    Une maladie diagnostiquée avant la souscription peut être exclue définitivement.
-                    La LAMal, elle, ne peut jamais imposer d'exclusions.
+                    Plus vous souscrivez tôt et en bonne santé, moins vous risquez d'être exclu ou de payer
+                    une surprime. Si vous avez déjà une maladie au moment de la souscription, l'assureur
+                    peut refuser de vous couvrir pour cette condition, ou alors accepter, mais à un tarif
+                    plus élevé.
                   </p>
                 </div>
               </div>
               <ul className="space-y-3">
                 {[
-                  "Souscrivez la LCA hospitalière pendant que vous êtes en bonne santé pour éviter les surprimes liées à l'âge.",
-                  'Pour les enfants, une LCA dentaire peut être rentable dès le plus jeune âge.',
-                  'Voyageurs fréquents et expatriés : une LCA internationale est souvent indispensable.',
+                  "Souscrivez la complémentaire hospitalière pendant que vous êtes en bonne santé pour éviter les surprimes liées à l'âge.",
+                  'Pour les enfants, une complémentaire dentaire peut être rentable dès le plus jeune âge.',
+                  'Voyageurs fréquents et expatriés : une complémentaire internationale est souvent indispensable.',
                   'Comparez les offres : les écarts pour des prestations similaires peuvent dépasser 50%.',
                 ].map((item, i) => (
                   <li key={i} className="flex gap-3 text-[15px] text-slate">
@@ -322,44 +323,24 @@ export default function LamalVsLcaPage() {
                 {[
                   {
                     profil: 'Jeune actif en bonne santé',
-                    lamal: 'LAMal standard ou Telmed, franchise 2 500 CHF par an.',
-                    lca: "LCA hospitalière souscrite tôt, avant 30 ans, pour figer les conditions avantageuses. LCA ambulatoire optionnelle.",
-                    conseil: "Priorité à la LCA hospitalière en bonne santé : c'est le moment idéal pour éviter les exclusions.",
+                    desc: "Souscrivez une complémentaire hospitalière avant 30 ans pour figer les conditions avantageuses. La complémentaire ambulatoire reste optionnelle à cet âge. C'est le moment idéal : plus vous attendez, plus le risque d'exclusion ou de surprime augmente.",
                   },
                   {
                     profil: 'Famille avec deux enfants',
-                    lamal: 'LAMal médecin de famille pour les adultes, franchise 300 CHF par an pour les enfants.',
-                    lca: 'LCA dentaire très pertinente pour les frais orthodontiques. LCA ambulatoire pour la médecine préventive.',
-                    conseil: "Comparez les offres LCA dentaire : les remboursements varient fortement d'un assureur à l'autre, comparez avant de souscrire.",
+                    desc: "La complémentaire dentaire est particulièrement utile pour couvrir les frais orthodontiques des enfants. La complémentaire ambulatoire peut compléter pour la médecine préventive. Les remboursements varient fortement d'un assureur à l'autre, comparez avant de souscrire.",
                   },
                   {
                     profil: 'Retraité ou retraitée',
-                    lamal: 'LAMal médecin de famille, franchise 300 CHF par an (frais médicaux fréquents).',
-                    lca: 'LCA hospitalière recommandée pour le libre choix du médecin-chef. À souscrire avant 65 ans pour des conditions optimales.',
-                    conseil: "Après 65 ans, certaines LCA hospitalières deviennent inaccessibles ou très chères. Anticipez.",
+                    desc: "La complémentaire hospitalière permet le libre choix du médecin-chef. À souscrire avant 65 ans : passé cet âge, certaines complémentaires deviennent inaccessibles ou très chères. Anticipez avant la retraite.",
                   },
                   {
-                    profil: "Personne expatriée ou voyageant fréquemment à l'étranger",
-                    lamal: 'LAMal standard avec franchise 300 CHF ou 500 CHF par an.',
-                    lca: "LCA internationale indispensable pour les soins hors Suisse, le rapatriement et les urgences à l'étranger.",
-                    conseil: 'Vérifiez que votre LCA internationale couvre votre pays de résidence habituel et vos destinations fréquentes.',
+                    profil: "Personne voyageant fréquemment à l'étranger",
+                    desc: "Une complémentaire internationale est indispensable pour les soins hors Suisse, le rapatriement et les urgences à l'étranger. Vérifiez que votre contrat couvre vos destinations habituelles.",
                   },
                 ].map((cas, i) => (
                   <div key={i} className="border border-edge rounded-[8px] p-5 bg-white">
-                    <p className="font-semibold text-ink text-[16px] mb-3">{cas.profil}</p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
-                      <div className="bg-cloud border border-edge rounded-md px-3 py-2">
-                        <p className="text-[11px] font-semibold text-slate mb-1">LAMal recommandée</p>
-                        <p className="text-[13px] text-ink">{cas.lamal}</p>
-                      </div>
-                      <div className="bg-[#eff6ff] border border-[#bfdbfe] rounded-md px-3 py-2">
-                        <p className="text-[11px] font-semibold text-brand uppercase tracking-wide mb-1">LCA pertinente</p>
-                        <p className="text-[13px] text-ink">{cas.lca}</p>
-                      </div>
-                    </div>
-                    <p className="text-[13px] text-brand bg-[#eff6ff] border border-[#bfdbfe] rounded-md px-3 py-1.5">
-                      {cas.conseil}
-                    </p>
+                    <p className="font-semibold text-ink text-[16px] mb-2">{cas.profil}</p>
+                    <p className="text-[15px] text-slate">{cas.desc}</p>
                   </div>
                 ))}
               </div>
