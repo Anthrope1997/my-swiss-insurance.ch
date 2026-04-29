@@ -31,7 +31,7 @@ const articleSchema = {
 
 const faqItems = [
   {
-    question: 'Quel est le meilleur modèle LAMal pour économiser ?',
+    question: "Quel modèle LAMal permet d'économiser le plus ?",
     answer:
       "Le modèle Telmed offre la plus grande réduction de prime (jusqu'à 24%) selon la caisse et le canton. Le modèle médecin de famille offre jusqu'à 20%. Les économies réelles dépendent de votre caisse et de votre région. Le HMO peut être très avantageux en ville mais son réseau est limité en zone rurale.",
   },
@@ -160,8 +160,7 @@ export default function ModelesPage() {
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
             La LAMal propose quatre modèles d'assurance. Le modèle standard offre le plus de liberté.
             Les trois modèles alternatifs (médecin de famille, HMO, Telmed) réduisent la prime jusqu'à
-            24 pour cent en échange d'un interlocuteur médical imposé avant toute consultation chez
-            un spécialiste.
+            24% en échange d'un interlocuteur médical imposé avant toute consultation chez un spécialiste.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
@@ -212,7 +211,7 @@ export default function ModelesPage() {
                   </thead>
                   <tbody>
                     {[
-                      ['Telmed', "jusqu'à −24%", 'Hotline médicale (application ou téléphone)', 'Partout'],
+                      ['Telmed', "jusqu'à −24%", 'Télémédecine (application ou téléphone)', 'Partout'],
                       ['HMO', "jusqu'à −20%", 'Réseau de cabinets agréés', 'Grandes villes'],
                       ["Médecin de famille", "jusqu'à −20%", 'Médecin généraliste attitré', 'Très large'],
                       ['Standard', 'Aucune', 'Libre', 'Partout'],
