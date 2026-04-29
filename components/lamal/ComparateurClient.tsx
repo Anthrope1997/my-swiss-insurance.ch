@@ -130,15 +130,15 @@ function InfoTooltip({ text }: { text: string }) {
         onFocus={() => setShow(true)}
         onBlur={() => setShow(false)}
         onClick={() => setShow(s => !s)}
-        className="w-4 h-4 rounded-full bg-[#e2e8f0] text-[#475569] text-[10px] font-bold flex items-center justify-center hover:bg-[#1d4ed8] hover:text-white transition-colors leading-none"
+        className="w-4 h-4 rounded-full bg-edge text-slate text-[10px] font-bold flex items-center justify-center hover:bg-brand hover:text-white transition-colors leading-none"
         aria-label="Information"
       >
         i
       </button>
       {show && (
-        <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 bg-[#0f2040] text-white text-[12px] leading-relaxed rounded-lg px-3 py-2.5 shadow-xl z-50 pointer-events-none">
+        <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 bg-[var(--navy)] text-white text-[12px] leading-relaxed rounded-lg px-3 py-2.5 shadow-xl z-50 pointer-events-none">
           {text}
-          <span className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-[#0f2040]" />
+          <span className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-[var(--navy)]" />
         </span>
       )}
     </span>
@@ -153,11 +153,11 @@ function ProgressBar({ step }: { step: number }) {
     <div className="mb-6">
       <div className="flex gap-1.5 mb-2">
         {[1, 2, 3, 4].map(s => (
-          <div key={s} className={`h-1.5 flex-1 rounded-full transition-colors duration-300 ${s <= step ? 'bg-[#1d4ed8]' : 'bg-[#e2e8f0]'}`} />
+          <div key={s} className={`h-1.5 flex-1 rounded-full transition-colors duration-300 ${s <= step ? 'bg-brand' : 'bg-edge'}`} />
         ))}
       </div>
-      <p className="text-[12px] text-[#475569]">
-        Étape {step} sur 4 : <span className="font-medium text-[#0f2040]">{labels[step - 1]}</span>
+      <p className="text-[12px] text-slate">
+        Étape {step} sur 4 : <span className="font-medium text-ink">{labels[step - 1]}</span>
       </p>
     </div>
   )
@@ -172,8 +172,8 @@ function SelectCard({ label, selected, onClick }: { label: string; selected: boo
       onClick={onClick}
       className={`text-left px-4 py-3.5 rounded-[8px] border text-[14px] font-medium transition-all duration-150 w-full ${
         selected
-          ? 'border-[#1d4ed8] bg-[#dbeafe] text-[#1d4ed8]'
-          : 'border-[#e2e8f0] bg-white text-[#0f2040] hover:border-[#1d4ed8]/50'
+          ? 'border-brand bg-[var(--blue-tint)] text-brand'
+          : 'border-edge bg-white text-ink hover:border-brand/50'
       }`}
     >
       {label}
@@ -333,20 +333,20 @@ export default function ComparateurClient() {
     <>
       {/* ── STICKY BAR ────────────────────────────────────────────────────── */}
       {showSticky && stickyData && (
-        <div className="fixed bottom-0 sm:bottom-auto sm:top-16 left-0 right-0 z-40 bg-[#0f2040] border-t sm:border-t-0 sm:border-b border-white/10 shadow-lg">
+        <div className="fixed bottom-0 sm:bottom-auto sm:top-16 left-0 right-0 z-40 bg-[var(--navy)] border-t sm:border-t-0 sm:border-b border-white/10 shadow-lg">
           <div className="container-xl py-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
             <p className="text-white text-[13px] sm:text-[14px] leading-snug">
               <span className="font-semibold">{stickyData.name}</span>
               {', '}CHF {fmtChf(stickyData.prime)} par mois pour votre profil
               {stickyData.economie > 0 && (
-                <span className="text-[#86efac]">
+                <span className="text-white/70">
                   {', '}CHF {fmtAn(stickyData.economie)} par an économisés
                 </span>
               )}
             </p>
             <button
               onClick={() => conversionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
-              className="shrink-0 bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-[13px] font-medium px-4 py-2 rounded-md transition-colors whitespace-nowrap"
+              className="shrink-0 bg-brand hover:bg-brand-dark text-white text-[13px] font-medium px-4 py-2 rounded-md transition-colors whitespace-nowrap"
             >
               Être rappelé →
             </button>
@@ -355,13 +355,13 @@ export default function ComparateurClient() {
       )}
 
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
-      <section className="bg-white border-b border-[#e2e8f0] pt-14 pb-12">
+      <section className="bg-white border-b border-edge pt-14 pb-12">
         <div className="container-xl max-w-3xl">
           <div className="badge mb-5">Données OFSP, Suisse, 2026</div>
-          <h1 className="text-5xl sm:text-6xl font-bold text-[#0f2040] leading-tight mb-5">
+          <h1 className="text-5xl sm:text-6xl font-bold text-ink leading-tight mb-5">
             Comparateur de caisses maladie LAMal 2026
           </h1>
-          <p className="text-xl text-[#475569] leading-relaxed">
+          <p className="text-xl text-slate leading-relaxed">
             En Suisse, les primes LAMal varient jusqu'à 97% au sein d'une même région selon l'assureur choisi.
             Comparez toutes les caisses selon votre code postal, votre franchise et votre modèle d'assurance.
           </p>
@@ -369,18 +369,18 @@ export default function ComparateurClient() {
       </section>
 
       {/* ── OUTIL DE COMPARAISON ──────────────────────────────────────────── */}
-      <section className="bg-[#f8fafc] border-b border-[#e2e8f0] py-12">
+      <section className="bg-cloud border-b border-edge py-12">
         <div className="container-xl max-w-3xl">
 
           {/* Form */}
-          <div className="bg-white border border-[#e2e8f0] rounded-xl p-6 sm:p-8 shadow-sm">
+          <div className="bg-white border border-edge rounded-xl p-6 sm:p-8 shadow-sm">
 
             {/* Ligne 1 — 3 colonnes */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
 
               {/* NPA */}
               <div>
-                <label className="block text-[13px] font-medium text-[#0f2040] mb-1.5">
+                <label className="block text-[13px] font-medium text-ink mb-1.5">
                   Code postal (NPA)
                 </label>
                 <div className="relative">
@@ -392,11 +392,11 @@ export default function ComparateurClient() {
                     className={`input-field ${npaError ? 'border-red-400' : ''}`}
                   />
                   {npaLoading && (
-                    <div className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 border-2 border-[#1d4ed8] border-t-transparent rounded-full animate-spin" />
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 border-2 border-brand border-t-transparent rounded-full animate-spin" />
                   )}
                 </div>
                 {npaInfo && (
-                  <p className="mt-1 text-[12px] text-[#1d4ed8] font-medium">
+                  <p className="mt-1 text-[12px] text-brand font-medium">
                     {npaInfo.ville}, région {npaInfo.regionId}
                   </p>
                 )}
@@ -405,7 +405,7 @@ export default function ComparateurClient() {
 
               {/* Franchise */}
               <div>
-                <label className="block text-[13px] font-medium text-[#0f2040] mb-1.5">
+                <label className="block text-[13px] font-medium text-ink mb-1.5">
                   Franchise
                 </label>
                 <div className="relative">
@@ -420,7 +420,7 @@ export default function ComparateurClient() {
                       </option>
                     ))}
                   </select>
-                  <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#475569] pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </div>
@@ -428,7 +428,7 @@ export default function ComparateurClient() {
 
               {/* Modèle */}
               <div>
-                <label className="flex items-center text-[13px] font-medium text-[#0f2040] mb-1.5">
+                <label className="flex items-center text-[13px] font-medium text-ink mb-1.5">
                   Modèle d'assurance
                   <InfoTooltip text="Standard : libre choix du médecin et spécialiste. Médecin de famille (−15 %) : passage obligatoire par votre médecin traitant. HMO (−18 %) : soins via le réseau HMO. Télémédecine (−20 %) : première consultation par téléphone. Les réductions varient selon la caisse et le canton." />
                 </label>
@@ -442,7 +442,7 @@ export default function ComparateurClient() {
                       <option key={k} value={k}>{v}</option>
                     ))}
                   </select>
-                  <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#475569] pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </div>
@@ -454,7 +454,7 @@ export default function ComparateurClient() {
 
               {/* Profil */}
               <div>
-                <label className="block text-[13px] font-medium text-[#0f2040] mb-1.5">
+                <label className="block text-[13px] font-medium text-ink mb-1.5">
                   Profil
                 </label>
                 <div className="relative">
@@ -467,7 +467,7 @@ export default function ComparateurClient() {
                     <option value="jeune_adulte">Jeune adulte (19 à 25 ans)</option>
                     <option value="enfant">Enfant (0 à 18 ans)</option>
                   </select>
-                  <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#475569] pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </div>
@@ -476,7 +476,7 @@ export default function ComparateurClient() {
               {/* Couverture accident (masquée pour enfant) */}
               {profil !== 'enfant' && (
                 <div>
-                  <label className="flex items-center text-[13px] font-medium text-[#0f2040] mb-1.5">
+                  <label className="flex items-center text-[13px] font-medium text-ink mb-1.5">
                     Couverture accident
                     <InfoTooltip text="Les salariés travaillant plus de 8 heures par semaine chez un employeur sont couverts pour les accidents via la LAA. Si vous êtes indépendant ou travaillez moins de 8h/semaine, sélectionnez 'Avec couverture accident'." />
                   </label>
@@ -489,7 +489,7 @@ export default function ComparateurClient() {
                       <option value="non">Sans couverture accident</option>
                       <option value="oui">Avec couverture accident</option>
                     </select>
-                    <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#475569] pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </div>
@@ -501,7 +501,7 @@ export default function ComparateurClient() {
             <button
               onClick={calculate}
               disabled={!npaInfo || calcLoading}
-              className="w-full bg-[#1d4ed8] hover:bg-[#1e40af] disabled:bg-[#475569] text-white font-semibold py-4 rounded-md transition-colors duration-150 text-[16px] flex items-center justify-center gap-2"
+              className="w-full bg-brand hover:bg-brand-dark disabled:bg-slate text-white font-semibold py-4 rounded-md transition-colors duration-150 text-[16px] flex items-center justify-center gap-2"
             >
               {calcLoading ? (
                 <>
@@ -524,13 +524,13 @@ export default function ComparateurClient() {
 
               {/* En-tête résultats */}
               <div className="flex items-start justify-between gap-4 mb-4">
-                <p className="text-[14px] text-[#475569]">
-                  <span className="font-semibold text-[#0f2040]">{npaInfo?.ville}</span>
+                <p className="text-[14px] text-slate">
+                  <span className="font-semibold text-ink">{npaInfo?.ville}</span>
                   {npaInfo && <> ({npaInfo.regionId})</>}
                   {', '}Franchise {franchise.toLocaleString('fr-CH')} CHF
                   {', '}{MODELE_LABELS[modele]}
                 </p>
-                <p className="text-[13px] font-medium text-[#475569] shrink-0">
+                <p className="text-[13px] font-medium text-slate shrink-0">
                   {results.length} caisses comparées
                 </p>
               </div>
@@ -554,15 +554,15 @@ export default function ComparateurClient() {
                           key={`${row.assureur}-${i}`}
                           className={`flex items-center gap-3 sm:gap-4 px-4 py-3.5 rounded-[8px] border transition-all ${
                             isFirst
-                              ? 'border-[#1d4ed8] bg-[#dbeafe]'
+                              ? 'border-brand bg-[var(--blue-tint)]'
                               : isRef
-                              ? 'border-[#e2e8f0] bg-[#f8fafc] opacity-60'
-                              : 'border-[#e2e8f0] bg-white'
+                              ? 'border-edge bg-cloud opacity-60'
+                              : 'border-edge bg-white'
                           }`}
                         >
                           {/* Rang */}
                           <div className={`w-7 h-7 shrink-0 rounded-full flex items-center justify-center text-[12px] font-bold ${
-                            isFirst ? 'bg-[#1d4ed8] text-white' : 'bg-[#e2e8f0] text-[#475569]'
+                            isFirst ? 'bg-brand text-white' : 'bg-edge text-slate'
                           }`}>
                             {realRank}
                           </div>
@@ -570,35 +570,35 @@ export default function ComparateurClient() {
                           {/* Nom + badge */}
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 flex-wrap">
-                              <span className={`font-medium text-[14px] sm:text-[15px] ${isFirst ? 'text-[#1d4ed8]' : 'text-[#0f2040]'}`}>
+                              <span className={`font-medium text-[14px] sm:text-[15px] ${isFirst ? 'text-brand' : 'text-ink'}`}>
                                 {row.assureur}
                               </span>
                               {isFirst && (
-                                <span className="text-[11px] font-semibold bg-[#1d4ed8] text-white px-2 py-0.5 rounded-full">
+                                <span className="text-[11px] font-semibold bg-brand text-white px-2 py-0.5 rounded-full">
                                   Meilleur prix
                                 </span>
                               )}
                               {isRef && (
-                                <span className="text-[11px] text-[#94a3b8]">Référence</span>
+                                <span className="text-[11px] text-slate/60">Référence</span>
                               )}
                             </div>
                           </div>
 
                           {/* Prix */}
                           <div className="text-right shrink-0">
-                            <p className={`font-semibold text-[15px] ${isFirst ? 'text-[#1d4ed8]' : 'text-[#0f2040]'}`}>
+                            <p className={`font-semibold text-[15px] ${isFirst ? 'text-brand' : 'text-ink'}`}>
                               CHF {fmtChf(row.prime_nette)}
                             </p>
-                            <p className="text-[11px] text-[#475569]">par mois</p>
+                            <p className="text-[11px] text-slate">par mois</p>
                           </div>
 
                           {/* Économie */}
                           {!isRef && economieAn > 0 && (
                             <div className="text-right shrink-0 hidden sm:block">
-                              <p className="text-[13px] font-semibold text-[#16a34a]">
+                              <p className="text-[13px] font-semibold text-brand">
                                 CHF {fmtAn(economieAn)}
                               </p>
-                              <p className="text-[11px] text-[#475569]">par an</p>
+                              <p className="text-[11px] text-slate">par an</p>
                             </div>
                           )}
                         </div>
@@ -608,7 +608,7 @@ export default function ComparateurClient() {
                 )
               })()}
 
-              <p className="mt-3 text-[12px] text-[#94a3b8]">
+              <p className="mt-3 text-[12px] text-slate/60">
                 Source : Office fédéral de la santé publique (OFSP) 2026. Primes nettes après remboursements.
               </p>
             </div>
@@ -618,20 +618,20 @@ export default function ComparateurClient() {
 
       {/* ── BLOC DE CONVERSION POST-RÉSULTATS ────────────────────────────── */}
       {showResults && stickyData && (
-        <section ref={conversionRef} className="bg-white border-b border-[#e2e8f0] py-12">
+        <section ref={conversionRef} className="bg-white border-b border-edge py-12">
           <div className="container-xl max-w-3xl">
 
-            <div className="border-2 border-[#1d4ed8] rounded-xl overflow-hidden bg-[#f0fdf4]">
+            <div className="border-2 border-brand rounded-xl overflow-hidden bg-cloud">
 
               {/* Header bloc */}
-              <div className="px-6 sm:px-8 pt-7 pb-5 border-b border-[#bbf7d0]">
-                <p className="text-[12px] font-semibold text-[#16a34a] uppercase tracking-wider mb-2">
+              <div className="px-6 sm:px-8 pt-7 pb-5 border-b border-edge">
+                <p className="text-[12px] font-semibold text-brand uppercase tracking-wider mb-2">
                   {stickyData.name} est CHF {fmtAn(stickyData.economie)} par an moins chère : passez à l'action
                 </p>
-                <h2 className="text-2xl font-bold text-[#0f2040] mb-2">
+                <h2 className="text-2xl font-bold text-ink mb-2">
                   Un expert gère le changement gratuitement
                 </h2>
-                <p className="text-[15px] text-[#475569] leading-relaxed">
+                <p className="text-[15px] text-slate leading-relaxed">
                   Laissez vos coordonnées : un expert confirme la meilleure caisse pour votre profil exact,
                   vérifie vos droits aux subsides et s'occupe de la résiliation si vous le souhaitez.
                 </p>
@@ -642,13 +642,13 @@ export default function ComparateurClient() {
 
                 {formStatus === 'success' ? (
                   <div className="text-center py-8">
-                    <div className="w-14 h-14 bg-[#16a34a] rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div className="w-14 h-14 bg-brand rounded-full flex items-center justify-center mx-auto mb-4">
                       <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <h3 className="text-xl font-semibold text-[#0f2040] mb-1">Demande envoyée</h3>
-                    <p className="text-[#475569]">Un expert vous contacte sous 24 heures ouvrables.</p>
+                    <h3 className="text-xl font-semibold text-ink mb-1">Demande envoyée</h3>
+                    <p className="text-slate">Un expert vous contacte sous 24 heures ouvrables.</p>
                   </div>
                 ) : (
                   <>
@@ -677,7 +677,7 @@ export default function ComparateurClient() {
                     {step === 2 && (
                       <div className="space-y-4">
                         <div>
-                          <label className="block text-[13px] font-medium text-[#0f2040] mb-1.5">
+                          <label className="block text-[13px] font-medium text-ink mb-1.5">
                             Code postal (NPA)
                           </label>
                           <input
@@ -689,7 +689,7 @@ export default function ComparateurClient() {
                           />
                         </div>
                         <div>
-                          <label className="block text-[13px] font-medium text-[#0f2040] mb-1.5">
+                          <label className="block text-[13px] font-medium text-ink mb-1.5">
                             Situation familiale
                           </label>
                           <div className="relative">
@@ -704,7 +704,7 @@ export default function ComparateurClient() {
                               <option>Famille avec enfants</option>
                               <option>Retraité</option>
                             </select>
-                            <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#475569] pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                             </svg>
                           </div>
@@ -713,7 +713,7 @@ export default function ComparateurClient() {
                           <button
                             type="button"
                             onClick={() => setStep(1)}
-                            className="flex-1 py-3 rounded-md border border-[#e2e8f0] text-[#475569] text-[14px] font-medium hover:bg-[#f8fafc] transition-colors"
+                            className="flex-1 py-3 rounded-md border border-edge text-slate text-[14px] font-medium hover:bg-cloud transition-colors"
                           >
                             Retour
                           </button>
@@ -721,7 +721,7 @@ export default function ComparateurClient() {
                             type="button"
                             disabled={!situation}
                             onClick={() => setStep(3)}
-                            className="flex-1 py-3 rounded-md bg-[#1d4ed8] hover:bg-[#1e40af] disabled:bg-[#475569] text-white text-[14px] font-medium transition-colors"
+                            className="flex-1 py-3 rounded-md bg-brand hover:bg-brand-dark disabled:bg-slate text-white text-[14px] font-medium transition-colors"
                           >
                             Continuer →
                           </button>
@@ -750,7 +750,7 @@ export default function ComparateurClient() {
                         <button
                           type="button"
                           onClick={() => setStep(2)}
-                          className="mt-1 text-[13px] text-[#475569] hover:text-[#0f2040] transition-colors"
+                          className="mt-1 text-[13px] text-slate hover:text-ink transition-colors"
                         >
                           ← Retour
                         </button>
@@ -763,7 +763,7 @@ export default function ComparateurClient() {
                         {/* Prénom + Nom */}
                         <div className="grid grid-cols-2 gap-3">
                           <div>
-                            <label className="block text-[13px] font-medium text-[#0f2040] mb-1.5">Prénom</label>
+                            <label className="block text-[13px] font-medium text-ink mb-1.5">Prénom</label>
                             <input
                               type="text" required
                               value={prenom}
@@ -773,7 +773,7 @@ export default function ComparateurClient() {
                             />
                           </div>
                           <div>
-                            <label className="block text-[13px] font-medium text-[#0f2040] mb-1.5">Nom</label>
+                            <label className="block text-[13px] font-medium text-ink mb-1.5">Nom</label>
                             <input
                               type="text" required
                               value={nomForm}
@@ -786,7 +786,7 @@ export default function ComparateurClient() {
                         {/* Téléphone + Email */}
                         <div className="grid grid-cols-2 gap-3">
                           <div>
-                            <label className="block text-[13px] font-medium text-[#0f2040] mb-1.5">Téléphone</label>
+                            <label className="block text-[13px] font-medium text-ink mb-1.5">Téléphone</label>
                             <input
                               type="tel" required
                               value={tel}
@@ -796,7 +796,7 @@ export default function ComparateurClient() {
                             />
                           </div>
                           <div>
-                            <label className="block text-[13px] font-medium text-[#0f2040] mb-1.5">Email</label>
+                            <label className="block text-[13px] font-medium text-ink mb-1.5">Email</label>
                             <input
                               type="email" required
                               value={email}
@@ -816,19 +816,19 @@ export default function ComparateurClient() {
                         <button
                           type="submit"
                           disabled={formStatus === 'loading'}
-                          className="w-full bg-[#0f2040] hover:bg-[#1e3a5f] disabled:bg-[#475569] text-white font-semibold py-4 rounded-md text-[16px] transition-colors duration-150"
+                          className="w-full bg-[var(--navy)] hover:bg-brand-dark disabled:bg-slate text-white font-semibold py-4 rounded-md text-[16px] transition-colors duration-150"
                         >
                           {formStatus === 'loading' ? 'Envoi en cours…' : 'Recevoir mon conseil gratuit →'}
                         </button>
 
-                        <p className="text-[11px] text-[#475569]/70 text-center leading-relaxed">
+                        <p className="text-[11px] text-slate/70 text-center leading-relaxed">
                           Vos données sont protégées conformément à la LPD. Sans engagement. Réponse sous 24 heures.
                         </p>
 
                         <button
                           type="button"
                           onClick={() => setStep(3)}
-                          className="w-full text-[13px] text-[#475569] hover:text-[#0f2040] transition-colors"
+                          className="w-full text-[13px] text-slate hover:text-ink transition-colors"
                         >
                           ← Retour
                         </button>
@@ -843,16 +843,16 @@ export default function ComparateurClient() {
       )}
 
       {/* ── PARTS DE MARCHÉ ───────────────────────────────────────────────── */}
-      <section className="bg-[#f8fafc] border-b border-[#e2e8f0] py-16">
+      <section className="bg-cloud border-b border-edge py-16">
         <div className="container-xl max-w-5xl">
 
-          <p className="text-[11px] font-semibold text-[#94a3b8] uppercase tracking-widest mb-3">
+          <p className="text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-3">
             Parts de marché, 8 principaux assureurs, FINMA 2024
           </p>
-          <h2 className="text-3xl font-bold text-[#0f2040] mb-4">
+          <h2 className="text-3xl font-bold text-ink mb-4">
             Les principaux assureurs maladie en Suisse
           </h2>
-          <p className="text-[16px] text-[#475569] leading-relaxed mb-10 max-w-2xl">
+          <p className="text-[16px] text-slate leading-relaxed mb-10 max-w-2xl">
             En Suisse, 8 grands groupes se partagent l'essentiel du marché de l'assurance maladie obligatoire.
             Les prestations LAMal sont strictement identiques chez tous les assureurs agréés. La différence
             porte uniquement sur le prix et la qualité du service.
@@ -861,16 +861,16 @@ export default function ComparateurClient() {
           {/* Grille top 4 */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
             {assureurs.slice(0, 4).map(a => (
-              <div key={a.name} className="bg-white border border-[#e2e8f0] rounded-xl p-5">
-                <p className="font-semibold text-[#0f2040] text-[16px] mb-1">{a.name}</p>
-                <p className="text-2xl font-bold text-[#0f2040] mb-2">{a.part}%</p>
-                <p className="text-[13px] text-[#475569] leading-snug">{a.note}</p>
+              <div key={a.name} className="bg-white border border-edge rounded-xl p-5">
+                <p className="font-semibold text-ink text-[16px] mb-1">{a.name}</p>
+                <p className="text-2xl font-bold text-ink mb-2">{a.part}%</p>
+                <p className="text-[13px] text-slate leading-snug">{a.note}</p>
               </div>
             ))}
           </div>
 
           {/* Tableau complet */}
-          <div className="border border-[#e2e8f0] rounded-[8px] overflow-hidden">
+          <div className="border border-edge rounded-[8px] overflow-hidden">
             <table className="stripe-table w-full">
               <thead>
                 <tr>
@@ -882,31 +882,31 @@ export default function ComparateurClient() {
               <tbody>
                 {assureurs.map(a => (
                   <tr key={a.name}>
-                    <td className="font-semibold text-[#0f2040]">{a.name}</td>
-                    <td className="text-center font-medium text-[#1d4ed8]">{a.part}%</td>
-                    <td className="hidden sm:table-cell text-[#475569]">{a.note}</td>
+                    <td className="font-semibold text-ink">{a.name}</td>
+                    <td className="text-center font-medium text-brand">{a.part}%</td>
+                    <td className="hidden sm:table-cell text-slate">{a.note}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <p className="mt-3 text-[12px] text-[#94a3b8]">
+          <p className="mt-3 text-[12px] text-slate/60">
             Source : FINMA 2024. Ce tableau représente les parts de marché des assureurs maladie en Suisse.
           </p>
         </div>
       </section>
 
       {/* ── PRIMES MOYENNES PAR CANTON ────────────────────────────────────── */}
-      <section className="bg-white border-b border-[#e2e8f0] py-16">
+      <section className="bg-white border-b border-edge py-16">
         <div className="container-xl max-w-5xl">
 
-          <p className="text-[11px] font-semibold text-[#94a3b8] uppercase tracking-widest mb-3">
+          <p className="text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-3">
             Données de référence, primes moyennes 2026
           </p>
-          <h2 className="text-3xl font-bold text-[#0f2040] mb-4">
+          <h2 className="text-3xl font-bold text-ink mb-4">
             Primes moyennes par canton, adulte 35 ans
           </h2>
-          <p className="text-[16px] text-[#475569] leading-relaxed mb-8 max-w-2xl">
+          <p className="text-[16px] text-slate leading-relaxed mb-8 max-w-2xl">
             Primes de référence pour un adulte de 35 ans, modèle standard, franchise 300 CHF, sans couverture accident.
             Les écarts entre caisses au sein d'un même canton peuvent atteindre plusieurs centaines de francs par mois.
           </p>
@@ -922,25 +922,25 @@ export default function ComparateurClient() {
                   return (
                     <div
                       key={row.code}
-                      className={`flex items-center gap-3 px-4 py-2.5 rounded-lg ${isMin ? 'bg-[#f0fdf4] border border-[#86efac]' : 'bg-white border border-[#f1f5f9]'}`}
+                      className={`flex items-center gap-3 px-4 py-2.5 rounded-lg ${isMin ? 'bg-cloud border border-edge' : 'bg-white border border-edge'}`}
                     >
                       {/* Badge code */}
-                      <span className={`w-9 shrink-0 text-center py-0.5 rounded text-[11px] font-bold ${isMin ? 'bg-[#16a34a] text-white' : 'bg-[#0f2040] text-white'}`}>
+                      <span className={`w-9 shrink-0 text-center py-0.5 rounded text-[11px] font-bold ${isMin ? 'bg-brand text-white' : 'bg-[var(--navy)] text-white'}`}>
                         {row.code}
                       </span>
                       {/* Canton + barre */}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between gap-2 mb-1">
-                          <span className={`text-[13px] font-medium truncate ${isMin ? 'text-[#166534]' : 'text-[#0f2040]'}`}>
+                          <span className={`text-[13px] font-medium truncate ${isMin ? 'text-brand' : 'text-ink'}`}>
                             {row.canton}
                           </span>
-                          <span className={`text-[13px] font-semibold shrink-0 ${isMin ? 'text-[#166534]' : 'text-[#0f2040]'}`}>
+                          <span className={`text-[13px] font-semibold shrink-0 ${isMin ? 'text-brand' : 'text-ink'}`}>
                             CHF {fmtChf(row.prime)}
                           </span>
                         </div>
-                        <div className="h-1.5 bg-[#e2e8f0] rounded-full overflow-hidden">
+                        <div className="h-1.5 bg-edge rounded-full overflow-hidden">
                           <div
-                            className={`h-full rounded-full ${isMin ? 'bg-[#22c55e]' : 'bg-[#1d4ed8]'}`}
+                            className={`h-full rounded-full ${isMin ? 'bg-brand' : 'bg-brand'}`}
                             style={{ width: `${barPct}%` }}
                           />
                         </div>
@@ -952,17 +952,17 @@ export default function ComparateurClient() {
             )
           })()}
 
-          <p className="text-[12px] text-[#94a3b8] mb-6">Source : OFSP 2026.</p>
+          <p className="text-[12px] text-slate/60 mb-6">Source : OFSP 2026.</p>
 
           {/* Pills cantons avec pages */}
           <div>
-            <p className="text-[13px] font-medium text-[#475569] mb-3">Pages détaillées par canton :</p>
+            <p className="text-[13px] font-medium text-slate mb-3">Pages détaillées par canton :</p>
             <div className="flex flex-wrap gap-2">
               {cantonTable.filter(c => c.slug).map(c => (
                 <Link
                   key={c.code}
                   href={`/lamal/canton/${c.slug}`}
-                  className="px-3.5 py-1.5 rounded-full bg-[#dbeafe] text-[#1d4ed8] text-[13px] font-medium hover:bg-[#1d4ed8] hover:text-white transition-colors duration-150"
+                  className="px-3.5 py-1.5 rounded-full bg-[var(--blue-tint)] text-brand text-[13px] font-medium hover:bg-brand hover:text-white transition-colors duration-150"
                 >
                   {c.canton}
                 </Link>
@@ -973,7 +973,7 @@ export default function ComparateurClient() {
       </section>
 
       {/* ── FAQ ───────────────────────────────────────────────────────────── */}
-      <section className="bg-[#f8fafc] border-b border-[#e2e8f0] py-16">
+      <section className="bg-cloud border-b border-edge py-16">
         <div className="container-xl max-w-3xl">
           <FaqAccordion items={faqItems} />
         </div>
@@ -982,7 +982,7 @@ export default function ComparateurClient() {
       {/* ── MISE À JOUR ───────────────────────────────────────────────────── */}
       <section className="bg-white py-8">
         <div className="container-xl max-w-3xl">
-          <p className="text-[13px] text-[#94a3b8]">
+          <p className="text-[13px] text-slate/60">
             Dernière mise à jour : avril 2026, Données OFSP 2026, 34 caisses comparées
           </p>
         </div>
@@ -997,21 +997,21 @@ function FaqAccordion({ items }: { items: { question: string; answer: string }[]
   const [open, setOpen] = useState<number | null>(0)
   return (
     <div>
-      <h2 className="text-3xl font-bold text-[#0f2040] mb-8">Questions fréquentes</h2>
-      <div className="divide-y divide-[#e2e8f0]">
+      <h2 className="text-3xl font-bold text-ink mb-8">Questions fréquentes</h2>
+      <div className="divide-y divide-edge">
         {items.map((item, i) => (
           <div key={i} className="py-4">
             <button
               onClick={() => setOpen(open === i ? null : i)}
               className="w-full flex items-center justify-between gap-4 text-left"
             >
-              <span className="text-[#0f2040] font-medium text-base">{item.question}</span>
-              <span className="text-[#1d4ed8] font-bold text-lg flex-shrink-0">
+              <span className="text-ink font-medium text-base">{item.question}</span>
+              <span className="text-brand font-bold text-lg flex-shrink-0">
                 {open === i ? '−' : '+'}
               </span>
             </button>
             {open === i && (
-              <p className="mt-3 text-[#475569] text-[14px] leading-relaxed max-w-2xl">
+              <p className="mt-3 text-slate text-[14px] leading-relaxed max-w-2xl">
                 {item.answer}
               </p>
             )}
