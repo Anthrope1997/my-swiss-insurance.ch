@@ -79,12 +79,12 @@ const faqSchema = {
 }
 
 const toc = [
-  { id: 'fonctionnement',  label: '1. Comment ça fonctionne' },
-  { id: 'calculateur',     label: '2. Calculateur interactif' },
+  { id: 'simulateur',      label: '1. Simulateur interactif' },
+  { id: 'fonctionnement',  label: '2. Comment ça fonctionne' },
   { id: 'tableau-cantons', label: '3. Tableau des 26 cantons' },
   { id: 'reforme-2025',    label: '4. La réforme 2025' },
   { id: 'faq',             label: '5. Questions fréquentes' },
-  { id: 'contact',         label: '6. Besoin d\'aide ?' },
+  { id: 'contact',         label: "6. Besoin d'aide ?" },
 ]
 
 // Données de référence — 26 cantons suisses, sources officielles 2026
@@ -275,6 +275,14 @@ const CANTONS_SUBSIDES = [
   },
 ]
 
+const ROMAND_CODES = ['GE', 'VD', 'NE', 'FR', 'JU', 'VS'] as const
+const romandCantonInfos = Object.fromEntries(
+  ROMAND_CODES.map(code => {
+    const c = CANTONS_SUBSIDES.find(r => r.code === code)!
+    return [code, { revenu: c.revenu, montant: c.montant, auto: c.auto, delai: c.delai, lien: c.lien }]
+  })
+)
+
 export default function PageSubsides() {
   return (
     <>
@@ -339,9 +347,18 @@ export default function PageSubsides() {
           {/* Article */}
           <article className="min-w-0 space-y-4">
 
-            {/* §1 — Fonctionnement */}
+            {/* §1 — Simulateur */}
+            <section id="simulateur">
+              <h2 className="article-h2">1. Simulateur interactif — cantons romands</h2>
+              <p className="article-p">
+                Le calculateur couvre les six cantons romands avec les barèmes officiels 2026 : Genève, Vaud, Neuchâtel, Fribourg, Jura et Valais. Sélectionnez votre canton pour afficher les données spécifiques (seuils, montant maximum, délai, lien officiel) et estimer votre subside.
+              </p>
+              <SubsidesCalculator cantonInfos={romandCantonInfos} />
+            </section>
+
+            {/* §2 — Fonctionnement */}
             <section id="fonctionnement">
-              <h2 className="article-h2">1. Comment fonctionnent les subsides LAMal</h2>
+              <h2 className="article-h2">2. Comment fonctionnent les subsides LAMal</h2>
               <p className="article-p">
                 La réduction individuelle des primes (RIP, ou IPV en allemand) est une aide financière prévue par l'article 65 de la loi fédérale sur l'assurance maladie. Elle vise à garantir que les primes LAMal ne constituent pas une charge disproportionnée pour les ménages à revenu faible ou moyen.
               </p>
@@ -370,15 +387,6 @@ export default function PageSubsides() {
               </p>
             </section>
 
-            {/* §2 — Calculateur */}
-            <section id="calculateur">
-              <h2 className="article-h2">2. Calculateur interactif — cantons romands</h2>
-              <p className="article-p">
-                Le calculateur couvre les six cantons romands en détail, avec les barèmes officiels 2026 : Genève, Vaud, Neuchâtel, Fribourg, Jura et Valais. Pour les cantons alémaniques et le Tessin, consultez le tableau de la section suivante avec le lien officiel de votre canton.
-              </p>
-              <SubsidesCalculator />
-            </section>
-
             {/* §3 — Tableau 26 cantons */}
             <section id="tableau-cantons">
               <h2 className="article-h2">3. Tableau récapitulatif — 26 cantons suisses</h2>
@@ -401,14 +409,14 @@ export default function PageSubsides() {
                     {CANTONS_SUBSIDES.map(row => (
                       <tr key={row.code}>
                         <td className="text-left whitespace-nowrap">
-                          <span className="text-[12px] font-bold text-brand bg-[#dbeafe] px-1.5 py-0.5 rounded mr-1.5">{row.code}</span>
+                          <span className="text-[12px] font-bold text-brand bg-[var(--blue-tint)] px-1.5 py-0.5 rounded mr-1.5">{row.code}</span>
                           <span className="font-medium text-ink">{row.nom}</span>
                         </td>
                         <td className="text-left">{row.revenu}</td>
                         <td className="text-left font-medium text-ink">{row.montant}</td>
                         <td className="text-left whitespace-nowrap">
                           {row.auto ? (
-                            <span className="text-[13px] font-medium text-[#166534] bg-[#f0fdf4] border border-[#86efac] px-2 py-0.5 rounded-full">Automatique</span>
+                            <span className="text-[13px] font-medium text-brand bg-[var(--blue-tint)] border border-brand/20 px-2 py-0.5 rounded-full">Automatique</span>
                           ) : (
                             <span className="text-[13px] text-slate">Sur demande</span>
                           )}
@@ -459,17 +467,17 @@ export default function PageSubsides() {
                   <tbody>
                     <tr>
                       <td className="text-left whitespace-nowrap font-medium text-ink">Enfant (moins de 18 ans)</td>
-                      <td className="text-left whitespace-nowrap text-[#166534] font-medium">80 % de la prime de référence</td>
+                      <td className="text-left whitespace-nowrap text-brand font-medium">80 % de la prime de référence</td>
                       <td className="text-left">Revenu du ménage dans les barèmes cantonaux</td>
                     </tr>
                     <tr>
                       <td className="text-left whitespace-nowrap font-medium text-ink">Jeune adulte en formation (18–25 ans)</td>
-                      <td className="text-left whitespace-nowrap text-[#166534] font-medium">50 % de la prime de référence</td>
+                      <td className="text-left whitespace-nowrap text-brand font-medium">50 % de la prime de référence</td>
                       <td className="text-left">Rattaché à la famille ou revenu propre faible</td>
                     </tr>
                     <tr>
                       <td className="text-left whitespace-nowrap font-medium text-ink">Tout ménage</td>
-                      <td className="text-left whitespace-nowrap text-[#166534] font-medium">Prime plafonnée à 10 % du revenu</td>
+                      <td className="text-left whitespace-nowrap text-brand font-medium">Prime plafonnée à 10 % du revenu</td>
                       <td className="text-left">Revenu faible ou moyen selon barème cantonal</td>
                     </tr>
                   </tbody>
