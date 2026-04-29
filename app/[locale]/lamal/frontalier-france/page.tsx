@@ -336,7 +336,7 @@ export default function FrontalierFrancePage() {
                       <th className="text-left whitespace-nowrap">Canton de travail</th>
                       <th className="text-left whitespace-nowrap">Prime min. mensuelle</th>
                       <th className="text-left whitespace-nowrap">Prime max. mensuelle</th>
-                      <th className="text-left whitespace-nowrap">Économie max. possible</th>
+                      <th className="text-left whitespace-nowrap hidden md:table-cell">Économie max. possible</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -351,12 +351,13 @@ export default function FrontalierFrancePage() {
                         <td className="font-semibold text-ink">{row[0]}</td>
                         <td className="text-slate">{row[1]}</td>
                         <td className="text-slate">{row[2]}</td>
-                        <td className="text-slate">{row[3]}</td>
+                        <td className="text-slate hidden md:table-cell">{row[3]}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
+              <p className="text-[13px] text-slate/60 mt-2 md:hidden">Tableau complet visible sur ordinateur.</p>
               <div className="callout text-[14px]">
                 Les modèles alternatifs (médecin de famille, Telmed) réduisent la prime de 10 à 20 % par rapport au modèle standard.
                 Si vous êtes éligible aux subsides cantonaux, votre prime nette peut être significativement inférieure.

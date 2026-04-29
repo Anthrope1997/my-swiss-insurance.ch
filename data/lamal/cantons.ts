@@ -23,6 +23,7 @@ export interface SubsideInfo {
   subsideMensuel: string
   subsideMensuelMax?: number   // CHF/mois max pour un adulte seul
   automatique: boolean
+  delai?: string
   lienOfficiel: string
 }
 
@@ -98,6 +99,7 @@ const cantons: Canton[] = [
       subsideMensuel: 'de 30 à 331 CHF/mois',
       subsideMensuelMax: 331,
       automatique: false,
+      delai: 'Voir OVAM 2026',
       lienOfficiel: 'https://www.vd.ch',
     },
     capitale: {
@@ -148,6 +150,7 @@ const cantons: Canton[] = [
       subsideMensuel: 'de 55 à 348 CHF/mois',
       subsideMensuelMax: 348,
       automatique: true,
+      delai: '—',
       lienOfficiel: 'https://www.ge.ch',
     },
   },
@@ -192,6 +195,7 @@ const cantons: Canton[] = [
       seuilRevenu: '≈ 37 000 CHF/an (seul)',
       subsideMensuel: 'Barème non publié (60 paliers)',
       automatique: false,
+      delai: '31 août 2026',
       lienOfficiel: 'https://www.fr.ch',
     },
   },
@@ -236,7 +240,8 @@ const cantons: Canton[] = [
       seuilRevenu: '≈ 38 500 CHF/an (seul)',
       subsideMensuel: 'de 52 à 521 CHF/mois',
       subsideMensuelMax: 521,
-      automatique: false,
+      automatique: true,
+      delai: '—',
       lienOfficiel: 'https://www.vs.ch',
     },
   },
@@ -281,6 +286,7 @@ const cantons: Canton[] = [
       subsideMensuel: 'de 166 à 643 CHF/mois',
       subsideMensuelMax: 643,
       automatique: true,
+      delai: '—',
       lienOfficiel: 'https://www.ne.ch',
     },
   },
@@ -325,6 +331,7 @@ const cantons: Canton[] = [
       subsideMensuel: "jusqu'à 568 CHF/mois",
       subsideMensuelMax: 568,
       automatique: false,
+      delai: '31 déc. 2026',
       lienOfficiel: 'https://www.jura.ch',
     },
   },

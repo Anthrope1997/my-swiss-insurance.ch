@@ -97,7 +97,7 @@ const toc = [
 const guidesAssocies = [
   { href: '/lamal/guide',            label: 'Comprendre la LAMal'       },
   { href: '/lamal/modeles',          label: 'Les 4 modèles LAMal'       },
-  { href: '/lamal/subsides',         label: 'Calculer mes subsides'     },
+  { href: '/lamal/guide#subsides',   label: 'Calculer mes subsides'     },
   { href: '/lamal/changer-de-caisse', label: 'Changer de caisse maladie' },
 ]
 
@@ -250,7 +250,7 @@ export default function FranchisePage() {
                     <tr>
                       <th className="text-left whitespace-nowrap">Franchise</th>
                       <th className="text-left whitespace-nowrap">Prime par mois</th>
-                      <th className="text-left whitespace-nowrap">Avantageuse si frais annuels inférieurs à</th>
+                      <th className="text-left whitespace-nowrap hidden md:table-cell">Avantageuse si frais annuels inférieurs à</th>
                       <th className="text-left whitespace-nowrap">Profil concerné</th>
                     </tr>
                   </thead>
@@ -263,13 +263,14 @@ export default function FranchisePage() {
                         <td className="font-medium text-ink whitespace-nowrap">
                           CHF {f.prime.toFixed(2)}
                         </td>
-                        <td className="text-ink whitespace-nowrap">{f.seuil}</td>
+                        <td className="text-ink whitespace-nowrap hidden md:table-cell">{f.seuil}</td>
                         <td className="text-slate whitespace-nowrap">{f.conseil}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
+              <p className="text-[13px] text-slate/60 mt-2 md:hidden">Tableau complet visible sur ordinateur.</p>
               <p className="text-[13px] text-slate/60 mt-3 mb-4">
                 Primes pour un adulte (26 ans et plus) à Zurich, modèle standard, OFSP 2026.
               </p>

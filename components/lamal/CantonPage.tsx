@@ -363,6 +363,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
                   ['Attribution',                  canton.subside.automatique
                     ? 'Automatique : aucune démarche requise'
                     : 'Sur demande auprès du canton'],
+                  ...(canton.subside.delai ? [['Délai de demande', canton.subside.delai]] : []),
                 ].map(([label, value], i) => (
                   <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-cloud'}>
                     <td className="px-5 py-3 text-slate w-56 shrink-0">{label}</td>
@@ -398,7 +399,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
           )}
 
           <div className="mt-4">
-            <Link href="/lamal/subsides" className="text-brand hover:underline text-[15px] font-medium">
+            <Link href="/lamal/guide#subsides" className="text-brand hover:underline text-[15px] font-medium">
               Calculer mes subsides LAMal →
             </Link>
           </div>
@@ -435,7 +436,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
               { href: '/lamal/guide',             label: 'Comprendre la LAMal' },
               { href: '/lamal/changer-de-caisse', label: 'Changer de caisse maladie' },
               { href: '/lamal/comparateur',       label: 'Comparateur de primes 2026' },
-              { href: '/lamal/subsides',          label: 'Calculateur de subsides' },
+              { href: '/lamal/guide#subsides',     label: 'Calculateur de subsides' },
             ].map((link) => (
               <Link
                 key={link.href}

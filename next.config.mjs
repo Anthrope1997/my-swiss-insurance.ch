@@ -15,6 +15,8 @@ const nextConfig = {
       { source: '/lamal/expatrie-frontalier', destination: '/lamal/frontalier', permanent: true },
       { source: '/lamal/frontalier-choix-assurance', destination: '/lamal/frontalier', permanent: true },
       { source: '/confidentialite', destination: '/politique-confidentialite', permanent: true },
+      { source: '/lamal/subsides',    destination: '/lamal/guide',    permanent: true },
+      { source: '/fr/lamal/subsides', destination: '/fr/lamal/guide', permanent: true },
     ]
   },
 }

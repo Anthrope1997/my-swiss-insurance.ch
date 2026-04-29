@@ -622,7 +622,7 @@ export default function GuideLamalPage() {
               </div>
 
               <div className="mt-6">
-                <Link href="/lamal/subsides" className="text-brand hover:underline text-[15px] font-medium">
+                <Link href="#subsides" className="text-brand hover:underline text-[15px] font-medium">
                   Calculer mes subsides LAMal →
                 </Link>
               </div>

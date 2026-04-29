@@ -118,7 +118,26 @@ Variables CSS complémentaires (globals.css) :
 | Badges | `.badge` |
 | Métadonnées | `text-[13px] text-slate/60` |
 
-### 2.4 Tailles minimales sur mobile (< 768px) — `app/globals.css`
+### 2.4 Tableaux — règle mobile (< 768px)
+
+Sur mobile, tous les tableaux s'affichent avec **3 colonnes maximum**. Les colonnes supprimées restent visibles sur desktop (≥ 768px).
+
+**Implémentation :** ajouter `hidden md:table-cell` sur le `<th>` et chaque `<td>` des colonnes à masquer.
+**Note obligatoire** sous chaque tableau tronqué :
+```tsx
+<p className="text-[13px] text-slate/60 mt-2 md:hidden">Tableau complet visible sur ordinateur.</p>
+```
+
+**Choix des 3 colonnes à conserver** (par contexte) :
+- Tableau de primes/franchises → Franchise · Prime par mois · Profil concerné
+- Tableau cantons frontaliers → Canton de travail · Prime min. · Prime max.
+- Tableau comparatif (X colonnes) → colonne clé · 2 valeurs principales
+
+Les colonnes déjà masquées via `hidden sm:table-cell` n'ont pas besoin d'être modifiées.
+
+---
+
+### 2.5 Tailles minimales sur mobile (< 768px) — `app/globals.css`
 
 Règle globale via media query — **ne pas modifier ces valeurs dans les composants** :
 
