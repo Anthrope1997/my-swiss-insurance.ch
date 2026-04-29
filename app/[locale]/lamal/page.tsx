@@ -79,7 +79,7 @@ const guides = [
       </svg>
     ),
     title: 'Comprendre la LAMal',
-    desc: 'Fonctionnement, prestations, primes 2026 par canton et droits de chacun',
+    desc: 'Fonctionnement, prestations, subsides et primes 2026 par canton',
     href: '/lamal/guide',
   },
   {
@@ -90,7 +90,7 @@ const guides = [
       </svg>
     ),
     title: 'Choisir sa franchise',
-    desc: 'Trouvez la franchise la plus avantageuse selon vos frais médicaux habituels',
+    desc: 'Trouvez la franchise la plus avantageuse en fonction de vos frais médicaux',
     href: '/lamal/franchise',
   },
   {
@@ -112,7 +112,7 @@ const guides = [
       </svg>
     ),
     title: 'LAMal vs complémentaire',
-    desc: 'Obligatoire ou facultative, quand souscrire une LCA et pour quel profil',
+    desc: "La complémentaire vous couvre là où l'assurance maladie LAMal obligatoire s'arrête",
     href: '/lamal/lamal-vs-lca',
   },
 ]
@@ -163,7 +163,7 @@ const cantonCards = [
 const aproposFaits = [
   {
     label: 'Source des données',
-    desc: "Données officielles de l'OFSP et des 26 cantons suisses",
+    desc: "Données officielles de l'OFSP, des 26 cantons suisses et des caisses maladie",
   },
   {
     label: 'Couverture',
@@ -195,8 +195,6 @@ export default function LamalPage() {
             { label: 'Accueil', href: '/' },
             { label: 'LAMal' },
           ]} />
-
-          <div className="badge mb-5">Données OFSP 2026</div>
 
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-5 max-w-2xl">
             Économisez sur votre prime LAMal en 2026
@@ -293,7 +291,7 @@ export default function LamalPage() {
             <div>
               <p className="font-semibold text-ink text-[16px]">Vous souhaitez changer de caisse ?</p>
               <p className="text-slate text-[14px] mt-0.5">
-                Un expert s'en occupe pour vous : démarches, résiliation et souscription incluses
+                Un expert compare les meilleures offres pour votre profil et s'occupe du changement d'assurance pour vous
               </p>
             </div>
             <a href="#formulaire" className="btn-primary text-[14px] whitespace-nowrap shrink-0">
@@ -313,8 +311,8 @@ export default function LamalPage() {
               Des conseils adaptés à votre profil
             </h2>
             <p className="text-[17px] text-slate leading-relaxed">
-              Votre situation personnelle détermine la stratégie LAMal optimale. Franchise, modèle
-              et éligibilité aux subsides varient selon votre profil.
+              Votre situation personnelle détermine le contrat LAMal le plus avantageux pour vous.
+              Franchise, modèle et éligibilité aux subsides varient selon votre profil.
             </p>
           </div>
 
@@ -370,7 +368,7 @@ export default function LamalPage() {
           </div>
 
           {/* 4 cantons les plus peuplés */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-3">
             {cantonCards.map(c => (
               <Link key={c.nom} href={c.href}
                 className="group bg-white border border-edge rounded-xl p-6 flex flex-col
@@ -396,6 +394,10 @@ export default function LamalPage() {
             ))}
           </div>
 
+          <p className="text-[12px] text-slate/70 mb-8">
+            Adulte 35 ans, modèle standard, franchise 300 CHF. Source OFSP 2026.
+          </p>
+
           {/* Nudge */}
           <div className="text-center">
             <p className="text-[15px] text-slate mb-3">
@@ -418,9 +420,10 @@ export default function LamalPage() {
               Une source de référence sur la LAMal en Suisse
             </h2>
             <p className="text-[17px] text-slate leading-relaxed">
-              My Swiss Insurance publie des données officielles OFSP pour aider les résidents,
-              expatriés et frontaliers à prendre des décisions éclairées. Toutes les données
-              sont sourcées et mises à jour chaque année.
+              My Swiss Insurance s'appuie sur les données officielles de l'Office fédéral de la
+              santé publique (OFSP), des cantons et des caisses maladie. Cela permet à chacun
+              (résidents, expatriés ou frontaliers) de choisir l'assurance maladie LAMal la plus
+              adaptée à sa situation. Toutes les informations sont mises à jour chaque année.
             </p>
           </div>
 
