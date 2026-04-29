@@ -9,14 +9,15 @@ import FrontalierSimulateur from '@/components/lamal/FrontalierSimulateur'
 export const metadata: Metadata = {
   title: 'LAMal pour les frontaliers allemands en Suisse 2026',
   description:
-    'Droit d\'option LAMal pour les frontaliers germano-suisses : LAMal vs GKV allemand, cantons bâlois, formulaire S1 et démarches concrètes. Guide 2026.',
+    "Droit d'option LAMal pour les frontaliers germano-suisses : LAMal vs GKV allemand, cantons bâlois, formulaire S1 et démarches concrètes. Guide 2026.",
   openGraph: {
     title: 'LAMal frontaliers allemands — Suisse 2026',
     description:
-      'Frontaliers germano-suisses : droit d\'option LAMal ou GKV, cantons bâlois et cas particuliers.',
+      "Frontaliers germano-suisses : droit d'option LAMal ou GKV, cantons bâlois et cas particuliers.",
     url: 'https://my-swiss-insurance.ch/lamal/frontalier-allemagne',
     type: 'article',
   },
+  alternates: { canonical: 'https://my-swiss-insurance.ch/lamal/frontalier-allemagne' },
 }
 
 const articleSchema = {
@@ -39,10 +40,10 @@ const faqItems = [
   {
     question: 'Quelle est la différence entre la LAMal suisse et le GKV allemand ?',
     answer:
-      "La LAMal est une assurance individuelle à prime fixe par assuré, indépendante du revenu (sauf subsides). Le GKV est une assurance maladie légale à cotisation proportionnelle au salaire (environ 14,6% du salaire brut, partagé entre employeur et employé, plafonné à environ 66'150 euros de revenu annuel en 2026). Le GKV couvre également les membres de la famille sans revenu propre gratuitement, ce qui peut être avantageux pour les familles.",
+      "La LAMal est une assurance individuelle à prime fixe par assuré, indépendante du revenu (sauf subsides). Le GKV est une assurance maladie légale à cotisation proportionnelle au salaire (environ 14,6 % du salaire brut, partagé entre employeur et employé, plafonné à environ 66 150 euros de revenu annuel en 2026). Le GKV couvre également les membres de la famille sans revenu propre gratuitement, ce qui peut être avantageux pour les familles.",
   },
   {
-    question: 'Le droit d\'option est-il définitif pour les frontaliers allemands ?',
+    question: "Le droit d'option est-il définitif pour les frontaliers allemands ?",
     answer:
       "En principe oui. Une fois exercé, le droit d'option ne peut être modifié que lors de changements de situation reconnus : mariage ou divorce, déménagement, départ à la retraite, changement de statut professionnel majeur. Ces révisions doivent être demandées explicitement auprès des autorités compétentes.",
   },
@@ -79,7 +80,7 @@ export default function FrontalierAllemagnePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-      <section className="bg-white border-b border-edge pt-12 pb-10">
+      <section className="bg-white border-b border-edge pt-12 pb-14">
         <div className="container-xl">
           <Breadcrumb items={[
             { label: 'Accueil', href: '/' },
@@ -87,13 +88,11 @@ export default function FrontalierAllemagnePage() {
             { label: 'Frontaliers', href: '/lamal/frontalier' },
             { label: 'Frontaliers allemands' },
           ]} />
-          <div className="flex flex-wrap gap-2 mb-5">
-            <span className="badge">Données OFSP · 2026</span>
-          </div>
-          <h1 className="text-5xl font-bold text-ink leading-tight mb-4 max-w-2xl">
-            LAMal pour les frontaliers allemands en Suisse 2026.
+          <div className="badge mb-5">Données OFSP 2026</div>
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-2xl">
+            LAMal pour les frontaliers allemands en Suisse 2026
           </h1>
-          <p className="text-xl text-slate max-w-2xl leading-relaxed">
+          <p className="text-[18px] text-slate max-w-2xl leading-relaxed">
             Les frontaliers germano-suisses qui travaillent dans les cantons de Bâle-Ville,
             Bâle-Campagne, Schaffhouse, Thurgovie, Saint-Gall ou Argovie disposent du droit
             d'option entre la LAMal suisse et le système d'assurance maladie légale allemand (GKV).
@@ -102,16 +101,42 @@ export default function FrontalierAllemagnePage() {
         </div>
       </section>
 
-      <div className="container-xl py-16">
-        <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
+      <div className="container-xl py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-12 items-start">
 
-        <div className="flex gap-12">
-          <div className="flex-1 min-w-0 space-y-14">
+          {/* TOC */}
+          <aside className="hidden lg:block">
+            <nav className="sticky top-24">
+              <p className="text-[11px] font-semibold text-slate uppercase tracking-widest mb-4 px-4">
+                Sommaire
+              </p>
+              <ul className="space-y-0.5">
+                {[
+                  { id: 'qui', label: 'Cantons concernés' },
+                  { id: 'comparaison', label: 'LAMal vs GKV' },
+                  { id: 'bale', label: 'Cas bâlois' },
+                  { id: 's1', label: 'Formulaire S1' },
+                  { id: 'primes', label: 'Primes 2026' },
+                  { id: 'comment-decider', label: 'Comment décider' },
+                  { id: 'simulateur', label: 'Simulateur' },
+                  { id: 'faq', label: 'Questions fréquentes' },
+                  { id: 'contact', label: "Besoin d'aide" },
+                ].map(item => (
+                  <li key={item.id}>
+                    <a href={`#${item.id}`} className="toc-link">{item.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </aside>
 
-            {/* Qui est concerné */}
-            <section id="qui">
-              <h2 className="text-2xl font-semibold text-ink mb-4">Cantons et accords bilatéraux applicables</h2>
-              <p className="text-[16px] text-slate leading-relaxed mb-5">
+          {/* Article */}
+          <article className="min-w-0 space-y-4">
+
+            {/* Cantons et accords bilatéraux */}
+            <section id="qui" className="pt-2">
+              <h2 className="article-h2">Cantons et accords bilatéraux applicables</h2>
+              <p className="article-p">
                 Les accords bilatéraux Suisse-UE (ALCP, règlements CE 883/2004 et 987/2009)
                 définissent les règles de coordination de sécurité sociale entre la Suisse
                 et l'Allemagne. Ces accords s'appliquent à l'ensemble des frontaliers
@@ -151,20 +176,20 @@ export default function FrontalierAllemagnePage() {
 
             {/* Comparaison LAMal vs GKV */}
             <section id="comparaison">
-              <h2 className="text-2xl font-semibold text-ink mb-4">LAMal suisse vs GKV allemand : principales différences</h2>
+              <h2 className="article-h2">LAMal suisse vs GKV allemand : principales différences</h2>
 
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-5">
                 <table className="stripe-table w-full">
                   <thead>
                     <tr>
-                      <th>Critère</th>
-                      <th>LAMal suisse</th>
-                      <th>GKV allemand</th>
+                      <th className="text-left whitespace-nowrap">Critère</th>
+                      <th className="text-left whitespace-nowrap">LAMal suisse</th>
+                      <th className="text-left whitespace-nowrap">GKV allemand</th>
                     </tr>
                   </thead>
                   <tbody>
                     {[
-                      ['Calcul de la prime', 'Prime fixe par assuré (varie selon caisse, canton, modèle)', 'Cotisation proportionnelle au salaire (~14,6% partagé employeur/employé)'],
+                      ['Calcul de la prime', 'Prime fixe par assuré (varie selon caisse, canton, modèle)', 'Cotisation proportionnelle au salaire (~14,6 % partagé employeur/employé)'],
                       ['Couverture de la famille', 'Contrat individuel par membre de la famille', 'Membres sans revenu couverts gratuitement (co-assurance familiale)'],
                       ['Prestations', 'Standardisées (catalogue OFSP)', 'Standardisées (catalogue SGB)'],
                       ['Subsides', 'Subsides cantonaux selon revenus', 'Pas de subsides, mais cotisation proportionnelle au revenu'],
@@ -191,8 +216,8 @@ export default function FrontalierAllemagnePage() {
 
             {/* Cas particulier bâlois */}
             <section id="bale">
-              <h2 className="text-2xl font-semibold text-ink mb-4">Cas particulier des frontaliers bâlois</h2>
-              <p className="text-[16px] text-slate leading-relaxed mb-5">
+              <h2 className="article-h2">Cas particulier des frontaliers bâlois</h2>
+              <p className="article-p">
                 La région de Bâle (Bâle-Ville et Bâle-Campagne) est l'un des pôles frontaliers
                 les plus actifs de Suisse. Elle attire des travailleurs frontaliers d'Allemagne
                 (Bade-Wurtemberg principalement) et de France (Alsace).
@@ -202,11 +227,11 @@ export default function FrontalierAllemagnePage() {
                 {[
                   {
                     titre: 'Spécificité tarifaire LAMal à Bâle',
-                    desc: 'Les primes LAMal dans les cantons de Bâle-Ville et Bâle-Campagne figurent parmi les plus élevées de Suisse (autour de CHF 625 à 668 par mois pour un adulte en modèle standard, franchise 300 CHF). Ce facteur est important dans le calcul économique entre LAMal et GKV pour les frontaliers à revenus modestes ou moyens.',
+                    desc: "Les primes LAMal dans les cantons de Bâle-Ville et Bâle-Campagne figurent parmi les plus élevées de Suisse (autour de CHF 625 à 668 par mois pour un adulte en modèle standard, franchise 300 CHF). Ce facteur est important dans le calcul économique entre LAMal et GKV pour les frontaliers à revenus modestes ou moyens.",
                   },
                   {
                     titre: 'Accès aux soins dans les deux pays',
-                    desc: 'Les frontaliers bâlois ayant opté pour la LAMal peuvent consulter librement dans les hôpitaux et cabinets médicaux suisses. Pour les soins en Allemagne, la couverture est limitée aux urgences. Beaucoup de frontaliers bâlois ayant opté pour la LAMal gardent une mutuelle privée allemande pour compléter.',
+                    desc: "Les frontaliers bâlois ayant opté pour la LAMal peuvent consulter librement dans les hôpitaux et cabinets médicaux suisses. Pour les soins en Allemagne, la couverture est limitée aux urgences. Beaucoup de frontaliers bâlois ayant opté pour la LAMal gardent une mutuelle privée allemande pour compléter.",
                   },
                 ].map((item, i) => (
                   <div key={i} className="border border-edge rounded-[8px] p-5 bg-white">
@@ -219,8 +244,8 @@ export default function FrontalierAllemagnePage() {
 
             {/* Formulaire S1 */}
             <section id="s1">
-              <h2 className="text-2xl font-semibold text-ink mb-4">Formulaire S1 pour l'option GKV</h2>
-              <p className="text-[16px] text-slate leading-relaxed mb-5">
+              <h2 className="article-h2">Formulaire S1 pour l'option GKV</h2>
+              <p className="article-p">
                 Si vous optez pour le GKV allemand, votre employeur suisse doit vous fournir
                 le formulaire S1 (anciennement E106). Ce document est indispensable pour
                 vous inscrire dans une caisse d'assurance maladie légale allemande.
@@ -228,9 +253,9 @@ export default function FrontalierAllemagnePage() {
 
               <div className="space-y-3">
                 {[
-                  { n: '01', t: 'Informer votre employeur de votre choix', d: 'Signalez votre décision d\'opter pour le GKV à votre employeur ou à son service des ressources humaines dans les 3 mois suivant votre embauche.' },
-                  { n: '02', t: 'Obtenir le formulaire S1', d: 'Votre employeur ou la caisse de compensation AVS dont il dépend délivre le formulaire S1. Ce document atteste de votre couverture accidents (LAA) par votre employeur suisse.' },
-                  { n: '03', t: 'S\'inscrire dans une caisse GKV allemande', d: 'Présentez le formulaire S1 à la caisse GKV allemande de votre choix. L\'inscription est possible dans toutes les caisses légales allemandes (AOK, TK, Barmer, DAK, etc.).' },
+                  { n: '01', t: 'Informer votre employeur de votre choix', d: "Signalez votre décision d'opter pour le GKV à votre employeur ou à son service des ressources humaines dans les 3 mois suivant votre embauche." },
+                  { n: '02', t: 'Obtenir le formulaire S1', d: "Votre employeur ou la caisse de compensation AVS dont il dépend délivre le formulaire S1. Ce document atteste que vous êtes couvert pour les accidents du travail via la LAA suisse." },
+                  { n: '03', t: "S'inscrire dans une caisse GKV allemande", d: "Présentez le formulaire S1 à la caisse GKV allemande de votre choix. L'inscription est possible dans toutes les caisses légales allemandes (AOK, TK, Barmer, DAK, etc.)." },
                 ].map(step => (
                   <div key={step.n} className="flex gap-5">
                     <div className="text-[24px] font-bold text-brand leading-none shrink-0 w-10 text-right">{step.n}</div>
@@ -245,29 +270,29 @@ export default function FrontalierAllemagnePage() {
 
             {/* Primes indicatives 2026 */}
             <section id="primes">
-              <h2 className="text-2xl font-semibold text-ink mb-4">Primes indicatives 2026 dans votre canton de travail</h2>
-              <p className="text-[14px] text-slate mb-4">
-                Adulte de 35 ans · franchise 300 CHF · modèle standard · données indicatives OFSP 2026.
+              <h2 className="article-h2">Primes indicatives 2026 dans votre canton de travail</h2>
+              <p className="article-p">
+                Adulte de 35 ans, franchise 300 CHF, modèle standard, données indicatives OFSP 2026.
                 L'écart entre la caisse la moins chère et la plus chère peut dépasser CHF 260 par mois dans les cantons bâlois.
               </p>
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-5">
                 <table className="stripe-table w-full">
                   <thead>
                     <tr>
-                      <th>Canton de travail</th>
-                      <th>Prime min. mensuelle</th>
-                      <th>Prime max. mensuelle</th>
-                      <th>Économie max. possible</th>
+                      <th className="text-left whitespace-nowrap">Canton de travail</th>
+                      <th className="text-left whitespace-nowrap">Prime min. mensuelle</th>
+                      <th className="text-left whitespace-nowrap">Prime max. mensuelle</th>
+                      <th className="text-left whitespace-nowrap">Économie max. possible</th>
                     </tr>
                   </thead>
                   <tbody>
                     {[
-                      ['Bâle-Ville',      'CHF 558', 'CHF 820', 'CHF 262/mois'],
-                      ['Bâle-Campagne',   'CHF 520', 'CHF 738', 'CHF 218/mois'],
-                      ['Schaffhouse',     'CHF 431', 'CHF 594', 'CHF 163/mois'],
-                      ['Thurgovie',       'CHF 405', 'CHF 560', 'CHF 155/mois'],
-                      ['Saint-Gall',      'CHF 413', 'CHF 571', 'CHF 158/mois'],
-                      ['Argovie',         'CHF 395', 'CHF 546', 'CHF 151/mois'],
+                      ['Bâle-Ville',    'CHF 558', 'CHF 820', 'CHF 262/mois'],
+                      ['Bâle-Campagne', 'CHF 520', 'CHF 738', 'CHF 218/mois'],
+                      ['Schaffhouse',   'CHF 431', 'CHF 594', 'CHF 163/mois'],
+                      ['Thurgovie',     'CHF 405', 'CHF 560', 'CHF 155/mois'],
+                      ['Saint-Gall',    'CHF 413', 'CHF 571', 'CHF 158/mois'],
+                      ['Argovie',       'CHF 395', 'CHF 546', 'CHF 151/mois'],
                     ].map((row, i) => (
                       <tr key={i}>
                         <td className="font-semibold text-ink">{row[0]}</td>
@@ -287,22 +312,22 @@ export default function FrontalierAllemagnePage() {
 
             {/* LAMal ou GKV */}
             <section id="comment-decider">
-              <h2 className="text-2xl font-semibold text-ink mb-4">LAMal ou GKV — comment décider ?</h2>
+              <h2 className="article-h2">LAMal ou GKV : comment décider ?</h2>
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-5">
                 <table className="stripe-table w-full">
                   <thead>
                     <tr>
-                      <th>Critère</th>
-                      <th>Plutôt LAMal</th>
-                      <th>Plutôt GKV</th>
+                      <th className="text-left whitespace-nowrap">Critère</th>
+                      <th className="text-left whitespace-nowrap">Plutôt LAMal</th>
+                      <th className="text-left whitespace-nowrap">Plutôt GKV</th>
                     </tr>
                   </thead>
                   <tbody>
                     {[
                       ['Soins principalement en Suisse', 'Accès complet au réseau suisse sans avance de frais', 'Couverture limitée aux urgences en Suisse'],
                       ['Famille restée en Allemagne', 'Chaque membre doit avoir son propre contrat LAMal', 'Conjoint et enfants sans revenu couverts gratuitement par le GKV'],
-                      ['Éligibilité aux subsides', 'Subside cantonal possible si revenu < seuil cantonal', 'Cotisation GKV proportionnelle au salaire (~14,6% partagé), sans subside LAMal'],
-                      ['Durée de l\'activité en Suisse', 'Emploi stable sur le long terme', 'Mission temporaire ou situation incertaine'],
+                      ['Éligibilité aux subsides', 'Subside cantonal possible si revenu < seuil cantonal', 'Cotisation GKV proportionnelle au salaire (~14,6 % partagé), sans subside LAMal'],
+                      ["Durée de l'activité en Suisse", 'Emploi stable sur le long terme', 'Mission temporaire ou situation incertaine'],
                       ['Soins réguliers prévus', 'Spécialistes et traitements chroniques accessibles en Suisse', 'Continuité avec vos médecins et spécialistes en Allemagne'],
                     ].map((row, i) => (
                       <tr key={i}>
@@ -318,17 +343,36 @@ export default function FrontalierAllemagnePage() {
 
             {/* Simulateur de décision */}
             <section id="simulateur">
-              <h2 className="text-2xl font-semibold text-ink mb-4">Simulateur de décision</h2>
-              <p className="text-[16px] text-slate leading-relaxed mb-6">
+              <h2 className="article-h2">Simulateur de décision</h2>
+              <p className="article-p">
                 Répondez à 5 questions pour obtenir une recommandation personnalisée adaptée à votre situation de frontalier germano-suisse.
               </p>
               <FrontalierSimulateur />
             </section>
 
-            <FAQ items={faqItems} />
+            {/* FAQ */}
+            <section id="faq" className="scroll-mt-20">
+              <FAQ items={faqItems} />
+            </section>
 
-            <section>
-              <h3 className="text-[16px] font-semibold text-ink mb-3">Voir aussi</h3>
+            {/* Contact */}
+            <div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4">
+              <h2 className="text-2xl font-semibold text-ink border-b border-edge pb-4 mb-6">
+                Besoin d'aide ?
+              </h2>
+              <p className="text-[15px] text-slate mb-6 max-w-xl">
+                Un expert vous rappelle sous 24 heures pour établir avec vous une solution personnalisée. Gratuit, sans engagement.
+              </p>
+              <div className="max-w-xl">
+                <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
+              </div>
+            </div>
+
+            <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
+
+            {/* Guides associés */}
+            <section className="mt-8 pt-8 border-t border-edge">
+              <h3 className="text-[15px] font-semibold text-ink mb-4">Guides associés</h3>
               <div className="flex flex-col gap-2">
                 {[
                   { href: '/lamal/frontalier', label: 'Hub frontaliers' },
@@ -346,13 +390,7 @@ export default function FrontalierAllemagnePage() {
               </div>
             </section>
 
-          </div>
-
-          <div className="hidden lg:block w-80 flex-shrink-0">
-            <div className="sticky top-24">
-              <MultiStepLeadForm />
-            </div>
-          </div>
+          </article>
         </div>
       </div>
     </>

@@ -1,18 +1,21 @@
 import type { Metadata } from 'next'
+import AuthorBio from '@/components/ui/AuthorBio'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import Link from 'next/link'
+import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
 
 export const metadata: Metadata = {
   title: 'LAMal pour les frontaliers en Suisse romande 2026',
   description:
-    'Guide LAMal frontaliers 2026 : droit d\'option pour les frontaliers français, allemands et italiens. Choisissez votre nationalité pour un guide adapté.',
+    "Guide LAMal frontaliers 2026 : droit d'option pour les frontaliers français, allemands et italiens. Choisissez votre nationalité pour un guide adapté.",
   openGraph: {
     title: 'LAMal pour les frontaliers en Suisse romande 2026',
     description:
-      'Frontaliers franco-suisses, germano-suisses ou italo-suisses : guide droit d\'option LAMal adapté à votre situation.',
+      "Frontaliers franco-suisses, germano-suisses ou italo-suisses : guide droit d'option LAMal adapté à votre situation.",
     url: 'https://my-swiss-insurance.ch/lamal/frontalier',
     type: 'website',
   },
+  alternates: { canonical: 'https://my-swiss-insurance.ch/lamal/frontalier' },
 }
 
 const cards = [
@@ -20,9 +23,9 @@ const cards = [
     href: '/lamal/frontalier-france',
     titre: 'Frontalier français',
     description:
-      'Droit d\'option LAMal ou Sécurité sociale française, cantons concernés (Genève, Vaud, Neuchâtel, Jura, Valais), cas particulier genevois et démarches concrètes.',
+      "Droit d'option LAMal ou Sécurité sociale française, cantons concernés (Genève, Vaud, Neuchâtel, Jura, Valais), cas particulier genevois et démarches concrètes.",
     highlights: [
-      'Délai d\'option : 3 mois dès le début de l\'emploi',
+      "Délai d'option : 3 mois dès le début de l'emploi",
       'Cas particulier des frontaliers genevois',
       'Simulateur de décision LAMal / Sécu inclus',
     ],
@@ -37,7 +40,7 @@ const cards = [
     href: '/lamal/frontalier-allemagne',
     titre: 'Frontalier allemand',
     description:
-      'Droit d\'option LAMal ou GKV allemand, différences entre les deux systèmes, cantons bâlois et démarches spécifiques aux frontaliers germano-suisses.',
+      "Droit d'option LAMal ou GKV allemand, différences entre les deux systèmes, cantons bâlois et démarches spécifiques aux frontaliers germano-suisses.",
     highlights: [
       'Différences LAMal vs GKV allemand',
       'Cas particuliers des frontaliers bâlois',
@@ -54,7 +57,7 @@ const cards = [
     href: '/lamal/frontalier-italie',
     titre: 'Frontalier italien',
     description:
-      'Droit d\'option LAMal ou SSN italien, cantons concernés (Tessin, Grisons, Valais), démarches et comparaison des deux systèmes pour les frontaliers italo-suisses.',
+      "Droit d'option LAMal ou SSN italien, cantons concernés (Tessin, Grisons, Valais), démarches et comparaison des deux systèmes pour les frontaliers italo-suisses.",
     highlights: [
       'Différences LAMal vs SSN italien',
       'Tessin, Grisons, Valais : cantons concernés',
@@ -72,20 +75,18 @@ const cards = [
 export default function FrontalierPage() {
   return (
     <>
-      <section className="bg-white border-b border-edge pt-12 pb-10">
+      <section className="bg-white border-b border-edge pt-12 pb-14">
         <div className="container-xl">
           <Breadcrumb items={[
             { label: 'Accueil', href: '/' },
             { label: 'LAMal', href: '/lamal' },
             { label: 'Frontaliers' },
           ]} />
-          <div className="flex flex-wrap gap-2 mb-5">
-            <span className="badge">Données OFSP · 2026</span>
-          </div>
-          <h1 className="text-5xl font-bold text-ink leading-tight mb-4 max-w-2xl">
-            LAMal pour les frontaliers en Suisse romande 2026.
+          <div className="badge mb-5">Données OFSP 2026</div>
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-2xl">
+            LAMal pour les frontaliers en Suisse romande 2026
           </h1>
-          <p className="text-xl text-slate max-w-2xl leading-relaxed">
+          <p className="text-[18px] text-slate max-w-2xl leading-relaxed">
             Les travailleurs frontaliers ont un droit d'option : s'affilier à la LAMal suisse
             ou rester couverts dans leur pays de résidence. Ce choix dépend de la nationalité,
             du canton de travail et de la situation personnelle. Choisissez votre profil
@@ -94,8 +95,10 @@ export default function FrontalierPage() {
         </div>
       </section>
 
-      <div className="container-xl py-16">
-        <div className="grid grid-cols-1 gap-6 max-w-3xl">
+      <div className="container-xl py-12">
+
+        {/* Hub cards */}
+        <div className="grid grid-cols-1 gap-6 max-w-3xl mb-16">
           {cards.map((card) => (
             <Link
               key={card.href}
@@ -129,6 +132,44 @@ export default function FrontalierPage() {
             </Link>
           ))}
         </div>
+
+        {/* Contact */}
+        <div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4 max-w-3xl">
+          <h2 className="text-2xl font-semibold text-ink border-b border-edge pb-4 mb-6">
+            Besoin d'aide ?
+          </h2>
+          <p className="text-[15px] text-slate mb-6 max-w-xl">
+            Un expert vous rappelle sous 24 heures pour établir avec vous une solution personnalisée. Gratuit, sans engagement.
+          </p>
+          <div className="max-w-xl">
+            <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
+          </div>
+        </div>
+
+        <div className="max-w-3xl">
+          <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
+        </div>
+
+        {/* Guides associés */}
+        <section className="mt-8 pt-8 border-t border-edge max-w-3xl">
+          <h3 className="text-[15px] font-semibold text-ink mb-4">Guides associés</h3>
+          <div className="flex flex-col gap-2">
+            {[
+              { href: '/lamal/ma-situation', label: 'LAMal selon votre situation professionnelle' },
+              { href: '/lamal/par-profil', label: 'LAMal par situation de vie' },
+              { href: '/lamal/guide', label: 'Guide complet LAMal 2026' },
+            ].map((link) => (
+              <Link key={link.href} href={link.href}
+                className="text-[15px] text-brand hover:underline flex items-center gap-1">
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </section>
+
       </div>
     </>
   )

@@ -9,14 +9,15 @@ import FrontalierSimulateur from '@/components/lamal/FrontalierSimulateur'
 export const metadata: Metadata = {
   title: 'LAMal pour les frontaliers français en Suisse romande 2026',
   description:
-    'Droit d\'option LAMal pour les frontaliers franco-suisses : délai de 3 mois, LAMal vs Sécurité sociale française, formulaire S1, cas Genève. Guide complet 2026.',
+    "Droit d'option LAMal pour les frontaliers franco-suisses : délai de 3 mois, LAMal vs Sécurité sociale française, formulaire S1, cas Genève. Guide complet 2026.",
   openGraph: {
     title: 'LAMal frontaliers français — Suisse romande 2026',
     description:
-      'Frontaliers franco-suisses : droit d\'option LAMal ou Sécurité sociale, formulaire S1 et cas particulier genevois.',
+      "Frontaliers franco-suisses : droit d'option LAMal ou Sécurité sociale, formulaire S1 et cas particulier genevois.",
     url: 'https://my-swiss-insurance.ch/lamal/frontalier-france',
     type: 'article',
   },
+  alternates: { canonical: 'https://my-swiss-insurance.ch/lamal/frontalier-france' },
 }
 
 const articleSchema = {
@@ -47,7 +48,7 @@ const faqItems = [
       "Passé le délai de 3 mois, le droit d'option est généralement considéré comme perdu. Selon le canton de travail et les accords bilatéraux applicables, la LAMal suisse peut être imposée automatiquement. Dans certains cas, une attribution d'office par l'autorité cantonale intervient. Ne laissez pas ce délai s'écouler sans décision.",
   },
   {
-    question: 'Le droit d\'option est-il réversible ?',
+    question: "Le droit d'option est-il réversible ?",
     answer:
       "Non, sauf en cas de changement de situation. Une fois exercé, le droit d'option ne peut en principe plus être modifié. Les changements de situation reconnus comme motifs de révision incluent : mariage ou divorce, déménagement dans un autre pays, départ à la retraite, perte d'emploi prolongée, et changement de statut professionnel majeur.",
   },
@@ -59,7 +60,7 @@ const faqItems = [
   {
     question: 'Quelle caisse LAMal choisir en tant que frontalier français ?',
     answer:
-      "Les primes LAMal pour les frontaliers sont calculées selon le canton de travail (pas le canton de résidence). Comparez les caisses disponibles dans votre canton de travail principal — les écarts peuvent dépasser CHF 100 par mois entre la caisse la moins chère et la plus chère pour un même profil. Le modèle Telmed ou médecin de famille réduit la prime de 10 à 20% supplémentaires.",
+      "Les primes LAMal pour les frontaliers sont calculées selon le canton de travail (pas le canton de résidence). Comparez les caisses disponibles dans votre canton de travail principal — les écarts peuvent dépasser CHF 100 par mois entre la caisse la moins chère et la plus chère pour un même profil. Le modèle Telmed ou médecin de famille réduit la prime de 10 à 20 % supplémentaires.",
   },
   {
     question: 'Que devient mon assurance si je cesse mon activité en Suisse ?',
@@ -89,7 +90,7 @@ export default function FrontalierFrancePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-      <section className="bg-white border-b border-edge pt-12 pb-10">
+      <section className="bg-white border-b border-edge pt-12 pb-14">
         <div className="container-xl">
           <Breadcrumb items={[
             { label: 'Accueil', href: '/' },
@@ -97,13 +98,11 @@ export default function FrontalierFrancePage() {
             { label: 'Frontaliers', href: '/lamal/frontalier' },
             { label: 'Frontaliers français' },
           ]} />
-          <div className="flex flex-wrap gap-2 mb-5">
-            <span className="badge">Données OFSP · 2026</span>
-          </div>
-          <h1 className="text-5xl font-bold text-ink leading-tight mb-4 max-w-2xl">
-            LAMal pour les frontaliers français en Suisse romande 2026.
+          <div className="badge mb-5">Données OFSP 2026</div>
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-2xl">
+            LAMal pour les frontaliers français en Suisse romande 2026
           </h1>
-          <p className="text-xl text-slate max-w-2xl leading-relaxed">
+          <p className="text-[18px] text-slate max-w-2xl leading-relaxed">
             Les frontaliers franco-suisses qui travaillent dans les cantons de Genève, Vaud,
             Neuchâtel, Jura ou Valais disposent d'un droit d'option entre la LAMal suisse
             et la Sécurité sociale française. Ce choix est structurant, difficile à inverser,
@@ -112,17 +111,44 @@ export default function FrontalierFrancePage() {
         </div>
       </section>
 
-      <div className="container-xl py-16">
-        <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
+      <div className="container-xl py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-12 items-start">
 
-        <div className="flex gap-12">
-          <div className="flex-1 min-w-0 space-y-14">
+          {/* TOC */}
+          <aside className="hidden lg:block">
+            <nav className="sticky top-24">
+              <p className="text-[11px] font-semibold text-slate uppercase tracking-widest mb-4 px-4">
+                Sommaire
+              </p>
+              <ul className="space-y-0.5">
+                {[
+                  { id: 'qui', label: 'Qui est concerné' },
+                  { id: 'droit-option', label: "Droit d'option" },
+                  { id: 'option-lamal', label: 'Option LAMal' },
+                  { id: 'option-secu', label: 'Option Sécu française' },
+                  { id: 'geneve', label: 'Cas Genève' },
+                  { id: 'primes', label: 'Primes 2026' },
+                  { id: 'comment-decider', label: 'Comment décider' },
+                  { id: 'simulateur', label: 'Simulateur' },
+                  { id: 'faq', label: 'Questions fréquentes' },
+                  { id: 'contact', label: "Besoin d'aide" },
+                ].map(item => (
+                  <li key={item.id}>
+                    <a href={`#${item.id}`} className="toc-link">{item.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </aside>
+
+          {/* Article */}
+          <article className="min-w-0 space-y-4">
 
             {/* Qui est concerné */}
-            <section id="qui">
-              <h2 className="text-2xl font-semibold text-ink mb-4">Qui est concerné par ce droit d'option ?</h2>
-              <p className="text-[16px] text-slate leading-relaxed mb-5">
-                Le droit d'option s'applique aux personnes qui résidant en France et
+            <section id="qui" className="pt-2">
+              <h2 className="article-h2">Qui est concerné par ce droit d'option ?</h2>
+              <p className="article-p">
+                Le droit d'option s'applique aux personnes résidant en France et
                 travaillant en Suisse (statut frontalier). Les accords bilatéraux Suisse-UE
                 (en particulier l'Accord sur la libre circulation des personnes, ALCP)
                 encadrent ce dispositif.
@@ -145,7 +171,7 @@ export default function FrontalierFrancePage() {
                     {[
                       'Résidence habituelle en France',
                       'Emploi salarié en Suisse',
-                      'Retour au domicile en principe chaque jour ou au moins une fois par semaine',
+                      "Retour au domicile en principe chaque jour ou au moins une fois par semaine",
                       'Permis de travail G ou équivalent',
                     ].map((c, i) => (
                       <li key={i} className="flex gap-2">
@@ -159,7 +185,7 @@ export default function FrontalierFrancePage() {
 
             {/* Le droit d'option */}
             <section id="droit-option">
-              <h2 className="text-2xl font-semibold text-ink mb-4">Le droit d'option : fonctionnement</h2>
+              <h2 className="article-h2">Le droit d'option : fonctionnement</h2>
 
               <div className="callout-warning mb-5">
                 <p className="font-semibold text-[#0f2040] mb-1">Délai de 3 mois — à ne pas manquer</p>
@@ -173,12 +199,12 @@ export default function FrontalierFrancePage() {
               <div className="space-y-4 mb-5">
                 {[
                   {
-                    titre: 'Comment exercer le droit d\'option',
-                    desc: 'La démarche se fait par écrit auprès de la caisse de compensation AVS de votre employeur ou auprès du service cantonal compétent. Si vous optez pour la Sécurité sociale française, vous devez le déclarer explicitement et obtenir le formulaire S1 auprès de votre caisse de sécurité sociale française (CPAM).',
+                    titre: "Comment exercer le droit d'option",
+                    desc: "La démarche se fait par écrit auprès de la caisse de compensation AVS de votre employeur ou auprès du service cantonal compétent. Si vous optez pour la Sécurité sociale française, vous devez le déclarer explicitement et obtenir le formulaire S1 auprès de votre caisse de sécurité sociale française (CPAM).",
                   },
                   {
                     titre: 'Situations ouvrant une révision du choix',
-                    desc: 'Le droit d\'option ne peut être modifié qu\'en cas de changement de situation reconnu : mariage ou divorce, déménagement hors de France, départ à la retraite, perte d\'emploi prolongée. Ces révisions ne sont pas automatiques — elles doivent être sollicitées auprès des autorités compétentes.',
+                    desc: "Le droit d'option ne peut être modifié qu'en cas de changement de situation reconnu : mariage ou divorce, déménagement hors de France, départ à la retraite, perte d'emploi prolongée. Ces révisions ne sont pas automatiques — elles doivent être sollicitées auprès des autorités compétentes.",
                   },
                 ].map((item, i) => (
                   <div key={i} className="border border-edge rounded-[8px] p-5 bg-white">
@@ -191,7 +217,7 @@ export default function FrontalierFrancePage() {
 
             {/* Option LAMal */}
             <section id="option-lamal">
-              <h2 className="text-2xl font-semibold text-ink mb-4">Option LAMal suisse</h2>
+              <h2 className="article-h2">Option LAMal suisse</h2>
 
               <div className="bg-[#f0fdf4] border border-[#86efac] rounded-[8px] p-5 mb-5">
                 <h3 className="font-semibold text-ink text-[15px] mb-3">Avantages de la LAMal</h3>
@@ -201,7 +227,7 @@ export default function FrontalierFrancePage() {
                     'Primes calculées selon le canton de travail',
                     'Droit potentiel aux subsides cantonaux selon revenus',
                     'Liberté de choix de la caisse et du modèle',
-                    'Couverture accidents automatique en cas d\'emploi salarié (LAA)',
+                    "Couverture accidents automatique en cas d'emploi salarié (LAA)",
                   ].map((item, i) => (
                     <li key={i} className="flex gap-2">
                       <svg className="w-3.5 h-3.5 text-[#22c55e] mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -226,7 +252,7 @@ export default function FrontalierFrancePage() {
 
             {/* Option Sécurité sociale */}
             <section id="option-secu">
-              <h2 className="text-2xl font-semibold text-ink mb-4">Option Sécurité sociale française</h2>
+              <h2 className="article-h2">Option Sécurité sociale française</h2>
 
               <div className="bg-cloud border border-edge rounded-[8px] p-5 mb-5">
                 <h3 className="font-semibold text-ink text-[15px] mb-3">Avantages du maintien en France</h3>
@@ -234,11 +260,11 @@ export default function FrontalierFrancePage() {
                   {[
                     'Continuité avec votre médecin traitant et réseau de soins français',
                     'Couverture de votre famille restée en France',
-                    'Pas de rupture avec vos droits de retraite en France',
+                    "Pas de rupture avec vos droits de retraite en France",
                     'Complémentaire santé française (mutuelle) applicable',
                   ].map((item, i) => (
                     <li key={i} className="flex gap-2">
-                      <span className="text-[#475569] font-bold shrink-0">•</span>
+                      <span className="text-slate font-bold shrink-0">•</span>
                       {item}
                     </li>
                   ))}
@@ -249,11 +275,11 @@ export default function FrontalierFrancePage() {
                 {[
                   {
                     titre: 'Le formulaire S1 (ex-formulaire E106)',
-                    desc: 'Si vous optez pour la Sécurité sociale française, votre employeur suisse doit vous fournir le formulaire S1. Ce document atteste de votre couverture accident-maladie via la LAA suisse et vous permet d\'accéder aux soins en France. Il est délivré par la caisse de compensation AVS de votre employeur.',
+                    desc: "Si vous optez pour la Sécurité sociale française, votre employeur suisse doit vous fournir le formulaire S1. Ce document atteste de votre couverture accident-maladie via la LAA suisse et vous permet d'accéder aux soins en France. Il est délivré par la caisse de compensation AVS de votre employeur.",
                   },
                   {
                     titre: 'Couverture en Suisse limitée aux urgences',
-                    desc: 'Avec l\'option Sécurité sociale française, vos soins en Suisse ne sont remboursés qu\'en cas d\'urgence médicale. Les consultations programmées chez un médecin suisse ne sont pas prises en charge. Pour travailler en Suisse, votre employeur vous couvre via la LAA pour les accidents du travail.',
+                    desc: "Avec l'option Sécurité sociale française, vos soins en Suisse ne sont remboursés qu'en cas d'urgence médicale. Les consultations programmées chez un médecin suisse ne sont pas prises en charge. Pour travailler en Suisse, votre employeur vous couvre via la LAA pour les accidents du travail.",
                   },
                 ].map((item, i) => (
                   <div key={i} className="border border-edge rounded-[8px] p-5 bg-white">
@@ -266,26 +292,26 @@ export default function FrontalierFrancePage() {
 
             {/* Cas Genève */}
             <section id="geneve">
-              <h2 className="text-2xl font-semibold text-ink mb-4">Cas particulier des frontaliers genevois</h2>
-              <p className="text-[16px] text-slate leading-relaxed mb-5">
+              <h2 className="article-h2">Cas particulier des frontaliers genevois</h2>
+              <p className="article-p">
                 Genève est le canton suisse avec le plus grand nombre de frontaliers français
-                (environ 100'000 personnes). Des dispositions spécifiques s'appliquent dans
+                (environ 100 000 personnes). Des dispositions spécifiques s'appliquent dans
                 ce contexte particulier.
               </p>
 
               <div className="space-y-4">
                 {[
                   {
-                    titre: 'Droit d\'option spécifique au canton de Genève',
-                    desc: 'Les frontaliers genevois disposent du même droit d\'option que les autres frontaliers franco-suisses, mais avec des particularités liées aux conventions fiscales franco-genevoises et aux accords bilatéraux de coordination sociale.',
+                    titre: "Droit d'option spécifique au canton de Genève",
+                    desc: "Les frontaliers genevois disposent du même droit d'option que les autres frontaliers franco-suisses, mais avec des particularités liées aux conventions fiscales franco-genevoises et aux accords bilatéraux de coordination sociale.",
                   },
                   {
                     titre: 'Complémentaire Santé Solidaire (ex-CMU-C) en France',
-                    desc: 'Les frontaliers genevois optant pour la Sécurité sociale française et dont les revenus le permettent peuvent bénéficier de la Complémentaire Santé Solidaire (anciennement CMU-C) en France. Cette couverture complémentaire gratuite ou à tarif réduit est attribuée sous conditions de ressources par la CPAM de Haute-Savoie ou de l\'Ain selon le département de résidence.',
+                    desc: "Les frontaliers genevois optant pour la Sécurité sociale française et dont les revenus le permettent peuvent bénéficier de la Complémentaire Santé Solidaire (anciennement CMU-C) en France. Cette couverture complémentaire gratuite ou à tarif réduit est attribuée sous conditions de ressources par la CPAM de Haute-Savoie ou de l'Ain selon le département de résidence.",
                   },
                   {
                     titre: 'Évolutions récentes à surveiller',
-                    desc: 'Les accords bilatéraux Suisse-UE et leurs implications sur la protection sociale des frontaliers évoluent. Consultez régulièrement le site de la CPAM ou de la caisse de compensation genevoise (OCAS) pour les mises à jour relatives à votre situation.',
+                    desc: "Les accords bilatéraux Suisse-UE et leurs implications sur la protection sociale des frontaliers évoluent. Consultez régulièrement le site de la CPAM ou de la caisse de compensation genevoise (OCAS) pour les mises à jour relatives à votre situation.",
                   },
                 ].map((item, i) => (
                   <div key={i} className="border border-edge rounded-[8px] p-5 bg-white">
@@ -298,19 +324,19 @@ export default function FrontalierFrancePage() {
 
             {/* Primes indicatives 2026 */}
             <section id="primes">
-              <h2 className="text-2xl font-semibold text-ink mb-4">Primes indicatives 2026 dans votre canton de travail</h2>
-              <p className="text-[14px] text-slate mb-4">
-                Adulte de 35 ans · franchise 300 CHF · modèle standard · données OFSP 2026.
+              <h2 className="article-h2">Primes indicatives 2026 dans votre canton de travail</h2>
+              <p className="article-p">
+                Adulte de 35 ans, franchise 300 CHF, modèle standard, données OFSP 2026.
                 L'écart entre la caisse la moins chère et la plus chère peut dépasser CHF 200 par mois dans le même canton.
               </p>
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-5">
                 <table className="stripe-table w-full">
                   <thead>
                     <tr>
-                      <th>Canton de travail</th>
-                      <th>Prime min. mensuelle</th>
-                      <th>Prime max. mensuelle</th>
-                      <th>Économie max. possible</th>
+                      <th className="text-left whitespace-nowrap">Canton de travail</th>
+                      <th className="text-left whitespace-nowrap">Prime min. mensuelle</th>
+                      <th className="text-left whitespace-nowrap">Prime max. mensuelle</th>
+                      <th className="text-left whitespace-nowrap">Économie max. possible</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -339,14 +365,14 @@ export default function FrontalierFrancePage() {
 
             {/* LAMal ou Sécurité sociale */}
             <section id="comment-decider">
-              <h2 className="text-2xl font-semibold text-ink mb-4">LAMal ou Sécurité sociale — comment décider ?</h2>
+              <h2 className="article-h2">LAMal ou Sécurité sociale : comment décider ?</h2>
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-5">
                 <table className="stripe-table w-full">
                   <thead>
                     <tr>
-                      <th>Critère</th>
-                      <th>Plutôt LAMal</th>
-                      <th>Plutôt Sécurité sociale</th>
+                      <th className="text-left whitespace-nowrap">Critère</th>
+                      <th className="text-left whitespace-nowrap">Plutôt LAMal</th>
+                      <th className="text-left whitespace-nowrap">Plutôt Sécurité sociale</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -354,7 +380,7 @@ export default function FrontalierFrancePage() {
                       ['Soins principalement en Suisse', 'Accès complet au réseau suisse sans avance de frais', 'Couverture limitée aux urgences en Suisse'],
                       ['Famille restée en France', 'Chaque membre doit avoir son propre contrat LAMal', 'Conjoint et enfants couverts par la Sécu, mutuelle applicable'],
                       ['Éligibilité aux subsides', 'Subside cantonal possible si revenu < seuil cantonal', 'Cotisation Sécu proportionnelle au salaire, sans subside LAMal'],
-                      ['Durée de l\'activité en Suisse', 'Emploi stable sur le long terme', 'Mission temporaire ou situation incertaine'],
+                      ["Durée de l'activité en Suisse", 'Emploi stable sur le long terme', 'Mission temporaire ou situation incertaine'],
                       ['Soins réguliers prévus', 'Spécialistes et traitements chroniques accessibles en Suisse', 'Continuité avec vos médecins et spécialistes en France'],
                     ].map((row, i) => (
                       <tr key={i}>
@@ -370,17 +396,36 @@ export default function FrontalierFrancePage() {
 
             {/* Simulateur de décision */}
             <section id="simulateur">
-              <h2 className="text-2xl font-semibold text-ink mb-4">Simulateur de décision</h2>
-              <p className="text-[16px] text-slate leading-relaxed mb-6">
+              <h2 className="article-h2">Simulateur de décision</h2>
+              <p className="article-p">
                 Répondez à 5 questions pour obtenir une recommandation personnalisée adaptée à votre situation de frontalier franco-suisse.
               </p>
               <FrontalierSimulateur />
             </section>
 
-            <FAQ items={faqItems} />
+            {/* FAQ */}
+            <section id="faq" className="scroll-mt-20">
+              <FAQ items={faqItems} />
+            </section>
 
-            <section>
-              <h3 className="text-[16px] font-semibold text-ink mb-3">Voir aussi</h3>
+            {/* Contact */}
+            <div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4">
+              <h2 className="text-2xl font-semibold text-ink border-b border-edge pb-4 mb-6">
+                Besoin d'aide ?
+              </h2>
+              <p className="text-[15px] text-slate mb-6 max-w-xl">
+                Un expert vous rappelle sous 24 heures pour établir avec vous une solution personnalisée. Gratuit, sans engagement.
+              </p>
+              <div className="max-w-xl">
+                <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
+              </div>
+            </div>
+
+            <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
+
+            {/* Guides associés */}
+            <section className="mt-8 pt-8 border-t border-edge">
+              <h3 className="text-[15px] font-semibold text-ink mb-4">Guides associés</h3>
               <div className="flex flex-col gap-2">
                 {[
                   { href: '/lamal/frontalier', label: 'Hub frontaliers' },
@@ -398,13 +443,7 @@ export default function FrontalierFrancePage() {
               </div>
             </section>
 
-          </div>
-
-          <div className="hidden lg:block w-80 flex-shrink-0">
-            <div className="sticky top-24">
-              <MultiStepLeadForm />
-            </div>
-          </div>
+          </article>
         </div>
       </div>
     </>
