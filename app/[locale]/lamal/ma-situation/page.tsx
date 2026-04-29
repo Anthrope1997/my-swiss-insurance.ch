@@ -8,7 +8,7 @@ import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
 export const metadata: Metadata = {
   title: 'LAMal selon votre situation professionnelle en 2026',
   description:
-    'LAMal pour salarié, indépendant, chômeur et nouvel arrivant expatrié en Suisse : franchise optimale, couverture accidents, subsides et démarches d\'affiliation. Guide 2026.',
+    "LAMal pour salarié, indépendant, chômeur et nouvel arrivant expatrié en Suisse : franchise optimale, couverture accidents, subsides et démarches d'affiliation. Guide 2026.",
   openGraph: {
     title: 'LAMal selon votre situation professionnelle en 2026',
     description:
@@ -16,6 +16,7 @@ export const metadata: Metadata = {
     url: 'https://my-swiss-insurance.ch/lamal/ma-situation',
     type: 'article',
   },
+  alternates: { canonical: 'https://my-swiss-insurance.ch/lamal/ma-situation' },
 }
 
 const articleSchema = {
@@ -41,12 +42,12 @@ const faqItems = [
       "La LAMal reste obligatoire et continue sans interruption. La perte d'emploi n'entraîne aucune suspension de couverture. Deux changements importants : (1) vous devenez potentiellement éligible aux subsides cantonaux si vos revenus chutent sous les seuils cantonaux — à demander immédiatement auprès de votre service cantonal ; (2) la couverture LAA accidents reste active via l'assurance chômage pendant toute la durée des indemnités, puis cesse 30 jours après la fin du droit.",
   },
   {
-    question: 'Comment s\'affilier à la LAMal en arrivant en Suisse ?',
+    question: "Comment s'affilier à la LAMal en arrivant en Suisse ?",
     answer:
       "Dès la prise de domicile officielle, vous disposez de 90 jours pour choisir une caisse et vous affilier. Si ce délai est respecté, la couverture est rétroactive à la date d'arrivée. Les pièces nécessaires sont : permis de séjour (B, C, G, L ou N) et attestation de domicile officielle. Aucune caisse ne peut vous refuser pour l'assurance de base (art. 4 LAMal). Passé 90 jours, les autorités cantonales attribuent d'office une caisse.",
   },
   {
-    question: 'Puis-je cumuler emploi salarié et activité indépendante — quelle couverture LAMal ?',
+    question: "Puis-je cumuler emploi salarié et activité indépendante — quelle couverture LAMal ?",
     answer:
       "La LAMal est unique : un seul contrat couvre l'ensemble de votre activité, quelle que soit sa nature. En revanche, la couverture LAA dépend du statut. Pour votre activité salariée, la LAA est couverte par l'employeur dès 8 heures par semaine. Pour votre activité indépendante, cette couverture est absente. Vous devez activer la couverture accidents LAMal pour protéger votre activité indépendante, sauf si votre volume horaire salarié dépasse 8 heures hebdomadaires et couvre l'ensemble de vos risques.",
   },
@@ -56,7 +57,7 @@ const faqItems = [
       "Oui, et souvent de façon prioritaire. La perte d'emploi réduit le revenu déterminant, ce qui ouvre généralement des droits aux subsides cantonaux. Dans plusieurs cantons (VD, GE, NE, FR), les personnes au chômage reçoivent une aide automatique calculée sur la base de la déclaration d'impôts ou de l'attestation de chômage. Pour les autres cantons, une demande est à déposer rapidement auprès du service cantonal compétent, sans attendre la fin de l'année.",
   },
   {
-    question: 'Dans quel délai un expatrié doit-il s\'affilier à la LAMal ?',
+    question: "Dans quel délai un expatrié doit-il s'affilier à la LAMal ?",
     answer:
       "Tout résident en Suisse doit s'affilier dans les 90 jours suivant la prise de domicile officielle. Si ce délai est respecté, la couverture est rétroactive à la date d'arrivée. Au-delà de 90 jours, les autorités cantonales attribuent d'office une caisse maladie, souvent sans tenir compte des préférences de l'assuré. Source : art. 3 al. 1 et art. 5 LAMal (RS 832.10).",
   },
@@ -66,7 +67,7 @@ const faqItems = [
       "Oui, mais avec une distinction importante. Pour un emploi d'au moins 8 heures par semaine chez un même employeur, la LAA couvre à la fois les accidents professionnels et les accidents non professionnels. En dessous de 8 heures, seuls les accidents professionnels sont couverts par la LAA de l'employeur. Les accidents non professionnels sont alors à la charge de la LAMal — vérifiez que votre caisse inclut cette couverture.",
   },
   {
-    question: 'Peut-on désactiver la couverture accidents LAMal si l\'on devient salarié ?',
+    question: "Peut-on désactiver la couverture accidents LAMal si l'on devient salarié ?",
     answer:
       "Oui. Si vous passiez de statut indépendant à salarié et activez ainsi la LAA employeur, vous pouvez désactiver la couverture accidents optionnelle de votre LAMal pour éviter de payer deux fois. Cette désactivation se fait par écrit auprès de votre caisse, en fournissant une attestation de votre employeur confirmant la couverture LAA. La modification prend effet à la date convenue avec la caisse.",
   },
@@ -88,20 +89,18 @@ export default function MaSituationPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-      <section className="bg-white border-b border-edge pt-12 pb-10">
+      <section className="bg-white border-b border-edge pt-12 pb-14">
         <div className="container-xl">
           <Breadcrumb items={[
             { label: 'Accueil', href: '/' },
             { label: 'LAMal', href: '/lamal' },
             { label: 'Ma situation' },
           ]} />
-          <div className="flex flex-wrap gap-2 mb-5">
-            <span className="badge">Données OFSP · 2026</span>
-          </div>
-          <h1 className="text-5xl font-bold text-ink leading-tight mb-4 max-w-2xl">
-            LAMal selon votre situation professionnelle en 2026.
+          <div className="badge mb-5">Données OFSP 2026</div>
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-2xl">
+            LAMal selon votre situation professionnelle en 2026
           </h1>
-          <p className="text-xl text-slate max-w-2xl leading-relaxed">
+          <p className="text-[18px] text-slate max-w-2xl leading-relaxed">
             Salarié, indépendant, en situation de chômage ou nouvel arrivant en Suisse :
             votre statut professionnel détermine directement votre couverture accidents,
             votre franchise optimale et vos droits aux subsides cantonaux.
@@ -110,16 +109,39 @@ export default function MaSituationPage() {
         </div>
       </section>
 
-      <div className="container-xl py-16">
-        <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
+      <div className="container-xl py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-12 items-start">
 
-        <div className="flex gap-12">
-          <div className="flex-1 min-w-0 space-y-14">
+          {/* TOC */}
+          <aside className="hidden lg:block">
+            <nav className="sticky top-24">
+              <p className="text-[11px] font-semibold text-slate uppercase tracking-widest mb-4 px-4">
+                Sommaire
+              </p>
+              <ul className="space-y-0.5">
+                {[
+                  { id: 'salarie', label: 'Salarié' },
+                  { id: 'independant', label: 'Indépendant' },
+                  { id: 'chomeur', label: 'Chômeur' },
+                  { id: 'expatrie', label: 'Nouvel arrivant' },
+                  { id: 'faq', label: 'Questions fréquentes' },
+                  { id: 'contact', label: "Besoin d'aide" },
+                ].map(item => (
+                  <li key={item.id}>
+                    <a href={`#${item.id}`} className="toc-link">{item.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </aside>
+
+          {/* Article */}
+          <article className="min-w-0 space-y-4">
 
             {/* Salarié */}
-            <section id="salarie">
-              <h2 className="text-2xl font-semibold text-ink mb-4">LAMal pour les salariés</h2>
-              <p className="text-[16px] text-slate leading-relaxed mb-5">
+            <section id="salarie" className="pt-2">
+              <h2 className="article-h2">LAMal pour les salariés</h2>
+              <p className="article-p">
                 Le salarié bénéficie du cadre le plus complet : la LAMal de base couvre
                 les soins médicaux, et la LAA (loi sur l'assurance-accidents, RS 832.20)
                 couvre les accidents dès 8 heures de travail par semaine chez un même employeur.
@@ -171,10 +193,10 @@ export default function MaSituationPage() {
                   </h3>
                   <p className="text-[15px] text-slate">
                     La franchise optimale dépend de votre fréquence de soins. Pour un salarié
-                    en bonne santé, la franchise 2500 CHF réduit la prime de ~CHF 120 par mois.
+                    en bonne santé, la franchise 2 500 CHF réduit la prime de ~CHF 120 par mois.
                     Pour un salarié avec un médecin de famille régulier ou un traitement en cours,
                     la franchise 300 CHF devient avantageuse dès que les frais annuels dépassent
-                    environ CHF 1'440. Consultez la{' '}
+                    environ CHF 1 440. Consultez la{' '}
                     <Link href="/lamal/franchise" className="text-brand hover:underline">
                       page franchise
                     </Link>{' '}
@@ -186,10 +208,10 @@ export default function MaSituationPage() {
 
             {/* Indépendant */}
             <section id="independant">
-              <h2 className="text-2xl font-semibold text-ink mb-4">
+              <h2 className="article-h2">
                 LAMal pour les indépendants et freelances
               </h2>
-              <p className="text-[16px] text-slate leading-relaxed mb-5">
+              <p className="article-p">
                 L'indépendant supporte l'intégralité de sa prime LAMal sans contribution
                 employeur, et n'est couvert par aucune LAA automatique. Ce double écart
                 par rapport au salarié exige une planification spécifique.
@@ -211,19 +233,19 @@ export default function MaSituationPage() {
                 {[
                   {
                     titre: 'Activer la couverture accidents LAMal',
-                    desc: 'La LAMal offre une option accidents pour les personnes non couvertes par la LAA (indépendants, sans emploi, étudiants). La prime supplémentaire est d\'environ CHF 10 à 30 par mois selon la caisse. Cette activation se fait par écrit auprès de votre caisse, avec prise d\'effet rapide.',
+                    desc: "La LAMal offre une option accidents pour les personnes non couvertes par la LAA (indépendants, sans emploi, étudiants). La prime supplémentaire est d'environ CHF 10 à 30 par mois selon la caisse. Cette activation se fait par écrit auprès de votre caisse, avec prise d'effet rapide.",
                   },
                   {
                     titre: 'Désactiver la couverture accidents en devenant salarié',
-                    desc: 'Si vous changez de statut et bénéficiez d\'une LAA employeur (dès 8 heures par semaine), vous pouvez désactiver la couverture accidents LAMal pour éviter un double paiement. Fournissez une attestation LAA de votre employeur à votre caisse.',
+                    desc: "Si vous changez de statut et bénéficiez d'une LAA employeur (dès 8 heures par semaine), vous pouvez désactiver la couverture accidents LAMal pour éviter un double paiement. Fournissez une attestation LAA de votre employeur à votre caisse.",
                   },
                   {
                     titre: 'Franchise élevée souvent avantageuse',
-                    desc: 'Si votre trésorerie le permet, une franchise 2000 à 2500 CHF réduit la prime mensuelle de 25 à 30%. Provisionnez la différence sur un compte épargne dédié. Les primes LAMal sont partiellement déductibles de votre revenu imposable — montant forfaitaire variable selon le canton.',
+                    desc: "Si votre trésorerie le permet, une franchise 2 000 à 2 500 CHF réduit la prime mensuelle de 25 à 30 %. Provisionnez la différence sur un compte épargne dédié. Les primes LAMal sont partiellement déductibles de votre revenu imposable — montant forfaitaire variable selon le canton.",
                   },
                   {
                     titre: 'Vérifier les subsides chaque année',
-                    desc: 'Les revenus variables des indépendants peuvent ouvrir des droits certaines années. Vérifiez votre éligibilité chaque printemps, après votre déclaration d\'impôts, auprès du service cantonal compétent.',
+                    desc: "Les revenus variables des indépendants peuvent ouvrir des droits certaines années. Vérifiez votre éligibilité chaque printemps, après votre déclaration d'impôts, auprès du service cantonal compétent.",
                   },
                 ].map((item, i) => (
                   <div key={i} className="border border-edge rounded-[8px] p-5 bg-white">
@@ -236,8 +258,8 @@ export default function MaSituationPage() {
 
             {/* Chômeur */}
             <section id="chomeur">
-              <h2 className="text-2xl font-semibold text-ink mb-4">LAMal en situation de chômage</h2>
-              <p className="text-[16px] text-slate leading-relaxed mb-5">
+              <h2 className="article-h2">LAMal en situation de chômage</h2>
+              <p className="article-p">
                 La LAMal est obligatoire pendant le chômage et la couverture ne s'interrompt
                 pas. En revanche, plusieurs mécanismes de protection renforcée s'activent
                 dès la prise en charge par l'assurance chômage.
@@ -272,10 +294,10 @@ export default function MaSituationPage() {
 
             {/* Nouvel arrivant expatrié */}
             <section id="expatrie">
-              <h2 className="text-2xl font-semibold text-ink mb-4">
+              <h2 className="article-h2">
                 Nouvel arrivant et expatrié en Suisse
               </h2>
-              <p className="text-[16px] text-slate leading-relaxed mb-5">
+              <p className="article-p">
                 Dès l'établissement du domicile en Suisse, la LAMal devient obligatoire.
                 Le délai de 90 jours pour s'affilier est une règle absolue : ne le manquez pas.
               </p>
@@ -290,19 +312,19 @@ export default function MaSituationPage() {
                 {[
                   {
                     titre: 'Aucune caisse ne peut vous refuser',
-                    desc: 'Pour l\'assurance de base LAMal, tous les assureurs agréés par l\'OFSP ont l\'obligation légale d\'accepter tout résident en Suisse, quelle que soit sa nationalité, son âge ou son état de santé. Aucune sélection médicale n\'est autorisée (art. 4 LAMal, RS 832.10).',
+                    desc: "Pour l'assurance de base LAMal, tous les assureurs agréés par l'OFSP ont l'obligation légale d'accepter tout résident en Suisse, quelle que soit sa nationalité, son âge ou son état de santé. Aucune sélection médicale n'est autorisée (art. 4 LAMal, RS 832.10).",
                   },
                   {
-                    titre: 'Pièces nécessaires pour l\'affiliation',
-                    desc: 'Permis de séjour (B, C, G, L ou N) et attestation de domicile officielle (délivrée par l\'office communal ou cantonal des habitants). La plupart des caisses permettent l\'inscription en ligne en quelques minutes.',
+                    titre: "Pièces nécessaires pour l'affiliation",
+                    desc: "Permis de séjour (B, C, G, L ou N) et attestation de domicile officielle (délivrée par l'office communal ou cantonal des habitants). La plupart des caisses permettent l'inscription en ligne en quelques minutes.",
                   },
                   {
                     titre: 'Modèle standard recommandé au départ',
-                    desc: 'Le temps de trouver un médecin de famille de confiance et de vous orienter dans le système suisse, commencez par le modèle standard. Vous pourrez basculer vers un modèle alternatif (Telmed, HMO, médecin de famille) dès le 1er janvier suivant, avec des économies de prime allant jusqu\'à 24%.',
+                    desc: "Le temps de trouver un médecin de famille de confiance et de vous orienter dans le système suisse, commencez par le modèle standard. Vous pourrez basculer vers un modèle alternatif (Telmed, HMO, médecin de famille) dès le 1er janvier suivant, avec des économies de prime allant jusqu'à 24 %.",
                   },
                   {
                     titre: 'Frontalier ou détaché en Suisse ?',
-                    desc: 'Si vous résidez hors de Suisse et travaillez en Suisse, un droit d\'option spécifique s\'applique. Consultez le guide dédié pour les frontaliers.',
+                    desc: "Si vous résidez hors de Suisse et travaillez en Suisse, un droit d'option spécifique s'applique. Consultez le guide dédié pour les frontaliers.",
                   },
                 ].map((item, i) => (
                   <div key={i} className="border border-edge rounded-[8px] p-5 bg-white">
@@ -320,10 +342,29 @@ export default function MaSituationPage() {
               </div>
             </section>
 
-            <FAQ items={faqItems} />
+            {/* FAQ */}
+            <section id="faq" className="scroll-mt-20">
+              <FAQ items={faqItems} />
+            </section>
 
-            <section>
-              <h3 className="text-[16px] font-semibold text-ink mb-3">Voir aussi</h3>
+            {/* Contact */}
+            <div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4">
+              <h2 className="text-2xl font-semibold text-ink border-b border-edge pb-4 mb-6">
+                Besoin d'aide ?
+              </h2>
+              <p className="text-[15px] text-slate mb-6 max-w-xl">
+                Un expert vous rappelle sous 24 heures pour établir avec vous une solution personnalisée. Gratuit, sans engagement.
+              </p>
+              <div className="max-w-xl">
+                <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
+              </div>
+            </div>
+
+            <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
+
+            {/* Guides associés */}
+            <section className="mt-8 pt-8 border-t border-edge">
+              <h3 className="text-[15px] font-semibold text-ink mb-4">Guides associés</h3>
               <div className="flex flex-col gap-2">
                 {[
                   { href: '/lamal/ma-famille', label: 'LAMal pour votre famille' },
@@ -342,13 +383,7 @@ export default function MaSituationPage() {
               </div>
             </section>
 
-          </div>
-
-          <div className="hidden lg:block w-80 flex-shrink-0">
-            <div className="sticky top-24">
-              <MultiStepLeadForm />
-            </div>
-          </div>
+          </article>
         </div>
       </div>
     </>

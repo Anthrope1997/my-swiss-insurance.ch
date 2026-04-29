@@ -16,6 +16,7 @@ export const metadata: Metadata = {
     url: 'https://my-swiss-insurance.ch/lamal/ma-famille',
     type: 'article',
   },
+  alternates: { canonical: 'https://my-swiss-insurance.ch/lamal/ma-famille' },
 }
 
 const articleSchema = {
@@ -36,12 +37,12 @@ const faqItems = [
       "Oui, à condition de l'affilier dans les 3 mois suivant la naissance. Si ce délai est respecté, la couverture est rétroactive à la date de naissance. Le nourrisson peut être affilié à n'importe quelle caisse, pas nécessairement celle des parents. Les parents choisissent également la franchise enfant (de 0 à 600 CHF) et, si désiré, un modèle alternatif.",
   },
   {
-    question: 'La franchise s\'applique-t-elle pendant la grossesse ?',
+    question: "La franchise s'applique-t-elle pendant la grossesse ?",
     answer:
       "Non. Les prestations de maternité répertoriées par l'OFSP sont entièrement exonérées de franchise et de quote-part (art. 64 al. 7 LAMal). Cela inclut les consultations prénatales, l'accouchement et les soins post-partum standard. En revanche, les soins médicaux non liés à la grossesse restent soumis aux règles habituelles de franchise et de quote-part.",
   },
   {
-    question: 'L\'accouchement à domicile est-il remboursé par la LAMal ?',
+    question: "L'accouchement à domicile est-il remboursé par la LAMal ?",
     answer:
       "Oui. La LAMal rembourse les accouchements à domicile assistés par une sage-femme agréée, dans les mêmes conditions qu'un accouchement en hôpital ou en maison de naissance. L'accouchement est exonéré de franchise et de quote-part. Si des complications surviennent nécessitant un transfert à l'hôpital, la prise en charge hospitalière s'applique également.",
   },
@@ -51,7 +52,7 @@ const faqItems = [
       "Dès la naissance. En Suisse, il n'existe pas d'assurance familiale groupée : chaque personne, y compris les nourrissons, dispose de son propre contrat LAMal individuel. L'affiliation doit intervenir dans les 3 mois suivant la naissance. Le tarif enfant (0 à 18 ans) est nettement inférieur au tarif adulte.",
   },
   {
-    question: 'Les cours de préparation à l\'accouchement sont-ils remboursés ?',
+    question: "Les cours de préparation à l'accouchement sont-ils remboursés ?",
     answer:
       "Partiellement selon la caisse. La LAMal de base ne rembourse pas systématiquement les cours de préparation à la naissance. Certains assureurs les prennent en charge via une assurance complémentaire LCA ambulatoire. Vérifiez les conditions spécifiques de votre caisse avant d'inscrire ces cours.",
   },
@@ -93,20 +94,18 @@ export default function MaFamillePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-      <section className="bg-white border-b border-edge pt-12 pb-10">
+      <section className="bg-white border-b border-edge pt-12 pb-14">
         <div className="container-xl">
           <Breadcrumb items={[
             { label: 'Accueil', href: '/' },
             { label: 'LAMal', href: '/lamal' },
             { label: 'Ma famille' },
           ]} />
-          <div className="flex flex-wrap gap-2 mb-5">
-            <span className="badge">Données OFSP · 2026</span>
-          </div>
-          <h1 className="text-5xl font-bold text-ink leading-tight mb-4 max-w-2xl">
-            LAMal pour votre famille en 2026.
+          <div className="badge mb-5">Données OFSP 2026</div>
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-2xl">
+            LAMal pour votre famille en 2026
           </h1>
-          <p className="text-xl text-slate max-w-2xl leading-relaxed">
+          <p className="text-[18px] text-slate max-w-2xl leading-relaxed">
             La Suisse n'a pas d'assurance familiale groupée : chaque membre de la famille
             dispose de son propre contrat LAMal, avec des règles spécifiques selon l'âge.
             Nourrissons, enfants, jeunes adultes, maternité, retraite — ce guide couvre
@@ -115,16 +114,40 @@ export default function MaFamillePage() {
         </div>
       </section>
 
-      <div className="container-xl py-16">
-        <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
+      <div className="container-xl py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-12 items-start">
 
-        <div className="flex gap-12">
-          <div className="flex-1 min-w-0 space-y-14">
+          {/* TOC */}
+          <aside className="hidden lg:block">
+            <nav className="sticky top-24">
+              <p className="text-[11px] font-semibold text-slate uppercase tracking-widest mb-4 px-4">
+                Sommaire
+              </p>
+              <ul className="space-y-0.5">
+                {[
+                  { id: 'nouveau-ne', label: 'Nouveau-né' },
+                  { id: 'enfants', label: 'Enfants' },
+                  { id: 'jeunes-adultes', label: 'Jeunes adultes' },
+                  { id: 'maternite', label: 'Maternité' },
+                  { id: 'retraite', label: 'Retraite' },
+                  { id: 'faq', label: 'Questions fréquentes' },
+                  { id: 'contact', label: "Besoin d'aide" },
+                ].map(item => (
+                  <li key={item.id}>
+                    <a href={`#${item.id}`} className="toc-link">{item.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </aside>
+
+          {/* Article */}
+          <article className="min-w-0 space-y-4">
 
             {/* Nouveau-né */}
-            <section id="nouveau-ne">
-              <h2 className="text-2xl font-semibold text-ink mb-4">Nouveau-né et nourrisson</h2>
-              <p className="text-[16px] text-slate leading-relaxed mb-5">
+            <section id="nouveau-ne" className="pt-2">
+              <h2 className="article-h2">Nouveau-né et nourrisson</h2>
+              <p className="article-p">
                 Tout enfant né en Suisse ou s'y installant doit être affilié à la LAMal.
                 L'affiliation est obligatoire dans les 3 mois suivant la naissance.
                 Si ce délai est respecté, la couverture est rétroactive à la date de naissance.
@@ -132,7 +155,7 @@ export default function MaFamillePage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
                 {[
-                  { label: 'Délai d\'affiliation', valeur: '3 mois', note: 'dès la naissance' },
+                  { label: "Délai d'affiliation", valeur: '3 mois', note: 'dès la naissance' },
                   { label: 'Franchise recommandée', valeur: '0 CHF', note: 'pour les nourrissons' },
                   { label: 'Quote-part maximale', valeur: '350 CHF', note: 'par an pour les enfants' },
                 ].map((m, i) => (
@@ -154,8 +177,8 @@ export default function MaFamillePage() {
 
             {/* Enfants */}
             <section id="enfants">
-              <h2 className="text-2xl font-semibold text-ink mb-4">Enfants de 0 à 18 ans</h2>
-              <p className="text-[16px] text-slate leading-relaxed mb-5">
+              <h2 className="article-h2">Enfants de 0 à 18 ans</h2>
+              <p className="article-p">
                 Les enfants bénéficient d'un tarif de prime nettement inférieur aux adultes
                 et d'un régime de participation aux frais allégé. La quote-part est plafonnée
                 à 350 CHF par an (contre 700 CHF pour un adulte).
@@ -165,13 +188,13 @@ export default function MaFamillePage() {
                 <table className="stripe-table w-full">
                   <thead>
                     <tr>
-                      <th>Franchise enfant</th>
-                      <th className="text-center">Profil recommandé</th>
+                      <th className="text-left whitespace-nowrap">Franchise enfant</th>
+                      <th className="text-left whitespace-nowrap">Profil recommandé</th>
                     </tr>
                   </thead>
                   <tbody>
                     {[
-                      ['CHF 0', 'Nourrissons, enfants consultatnt fréquemment, maladies régulières'],
+                      ['CHF 0', 'Nourrissons, enfants consultant fréquemment, maladies régulières'],
                       ['CHF 100', 'Jeunes enfants en bonne santé avec quelques consultations par an'],
                       ['CHF 200 à 300', 'Enfants sains, visites médicales occasionnelles'],
                       ['CHF 400 à 600', 'Adolescents robustes, rarement malades'],
@@ -188,12 +211,12 @@ export default function MaFamillePage() {
               <div className="space-y-4">
                 {[
                   {
-                    titre: 'Jusqu\'à 18 ans : tarif enfant',
-                    desc: 'Le tarif enfant s\'applique de la naissance jusqu\'au 31 décembre de l\'année des 18 ans. À partir du 1er janvier de l\'année des 19 ans, le tarif jeune adulte (19 à 25 ans) prend le relais automatiquement.',
+                    titre: "Jusqu'à 18 ans : tarif enfant",
+                    desc: "Le tarif enfant s'applique de la naissance jusqu'au 31 décembre de l'année des 18 ans. À partir du 1er janvier de l'année des 19 ans, le tarif jeune adulte (19 à 25 ans) prend le relais automatiquement.",
                   },
                   {
-                    titre: 'Subsidescumulables avec les droits des parents',
-                    desc: 'Les droits aux subsides des enfants sont calculés séparément des parents. Dans plusieurs cantons, les primes enfants sont totalement prises en charge pour les familles sous certains seuils de revenus. Vérifiez auprès de votre service cantonal.',
+                    titre: 'Subsides cumulables avec les droits des parents',
+                    desc: "Les droits aux subsides des enfants sont calculés séparément des parents. Dans plusieurs cantons, les primes enfants sont totalement prises en charge pour les familles sous certains seuils de revenus. Vérifiez auprès de votre service cantonal.",
                   },
                 ].map((item, i) => (
                   <div key={i} className="border border-edge rounded-[8px] p-5 bg-white">
@@ -206,9 +229,9 @@ export default function MaFamillePage() {
 
             {/* Jeunes adultes */}
             <section id="jeunes-adultes">
-              <h2 className="text-2xl font-semibold text-ink mb-4">Jeunes adultes de 19 à 25 ans</h2>
-              <p className="text-[16px] text-slate leading-relaxed mb-5">
-                La catégorie tarifaire jeune adulte offre des primes réduites d'environ 20 à 25%
+              <h2 className="article-h2">Jeunes adultes de 19 à 25 ans</h2>
+              <p className="article-p">
+                La catégorie tarifaire jeune adulte offre des primes réduites d'environ 20 à 25 %
                 par rapport au tarif adulte complet. Elle s'applique automatiquement de 19 à 25 ans.
               </p>
 
@@ -216,15 +239,15 @@ export default function MaFamillePage() {
                 {[
                   {
                     titre: 'Réduction légale de prime',
-                    desc: 'Les caisses sont légalement tenues d\'appliquer une prime réduite pour les 19 à 25 ans. Le montant exact varie selon la caisse et le canton, mais la réduction est en moyenne de 20 à 25% par rapport au tarif adulte standard. Comparez les caisses spécifiquement pour cette tranche d\'âge.',
+                    desc: "Les caisses sont légalement tenues d'appliquer une prime réduite pour les 19 à 25 ans. Le montant exact varie selon la caisse et le canton, mais la réduction est en moyenne de 20 à 25 % par rapport au tarif adulte standard. Comparez les caisses spécifiquement pour cette tranche d'âge.",
                   },
                   {
                     titre: 'Bascule vers le tarif adulte à 26 ans',
-                    desc: 'Au 1er janvier de l\'année des 26 ans, le tarif adulte s\'applique automatiquement. Les franchises enfants (0 à 600 CHF) sont remplacées par les franchises adultes (300 à 2500 CHF). Anticipez ce changement pour choisir votre nouvelle franchise.',
+                    desc: "Au 1er janvier de l'année des 26 ans, le tarif adulte s'applique automatiquement. Les franchises enfants (0 à 600 CHF) sont remplacées par les franchises adultes (300 à 2 500 CHF). Anticipez ce changement pour choisir votre nouvelle franchise.",
                   },
                   {
                     titre: 'Modèle Telmed souvent recommandé',
-                    desc: 'Pour un jeune adulte en bonne santé, à l\'aise avec les outils numériques, le modèle Telmed (consultation médicale par téléphone ou application avant tout rendez-vous) réduit la prime de 15 à 24% supplémentaires. Combiné à une franchise élevée, les économies peuvent dépasser CHF 200 par mois.',
+                    desc: "Pour un jeune adulte en bonne santé, à l'aise avec les outils numériques, le modèle Telmed (consultation médicale par téléphone ou application avant tout rendez-vous) réduit la prime de 15 à 24 % supplémentaires. Combiné à une franchise élevée, les économies peuvent dépasser CHF 200 par mois.",
                   },
                 ].map((item, i) => (
                   <div key={i} className="border border-edge rounded-[8px] p-5 bg-white">
@@ -237,10 +260,10 @@ export default function MaFamillePage() {
 
             {/* Maternité */}
             <section id="maternite">
-              <h2 className="text-2xl font-semibold text-ink mb-4">
+              <h2 className="article-h2">
                 Maternité : couverture LAMal complète
               </h2>
-              <p className="text-[16px] text-slate leading-relaxed mb-5">
+              <p className="article-p">
                 La LAMal couvre entièrement la maternité physiologique sans franchise ni
                 quote-part (art. 64 al. 7 LAMal, RS 832.10). La mère ne paie rien de sa
                 poche pour les prestations listées par l'OFSP.
@@ -256,7 +279,7 @@ export default function MaFamillePage() {
                       'Analyses de laboratoire prescrites et dépistages obligatoires',
                       'Accouchement en hôpital, maison de naissance ou à domicile',
                       'Séjour hospitalier post-partum standard',
-                      'Consultations sage-femme jusqu\'à 10 semaines post-partum',
+                      "Consultations sage-femme jusqu'à 10 semaines post-partum",
                       'Soins infirmiers à domicile prescrits',
                       'Consultations supplémentaires en cas de grossesse à risque',
                     ].map((item, i) => (
@@ -299,8 +322,8 @@ export default function MaFamillePage() {
 
             {/* Retraité */}
             <section id="retraite">
-              <h2 className="text-2xl font-semibold text-ink mb-4">LAMal à la retraite</h2>
-              <p className="text-[16px] text-slate leading-relaxed mb-5">
+              <h2 className="article-h2">LAMal à la retraite</h2>
+              <p className="article-p">
                 Il n'existe pas de tarif senior en LAMal. Le tarif adulte s'applique à partir
                 de 26 ans et reste identique quel que soit l'âge. Les retraités ne paient donc
                 pas de surprime liée à l'âge, mais la fréquence des soins augmente souvent
@@ -311,19 +334,19 @@ export default function MaFamillePage() {
                 {[
                   {
                     titre: 'Franchise 300 CHF généralement recommandée',
-                    desc: 'Les frais médicaux augmentent statistiquement avec l\'âge. La franchise basse (300 CHF) devient rapidement avantageuse dès que les dépenses médicales annuelles dépassent environ CHF 1\'440. Pour un retraité consultant régulièrement un médecin ou suivi pour une pathologie chronique, c\'est souvent le meilleur choix.',
+                    desc: "Les frais médicaux augmentent statistiquement avec l'âge. La franchise basse (300 CHF) devient rapidement avantageuse dès que les dépenses médicales annuelles dépassent environ CHF 1 440. Pour un retraité consultant régulièrement un médecin ou suivi pour une pathologie chronique, c'est souvent le meilleur choix.",
                   },
                   {
                     titre: 'Subsides prioritaires pour les retraités à revenus modestes',
-                    desc: 'Les retraités disposant d\'une rente AVS ou LPP modeste ont souvent droit aux subsides cantonaux, sans toujours le savoir. Dans plusieurs cantons, les subsides sont attribués automatiquement. Pour les autres, une demande annuelle est à déposer auprès du service cantonal compétent.',
+                    desc: "Les retraités disposant d'une rente AVS ou LPP modeste ont souvent droit aux subsides cantonaux, sans toujours le savoir. Dans plusieurs cantons, les subsides sont attribués automatiquement. Pour les autres, une demande annuelle est à déposer auprès du service cantonal compétent.",
                   },
                   {
                     titre: 'LCA hospitalière : à souscrire avant la retraite',
-                    desc: 'La LAMal de base couvre uniquement la division commune à l\'hôpital. Une LCA hospitalière garantit la chambre semi-privée ou privée et le libre choix du médecin chef — particulièrement utile pour les hospitalisations qui deviennent plus fréquentes. À souscrire avant 65 ans pour des conditions optimales et éviter les exclusions liées à l\'âge.',
+                    desc: "La LAMal de base couvre uniquement la division commune à l'hôpital. Une LCA hospitalière garantit la chambre semi-privée ou privée et le libre choix du médecin chef — particulièrement utile pour les hospitalisations qui deviennent plus fréquentes. À souscrire avant 65 ans pour des conditions optimales et éviter les exclusions liées à l'âge.",
                   },
                   {
                     titre: 'Planifier les primes dans le budget retraite',
-                    desc: 'Les primes LAMal représentent souvent 10 à 15% du revenu d\'une rente AVS. Cette charge est prévisible et stable. Intégrez-la dans votre planification financière de retraite, en anticipant l\'éventuelle hausse annuelle des primes fixées par l\'OFSP.',
+                    desc: "Les primes LAMal représentent souvent 10 à 15 % du revenu d'une rente AVS. Cette charge est prévisible et stable. Intégrez-la dans votre planification financière de retraite, en anticipant l'éventuelle hausse annuelle des primes fixées par l'OFSP.",
                   },
                 ].map((item, i) => (
                   <div key={i} className="border border-edge rounded-[8px] p-5 bg-white">
@@ -334,10 +357,29 @@ export default function MaFamillePage() {
               </div>
             </section>
 
-            <FAQ items={faqItems} />
+            {/* FAQ */}
+            <section id="faq" className="scroll-mt-20">
+              <FAQ items={faqItems} />
+            </section>
 
-            <section>
-              <h3 className="text-[16px] font-semibold text-ink mb-3">Voir aussi</h3>
+            {/* Contact */}
+            <div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4">
+              <h2 className="text-2xl font-semibold text-ink border-b border-edge pb-4 mb-6">
+                Besoin d'aide ?
+              </h2>
+              <p className="text-[15px] text-slate mb-6 max-w-xl">
+                Un expert vous rappelle sous 24 heures pour établir avec vous une solution personnalisée. Gratuit, sans engagement.
+              </p>
+              <div className="max-w-xl">
+                <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
+              </div>
+            </div>
+
+            <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
+
+            {/* Guides associés */}
+            <section className="mt-8 pt-8 border-t border-edge">
+              <h3 className="text-[15px] font-semibold text-ink mb-4">Guides associés</h3>
               <div className="flex flex-col gap-2">
                 {[
                   { href: '/lamal/ma-situation', label: 'LAMal selon votre situation professionnelle' },
@@ -356,13 +398,7 @@ export default function MaFamillePage() {
               </div>
             </section>
 
-          </div>
-
-          <div className="hidden lg:block w-80 flex-shrink-0">
-            <div className="sticky top-24">
-              <MultiStepLeadForm />
-            </div>
-          </div>
+          </article>
         </div>
       </div>
     </>
