@@ -32,12 +32,12 @@ const faqItems = [
   {
     question: 'Quelle franchise LAMal choisir en 2026 ?',
     answer:
-      "Choisissez la franchise 300 CHF si vos frais médicaux annuels dépassent environ CHF 1 440 par an. Optez pour la franchise 2 500 CHF si vous êtes en bonne santé : vous économisez environ CHF 120 par mois sur la prime mais vous assumez jusqu'à CHF 2 500 par an de frais médicaux. Le seuil d'équilibre entre les deux franchises extrêmes se situe autour de CHF 1 440 par an.",
+      "Choisissez la franchise 2 500 CHF si vous êtes en bonne santé et avez peu de frais médicaux : vous économisez environ CHF 120 par mois sur la prime. Optez pour la franchise 300 CHF si vos dépenses médicales dépassent CHF 1 440 par an.",
   },
   {
     question: "Peut-on changer de franchise en cours d'année ?",
     answer:
-      "Non. La franchise ne peut être modifiée qu'au 1er janvier de chaque année. La demande doit parvenir à votre caisse avant le 30 novembre. Pour passer d'une franchise élevée à la franchise 300 CHF, la même date limite s'applique.",
+      "Non. La franchise se choisit une fois par an, au 1er janvier. La demande doit être envoyée à votre caisse avant le 30 novembre.",
   },
   {
     question: "Quelle est la différence entre la franchise et la quote-part ?",
@@ -224,11 +224,11 @@ export default function FranchisePage() {
                   <ul className="space-y-1">
                     <li className="text-[16px] flex gap-2">
                       <span className="shrink-0">✓</span>
-                      <span>Vous payez CHF 1 550 : CHF 1 500 (franchise) + CHF 50 (10 pour cent de quote-part sur les CHF 500 restants).</span>
+                      <span>Vous payez CHF 1 550 : CHF 1 500 (franchise) + CHF 50 (10% de quote-part sur les CHF 500 restants).</span>
                     </li>
                     <li className="text-[16px] flex gap-2">
                       <span className="shrink-0">✓</span>
-                      <span>Votre caisse prend en charge CHF 450 : les 90 pour cent au-dessus de la franchise.</span>
+                      <span>Votre caisse prend en charge CHF 450 : les 90% au-dessus de la franchise.</span>
                     </li>
                   </ul>
                 </div>
@@ -239,13 +239,12 @@ export default function FranchisePage() {
             <section id="tableau">
               <h2 className="article-h2">2. Quelle franchise choisir selon vos frais médicaux annuels ?</h2>
               <p className="article-p">
-                Une franchise élevée réduit votre prime mensuelle, mais augmente votre reste à charge en cas de maladie.
-                Le tableau ci-dessous indique, pour chaque franchise, le niveau de frais médicaux annuels à ne pas dépasser
-                pour qu'elle reste avantageuse par rapport à la franchise minimale de CHF 300.
-                Primes pour un adulte (26 ans et plus) à Zurich, modèle standard, OFSP 2026. Les montants varient selon le canton.
+                Une franchise élevée réduit votre prime, mais augmente votre reste à charge.
+                Le tableau indique, pour chaque franchise, le seuil de dépenses annuelles
+                à ne pas dépasser pour qu'elle reste avantageuse.
               </p>
 
-              <div className="overflow-x-auto border border-edge rounded-[8px] mb-4">
+              <div className="overflow-x-auto border border-edge rounded-[8px] mb-2">
                 <table className="stripe-table w-full">
                   <thead>
                     <tr>
@@ -271,6 +270,9 @@ export default function FranchisePage() {
                   </tbody>
                 </table>
               </div>
+              <p className="text-[13px] text-slate/60 mb-4">
+                Primes pour un adulte (26 ans et plus) à Zurich, modèle standard, OFSP 2026.
+              </p>
 
               <div className="callout flex gap-3">
                 <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
@@ -331,9 +333,9 @@ export default function FranchisePage() {
                   </thead>
                   <tbody>
                     {[
-                      ['CHF 400 à 600',  'Adolescents robustes, rarement malades'],
+                      ['CHF 400 à 600',  'Adolescents en bonne santé, rarement malades'],
                       ['CHF 200 à 300',  'Enfants en bonne santé, quelques visites annuelles'],
-                      ['CHF 100',        'Enfants avec quelques consultations par an'],
+                      ['CHF 100',        'Enfants avec des consultations régulières'],
                       ['CHF 0',          'Nourrissons et enfants en bas âge, consultations fréquentes'],
                     ].map(([fr, profil], i) => (
                       <tr key={i}>
