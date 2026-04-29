@@ -11,18 +11,18 @@ const capEconAn   = capEconMois * 12
 export const metadata: Metadata = {
   title: 'Assurance maladie dans le canton de Vaud en 2026 : primes, caisses et subsides',
   description:
-    `Prime LAMal 2026 à Vaud : ${c.primeMoyenne} CHF/mois en moyenne pour un adulte. ` +
-    `À Lausanne, ${cap.cheapest.name} est la caisse la moins chère à ${cap.cheapest.prime} CHF/mois — ` +
-    `économie max CHF ${capEconAn}/an vs la plus chère (${cap.mostExpensive.name}, ${cap.mostExpensive.prime} CHF/mois). ` +
-    `Jeune adulte : ${c.primeMoyenneJA} CHF/mois. Enfant : ${c.primeMoyenneEnfant} CHF/mois. ` +
-    `Subsides jusqu'à CHF ${c.subside.subsideMensuelMax}/mois. ` +
+    `Prime LAMal 2026 à Vaud : ${c.primeMoyenne} CHF par mois en moyenne pour un adulte. ` +
+    `À Lausanne, ${cap.cheapest.name} est la caisse la moins chère à ${cap.cheapest.prime} CHF par mois : ` +
+    `économie maximale CHF ${capEconAn} par an, caisse la plus chère (${cap.mostExpensive.name}, ${cap.mostExpensive.prime} CHF par mois). ` +
+    `Jeune adulte : ${c.primeMoyenneJA} CHF par mois. Enfant : ${c.primeMoyenneEnfant} CHF par mois. ` +
+    `Subsides jusqu'à CHF ${c.subside.subsideMensuelMax} par mois. ` +
     `${c.rang}e canton le moins cher sur 26. Données OFSP 2026.`,
   alternates: { canonical: 'https://my-swiss-insurance.ch/lamal/canton/vaud' },
   openGraph: {
     title: 'Assurance maladie dans le canton de Vaud en 2026 : primes, caisses et subsides',
     description:
-      `Prime moyenne ${c.primeMoyenne} CHF/mois. À Lausanne : ${cap.cheapest.name} à ${cap.cheapest.prime} CHF/mois. ` +
-      `Économisez jusqu'à CHF ${capEconAn}/an en changeant de caisse.`,
+      `Prime moyenne ${c.primeMoyenne} CHF par mois. À Lausanne : ${cap.cheapest.name} à ${cap.cheapest.prime} CHF par mois. ` +
+      `Économisez jusqu'à CHF ${capEconAn} par an en changeant de caisse.`,
     url: 'https://my-swiss-insurance.ch/lamal/canton/vaud',
     type: 'article',
   },
@@ -40,11 +40,11 @@ const faqSchema = {
       acceptedAnswer: {
         '@type': 'Answer',
         text:
-          `La prime LAMal moyenne dans le canton de Vaud en 2026 est de ${c.primeMoyenne} CHF/mois ` +
+          `La prime LAMal moyenne dans le canton de Vaud en 2026 est de ${c.primeMoyenne} CHF par mois ` +
           `pour un adulte (franchise 300 CHF, modèle standard, source OFSP 2026). ` +
-          `Elle varie de ${cheapest.prime} CHF/mois (${cheapest.name}, la moins chère) ` +
-          `à ${c.caissePlusChere.prime} CHF/mois (${c.caissePlusChere.name}, la plus chère), ` +
-          `soit une différence de CHF ${c.economieAn}/an pour les mêmes prestations de base.`,
+          `Elle varie de ${cheapest.prime} CHF par mois (${cheapest.name}, la moins chère) ` +
+          `à ${c.caissePlusChere.prime} CHF par mois (${c.caissePlusChere.name}, la plus chère), ` +
+          `soit une différence de CHF ${c.economieAn} par an pour les mêmes prestations de base.`,
       },
     },
     {
@@ -54,9 +54,9 @@ const faqSchema = {
         '@type': 'Answer',
         text:
           `À Lausanne (région de primes VD1), la caisse d'assurance maladie la moins chère en 2026 est ` +
-          `${cap.cheapest.name} à ${cap.cheapest.prime} CHF/mois pour un adulte de 35 ans, franchise 300 CHF, ` +
+          `${cap.cheapest.name} à ${cap.cheapest.prime} CHF par mois pour un adulte de 35 ans, franchise 300 CHF, ` +
           `modèle standard (source : OFSP 2026). La caisse la plus chère est ${cap.mostExpensive.name} ` +
-          `à ${cap.mostExpensive.prime} CHF/mois — soit CHF ${capEconAn} d'économie par année en changeant de caisse.`,
+          `à ${cap.mostExpensive.prime} CHF par mois, soit CHF ${capEconAn} d'économie par an en changeant de caisse.`,
       },
     },
     {
@@ -66,9 +66,9 @@ const faqSchema = {
         '@type': 'Answer',
         text:
           `Dans le canton de Vaud en 2026 (source OFSP), la prime LAMal moyenne varie selon le profil : ` +
-          `adulte de 26 ans et plus : ${c.primeMoyenne} CHF/mois ; ` +
-          `jeune adulte de 19 à 25 ans : ${c.primeMoyenneJA} CHF/mois ; ` +
-          `enfant de 0 à 18 ans : ${c.primeMoyenneEnfant} CHF/mois. ` +
+          `adulte de 26 ans et plus : ${c.primeMoyenne} CHF par mois ; ` +
+          `jeune adulte de 19 à 25 ans : ${c.primeMoyenneJA} CHF par mois ; ` +
+          `enfant de 0 à 18 ans : ${c.primeMoyenneEnfant} CHF par mois. ` +
           `Ces montants sont calculés avec une franchise de 300 CHF et le modèle standard, ` +
           `en moyenne sur les deux régions de primes du canton (VD1 et VD2).`,
       },
@@ -81,7 +81,7 @@ const faqSchema = {
         text:
           `Dans le canton de Vaud, le subside LAMal (réduction individuelle des primes) est attribué sur demande ` +
           `aux personnes dont le revenu déterminant ne dépasse pas environ ${c.subside.seuilRevenu}. ` +
-          `Le montant maximum pour un adulte seul est de CHF ${c.subside.subsideMensuelMax}/mois. ` +
+          `Le montant maximum pour un adulte seul est de CHF ${c.subside.subsideMensuelMax} par mois. ` +
           `La demande se fait auprès de la Caisse cantonale vaudoise de compensation (CCVD). ` +
           `Le subside est versé directement à votre caisse-maladie.`,
       },
@@ -92,10 +92,10 @@ const faqSchema = {
       acceptedAnswer: {
         '@type': 'Answer',
         text:
-          `En choisissant la caisse la moins chère (${cheapest.name}, ${cheapest.prime} CHF/mois) ` +
-          `plutôt que la plus chère (${c.caissePlusChere.name}, ${c.caissePlusChere.prime} CHF/mois) ` +
-          `dans le canton de Vaud, vous économisez CHF ${c.economieAn}/an pour les mêmes prestations LAMal. ` +
-          `À Lausanne spécifiquement, l'économie maximale est de CHF ${capEconAn}/an (${capEconMois} CHF/mois).`,
+          `En choisissant la caisse la moins chère (${cheapest.name}, ${cheapest.prime} CHF par mois) ` +
+          `plutôt que la plus chère (${c.caissePlusChere.name}, ${c.caissePlusChere.prime} CHF par mois) ` +
+          `dans le canton de Vaud, vous économisez CHF ${c.economieAn} par an pour les mêmes prestations LAMal. ` +
+          `À Lausanne spécifiquement, l'économie maximale est de CHF ${capEconAn} par an (${capEconMois} CHF par mois).`,
       },
     },
     {
@@ -105,9 +105,9 @@ const faqSchema = {
         '@type': 'Answer',
         text:
           `Le choix de franchise dépend de votre état de santé. ` +
-          `Avec la franchise 2 500 CHF (la plus haute), vous payez moins de prime chaque mois — ` +
+          `Avec la franchise 2 500 CHF (la plus haute), vous payez moins de prime chaque mois : ` +
           `mais vous supportez jusqu'à 2 500 CHF de frais médicaux par an avant que l'assurance intervienne. ` +
-          `Avec la franchise 300 CHF, votre reste à charge est plafonné à CHF 1 000/an maximum (300 CHF de franchise + 700 CHF de quote-part 10 %). ` +
+          `Avec la franchise 300 CHF, votre reste à charge est plafonné à CHF 1 000 par an maximum (300 CHF de franchise + 700 CHF de quote-part 10 %). ` +
           `Si vous êtes en bonne santé et consultez peu, la franchise 2 500 CHF est généralement avantageuse.`,
       },
     },
@@ -118,8 +118,8 @@ const faqSchema = {
         '@type': 'Answer',
         text:
           `Le canton de Vaud est divisé en 2 régions de primes OFSP. ` +
-          `La région VD1 (zone Lausanne–Vevey) affiche une prime moyenne de ${c.regions[0].prime.toFixed(0)} CHF/mois, ` +
-          `supérieure à la région VD2 (reste du canton) à ${c.regions[1].prime.toFixed(0)} CHF/mois. ` +
+          `La région VD1 (zone Lausanne–Vevey) affiche une prime moyenne de ${c.regions[0].prime.toFixed(0)} CHF par mois, ` +
+          `supérieure à la région VD2 (reste du canton) à ${c.regions[1].prime.toFixed(0)} CHF par mois. ` +
           `Votre prime varie donc selon votre commune de résidence au sein du canton.`,
       },
     },

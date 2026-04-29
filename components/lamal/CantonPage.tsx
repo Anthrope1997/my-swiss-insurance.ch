@@ -56,7 +56,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
       question: `Le canton de ${canton.name} est-il cher pour l'assurance maladie ?`,
       answer:
         `Avec une prime moyenne de ${canton.primeMoyenne} CHF par mois pour un adulte (franchise 300 CHF, modèle standard), le canton de ${canton.name} se classe au ${ordinal(canton.rang)} rang sur 26 cantons suisses, du moins cher au plus cher (source OFSP 2026). ` +
-        `Les primes varient selon votre commune de résidence${canton.nbRegions > 1 ? ` — le canton compte ${canton.nbRegions} régions tarifaires OFSP` : ''}, votre franchise et le modèle d'assurance choisi.`,
+        `Les primes varient selon votre commune de résidence${canton.nbRegions > 1 ? `, le canton compte ${canton.nbRegions} régions tarifaires OFSP` : ''}, votre franchise et le modèle d'assurance choisi.`,
     },
     {
       question: `Quelle est la différence de prime entre adulte et jeune adulte dans le canton de ${canton.name} ?`,
@@ -135,7 +135,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
       <section className="bg-white border-b border-edge pt-12 pb-14">
         <div className="container-xl">
-          <div className="badge mb-5">Données OFSP · 2026</div>
+          <div className="badge mb-5">Données OFSP 2026</div>
 
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-5 max-w-3xl">
             Assurance maladie dans le canton de {canton.name}
@@ -225,22 +225,22 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
         {/* ── Top caisses ──────────────────────────────────────────────── */}
         <section id="top-caisses">
           <h2 className="text-2xl font-semibold text-ink border-b border-edge pb-4 mb-5">
-            Caisses les moins chères — {canton.name} 2026
+            Caisses les moins chères, {canton.name} 2026
           </h2>
           <p className="text-[15px] text-slate mb-6 max-w-2xl">
-            Classement pour un adulte de 35 ans, franchise 300 CHF, modèle standard, sans couverture accident
-            — en moyenne sur {canton.nbRegions > 1 ? `les ${canton.nbRegions} régions tarifaires` : `l'ensemble`} du canton.
+            Classement pour un adulte de 35 ans, franchise 300 CHF, modèle standard, sans couverture accident,
+            en moyenne sur {canton.nbRegions > 1 ? `les ${canton.nbRegions} régions tarifaires` : `l'ensemble`} du canton.
             Les primes varient selon votre profil exact et votre commune.
           </p>
           <div className="border border-edge rounded-[8px] overflow-hidden">
             <table className="stripe-table w-full">
               <thead>
                 <tr>
-                  <th className="w-12">Rang</th>
-                  <th>Caisse</th>
-                  <th className="text-right">Prime par mois</th>
-                  <th className="text-right hidden sm:table-cell">Prime par an</th>
-                  <th className="text-right hidden md:table-cell">Économie annuelle</th>
+                  <th className="w-12 text-left whitespace-nowrap">Rang</th>
+                  <th className="text-left whitespace-nowrap">Caisse</th>
+                  <th className="text-left whitespace-nowrap">Prime par mois</th>
+                  <th className="text-left whitespace-nowrap hidden sm:table-cell">Prime par an</th>
+                  <th className="text-left whitespace-nowrap hidden md:table-cell">Économie annuelle</th>
                 </tr>
               </thead>
               <tbody>
@@ -253,12 +253,12 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
                           {i + 1}
                         </span>
                       </td>
-                      <td className="font-semibold text-ink">{c.name}</td>
-                      <td className="text-right font-bold text-brand">{c.prime} CHF</td>
-                      <td className="text-right hidden sm:table-cell text-slate">
+                      <td className="font-semibold text-ink whitespace-nowrap">{c.name}</td>
+                      <td className="text-left font-bold text-brand whitespace-nowrap">{c.prime} CHF</td>
+                      <td className="text-left whitespace-nowrap hidden sm:table-cell text-slate">
                         {formatChf(c.prime * 12)} CHF
                       </td>
-                      <td className="text-right hidden md:table-cell">
+                      <td className="text-left whitespace-nowrap hidden md:table-cell">
                         <span className="text-[#16a34a] font-semibold">
                           {formatChf(econAn)} CHF par an
                         </span>
@@ -273,27 +273,21 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
                       {canton.topCaisses.length + 1}
                     </span>
                   </td>
-                  <td className="text-slate">{canton.caissePlusChere.name}</td>
-                  <td className="text-right text-slate">{canton.caissePlusChere.prime} CHF</td>
-                  <td className="text-right hidden sm:table-cell text-slate/60">
+                  <td className="text-slate whitespace-nowrap">{canton.caissePlusChere.name}</td>
+                  <td className="text-left text-slate whitespace-nowrap">{canton.caissePlusChere.prime} CHF</td>
+                  <td className="text-left whitespace-nowrap hidden sm:table-cell text-slate/60">
                     {formatChf(canton.caissePlusChere.prime * 12)} CHF
                   </td>
-                  <td className="text-right hidden md:table-cell text-[12px] text-slate/50 italic">
+                  <td className="text-left whitespace-nowrap hidden md:table-cell text-[12px] text-slate/50 italic">
                     Caisse la plus chère
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <div className="mt-4 bg-ink rounded-xl px-5 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <p className="text-white text-[14px]">
-              Comparez toutes les caisses disponibles pour votre profil exact et votre commune.
-            </p>
-            <Link
-              href="/lamal/comparateur"
-              className="shrink-0 bg-brand hover:bg-brand-dark text-white text-[14px] font-semibold px-5 py-2.5 rounded-md transition-colors whitespace-nowrap"
-            >
-              Voir toutes les primes →
+          <div className="mt-4">
+            <Link href="/lamal/comparateur" className="text-brand hover:underline text-[15px] font-medium">
+              Comparer toutes les caisses pour votre profil exact →
             </Link>
           </div>
         </section>
@@ -312,23 +306,23 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
             <table className="stripe-table w-full text-[14px]">
               <thead>
                 <tr>
-                  <th>Franchise</th>
-                  <th className="text-right">Prime par mois</th>
-                  <th className="text-right hidden sm:table-cell">Prime par an</th>
-                  <th className="text-right">Si aucun frais</th>
-                  <th className="text-right hidden sm:table-cell">Si 3 000 CHF</th>
-                  <th className="text-right hidden md:table-cell">Si 8 000 CHF</th>
+                  <th className="text-left whitespace-nowrap">Franchise</th>
+                  <th className="text-left whitespace-nowrap">Prime par mois</th>
+                  <th className="text-left whitespace-nowrap hidden sm:table-cell">Prime par an</th>
+                  <th className="text-left whitespace-nowrap">Si aucun frais</th>
+                  <th className="text-left whitespace-nowrap hidden sm:table-cell">Si 3 000 CHF</th>
+                  <th className="text-left whitespace-nowrap hidden md:table-cell">Si 8 000 CHF</th>
                 </tr>
               </thead>
               <tbody>
                 {canton.franchiseTable.map((row) => (
                   <tr key={row.franchise}>
-                    <td className="font-semibold text-ink">CHF {formatChf(row.franchise)}</td>
-                    <td className="text-right text-brand font-semibold">{row.primeMois.toFixed(2)}</td>
-                    <td className="text-right hidden sm:table-cell text-slate">{formatChf(row.primeAn)}</td>
-                    <td className="text-right font-medium">{formatChf(row.cout0)}</td>
-                    <td className="text-right hidden sm:table-cell text-slate">{formatChf(row.cout3000)}</td>
-                    <td className="text-right hidden md:table-cell text-slate">{formatChf(row.cout8000)}</td>
+                    <td className="font-semibold text-ink whitespace-nowrap">CHF {formatChf(row.franchise)}</td>
+                    <td className="text-left text-brand font-semibold whitespace-nowrap">{row.primeMois.toFixed(2)}</td>
+                    <td className="text-left whitespace-nowrap hidden sm:table-cell text-slate">{formatChf(row.primeAn)}</td>
+                    <td className="text-left font-medium whitespace-nowrap">{formatChf(row.cout0)}</td>
+                    <td className="text-left whitespace-nowrap hidden sm:table-cell text-slate">{formatChf(row.cout3000)}</td>
+                    <td className="text-left whitespace-nowrap hidden md:table-cell text-slate">{formatChf(row.cout8000)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -338,33 +332,27 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
             <div className="bg-[#f0fdf4] border border-[#86efac] rounded-[8px] px-4 py-3">
               <p className="text-[13px] font-semibold text-[#166534] mb-0.5">Peu de frais médicaux</p>
               <p className="text-[13px] text-[#166534]">
-                Franchise 2 500 CHF — économie de CHF {formatChf(economieFranchise)} par an sur la prime.
+                Franchise 2 500 CHF : économie de CHF {formatChf(economieFranchise)} par an sur la prime.
               </p>
             </div>
             <div className="bg-[#fff7ed] border border-[#fdba74] rounded-[8px] px-4 py-3">
               <p className="text-[13px] font-semibold text-[#9a3412] mb-0.5">Frais médicaux élevés</p>
               <p className="text-[13px] text-[#9a3412]">
-                Franchise 300 CHF — reste à charge plafonné à CHF 1 000 par an.
+                Franchise 300 CHF : reste à charge plafonné à CHF 1 000 par an.
               </p>
             </div>
           </div>
-          <div className="mt-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-cloud border border-edge rounded-xl px-5 py-4">
-            <p className="text-[14px] text-slate">
-              Vous hésitez entre deux franchises ? Un expert analyse votre situation gratuitement.
-            </p>
-            <FormScrollButton
-              intent="conseil"
-              className="shrink-0 bg-ink hover:bg-[#1a3a6e] text-white text-[14px] font-semibold px-5 py-2.5 rounded-md transition-colors whitespace-nowrap"
-            >
-              Me faire conseiller →
-            </FormScrollButton>
+          <div className="mt-4">
+            <Link href="/lamal/franchise" className="text-brand hover:underline text-[15px] font-medium">
+              Tout savoir sur le choix de la franchise →
+            </Link>
           </div>
         </section>
 
         {/* ── Subsides ─────────────────────────────────────────────────── */}
         <section id="subsides">
           <h2 className="text-2xl font-semibold text-ink border-b border-edge pb-4 mb-5">
-            Subsides LAMal — {canton.name}
+            Subsides LAMal, {canton.name}
           </h2>
           <div className="border border-edge rounded-[8px] overflow-hidden mb-5">
             <table className="w-full text-[14px]">
@@ -373,7 +361,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
                   ['Seuil de revenu déterminant', canton.subside.seuilRevenu],
                   ['Subside indicatif',            canton.subside.subsideMensuel],
                   ['Attribution',                  canton.subside.automatique
-                    ? 'Automatique — aucune démarche requise'
+                    ? 'Automatique : aucune démarche requise'
                     : 'Sur demande auprès du canton'],
                 ].map(([label, value], i) => (
                   <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-cloud'}>
@@ -409,17 +397,10 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
             </div>
           )}
 
-          {/* Nudge */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-[#eff6ff] border border-[#bfdbfe] rounded-xl px-5 py-4">
-            <p className="text-[14px] text-ink">
-              Un expert vérifie votre éligibilité et effectue la demande pour vous.
-            </p>
-            <FormScrollButton
-              intent="subsides"
-              className="shrink-0 bg-brand hover:bg-brand-dark text-white text-[14px] font-semibold px-5 py-2.5 rounded-md transition-colors whitespace-nowrap"
-            >
-              Vérifier mes subsides →
-            </FormScrollButton>
+          <div className="mt-4">
+            <Link href="/lamal/subsides" className="text-brand hover:underline text-[15px] font-medium">
+              Calculer mes subsides LAMal →
+            </Link>
           </div>
         </section>
 
@@ -429,18 +410,20 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
         </div>
 
         {/* ── Formulaire multi-étapes ───────────────────────────────────── */}
-        <section id="formulaire">
+        <div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4">
           <h2 className="text-2xl font-semibold text-ink border-b border-edge pb-4 mb-6">
-            Recevoir un conseil personnalisé gratuit
+            Besoin d'aide ?
           </h2>
           <p className="text-[15px] text-slate mb-6 max-w-xl">
-            Un expert indépendant analyse votre situation et vous propose la meilleure solution
-            dans le canton de {canton.name}. Sans engagement, sous 24 heures.
+            Un expert vous rappelle sous 24 heures pour établir avec vous une solution personnalisée. Gratuit, sans engagement.
           </p>
           <div className="max-w-xl">
-            <MultiStepLeadForm />
+            <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
           </div>
-        </section>
+        </div>
+
+        {/* ── Mise à jour ──────────────────────────────────────────────── */}
+        <AuthorBio publishedDate="1er janvier 2026" updatedDate="21 avril 2026" />
 
         {/* ── Navigation cantons ───────────────────────────────────────── */}
         <section>
@@ -477,9 +460,6 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
             ))}
           </div>
         </section>
-
-        {/* ── Mise à jour ──────────────────────────────────────────────── */}
-        <AuthorBio publishedDate="1er janvier 2026" updatedDate="21 avril 2026" />
 
       </div>
     </>
