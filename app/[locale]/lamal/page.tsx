@@ -248,9 +248,9 @@ export default function LamalPage() {
               Tout comprendre sur l'assurance maladie suisse
             </h2>
             <p className="text-[17px] text-slate leading-relaxed">
-              La LAMal est obligatoire pour tous les résidents en Suisse depuis 1996. Franchises,
-              modèles alternatifs, subsides cantonaux : nos guides couvrent chaque aspect avec
-              des données officielles OFSP.
+              L'assurance maladie LAMal est obligatoire pour tous les résidents en Suisse depuis
+              1996. Nos guides couvrent chaque aspect pour vous aider à faire le bon choix :
+              franchises, modèles alternatifs et subsides cantonaux.
             </p>
           </div>
 
@@ -358,8 +358,7 @@ export default function LamalPage() {
             </h2>
             <p className="text-[17px] text-slate leading-relaxed">
               Sélectionnez votre canton pour accéder aux données détaillées : primes, classement
-              des caisses et simulateur de subsides. Adulte 35 ans, modèle standard,
-              franchise 300 CHF. Source OFSP 2026.
+              des caisses et simulateur de subsides.
             </p>
           </div>
 

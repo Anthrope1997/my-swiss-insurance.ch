@@ -638,8 +638,7 @@ export default function GuideLamalPage() {
                 Besoin d'aide ?
               </h2>
               <p className="text-[16px] text-slate mb-6 leading-relaxed">
-                Un expert vous rappelle sous 24 heures pour établir avec vous une solution
-                personnalisée. Gratuit, sans engagement.
+                Un expert vous rappelle sous 24 heures pour vous aider à trouver l'assurance maladie la plus adaptée à votre situation. C'est gratuit et sans engagement.
               </p>
               <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
             </div>

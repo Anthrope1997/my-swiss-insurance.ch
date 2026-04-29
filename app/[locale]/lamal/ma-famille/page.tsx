@@ -368,7 +368,7 @@ export default function MaFamillePage() {
                 Besoin d'aide ?
               </h2>
               <p className="text-[15px] text-slate mb-6 max-w-xl">
-                Un expert vous rappelle sous 24 heures pour établir avec vous une solution personnalisée. Gratuit, sans engagement.
+                Un expert vous rappelle sous 24 heures pour vous aider à trouver l'assurance maladie la plus adaptée à votre situation. C'est gratuit et sans engagement.
               </p>
               <div className="max-w-xl">
                 <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
