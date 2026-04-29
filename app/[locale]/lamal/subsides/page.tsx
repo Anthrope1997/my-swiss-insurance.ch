@@ -88,15 +88,119 @@ const toc = [
 ]
 
 // Données de référence — 26 cantons suisses, sources officielles 2026
-// Montant maximum indicatif = subside adulte seul, sans enfant, revenu proche de zéro
-// Seuil revenu = plafond d'éligibilité pour adulte seul, sans enfant
+// Triés par montant maximum indicatif décroissant ; cantons sans CHF fixe à la fin
 const CANTONS_SUBSIDES = [
+  {
+    code: 'TI', nom: 'Tessin',
+    revenu: 'Formule de calcul cantonale',
+    montant: "jusqu'à CHF 668",
+    auto: false, delai: '31 déc. 2025',
+    lien: 'https://www4.ti.ch/dss/ias/prestazioni-e-contributi/scheda/p/s/dettaglio/riduzione-dei-premi-dellassicurazione-malattia-ripam/richiesta-del-formulario-ripam/',
+  },
+  {
+    code: 'NE', nom: 'Neuchâtel',
+    revenu: "65'089 CHF",
+    montant: "jusqu'à CHF 643",
+    auto: true, delai: '—',
+    lien: 'https://www.ne.ch/themes/social/assurance-maladie/subsides-assurance-maladie-lamal',
+  },
+  {
+    code: 'JU', nom: 'Jura',
+    revenu: "27'000 CHF",
+    montant: "jusqu'à CHF 568",
+    auto: false, delai: '31 déc. 2026',
+    lien: 'https://www.ecasjura.ch',
+  },
+  {
+    code: 'SG', nom: 'Saint-Gall',
+    revenu: 'Formule proportionnelle',
+    montant: "jusqu'à CHF 524 (région 1)",
+    auto: false, delai: '31 mars 2026',
+    lien: 'https://www.svasg.ch/produkte/ipv/',
+  },
+  {
+    code: 'VS', nom: 'Valais',
+    revenu: "~38'500 CHF",
+    montant: "jusqu'à CHF 521",
+    auto: true, delai: '—',
+    lien: 'https://www.avsvalais.ch/fr/Assurances/RIP-Reduction-individuelle-des-primes-d-assurance-maladie/Reduction-des-primes-d-assurance-maladie/Reduction-des-primes-caisse-maladie.html',
+  },
+  {
+    code: 'AR', nom: 'App. Rh.-Extérieures',
+    revenu: "35'000 CHF",
+    montant: "jusqu'à CHF 502",
+    auto: false, delai: '31 mars 2026',
+    lien: 'https://www.sovar.ch/dienstleistungen/prämienverbilligung-ipv',
+  },
+  {
+    code: 'GR', nom: 'Grisons',
+    revenu: 'Formule proportionnelle',
+    montant: "jusqu'à CHF 493 (région 1)",
+    auto: false, delai: '31 déc. 2026',
+    lien: 'https://www.sva.gr.ch/dienstleistungen/individuelle-praemienverbilligung.html',
+  },
   {
     code: 'AG', nom: 'Argovie',
     revenu: 'Formule proportionnelle',
     montant: "jusqu'à CHF 486",
     auto: false, delai: '31 déc. 2026',
     lien: 'https://www.sva-aargau.ch/private/ihre-private-situation/finanzielle-unterstuetzung/praemienverbilligung/allgemeine',
+  },
+  {
+    code: 'LU', nom: 'Lucerne',
+    revenu: 'Formule proportionnelle',
+    montant: "jusqu'à CHF 469 (région 1)",
+    auto: false, delai: '31 oct. 2025',
+    lien: 'https://www.was-luzern.ch/praemienverbilligung',
+  },
+  {
+    code: 'SZ', nom: 'Schwyz',
+    revenu: "~43'554 CHF (minimum selon région)",
+    montant: "jusqu'à CHF 465",
+    auto: false, delai: '31 déc. 2026',
+    lien: 'https://www.sva-sz.ch/dienstleistungen/pr%C3%A4mienverbilligung-ipv',
+  },
+  {
+    code: 'GL', nom: 'Glaris',
+    revenu: 'Formule proportionnelle',
+    montant: "jusqu'à CHF 454",
+    auto: false, delai: '31 janv. 2026',
+    lien: 'https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/individuelle-praemienverbilligung-ipv.html/502',
+  },
+  {
+    code: 'NW', nom: 'Nidwald',
+    revenu: 'Formule proportionnelle',
+    montant: "jusqu'à CHF 450",
+    auto: false, delai: '30 avril 2026',
+    lien: 'https://www.aknw.ch/dienstleistungen/praemienverbilligung-ipv',
+  },
+  {
+    code: 'BS', nom: 'Bâle-Ville',
+    revenu: "49'375 CHF",
+    montant: "jusqu'à CHF 444",
+    auto: false, delai: 'Continu',
+    lien: 'https://www.bs.ch/themen/finanzielle-hilfe/leistungen/praemienverbilligung',
+  },
+  {
+    code: 'SO', nom: 'Soleure',
+    revenu: "~74'000 CHF",
+    montant: "jusqu'à CHF 422",
+    auto: false, delai: '31 juil. 2026',
+    lien: 'https://www.akso.ch/dienstleistungen/praemienverbilligung-ipv',
+  },
+  {
+    code: 'OW', nom: 'Obwald',
+    revenu: "~50'000 CHF",
+    montant: "jusqu'à CHF 418",
+    auto: false, delai: '31 mai 2026',
+    lien: 'https://www.akow.ch/dienstleistungen/praemienverbilligung',
+  },
+  {
+    code: 'ZG', nom: 'Zoug',
+    revenu: "~89'900 CHF (famille)",
+    montant: "jusqu'à CHF 415",
+    auto: false, delai: '30 avril 2026',
+    lien: 'https://www.akzug.ch/dienstleistungen/praemienverbilligung',
   },
   {
     code: 'AI', nom: 'App. Rh.-Intérieures',
@@ -106,11 +210,32 @@ const CANTONS_SUBSIDES = [
     lien: 'https://www.ai.ch/themen/gesundheit/krankenversicherung/praemienverbilligung',
   },
   {
-    code: 'AR', nom: 'App. Rh.-Extérieures',
-    revenu: "35'000 CHF",
-    montant: "jusqu'à CHF 502",
-    auto: false, delai: '31 mars 2026',
-    lien: 'https://www.sovar.ch/dienstleistungen/prämienverbilligung-ipv',
+    code: 'UR', nom: 'Uri',
+    revenu: "~90'000 CHF (revenu déterminant)",
+    montant: "jusqu'à CHF 364",
+    auto: false, delai: '31 déc. 2026',
+    lien: 'https://www.svsuri.ch/dienstleistungen/pr%C3%A4mienverbilligung-ipv',
+  },
+  {
+    code: 'GE', nom: 'Genève',
+    revenu: "~50'000 CHF",
+    montant: "jusqu'à CHF 348",
+    auto: true, delai: '—',
+    lien: 'https://www.ge.ch/informations-generales-subside-assurance-maladie/baremes',
+  },
+  {
+    code: 'VD', nom: 'Vaud',
+    revenu: "~50'000 CHF",
+    montant: "jusqu'à CHF 331",
+    auto: false, delai: 'Voir OVAM 2026',
+    lien: 'https://www.vd.ch/sante-soins-et-handicap/assurance-maladie/subside-a-lassurance-maladie',
+  },
+  {
+    code: 'SH', nom: 'Schaffhouse',
+    revenu: 'Formule proportionnelle',
+    montant: "jusqu'à CHF 322 (max 65 % de la prime de référence)",
+    auto: false, delai: '30 avril 2026',
+    lien: 'https://www.svash.ch',
   },
   {
     code: 'BE', nom: 'Berne',
@@ -127,13 +252,6 @@ const CANTONS_SUBSIDES = [
     lien: 'https://www.sva-bl.ch/de/ausgleichskasse/individuelle-praemienverbilligung-ipv',
   },
   {
-    code: 'BS', nom: 'Bâle-Ville',
-    revenu: "49'375 CHF",
-    montant: "jusqu'à CHF 444",
-    auto: false, delai: 'Continu',
-    lien: 'https://www.bs.ch/themen/finanzielle-hilfe/leistungen/praemienverbilligung',
-  },
-  {
     code: 'FR', nom: 'Fribourg',
     revenu: "37'000 CHF",
     montant: 'Calculé sur dossier (60 paliers)',
@@ -141,130 +259,11 @@ const CANTONS_SUBSIDES = [
     lien: 'https://www.ecasfr.ch/fr/Assurances/Reduction-des-primes-d-assurance-maladie/Reduction-des-primes-d-assurance-maladie.html',
   },
   {
-    code: 'GE', nom: 'Genève',
-    revenu: "~50'000 CHF",
-    montant: "jusqu'à CHF 348",
-    auto: true, delai: '—',
-    lien: 'https://www.ge.ch/informations-generales-subside-assurance-maladie/baremes',
-  },
-  {
-    code: 'GL', nom: 'Glaris',
-    revenu: 'Formule proportionnelle',
-    montant: "jusqu'à CHF 454",
-    auto: false, delai: '31 janv. 2026',
-    lien: 'https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/individuelle-praemienverbilligung-ipv.html/502',
-  },
-  {
-    code: 'GR', nom: 'Grisons',
-    revenu: 'Formule proportionnelle',
-    montant: "jusqu'à CHF 493 (région 1)",
-    auto: false, delai: '31 déc. 2026',
-    lien: 'https://www.sva.gr.ch/dienstleistungen/individuelle-praemienverbilligung.html',
-  },
-  {
-    code: 'JU', nom: 'Jura',
-    revenu: "27'000 CHF",
-    montant: "jusqu'à CHF 568",
-    auto: false, delai: '31 déc. 2026',
-    lien: 'https://www.ecasjura.ch',
-  },
-  {
-    code: 'LU', nom: 'Lucerne',
-    revenu: 'Formule proportionnelle',
-    montant: "jusqu'à CHF 469 (région 1)",
-    auto: false, delai: '31 oct. 2025',
-    lien: 'https://www.was-luzern.ch/praemienverbilligung',
-  },
-  {
-    code: 'NE', nom: 'Neuchâtel',
-    revenu: "65'089 CHF",
-    montant: "jusqu'à CHF 643",
-    auto: true, delai: '—',
-    lien: 'https://www.ne.ch/themes/social/assurance-maladie/subsides-assurance-maladie-lamal',
-  },
-  {
-    code: 'NW', nom: 'Nidwald',
-    revenu: 'Formule proportionnelle',
-    montant: "jusqu'à CHF 450",
-    auto: false, delai: '30 avril 2026',
-    lien: 'https://www.aknw.ch/dienstleistungen/praemienverbilligung-ipv',
-  },
-  {
-    code: 'OW', nom: 'Obwald',
-    revenu: "~50'000 CHF",
-    montant: "jusqu'à CHF 418",
-    auto: false, delai: '31 mai 2026',
-    lien: 'https://www.akow.ch/dienstleistungen/praemienverbilligung',
-  },
-  {
-    code: 'SG', nom: 'Saint-Gall',
-    revenu: 'Formule proportionnelle',
-    montant: "jusqu'à CHF 524 (région 1)",
-    auto: false, delai: '31 mars 2026',
-    lien: 'https://www.svasg.ch/produkte/ipv/',
-  },
-  {
-    code: 'SH', nom: 'Schaffhouse',
-    revenu: 'Formule proportionnelle',
-    montant: "jusqu'à CHF 322 (max 65 % de la prime de référence)",
-    auto: false, delai: '30 avril 2026',
-    lien: 'https://www.svash.ch',
-  },
-  {
-    code: 'SO', nom: 'Soleure',
-    revenu: "~74'000 CHF",
-    montant: "jusqu'à CHF 422",
-    auto: false, delai: '31 juil. 2026',
-    lien: 'https://www.akso.ch/dienstleistungen/praemienverbilligung-ipv',
-  },
-  {
-    code: 'SZ', nom: 'Schwyz',
-    revenu: "~43'554 CHF (minimum selon région)",
-    montant: "jusqu'à CHF 465",
-    auto: false, delai: '31 déc. 2026',
-    lien: 'https://www.sva-sz.ch/dienstleistungen/pr%C3%A4mienverbilligung-ipv',
-  },
-  {
     code: 'TG', nom: 'Thurgovie',
     revenu: 'Barème fiscal (catégories A–D)',
     montant: 'Selon catégorie fiscale',
     auto: false, delai: '31 déc. 2026',
     lien: 'https://gesundheit.tg.ch/bevoelkerung/krankenversicherung/praemienverbilligung.html/5578',
-  },
-  {
-    code: 'TI', nom: 'Tessin',
-    revenu: 'Formule RIPAM',
-    montant: "jusqu'à CHF 668",
-    auto: false, delai: '31 déc. 2025',
-    lien: 'https://www4.ti.ch/dss/ias/prestazioni-e-contributi/scheda/p/s/dettaglio/riduzione-dei-premi-dellassicurazione-malattia-ripam/richiesta-del-formulario-ripam/',
-  },
-  {
-    code: 'UR', nom: 'Uri',
-    revenu: "~90'000 CHF (revenu déterminant)",
-    montant: "jusqu'à CHF 364",
-    auto: false, delai: '31 déc. 2026',
-    lien: 'https://www.svsuri.ch/dienstleistungen/pr%C3%A4mienverbilligung-ipv',
-  },
-  {
-    code: 'VD', nom: 'Vaud',
-    revenu: "~50'000 CHF",
-    montant: "jusqu'à CHF 331",
-    auto: false, delai: 'Voir OVAM 2026',
-    lien: 'https://www.vd.ch/sante-soins-et-handicap/assurance-maladie/subside-a-lassurance-maladie',
-  },
-  {
-    code: 'VS', nom: 'Valais',
-    revenu: "~38'500 CHF",
-    montant: "jusqu'à CHF 521",
-    auto: true, delai: '—',
-    lien: 'https://www.avsvalais.ch/fr/Assurances/RIP-Reduction-individuelle-des-primes-d-assurance-maladie/Reduction-des-primes-d-assurance-maladie/Reduction-des-primes-caisse-maladie.html',
-  },
-  {
-    code: 'ZG', nom: 'Zoug',
-    revenu: "~89'900 CHF (famille)",
-    montant: "jusqu'à CHF 415",
-    auto: false, delai: '30 avril 2026',
-    lien: 'https://www.akzug.ch/dienstleistungen/praemienverbilligung',
   },
   {
     code: 'ZH', nom: 'Zurich',
@@ -275,12 +274,11 @@ const CANTONS_SUBSIDES = [
   },
 ]
 
-const ROMAND_CODES = ['GE', 'VD', 'NE', 'FR', 'JU', 'VS'] as const
-const romandCantonInfos = Object.fromEntries(
-  ROMAND_CODES.map(code => {
-    const c = CANTONS_SUBSIDES.find(r => r.code === code)!
-    return [code, { revenu: c.revenu, montant: c.montant, auto: c.auto, delai: c.delai, lien: c.lien }]
-  })
+const allCantonInfos = Object.fromEntries(
+  CANTONS_SUBSIDES.map(c => [
+    c.code,
+    { nom: c.nom, revenu: c.revenu, montant: c.montant, auto: c.auto, delai: c.delai, lien: c.lien },
+  ])
 )
 
 export default function PageSubsides() {
@@ -353,14 +351,14 @@ export default function PageSubsides() {
               <p className="article-p">
                 Le calculateur couvre les six cantons romands avec les barèmes officiels 2026 : Genève, Vaud, Neuchâtel, Fribourg, Jura et Valais. Sélectionnez votre canton pour afficher les données spécifiques (seuils, montant maximum, délai, lien officiel) et estimer votre subside.
               </p>
-              <SubsidesCalculator cantonInfos={romandCantonInfos} />
+              <SubsidesCalculator cantonInfos={allCantonInfos} />
             </section>
 
             {/* §2 — Fonctionnement */}
             <section id="fonctionnement">
               <h2 className="article-h2">2. Comment fonctionnent les subsides LAMal</h2>
               <p className="article-p">
-                La réduction individuelle des primes (RIP, ou IPV en allemand) est une aide financière prévue par l'article 65 de la loi fédérale sur l'assurance maladie. Elle vise à garantir que les primes LAMal ne constituent pas une charge disproportionnée pour les ménages à revenu faible ou moyen.
+                La réduction individuelle des primes (RIP) est une aide financière prévue par l'article 65 de la loi fédérale sur l'assurance maladie. Elle vise à garantir que les primes LAMal ne constituent pas une charge disproportionnée pour les ménages à revenu faible ou moyen.
               </p>
               <p className="article-p">
                 La Confédération verse aux cantons une contribution annuelle calculée sur la base des coûts moyens de l'assurance maladie. Les cantons doivent y ajouter au moins autant de leur propre budget. En pratique, chaque canton fixe librement ses barèmes, ses seuils de revenus et ses procédures d'attribution dans le cadre de la loi fédérale.
@@ -434,7 +432,7 @@ export default function PageSubsides() {
                 </table>
               </div>
               <p className="text-[12px] text-slate mt-3">
-                Sources : caisses de compensation cantonales, sites officiels cantonaux 2026. Montants calculés sur la base des primes de référence (Richtprämien) 2026. Les seuils et montants varient selon la région tarifaire, la taille du ménage et la situation fiscale individuelle.
+                Sources : caisses de compensation cantonales, sites officiels cantonaux 2026. Montants calculés sur la base des primes de référence 2026. Les seuils et montants varient selon la région tarifaire, la taille du ménage et la situation fiscale individuelle.
               </p>
             </section>
 

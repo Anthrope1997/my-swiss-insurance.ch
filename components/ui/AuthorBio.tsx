@@ -17,7 +17,7 @@ export default function AuthorBio({ publishedDate, updatedDate }: AuthorBioProps
 
         <div className="space-y-0.5">
           <p className="text-sm font-semibold text-[#0f2040]">My Swiss Insurance</p>
-          <p className="text-sm text-[#475569]">Service éditorial indépendant</p>
+          <p className="text-sm text-[#475569]">Service éditorial indépendant · Lausanne, Suisse romande</p>
           <p className="text-sm text-[#475569]">Publié le {publishedDate}, mis à jour le {updatedDate}</p>
         </div>
 
