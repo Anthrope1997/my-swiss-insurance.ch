@@ -240,9 +240,7 @@ export default function ChangerDeCaissePage() {
                       <h3 className="font-semibold text-ink text-[17px] mb-1">{step.title}</h3>
                       <p className="text-[15px] text-slate mb-2">{step.desc}</p>
                       {step.tip && (
-                        <p className="text-[13px] text-brand bg-cloud border border-edge rounded-md px-3 py-1.5 inline-block">
-                          {step.tip}
-                        </p>
+                        <p className="text-[15px] text-slate mt-1">{step.tip}</p>
                       )}
                     </div>
                   </div>
@@ -317,7 +315,7 @@ export default function ChangerDeCaissePage() {
                     urgence: false,
                   },
                 ].map((cas, i) => (
-                  <div key={i} className={`border-l-4 ${cas.urgence ? 'border-[#f59e0b] bg-[#fffbeb]' : 'border-brand bg-white'} border border-edge rounded-[8px] p-5`}>
+                  <div key={i} className="border-l-4 border-brand bg-white border border-edge rounded-[8px] p-5">
                     <h3 className="font-semibold text-ink text-[16px] mb-2">{cas.titre}</h3>
                     <p className="text-[15px] text-slate">{cas.desc}</p>
                   </div>
