@@ -97,7 +97,7 @@ const toc = [
 const guidesAssocies = [
   { href: '/lamal/guide',            label: 'Comprendre la LAMal'       },
   { href: '/lamal/modeles',          label: 'Les 4 modèles LAMal'       },
-  { href: '/lamal/guide#subsides',   label: 'Calculer mes subsides'     },
+  { href: '/lamal/subsides',         label: 'Calculer mes subsides'     },
   { href: '/lamal/changer-de-caisse', label: 'Changer de caisse maladie' },
 ]
 

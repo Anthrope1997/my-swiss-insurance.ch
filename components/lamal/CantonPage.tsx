@@ -399,7 +399,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
           )}
 
           <div className="mt-4">
-            <Link href="/lamal/guide#subsides" className="text-brand hover:underline text-[15px] font-medium">
+            <Link href="/lamal/subsides" className="text-brand hover:underline text-[15px] font-medium">
               Calculer mes subsides LAMal →
             </Link>
           </div>
@@ -436,7 +436,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
               { href: '/lamal/guide',             label: 'Comprendre la LAMal' },
               { href: '/lamal/changer-de-caisse', label: 'Changer de caisse maladie' },
               { href: '/lamal/comparateur',       label: 'Comparateur de primes 2026' },
-              { href: '/lamal/guide#subsides',     label: 'Calculateur de subsides' },
+              { href: '/lamal/subsides',           label: 'Calculateur de subsides' },
             ].map((link) => (
               <Link
                 key={link.href}
