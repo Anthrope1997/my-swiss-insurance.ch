@@ -128,36 +128,39 @@ my-swiss-insurance.ch/
 │       ├── FrontalierSimulateur.tsx ← Simulateur droit d'option (Client Component)
 │       ├── PrimeCalculator.tsx
 │       ├── PrimeCalculatorReal.tsx
-│       └── SubsidesCalculator.tsx
+│       ├── SubsidesCalculator.tsx
+│       └── SubsidesSimulatorFull.tsx ← Simulateur subsides 26 cantons (Client Component)
 │
 ├── data/
-│   └── lamal/
-│       ├── cantons.ts           ← Données par canton (source de vérité)
-│       ├── primes-2026.ts       ← Constantes tarifaires OFSP 2026
-│       ├── primes.json          ← Dataset complet (58 MB, chargé par /api/primes)
-│       ├── regions.json         ← Régions tarifaires
-│       ├── npa_to_region.json   ← Mapping NPA → région
-│       ├── stats.json           ← Statistiques pré-calculées
-│       ├── subsidesLamal.json   ← Infos subsides par canton
-│       ├── subsidesLamal.md     ← Documentation subsides
-│       └── subsides_urls.json   ← URLs officielles subsides
+│   ├── lamal/
+│   │   ├── cantons.ts           ← Données par canton (source de vérité)
+│   │   ├── primes-2026.ts       ← Constantes tarifaires OFSP 2026
+│   │   ├── primes.json          ← Dataset complet (58 MB, chargé par /api/primes)
+│   │   ├── regions.json         ← Régions tarifaires
+│   │   ├── npa_to_region.json   ← Mapping NPA → région
+│   │   └── stats.json           ← Statistiques pré-calculées
+│   └── archive/                 ← Anciens fichiers subsides (remplacés par lib/data/subsides-2026.ts)
+│       ├── subsidesLamal.json
+│       ├── subsidesLamal.md
+│       ├── subsides_urls.json
+│       ├── subsides-cantons.ts  ← Données brutes 26 cantons (supersédé)
+│       └── scrape_subsides.py
 │
 ├── dictionaries/
 │   └── fr.json                  ← Chaînes UI en français (infrastructure i18n)
 │
 ├── lib/
 │   ├── data/
-│   │   └── subsides-cantons.ts  ← Base de données subsides unifiée (26 cantons, source de vérité)
+│   │   └── subsides-2026.ts     ← SOURCE UNIQUE subsides IPV 2026 (26 cantons, barèmes précis GE/VD/NE/VS/FR/JU)
 │   ├── i18n/
 │   │   └── get-dictionary.ts    ← Chargeur de dictionnaire par locale
 │   └── lamal/
-│       ├── calcul-subside.ts    ← Fonctions de calcul (consomme subsides-cantons.ts)
+│       ├── calcul-subside.ts    ← Fonctions de calcul subsides (consomme subsides-2026.ts uniquement)
 │       └── calcul-prime.ts      ← Coefficients et helper d'estimation de prime
 │
 ├── scripts/                     ← Scripts de scraping et calcul (ne pas modifier)
 │   ├── compute_stats.py
-│   ├── scrape_primes.py
-│   └── scrape_subsides.py
+│   └── scrape_primes.py
 │
 ├── proxy.ts                     ← Redirect / → /fr (Next.js 16)
 ├── next.config.mjs
@@ -204,7 +207,11 @@ const faqSchema = { '@type': 'FAQPage', mainEntity: [...] }
 
 ### Données cantons (primes, franchises, subsides)
 Modifier `data/lamal/cantons.ts` — source de vérité pour les pages canton (primes, franchises).
-Modifier `lib/data/subsides-cantons.ts` — source de vérité pour les subsides IPV (26 cantons, données 2026).
+Modifier `lib/data/subsides-2026.ts` — **source unique** pour tous les subsides IPV (26 cantons, données 2026).
+- Métadonnées affichage : `nom`, `seuilRevenu`, `montantMax`, `auto`, `delai`, `lien`, `primeMoyenne`
+- Barèmes précis (6 cantons romands) : champs optionnels typés `ge?`, `vd?`, `ne?`, `vs?`, `fr?`, `ju?`
+- FR inclut les 60 paliers officiels (art. 6 ORP / art. 15 LALAMal) — ne pas remplacer par des coefficients estimés
+- Toute modification doit passer par ce fichier uniquement — ne pas créer de données locales dans les composants
 
 ### Données tarifaires brutes
 Les JSON dans `data/lamal/` sont générés par les scripts Python dans `scripts/`.

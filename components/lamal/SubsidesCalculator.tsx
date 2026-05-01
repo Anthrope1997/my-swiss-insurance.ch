@@ -45,13 +45,13 @@ function computeResult(s: FormState) {
     case 'VS': return calculerSubsideVS(rev, s.situation, s.nbEnfants, s.isJeune)
     case 'NE': return calculerSubsideNE(rev, s.situation, s.nbEnfants, s.isJeune)
     case 'VD': return calculerSubsideVD(rev, s.situation, s.nbEnfants, s.isJeune)
-    case 'FR': return calculerSubsideFR(rev, s.situation, s.nbEnfants)
+    case 'FR': return calculerSubsideFR(rev, s.situation, s.nbEnfants, s.isJeune)
     case 'JU': return calculerSubsideJU(rev, s.situation, s.nbEnfants, s.isJeune)
     default:   return null
   }
 }
 
-const isEligibilityOnly = (c: string) => c === 'FR'
+const isEligibilityOnly = (_: string) => false   // FR utilise désormais le calcul précis 60 paliers
 
 export default function SubsidesCalculator({ fixedCanton, cantonInfos }: Props = {}) {
   const [form, setForm] = useState<FormState>({

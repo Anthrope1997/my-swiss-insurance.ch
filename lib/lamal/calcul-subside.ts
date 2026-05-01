@@ -1,38 +1,36 @@
-// Barèmes subsides LAMal 2026 — cantons romands
-// Sources :
-//   GE : ge.ch/informations-generales-subside-assurance-maladie/baremes
-//   VD : Notice explicative OVAM 2026 (PDF)
-//   NE : ne.ch barèmes 2026 (classifications S1–S15)
-//   VS : Echelle RIP 2026 (PDF officiel)
-//   FR : ecasfr.ch (seuils revenus)
-//   JU : ecasjura.ch (seuils revenus)
+// Fonctions de calcul des subsides LAMal 2026 — cantons romands
+// Toutes les données sont importées depuis lib/data/subsides-2026.ts (source unique)
+//
+// Cantons avec formule précise publiée : GE, VD, NE, FR, JU, VS
+// FR utilise la grille officielle 60 paliers (art. 6 ORP / art. 15 LALAMal)
 
+import {
+  SUBSIDES_2026,
+  type Situation,
+  type SubsideResult,
+  type TauxVS,
+} from '@/lib/data/subsides-2026'
+
+// Re-export des types utilisés par les composants
+export type { Situation, SubsideResult } from '@/lib/data/subsides-2026'
+
+// Cantons avec formule officielle précise
 export type Canton = 'GE' | 'VD' | 'NE' | 'FR' | 'JU' | 'VS'
-export type Situation = 'seul' | 'couple'
 
 export const CANTON_NAMES: Record<Canton, string> = {
   GE: 'Genève', VD: 'Vaud', NE: 'Neuchâtel', FR: 'Fribourg', JU: 'Jura', VS: 'Valais',
 }
 
 export const CANTON_URLS: Record<Canton, string> = {
-  GE: 'https://www.ge.ch/informations-generales-subside-assurance-maladie',
-  VD: 'https://www.vd.ch/sante-soins-et-handicap/assurance-maladie/subside-a-lassurance-maladie',
-  NE: 'https://www.ne.ch/themes/social/assurance-maladie/subsides-assurance-maladie-lamal',
-  FR: 'https://www.ecasfr.ch/fr/Assurances/Reduction-des-primes-d-assurance-maladie/Reduction-des-primes-d-assurance-maladie.html',
-  JU: 'https://www.ecasjura.ch/fr/Assurances/Assurance-maladie/Reduction-des-primes-d-assurance-maladie-RPI-Informations-generales-2026/Reduction-des-primes-d-assurance-maladie-RPI-Informations-generales-2026.html',
-  VS: 'https://www.avsvalais.ch/fr/Assurances/RIP-Reduction-individuelle-des-primes-d-assurance-maladie/Reduction-des-primes-d-assurance-maladie/Reduction-des-primes-caisse-maladie.html',
+  GE: SUBSIDES_2026.GE.lien,
+  VD: SUBSIDES_2026.VD.lien,
+  NE: SUBSIDES_2026.NE.lien,
+  FR: SUBSIDES_2026.FR.lien,
+  JU: SUBSIDES_2026.JU.lien,
+  VS: SUBSIDES_2026.VS.lien,
 }
 
-export interface SubsideResult {
-  adulte: number        // mensuel par adulte
-  enfant: number        // mensuel par enfant
-  total: number         // mensuel total ménage
-  approx: boolean
-  label?: string        // ex. "S12" pour NE, "70%" pour VS
-  note?: string
-}
-
-// ─── Helpers ────────────────────────────────────────────────────────────────
+// ─── Helper ───────────────────────────────────────────────────────────────────
 
 function lerp(x: number, x1: number, x2: number, y1: number, y2: number): number {
   if (x <= x1) return y1
@@ -41,91 +39,84 @@ function lerp(x: number, x1: number, x2: number, y1: number, y2: number): number
 }
 
 // ─── GE — Genève ─────────────────────────────────────────────────────────────
-// 9 groupes, montants mensuels 2026
-// Seul sans enfant  : G1 = 0–30'000, G8 = 47'501–50'000
-// Couple sans enfant: G1 = 0–45'000, G8 = 105'001–115'000
-// G9 activé pour familles avec enfants (dernier palier faible)
-
-const GE_AMT_ADULTE = [348, 294, 240, 196, 164, 120, 87, 55, 0]
-const GE_AMT_JEUNE  = [231, 231, 231, 231, 231, 231, 231, 231, 106]
-const GE_AMT_ENFANT = [132, 132, 132, 132, 132, 132, 132, 132, 67]
-
-const GE_UPPER_SEUL   = [30000, 32917, 35833, 38750, 41667, 44583, 47500, 50000]
-const GE_UPPER_COUPLE = [45000, 55000, 65000, 75000, 85000, 95000, 105000, 115000]
-
-function geGroupIndex(revenu: number, situation: Situation, nbEnfants: number): number {
-  const base = situation === 'seul' ? GE_UPPER_SEUL : GE_UPPER_COUPLE
-  const bonus = nbEnfants * (situation === 'seul' ? 13000 : 17000)
-  const thresholds = base.map(t => t + bonus)
-  for (let i = 0; i < thresholds.length; i++) {
-    if (revenu <= thresholds[i]) return i
-  }
-  return nbEnfants > 0 ? 8 : 9
-}
+// 9 groupes d'imposition, montants mensuels fixes
+// Seuils ajustés par enfant : +13 000 CHF (seul) / +17 000 CHF (couple)
+// Groupe 9 : famille rattrapage (adulte = 0 si seul sans enfant)
 
 export function calculerSubsideGE(
   revenu: number, situation: Situation, nbEnfants: number, isJeune: boolean,
 ): SubsideResult {
-  const g = geGroupIndex(revenu, situation, nbEnfants)
-  if (g >= 9) return { adulte: 0, enfant: 0, total: 0, approx: true, label: 'Hors barème' }
+  const ge = SUBSIDES_2026.GE.ge!
+  const bonus = nbEnfants * (situation === 'couple' ? ge.bonusEnfantCouple : ge.bonusEnfantSeul)
+
+  let groupeIndex = ge.groupes.length   // hors barème par défaut
+  for (let i = 0; i < ge.groupes.length; i++) {
+    const g = ge.groupes[i]
+    const seuil = (situation === 'couple' ? g.revenuMaxCouple : g.revenuMaxSeul) + bonus
+    if (revenu <= seuil) { groupeIndex = i; break }
+  }
+
+  if (groupeIndex >= ge.groupes.length) {
+    return { adulte: 0, enfant: 0, total: 0, approx: true, label: 'Hors barème' }
+  }
+
+  const groupe = ge.groupes[groupeIndex]
+  const adulte = isJeune ? groupe.jeune : groupe.adulte
+  const enfant = groupe.enfant
   const nb = situation === 'couple' ? 2 : 1
-  const adulte = isJeune ? GE_AMT_JEUNE[g] : GE_AMT_ADULTE[g]
-  const enfant = GE_AMT_ENFANT[g]
+
+  // Groupe 9 + seul sans enfant = hors barème (adulte = 0, aucun enfant)
+  if (adulte === 0 && nbEnfants === 0) {
+    return { adulte: 0, enfant: 0, total: 0, approx: true, label: 'Hors barème' }
+  }
+
   return {
     adulte, enfant,
     total: adulte * nb + enfant * nbEnfants,
     approx: true,
-    label: `Groupe ${g + 1}`,
-    note: 'Estimation — seuils intermédiaires interpolés. Consultez ge.ch pour le montant exact.',
+    label: `Groupe ${groupe.groupe}`,
+    note: 'Estimation — seuils intermédiaires des groupes 2–8 interpolés. Consultez ge.ch pour le montant officiel exact.',
   }
 }
 
 // ─── VS — Valais ─────────────────────────────────────────────────────────────
-// Taux × prime de référence ordinaire
+// Taux × prime de référence, par profil de ménage et tranche de revenu
 // Source : Echelle RIP 2026
 
-// Moyenne régions I et II
-const VS_REF = { adulte: 521, jeune: 380, enfant: 122 }
-
-// [tauxPct, revenuMaxAnnuel]
-const VS_SEUL_0E: [number, number][] = [[100,21000],[70,23917],[50,26833],[40,29750],[30,32667],[20,35583],[10,38500]]
-const VS_SEUL_1E: [number, number][] = [[100,38250],[70,41896],[50,45542],[40,49188],[30,52833],[20,56479],[10,60125]]
-const VS_CPLI_0E: [number, number][] = [[100,36750],[70,41854],[50,46958],[40,52063],[30,57167],[20,62271],[10,67375]]
-const VS_CPLI_1E: [number, number][] = [[100,48750],[70,53854],[50,58958],[40,64063],[30,69167],[20,74271],[10,79375]]
-const VS_CPLI_2E: [number, number][] = [[100,58750],[70,63854],[50,68958],[40,74063],[30,79167],[20,84271],[10,89375]]
-const VS_CPLI_3E: [number, number][] = [[100,66750],[70,71854],[50,76958],[40,82063],[30,87167],[20,92271],[10,97375]]
-const VS_CPLI_4E: [number, number][] = [[100,72750],[70,77854],[50,82958],[40,88063],[30,93167],[20,98271],[10,103375]]
-
-const VS_ENFANT_MAX: Record<Situation, Record<number, number>> = {
-  seul:   { 1: 63000, 2: 73000, 3: 81000, 4: 87000 },
-  couple: { 1: 116000, 2: 116000, 3: 116000, 4: 116000 },
-}
-
-function vsTable(situation: Situation, nbEnfants: number): [number, number][] {
-  if (situation === 'seul') return nbEnfants >= 1 ? VS_SEUL_1E : VS_SEUL_0E
-  switch (nbEnfants) {
-    case 0: return VS_CPLI_0E
-    case 1: return VS_CPLI_1E
-    case 2: return VS_CPLI_2E
-    case 3: return VS_CPLI_3E
-    default: return VS_CPLI_4E
+function vsGetProfil(situation: Situation, nbEnfants: number): TauxVS['profil'] {
+  if (situation === 'seul') return nbEnfants >= 1 ? 'seul_1e+' : 'seul_0e'
+  switch (Math.min(nbEnfants, 4)) {
+    case 0:  return 'couple_0e'
+    case 1:  return 'couple_1e'
+    case 2:  return 'couple_2e'
+    case 3:  return 'couple_3e'
+    default: return 'couple_4e+'
   }
 }
 
 export function calculerSubsideVS(
   revenu: number, situation: Situation, nbEnfants: number, isJeune: boolean,
 ): SubsideResult {
-  const table = vsTable(situation, nbEnfants)
+  const vs = SUBSIDES_2026.VS.vs!
+  const profil = vsGetProfil(situation, nbEnfants)
+
   let taux = 0
-  for (const [t, max] of table) { if (revenu <= max) { taux = t; break } }
-  const adulteRef = isJeune ? VS_REF.jeune : VS_REF.adulte
+  for (const entry of vs.taux) {
+    if (entry.profil === profil && revenu <= entry.revenuMaxAn) { taux = entry.taux; break }
+  }
+
+  const adulteRef = isJeune ? vs.primeReference.jeune : vs.primeReference.adulte
   const adulte = Math.round(taux / 100 * adulteRef)
   const nb = situation === 'couple' ? 2 : 1
 
   let enfant = 0
   if (nbEnfants > 0) {
-    const limit = VS_ENFANT_MAX[situation][Math.min(nbEnfants, 4)]
-    if (revenu <= limit) enfant = Math.round(0.8 * VS_REF.enfant)
+    const maxEntry = vs.enfantMaxRevenu.find(
+      e => e.statut === situation && e.nbEnfants === Math.min(nbEnfants, 4)
+    )
+    if (maxEntry && revenu <= maxEntry.revenuMax) {
+      enfant = Math.round(0.8 * vs.primeReference.enfant)
+    }
   }
 
   return {
@@ -138,25 +129,18 @@ export function calculerSubsideVS(
 
 // ─── NE — Neuchâtel ──────────────────────────────────────────────────────────
 // Classifications S1–S15, montants mensuels 2026
-
-const NE_BANDS = [
-  { label: 'S1–S11', adulte: 643, jeune: 484, enfant: 160, maxSeul: 50600 },
-  { label: 'S12',    adulte: 515, jeune: 387, enfant: 160, maxSeul: 53500 },
-  { label: 'S13',    adulte: 390, jeune: 293, enfant: 160, maxSeul: 56400 },
-  { label: 'S14',    adulte: 272, jeune: 204, enfant: 160, maxSeul: 58164 },
-  { label: 'S15',    adulte: 166, jeune: 124, enfant: 160, maxSeul: 65089 },
-]
+// Ajustement revenu : revAdj = (revenu / facteurCouple) / (1 + nbEnfants × facteurEnfant)
 
 export function calculerSubsideNE(
   revenu: number, situation: Situation, nbEnfants: number, isJeune: boolean,
 ): SubsideResult {
+  const ne = SUBSIDES_2026.NE.ne!
   const nb = situation === 'couple' ? 2 : 1
-  // Adjust revenu to seul-equivalent for threshold comparison
-  const coupleDiscount = situation === 'couple' ? 0.60 : 1
-  const childDiscount  = 1 + nbEnfants * 0.28
-  const adjRevenu = (revenu / coupleDiscount) / childDiscount
+  const coupleDiv  = situation === 'couple' ? ne.facteurCouple : 1
+  const childDiv   = 1 + nbEnfants * ne.facteurEnfant
+  const adjRevenu  = (revenu / coupleDiv) / childDiv
 
-  for (const b of NE_BANDS) {
+  for (const b of ne.bandes) {
     if (adjRevenu <= b.maxSeul) {
       const adulte = isJeune ? b.jeune : b.adulte
       return {
@@ -172,98 +156,130 @@ export function calculerSubsideNE(
 }
 
 // ─── VD — Vaud ───────────────────────────────────────────────────────────────
-// Subside ordinaire (mensuel) + subside spécifique si primes > 10% RDU
-// Source : Notice explicative OVAM 2026
+// Barème linéaire par morceaux — subside ordinaire OVAM 2026
 
-function vdOrdSeul26(r: number): number {
-  if (r <= 17000) return 331
-  if (r <= 40000) return lerp(r, 17000, 40000, 331, 30)
-  if (r <= 50000) return 30
-  return 0
-}
-function vdOrdSeul1925(r: number): number {
-  if (r <= 16000) return 255
-  if (r <= 34000) return lerp(r, 16000, 34000, 255, 20)
-  if (r <= 39000) return 20
-  return 0
-}
-function vdOrdFamille26(r: number): number {
-  // Famille adulte 26+ (avec ou sans enfant) — R1≈336 / R2≈300 → moyenne 318
-  if (r <= 24200) return 318
-  if (r <= 55000) return lerp(r, 24200, 55000, 300, 20)
-  if (r <= 72500) return 20
-  return 0
-}
-function vdOrdEnfant(r: number): number {
-  // Subside ordinaire enfant (indépendant de la région selon la notice)
-  if (r <= 76000) return 114
+function vdInterpolate(
+  revenu: number,
+  profil: 'adulte26_seul' | 'adulte1925' | 'adulte26_famille' | 'enfant',
+): number {
+  const segments = SUBSIDES_2026.VD.vd!.segments.filter(s => s.profil === profil)
+  for (const seg of segments) {
+    if (revenu <= seg.revenuMax) {
+      if (seg.montantMin === seg.montantMax) return seg.montantMin
+      return lerp(revenu, seg.revenuMin, seg.revenuMax, seg.montantMin, seg.montantMax)
+    }
+  }
   return 0
 }
 
 export function calculerSubsideVD(
-  revenu: number,
-  situation: Situation,
-  nbEnfants: number,
-  isJeune: boolean,
+  revenu: number, situation: Situation, nbEnfants: number, isJeune: boolean,
 ): SubsideResult {
   const nb = situation === 'couple' ? 2 : 1
   const hasChildren = nbEnfants > 0
 
   const adulte = (() => {
-    if (hasChildren || situation === 'couple') return isJeune ? vdOrdSeul1925(revenu) : vdOrdFamille26(revenu)
-    return isJeune ? vdOrdSeul1925(revenu) : vdOrdSeul26(revenu)
+    if (isJeune) return vdInterpolate(revenu, 'adulte1925')
+    if (hasChildren || situation === 'couple') return vdInterpolate(revenu, 'adulte26_famille')
+    return vdInterpolate(revenu, 'adulte26_seul')
   })()
 
-  const enfant = hasChildren ? vdOrdEnfant(revenu) : 0
+  const enfant = hasChildren ? vdInterpolate(revenu, 'enfant') : 0
+
   return {
-    adulte,
-    enfant,
+    adulte, enfant,
     total: adulte * nb + enfant * nbEnfants,
     approx: true,
     label: 'Ordinaire',
-    note: 'Subside ordinaire — estimation indicative. Un subside spécifique peut s\'ajouter si vos primes dépassent 10% du revenu.',
+    note: "Subside ordinaire — estimation indicative OVAM 2026. Un subside spécifique peut s'ajouter si vos primes dépassent 10 % du revenu.",
   }
 }
 
 // ─── FR — Fribourg ───────────────────────────────────────────────────────────
-// Seuils de revenus (60 paliers non publiés — éligibilité uniquement)
+// Grille officielle 60 paliers (art. 6 ORP / art. 15 LALAMal)
+// Source : FR-grille_lissage_des_taux_paliers_f.pdf + FR-memento_rpi_f_2026.pdf (ECAS FR)
+//
+// Algorithme :
+//   1. Trouver la limite légale selon situation/nbEnfants
+//   2. pctEnDessous = (limite − revenu) / limite × 100
+//   3. Lire le taux dans les 60 paliers
+//   4. Subside = taux/100 × prime_moyenne_région_1[profil]
+//   5. Enfants : taux = max(taux, 80 %) ; JA en formation : taux = max(taux, 50 %)
+// Note : les montants sont calculés sur la prime de la région 1 (Sarine).
+//        Région 2 (autres districts) : primes légèrement inférieures (−8 %).
 
 export function calculerSubsideFR(
-  revenu: number, situation: Situation, nbEnfants: number,
+  revenu: number, situation: Situation, nbEnfants: number, isJeune: boolean,
 ): SubsideResult {
-  if (revenu > 150000) return { adulte: 0, enfant: 0, total: 0, approx: true, label: 'Non éligible' }
-  const base    = situation === 'couple' ? 65000 : 37000
-  const enfBonus = nbEnfants * (situation === 'couple' ? 14000 : 10000)
-  const plafond  = Math.min(base + enfBonus, 135000)
-  if (revenu > plafond) return { adulte: 0, enfant: 0, total: 0, approx: true, label: 'Non éligible' }
+  const fr = SUBSIDES_2026.FR.fr!
+
+  // 1. Limite légale selon situation/nbEnfants (plafonné à 6 enfants dans la table)
+  const seuil = fr.seuilsEligibilite.find(
+    s => s.statut === situation && s.nbEnfants === Math.min(nbEnfants, 6)
+  )
+  if (!seuil || revenu >= seuil.revenuMax) {
+    return { adulte: 0, enfant: 0, total: 0, approx: false, label: 'Non éligible' }
+  }
+
+  // 2. Pourcentage en dessous de la limite
+  const pctEnDessous = (seuil.revenuMax - revenu) / seuil.revenuMax * 100
+
+  // 3. Lookup taux dans les 60 paliers
+  const palier = fr.paliers.find(p => pctEnDessous >= p.pctMin && pctEnDessous <= p.pctMax)
+  const taux = palier?.taux ?? 65   // pctEnDessous ≥ 60.01 → dernier palier 65 %
+
+  // 4. Primes moyennes région 1 (Sarine)
+  const primes = fr.primesMoyennes.find(p => p.region === '1')!
+  const adulteRef = isJeune ? primes.jeune : primes.adulte
+  const adulte = Math.round(taux / 100 * adulteRef)
+
+  // 5. Enfants : minimum 80 % de la prime moyenne enfant
+  const nb = situation === 'couple' ? 2 : 1
+  const tauxEnfant = Math.max(taux, fr.pctMinEnfant)
+  const enfant = nbEnfants > 0 ? Math.round(tauxEnfant / 100 * primes.enfant) : 0
+
   return {
-    adulte: 0, enfant: 0, total: 0, approx: true,
-    label: 'Probablement éligible',
-    note: 'Les montants exacts sont calculés sur 60 paliers par la caisse de compensation. Déposez votre demande avant le 31 août.',
+    adulte, enfant,
+    total: adulte * nb + enfant * nbEnfants,
+    approx: false,
+    label: `${taux}%`,
+    note:
+      'Calculé sur les primes de référence région 1 (district de la Sarine). ' +
+      'Région 2 (autres districts) : adulte CHF 524/mois, jeune CHF 386/mois, enfant CHF 124/mois — montants légèrement inférieurs. ' +
+      'Délai de demande : 31 août 2026. Source : ECAS Fribourg.',
   }
 }
 
 // ─── JU — Jura ───────────────────────────────────────────────────────────────
-// Subside ordinaire 2026 — barème gradué 15–225 CHF/mois (adulte) non publié.
-// On retourne le maximum du subside ordinaire ; montants fixes pour enfant/jeune.
-// Source : ecasjura.ch + communiqué SIC jura.ch 2025
-
-const JU_ORD = { adulte: 225, jeune: 196, enfant: 100 }
+// Subside partiel ordinaire 2026 — barème gradué 15–225 CHF/mois (adulte, non publié)
+// Montant affiché = maximum du barème ; le montant réel dépend du revenu exact.
 
 export function calculerSubsideJU(
   revenu: number, situation: Situation, nbEnfants: number, isJeune: boolean,
 ): SubsideResult {
+  const ju = SUBSIDES_2026.JU.ju!
   const hasChildren = nbEnfants > 0
-  const plafond = hasChildren ? 53000 : (situation === 'couple' ? 40000 : 27000)
-  if (revenu > plafond) return { adulte: 0, enfant: 0, total: 0, approx: true, label: 'Non éligible' }
+
+  const seuil = ju.seuilsEligibilite.find(
+    s => s.statut === situation && s.nbEnfants === Math.min(nbEnfants, 3)
+  )
+  if (!seuil || revenu > seuil.revenuMax) {
+    return { adulte: 0, enfant: 0, total: 0, approx: true, label: 'Non éligible' }
+  }
+
   const nb = situation === 'couple' ? 2 : 1
-  const adulte = isJeune ? JU_ORD.jeune : JU_ORD.adulte
-  const enfant = JU_ORD.enfant
+  const adulte = isJeune ? ju.jeune : ju.adulteMax
+  const enfant = hasChildren ? ju.enfant : 0
+
   return {
     adulte, enfant,
     total: adulte * nb + enfant * nbEnfants,
     approx: true,
     label: 'Maximum ordinaire',
-    note: 'Montant maximum du subside ordinaire 2026. Le barème gradué complet n\'est pas publié — le montant réel (15–225 CHF/mois adulte) dépend de votre revenu exact. Délai : 31 décembre 2026.',
+    note:
+      'Montant maximum du subside ordinaire 2026. ' +
+      'Le barème gradué complet (15–225 CHF/mois adulte) n\'est pas publié — ' +
+      'le montant réel dépend de votre revenu exact. ' +
+      'Délai de demande : 31 décembre 2026.',
   }
 }

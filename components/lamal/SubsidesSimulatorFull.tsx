@@ -4,69 +4,28 @@ import { useState } from 'react'
 import {
   type Canton, type Situation, type SubsideResult,
   calculerSubsideGE, calculerSubsideVS, calculerSubsideNE,
-  calculerSubsideVD, calculerSubsideJU,
+  calculerSubsideVD, calculerSubsideJU, calculerSubsideFR,
 } from '@/lib/lamal/calcul-subside'
+import { SUBSIDES_2026, type CantonSubside2026 } from '@/lib/data/subsides-2026'
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
-interface CantonData {
-  nom: string
-  seuilRevenu: string
-  seuilNum?: number     // seuil personne seule — absent = formule propriétaire (ZH, TI)
-  montantMaxNum: number // CHF/mois adulte seul au plafond
-  montantMax: string    // libellé affiché
-  auto: boolean
-  delai: string
-  lien: string
-  primeMoyenne: number
-}
+// Cantons avec formule officielle précise publiée (barème intégral disponible)
+const PRECISE_CANTONS = new Set<string>(['GE', 'VS', 'NE', 'VD', 'JU', 'FR'])
 
-const CANTON_DATA: Record<string, CantonData> = {
-  // Seuils, montants max et délais 2026 — source : lib/data/subsides-cantons.ts (scrapé avril 2026)
-  // seuilNum = seuil personne seule adulte sans enfant ; absent = formule non linéaire (ZH, TI)
-  // montantMaxNum = montant mensuel max adulte (Richtprämie / 12 ou barème officiel)
-  AG: { nom: 'Argovie',             seuilRevenu: '≈ 42 000 CHF/an', seuilNum: 42000, montantMaxNum: 486, montantMax: '≤ 486 CHF/mois', auto: false, delai: '31 déc. 2026',              lien: 'https://www.sva-aargau.ch/private/ihre-private-situation/finanzielle-unterstuetzung/praemienverbilligung/allgemeine',             primeMoyenne: 419 },
-  AI: { nom: 'Appenzell Rh.-Int.',  seuilRevenu: '≈ 55 000 CHF/an', seuilNum: 55000, montantMaxNum: 387, montantMax: '≤ 387 CHF/mois', auto: true,  delai: 'Non requis (automatique)', lien: 'https://www.ai.ch/themen/gesundheit/krankenversicherung/praemienverbilligung',                                                        primeMoyenne: 382 },
-  AR: { nom: 'Appenzell Rh.-Ext.',  seuilRevenu: '≤ 35 000 CHF/an', seuilNum: 35000, montantMaxNum: 502, montantMax: '≤ 502 CHF/mois', auto: false, delai: '31 mars 2026',              lien: 'https://www.sovar.ch/dienstleistungen/pr%C3%A4mienverbilligung-ipv',                                                                primeMoyenne: 432 },
-  BE: { nom: 'Berne',               seuilRevenu: '≤ 35 000 CHF/an', seuilNum: 35000, montantMaxNum: 221, montantMax: '≤ 221 CHF/mois', auto: true,  delai: '31 mars 2027',              lien: 'https://www.gef.be.ch/gef/fr/index/gesundheit/gesundheit/krankenversicherung/praemienverbilligung.html',                            primeMoyenne: 397 },
-  BL: { nom: 'Bâle-Campagne',       seuilRevenu: '≤ 31 000 CHF/an', seuilNum: 31000, montantMaxNum: 383, montantMax: '≤ 383 CHF/mois', auto: false, delai: '31 déc. 2026',              lien: 'https://www.sva-bl.ch/de/ausgleichskasse/individuelle-praemienverbilligung-ipv',                                                     primeMoyenne: 466 },
-  BS: { nom: 'Bâle-Ville',          seuilRevenu: '≤ 49 375 CHF/an', seuilNum: 49375, montantMaxNum: 444, montantMax: '≤ 444 CHF/mois', auto: false, delai: '31 déc. 2026',              lien: 'https://www.bs.ch/themen/finanzielle-hilfe/leistungen/praemienverbilligung',                                                         primeMoyenne: 500 },
-  FR: { nom: 'Fribourg',            seuilRevenu: '≤ 37 000 CHF/an', seuilNum: 37000, montantMaxNum: 370, montantMax: '≤ 370 CHF/mois', auto: true,  delai: '31 août 2026',              lien: 'https://www.ecasfr.ch/fr/Assurances/Reduction-des-primes-d-assurance-maladie/Reduction-des-primes-d-assurance-maladie.html',          primeMoyenne: 522 },
-  GE: { nom: 'Genève',              seuilRevenu: '≈ 50 000 CHF/an', seuilNum: 50000, montantMaxNum: 348, montantMax: '≤ 348 CHF/mois', auto: true,  delai: 'Non requis (automatique)', lien: 'https://www.ge.ch/informations-generales-subside-assurance-maladie',                                                                    primeMoyenne: 710 },
-  GL: { nom: 'Glaris',              seuilRevenu: '≈ 50 000 CHF/an', seuilNum: 50000, montantMaxNum: 454, montantMax: '≤ 454 CHF/mois', auto: false, delai: '31 janv. 2026',             lien: 'https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/individuelle-praemienverbilligung-ipv.html/502',                         primeMoyenne: 345 },
-  GR: { nom: 'Grisons',             seuilRevenu: '≈ 59 000 CHF/an', seuilNum: 59000, montantMaxNum: 493, montantMax: '≤ 493 CHF/mois', auto: false, delai: '31 déc. 2026',              lien: 'https://www.sva.gr.ch/dienstleistungen/individuelle-praemienverbilligung.html',                                                       primeMoyenne: 390 },
-  JU: { nom: 'Jura',                seuilRevenu: '≤ 27 000 CHF/an', seuilNum: 27000, montantMaxNum: 225, montantMax: '≤ 225 CHF/mois', auto: false, delai: '31 déc. 2026',              lien: 'https://www.ecasjura.ch/fr/Assurances/Assurance-maladie',                                                                               primeMoyenne: 633 },
-  LU: { nom: 'Lucerne',             seuilRevenu: '≈ 44 000 CHF/an', seuilNum: 44000, montantMaxNum: 469, montantMax: '≤ 469 CHF/mois', auto: false, delai: '31 oct. 2026',              lien: 'https://www.was-luzern.ch/praemienverbilligung',                                                                                        primeMoyenne: 395 },
-  NE: { nom: 'Neuchâtel',           seuilRevenu: '≈ 65 000 CHF/an', seuilNum: 65000, montantMaxNum: 643, montantMax: '≤ 643 CHF/mois', auto: true,  delai: 'Non requis (automatique)', lien: 'https://www.ne.ch/themes/social/assurance-maladie/subsides-assurance-maladie-lamal',                                                    primeMoyenne: 663 },
-  NW: { nom: 'Nidwald',             seuilRevenu: '≈ 54 000 CHF/an', seuilNum: 54000, montantMaxNum: 450, montantMax: '≤ 450 CHF/mois', auto: false, delai: '30 avr. 2026',              lien: 'https://www.aknw.ch/dienstleistungen/praemienverbilligung-ipv',                                                                        primeMoyenne: 288 },
-  OW: { nom: 'Obwald',              seuilRevenu: '≈ 50 000 CHF/an', seuilNum: 50000, montantMaxNum: 418, montantMax: '≤ 418 CHF/mois', auto: false, delai: '31 mai 2026',               lien: 'https://www.akow.ch/dienstleistungen/praemienverbilligung',                                                                             primeMoyenne: 303 },
-  SG: { nom: 'Saint-Gall',          seuilRevenu: '≤ 41 700 CHF/an', seuilNum: 41700, montantMaxNum: 524, montantMax: '≤ 524 CHF/mois', auto: false, delai: '31 mars 2026',              lien: 'https://www.svasg.ch/produkte/ipv/',                                                                                                    primeMoyenne: 430 },
-  SH: { nom: 'Schaffhouse',         seuilRevenu: '≈ 44 000 CHF/an', seuilNum: 44000, montantMaxNum: 322, montantMax: '≤ 322 CHF/mois', auto: false, delai: '30 avr. 2026',              lien: 'https://www.svash.ch',                                                                                                                  primeMoyenne: 431 },
-  SO: { nom: 'Soleure',             seuilRevenu: '≤ 74 000 CHF/an', seuilNum: 74000, montantMaxNum: 422, montantMax: '≤ 422 CHF/mois', auto: false, delai: '31 juil. 2026',             lien: 'https://www.akso.ch/dienstleistungen/praemienverbilligung-ipv',                                                                        primeMoyenne: 387 },
-  SZ: { nom: 'Schwytz',             seuilRevenu: '≤ 43 554 CHF/an', seuilNum: 43554, montantMaxNum: 465, montantMax: '≤ 465 CHF/mois', auto: false, delai: '31 déc. 2026',              lien: 'https://www.sva-sz.ch/dienstleistungen/pr%C3%A4mienverbilligung-ipv',                                                                primeMoyenne: 347 },
-  TG: { nom: 'Thurgovie',           seuilRevenu: '≈ 38 000 CHF/an', seuilNum: 38000, montantMaxNum: 284, montantMax: '≤ 284 CHF/mois', auto: false, delai: '31 déc. 2026',              lien: 'https://gesundheit.tg.ch/bevoelkerung/krankenversicherung/praemienverbilligung.html/5578',                                             primeMoyenne: 360 },
-  TI: { nom: 'Tessin',              seuilRevenu: 'Formule RIPAM',                     montantMaxNum: 668, montantMax: '≤ 668 CHF/mois', auto: false, delai: 'Dépôt possible — rétroactif', lien: 'https://www4.ti.ch/dss/ias/prestazioni-e-contributi/scheda/p/s/dettaglio/riduzione-dei-premi-dellassicurazione-malattia-ripam/richiesta-del-formulario-ripam/', primeMoyenne: 531 },
-  UR: { nom: 'Uri',                 seuilRevenu: '≈ 51 000 CHF/an', seuilNum: 51000, montantMaxNum: 364, montantMax: '≤ 364 CHF/mois', auto: false, delai: '31 déc. 2026',              lien: 'https://www.svsuri.ch/dienstleistungen/pr%C3%A4mienverbilligung-ipv',                                                                primeMoyenne: 310 },
-  VD: { nom: 'Vaud',                seuilRevenu: '≈ 50 000 CHF/an', seuilNum: 50000, montantMaxNum: 331, montantMax: '≤ 331 CHF/mois', auto: false, delai: 'Voir OVAM 2026',            lien: 'https://www.vd.ch/sante-soins-et-handicap/assurance-maladie/subside-a-lassurance-maladie',                                            primeMoyenne: 638 },
-  VS: { nom: 'Valais',              seuilRevenu: '≈ 38 500 CHF/an', seuilNum: 38500, montantMaxNum: 521, montantMax: '≤ 521 CHF/mois', auto: true,  delai: 'Non requis (automatique)', lien: 'https://www.avsvalais.ch/fr/Assurances/RIP-Reduction-individuelle-des-primes-d-assurance-maladie',                                       primeMoyenne: 528 },
-  ZG: { nom: 'Zoug',                seuilRevenu: '≤ 89 900 CHF/an', seuilNum: 89900, montantMaxNum: 415, montantMax: '≤ 415 CHF/mois', auto: false, delai: '30 avr. 2026',              lien: 'https://www.akzug.ch/dienstleistungen/praemienverbilligung',                                                                            primeMoyenne: 360 },
-  ZH: { nom: 'Zurich',              seuilRevenu: 'Formule cantonale',                 montantMaxNum: 442, montantMax: '≤ 442 CHF/mois', auto: false, delai: '31 mars 2027',              lien: 'https://svazurich.ch/ihr-anliegen/privatpersonen/praemienverbilligung/praemienverbilligung_2026/einkommensgrenzen-2026.html',           primeMoyenne: 442 },
-}
-
-// Cantons avec formule officielle précise publiée
-const PRECISE_CANTONS = new Set<string>(['GE', 'VS', 'NE', 'VD', 'JU'])
-
-const ALL_CODES = Object.keys(CANTON_DATA).sort((a, b) =>
-  CANTON_DATA[a].nom.localeCompare(CANTON_DATA[b].nom, 'fr')
+const ALL_CODES = Object.keys(SUBSIDES_2026).sort((a, b) =>
+  SUBSIDES_2026[a as keyof typeof SUBSIDES_2026].nom.localeCompare(
+    SUBSIDES_2026[b as keyof typeof SUBSIDES_2026].nom, 'fr'
+  )
 )
 
 // ─── Calcul standard (interpolation linéaire) ─────────────────────────────────
-// Utilisé pour les 18 cantons hors Suisse romande précise + FR
+// Utilisé pour les 19 cantons alémaniques sans barème précis publié
 // seuilNum = seuil personne seule ; l'ajustement situation/enfants/âge est appliqué
 
 function calculerSubsideStd(
   revenu: number,
-  data: CantonData,
+  data: CantonSubside2026,
   situation: Situation,
   nbEnfants: number,
   isJeune: boolean,
@@ -100,7 +59,7 @@ function calculerSubsideStd(
 function computeResult(
   revenu: number,
   canton: string,
-  data: CantonData,
+  data: CantonSubside2026,
   situation: Situation,
   nbEnfants: number,
   isJeune: boolean,
@@ -114,6 +73,7 @@ function computeResult(
     case 'NE': return calculerSubsideNE(revenu, situation, nbEnfants, isJeune)
     case 'VD': return calculerSubsideVD(revenu, situation, nbEnfants, isJeune)
     case 'JU': return calculerSubsideJU(revenu, situation, nbEnfants, isJeune)
+    case 'FR': return calculerSubsideFR(revenu, situation, nbEnfants, isJeune)
     default:   return calculerSubsideStd(revenu, data, situation, nbEnfants, isJeune)
   }
 }
@@ -150,7 +110,7 @@ export default function SubsidesSimulatorFull() {
 
   const set = (patch: Partial<FormState>) => setForm(f => ({ ...f, ...patch }))
 
-  const cantonData = form.canton ? CANTON_DATA[form.canton] : null
+  const cantonData = form.canton ? SUBSIDES_2026[form.canton as keyof typeof SUBSIDES_2026] ?? null : null
   const hasSeuilNum = Boolean(cantonData?.seuilNum)
   const revNum      = parseInt(form.revenu.replace(/['\s]/g, '')) || 0
   const hasRevenu   = revNum > 0
@@ -185,7 +145,7 @@ export default function SubsidesSimulatorFull() {
             >
               <option value="">Sélectionner votre canton…</option>
               {ALL_CODES.map(c => (
-                <option key={c} value={c}>{c} — {CANTON_DATA[c].nom}</option>
+                <option key={c} value={c}>{c} — {SUBSIDES_2026[c as keyof typeof SUBSIDES_2026].nom}</option>
               ))}
             </select>
             <ChevronDown />
@@ -393,7 +353,7 @@ export default function SubsidesSimulatorFull() {
 
 // ─── Sous-composants partagés ─────────────────────────────────────────────────
 
-function InfoGrid({ cantonData }: { cantonData: CantonData }) {
+function InfoGrid({ cantonData }: { cantonData: CantonSubside2026 }) {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
       {[
@@ -411,7 +371,7 @@ function InfoGrid({ cantonData }: { cantonData: CantonData }) {
   )
 }
 
-function PrimeLien({ cantonData }: { cantonData: CantonData }) {
+function PrimeLien({ cantonData }: { cantonData: CantonSubside2026 }) {
   return (
     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white border border-edge rounded-[8px] px-4 py-3">
       <p className="text-[13px] text-slate">
