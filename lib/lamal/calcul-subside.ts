@@ -244,10 +244,11 @@ export function calculerSubsideFR(
 }
 
 // ─── JU — Jura ───────────────────────────────────────────────────────────────
-// Subside intégral 2026 (source : ecasjura.ch)
-// Barème partiel non publié — on utilise le subside intégral comme plafond indicatif
+// Subside ordinaire 2026 — barème gradué 15–225 CHF/mois (adulte) non publié.
+// On retourne le maximum du subside ordinaire ; montants fixes pour enfant/jeune.
+// Source : ecasjura.ch + communiqué SIC jura.ch 2025
 
-const JU_REF = { adulte: 568, jeune: 392, enfant: 125 }
+const JU_ORD = { adulte: 225, jeune: 196, enfant: 100 }
 
 export function calculerSubsideJU(
   revenu: number, situation: Situation, nbEnfants: number, isJeune: boolean,
@@ -256,13 +257,13 @@ export function calculerSubsideJU(
   const plafond = hasChildren ? 53000 : (situation === 'couple' ? 40000 : 27000)
   if (revenu > plafond) return { adulte: 0, enfant: 0, total: 0, approx: true, label: 'Non éligible' }
   const nb = situation === 'couple' ? 2 : 1
-  const adulte = isJeune ? JU_REF.jeune : JU_REF.adulte
-  const enfant = JU_REF.enfant
+  const adulte = isJeune ? JU_ORD.jeune : JU_ORD.adulte
+  const enfant = JU_ORD.enfant
   return {
     adulte, enfant,
     total: adulte * nb + enfant * nbEnfants,
     approx: true,
-    label: 'Jusqu\'à',
-    note: 'Montant maximum 2026 (subside intégral). Le montant réel dépend de votre revenu exact — délai de demande : 31 décembre 2026.',
+    label: 'Maximum ordinaire',
+    note: 'Montant maximum du subside ordinaire 2026. Le barème gradué complet n\'est pas publié — le montant réel (15–225 CHF/mois adulte) dépend de votre revenu exact. Délai : 31 décembre 2026.',
   }
 }
