@@ -5,6 +5,7 @@ import Link from 'next/link'
 import AuthorBio from '@/components/ui/AuthorBio'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import SubsidesSimulatorFull from '@/components/lamal/SubsidesSimulatorFull'
+import HeroStats from '@/components/ui/HeroStats'
 
 export const metadata: Metadata = {
   title: 'Calculateur de subsides LAMal 2026 — Estimez votre aide cantonale',
@@ -101,19 +102,11 @@ export default function SubsidesPage() {
             votre revenu et votre situation familiale. Données officielles 2026 pour les 26 cantons.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-            {[
-              { value: '2,5 millions', label: 'Bénéficiaires en Suisse', sub: 'Soit environ 29% de la population' },
-              { value: '26 cantons',   label: 'Barèmes distincts',       sub: 'Critères et montants variables' },
-              { value: '≤ 643 CHF',   label: 'Subside mensuel maximum', sub: "Canton de Neuchâtel, barème 2026" },
-            ].map(s => (
-              <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
-                <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
-                <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
-                <div className="text-[12px] text-slate mt-0.5">{s.sub}</div>
-              </div>
-            ))}
-          </div>
+          <HeroStats stats={[
+            { value: '2,5 millions', label: 'Bénéficiaires en Suisse', sub: 'Soit environ 29% de la population' },
+            { value: '26 cantons',   label: 'Barèmes distincts',       sub: 'Critères et montants variables'    },
+            { value: '≤ 643 CHF',   label: 'Subside mensuel maximum', sub: 'Canton de Neuchâtel, barème 2026'  },
+          ]} className="mb-8" />
 
         </div>
       </section>

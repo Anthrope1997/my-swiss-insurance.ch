@@ -4,6 +4,7 @@ import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
 import CantonSearch from '@/components/ui/CantonSearch'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
+import HeroStats from '@/components/ui/HeroStats'
 
 export const metadata: Metadata = {
   title: 'Primes LAMal 2026 : comparez et économisez — My Swiss Insurance',
@@ -202,15 +203,7 @@ export default function LamalPage() {
           </p>
 
           {/* Stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10 pb-10 border-b border-edge">
-            {stats.map(s => (
-              <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
-                <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
-                <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
-                <div className="text-[12px] text-slate mt-0.5">{s.sub}</div>
-              </div>
-            ))}
-          </div>
+          <HeroStats stats={stats} className="mb-10 pb-10 border-b border-edge" />
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-3 sm:items-start">

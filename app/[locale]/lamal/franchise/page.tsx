@@ -4,6 +4,7 @@ import FAQ from '@/components/ui/FAQ'
 import Link from 'next/link'
 import AuthorBio from '@/components/ui/AuthorBio'
 import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
+import HeroStats from '@/components/ui/HeroStats'
 
 export const metadata: Metadata = {
   title: "Franchise LAMal 2026 : quel montant choisir — My Swiss Insurance",
@@ -131,15 +132,7 @@ export default function FranchisePage() {
             Choisir le bon niveau, entre 300 et 2 500 CHF par an, peut économiser jusqu&apos;à 120 CHF par mois sur votre prime.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {heroStats.map(s => (
-              <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
-                <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
-                <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
-                <div className="text-[12px] text-slate mt-0.5">{s.sub}</div>
-              </div>
-            ))}
-          </div>
+          <HeroStats stats={heroStats} />
 
         </div>
       </section>

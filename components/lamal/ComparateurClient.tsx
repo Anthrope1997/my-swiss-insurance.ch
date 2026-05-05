@@ -6,6 +6,7 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 import AuthorBio from '@/components/ui/AuthorBio'
 import FAQ from '@/components/ui/FAQ'
 import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
+import HeroStats from '@/components/ui/HeroStats'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -149,42 +150,6 @@ function InfoTooltip({ text }: { text: string }) {
   )
 }
 
-// ─── Multi-step form progress bar ────────────────────────────────────────────
-
-function ProgressBar({ step }: { step: number }) {
-  const labels = ['Votre objectif', 'Votre situation', 'Vos frais médicaux', 'Vos coordonnées']
-  return (
-    <div className="mb-6">
-      <div className="flex gap-1.5 mb-2">
-        {[1, 2, 3, 4].map(s => (
-          <div key={s} className={`h-1.5 flex-1 rounded-full transition-colors duration-300 ${s <= step ? 'bg-brand' : 'bg-edge'}`} />
-        ))}
-      </div>
-      <p className="text-[12px] text-slate">
-        Étape {step} sur 4 : <span className="font-medium text-ink">{labels[step - 1]}</span>
-      </p>
-    </div>
-  )
-}
-
-// ─── SelectCard ──────────────────────────────────────────────────────────────
-
-function SelectCard({ label, selected, onClick }: { label: string; selected: boolean; onClick: () => void }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`text-left px-4 py-3.5 rounded-[8px] border text-[14px] font-medium transition-all duration-150 w-full ${
-        selected
-          ? 'border-brand bg-[var(--blue-tint)] text-brand'
-          : 'border-edge bg-white text-ink hover:border-brand/50'
-      }`}
-    >
-      {label}
-    </button>
-  )
-}
-
 // ─── Main component ──────────────────────────────────────────────────────────
 
 export default function ComparateurClient() {
@@ -204,24 +169,7 @@ export default function ComparateurClient() {
   const [calcError, setCalcError]   = useState('')
   const [showResults, setShowResults] = useState(false)
 
-  // — Sticky / conversion state —
-  const [showSticky, setShowSticky] = useState(false)
-  const [stickyData, setStickyData] = useState<{ name: string; prime: number; economie: number } | null>(null)
-
-  // — Multi-step form state —
-  const [step, setStep]           = useState(1)
-  const [objective, setObjective] = useState('')
-  const [codePostal2, setCp2]     = useState('')
-  const [situation, setSituation] = useState('')
-  const [frais, setFrais]         = useState('')
-  const [prenom, setPrenom]       = useState('')
-  const [nomForm, setNomForm]     = useState('')
-  const [tel, setTel]             = useState('')
-  const [email, setEmail]         = useState('')
-  const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
-
-  const resultsRef    = useRef<HTMLDivElement>(null)
-  const conversionRef = useRef<HTMLDivElement>(null)
+  const resultsRef = useRef<HTMLDivElement>(null)
 
   // Reset franchise when profil changes
   useEffect(() => {
@@ -255,7 +203,6 @@ export default function ComparateurClient() {
     setNpaError('')
     setResults(null)
     setShowResults(false)
-    setShowSticky(false)
     if (digits.length === 4) validateNpa(digits)
   }
 
@@ -266,7 +213,6 @@ export default function ComparateurClient() {
     setCalcError('')
     setResults(null)
     setShowResults(false)
-    setShowSticky(false)
     try {
       const params = new URLSearchParams({
         npa,
@@ -283,16 +229,6 @@ export default function ComparateurClient() {
       )
       setResults(sorted)
       setShowResults(true)
-      if (sorted.length > 1) {
-        const max = sorted[sorted.length - 1].prime_nette
-        const min = sorted[0].prime_nette
-        setStickyData({
-          name:    sorted[0].assureur,
-          prime:   sorted[0].prime_nette,
-          economie: Math.round((max - min) * 12),
-        })
-        setShowSticky(true)
-      }
       setTimeout(() => {
         resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
       }, 150)
@@ -303,31 +239,6 @@ export default function ComparateurClient() {
     }
   }
 
-  // — Form submit —
-  const submitForm = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setFormStatus('loading')
-    try {
-      const res = await fetch('/api/leads', {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          nom:        `${prenom} ${nomForm}`.trim(),
-          email,
-          telephone:  tel,
-          canton:     npaInfo?.canton ?? '',
-          codePostal: codePostal2 || npa,
-          profil:     objective,
-          type:       'comparateur',
-        }),
-      })
-      if (!res.ok) throw new Error()
-      setFormStatus('success')
-    } catch {
-      setFormStatus('error')
-    }
-  }
-
   const franchises = profil === 'enfant' ? FRANCHISES_ENFANT : FRANCHISES_ADULTE
   const maxPrime   = results ? results[results.length - 1].prime_nette : 0
 
@@ -335,29 +246,6 @@ export default function ComparateurClient() {
 
   return (
     <>
-      {/* ── STICKY BAR ────────────────────────────────────────────────────── */}
-      {showSticky && stickyData && (
-        <div className="fixed bottom-0 sm:bottom-auto sm:top-16 left-0 right-0 z-40 bg-[var(--navy)] border-t sm:border-t-0 sm:border-b border-white/10 shadow-lg">
-          <div className="container-xl py-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-            <p className="text-white text-[13px] sm:text-[14px] leading-snug">
-              <span className="font-semibold">{stickyData.name}</span>
-              {', '}CHF {fmtChf(stickyData.prime)} par mois pour votre profil
-              {stickyData.economie > 0 && (
-                <span className="text-white/70">
-                  {', '}CHF {fmtAn(stickyData.economie)} par an économisés
-                </span>
-              )}
-            </p>
-            <button
-              onClick={() => conversionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
-              className="shrink-0 bg-brand hover:bg-brand-dark text-white text-[13px] font-medium px-4 py-2 rounded-md transition-colors whitespace-nowrap"
-            >
-              Être rappelé →
-            </button>
-          </div>
-        </div>
-      )}
-
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
       <section className="bg-white border-b border-edge pt-10 pb-12">
         <div className="container-xl">
@@ -374,19 +262,11 @@ export default function ComparateurClient() {
             Comparez toutes les caisses selon votre code postal, votre franchise et votre modèle d'assurance.
           </p>
           {/* StatsGrid */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-            {[
-              { value: '34 caisses',  label: 'Comparées en temps réel',  sub: 'Données officielles OFSP 2026' },
-              { value: 'CHF 2 753',   label: 'Économie possible par an', sub: 'Canton de Genève, modèle standard' },
-              { value: '97%',         label: 'Écart de prime possible',  sub: 'Entre caisses dans une même région' },
-            ].map(s => (
-              <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
-                <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
-                <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
-                <div className="text-[12px] text-slate mt-0.5">{s.sub}</div>
-              </div>
-            ))}
-          </div>
+          <HeroStats stats={[
+            { value: '34 caisses',  label: 'Comparées en temps réel',  sub: 'Données officielles OFSP 2026'      },
+            { value: 'CHF 2 753',   label: 'Économie possible par an', sub: 'Canton de Genève, modèle standard'  },
+            { value: '97%',         label: 'Écart de prime possible',  sub: 'Entre caisses dans une même région' },
+          ]} className="mb-8" />
         </div>
       </section>
 
@@ -638,225 +518,14 @@ export default function ComparateurClient() {
         </div>
       </section>
 
-      {/* ── BLOC DE CONVERSION POST-RÉSULTATS ────────────────────────────── */}
-      {showResults && stickyData && (
-        <section ref={conversionRef} className="bg-white border-b border-edge py-12">
-          <div className="container-xl">
-
-            <div className="rounded-xl overflow-hidden border border-edge">
-
-              {/* Header bloc */}
-              <div className="bg-[var(--navy)] px-6 sm:px-8 pt-7 pb-5">
-                <h2 className="text-xl font-semibold text-white mb-2">
-                  Vous souhaitez changer de caisse ?
-                </h2>
-                <p className="text-[15px] text-white/70 leading-relaxed">
-                  Laissez vos coordonnées : un expert confirme la caisse adaptée à votre code postal et votre profil,
-                  vérifie vos droits aux subsides et s'occupe de la résiliation si vous le souhaitez.
-                </p>
-              </div>
-
-              {/* Multi-step form */}
-              <div className="bg-white px-6 sm:px-8 py-6">
-
-                {formStatus === 'success' ? (
-                  <div className="text-center py-8">
-                    <div className="w-14 h-14 bg-brand rounded-full flex items-center justify-center mx-auto mb-4">
-                      <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <h3 className="text-xl font-semibold text-ink mb-1">Demande envoyée</h3>
-                    <p className="text-slate">Un expert vous contacte sous 24 heures ouvrables.</p>
-                  </div>
-                ) : (
-                  <>
-                    <ProgressBar step={step} />
-
-                    {/* Étape 1 — Objectif */}
-                    {step === 1 && (
-                      <div className="grid grid-cols-2 gap-3">
-                        {[
-                          'Changer de caisse',
-                          'Vérifier mes subsides',
-                          'Optimiser ma franchise et mon modèle',
-                          'Conseil complet',
-                        ].map(label => (
-                          <SelectCard
-                            key={label}
-                            label={label}
-                            selected={objective === label}
-                            onClick={() => { setObjective(label); setStep(2) }}
-                          />
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Étape 2 — Situation */}
-                    {step === 2 && (
-                      <div className="space-y-4">
-                        <div>
-                          <label className="block text-[13px] font-medium text-ink mb-1.5">
-                            Code postal (NPA)
-                          </label>
-                          <input
-                            type="text" inputMode="numeric" maxLength={4}
-                            value={codePostal2}
-                            onChange={e => setCp2(e.target.value.replace(/\D/g, '').slice(0, 4))}
-                            placeholder={npa || '1000'}
-                            className="input-field"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-[13px] font-medium text-ink mb-1.5">
-                            Situation familiale
-                          </label>
-                          <div className="relative">
-                            <select
-                              value={situation}
-                              onChange={e => setSituation(e.target.value)}
-                              className="select-field pr-9"
-                            >
-                              <option value="">Sélectionner</option>
-                              <option>Seul</option>
-                              <option>Couple</option>
-                              <option>Famille avec enfants</option>
-                              <option>Retraité</option>
-                            </select>
-                            <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                            </svg>
-                          </div>
-                        </div>
-                        <div className="flex gap-3 pt-1">
-                          <button
-                            type="button"
-                            onClick={() => setStep(1)}
-                            className="flex-1 py-3 rounded-md border border-edge text-slate text-[14px] font-medium hover:bg-cloud transition-colors"
-                          >
-                            Retour
-                          </button>
-                          <button
-                            type="button"
-                            disabled={!situation}
-                            onClick={() => setStep(3)}
-                            className="flex-1 py-3 rounded-md bg-brand hover:bg-brand-dark disabled:bg-slate text-white text-[14px] font-medium transition-colors"
-                          >
-                            Continuer →
-                          </button>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Étape 3 — Frais médicaux */}
-                    {step === 3 && (
-                      <div>
-                        <div className="grid grid-cols-2 gap-3 mb-3">
-                          {[
-                            'Moins de 1 000 CHF par an',
-                            'Entre 1 000 et 3 000 CHF par an',
-                            'Plus de 3 000 CHF par an',
-                            'Je ne sais pas',
-                          ].map(label => (
-                            <SelectCard
-                              key={label}
-                              label={label}
-                              selected={frais === label}
-                              onClick={() => { setFrais(label); setStep(4) }}
-                            />
-                          ))}
-                        </div>
-                        <button
-                          type="button"
-                          onClick={() => setStep(2)}
-                          className="mt-1 text-[13px] text-slate hover:text-ink transition-colors"
-                        >
-                          ← Retour
-                        </button>
-                      </div>
-                    )}
-
-                    {/* Étape 4 — Coordonnées */}
-                    {step === 4 && (
-                      <form onSubmit={submitForm} className="space-y-4">
-                        {/* Prénom + Nom */}
-                        <div className="grid grid-cols-2 gap-3">
-                          <div>
-                            <label className="block text-[13px] font-medium text-ink mb-1.5">Prénom</label>
-                            <input
-                              type="text" required
-                              value={prenom}
-                              onChange={e => setPrenom(e.target.value)}
-                              placeholder="Marie"
-                              className="input-field"
-                            />
-                          </div>
-                          <div>
-                            <label className="block text-[13px] font-medium text-ink mb-1.5">Nom</label>
-                            <input
-                              type="text" required
-                              value={nomForm}
-                              onChange={e => setNomForm(e.target.value)}
-                              placeholder="Dupont"
-                              className="input-field"
-                            />
-                          </div>
-                        </div>
-                        {/* Téléphone + Email */}
-                        <div className="grid grid-cols-2 gap-3">
-                          <div>
-                            <label className="block text-[13px] font-medium text-ink mb-1.5">Téléphone</label>
-                            <input
-                              type="tel" required
-                              value={tel}
-                              onChange={e => setTel(e.target.value)}
-                              placeholder="+41 79 000 00 00"
-                              className="input-field"
-                            />
-                          </div>
-                          <div>
-                            <label className="block text-[13px] font-medium text-ink mb-1.5">Email</label>
-                            <input
-                              type="email" required
-                              value={email}
-                              onChange={e => setEmail(e.target.value)}
-                              placeholder="votre@email.ch"
-                              className="input-field"
-                            />
-                          </div>
-                        </div>
-
-                        {formStatus === 'error' && (
-                          <p className="text-[13px] text-red-500 border border-red-200 bg-red-50 rounded-md px-3 py-2">
-                            Une erreur est survenue. Veuillez réessayer.
-                          </p>
-                        )}
-
-                        <button
-                          type="submit"
-                          disabled={formStatus === 'loading'}
-                          className="w-full bg-brand hover:bg-brand-dark disabled:bg-slate text-white font-semibold py-4 rounded-md text-[16px] transition-colors duration-150"
-                        >
-                          {formStatus === 'loading' ? 'Envoi en cours…' : 'Recevoir mon conseil gratuit →'}
-                        </button>
-
-                        <p className="text-[11px] text-slate/70 text-center leading-relaxed">
-                          Vos données sont protégées conformément à la LPD. Sans engagement. Réponse sous 24 heures.
-                        </p>
-
-                        <button
-                          type="button"
-                          onClick={() => setStep(3)}
-                          className="w-full text-[13px] text-slate hover:text-ink transition-colors"
-                        >
-                          ← Retour
-                        </button>
-                      </form>
-                    )}
-                  </>
-                )}
-              </div>
-            </div>
+      {/* ── CONVERSION POST-RÉSULTATS ──────────────────────────────────────── */}
+      {showResults && (
+        <section className="bg-[#0f2040] border-b border-white/10 py-12">
+          <div className="container-xl max-w-2xl text-center">
+            <p className="text-[16px] text-white/80 mb-8 leading-relaxed">
+              Un expert confirme la caisse optimale pour votre profil, vérifie vos droits aux subsides et gère le changement à votre place.
+            </p>
+            <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
           </div>
         </section>
       )}

@@ -81,6 +81,17 @@ La distinction sémantique est indiquée par le style du label, pas par une clas
 Espace avant et après `:` dans tous les textes visibles (labels, titres, tableaux).
 Les labels uppercase "À retenir" et "Recommandation" ne portent **pas** de deux-points finaux.
 
+### 0.5 Tuiles statistiques — composant unique
+
+**Toutes** les tuiles statistiques héro (Zone 1) utilisent le composant `<HeroStats>`.
+**Aucune page ne définit son propre style de tuile** : pas de grille `bg-cloud/60 border border-edge` inline.
+
+```tsx
+import HeroStats from '@/components/ui/HeroStats'
+<HeroStats stats={heroStats} className="mb-8" />
+// className porte uniquement l'espacement vertical
+```
+
 ---
 
 ## 1. Stack & contexte
@@ -376,6 +387,27 @@ import CantonCombobox, { CANTON_NAMES } from '@/components/ui/CantonCombobox'
 
 ---
 
+### 3.11 `<HeroStats>` — components/ui/HeroStats.tsx
+
+Server Component. Grille 3 tuiles sur fond navy `#0f2040`, chiffre en bleu `#60a5fa`, label en blanc.
+Obligatoire dans Zone 1 de toutes les pages. Aucune page ne définit son propre style de tuile.
+
+```tsx
+import HeroStats from '@/components/ui/HeroStats'
+
+const heroStats = [
+  { value: '34',        label: 'Caisses agréées',    sub: 'données OFSP 2026'      },
+  { value: 'CHF 2 753', label: 'Économie maximale',  sub: 'Genève, adulte 35 ans'   },
+  { value: '26',        label: 'Cantons couverts',   sub: 'primes OFSP officielles' },
+]
+
+<HeroStats stats={heroStats} className="mb-8" />
+// stats: { value: string, label: string, sub: string }[]
+// className?: string  — espacement vertical uniquement (mb-*, pb-*, border-b)
+```
+
+---
+
 ## 4. Règles éditoriales — permanentes et sans exception
 
 1. **Jamais "courtier"** → toujours **"expert"**
@@ -417,20 +449,12 @@ Contient dans l'ordre :
     <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-8">
       {intro}  {/* 2-3 phrases — enjeu, pas résumé */}
     </p>
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-      {heroStats.map(s => (
-        <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
-          <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
-          <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
-          <div className="text-[12px] text-slate mt-0.5">{s.sub}</div>
-        </div>
-      ))}
-    </div>
+    <HeroStats stats={heroStats} />  {/* className optionnel si espacement nécessaire */}
   </div>
 </section>
 ```
 
-**Règles Zone 1 :** valeurs numériques en `font-bold text-ink` — jamais en bleu. Aucun bouton dans cette zone. La `border-b border-edge` de la section constitue le séparateur visuel avant Zone 2.
+**Règles Zone 1 :** tuiles via `<HeroStats>` obligatoire — aucune grille inline. Aucun bouton dans cette zone. La `border-b border-edge` de la section constitue le séparateur visuel avant Zone 2.
 
 ---
 
@@ -615,15 +639,7 @@ export default function PageGuide() {
           </p>
 
           {/* StatsGrid — 3 métriques qui prouvent que ça vaut la peine de lire */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {heroStats.map(s => (
-              <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
-                <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
-                <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
-                <div className="text-[12px] text-slate mt-0.5">{s.sub}</div>
-              </div>
-            ))}
-          </div>
+          <HeroStats stats={heroStats} />
 
         </div>
       </section>
@@ -794,15 +810,7 @@ export default function PageHub() {
           </p>
 
           {/* StatsGrid — 3 métriques de crédibilité */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {heroStats.map(s => (
-              <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
-                <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
-                <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
-                <div className="text-[12px] text-slate mt-0.5">{s.sub}</div>
-              </div>
-            ))}
-          </div>
+          <HeroStats stats={heroStats} className="mb-10 pb-10 border-b border-edge" />
         </div>
       </section>
 
@@ -856,7 +864,13 @@ export default function PageHub() {
 }
 ```
 
-**Règles Template B :** pas de MSIBand, pas de bloc En bref, pas de sommaire, pas de nudge sombre. Cartes sans statistiques — titre et description courte uniquement. FAQ limitée à 3 questions.
+**Règles Template B :**
+
+1. **Pas de MSIBand, pas de bloc En bref, pas de sommaire.** Cartes sans statistiques — titre et description courte uniquement. FAQ limitée à 3 questions.
+
+2. **Espacement réduit entre sections.** L'espacement vertical entre les sections est réduit de moitié par rapport aux valeurs par défaut. La page doit être fluide et continue, pas une succession de blocs isolés avec du vide entre eux. En pratique : `py-10` au lieu de `py-20`, `py-[3.75rem]` au lieu de `py-[7.5rem]`, `mb-6` au lieu de `mb-12`.
+
+3. **Largeur pleine du conteneur pour tous les textes.** Le H1, l'intro, les CTAs et les textes d'introduction de chaque section occupent toute la largeur du conteneur principal. Aucun `max-w-2xl` ni `max-w-3xl` sur les blocs de texte. Le même conteneur `.container-xl` est utilisé pour les textes, les cartes et les tuiles.
 
 ---
 
@@ -922,15 +936,7 @@ export default function PageOutil() {
             {intro}  {/* 2-3 phrases — enjeu de l'outil */}
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {heroStats.map(s => (
-              <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
-                <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
-                <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
-                <div className="text-[12px] text-slate mt-0.5">{s.sub}</div>
-              </div>
-            ))}
-          </div>
+          <HeroStats stats={heroStats} />
 
         </div>
       </section>
@@ -976,7 +982,18 @@ export default function PageOutil() {
             </div>
           </section>
 
-          {/* Pas de nudge sombre sur les pages outils */}
+          {/* Conversion post-résultats — outils interactifs uniquement (ex : comparateur) */}
+          {/* Insérer ce bloc immédiatement après l'affichage des résultats */}
+          {showResults && (
+            <section className="bg-[#0f2040] border-b border-white/10 py-12">
+              <div className="container-xl max-w-2xl text-center">
+                <p className="text-[16px] text-white/80 mb-8 leading-relaxed">
+                  {phraseNudge}  {/* 1 phrase — valeur expert : confirme, vérifie, gère */}
+                </p>
+                <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
+              </div>
+            </section>
+          )}
 
           {/* FAQ — 1ère question ouverte par défaut */}
           <section id="faq">
@@ -1023,7 +1040,7 @@ export default function PageOutil() {
 }
 ```
 
-**Règles Template C :** pas de MSIBand, pas de bloc En bref, pas de sommaire, pas de nudge sombre. Pas d'AnchorLabels numérotés devant les H2. Pas de bordure dashed sous les phrases d'entrée. L'outil est toujours premier en Zone 2. Maximum 2 couleurs de fond alternées (bg-white / bg-cloud). Chaque tableau en Zone 3 est précédé d'au moins 2 phrases contenant les chiffres clés. Ordre bas de page : FAQ → Formulaire → AuthorBio → Guides associés → Footer.
+**Règles Template C :** pas de MSIBand, pas de bloc En bref, pas de sommaire. Pas d'AnchorLabels numérotés devant les H2. Pas de bordure dashed sous les phrases d'entrée. L'outil est toujours premier en Zone 2. Maximum 2 couleurs de fond alternées (bg-white / bg-cloud). Chaque tableau en Zone 3 est précédé d'au moins 2 phrases contenant les chiffres clés. Nudge sombre `bg-[#0f2040]` uniquement après l'affichage des résultats de l'outil (conditionnel `{showResults && ...}`). Ordre bas de page : Nudge résultats (si outil) → FAQ → Formulaire → AuthorBio → Guides associés → Footer.
 
 ---
 
