@@ -3,6 +3,7 @@ import Link from 'next/link'
 import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
 import CantonSearch from '@/components/ui/CantonSearch'
 import Breadcrumb from '@/components/ui/Breadcrumb'
+import FAQ from '@/components/ui/FAQ'
 
 export const metadata: Metadata = {
   title: 'Primes LAMal 2026 : comparez et économisez — My Swiss Insurance',
@@ -18,35 +19,29 @@ export const metadata: Metadata = {
   },
 }
 
+const faqItems = [
+  {
+    question: "L'assurance maladie est-elle obligatoire en Suisse ?",
+    answer: "Oui, la LAMal rend l'assurance maladie obligatoire pour tout résident en Suisse depuis 1996. L'affiliation doit intervenir dans les 3 mois suivant l'arrivée.",
+  },
+  {
+    question: 'Combien peut-on économiser en changeant de caisse LAMal ?',
+    answer: "Jusqu'à 2 753 CHF par an pour un adulte de 35 ans à Genève (franchise 300 CHF, modèle standard, source OFSP 2026). Les 34 caisses agréées proposent les mêmes prestations de base à des prix très différents selon le canton.",
+  },
+  {
+    question: 'Qui a droit à un subside LAMal en Suisse ?',
+    answer: "25 à 30 % de la population suisse bénéficie d'une réduction individuelle des primes (subside). Les conditions varient selon le canton et le revenu déterminant. Un simulateur est disponible sur my-swiss-insurance.ch.",
+  },
+]
+
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: "L'assurance maladie est-elle obligatoire en Suisse ?",
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: "Oui, la LAMal rend l'assurance maladie obligatoire pour tout résident en Suisse depuis 1996. L'affiliation doit intervenir dans les 3 mois suivant l'arrivée.",
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Combien peut-on économiser en changeant de caisse LAMal ?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Jusqu\'à 2 753 CHF par an pour un adulte de 35 ans à Genève (franchise 300 CHF, modèle standard, source OFSP 2026). Les 34 caisses agréées proposent les mêmes prestations de base à des prix très différents selon le canton.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Qui a droit à un subside LAMal en Suisse ?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: '25 à 30 % de la population suisse bénéficie d\'une réduction individuelle des primes (subside). Les conditions varient selon le canton et le revenu déterminant. Un simulateur est disponible sur my-swiss-insurance.ch.',
-      },
-    },
-  ],
+  mainEntity: faqItems.map(item => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
 }
 
 const webSiteSchema = {
@@ -74,7 +69,7 @@ const guides = [
   {
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75}
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
           d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
       </svg>
     ),
@@ -85,7 +80,7 @@ const guides = [
   {
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75}
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
           d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
       </svg>
     ),
@@ -96,7 +91,7 @@ const guides = [
   {
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75}
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
           d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
       </svg>
     ),
@@ -107,7 +102,7 @@ const guides = [
   {
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75}
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
           d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
       </svg>
     ),
@@ -121,7 +116,7 @@ const situations = [
   {
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75}
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
           d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
       </svg>
     ),
@@ -132,7 +127,7 @@ const situations = [
   {
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75}
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
           d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
       </svg>
     ),
@@ -143,7 +138,7 @@ const situations = [
   {
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75}
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
           d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
@@ -210,7 +205,7 @@ export default function LamalPage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10 pb-10 border-b border-edge">
             {stats.map(s => (
               <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
-                <div className="text-2xl font-medium text-brand leading-none">{s.value}</div>
+                <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
                 <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
                 <div className="text-[12px] text-slate mt-0.5">{s.sub}</div>
               </div>
@@ -254,7 +249,7 @@ export default function LamalPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {guides.map(g => (
               <Link
                 key={g.href} href={g.href}
@@ -285,20 +280,6 @@ export default function LamalPage() {
             ))}
           </div>
 
-          {/* Nudge */}
-          <div className="bg-white border border-edge rounded-xl px-8 py-6 flex flex-col sm:flex-row
-                          sm:items-center justify-between gap-4">
-            <div>
-              <p className="font-semibold text-ink text-[16px]">Vous souhaitez changer de caisse ?</p>
-              <p className="text-slate text-[14px] mt-0.5">
-                Un expert compare les meilleures offres pour votre profil et s'occupe du changement d'assurance pour vous
-              </p>
-            </div>
-            <a href="#formulaire" className="btn-primary text-[14px] whitespace-nowrap shrink-0">
-              Prendre rendez-vous →
-            </a>
-          </div>
-
         </div>
       </section>
 
@@ -308,7 +289,7 @@ export default function LamalPage() {
 
           <div className="max-w-2xl mb-12">
             <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
-              Des conseils adaptés à votre profil
+              Votre assurance LAMal selon votre situation
             </h2>
             <p className="text-[17px] text-slate leading-relaxed">
               Votre situation personnelle détermine le contrat LAMal le plus avantageux pour vous.
@@ -374,12 +355,12 @@ export default function LamalPage() {
                            hover:border-brand hover:shadow-md transition-all duration-200">
                 <p className="font-bold text-ink text-[22px] mb-1">{c.nom}</p>
                 <p className="text-slate text-[13px] mb-4">
-                  À partir de <span className="font-semibold text-ink">{c.primeMin} CHF</span>/mois
+                  À partir de <span className="font-semibold text-ink">{c.primeMin} CHF par mois</span>
                 </p>
                 <div className="bg-[#eff6ff] rounded-lg px-3 py-2 mb-5">
                   <p className="text-[12px] text-brand font-medium">Économie possible</p>
                   <p className="text-[18px] font-bold text-ink leading-tight">
-                    {c.economieAn} CHF/an
+                    {c.economieAn} CHF par an
                   </p>
                 </div>
                 <div className="mt-auto flex items-center gap-1 text-[13px] font-medium text-brand">
@@ -396,16 +377,6 @@ export default function LamalPage() {
           <p className="text-[12px] text-slate/70 mb-8">
             Adulte 35 ans, modèle standard, franchise 300 CHF. Source OFSP 2026.
           </p>
-
-          {/* Nudge */}
-          <div className="text-center">
-            <p className="text-[15px] text-slate mb-3">
-              Vous souhaitez comparer toutes les caisses pour un profil précis ?
-            </p>
-            <Link href="/lamal/comparateur" className="btn-primary text-[14px]">
-              Ouvrir le comparateur →
-            </Link>
-          </div>
 
         </div>
       </section>
@@ -440,23 +411,24 @@ export default function LamalPage() {
         </div>
       </section>
 
-      {/* ── 6. FORMULAIRE ───────────────────────────────────────────────────── */}
-      <section id="formulaire" className="bg-white border-t border-edge py-[3.75rem] sm:py-24 scroll-mt-16">
-        <div className="container-xl max-w-2xl">
+      {/* ── 6. FAQ ──────────────────────────────────────────────────────────── */}
+      <div className="container-xl pb-8 pt-[7.5rem]">
+        <FAQ items={faqItems} title="Questions fréquentes sur la LAMal" />
+      </div>
 
+      {/* ── 7. FORMULAIRE ───────────────────────────────────────────────────── */}
+      <section id="formulaire" className="bg-cloud border-y border-edge py-10 sm:py-16 scroll-mt-16">
+        <div className="container-xl max-w-2xl">
           <div className="text-center mb-6">
             <h2 className="text-2xl sm:text-3xl font-bold text-ink leading-tight mb-3">
-              Vous préférez qu'on s'occupe de tout ?
+              Besoin d'aide ?
             </h2>
             <p className="text-[15px] sm:text-[17px] text-slate leading-relaxed">
-              Un expert analyse votre profil, trouve la meilleure caisse pour votre situation
-              et gère le changement de votre côté. Gratuit, sans engagement, réponse sous
-              24 heures.
+              Un expert vous rappelle sous 24 heures pour établir avec vous une solution
+              personnalisée. Gratuit, sans engagement.
             </p>
           </div>
-
           <MultiStepLeadForm redirectOnSuccess="/merci" />
-
         </div>
       </section>
     </>
