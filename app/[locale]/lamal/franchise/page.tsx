@@ -3,7 +3,7 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
 import Link from 'next/link'
 import AuthorBio from '@/components/ui/AuthorBio'
-import NeedHelpSection from '@/components/ui/NeedHelpSection'
+import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
 
 export const metadata: Metadata = {
   title: "Franchise LAMal 2026 : quel montant choisir — My Swiss Insurance",
@@ -80,6 +80,12 @@ const franchises = [
   { montant: 300,  prime: 564.60, seuil: 'Référence',  conseil: 'Traitement chronique, médicaments réguliers, grossesse' },
 ]
 
+const enBref = [
+  "La franchise 2 500 CHF économise 120 CHF par mois sur votre prime et vous expose à 3 200 CHF de reste à charge maximum par an.",
+  "Le seuil d'équilibre entre franchise 300 CHF et 2 500 CHF est de 1 440 CHF de frais médicaux annuels.",
+  "Les enfants bénéficient de franchises de 0 à 600 CHF par an, avec une quote-part plafonnée à 350 CHF par an.",
+]
+
 const heroStats = [
   { value: '6',         label: 'Niveaux de franchise',       sub: 'de 300 à 2 500 CHF par an'         },
   { value: 'CHF 1 440', label: "Seuil d'équilibre maximum",  sub: 'franchise 300 vs 2 500 CHF par an' },
@@ -87,17 +93,17 @@ const heroStats = [
 ]
 
 const toc = [
-  { id: 'definition', label: "1. Franchise et quote-part"         },
-  { id: 'tableau',    label: "2. Quelle franchise choisir ?"        },
-  { id: 'enfants',    label: "3. Franchise enfant"                },
-  { id: 'changement', label: "4. Changer de franchise"            },
-  { id: 'faq',        label: "5. Questions fréquentes"            },
+  { id: 'definition', label: "1. Franchise et quote-part"    },
+  { id: 'tableau',    label: "2. Quelle franchise choisir ?" },
+  { id: 'enfants',    label: "3. Franchise enfant"           },
+  { id: 'changement', label: "4. Changer de franchise"       },
+  { id: 'faq',        label: "5. Questions fréquentes"       },
 ]
 
 const guidesAssocies = [
-  { href: '/lamal/guide',            label: 'Comprendre la LAMal'       },
-  { href: '/lamal/modeles',          label: 'Les 4 modèles LAMal'       },
-  { href: '/lamal/subsides',         label: 'Calculer mes subsides'     },
+  { href: '/lamal/guide',             label: 'Comprendre la LAMal'       },
+  { href: '/lamal/modeles',           label: 'Les 4 modèles LAMal'       },
+  { href: '/lamal/subsides',          label: 'Calculer mes subsides'     },
   { href: '/lamal/changer-de-caisse', label: 'Changer de caisse maladie' },
 ]
 
@@ -107,8 +113,8 @@ export default function FranchisePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-      {/* ── Hero ── */}
-      <section className="bg-white border-b border-edge pt-12 pb-14">
+      {/* ── ZONE 1 — Accroche ── */}
+      <section className="bg-white border-b border-edge pt-10 pb-12">
         <div className="container-xl">
 
           <Breadcrumb items={[
@@ -117,16 +123,28 @@ export default function FranchisePage() {
             { label: 'Franchise LAMal' },
           ]} />
 
+          {/* MSIBand */}
+          <div className="flex items-center gap-2.5 mt-3 mb-5">
+            <div className="w-6 h-6 bg-brand rounded-[4px] flex items-center justify-center shrink-0">
+              <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor"
+                   viewBox="0 0 24 24" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <span className="text-[13px] font-medium text-ink">My Swiss Insurance</span>
+            <span className="text-[13px] text-slate">Publié le 1er janvier 2026, mis à jour le 22 avril 2026</span>
+          </div>
+
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
             Franchise LAMal : quel montant choisir en 2026 ?
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
             La franchise est le montant annuel que vous payez avant que votre caisse intervienne.
-            Plus elle est élevée, plus votre prime baisse, jusqu'à CHF 120 par mois,
-            mais plus vous payez de votre poche en cas de soins. Tout est question d'équilibre.
+            Choisir le bon niveau, entre 300 et 2 500 CHF par an, peut économiser jusqu&apos;à 120 CHF par mois sur votre prime.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {heroStats.map(s => (
               <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
                 <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
@@ -135,296 +153,363 @@ export default function FranchisePage() {
               </div>
             ))}
           </div>
+
         </div>
       </section>
 
-      {/* ── Layout 2 colonnes ── */}
+      {/* ── ZONE 2 — Navigation rapide ── */}
+      <div className="bg-cloud/60 border-b border-edge py-8">
+        <div className="container-xl space-y-6">
+
+          <div>
+            <p className="text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-3">
+              En bref
+            </p>
+            <ul className="space-y-2.5">
+              {enBref.map((phrase, i) => (
+                <li key={i} className="flex gap-2.5 text-[15px] text-ink leading-relaxed">
+                  <span className="text-brand font-bold shrink-0" aria-hidden="true">•</span>
+                  <span>{phrase}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <p className="text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-3">
+              Sommaire
+            </p>
+            <ul className="space-y-0.5">
+              {toc.map((item) => (
+                <li key={item.id}>
+                  <a href={`#${item.id}`} className="toc-link">{item.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      {/* ── ZONE 3 — Contenu détaillé ── */}
       <div className="container-xl py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-12 items-start">
+        <article className="max-w-3xl space-y-4">
 
-          {/* TOC sticky */}
-          <aside className="hidden lg:block">
-            <nav className="sticky top-24">
-              <p className="text-[11px] font-semibold text-slate uppercase tracking-widest mb-4 px-4">
-                Sommaire
+          {/* 1 — Définition */}
+          <section id="definition">
+            <p className="text-[11px] font-semibold text-brand uppercase tracking-widest mb-2" aria-hidden="true">
+              01 — Définition
+            </p>
+            <h2 className="article-h2">1. Franchise et quote-part : quelle différence ?</h2>
+
+            <div className="border-b border-dashed border-edge pb-4 mb-6">
+              <p className="article-p mb-0">
+                La franchise et la quote-part sont les deux mécanismes de participation aux frais médicaux.
+                Ils s&apos;appliquent successivement dans l&apos;année et ont chacun un plafond propre.
               </p>
-              <ul className="space-y-0.5">
-                {toc.map(item => (
-                  <li key={item.id}>
-                    <a href={`#${item.id}`} className="toc-link">{item.label}</a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </aside>
+            </div>
 
-          {/* Article */}
-          <article className="min-w-0 space-y-4">
-
-            {/* 1 — Définition */}
-            <section id="definition" className="pt-2">
-              <h2 className="article-h2">1. Franchise et quote-part : quelle différence ?</h2>
-              <p className="article-p">
-                La franchise et la quote-part sont les deux mécanismes de participation financière
-                aux soins. Ils s'appliquent successivement dans l'année et ont chacun un plafond propre.
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                <div className="bg-white border border-edge rounded-lg p-5">
-                  <h3 className="article-h3">La franchise</h3>
-                  <ul className="space-y-2">
-                    {[
-                      'Montant fixe : 300 à 2 500 CHF par an (adulte)',
-                      "Vous payez 100% des frais jusqu'à ce montant",
-                      'Choisie une fois par an, avant le 30 novembre',
-                      'Plus la franchise est élevée, plus la prime mensuelle est basse',
-                    ].map((item, i) => (
-                      <li key={i} className="flex gap-3 text-[16px] text-slate">
-                        <svg className="w-4 h-4 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
-                        </svg>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="bg-white border border-edge rounded-lg p-5">
-                  <h3 className="article-h3">La quote-part</h3>
-                  <ul className="space-y-2">
-                    {[
-                      '10% des frais dépassant la franchise',
-                      'Plafond : CHF 700 par an (adulte), CHF 350 par an (enfant)',
-                      'Automatique, non modifiable',
-                      'Coût maximum total : franchise + CHF 700 par an',
-                    ].map((item, i) => (
-                      <li key={i} className="flex gap-3 text-[16px] text-slate">
-                        <svg className="w-4 h-4 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
-                        </svg>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              <div className="callout flex gap-3">
-                <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
-                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
-                     strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
-                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
-                  <line x1="10" y1="21" x2="14" y2="21" />
-                </svg>
-                <div>
-                  <p className="text-[16px] mb-2">
-                    <strong>Exemple concret : </strong>
-                    franchise de CHF 1 500 par an, CHF 2 000 de frais médicaux dans l'année.
-                  </p>
-                  <ul className="space-y-1">
-                    <li className="text-[16px] flex gap-2">
-                      <span className="shrink-0">✓</span>
-                      <span>Vous payez CHF 1 550 : CHF 1 500 (franchise) + CHF 50 (10% de quote-part sur les CHF 500 restants).</span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+              <div className="bg-white border border-edge rounded-lg p-5">
+                <h3 className="article-h3">La franchise</h3>
+                <ul className="space-y-2">
+                  {[
+                    'Montant fixe : 300 à 2 500 CHF par an (adulte)',
+                    "Vous payez 100% des frais jusqu'à ce montant",
+                    'Choisie une fois par an, avant le 30 novembre',
+                    'Plus la franchise est élevée, plus la prime mensuelle est basse',
+                  ].map((item, i) => (
+                    <li key={i} className="flex gap-3 text-[16px] text-slate">
+                      <svg className="w-4 h-4 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
+                      </svg>
+                      {item}
                     </li>
-                    <li className="text-[16px] flex gap-2">
-                      <span className="shrink-0">✓</span>
-                      <span>Votre caisse prend en charge CHF 450 : les 90% au-dessus de la franchise.</span>
-                    </li>
-                  </ul>
-                </div>
+                  ))}
+                </ul>
               </div>
-            </section>
+              <div className="bg-white border border-edge rounded-lg p-5">
+                <h3 className="article-h3">La quote-part</h3>
+                <ul className="space-y-2">
+                  {[
+                    '10% des frais dépassant la franchise',
+                    'Plafond : CHF 700 par an (adulte), CHF 350 par an (enfant)',
+                    'Automatique, non modifiable',
+                    'Coût maximum total : franchise + CHF 700 par an',
+                  ].map((item, i) => (
+                    <li key={i} className="flex gap-3 text-[16px] text-slate">
+                      <svg className="w-4 h-4 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
+                      </svg>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
 
-            {/* 2 — Tableau */}
-            <section id="tableau">
-              <h2 className="article-h2">2. Quelle franchise choisir selon vos frais médicaux annuels ?</h2>
-              <p className="article-p">
-                Une franchise élevée réduit votre prime, mais augmente votre reste à charge.
-                Le tableau indique, pour chaque franchise, le seuil de dépenses annuelles
-                à ne pas dépasser pour qu'elle reste avantageuse.
+            <div className="callout flex gap-3">
+              <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
+                   viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
+                   strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
+                <line x1="9.5" y1="18" x2="14.5" y2="18" />
+                <line x1="10" y1="21" x2="14" y2="21" />
+              </svg>
+              <div>
+                <p className="font-semibold text-ink mb-1">Exemple : franchise 1 500 CHF, CHF 2 000 de frais dans l&apos;année</p>
+                <ul className="space-y-1">
+                  <li className="text-[16px]">Vous payez CHF 1 550 : CHF 1 500 (franchise) + CHF 50 (10% de quote-part sur les CHF 500 restants).</li>
+                  <li className="text-[16px]">Votre caisse prend en charge CHF 450 : les 90% au-dessus de la franchise.</li>
+                </ul>
+              </div>
+            </div>
+
+            <p className="article-p mt-6">
+              <Link href="/lamal/guide" className="text-brand hover:underline">
+                Comprendre le fonctionnement complet de la LAMal →
+              </Link>
+            </p>
+          </section>
+
+          {/* 2 — Tableau comparatif */}
+          <section id="tableau">
+            <p className="text-[11px] font-semibold text-brand uppercase tracking-widest mb-2" aria-hidden="true">
+              02 — Tableau comparatif
+            </p>
+            <h2 className="article-h2">2. Quelle franchise choisir selon vos frais médicaux annuels ?</h2>
+
+            <div className="border-b border-dashed border-edge pb-4 mb-6">
+              <p className="article-p mb-0">
+                La franchise 2 500 CHF est avantageuse si vos frais médicaux annuels restent sous 1 440 CHF.
+                Au-delà, la franchise 300 CHF devient moins coûteuse au total, prime et reste à charge confondus.
               </p>
+            </div>
 
-              <div className="overflow-x-auto border border-edge rounded-[8px] mb-2">
-                <table className="stripe-table w-full">
-                  <thead>
-                    <tr>
-                      <th className="text-left whitespace-nowrap">Franchise</th>
-                      <th className="text-left whitespace-nowrap">Prime par mois</th>
-                      <th className="text-left whitespace-nowrap hidden md:table-cell">Avantageuse si frais annuels inférieurs à</th>
-                      <th className="text-left whitespace-nowrap">Profil concerné</th>
+            <div className="overflow-x-auto border border-edge rounded-[8px] mb-2">
+              <table className="stripe-table w-full">
+                <thead>
+                  <tr>
+                    <th className="text-left whitespace-nowrap">Franchise</th>
+                    <th className="text-left whitespace-nowrap">Prime par mois</th>
+                    <th className="text-left whitespace-nowrap hidden md:table-cell">Avantageuse si frais annuels inférieurs à</th>
+                    <th className="text-left whitespace-nowrap">Profil concerné</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {franchises.map((f) => (
+                    <tr key={f.montant} className={f.montant === 300 ? 'bg-[#eff6ff]' : ''}>
+                      <td className="font-semibold text-ink whitespace-nowrap">
+                        CHF {f.montant.toLocaleString('fr-CH')} par an
+                      </td>
+                      <td className="font-medium text-ink whitespace-nowrap">
+                        CHF {f.prime.toFixed(2)}
+                      </td>
+                      <td className="text-ink whitespace-nowrap hidden md:table-cell">{f.seuil}</td>
+                      <td className="text-slate whitespace-nowrap">{f.conseil}</td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {franchises.map((f) => (
-                      <tr key={f.montant} className={f.montant === 300 ? 'bg-[#eff6ff]' : ''}>
-                        <td className="font-semibold text-ink whitespace-nowrap">
-                          CHF {f.montant.toLocaleString('fr-CH')} par an
-                        </td>
-                        <td className="font-medium text-ink whitespace-nowrap">
-                          CHF {f.prime.toFixed(2)}
-                        </td>
-                        <td className="text-ink whitespace-nowrap hidden md:table-cell">{f.seuil}</td>
-                        <td className="text-slate whitespace-nowrap">{f.conseil}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              <p className="text-[13px] text-slate/60 mt-2 md:hidden">Tableau complet visible sur ordinateur.</p>
-              <p className="text-[13px] text-slate/60 mt-3 mb-4">
-                Primes pour un adulte (26 ans et plus) à Zurich, modèle standard, OFSP 2026.
-              </p>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="text-[13px] text-slate/60 mt-2 md:hidden">Tableau complet visible sur ordinateur.</p>
+            <p className="text-[13px] text-slate/60 mt-3 mb-4">
+              Primes pour un adulte (26 ans et plus) à Zurich, modèle standard, OFSP 2026.
+            </p>
 
-              <div className="callout flex gap-3">
-                <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
-                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
-                     strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
-                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
-                  <line x1="10" y1="21" x2="14" y2="21" />
-                </svg>
-                <div>
-                  <p className="font-semibold text-ink mb-1">Vous hésitez entre CHF 2 500 et CHF 300 ?</p>
-                  <p className="text-[16px]">
-                    Avec la franchise CHF 2 500, vous économisez CHF 1 440 par an sur votre prime (CHF 120 par mois).
-                    En contrepartie, vous payez jusqu'à CHF 2 500 de votre poche en cas de maladie.
-                    Le point de bascule se situe à CHF 1 440 de frais médicaux annuels : en dessous, la franchise CHF 2 500
-                    est gagnante. Au-dessus, c'est la franchise CHF 300.
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-6">
-                <Link href="/lamal/comparateur" className="text-brand hover:underline text-[16px] font-medium">
-                  Comparer les primes LAMal par canton →
-                </Link>
-              </div>
-            </section>
-
-            {/* 3 — Enfants */}
-            <section id="enfants">
-              <h2 className="article-h2">3. Franchise pour les enfants (0 à 18 ans)</h2>
-              <p className="article-p">
-                Les franchises enfants sont distinctes des franchises adultes. Elles vont de 0 à 600 CHF
-                par an et la quote-part est plafonnée à CHF 350 par an, contre CHF 700 par an pour un adulte.
-              </p>
-
-              <div className="callout-success flex gap-3 mb-6">
-                <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
-                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
-                     strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
-                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
-                  <line x1="10" y1="21" x2="14" y2="21" />
-                </svg>
+            <div className="callout flex gap-3">
+              <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
+                   viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
+                   strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
+                <line x1="9.5" y1="18" x2="14.5" y2="18" />
+                <line x1="10" y1="21" x2="14" y2="21" />
+              </svg>
+              <div>
+                <p className="font-semibold text-ink mb-1">Vous hésitez entre CHF 2 500 et CHF 300 ?</p>
                 <p className="text-[16px]">
-                  <strong>Recommandation :</strong> la franchise 0 CHF par an est conseillée pour les
-                  jeunes enfants qui consultent fréquemment. À partir de l'adolescence (15 à 18 ans),
-                  une franchise plus élevée peut être envisagée si l'enfant est en bonne santé.
+                  Avec la franchise CHF 2 500, vous économisez CHF 1 440 par an sur votre prime (CHF 120 par mois).
+                  En contrepartie, vous payez jusqu&apos;à CHF 2 500 de votre poche en cas de maladie.
+                  Le point de bascule se situe à CHF 1 440 de frais médicaux annuels : en dessous, la franchise CHF 2 500
+                  est gagnante. Au-dessus, c&apos;est la franchise CHF 300.
                 </p>
               </div>
+            </div>
 
-              <div className="overflow-x-auto border border-edge rounded-[8px]">
-                <table className="stripe-table w-full">
-                  <thead>
-                    <tr>
-                      <th className="text-left whitespace-nowrap">Franchise par an</th>
-                      <th className="text-left whitespace-nowrap">Profil adapté</th>
+            <p className="article-p mt-6">
+              <Link href="/lamal/comparateur" className="text-brand hover:underline">
+                Comparer les primes LAMal par canton →
+              </Link>
+            </p>
+          </section>
+
+          {/* Nudge sombre — après la section la plus complexe */}
+          <div className="bg-[var(--navy)] rounded-xl px-6 py-5 my-8">
+            <p className="text-[15px] font-medium text-white mb-1.5">Pas sûr de la franchise adaptée à votre situation ?</p>
+            <p className="text-[14px] text-white/70 leading-relaxed mb-4">
+              Un expert analyse vos dépenses médicales habituelles et calcule la franchise la plus avantageuse pour votre profil.
+            </p>
+            <a href="#contact" className="text-[14px] text-white underline hover:text-white/80">
+              Parler à un expert →
+            </a>
+          </div>
+
+          {/* 3 — Franchise enfant */}
+          <section id="enfants">
+            <p className="text-[11px] font-semibold text-brand uppercase tracking-widest mb-2" aria-hidden="true">
+              03 — Franchise enfant
+            </p>
+            <h2 className="article-h2">3. Quelle franchise choisir pour un enfant ?</h2>
+
+            <div className="border-b border-dashed border-edge pb-4 mb-6">
+              <p className="article-p mb-0">
+                Les franchises enfant sont distinctes des franchises adultes, de 0 à 600 CHF par an.
+                La quote-part est plafonnée à 350 CHF par an, contre 700 CHF pour un adulte.
+              </p>
+            </div>
+
+            <div className="callout-success flex gap-3 mb-6">
+              <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
+                   viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
+                   strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
+                <line x1="9.5" y1="18" x2="14.5" y2="18" />
+                <line x1="10" y1="21" x2="14" y2="21" />
+              </svg>
+              <p className="text-[16px]">
+                <strong>Recommandation :</strong> la franchise 0 CHF par an est conseillée pour les
+                jeunes enfants qui consultent fréquemment. À partir de l&apos;adolescence (15 à 18 ans),
+                une franchise plus élevée peut être envisagée si l&apos;enfant est en bonne santé.
+              </p>
+            </div>
+
+            <div className="overflow-x-auto border border-edge rounded-[8px]">
+              <table className="stripe-table w-full">
+                <thead>
+                  <tr>
+                    <th className="text-left whitespace-nowrap">Franchise par an</th>
+                    <th className="text-left whitespace-nowrap">Profil adapté</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ['CHF 400 à 600', 'Adolescents en bonne santé, rarement malades'],
+                    ['CHF 200 à 300', 'Enfants en bonne santé, quelques visites annuelles'],
+                    ['CHF 100',       'Enfants avec des consultations régulières'],
+                    ['CHF 0',         'Nourrissons et enfants en bas âge, consultations fréquentes'],
+                  ].map(([fr, profil], i) => (
+                    <tr key={i}>
+                      <td className="font-semibold text-ink whitespace-nowrap">{fr}</td>
+                      <td className="whitespace-nowrap">{profil}</td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {[
-                      ['CHF 400 à 600',  'Adolescents en bonne santé, rarement malades'],
-                      ['CHF 200 à 300',  'Enfants en bonne santé, quelques visites annuelles'],
-                      ['CHF 100',        'Enfants avec des consultations régulières'],
-                      ['CHF 0',          'Nourrissons et enfants en bas âge, consultations fréquentes'],
-                    ].map(([fr, profil], i) => (
-                      <tr key={i}>
-                        <td className="font-semibold text-ink whitespace-nowrap">{fr}</td>
-                        <td className="whitespace-nowrap">{profil}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </section>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
-            {/* 4 — Changement */}
-            <section id="changement">
-              <h2 className="article-h2">4. Comment changer de franchise</h2>
-              <p className="article-p">
-                Le changement de franchise suit un calendrier strict. Il n'est possible qu'une fois
-                par an, avec une date limite impérative pour notifier votre caisse.
+            <p className="article-p mt-6">
+              <Link href="/lamal/ma-famille" className="text-brand hover:underline">
+                Assurance maladie famille et maternité : ce qu&apos;il faut savoir →
+              </Link>
+            </p>
+          </section>
+
+          {/* 4 — Changement */}
+          <section id="changement">
+            <p className="text-[11px] font-semibold text-brand uppercase tracking-widest mb-2" aria-hidden="true">
+              04 — Délai et changement
+            </p>
+            <h2 className="article-h2">4. Comment changer de franchise ?</h2>
+
+            <div className="border-b border-dashed border-edge pb-4 mb-6">
+              <p className="article-p mb-0">
+                Le changement de franchise suit un calendrier strict et n&apos;est possible qu&apos;une fois par an.
+                La date limite pour notifier votre caisse est le 30 novembre, pour une prise d&apos;effet au 1er janvier suivant.
               </p>
+            </div>
 
-              <ol className="space-y-4 mb-6">
-                {[
-                  {
-                    n: '1',
-                    t: 'Avant le 30 novembre',
-                    d: "Informez votre caisse par écrit ou via votre espace client en ligne de votre souhait de modifier votre franchise pour l'année suivante.",
-                  },
-                  {
-                    n: '2',
-                    t: "Prise d'effet au 1er janvier",
-                    d: "La nouvelle franchise s'applique dès le 1er janvier. Toutes les dépenses médicales de l'année précédente sont calculées avec l'ancienne franchise.",
-                  },
-                  {
-                    n: '3',
-                    t: 'Franchise et changement de caisse',
-                    d: 'Si vous changez de caisse, vous choisissez simultanément votre franchise chez la nouvelle caisse. Le processus se fait en une seule démarche.',
-                  },
-                ].map(s => (
-                  <li key={s.n} className="flex gap-4">
-                    <span className="w-7 h-7 bg-brand text-white rounded-full flex items-center justify-center text-[16px] font-semibold shrink-0 mt-0.5">
-                      {s.n}
-                    </span>
-                    <div>
-                      <span className="font-semibold text-ink text-[16px]">{s.t} : </span>
-                      <span className="text-slate text-[16px]">{s.d}</span>
-                    </div>
-                  </li>
-                ))}
-              </ol>
+            <ol className="space-y-4 mb-6">
+              {[
+                {
+                  n: '1',
+                  t: 'Avant le 30 novembre',
+                  d: "Informez votre caisse par écrit ou via votre espace client en ligne de votre souhait de modifier votre franchise pour l'année suivante.",
+                },
+                {
+                  n: '2',
+                  t: "Prise d'effet au 1er janvier",
+                  d: "La nouvelle franchise s'applique dès le 1er janvier. Toutes les dépenses médicales de l'année précédente sont calculées avec l'ancienne franchise.",
+                },
+                {
+                  n: '3',
+                  t: 'Franchise et changement de caisse',
+                  d: 'Si vous changez de caisse, vous choisissez simultanément votre franchise chez la nouvelle caisse. Le processus se fait en une seule démarche.',
+                },
+              ].map(s => (
+                <li key={s.n} className="flex gap-4">
+                  <span className="w-7 h-7 bg-brand text-white rounded-full flex items-center justify-center text-[16px] font-semibold shrink-0 mt-0.5">
+                    {s.n}
+                  </span>
+                  <div>
+                    <span className="font-semibold text-ink text-[16px]">{s.t} : </span>
+                    <span className="text-slate text-[16px]">{s.d}</span>
+                  </div>
+                </li>
+              ))}
+            </ol>
 
-              <div className="mt-6">
-                <Link href="/lamal/changer-de-caisse" className="text-brand hover:underline text-[16px] font-medium">
-                  Guide complet : changer de caisse maladie →
+            <div className="bg-cloud border-l-4 border-ink rounded-r-lg px-5 py-4 my-4">
+              <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1.5">À retenir</p>
+              <p className="text-[15px] text-ink leading-relaxed">
+                La demande doit parvenir à votre caisse avant le 30 novembre pour une prise d&apos;effet au 1er janvier.
+                Passé ce délai, votre franchise reste inchangée pour toute l&apos;année suivante.
+              </p>
+            </div>
+
+            <p className="article-p mt-6">
+              <Link href="/lamal/changer-de-caisse" className="text-brand hover:underline">
+                Guide complet : changer de caisse maladie →
+              </Link>
+            </p>
+          </section>
+
+          {/* 5 — FAQ */}
+          <section id="faq">
+            <FAQ items={faqItems} title="5. Questions fréquentes sur la franchise LAMal" />
+          </section>
+
+          {/* Formulaire */}
+          <div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4">
+            <h2 className="text-2xl font-semibold text-ink mb-3">Besoin d&apos;aide ?</h2>
+            <p className="text-[16px] text-slate mb-6 leading-relaxed">
+              Un expert vous rappelle sous 24 heures pour établir avec vous une solution
+              personnalisée. Gratuit, sans engagement.
+            </p>
+            <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
+          </div>
+
+          {/* Bandeau MSI */}
+          <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
+
+          {/* Guides associés */}
+          <section className="pt-8 border-t border-edge mt-4">
+            <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
+              Guides associés
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {guidesAssocies.map(({ href, label }) => (
+                <Link key={href} href={href}
+                  className="flex items-center gap-2 text-[14px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                  <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                  {label}
                 </Link>
-              </div>
-            </section>
+              ))}
+            </div>
+          </section>
 
-            {/* 5 — FAQ */}
-            <section id="faq">
-              <FAQ items={faqItems} title="5. Questions fréquentes sur la franchise LAMal" />
-            </section>
-
-            {/* Formulaire */}
-            <NeedHelpSection />
-
-            {/* Bandeau MSI */}
-            <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
-
-            {/* Guides associés */}
-            <section className="pt-8 border-t border-edge mt-4">
-              <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
-                Guides associés
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {guidesAssocies.map(({ href, label }) => (
-                  <Link key={href} href={href}
-                    className="flex items-center gap-2 text-[14px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
-                    <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                    {label}
-                  </Link>
-                ))}
-              </div>
-            </section>
-
-          </article>
-        </div>
+        </article>
       </div>
     </>
   )
