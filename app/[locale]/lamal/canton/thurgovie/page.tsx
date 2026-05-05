@@ -1,20 +1,21 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
+import CantonPage from '@/components/lamal/CantonPage'
+import { cantonBySlug } from '@/data/lamal/cantons'
+
+const canton = cantonBySlug['thurgovie']
 
 export const metadata: Metadata = {
-  title: 'Assurance maladie dans le canton de Thurgovie — My Swiss Insurance',
-  robots: { index: false },
+  title: `Assurance maladie en Thurgovie 2026 : primes, caisses et subsides`,
+  description: `Prime moyenne ${canton.primeMoyenne} CHF/mois en Thurgovie. Caisse la moins chère : ${canton.topCaisses[0].name} dès ${canton.topCaisses[0].prime} CHF/mois. Économie max : CHF ${canton.economieAn}/an. Données OFSP 2026.`,
+  alternates: { canonical: 'https://my-swiss-insurance.ch/lamal/canton/thurgovie' },
+  openGraph: {
+    title: `Assurance maladie en Thurgovie 2026 : primes, caisses et subsides`,
+    description: `Prime moyenne ${canton.primeMoyenne} CHF/mois. Économisez jusqu'à CHF ${canton.economieAn}/an en changeant de caisse.`,
+    url: 'https://my-swiss-insurance.ch/lamal/canton/thurgovie',
+    type: 'article',
+  },
 }
 
-export default function CantonPage() {
-  return (
-    <main className="min-h-screen bg-white flex items-center justify-center px-4">
-      <div className="text-center">
-        <p className="text-[11px] font-semibold text-slate uppercase tracking-widest mb-3">Par canton</p>
-        <h1 className="text-4xl font-bold text-ink mb-4">Canton de Thurgovie</h1>
-        <p className="text-slate text-[17px] mb-8">Cette page est en cours de rédaction. Revenez bientôt.</p>
-        <Link href="/lamal" className="btn-secondary">Retour à la LAMal</Link>
-      </div>
-    </main>
-  )
+export default function ThurgoviePage() {
+  return <CantonPage canton={canton} />
 }
