@@ -433,26 +433,20 @@ Contient exactement deux blocs dans l'ordre suivant, dans la même zone de fond.
 
 Chaque section de Zone 3 suit ce pattern sans exception :
 
-1. **Label d'ancrage** (`aria-hidden="true"`) : petit texte coloré au-dessus du H2, numéro ou thème court
-2. **H2 formulé comme une question directe** — "Comment choisir sa franchise ?" et non "La franchise LAMal"
-3. **2 phrases d'entrée** répondant directement à ce H2, avant tout tableau, liste ou callout
-4. Contenu (tableaux, listes, callouts ampoule…)
-5. **Bloc "À retenir"** (optionnel) : uniquement si l'information est critique (délai légal, montant exact, règle sans exception). Distinct du callout ampoule — ne pas substituer l'un à l'autre.
-6. **Un seul lien interne** par section, vers une autre page informative du site — jamais vers `#contact` ni vers le formulaire
+1. **H2 formulé comme une question directe** — "Comment choisir sa franchise ?" et non "La franchise LAMal"
+2. **2 phrases d'entrée** répondant directement à ce H2, avant tout tableau, liste ou callout
+3. Contenu (tableaux, listes, callouts ampoule…)
+4. **Bloc "À retenir"** (optionnel) : uniquement si l'information est critique (délai légal, montant exact, règle sans exception). Distinct du callout ampoule — ne pas substituer l'un à l'autre.
+5. **Un seul lien interne** par section, vers une autre page informative du site — jamais vers `#contact` ni vers le formulaire
 
 ```tsx
 <section id="{id}">
-
-  {/* Label d'ancrage — visuel uniquement */}
-  <p className="text-[11px] font-semibold text-brand uppercase tracking-widest mb-2" aria-hidden="true">
-    {labelCourt}  {/* ex: "01 — Franchise" */}
-  </p>
 
   {/* H2 — toujours formulé comme une question directe */}
   <h2 className="article-h2">{n}. {questionDirecte}</h2>
 
   {/* 2 phrases d'entrée — répondent au H2, avant tout tableau */}
-  <p className="article-p">{phraseEntree1} {phraseEntree2}</p>
+  <p className="article-p mb-6">{phraseEntree1} {phraseEntree2}</p>
 
   {/* ... tableaux, listes, callouts ampoule ... */}
 
@@ -470,21 +464,6 @@ Chaque section de Zone 3 suit ce pattern sans exception :
   </p>
 
 </section>
-```
-
-**Nudge sombre — conditionnel, 1 maximum sur toute la page :**
-
-Si le sujet le justifie, placer un seul nudge sombre immédiatement après la section la plus complexe. Formulé comme une aide disponible, jamais comme une offre commerciale (voir §8).
-
-```tsx
-{/* Nudge sombre — 1 par page maximum, après la section la plus complexe */}
-<div className="bg-[var(--navy)] rounded-xl px-6 py-5 my-8">
-  <p className="text-[15px] font-medium text-white mb-1.5">{titreAide}</p>
-  <p className="text-[14px] text-white/70 leading-relaxed mb-4">{descriptionAide}</p>
-  <a href="#contact" className="text-[14px] text-white underline hover:text-white/80">
-    Parler à un expert →
-  </a>
-</div>
 ```
 
 Formulations acceptées : "Pas sûr de votre situation ?", "Ce calcul vous semble complexe ?", "Besoin d'une vérification personnalisée ?"
@@ -519,8 +498,7 @@ Source de référence : `app/[locale]/lamal/guide/page.tsx`
 - `heroStats[3]` : `{ value, label, sub }` — métriques qui prouvent que ça vaut la peine de lire
 - `enBref[3]` : 3 phrases autonomes avec fait chiffré vérifiable — voir règle GEO §9
 - `toc[]` : `{ id, label }` — une entrée par section de Zone 3
-- `sections[]` : `{ id, n, labelCourt, questionDirecte, phraseEntree1, phraseEntree2, contenu, keyFact?, lienInterne? }`
-- `nudge?` : `{ titre, description }` — optionnel, 1 maximum par page, après la section la plus complexe
+- `sections[]` : `{ id, n, questionDirecte, phraseEntree1, phraseEntree2, contenu, keyFact?, lienInterne? }`
 - `faqItems[]` : `{ question, answer }`
 - `guidesAssocies[]` : `{ href, label }`
 
@@ -565,21 +543,6 @@ export default function PageGuide() {
             { label: titreH1 },
           ]} />
 
-          {/* MSIBand — crédibilité éditoriale, entre breadcrumb et H1 */}
-          <div className="flex items-center gap-2.5 mt-3 mb-5">
-            <div className="w-6 h-6 bg-brand rounded-[4px] flex items-center justify-center shrink-0">
-              <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor"
-                   viewBox="0 0 24 24" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round"
-                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-            </div>
-            <span className="text-[13px] font-medium text-ink">My Swiss Insurance</span>
-            <span className="text-[13px] text-slate">
-              Publié le {publishedDateFR}, mis à jour le {updatedDateFR}
-            </span>
-          </div>
-
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
             {titreH1}
           </h1>
@@ -602,18 +565,18 @@ export default function PageGuide() {
       </section>
 
       {/* ── ZONE 2 — Navigation rapide, fond secondaire ── */}
-      <div className="bg-cloud/60 border-b border-edge py-8">
-        <div className="container-xl space-y-6">
+      <div className="bg-cloud border-b border-edge py-8">
+        <div className="container-xl grid grid-cols-1 md:grid-cols-2 gap-5">
 
           {/* Bloc En bref — exactement 3 phrases autonomes avec fait chiffré vérifiable */}
-          <div>
-            <p className="text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-3">
+          <div className="bg-white border border-edge rounded-xl p-5">
+            <p className="text-[11px] font-semibold text-ink uppercase tracking-widest mb-3">
               En bref
             </p>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               {enBref.map((phrase, i) => (
                 <li key={i} className="flex gap-2.5 text-[15px] text-ink leading-relaxed">
-                  <span className="text-brand font-bold shrink-0" aria-hidden="true">•</span>
+                  <span className="text-brand font-bold shrink-0 mt-0.5" aria-hidden="true">•</span>
                   <span>{phrase}</span>
                 </li>
               ))}
@@ -621,11 +584,11 @@ export default function PageGuide() {
           </div>
 
           {/* Sommaire colonne unique */}
-          <div>
-            <p className="text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-3">
+          <div className="bg-white border border-edge rounded-xl p-5">
+            <p className="text-[11px] font-semibold text-ink uppercase tracking-widest mb-3">
               Sommaire
             </p>
-            <ul className="space-y-0.5">
+            <ul className="space-y-1">
               {toc.map((item, i) => (
                 <li key={item.id}>
                   <a href={`#${item.id}`} className="toc-link">{i + 1}. {item.label}</a>
@@ -644,19 +607,11 @@ export default function PageGuide() {
           {/* ── Pattern section — répéter pour chaque entrée du sommaire ── */}
           <section id="{id}">
 
-            {/* AnchorLabel numéroté */}
-            <p className="text-[11px] font-semibold text-brand uppercase tracking-widest mb-2"
-               aria-hidden="true">
-              {n.toString().padStart(2, '0')} — {labelCourt}
-            </p>
-
             {/* H2 toujours formulé comme une question directe */}
             <h2 className="article-h2">{n}. {questionDirecte}</h2>
 
-            {/* 2 phrases d'entrée, séparées du reste par une bordure en pointillés */}
-            <div className="border-b border-dashed border-edge pb-4 mb-6">
-              <p className="article-p mb-0">{phraseEntree1} {phraseEntree2}</p>
-            </div>
+            {/* 2 phrases d'entrée directement sous le H2, sans séparateur */}
+            <p className="article-p mb-6">{phraseEntree1} {phraseEntree2}</p>
 
             {/* Contenu : tableaux, listes, exemples, callouts ampoule */}
 
@@ -678,18 +633,6 @@ export default function PageGuide() {
             </p>
 
           </section>
-
-          {/* ── Nudge sombre — conditionnel, 1 maximum sur toute la page ── */}
-          {/* Placer après la section la plus complexe */}
-          {/* Accepté : "Pas sûr de votre situation ?" "Ce calcul vous semble complexe ?" */}
-          {/* Refusé : "Économisez dès maintenant" "Obtenez votre offre gratuite" */}
-          <div className="bg-[var(--navy)] rounded-xl px-6 py-5 my-8">
-            <p className="text-[15px] font-medium text-white mb-1.5">{nudge.titre}</p>
-            <p className="text-[14px] text-white/70 leading-relaxed mb-4">{nudge.description}</p>
-            <a href="#contact" className="text-[14px] text-white underline hover:text-white/80">
-              Parler à un expert →
-            </a>
-          </div>
 
           {/* FAQ — 1ère question ouverte par défaut, TOUJOURS avant le formulaire */}
           <section id="faq">
@@ -902,21 +845,6 @@ export default function PageOutil() {
             { label: titreH1 },
           ]} />
 
-          {/* MSIBand */}
-          <div className="flex items-center gap-2.5 mt-3 mb-5">
-            <div className="w-6 h-6 bg-brand rounded-[4px] flex items-center justify-center shrink-0">
-              <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor"
-                   viewBox="0 0 24 24" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round"
-                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-            </div>
-            <span className="text-[13px] font-medium text-ink">My Swiss Insurance</span>
-            <span className="text-[13px] text-slate">
-              Publié le {publishedDateFR}, mis à jour le {updatedDateFR}
-            </span>
-          </div>
-
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
             {titreH1}
           </h1>
@@ -954,9 +882,7 @@ export default function PageOutil() {
           {/* Section éditoriale — phrase d'entrée directe avant tout tableau ou liste */}
           <section id="{id}">
             <h2 className="article-h2">{n}. {questionDirecte}</h2>
-            <div className="border-b border-dashed border-edge pb-4 mb-6">
-              <p className="article-p mb-0">{phraseEntree1} {phraseEntree2}</p>
-            </div>
+            <p className="article-p mb-6">{phraseEntree1} {phraseEntree2}</p>
             {/* Contenu */}
           </section>
 
@@ -965,9 +891,7 @@ export default function PageOutil() {
           {/* Un tableau sans phrase d'introduction n'est pas indexable par les moteurs IA */}
           <section id="{id-tableau}">
             <h2 className="article-h2">{n}. {questionDirecte}</h2>
-            <div className="border-b border-dashed border-edge pb-4 mb-6">
-              <p className="article-p mb-0">{phrase1} {phrase2}</p>
-            </div>
+            <p className="article-p mb-6">{phrase1} {phrase2}</p>
             <div className="overflow-x-auto border border-edge rounded-[8px]">
               <table className="stripe-table w-full">
                 <thead>
@@ -1029,7 +953,7 @@ export default function PageOutil() {
 }
 ```
 
-**Règles Template C :** pas de bloc En bref, pas de sommaire, pas de nudge sombre. L'outil est toujours premier en Zone 2. Chaque tableau en Zone 3 est précédé de 2 phrases contenant les chiffres clés du tableau.
+**Règles Template C :** pas de MSIBand, pas de bloc En bref, pas de sommaire, pas de nudge sombre. Pas d'AnchorLabels numérotés devant les H2. Pas de bordure dashed sous les phrases d'entrée. L'outil est toujours premier en Zone 2. Maximum 2 couleurs de fond alternées (bg-white / bg-cloud). Chaque tableau en Zone 3 est précédé d'au moins 2 phrases contenant les chiffres clés. Ordre bas de page : FAQ → Formulaire → AuthorBio → Guides associés → Footer.
 
 ---
 
@@ -1105,8 +1029,7 @@ Voir section 7. Titre et sous-titre immuables. Soumission → /fr/merci.
 ```
 
 - **Aucun bouton** (`btn-primary`, `btn-secondary`) dans le corps des sections article
-- **Maximum 1 nudge sombre** par page (`bg-[var(--navy)]`) — uniquement sous la section la plus complexe de Zone 3, formulé comme aide disponible (voir §5 Zone 3). Jamais plus d'un sur la page.
-- **Aucun nudge intermédiaire** (encadrés `bg-cloud` avec `btn-primary`) entre les sections
+- **Aucun nudge sombre ni intermédiaire** entre les sections — ni `bg-[var(--navy)]` conditionnel, ni encadrés `bg-cloud` avec `btn-primary`. Le formulaire en bas de page est le seul point de conversion.
 - Les liens texte pointent uniquement vers d'autres pages de contenu (guides, cantons, situations)
 - Ils ne pointent jamais vers `#contact` ou `/lamal/comparateur` depuis le corps d'une section
 
@@ -1115,7 +1038,7 @@ Voir section 7. Titre et sous-titre immuables. Soumission → /fr/merci.
 | Header | `btn-primary` → modal formulaire | `Recevez les meilleures offres` |
 | Hero page contenu | Aucun bouton | — |
 | Corps section | Lien texte `text-brand` | `Comprendre les franchises →` |
-| Corps section (après section complexe) | Nudge sombre conditionnel (1 max par page) | `Pas sûr de votre situation ?` |
+| Corps section | Aucun nudge sombre — formulaire en bas de page uniquement | — |
 | TOC sidebar | Aucun bouton | — |
 | Formulaire bas de page | `btn-primary` submit | `Envoyer ma demande →` |
 
@@ -1142,7 +1065,7 @@ Les chiffres clés apparaissent dans le texte brut, pas uniquement dans les tabl
 **Titre pages :** `{H1} — My Swiss Insurance`
 **Meta description :** 150-160 caractères, commence par un chiffre clé.
 
-**Bandeau MSI :** TOUJOURS dans l'`<article>`, après le formulaire (`</div>` fermant `#contact`), avant les guides associés. Utiliser le composant `<AuthorBio publishedDate="..." updatedDate="..." />` (importé depuis `@/components/ui/AuthorBio`). Jamais de div custom à la place. Jamais dans le hero. Jamais en dehors de l'article.
+**AuthorBio :** TOUJOURS après le formulaire, avant les guides associés. Utiliser le composant `<AuthorBio publishedDate="..." updatedDate="..." />` (importé depuis `@/components/ui/AuthorBio`). Jamais de div custom à la place. Jamais dans le hero. Pas de bandeau crédibilité inline avant le H1 (MSIBand supprimé).
 
 **AuthorBio — layout :**
 - `flex-row items-center gap-3` — logo bouclier | bloc texte
@@ -1164,9 +1087,9 @@ Les chiffres clés apparaissent dans le texte brut, pas uniquement dans les tabl
 
 | Breakpoint | Contenu |
 |---|---|
-| Desktop `≥768px` | hamburger → bouclier MSI → "My Swiss Insurance" → CTA "Recevez les meilleures offres" |
-| Mobile `<768px` | hamburger → bouclier MSI (sans texte) → CTA |
-| Très petit `<380px` | hamburger → bouclier MSI → CTA "Être conseillé" |
+| Desktop `≥768px` | bouclier MSI → "My Swiss Insurance" → CTA "Recevez les meilleures offres" → hamburger |
+| Mobile `<768px` | bouclier MSI (sans texte) → CTA → hamburger |
+| Très petit `<380px` | bouclier MSI → CTA "Être conseillé" → hamburger |
 
 Implémentation :
 - Logo : SVG bouclier blanc `w-7 h-7` **directement** sur le fond `#0f2040` — **pas de conteneur bleu**, pas de `rounded-md bg-[#1d4ed8]`

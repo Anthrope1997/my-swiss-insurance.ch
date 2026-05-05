@@ -128,21 +128,7 @@ export default function Header() {
         <div className="container-xl">
           <div className="flex items-center h-16 gap-3">
 
-            {/* Hamburger — LEFT */}
-            <button
-              onClick={() => setMobileOpen(o => !o)}
-              className="p-2 flex flex-col justify-center items-center gap-[5px] shrink-0"
-              aria-label={mobileOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
-            >
-              <span className={`block w-5 h-[2px] bg-white rounded-full transition-all duration-300 origin-center
-                ${mobileOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
-              <span className={`block w-5 h-[2px] bg-white rounded-full transition-all duration-300
-                ${mobileOpen ? 'opacity-0 scale-x-0' : ''}`} />
-              <span className={`block w-5 h-[2px] bg-white rounded-full transition-all duration-300 origin-center
-                ${mobileOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
-            </button>
-
-            {/* Logo — bouclier seul sur mobile (<768px), bouclier + texte sur desktop (≥768px) */}
+            {/* Logo — LEFT, flex-1 */}
             <Link href="/lamal" className="flex items-center gap-2.5 flex-1">
               <ShieldIcon />
               <span className="font-semibold text-white text-[15px] hidden md:inline">
@@ -158,6 +144,20 @@ export default function Header() {
             >
               <span className="hidden min-[380px]:inline">Recevez les meilleures offres</span>
               <span className="min-[380px]:hidden">Être conseillé</span>
+            </button>
+
+            {/* Hamburger — RIGHT */}
+            <button
+              onClick={() => setMobileOpen(o => !o)}
+              className="p-2 flex flex-col justify-center items-center gap-[5px] shrink-0"
+              aria-label={mobileOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+            >
+              <span className={`block w-5 h-[2px] bg-white rounded-full transition-all duration-300 origin-center
+                ${mobileOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
+              <span className={`block w-5 h-[2px] bg-white rounded-full transition-all duration-300
+                ${mobileOpen ? 'opacity-0 scale-x-0' : ''}`} />
+              <span className={`block w-5 h-[2px] bg-white rounded-full transition-all duration-300 origin-center
+                ${mobileOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
             </button>
 
           </div>

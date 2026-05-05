@@ -123,19 +123,6 @@ export default function FranchisePage() {
             { label: 'Franchise LAMal' },
           ]} />
 
-          {/* MSIBand */}
-          <div className="flex items-center gap-2.5 mt-3 mb-5">
-            <div className="w-6 h-6 bg-brand rounded-[4px] flex items-center justify-center shrink-0">
-              <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor"
-                   viewBox="0 0 24 24" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round"
-                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-            </div>
-            <span className="text-[13px] font-medium text-ink">My Swiss Insurance</span>
-            <span className="text-[13px] text-slate">Publié le 1er janvier 2026, mis à jour le 22 avril 2026</span>
-          </div>
-
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
             Franchise LAMal : quel montant choisir en 2026 ?
           </h1>
@@ -158,28 +145,28 @@ export default function FranchisePage() {
       </section>
 
       {/* ── ZONE 2 — Navigation rapide ── */}
-      <div className="bg-cloud/60 border-b border-edge py-8">
-        <div className="container-xl space-y-6">
+      <div className="bg-cloud border-b border-edge py-8">
+        <div className="container-xl grid grid-cols-1 md:grid-cols-2 gap-5">
 
-          <div>
-            <p className="text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-3">
+          <div className="bg-white border border-edge rounded-xl p-5">
+            <p className="text-[11px] font-semibold text-ink uppercase tracking-widest mb-3">
               En bref
             </p>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               {enBref.map((phrase, i) => (
                 <li key={i} className="flex gap-2.5 text-[15px] text-ink leading-relaxed">
-                  <span className="text-brand font-bold shrink-0" aria-hidden="true">•</span>
+                  <span className="text-brand font-bold shrink-0 mt-0.5" aria-hidden="true">•</span>
                   <span>{phrase}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div>
-            <p className="text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-3">
+          <div className="bg-white border border-edge rounded-xl p-5">
+            <p className="text-[11px] font-semibold text-ink uppercase tracking-widest mb-3">
               Sommaire
             </p>
-            <ul className="space-y-0.5">
+            <ul className="space-y-1">
               {toc.map((item) => (
                 <li key={item.id}>
                   <a href={`#${item.id}`} className="toc-link">{item.label}</a>
@@ -197,17 +184,12 @@ export default function FranchisePage() {
 
           {/* 1 — Définition */}
           <section id="definition">
-            <p className="text-[11px] font-semibold text-brand uppercase tracking-widest mb-2" aria-hidden="true">
-              01 — Définition
-            </p>
             <h2 className="article-h2">1. Franchise et quote-part : quelle différence ?</h2>
 
-            <div className="border-b border-dashed border-edge pb-4 mb-6">
-              <p className="article-p mb-0">
-                La franchise et la quote-part sont les deux mécanismes de participation aux frais médicaux.
-                Ils s&apos;appliquent successivement dans l&apos;année et ont chacun un plafond propre.
-              </p>
-            </div>
+            <p className="article-p mb-6">
+              La franchise et la quote-part sont les deux mécanismes de participation aux frais médicaux.
+              Ils s&apos;appliquent successivement dans l&apos;année et ont chacun un plafond propre.
+            </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
               <div className="bg-white border border-edge rounded-lg p-5">
@@ -274,17 +256,12 @@ export default function FranchisePage() {
 
           {/* 2 — Tableau comparatif */}
           <section id="tableau">
-            <p className="text-[11px] font-semibold text-brand uppercase tracking-widest mb-2" aria-hidden="true">
-              02 — Tableau comparatif
-            </p>
             <h2 className="article-h2">2. Quelle franchise choisir selon vos frais médicaux annuels ?</h2>
 
-            <div className="border-b border-dashed border-edge pb-4 mb-6">
-              <p className="article-p mb-0">
-                La franchise 2 500 CHF est avantageuse si vos frais médicaux annuels restent sous 1 440 CHF.
-                Au-delà, la franchise 300 CHF devient moins coûteuse au total, prime et reste à charge confondus.
-              </p>
-            </div>
+            <p className="article-p mb-6">
+              La franchise 2 500 CHF est avantageuse si vos frais médicaux annuels restent sous 1 440 CHF.
+              Au-delà, la franchise 300 CHF devient moins coûteuse au total, prime et reste à charge confondus.
+            </p>
 
             <div className="overflow-x-auto border border-edge rounded-[8px] mb-2">
               <table className="stripe-table w-full">
@@ -343,30 +320,14 @@ export default function FranchisePage() {
             </p>
           </section>
 
-          {/* Nudge sombre — après la section la plus complexe */}
-          <div className="bg-[var(--navy)] rounded-xl px-6 py-5 my-8">
-            <p className="text-[15px] font-medium text-white mb-1.5">Pas sûr de la franchise adaptée à votre situation ?</p>
-            <p className="text-[14px] text-white/70 leading-relaxed mb-4">
-              Un expert analyse vos dépenses médicales habituelles et calcule la franchise la plus avantageuse pour votre profil.
-            </p>
-            <a href="#contact" className="text-[14px] text-white underline hover:text-white/80">
-              Parler à un expert →
-            </a>
-          </div>
-
           {/* 3 — Franchise enfant */}
           <section id="enfants">
-            <p className="text-[11px] font-semibold text-brand uppercase tracking-widest mb-2" aria-hidden="true">
-              03 — Franchise enfant
-            </p>
             <h2 className="article-h2">3. Quelle franchise choisir pour un enfant ?</h2>
 
-            <div className="border-b border-dashed border-edge pb-4 mb-6">
-              <p className="article-p mb-0">
-                Les franchises enfant sont distinctes des franchises adultes, de 0 à 600 CHF par an.
-                La quote-part est plafonnée à 350 CHF par an, contre 700 CHF pour un adulte.
-              </p>
-            </div>
+            <p className="article-p mb-6">
+              Les franchises enfant sont distinctes des franchises adultes, de 0 à 600 CHF par an.
+              La quote-part est plafonnée à 350 CHF par an, contre 700 CHF pour un adulte.
+            </p>
 
             <div className="callout-success flex gap-3 mb-6">
               <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
@@ -416,17 +377,12 @@ export default function FranchisePage() {
 
           {/* 4 — Changement */}
           <section id="changement">
-            <p className="text-[11px] font-semibold text-brand uppercase tracking-widest mb-2" aria-hidden="true">
-              04 — Délai et changement
-            </p>
             <h2 className="article-h2">4. Comment changer de franchise ?</h2>
 
-            <div className="border-b border-dashed border-edge pb-4 mb-6">
-              <p className="article-p mb-0">
-                Le changement de franchise suit un calendrier strict et n&apos;est possible qu&apos;une fois par an.
-                La date limite pour notifier votre caisse est le 30 novembre, pour une prise d&apos;effet au 1er janvier suivant.
-              </p>
-            </div>
+            <p className="article-p mb-6">
+              Le changement de franchise suit un calendrier strict et n&apos;est possible qu&apos;une fois par an.
+              La date limite pour notifier votre caisse est le 30 novembre, pour une prise d&apos;effet au 1er janvier suivant.
+            </p>
 
             <ol className="space-y-4 mb-6">
               {[

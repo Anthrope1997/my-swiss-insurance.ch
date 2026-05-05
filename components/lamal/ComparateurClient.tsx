@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import AuthorBio from '@/components/ui/AuthorBio'
 import FAQ from '@/components/ui/FAQ'
+import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -365,16 +366,6 @@ export default function ComparateurClient() {
             { label: 'LAMal', href: '/lamal' },
             { label: 'Comparateur de caisses' },
           ]} />
-          {/* MSIBand */}
-          <div className="flex items-center gap-2.5 mt-3 mb-5">
-            <div className="w-6 h-6 bg-brand rounded-[4px] flex items-center justify-center shrink-0">
-              <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-            </div>
-            <span className="text-[13px] font-medium text-ink">My Swiss Insurance</span>
-            <span className="text-[13px] text-slate">Publié le 1er janvier 2026, mis à jour le 22 avril 2026</span>
-          </div>
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
             Comparateur de caisses maladie LAMal 2026
           </h1>
@@ -844,7 +835,7 @@ export default function ComparateurClient() {
                         <button
                           type="submit"
                           disabled={formStatus === 'loading'}
-                          className="w-full bg-[var(--navy)] hover:bg-brand-dark disabled:bg-slate text-white font-semibold py-4 rounded-md text-[16px] transition-colors duration-150"
+                          className="w-full bg-brand hover:bg-brand-dark disabled:bg-slate text-white font-semibold py-4 rounded-md text-[16px] transition-colors duration-150"
                         >
                           {formStatus === 'loading' ? 'Envoi en cours…' : 'Recevoir mon conseil gratuit →'}
                         </button>
@@ -871,19 +862,16 @@ export default function ComparateurClient() {
       )}
 
       {/* ── PARTS DE MARCHÉ ───────────────────────────────────────────────── */}
-      <section className="bg-cloud border-b border-edge py-16">
+      <section id="assureurs" className="bg-cloud border-b border-edge py-16">
         <div className="container-xl max-w-5xl">
 
-          <p className="text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-3">
-            Parts de marché, 8 principaux assureurs, FINMA 2024
-          </p>
-          <h2 className="text-3xl font-bold text-ink mb-4">
-            Les principaux assureurs maladie en Suisse
+          <h2 className="article-h2 !mt-0">
+            1. Quels assureurs dominent le marché suisse ?
           </h2>
-          <p className="text-[16px] text-slate leading-relaxed mb-10 max-w-2xl">
-            En Suisse, 8 grands groupes se partagent l'essentiel du marché de l'assurance maladie obligatoire.
-            Les prestations LAMal sont strictement identiques chez tous les assureurs agréés. La différence
-            porte uniquement sur le prix et la qualité du service.
+          <p className="article-p mb-10">
+            8 groupes se partagent la totalité du marché de l'assurance maladie obligatoire en Suisse.
+            Les prestations LAMal sont strictement identiques chez tous les assureurs agréés.
+            La différence porte uniquement sur le prix et la qualité du service.
           </p>
 
           {/* Grille top 4 */}
@@ -902,9 +890,9 @@ export default function ComparateurClient() {
             <table className="stripe-table w-full">
               <thead>
                 <tr>
-                  <th>Assureur</th>
-                  <th className="text-center">Part de marché</th>
-                  <th className="hidden sm:table-cell">Caractéristiques</th>
+                  <th className="text-left whitespace-nowrap">Assureur</th>
+                  <th className="text-center whitespace-nowrap">Part de marché</th>
+                  <th className="hidden sm:table-cell text-left whitespace-nowrap">Caractéristiques</th>
                 </tr>
               </thead>
               <tbody>
@@ -925,16 +913,13 @@ export default function ComparateurClient() {
       </section>
 
       {/* ── PRIMES MOYENNES PAR CANTON ────────────────────────────────────── */}
-      <section className="bg-white border-b border-edge py-16">
+      <section id="primes" className="bg-white border-b border-edge py-16">
         <div className="container-xl max-w-5xl">
 
-          <p className="text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-3">
-            Données de référence, primes moyennes 2026
-          </p>
-          <h2 className="text-3xl font-bold text-ink mb-4">
-            Primes moyennes par canton, adulte 35 ans
+          <h2 className="article-h2 !mt-0">
+            2. Quelle est la prime LAMal dans votre canton ?
           </h2>
-          <p className="text-[16px] text-slate leading-relaxed mb-8 max-w-2xl">
+          <p className="article-p mb-8">
             Primes de référence pour un adulte de 35 ans, modèle standard, franchise 300 CHF, sans couverture accident.
             Les écarts entre caisses au sein d'un même canton peuvent atteindre plusieurs centaines de francs par mois.
           </p>
@@ -981,71 +966,54 @@ export default function ComparateurClient() {
           })()}
 
           <p className="text-[12px] text-slate/60 mb-6">Source : OFSP 2026.</p>
-
-          {/* Pills cantons avec pages */}
-          <div>
-            <p className="text-[13px] font-medium text-slate mb-3">Pages détaillées par canton :</p>
-            <div className="flex flex-wrap gap-2">
-              {cantonTable.filter(c => c.slug).map(c => (
-                <Link
-                  key={c.code}
-                  href={`/lamal/canton/${c.slug}`}
-                  className="px-3.5 py-1.5 rounded-full bg-[var(--blue-tint)] text-brand text-[13px] font-medium hover:bg-brand hover:text-white transition-colors duration-150"
-                >
-                  {c.canton}
-                </Link>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
       {/* ── FAQ ───────────────────────────────────────────────────────────── */}
       <section className="bg-cloud border-b border-edge py-16">
         <div className="container-xl max-w-3xl">
-          <FaqAccordion items={faqItems} />
+          <FAQ items={faqItems} title="3. Vos questions sur la prime LAMal" />
         </div>
       </section>
 
-      {/* ── MISE À JOUR ───────────────────────────────────────────────────── */}
-      <section className="bg-white py-8">
+      {/* ── FORMULAIRE ────────────────────────────────────────────────────── */}
+      <section className="bg-white border-b border-edge py-12">
         <div className="container-xl max-w-3xl">
-          <p className="text-[13px] text-slate/60">
-            Dernière mise à jour : avril 2026, Données OFSP 2026, 34 caisses comparées
+          <h2 className="text-2xl font-semibold text-ink mb-3">Besoin d'aide ?</h2>
+          <p className="text-[16px] text-slate mb-6 leading-relaxed">
+            Un expert vous rappelle sous 24 heures pour comparer les caisses adaptées à votre profil.
+            Gratuit, sans engagement.
           </p>
+          <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
         </div>
       </section>
-    </>
-  )
-}
 
-// ─── FAQ accordion (inline pour éviter le conflit de client boundary) ────────
+      {/* ── AUTEUR + GUIDES ───────────────────────────────────────────────── */}
+      <div className="container-xl max-w-3xl py-12 space-y-8">
+        <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
 
-function FaqAccordion({ items }: { items: { question: string; answer: string }[] }) {
-  const [open, setOpen] = useState<number | null>(0)
-  return (
-    <div>
-      <h2 className="text-3xl font-bold text-ink mb-8">Questions fréquentes</h2>
-      <div className="divide-y divide-edge">
-        {items.map((item, i) => (
-          <div key={i} className="py-4">
-            <button
-              onClick={() => setOpen(open === i ? null : i)}
-              className="w-full flex items-center justify-between gap-4 text-left"
-            >
-              <span className="text-ink font-medium text-base">{item.question}</span>
-              <span className="text-brand font-bold text-lg flex-shrink-0">
-                {open === i ? '−' : '+'}
-              </span>
-            </button>
-            {open === i && (
-              <p className="mt-3 text-slate text-[14px] leading-relaxed max-w-2xl">
-                {item.answer}
-              </p>
-            )}
+        <section className="pt-8 border-t border-edge">
+          <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
+            Guides associés
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {[
+              { href: '/lamal/guide',             label: 'Comprendre la LAMal'       },
+              { href: '/lamal/franchise',         label: 'Choisir sa franchise'      },
+              { href: '/lamal/subsides',          label: 'Calculateur de subsides'   },
+              { href: '/lamal/changer-de-caisse', label: 'Changer de caisse maladie' },
+            ].map(({ href, label }) => (
+              <Link key={href} href={href}
+                className="flex items-center gap-2 text-[14px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+                {label}
+              </Link>
+            ))}
           </div>
-        ))}
+        </section>
       </div>
-    </div>
+    </>
   )
 }
