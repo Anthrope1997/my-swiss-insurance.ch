@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import ComparateurClient from '@/components/lamal/ComparateurClient'
+import Breadcrumb from '@/components/ui/Breadcrumb'
 
 export const metadata: Metadata = {
   title: 'Comparateur caisses maladie LAMal 2026 — Primes par canton',
