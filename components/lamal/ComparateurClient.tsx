@@ -391,8 +391,8 @@ export default function ComparateurClient() {
       </section>
 
       {/* ── OUTIL DE COMPARAISON ──────────────────────────────────────────── */}
-      <section className="bg-cloud border-b border-edge py-12">
-        <div className="container-xl max-w-3xl">
+      <section className="bg-white border-b border-edge py-12">
+        <div className="container-xl">
 
           {/* Form */}
           <div className="bg-white border border-edge rounded-xl p-6 sm:p-8 shadow-sm">
@@ -641,7 +641,7 @@ export default function ComparateurClient() {
       {/* ── BLOC DE CONVERSION POST-RÉSULTATS ────────────────────────────── */}
       {showResults && stickyData && (
         <section ref={conversionRef} className="bg-white border-b border-edge py-12">
-          <div className="container-xl max-w-3xl">
+          <div className="container-xl">
 
             <div className="rounded-xl overflow-hidden border border-edge">
 
@@ -862,8 +862,8 @@ export default function ComparateurClient() {
       )}
 
       {/* ── PARTS DE MARCHÉ ───────────────────────────────────────────────── */}
-      <section id="assureurs" className="bg-cloud border-b border-edge py-16">
-        <div className="container-xl max-w-5xl">
+      <section id="assureurs" className="bg-white border-b border-edge py-16">
+        <div className="container-xl">
 
           <h2 className="article-h2 !mt-0">
             1. Quels assureurs dominent le marché suisse ?
@@ -914,7 +914,7 @@ export default function ComparateurClient() {
 
       {/* ── PRIMES MOYENNES PAR CANTON ────────────────────────────────────── */}
       <section id="primes" className="bg-white border-b border-edge py-16">
-        <div className="container-xl max-w-5xl">
+        <div className="container-xl">
 
           <h2 className="article-h2 !mt-0">
             2. Quelle est la prime LAMal dans votre canton ?
@@ -970,15 +970,15 @@ export default function ComparateurClient() {
       </section>
 
       {/* ── FAQ ───────────────────────────────────────────────────────────── */}
-      <section className="bg-cloud border-b border-edge py-16">
-        <div className="container-xl max-w-3xl">
+      <section className="bg-white border-b border-edge py-16">
+        <div className="container-xl">
           <FAQ items={faqItems} title="3. Vos questions sur la prime LAMal" />
         </div>
       </section>
 
       {/* ── FORMULAIRE ────────────────────────────────────────────────────── */}
       <section className="bg-white border-b border-edge py-12">
-        <div className="container-xl max-w-3xl">
+        <div className="container-xl">
           <h2 className="text-2xl font-semibold text-ink mb-3">Besoin d'aide ?</h2>
           <p className="text-[16px] text-slate mb-6 leading-relaxed">
             Un expert vous rappelle sous 24 heures pour comparer les caisses adaptées à votre profil.
@@ -989,7 +989,7 @@ export default function ComparateurClient() {
       </section>
 
       {/* ── AUTEUR + GUIDES ───────────────────────────────────────────────── */}
-      <div className="container-xl max-w-3xl py-12 space-y-8">
+      <div className="container-xl py-12 space-y-8">
         <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
 
         <section className="pt-8 border-t border-edge">

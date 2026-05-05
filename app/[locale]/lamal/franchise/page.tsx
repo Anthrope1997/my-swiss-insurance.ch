@@ -180,7 +180,7 @@ export default function FranchisePage() {
 
       {/* ── ZONE 3 — Contenu détaillé ── */}
       <div className="container-xl py-12">
-        <article className="max-w-3xl space-y-4">
+        <article className="space-y-4">
 
           {/* 1 — Définition */}
           <section id="definition">
@@ -329,7 +329,7 @@ export default function FranchisePage() {
               La quote-part est plafonnée à 350 CHF par an, contre 700 CHF pour un adulte.
             </p>
 
-            <div className="callout-success flex gap-3 mb-6">
+            <div className="callout flex gap-3 mb-6">
               <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
                    viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
                    strokeLinecap="round" strokeLinejoin="round">
@@ -337,11 +337,12 @@ export default function FranchisePage() {
                 <line x1="9.5" y1="18" x2="14.5" y2="18" />
                 <line x1="10" y1="21" x2="14" y2="21" />
               </svg>
-              <p className="text-[16px]">
-                <strong>Recommandation :</strong> la franchise 0 CHF par an est conseillée pour les
-                jeunes enfants qui consultent fréquemment. À partir de l&apos;adolescence (15 à 18 ans),
-                une franchise plus élevée peut être envisagée si l&apos;enfant est en bonne santé.
-              </p>
+              <div>
+                <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">Recommandation</p>
+                <p className="text-[15px] leading-relaxed">La franchise 0 CHF par an est conseillée pour les
+                  jeunes enfants qui consultent fréquemment. À partir de l&apos;adolescence (15 à 18 ans),
+                  une franchise plus élevée peut être envisagée si l&apos;enfant est en bonne santé.</p>
+              </div>
             </div>
 
             <div className="overflow-x-auto border border-edge rounded-[8px]">
@@ -414,12 +415,19 @@ export default function FranchisePage() {
               ))}
             </ol>
 
-            <div className="bg-cloud border-l-4 border-ink rounded-r-lg px-5 py-4 my-4">
-              <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1.5">À retenir</p>
-              <p className="text-[15px] text-ink leading-relaxed">
-                La demande doit parvenir à votre caisse avant le 30 novembre pour une prise d&apos;effet au 1er janvier.
-                Passé ce délai, votre franchise reste inchangée pour toute l&apos;année suivante.
-              </p>
+            <div className="callout flex gap-3 my-4">
+              <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
+                   viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
+                   strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
+                <line x1="9.5" y1="18" x2="14.5" y2="18" />
+                <line x1="10" y1="21" x2="14" y2="21" />
+              </svg>
+              <div>
+                <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">À retenir</p>
+                <p className="text-[15px] leading-relaxed">La demande doit parvenir à votre caisse avant le 30 novembre pour une prise d&apos;effet au 1er janvier.
+                  Passé ce délai, votre franchise reste inchangée pour toute l&apos;année suivante.</p>
+              </div>
             </div>
 
             <p className="article-p mt-6">
