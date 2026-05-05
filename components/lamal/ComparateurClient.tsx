@@ -2,6 +2,9 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react'
 import Link from 'next/link'
+import Breadcrumb from '@/components/ui/Breadcrumb'
+import AuthorBio from '@/components/ui/AuthorBio'
+import FAQ from '@/components/ui/FAQ'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -355,16 +358,44 @@ export default function ComparateurClient() {
       )}
 
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
-      <section className="bg-white border-b border-edge pt-14 pb-12">
-        <div className="container-xl max-w-3xl">
-          <div className="badge mb-5">Données OFSP, Suisse, 2026</div>
-          <h1 className="text-5xl sm:text-6xl font-bold text-ink leading-tight mb-5">
+      <section className="bg-white border-b border-edge pt-10 pb-12">
+        <div className="container-xl">
+          <Breadcrumb items={[
+            { label: 'Accueil', href: '/' },
+            { label: 'LAMal', href: '/lamal' },
+            { label: 'Comparateur de caisses' },
+          ]} />
+          {/* MSIBand */}
+          <div className="flex items-center gap-2.5 mt-3 mb-5">
+            <div className="w-6 h-6 bg-brand rounded-[4px] flex items-center justify-center shrink-0">
+              <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <span className="text-[13px] font-medium text-ink">My Swiss Insurance</span>
+            <span className="text-[13px] text-slate">Publié le 1er janvier 2026, mis à jour le 22 avril 2026</span>
+          </div>
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
             Comparateur de caisses maladie LAMal 2026
           </h1>
-          <p className="text-xl text-slate leading-relaxed">
+          <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
             En Suisse, les primes LAMal varient jusqu'à 97% au sein d'une même région selon l'assureur choisi.
             Comparez toutes les caisses selon votre code postal, votre franchise et votre modèle d'assurance.
           </p>
+          {/* StatsGrid */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+            {[
+              { value: '34 caisses',  label: 'Comparées en temps réel',  sub: 'Données officielles OFSP 2026' },
+              { value: 'CHF 2 753',   label: 'Économie possible par an', sub: 'Canton de Genève, modèle standard' },
+              { value: '97%',         label: 'Écart de prime possible',  sub: 'Entre caisses dans une même région' },
+            ].map(s => (
+              <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
+                <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
+                <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
+                <div className="text-[12px] text-slate mt-0.5">{s.sub}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -621,24 +652,21 @@ export default function ComparateurClient() {
         <section ref={conversionRef} className="bg-white border-b border-edge py-12">
           <div className="container-xl max-w-3xl">
 
-            <div className="border-2 border-brand rounded-xl overflow-hidden bg-cloud">
+            <div className="rounded-xl overflow-hidden border border-edge">
 
               {/* Header bloc */}
-              <div className="px-6 sm:px-8 pt-7 pb-5 border-b border-edge">
-                <p className="text-[12px] font-semibold text-brand uppercase tracking-wider mb-2">
-                  {stickyData.name} est CHF {fmtAn(stickyData.economie)} par an moins chère : passez à l'action
-                </p>
-                <h2 className="text-2xl font-bold text-ink mb-2">
-                  Un expert gère le changement gratuitement
+              <div className="bg-[var(--navy)] px-6 sm:px-8 pt-7 pb-5">
+                <h2 className="text-xl font-semibold text-white mb-2">
+                  Vous souhaitez changer de caisse ?
                 </h2>
-                <p className="text-[15px] text-slate leading-relaxed">
-                  Laissez vos coordonnées : un expert confirme la meilleure caisse pour votre profil exact,
+                <p className="text-[15px] text-white/70 leading-relaxed">
+                  Laissez vos coordonnées : un expert confirme la caisse adaptée à votre code postal et votre profil,
                   vérifie vos droits aux subsides et s'occupe de la résiliation si vous le souhaitez.
                 </p>
               </div>
 
               {/* Multi-step form */}
-              <div className="px-6 sm:px-8 py-6">
+              <div className="bg-white px-6 sm:px-8 py-6">
 
                 {formStatus === 'success' ? (
                   <div className="text-center py-8">
