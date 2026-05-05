@@ -336,88 +336,259 @@ import CantonCombobox, { CANTON_NAMES } from '@/components/ui/CantonCombobox'
 
 ---
 
-## 5. Templates
+## 5. Structure obligatoire — pages éditoriales
 
-### Template A — Page Guide
+> S'applique à **toutes les pages du site sauf la homepage** (`/fr`). En cas de conflit avec un template (§6), cette section fait foi.
+
+Les pages éditoriales comportent trois zones dans l'ordre strict suivant.
+
+---
+
+### Zone 1 — Accroche
+
+Contient dans l'ordre :
+1. `<Breadcrumb>` (JSON-LD uniquement, pas d'affichage visuel)
+2. `<h1>` : titre court, formulé du point de vue du lecteur
+3. **Introduction** : 2 à 3 phrases qui posent l'enjeu — pourquoi le sujet importe, ce que la page apporte. Ne pas résumer la page.
+4. **3 tuiles statistiques** (StatsGrid) : une statistique sourcée par tuile, prouvant que la lecture vaut l'effort
+
+```tsx
+<section className="bg-white border-b border-edge pt-12 pb-10">
+  <div className="container-xl">
+    <Breadcrumb items={[...]} />
+    <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
+      {titreH1}
+    </h1>
+    <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-8">
+      {intro}  {/* 2-3 phrases — enjeu, pas résumé */}
+    </p>
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      {heroStats.map(s => (
+        <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
+          <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
+          <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
+          <div className="text-[12px] text-slate mt-0.5">{s.sub}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+```
+
+**Règles Zone 1 :** valeurs numériques en `font-bold text-ink` — jamais en bleu. Aucun bouton dans cette zone. La `border-b border-edge` de la section constitue le séparateur visuel avant Zone 2.
+
+---
+
+### Zone 2 — Navigation rapide
+
+Fond légèrement grisé (`bg-cloud/60`), pleine largeur, `border-b border-edge` en bas.
+Contient exactement deux blocs dans l'ordre suivant, dans la même zone de fond.
+
+**Bloc "En bref" :** exactement 3 phrases autonomes répondant aux 3 questions les plus fréquentes sur le sujet. Chaque phrase a du sens lue seule, sans contexte. Chaque phrase contient un fait chiffré vérifiable (voir §9 GEO). Les 3 phrases sont indépendantes les unes des autres — aucune ne s'appuie sur la précédente pour être comprise.
+
+**Sommaire :** colonne unique, liens d'ancrage vers les H2 de Zone 3, classe `.toc-link`.
+
+```tsx
+<div className="bg-cloud/60 border-b border-edge py-8">
+  <div className="container-xl space-y-6">
+
+    {/* Bloc En bref */}
+    <div>
+      <p className="text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-3">
+        En bref
+      </p>
+      <ul className="space-y-2.5">
+        {enBref.map((phrase, i) => (
+          <li key={i} className="flex gap-2.5 text-[15px] text-ink leading-relaxed">
+            <span className="text-brand font-bold shrink-0" aria-hidden="true">•</span>
+            <span>{phrase}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    {/* Sommaire */}
+    <div>
+      <p className="text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-3">
+        Sommaire
+      </p>
+      <ul className="space-y-0.5">
+        {toc.map((item, i) => (
+          <li key={item.id}>
+            <a href={`#${item.id}`} className="toc-link">{i + 1}. {item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+  </div>
+</div>
+```
+
+**Règles Zone 2 :** `enBref` contient exactement 3 éléments — jamais 2, jamais 4. Aucun bouton, aucun lien vers `#contact` dans cette zone.
+
+---
+
+### Zone 3 — Contenu détaillé
+
+Chaque section de Zone 3 suit ce pattern sans exception :
+
+1. **Label d'ancrage** (`aria-hidden="true"`) : petit texte coloré au-dessus du H2, numéro ou thème court
+2. **H2 formulé comme une question directe** — "Comment choisir sa franchise ?" et non "La franchise LAMal"
+3. **2 phrases d'entrée** répondant directement à ce H2, avant tout tableau, liste ou callout
+4. Contenu (tableaux, listes, callouts ampoule…)
+5. **Bloc "À retenir"** (optionnel) : uniquement si l'information est critique (délai légal, montant exact, règle sans exception). Distinct du callout ampoule — ne pas substituer l'un à l'autre.
+6. **Un seul lien interne** par section, vers une autre page informative du site — jamais vers `#contact` ni vers le formulaire
+
+```tsx
+<section id="{id}">
+
+  {/* Label d'ancrage — visuel uniquement */}
+  <p className="text-[11px] font-semibold text-brand uppercase tracking-widest mb-2" aria-hidden="true">
+    {labelCourt}  {/* ex: "01 — Franchise" */}
+  </p>
+
+  {/* H2 — toujours formulé comme une question directe */}
+  <h2 className="article-h2">{n}. {questionDirecte}</h2>
+
+  {/* 2 phrases d'entrée — répondent au H2, avant tout tableau */}
+  <p className="article-p">{phraseEntree1} {phraseEntree2}</p>
+
+  {/* ... tableaux, listes, callouts ampoule ... */}
+
+  {/* Bloc "À retenir" — informations critiques uniquement */}
+  <div className="bg-cloud border-l-4 border-ink rounded-r-lg px-5 py-4 my-4">
+    <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1.5">À retenir</p>
+    <p className="text-[15px] text-ink leading-relaxed">{infosCritique}</p>
+  </div>
+
+  {/* Lien interne — 1 par section, jamais vers le formulaire */}
+  <p className="article-p">
+    <Link href="{pageInformative}" className="text-brand hover:underline">
+      {texteLien} →
+    </Link>
+  </p>
+
+</section>
+```
+
+**Nudge sombre — conditionnel, 1 maximum sur toute la page :**
+
+Si le sujet le justifie, placer un seul nudge sombre immédiatement après la section la plus complexe. Formulé comme une aide disponible, jamais comme une offre commerciale (voir §8).
+
+```tsx
+{/* Nudge sombre — 1 par page maximum, après la section la plus complexe */}
+<div className="bg-[var(--navy)] rounded-xl px-6 py-5 my-8">
+  <p className="text-[15px] font-medium text-white mb-1.5">{titreAide}</p>
+  <p className="text-[14px] text-white/70 leading-relaxed mb-4">{descriptionAide}</p>
+  <a href="#contact" className="text-[14px] text-white underline hover:text-white/80">
+    Parler à un expert →
+  </a>
+</div>
+```
+
+Formulations acceptées : "Pas sûr de votre situation ?", "Ce calcul vous semble complexe ?", "Besoin d'une vérification personnalisée ?"
+Formulations refusées : "Économisez dès maintenant", "Obtenez votre offre gratuite", "Comparez et réduisez votre prime"
+
+**Fin de page — ordre obligatoire :**
+
+```
+FAQ (1ère question ouverte par défaut)
+→ Formulaire (#contact)
+→ Bandeau MSI (<AuthorBio>)
+→ Guides associés
+→ Footer
+```
+
+---
+
+## 6. Templates
+
+Trois templates couvrent l'ensemble des pages du site. Chaque template est la source de vérité pour la structure — le développeur fournit uniquement le contenu.
+
+---
+
+### Template A — Page guide (toutes les pages éditoriales sauf homepage)
 
 Source de référence : `app/[locale]/lamal/guide/page.tsx`
 
 **Input nécessaire :**
-- slug, titre H1, intro (2-3 phrases)
-- datePublished, dateModified (format YYYY-MM-DD)
-- sections[] : { id, h2, contenu, ctaType, ctaDest }
-- heroStats[3] : { value, label, sub }
-- faqItems[] : { question, answer }
-- guidesAssocies[2-4] : { href, label }
+- `titreH1`, `intro` : 2-3 phrases — enjeu émotionnel, pas résumé de la page
+- `datePublished`, `dateModified` : format YYYY-MM-DD
+- `publishedDateFR`, `updatedDateFR` : format "1er janvier 2026"
+- `heroStats[3]` : `{ value, label, sub }` — métriques qui prouvent que ça vaut la peine de lire
+- `enBref[3]` : 3 phrases autonomes avec fait chiffré vérifiable — voir règle GEO §9
+- `toc[]` : `{ id, label }` — une entrée par section de Zone 3
+- `sections[]` : `{ id, n, labelCourt, questionDirecte, phraseEntree1, phraseEntree2, contenu, keyFact?, lienInterne? }`
+- `nudge?` : `{ titre, description }` — optionnel, 1 maximum par page, après la section la plus complexe
+- `faqItems[]` : `{ question, answer }`
+- `guidesAssocies[]` : `{ href, label }`
 
 **Structure complète :**
 
 ```tsx
-import type { Metadata } from 'next'
-import Breadcrumb from '@/components/ui/Breadcrumb'
-import FAQ from '@/components/ui/FAQ'
-import Link from 'next/link'
-import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
-
 export const metadata: Metadata = {
-  title: '{Titre H1} — My Swiss Insurance',
-  description: '...', // 150-160 caractères
-  openGraph: {
-    title: '...',
-    description: '...',
-    url: 'https://my-swiss-insurance.ch/{path}',
-    type: 'article',
-  },
+  title: `${titreH1} — My Swiss Insurance`,
+  description: '...',  // 150-160 caractères, commence par un chiffre clé
+  openGraph: { title: '...', description: '...', url: `https://my-swiss-insurance.ch/${slug}`, type: 'article' },
 }
 
-// JSON-LD : Article + FAQPage
-// BreadcrumbList est émis automatiquement par <Breadcrumb>
 const articleSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Article',
-  headline: '...',
-  datePublished: 'YYYY-MM-DD',
-  dateModified: 'YYYY-MM-DD',
+  '@context': 'https://schema.org', '@type': 'Article',
+  headline: titreH1, datePublished, dateModified,
   author: { '@type': 'Organization', name: 'My Swiss Insurance', url: 'https://my-swiss-insurance.ch' },
   publisher: { '@type': 'Organization', name: 'My Swiss Insurance' },
-  mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://my-swiss-insurance.ch/{path}' },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `https://my-swiss-insurance.ch/${slug}` },
 }
 const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
+  '@context': 'https://schema.org', '@type': 'FAQPage',
   mainEntity: faqItems.map(item => ({
-    '@type': 'Question',
-    name: item.question,
+    '@type': 'Question', name: item.question,
     acceptedAnswer: { '@type': 'Answer', text: item.answer },
   })),
 }
 
-export default function PageSlug() {
+export default function PageGuide() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-      {/* ── HERO ── */}
-      <section className="bg-white border-b border-edge pt-12 pb-14">
+      {/* ── ZONE 1 — Accroche, fond blanc ── */}
+      <section className="bg-white border-b border-edge pt-10 pb-12">
         <div className="container-xl">
 
-          {/* Breadcrumb — émet BreadcrumbList JSON-LD uniquement, pas d'affichage visuel */}
+          {/* Breadcrumb — JSON-LD BreadcrumbList uniquement, aucun affichage visuel */}
           <Breadcrumb items={[
             { label: 'Accueil', href: '/' },
             { label: 'LAMal', href: '/lamal' },
-            { label: '{Titre page}' },
+            { label: titreH1 },
           ]} />
+
+          {/* MSIBand — crédibilité éditoriale, entre breadcrumb et H1 */}
+          <div className="flex items-center gap-2.5 mt-3 mb-5">
+            <div className="w-6 h-6 bg-brand rounded-[4px] flex items-center justify-center shrink-0">
+              <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor"
+                   viewBox="0 0 24 24" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <span className="text-[13px] font-medium text-ink">My Swiss Insurance</span>
+            <span className="text-[13px] text-slate">
+              Publié le {publishedDateFR}, mis à jour le {updatedDateFR}
+            </span>
+          </div>
 
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
             {titreH1}
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
-            {intro}
+            {intro}  {/* 2-3 phrases — enjeu émotionnel, pas résumé de la page */}
           </p>
 
-          {/* StatsGrid — 3 métriques clés */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+          {/* StatsGrid — 3 métriques qui prouvent que ça vaut la peine de lire */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {heroStats.map(s => (
               <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
                 <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
@@ -430,97 +601,134 @@ export default function PageSlug() {
         </div>
       </section>
 
-      {/* ── LAYOUT 2 COLONNES ── */}
-      <div className="container-xl py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-12 items-start">
+      {/* ── ZONE 2 — Navigation rapide, fond secondaire ── */}
+      <div className="bg-cloud/60 border-b border-edge py-8">
+        <div className="container-xl space-y-6">
 
-          {/* TOC sticky — masqué mobile */}
-          <aside className="hidden lg:block">
-            <nav className="sticky top-24">
-              <p className="text-[11px] font-semibold text-slate uppercase tracking-widest mb-4 px-4">
-                Sommaire
-              </p>
-              <ul className="space-y-0.5">
-                {toc.map(item => (
-                  <li key={item.id}>
-                    <a href={`#${item.id}`} className="toc-link">{item.label}</a>
-                  </li>
-                ))}
-              </ul>
-              {/* Pas de bouton de conversion dans le TOC — value first */}
-            </nav>
-          </aside>
+          {/* Bloc En bref — exactement 3 phrases autonomes avec fait chiffré vérifiable */}
+          <div>
+            <p className="text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-3">
+              En bref
+            </p>
+            <ul className="space-y-2.5">
+              {enBref.map((phrase, i) => (
+                <li key={i} className="flex gap-2.5 text-[15px] text-ink leading-relaxed">
+                  <span className="text-brand font-bold shrink-0" aria-hidden="true">•</span>
+                  <span>{phrase}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          {/* Article */}
-          <article className="min-w-0 space-y-4">
+          {/* Sommaire colonne unique */}
+          <div>
+            <p className="text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-3">
+              Sommaire
+            </p>
+            <ul className="space-y-0.5">
+              {toc.map((item, i) => (
+                <li key={item.id}>
+                  <a href={`#${item.id}`} className="toc-link">{i + 1}. {item.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-            {/* Section type */}
-            <section id="{id}">
-              <h2 className="article-h2">{N}. {titreSSection}</h2>
-              <p className="article-p">{intro_section}</p>
-              {/* Contenu : article-p, article-h3, stripe-table, callout */}
-
-              {/* Liens texte vers autres pages — PAS de bouton de conversion */}
-              <p className="article-p">
-                <Link href="{dest}" className="text-brand hover:underline">
-                  {texte_lien} →
-                </Link>
-              </p>
-            </section>
-
-            {/* Tableau stripe-table */}
-            <div className="overflow-x-auto border border-edge rounded-[8px]">
-              <table className="stripe-table w-full">
-                <thead><tr><th>Col1</th><th>Col2</th></tr></thead>
-                <tbody>
-                  {rows.map((r, i) => (
-                    <tr key={i}><td>{r.a}</td><td>{r.b}</td></tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            {/* FAQ — TOUJOURS avant le formulaire */}
-            <section id="faq">
-              <FAQ items={faqItems} title="{N}. Questions fréquentes sur {sujet}" />
-            </section>
-
-            {/* Formulaire — ancre #contact, titre/sous-titre immuables (voir section 6) */}
-            <div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4">
-              <h2 className="text-2xl font-semibold text-ink mb-3">
-                Besoin d'aide ?
-              </h2>
-              <p className="text-[16px] text-slate mb-6 leading-relaxed">
-                Un expert vous rappelle sous 24 heures pour établir avec vous une solution
-                personnalisée. Gratuit, sans engagement.
-              </p>
-              <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
-            </div>
-
-            {/* Bandeau MSI — TOUJOURS après le formulaire, avant les guides associés */}
-            {/* Utiliser le composant AuthorBio — jamais de div custom */}
-            <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
-
-            {/* Guides associés */}
-            <section className="pt-8 border-t border-edge mt-4">
-              <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
-                Guides associés
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {guidesAssocies.map(({ href, label }) => (
-                  <Link key={href} href={href}
-                    className="flex items-center gap-2 text-[14px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
-                    <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                    {label}
-                  </Link>
-                ))}
-              </div>
-            </section>
-
-          </article>
         </div>
+      </div>
+
+      {/* ── ZONE 3 — Contenu détaillé, fond blanc ── */}
+      <div className="container-xl py-12">
+        <article className="max-w-3xl space-y-4">
+
+          {/* ── Pattern section — répéter pour chaque entrée du sommaire ── */}
+          <section id="{id}">
+
+            {/* AnchorLabel numéroté */}
+            <p className="text-[11px] font-semibold text-brand uppercase tracking-widest mb-2"
+               aria-hidden="true">
+              {n.toString().padStart(2, '0')} — {labelCourt}
+            </p>
+
+            {/* H2 toujours formulé comme une question directe */}
+            <h2 className="article-h2">{n}. {questionDirecte}</h2>
+
+            {/* 2 phrases d'entrée, séparées du reste par une bordure en pointillés */}
+            <div className="border-b border-dashed border-edge pb-4 mb-6">
+              <p className="article-p mb-0">{phraseEntree1} {phraseEntree2}</p>
+            </div>
+
+            {/* Contenu : tableaux, listes, exemples, callouts ampoule */}
+
+            {/* KeyFact — 1 maximum par section, uniquement si information critique */}
+            {/* (délai légal, montant exact, règle sans exception) */}
+            {/* Distinct du callout ampoule (§12) — ne pas substituer l'un à l'autre */}
+            <div className="bg-cloud border-l-4 border-ink rounded-r-lg px-5 py-4 my-4">
+              <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1.5">
+                À retenir
+              </p>
+              <p className="text-[15px] text-ink leading-relaxed">{keyFact}</p>
+            </div>
+
+            {/* Lien interne — 1 par section, jamais vers #contact ni vers le comparateur */}
+            <p className="article-p">
+              <Link href="{pageInformative}" className="text-brand hover:underline">
+                {texteLien} →
+              </Link>
+            </p>
+
+          </section>
+
+          {/* ── Nudge sombre — conditionnel, 1 maximum sur toute la page ── */}
+          {/* Placer après la section la plus complexe */}
+          {/* Accepté : "Pas sûr de votre situation ?" "Ce calcul vous semble complexe ?" */}
+          {/* Refusé : "Économisez dès maintenant" "Obtenez votre offre gratuite" */}
+          <div className="bg-[var(--navy)] rounded-xl px-6 py-5 my-8">
+            <p className="text-[15px] font-medium text-white mb-1.5">{nudge.titre}</p>
+            <p className="text-[14px] text-white/70 leading-relaxed mb-4">{nudge.description}</p>
+            <a href="#contact" className="text-[14px] text-white underline hover:text-white/80">
+              Parler à un expert →
+            </a>
+          </div>
+
+          {/* FAQ — 1ère question ouverte par défaut, TOUJOURS avant le formulaire */}
+          <section id="faq">
+            <FAQ items={faqItems} title="{N}. Questions fréquentes sur {sujet}" />
+          </section>
+
+          {/* Formulaire */}
+          <div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4">
+            <h2 className="text-2xl font-semibold text-ink mb-3">Besoin d'aide ?</h2>
+            <p className="text-[16px] text-slate mb-6 leading-relaxed">
+              Un expert vous rappelle sous 24 heures pour établir avec vous une solution
+              personnalisée. Gratuit, sans engagement.
+            </p>
+            <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
+          </div>
+
+          {/* Bandeau MSI — après le formulaire, avant les guides associés */}
+          <AuthorBio publishedDate={publishedDateFR} updatedDate={updatedDateFR} />
+
+          {/* Guides associés */}
+          <section className="pt-8 border-t border-edge mt-4">
+            <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
+              Guides associés
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {guidesAssocies.map(({ href, label }) => (
+                <Link key={href} href={href}
+                  className="flex items-center gap-2 text-[14px] text-slate hover:text-brand
+                             border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                  <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                  {label}
+                </Link>
+              ))}
+            </div>
+          </section>
+
+        </article>
       </div>
 
     </>
@@ -530,71 +738,302 @@ export default function PageSlug() {
 
 ---
 
-### Template B — Page Canton
+### Template B — Homepage et pages hub
 
-Source de référence : `app/[locale]/lamal/canton/{slug}/page.tsx`
+Source de référence : `app/[locale]/page.tsx`, `app/[locale]/lamal/page.tsx`
 
-Utilise le composant `<CantonPage>` depuis `@/components/lamal/CantonPage`.
-Les données proviennent de `data/lamal/cantons.ts` (source de vérité par canton).
+**Input nécessaire :**
+- `titreH1`, `intro` : 2-3 phrases — ce que fait le site ou la section, établit la crédibilité
+- `heroStats[3]` : `{ value, label, sub }` — métriques de crédibilité, pas de stats dans les cartes
+- `categories[]` : `{ href, titre, desc }` — navigation vers les grandes catégories
+- `faqItems[]` : 3 questions maximum
 
----
+**Structure complète :**
 
-### Template C — Page Par Situation
-
-Source de référence : `app/[locale]/lamal/ma-situation/page.tsx`
-
-Structure identique à Template A mais sans `<StatsGrid>` dans le hero.
-Hero plus court, pas de bandeau MSI obligatoire.
-
----
-
-### Template D — Page Hub Navigation
-
-Source de référence : `app/[locale]/lamal/page.tsx`
-
-Structure :
-- Hero simple : H1, intro, pas de stats
-- Grille de cartes (Link, 2 ou 4 colonnes, icon + titre + desc + "Lire →")
-- Pas de TOC
-- Formulaire en bas
-
-Carte type :
 ```tsx
-<Link href="{href}"
-  className="group flex flex-col bg-white border border-edge rounded-xl p-6
-             hover:border-brand hover:shadow-md transition-all duration-200">
-  <div className="w-9 h-9 bg-[#dbeafe] border border-[#1d4ed8]/20 rounded-lg
-                  flex items-center justify-center text-brand mb-4
-                  group-hover:bg-brand group-hover:text-white group-hover:border-brand
-                  transition-colors duration-200">
-    {icon}
-  </div>
-  <h3 className="font-semibold text-ink text-[16px] mb-2 group-hover:text-brand transition-colors">
-    {titre}
-  </h3>
-  <p className="text-slate text-[14px] leading-relaxed flex-1">{desc}</p>
-  <div className="flex items-center gap-1 mt-4 text-brand text-[13px] font-medium">
-    Lire le guide
-    <svg ...>...</svg>
-  </div>
-</Link>
+export const metadata: Metadata = {
+  title: `${titreH1} — My Swiss Insurance`,
+  description: '...',  // 150-160 caractères
+  openGraph: { title: '...', description: '...', url: 'https://my-swiss-insurance.ch/', type: 'website' },
+}
+
+const faqSchema = {
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: faqItems.map(item => ({
+    '@type': 'Question', name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+}
+
+export default function PageHub() {
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+
+      {/* ── ZONE 1 — Accroche, fond blanc ── */}
+      <section className="bg-white border-b border-edge pt-12 pb-14">
+        <div className="container-xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
+            {titreH1}
+          </h1>
+          <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
+            {intro}  {/* 2-3 phrases — ce que fait le site, établit la crédibilité */}
+          </p>
+
+          {/* StatsGrid — 3 métriques de crédibilité */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {heroStats.map(s => (
+              <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
+                <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
+                <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
+                <div className="text-[12px] text-slate mt-0.5">{s.sub}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── ZONE 2 — Grille de navigation ── */}
+      <div className="container-xl py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {categories.map(({ href, titre, desc }) => (
+            <Link key={href} href={href}
+              className="group flex flex-col bg-white border border-edge rounded-xl p-6
+                         hover:border-brand hover:shadow-md transition-all duration-200">
+              <h3 className="font-semibold text-ink text-[16px] mb-2
+                             group-hover:text-brand transition-colors">
+                {titre}
+              </h3>
+              <p className="text-slate text-[14px] leading-relaxed flex-1">{desc}</p>
+              <div className="flex items-center gap-1 mt-4 text-brand text-[13px] font-medium">
+                Lire →
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      {/* ── ZONE 3 ── */}
+      {/* FAQ — 3 questions maximum, 1ère ouverte par défaut */}
+      <div className="container-xl pb-8">
+        <FAQ items={faqItems} title="Questions fréquentes" />
+      </div>
+
+      {/* Formulaire */}
+      <section id="formulaire" className="bg-cloud border-y border-edge py-10 sm:py-16 scroll-mt-16">
+        <div className="container-xl max-w-2xl">
+          <div className="text-center mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold text-ink leading-tight mb-3">
+              Besoin d'aide ?
+            </h2>
+            <p className="text-[15px] sm:text-[17px] text-slate leading-relaxed">
+              Un expert vous rappelle sous 24 heures pour établir avec vous une solution
+              personnalisée. Gratuit, sans engagement.
+            </p>
+          </div>
+          <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
+        </div>
+      </section>
+
+    </>
+  )
+}
 ```
 
----
-
-### Template E — Page Outil
-
-Source de référence : `app/[locale]/lamal/comparateur/page.tsx`, `subsides/page.tsx`
-
-Structure :
-- Hero : H1, intro
-- Composant interactif Client (`<ComparateurClient>`, `<SubsidesCalculator>`, etc.)
-- Section FAQ
-- Formulaire
+**Règles Template B :** pas de MSIBand, pas de bloc En bref, pas de sommaire, pas de nudge sombre. Cartes sans statistiques — titre et description courte uniquement. FAQ limitée à 3 questions.
 
 ---
 
-## 6. Formulaire multi-étapes — invariants
+### Template C — Pages outils (comparateur, calculateur de subsides)
+
+Source de référence : `app/[locale]/lamal/comparateur/page.tsx`, `app/[locale]/lamal/subsides/page.tsx`
+
+**Input nécessaire :**
+- `titreH1`, `intro` : 2-3 phrases qui posent l'enjeu de l'outil
+- `datePublished`, `dateModified`, `publishedDateFR`, `updatedDateFR`
+- `heroStats[3]` : `{ value, label, sub }` — métriques liées à l'outil
+- `OutilComponent` : composant interactif client
+- `notePerimetre?` : string — note discrète si l'outil a des limites, placée après l'outil, jamais avant
+- `sections[]` : `{ id, n, questionDirecte, phraseEntree1, phraseEntree2, contenu }`
+- `tableauxRef[]` : `{ id, n, questionDirecte, phrase1, phrase2, cols[], rows[] }` — 2 phrases avec chiffres clés obligatoires
+- `faqItems[]` : `{ question, answer }`
+- `guidesAssocies[]` : `{ href, label }`
+
+**Structure complète :**
+
+```tsx
+export const metadata: Metadata = {
+  title: `${titreH1} — My Swiss Insurance`,
+  description: '...',  // 150-160 caractères, commence par un chiffre clé sur l'outil
+  openGraph: { title: '...', description: '...', url: '...', type: 'article' },
+}
+
+const articleSchema = {
+  '@context': 'https://schema.org', '@type': 'Article',
+  headline: titreH1, datePublished, dateModified,
+  author: { '@type': 'Organization', name: 'My Swiss Insurance', url: 'https://my-swiss-insurance.ch' },
+  publisher: { '@type': 'Organization', name: 'My Swiss Insurance' },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `https://my-swiss-insurance.ch/${slug}` },
+}
+const faqSchema = {
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: faqItems.map(item => ({
+    '@type': 'Question', name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+}
+
+export default function PageOutil() {
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+
+      {/* ── ZONE 1 — Accroche, fond blanc ── */}
+      <section className="bg-white border-b border-edge pt-10 pb-12">
+        <div className="container-xl">
+
+          <Breadcrumb items={[
+            { label: 'Accueil', href: '/' },
+            { label: 'LAMal', href: '/lamal' },
+            { label: titreH1 },
+          ]} />
+
+          {/* MSIBand */}
+          <div className="flex items-center gap-2.5 mt-3 mb-5">
+            <div className="w-6 h-6 bg-brand rounded-[4px] flex items-center justify-center shrink-0">
+              <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor"
+                   viewBox="0 0 24 24" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <span className="text-[13px] font-medium text-ink">My Swiss Insurance</span>
+            <span className="text-[13px] text-slate">
+              Publié le {publishedDateFR}, mis à jour le {updatedDateFR}
+            </span>
+          </div>
+
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
+            {titreH1}
+          </h1>
+          <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
+            {intro}  {/* 2-3 phrases — enjeu de l'outil */}
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {heroStats.map(s => (
+              <div key={s.label} className="bg-cloud/60 border border-edge rounded-xl px-5 py-4">
+                <div className="text-2xl font-bold text-ink leading-none">{s.value}</div>
+                <div className="text-[13px] font-medium text-ink/70 mt-0.5">{s.label}</div>
+                <div className="text-[12px] text-slate mt-0.5">{s.sub}</div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ── ZONE 2 — Outil interactif, immédiatement ── */}
+      {/* Aucun texte d'introduction devant l'outil — l'outil est toujours premier */}
+      <div className="container-xl py-10">
+        <OutilComponent />
+        {/* Note périmètre — uniquement après l'outil, jamais avant */}
+        {notePerimetre && (
+          <p className="text-[13px] text-slate/60 mt-3">{notePerimetre}</p>
+        )}
+      </div>
+
+      {/* ── ZONE 3 — Sections éditoriales ── */}
+      <div className="container-xl pb-12">
+        <article className="max-w-3xl space-y-4">
+
+          {/* Section éditoriale — phrase d'entrée directe avant tout tableau ou liste */}
+          <section id="{id}">
+            <h2 className="article-h2">{n}. {questionDirecte}</h2>
+            <div className="border-b border-dashed border-edge pb-4 mb-6">
+              <p className="article-p mb-0">{phraseEntree1} {phraseEntree2}</p>
+            </div>
+            {/* Contenu */}
+          </section>
+
+          {/* Tableau de données de référence */}
+          {/* OBLIGATOIRE : phrase1 et phrase2 contiennent les chiffres clés du tableau */}
+          {/* Un tableau sans phrase d'introduction n'est pas indexable par les moteurs IA */}
+          <section id="{id-tableau}">
+            <h2 className="article-h2">{n}. {questionDirecte}</h2>
+            <div className="border-b border-dashed border-edge pb-4 mb-6">
+              <p className="article-p mb-0">{phrase1} {phrase2}</p>
+            </div>
+            <div className="overflow-x-auto border border-edge rounded-[8px]">
+              <table className="stripe-table w-full">
+                <thead>
+                  <tr>{cols.map(c => <th key={c} className="whitespace-nowrap">{c}</th>)}</tr>
+                </thead>
+                <tbody>
+                  {rows.map((r, i) => (
+                    <tr key={i}>{r.map((v, j) => <td key={j} className="whitespace-nowrap">{v}</td>)}</tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          {/* Pas de nudge sombre sur les pages outils */}
+
+          {/* FAQ — 1ère question ouverte par défaut */}
+          <section id="faq">
+            <FAQ items={faqItems} title="{N}. Questions fréquentes" />
+          </section>
+
+          {/* Formulaire */}
+          <div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4">
+            <h2 className="text-2xl font-semibold text-ink mb-3">Besoin d'aide ?</h2>
+            <p className="text-[16px] text-slate mb-6 leading-relaxed">
+              Un expert vous rappelle sous 24 heures pour établir avec vous une solution
+              personnalisée. Gratuit, sans engagement.
+            </p>
+            <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
+          </div>
+
+          {/* Bandeau MSI */}
+          <AuthorBio publishedDate={publishedDateFR} updatedDate={updatedDateFR} />
+
+          {/* Guides associés */}
+          <section className="pt-8 border-t border-edge mt-4">
+            <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
+              Guides associés
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {guidesAssocies.map(({ href, label }) => (
+                <Link key={href} href={href}
+                  className="flex items-center gap-2 text-[14px] text-slate hover:text-brand
+                             border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                  <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                  {label}
+                </Link>
+              ))}
+            </div>
+          </section>
+
+        </article>
+      </div>
+
+    </>
+  )
+}
+```
+
+**Règles Template C :** pas de bloc En bref, pas de sommaire, pas de nudge sombre. L'outil est toujours premier en Zone 2. Chaque tableau en Zone 3 est précédé de 2 phrases contenant les chiffres clés du tableau.
+
+---
+
+## 7. Formulaire multi-étapes — invariants
 
 Formulaire fixe en bas de chaque page, juste avant le footer.
 Position dans le layout : après les guides associés, avant `</main>`.
@@ -640,7 +1079,7 @@ Hauteur champs standalone (`input-field` par défaut) : `h-12` (48px).
 
 ---
 
-## 7. Logique CTA — value first
+## 8. Logique CTA — value first
 
 **Philosophie :** on apporte de la valeur, on laisse l'utilisateur venir naturellement au formulaire.
 Deux points de conversion par page, pas un de plus.
@@ -649,12 +1088,12 @@ Deux points de conversion par page, pas un de plus.
 
 Le seul point de conversion en haut de page est le bouton **"Recevez les meilleures offres"** dans le header (`components/ui/Header.tsx`).
 
-**Aucun bouton** `btn-primary` ni `btn-secondary` dans la section hero ou sous le titre des pages de contenu (Templates A, C, E).
+**Aucun bouton** `btn-primary` ni `btn-secondary` dans la section hero ou sous le titre des pages de contenu (Templates A, C).
 Supprimer tout bouton "Être conseillé gratuitement" ou équivalent placé sous un titre de page.
 
 ### Point 2 — Formulaire fixe en bas de page
 
-Voir section 6. Titre et sous-titre immuables. Soumission → /fr/merci.
+Voir section 7. Titre et sous-titre immuables. Soumission → /fr/merci.
 
 ### Dans le corps des sections : liens texte uniquement
 
@@ -666,7 +1105,7 @@ Voir section 6. Titre et sous-titre immuables. Soumission → /fr/merci.
 ```
 
 - **Aucun bouton** (`btn-primary`, `btn-secondary`) dans le corps des sections article
-- **Aucun nudge sombre** (`bg-[#0f2040]`, `bg-ink`, etc.)
+- **Maximum 1 nudge sombre** par page (`bg-[var(--navy)]`) — uniquement sous la section la plus complexe de Zone 3, formulé comme aide disponible (voir §5 Zone 3). Jamais plus d'un sur la page.
 - **Aucun nudge intermédiaire** (encadrés `bg-cloud` avec `btn-primary`) entre les sections
 - Les liens texte pointent uniquement vers d'autres pages de contenu (guides, cantons, situations)
 - Ils ne pointent jamais vers `#contact` ou `/lamal/comparateur` depuis le corps d'une section
@@ -676,12 +1115,13 @@ Voir section 6. Titre et sous-titre immuables. Soumission → /fr/merci.
 | Header | `btn-primary` → modal formulaire | `Recevez les meilleures offres` |
 | Hero page contenu | Aucun bouton | — |
 | Corps section | Lien texte `text-brand` | `Comprendre les franchises →` |
+| Corps section (après section complexe) | Nudge sombre conditionnel (1 max par page) | `Pas sûr de votre situation ?` |
 | TOC sidebar | Aucun bouton | — |
 | Formulaire bas de page | `btn-primary` submit | `Envoyer ma demande →` |
 
 ---
 
-## 8. SEO & GEO
+## 9. SEO & GEO
 
 **JSON-LD selon le type de page :**
 
@@ -694,6 +1134,10 @@ Voir section 6. Titre et sous-titre immuables. Soumission → /fr/merci.
 
 **Règle GEO :** chaque section commence par une réponse directe en 2 phrases.
 Les chiffres clés apparaissent dans le texte brut, pas uniquement dans les tableaux.
+
+**Règle GEO — bloc En bref :** les 3 phrases du bloc En bref (Zone 2, §5) sont indépendantes les unes des autres — aucune ne s'appuie sur la précédente pour être comprise. Chaque phrase contient un fait chiffré vérifiable (montant, pourcentage, nombre de jours, seuil légal, nombre de cantons...).
+
+**Règle GEO — tableaux :** chaque tableau de données doit être précédé d'au moins une phrase en texte brut contenant les chiffres clés du tableau. Un tableau sans phrase d'introduction n'est pas indexable correctement par les moteurs IA.
 
 **Titre pages :** `{H1} — My Swiss Insurance`
 **Meta description :** 150-160 caractères, commence par un chiffre clé.
@@ -710,9 +1154,9 @@ Les chiffres clés apparaissent dans le texte brut, pas uniquement dans les tabl
 
 ---
 
-## 9. Navigation & structure de pages
+## 10. Navigation & structure de pages
 
-### 9.1 Header — Standard global, toutes les pages
+### 10.1 Header — Standard global, toutes les pages
 
 > **Composant global** : `components/ui/Header.tsx`. Le modifier une fois l'applique sur l'intégralité du site. Ne jamais dupliquer ou surcharger ce composant dans une page.
 
@@ -753,7 +1197,7 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 
 ---
 
-## 10. Checklist de livraison
+## 11. Checklist de livraison
 
 **Composants**
 - [ ] Composant existant utilisé (pas recréé)
@@ -770,6 +1214,14 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 - [ ] Corps des sections : liens texte `text-brand` uniquement, jamais de bouton
 - [ ] Aucun nudge sombre ou intermédiaire entre les sections
 - [ ] TOC sidebar : aucun bouton de conversion
+
+**Structure — Zones éditoriales (§5)**
+- [ ] Zone 1 : H1 + introduction 2-3 phrases (enjeu, pas résumé) + 3 tuiles statistiques sourcées
+- [ ] Zone 2 : bloc En bref (exactement 3 phrases autonomes, chacune avec un fait chiffré) + sommaire colonne unique, même zone `bg-cloud/60`
+- [ ] Zone 3 : chaque H2 formulé comme une question directe + 2 phrases d'entrée avant tout tableau
+- [ ] Bloc "À retenir" uniquement pour informations critiques (jamais pour astuces — celles-ci utilisent le callout ampoule §12)
+- [ ] 1 seul lien interne par section de Zone 3, jamais vers `#contact` ni vers le formulaire
+- [ ] Nudge sombre : 0 ou 1 par page, sous la section la plus complexe, formulé comme aide disponible
 
 **Structure**
 - [ ] Pas de breadcrumb visuel en HTML — `<Breadcrumb>` est JSON-LD uniquement
@@ -816,9 +1268,9 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 
 ---
 
-## 11. Règles visuelles — tableaux, graphiques, encadrés, icônes
+## 12. Règles visuelles — tableaux, graphiques, encadrés, icônes
 
-### 11.1 Tableaux (`stripe-table`) — Standard global, toutes les pages
+### 12.1 Tableaux (`stripe-table`) — Standard global, toutes les pages
 
 > **Standard global** : s'applique à **tous** les tableaux sur **toutes** les pages du site, sans exception.
 
@@ -838,14 +1290,14 @@ Colonnes déplacées dans un encadré texte : Économie par mois · Seuil d'équ
 
 ---
 
-### 11.2 Graphiques
+### 12.2 Graphiques
 
 - **Trier toujours les entrées du plus grand au plus petit** selon la donnée principale de la page.
 - Même règle que les tableaux : jamais de tri alphabétique si une valeur quantitative est disponible.
 
 ---
 
-### 11.3 Encadrés bleus (`.callout`) — Standard global, toutes les pages
+### 12.3 Encadrés bleus (`.callout`) — Standard global, toutes les pages
 
 > **Standard global** : s'applique à **tous** les encadrés bleus sur **toutes** les pages du site.
 
@@ -878,7 +1330,7 @@ Chaque encadré bleu doit comporter une **icône ampoule outline** à gauche du 
 
 ---
 
-### 11.4 Icônes
+### 12.4 Icônes
 
 - **Style :** trait fin (`strokeWidth={1.5}`), pas de remplissage (`fill="none"`), couleur `text-brand` ou `text-brand-light`.
 - **Usage :** une icône par concept clé, jamais décorative. Ne pas répéter la même icône deux fois sur la même page.
@@ -896,7 +1348,7 @@ Exemple d'usage correct (section stats, liste avantages) :
 
 ---
 
-## 12. Sources consultées
+## 13. Sources consultées
 
 | Fichier | Rôle |
 |---|---|

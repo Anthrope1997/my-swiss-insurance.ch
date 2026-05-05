@@ -77,13 +77,6 @@ const faqSchema = {
   })),
 }
 
-const toc = [
-  { id: 'simulateur',    label: '1. Simulateur'              },
-  { id: 'fonctionnement', label: '2. Comment ça fonctionne'  },
-  { id: 'reforme-2025',  label: '3. Réforme 2025'            },
-  { id: 'faq',           label: '4. Questions fréquentes'    },
-]
-
 export default function SubsidesPage() {
   return (
     <>
@@ -125,36 +118,12 @@ export default function SubsidesPage() {
         </div>
       </section>
 
-      {/* ── LAYOUT 2 COLONNES ── */}
+      {/* ── ARTICLE ── */}
       <div className="container-xl py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-12 items-start">
-
-          {/* TOC sticky */}
-          <aside className="hidden lg:block">
-            <nav className="sticky top-24">
-              <p className="text-[11px] font-semibold text-slate uppercase tracking-widest mb-4 px-4">
-                Sommaire
-              </p>
-              <ul className="space-y-0.5">
-                {toc.map(item => (
-                  <li key={item.id}>
-                    <a href={`#${item.id}`} className="toc-link">{item.label}</a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </aside>
-
-          {/* Article */}
-          <article className="min-w-0 space-y-4">
+        <article className="space-y-8">
 
             {/* §1 — Simulateur */}
             <section id="simulateur" className="scroll-mt-24">
-              <h2 className="article-h2">1. Simulateur de subsides</h2>
-              <p className="article-p">
-                Sélectionnez votre canton et renseignez votre revenu annuel. Pour les cantons de Suisse
-                romande, entrez également votre situation familiale pour obtenir une estimation détaillée.
-              </p>
               <SubsidesSimulatorFull />
             </section>
 
@@ -276,8 +245,7 @@ export default function SubsidesPage() {
               </div>
             </section>
 
-          </article>
-        </div>
+        </article>
       </div>
     </>
   )

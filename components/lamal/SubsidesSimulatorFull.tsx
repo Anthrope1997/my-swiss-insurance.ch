@@ -10,7 +10,6 @@ import { SUBSIDES_2026, type CantonSubside2026 } from '@/lib/data/subsides-2026'
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
-// Cantons avec formule officielle précise publiée (barème intégral disponible)
 const PRECISE_CANTONS = new Set<string>(['GE', 'VS', 'NE', 'VD', 'JU', 'FR'])
 
 const ALL_CODES = Object.keys(SUBSIDES_2026).sort((a, b) =>
@@ -20,8 +19,6 @@ const ALL_CODES = Object.keys(SUBSIDES_2026).sort((a, b) =>
 )
 
 // ─── Calcul standard (interpolation linéaire) ─────────────────────────────────
-// Utilisé pour les 19 cantons alémaniques sans barème précis publié
-// seuilNum = seuil personne seule ; l'ajustement situation/enfants/âge est appliqué
 
 function calculerSubsideStd(
   revenu: number,
@@ -30,8 +27,7 @@ function calculerSubsideStd(
   nbEnfants: number,
   isJeune: boolean,
 ): SubsideResult {
-  const seuilBase = data.seuilNum!
-  // Ajustement du seuil selon situation familiale et enfants
+  const seuilBase   = data.seuilNum!
   const coupleBonus = situation === 'couple' ? Math.round(seuilBase * 0.70) : 0
   const childBonus  = nbEnfants * 12000
   const effectiveSeuil = seuilBase + coupleBonus + childBonus
@@ -64,7 +60,7 @@ function computeResult(
   nbEnfants: number,
   isJeune: boolean,
 ): SubsideResult | null {
-  if (!data.seuilNum) return null  // ZH, TI : formule non publiée
+  if (!data.seuilNum) return null
   if (revenu <= 0) return null
 
   switch (canton as Canton) {
@@ -107,30 +103,35 @@ export default function SubsidesSimulatorFull() {
   const [form, setForm] = useState<FormState>({
     canton: '', revenu: '', situation: 'seul', nbEnfants: 0, isJeune: false,
   })
+  const [submitted, setSubmitted] = useState(false)
 
-  const set = (patch: Partial<FormState>) => setForm(f => ({ ...f, ...patch }))
+  const set = (patch: Partial<FormState>) => {
+    setSubmitted(false)
+    setForm(f => ({ ...f, ...patch }))
+  }
 
-  const cantonData = form.canton ? SUBSIDES_2026[form.canton as keyof typeof SUBSIDES_2026] ?? null : null
-  const hasSeuilNum = Boolean(cantonData?.seuilNum)
-  const revNum      = parseInt(form.revenu.replace(/['\s]/g, '')) || 0
-  const hasRevenu   = revNum > 0
+  const cantonData    = form.canton ? SUBSIDES_2026[form.canton as keyof typeof SUBSIDES_2026] ?? null : null
+  const hasSeuilNum   = Boolean(cantonData?.seuilNum)
+  const revNum        = parseInt(form.revenu.replace(/['\s]/g, '')) || 0
+  const hasRevenu     = revNum > 0
+  const showNoFormula = Boolean(cantonData && !hasSeuilNum)
 
-  const result = (cantonData && hasRevenu)
+  const result = (submitted && cantonData && hasSeuilNum && hasRevenu)
     ? computeResult(revNum, form.canton, cantonData, form.situation, form.nbEnfants, form.isJeune)
     : null
 
   const ineligible = result !== null && result.total === 0
   const hasAmount  = result !== null && result.total > 0
-
-  // Cantons ZH/TI : afficher l'info dès la sélection
-  const showNoFormula = Boolean(cantonData && !hasSeuilNum)
-  // Cantons avec seuilNum : afficher résultat dès qu'un revenu est saisi
-  const showResult = hasSeuilNum && hasRevenu
+  const showResult = submitted && Boolean(cantonData) && hasSeuilNum
 
   return (
-    <div className="bg-cloud border border-edge rounded-xl p-6 space-y-6">
+    <div className="bg-[#dbeafe] border-2 border-[#1d4ed8] rounded-xl p-6 space-y-5">
 
-      {/* ── Inputs row 1 : canton + revenu ── */}
+      <p className="text-[11px] font-semibold text-[#1d4ed8] uppercase tracking-widest">
+        Estimez votre subside en 30 secondes
+      </p>
+
+      {/* ── Row 1 : canton + revenu ── */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
 
         <div>
@@ -152,108 +153,111 @@ export default function SubsidesSimulatorFull() {
           </div>
         </div>
 
-        {form.canton && hasSeuilNum && (
-          <div>
-            <label className="block text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-2">
-              Revenu déterminant annuel (CHF)
-            </label>
-            <input
-              type="text"
-              inputMode="numeric"
-              placeholder="ex. 45 000"
-              value={form.revenu}
-              onChange={e => set({ revenu: e.target.value })}
-              className="input-field"
-            />
-            <p className="text-[12px] text-slate/60 mt-1.5">
-              Revenu net fiscal — en cas de doute, utilisez votre revenu imposable.
-            </p>
-          </div>
-        )}
+        <div>
+          <label className="block text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-2">
+            Revenu déterminant annuel (CHF)
+          </label>
+          <input
+            type="text"
+            inputMode="numeric"
+            placeholder="ex. 45 000"
+            value={form.revenu}
+            onChange={e => set({ revenu: e.target.value })}
+            className="input-field"
+          />
+          <p className="text-[12px] text-slate/60 mt-1.5">
+            Revenu net fiscal — en cas de doute, utilisez votre revenu imposable.
+          </p>
+        </div>
 
       </div>
 
-      {/* ── Inputs row 2 : situation (tous les cantons avec seuilNum) ── */}
-      {form.canton && hasSeuilNum && (
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      {/* ── Row 2 : situation + enfants + âge ── */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
 
-          <div>
-            <label className="block text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-2">
-              Situation familiale
-            </label>
-            <div className="relative">
-              <select
-                value={form.situation}
-                onChange={e => set({ situation: e.target.value as Situation })}
-                className="select-field pr-9 text-[14px]"
-              >
-                <option value="seul">Personne seule</option>
-                <option value="couple">Couple</option>
-              </select>
-              <ChevronDown />
-            </div>
+        <div>
+          <label className="block text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-2">
+            Situation familiale
+          </label>
+          <div className="relative">
+            <select
+              value={form.situation}
+              onChange={e => set({ situation: e.target.value as Situation })}
+              className="select-field pr-9 text-[14px]"
+            >
+              <option value="seul">Personne seule</option>
+              <option value="couple">Couple</option>
+            </select>
+            <ChevronDown />
           </div>
-
-          <div>
-            <label className="block text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-2">
-              Enfants à charge
-            </label>
-            <div className="relative">
-              <select
-                value={form.nbEnfants}
-                onChange={e => set({ nbEnfants: parseInt(e.target.value) })}
-                className="select-field pr-9 text-[14px]"
-              >
-                {[0, 1, 2, 3, 4].map(n => (
-                  <option key={n} value={n}>{n === 0 ? 'Aucun' : `${n} enfant${n > 1 ? 's' : ''}`}</option>
-                ))}
-              </select>
-              <ChevronDown />
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-2">
-              Âge
-            </label>
-            <div className="relative">
-              <select
-                value={form.isJeune ? 'jeune' : 'adulte'}
-                onChange={e => set({ isJeune: e.target.value === 'jeune' })}
-                className="select-field pr-9 text-[14px]"
-              >
-                <option value="adulte">Adulte (26 ans et plus)</option>
-                <option value="jeune">Jeune adulte (19 à 25 ans)</option>
-              </select>
-              <ChevronDown />
-            </div>
-          </div>
-
         </div>
-      )}
 
-      {/* ── ZH / TI — formule non publiée ── */}
+        <div>
+          <label className="block text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-2">
+            Enfants à charge
+          </label>
+          <div className="relative">
+            <select
+              value={form.nbEnfants}
+              onChange={e => set({ nbEnfants: parseInt(e.target.value) })}
+              className="select-field pr-9 text-[14px]"
+            >
+              {[0, 1, 2, 3, 4].map(n => (
+                <option key={n} value={n}>{n === 0 ? 'Aucun' : `${n} enfant${n > 1 ? 's' : ''}`}</option>
+              ))}
+            </select>
+            <ChevronDown />
+          </div>
+        </div>
+
+        <div>
+          <label className="block text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-2">
+            Âge
+          </label>
+          <div className="relative">
+            <select
+              value={form.isJeune ? 'jeune' : 'adulte'}
+              onChange={e => set({ isJeune: e.target.value === 'jeune' })}
+              className="select-field pr-9 text-[14px]"
+            >
+              <option value="adulte">Adulte (26 ans et plus)</option>
+              <option value="jeune">Jeune adulte (19 à 25 ans)</option>
+            </select>
+            <ChevronDown />
+          </div>
+        </div>
+
+      </div>
+
+      {/* ── Bouton de calcul ── */}
+      <button
+        onClick={() => { if (form.canton) setSubmitted(true) }}
+        disabled={!form.canton}
+        className="btn-primary disabled:opacity-40 disabled:cursor-not-allowed"
+      >
+        Calculer mon subside →
+      </button>
+
+      {/* ── Note ZH / TI — formule non publiée ── */}
       {showNoFormula && cantonData && (
-        <div className="space-y-4">
-          <div className="rounded-lg border border-[var(--blue-tint)] bg-[var(--blue-tint)] p-5">
-            <p className="text-[14px] text-ink">
-              Le canton de {cantonData.nom} applique une formule de calcul propre qui n&apos;est pas publiée
-              sous forme de barème standard. Consultez directement le service cantonal (lien ci-dessous)
-              pour vérifier votre éligibilité et obtenir une estimation.
-            </p>
-          </div>
-          <InfoGrid cantonData={cantonData} />
-          <PrimeLien cantonData={cantonData} />
-          <CtaExpert />
-        </div>
+        <p className="text-[12px] text-slate/60 leading-relaxed">
+          Le canton de {cantonData.nom} n&apos;a pas publié de barème standard. L&apos;estimation chiffrée n&apos;est pas disponible — consultez directement le service cantonal.
+        </p>
       )}
 
-      {/* ── 24 cantons avec seuilNum — résultat chiffré ── */}
-      {showResult && cantonData && (
-        <div className="space-y-4 pt-2">
+      {/* ── Zone résultats ── */}
+      {submitted && cantonData && (
+        <div className="space-y-4 pt-2 border-t border-[#1d4ed8]/20">
 
-          {/* Résultat principal */}
-          {result && (
+          {/* Revenu non renseigné — canton standard */}
+          {showResult && !hasRevenu && (
+            <p className="text-[13px] text-slate/70">
+              Entrez votre revenu déterminant pour obtenir une estimation chiffrée.
+            </p>
+          )}
+
+          {/* Résultat chiffré */}
+          {showResult && hasRevenu && result && (
             ineligible ? (
               <div className="rounded-lg border border-edge bg-white p-5 flex items-center gap-3">
                 <div className="w-9 h-9 rounded-full bg-cloud flex items-center justify-center shrink-0">

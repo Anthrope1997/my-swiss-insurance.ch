@@ -1,0 +1,135 @@
+---
+name: Copywriter
+description: >
+  Ton, style et règles d'écriture pour my-swiss-insurance.ch.
+  Complète le skill UI (structure) et les règles éditoriales (interdictions formelles).
+  S'applique à tout texte produit pour le site : titres, introductions,
+  sections, CTAs, blocs "En bref", KeyFacts, nudges.
+---
+
+# My Swiss Insurance — Copy Skill
+
+---
+
+## 1. Positionnement éditorial
+
+Le lecteur est stressé. Il paye trop cher ou il ne comprend pas son contrat. Il ne cherche pas un cours magistral : il cherche quelqu'un qui connaît le sujet et qui lui parle franchement.
+
+My Swiss Insurance est ce quelqu'un. Pas un assureur. Pas un comparateur froid. Un interlocuteur qui sait, qui explique, et qui ne juge pas.
+
+---
+
+## 2. Ton
+
+Informatif sans être scolaire.
+Neutre sans être distant.
+Direct sans être brutal.
+Chaleureux sans être familier.
+
+À viser : le ton d'un ami qui travaille dans le secteur et à qui vous posez la question à table. Il connaît la réponse, il vous la donne sans jargon, il anticipe votre vrai problème.
+
+---
+
+## 3. Règles de style
+
+### Phrases
+
+- Longueur maximale : 25 mots par phrase.
+- Une idée par phrase. Jamais deux.
+- Commencer par le fait, pas par la condition.
+  - Bien : "La franchise 2 500 CHF économise 120 CHF par mois."
+  - Mal : "Si vous êtes en bonne santé, vous pourriez envisager..."
+- Éviter les constructions passives.
+  - Bien : "Votre caisse rembourse les frais au-delà de la franchise."
+  - Mal : "Les frais sont remboursés par votre caisse."
+
+### Paragraphes
+
+- Maximum 3 phrases par paragraphe.
+- Un paragraphe = une idée complète.
+- Pas de transitions génériques : "En effet", "Il est important de noter", "Dans ce contexte", "Ainsi".
+
+### Vocabulaire
+
+- Préférer le mot court au mot long.
+  - "choisir" plutôt que "sélectionner"
+  - "coûte" plutôt que "représente un coût de"
+  - "si" plutôt que "dans le cas où"
+- Jamais de jargon sans définition immédiate dans la même phrase.
+- Les chiffres s'écrivent en chiffres, pas en lettres : "300 CHF", jamais "trois cents francs".
+
+### Signaux d'écriture IA à éliminer
+
+Supprimer systématiquement :
+
+> "Il est essentiel de", "Il convient de", "N'hésitez pas à",
+> "Dans un premier temps", "Force est de constater",
+> "Cela étant dit", "En d'autres termes", "De manière générale",
+> "Il est à noter que", "Rappelons que", "Notons que"
+
+Ces formules signalent une écriture mécanique. Les remplacer par la phrase directe qui suit.
+
+---
+
+## 4. Règles par composant
+
+### H1
+
+- Maximum 10 mots.
+- Contient toujours le mot-clé principal et l'année.
+- Formulé comme une promesse ou une question directe.
+  - Bien : "Franchise LAMal : quel montant choisir en 2026 ?"
+  - Mal : "Tout ce qu'il faut savoir sur la franchise LAMal en Suisse"
+
+### H2
+
+- Formulé comme une question quand c'est naturel.
+- Jamais de H2 qui commence par "Les", "Des", "Un".
+  - Bien : "Quelle franchise choisir pour un enfant ?"
+  - Mal : "Les franchises pour les enfants"
+
+### Intro (après le H1)
+
+- 2 phrases maximum.
+- Phrase 1 : le fait principal ou l'enjeu.
+- Phrase 2 : ce que le lecteur va gagner à lire la page.
+- Pas de "Bienvenue", pas de "Dans ce guide".
+
+### Bloc "En bref"
+
+- 3 phrases. Pas 2, pas 4.
+- Chaque phrase répond à une question implicite différente.
+- Chaque phrase contient un chiffre ou un fait vérifiable.
+- Aucune phrase ne commence par la même structure que la précédente.
+
+### KeyFact / À retenir
+
+- 1 à 2 phrases maximum.
+- Contient l'information que 80 % des lecteurs cherchent sans le savoir encore.
+- Commence par le fait, jamais par "Il faut savoir que".
+
+### CTA (boutons)
+
+- Commence par un verbe d'action à l'infinitif.
+- Contient ce que l'utilisateur obtient, pas ce qu'il fait.
+  - Bien : "Comparer les primes dans mon canton →"
+  - Mal : "Cliquez ici pour accéder au comparateur"
+- La flèche → est toujours présente sur les CTAs primaires.
+
+### Nudge sombre
+
+- Titre : question directe qui nomme le problème du lecteur.
+- Description : 1 phrase sur ce que l'expert fait concrètement.
+- Ne pas promettre l'"optimal" ou le "meilleur" : trop vague.
+  - Bien : "Un expert calcule la franchise la plus avantageuse selon vos dépenses médicales habituelles."
+  - Mal : "Nos experts vous trouvent la meilleure solution."
+
+---
+
+## 5. Test avant livraison
+
+Lire chaque paragraphe à voix haute.
+
+- Si c'est difficile à lire à voix haute, réécrire.
+- Si la phrase peut commencer directement par le fait principal, la réécrire pour qu'elle commence par ce fait.
+- Si un mot peut être supprimé sans changer le sens, le supprimer.
