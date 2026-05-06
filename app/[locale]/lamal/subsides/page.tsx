@@ -94,7 +94,7 @@ export default function SubsidesPage() {
             { label: 'Calculateur de subsides' },
           ]} />
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
             Calculateur de subsides LAMal 2026
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
@@ -111,18 +111,18 @@ export default function SubsidesPage() {
         </div>
       </section>
 
-      {/* ── ARTICLE ── */}
-      <div className="container-xl py-12">
-        <article className="space-y-8">
+      {/* ── ZONE 2 — Outil interactif ── */}
+      <div className="container-xl py-10">
+        <SubsidesSimulatorFull />
+      </div>
 
-            {/* §1 — Simulateur */}
-            <section id="simulateur" className="scroll-mt-24">
-              <SubsidesSimulatorFull />
-            </section>
+      {/* ── ZONE 3 — Sections éditoriales ── */}
+      <div className="container-xl pb-12">
+        <article className="space-y-4">
 
-            {/* §2 — Comment ça fonctionne */}
+            {/* §1 — Comment ça fonctionne */}
             <section id="fonctionnement" className="scroll-mt-24">
-              <h2 className="article-h2">2. Comment ça fonctionne</h2>
+              <h2 className="article-h2">1. Comment ça fonctionne</h2>
 
               <h3 className="article-h3">Le revenu déterminant</h3>
               <p className="article-p">
@@ -161,9 +161,9 @@ export default function SubsidesPage() {
               </div>
             </section>
 
-            {/* §3 — Réforme 2025 */}
+            {/* §2 — Réforme 2025 */}
             <section id="reforme-2025" className="scroll-mt-24">
-              <h2 className="article-h2">3. Réforme 2025 : garanties renforcées</h2>
+              <h2 className="article-h2">2. Réforme 2025 : garanties renforcées</h2>
               <p className="article-p">
                 Depuis le 1er janvier 2025, la loi fédérale garantit des montants minimaux de subside
                 pour les enfants et les jeunes adultes, indépendamment du canton de résidence.
@@ -204,9 +204,9 @@ export default function SubsidesPage() {
               </p>
             </section>
 
-            {/* §4 — FAQ */}
+            {/* §3 — FAQ */}
             <section id="faq" className="scroll-mt-24 border-t border-edge pt-8">
-              <FAQ items={faqItems} title="4. Questions fréquentes sur les subsides" />
+              <FAQ items={faqItems} title="3. Questions fréquentes sur les subsides" />
             </section>
 
             {/* §5 — Formulaire contact */}

@@ -142,7 +142,7 @@ export default function FranchisePage() {
         <div className="container-xl grid grid-cols-1 md:grid-cols-2 gap-5">
 
           <div className="bg-white border border-edge rounded-xl p-5">
-            <p className="text-[11px] font-semibold text-ink uppercase tracking-widest mb-3">
+            <p className="text-base font-semibold text-ink mb-3">
               En bref
             </p>
             <ul className="space-y-3">
@@ -156,7 +156,7 @@ export default function FranchisePage() {
           </div>
 
           <div className="bg-white border border-edge rounded-xl p-5">
-            <p className="text-[11px] font-semibold text-ink uppercase tracking-widest mb-3">
+            <p className="text-base font-semibold text-ink mb-3">
               Sommaire
             </p>
             <ul className="space-y-1">

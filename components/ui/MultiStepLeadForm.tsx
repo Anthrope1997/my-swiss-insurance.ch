@@ -383,7 +383,7 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
       {/* Step 1 — Objectif */}
       {step === 1 && (
         <div className="step-anim">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+          <div className="grid grid-cols-1 gap-3 mb-4">
             {STEP1_OPTIONS.map(opt => (
               <button
                 key={opt.id}

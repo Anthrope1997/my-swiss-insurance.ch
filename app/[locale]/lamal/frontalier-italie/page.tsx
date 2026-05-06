@@ -107,7 +107,7 @@ export default function FrontalierItaliePage() {
           {/* TOC */}
           <aside className="hidden lg:block">
             <nav className="sticky top-24">
-              <p className="text-[11px] font-semibold text-slate uppercase tracking-widest mb-4 px-4">
+              <p className="text-base font-semibold text-ink mb-4 px-4">
                 Sommaire
               </p>
               <ul className="space-y-0.5">

@@ -464,6 +464,8 @@ import CantonCombobox, { CANTON_NAMES } from '@/components/ui/CantonCombobox'
 | `<PrimeCalculatorReal>` | PrimeCalculatorReal.tsx | Calcul prime avec données réelles |
 | `<SubsidesCalculator>` | SubsidesCalculator.tsx | Calculateur subsides LAMal |
 
+**`<CantonPage>` — StickyBar unique :** un seul `<StickyBar>` doit être visible à tout moment pendant le scroll. Ne jamais instancier `<StickyBar>` à la fois dans `<CantonPage>` et dans le layout ou la page parente — cela produirait deux bandeaux empilés visibles simultanément. Si `<CantonPage>` inclut déjà `<StickyBar>`, le supprimer de tout layout ou page parente. En cas de refactoring, garder l'instance dans `<CantonPage>` et supprimer l'autre.
+
 ---
 
 ### 3.11 `<HeroStats>` — components/ui/HeroStats.tsx
@@ -552,7 +554,7 @@ Contient exactement deux blocs dans l'ordre suivant, dans la même zone de fond.
 
     {/* Bloc En bref */}
     <div>
-      <p className="text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-3">
+      <p className="text-base font-semibold text-ink mb-3">
         En bref
       </p>
       <ul className="space-y-2.5">
@@ -567,7 +569,7 @@ Contient exactement deux blocs dans l'ordre suivant, dans la même zone de fond.
 
     {/* Sommaire */}
     <div>
-      <p className="text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-3">
+      <p className="text-base font-semibold text-ink mb-3">
         Sommaire
       </p>
       <ul className="space-y-0.5">
@@ -584,6 +586,8 @@ Contient exactement deux blocs dans l'ordre suivant, dans la même zone de fond.
 ```
 
 **Règles Zone 2 :** `enBref` contient exactement 3 éléments — jamais 2, jamais 4. Aucun bouton, aucun lien vers `#contact` dans cette zone.
+
+**Labels "En bref" et "Sommaire" :** même police, taille et couleur que les autres titres de section — `text-base font-semibold text-ink`. Ne jamais utiliser `uppercase`, `tracking-widest` ni `text-[11px]` sur ces labels. Le texte à l'intérieur des blocs suit le style éditorial standard (`text-[15px] text-ink leading-relaxed`). Les seuls différenciateurs visuels autorisés sont : fond gris (`bg-cloud`) et survol sur les liens du sommaire (`.toc-link`).
 
 ---
 
@@ -729,7 +733,7 @@ export default function PageGuide() {
 
           {/* Bloc En bref — exactement 3 phrases autonomes avec fait chiffré vérifiable */}
           <div className="bg-white border border-edge rounded-xl p-5">
-            <p className="text-[11px] font-semibold text-ink uppercase tracking-widest mb-3">
+            <p className="text-base font-semibold text-ink mb-3">
               En bref
             </p>
             <ul className="space-y-3">
@@ -744,7 +748,7 @@ export default function PageGuide() {
 
           {/* Sommaire colonne unique */}
           <div className="bg-white border border-edge rounded-xl p-5">
-            <p className="text-[11px] font-semibold text-ink uppercase tracking-widest mb-3">
+            <p className="text-base font-semibold text-ink mb-3">
               Sommaire
             </p>
             <ul className="space-y-1">
@@ -951,7 +955,7 @@ export default function PageHub() {
 
 **Règles Template B :**
 
-1. **Pas de bloc En bref, pas de sommaire.** Bandeau `<AuthorBio>` après le formulaire, avant le footer. Cartes sans statistiques — titre et description courte uniquement. FAQ limitée à 3 questions.
+1. **Pas de bloc En bref, pas de sommaire, pas de guides associés.** Ordre de fin de page immuable : formulaire → bandeau éditorial (`<AuthorBio>`) → footer. Espacement et rythme de fin de page alignés sur les pages guides (Template A). Cartes sans statistiques — titre et description courte uniquement. FAQ limitée à 3 questions.
 
 2. **Espacement réduit entre sections.** L'espacement vertical entre les sections est réduit de moitié par rapport aux valeurs par défaut. La page doit être fluide et continue, pas une succession de blocs isolés avec du vide entre eux. En pratique : `py-10` au lieu de `py-20`, `py-[3.75rem]` au lieu de `py-[7.5rem]`, `mb-6` au lieu de `mb-12`.
 
@@ -1127,6 +1131,8 @@ export default function PageOutil() {
 
 **Règles Template C :** pas de MSIBand, pas de bloc En bref, pas de sommaire. Pas d'AnchorLabels numérotés devant les H2. Pas de bordure dashed sous les phrases d'entrée. L'outil est toujours premier en Zone 2. Maximum 2 couleurs de fond alternées (bg-white / bg-cloud). Chaque tableau en Zone 3 est précédé d'au moins 2 phrases contenant les chiffres clés. Nudge sombre `bg-[#0f2040]` uniquement après l'affichage des résultats de l'outil (conditionnel `{showResults && ...}`). Ordre bas de page : Nudge résultats (si outil) → FAQ → Formulaire → AuthorBio → Guides associés → Footer.
 
+**Comparateur de primes et comparateur de subsides — parité obligatoire :** la page subsides (`app/[locale]/lamal/subsides/page.tsx`) suit exactement la même structure que la page comparateur de primes (`app/[locale]/lamal/comparateur/page.tsx`) : même hero Zone 1, mêmes tuiles statistiques `<HeroStats>`, même structure de Zone 2 avec l'outil en premier, même structure de sections éditoriales en Zone 3, même formulaire en bas de page, mêmes couleurs et tokens. Toute différence structurelle ou visuelle entre ces deux pages est une erreur à corriger.
+
 ---
 
 ## 7. Formulaire multi-étapes — invariants
@@ -1234,6 +1240,12 @@ Bouton désactivé visuellement (`disabled:opacity-40 disabled:cursor-not-allowe
 
 Hauteur champs internes au formulaire : `h-11` (44px) via `!h-11` override.
 Hauteur champs standalone (`input-field` par défaut) : `h-12` (48px).
+
+### 7.6 Formulaire modal (CTA header) — largeur et tuiles d'options
+
+Le formulaire ouvert via le CTA du header occupe toute la largeur du conteneur de la modal — jamais contraint par un `max-w-sm` ou `max-w-md` interne. Le conteneur modal fait `w-[95%] max-w-[600px]` et le formulaire remplit ce conteneur à 100% (`w-full`).
+
+**Tuiles d'options (étapes 1 et 3) :** chaque tuile doit avoir une largeur suffisante pour afficher son libellé sur une seule ligne, sans retour à la ligne forcé. Utiliser une grille à colonnes égales (`grid grid-cols-2` ou `grid-cols-3`) plutôt qu'un `flex-wrap` non contrôlé. Ne jamais contraindre la tuile à une largeur trop étroite au point que le texte passe sur 2 lignes.
 
 ---
 
@@ -1406,7 +1418,11 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 - [ ] FAQ : séparateur `border-t border-edge pt-8` sur la section `<section id="faq">` (§0.10)
 - [ ] Cantons dans la navigation : ordre alphabétique français (§0.9)
 - [ ] Formulaire : pas de phrase de réassurance "confidentielles..." ; filtre téléphone actif (§7.4)
-- [ ] Homepage (Template B) : `<AuthorBio>` après le formulaire, avant le footer
+- [ ] Formulaire modal (CTA header) : `w-full` dans la modal, tuiles d'options sur une ligne (§7.6)
+- [ ] Homepage (Template B) : ordre fin de page → formulaire → `<AuthorBio>` → footer, pas de guides associés (§6 Template B règle 1)
+- [ ] Labels "En bref" et "Sommaire" : `text-base font-semibold text-ink` — jamais uppercase/tracking (§5 Zone 2)
+- [ ] Pages canton : un seul `<StickyBar>` visible à tout moment — pas de doublon layout/CantonPage (§3.10)
+- [ ] Subsides : structure identique au comparateur de primes (§6 Template C)
 
 **Header**
 - [ ] CTA centré horizontalement sur mobile : `flex-1` sur logo ET conteneur hamburger (§10.1)
