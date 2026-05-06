@@ -84,8 +84,8 @@ Les labels uppercase "À retenir" et "Recommandation" ne portent **pas** de deux
 ### 0.5 Tuiles statistiques — composant unique
 
 **Toutes** les tuiles statistiques héro (Zone 1) utilisent le composant `<HeroStats>`.
-**Aucune page ne définit son propre style de tuile** : pas de grille inline, pas de tuiles `bg-cloud`, `bg-[#f0fdf4]`, `bg-[#eff6ff]` dans la zone héro.
-Style de référence : fond `bg-[#dbeafe]` (bleu clair), chiffre `text-[#1d4ed8]` (brand), label `text-slate`, sous-label `text-slate/60`.
+**Aucune page ne définit son propre style de tuile** : pas de grille inline, pas de tuiles `bg-[#dbeafe]`, `bg-[#f0fdf4]`, `bg-[#eff6ff]` dans la zone héro.
+Style de référence : fond `bg-cloud` (gris clair, identique à la zone "En bref"), chiffre `text-[#1d4ed8]` (brand), label `text-slate`, sous-label `text-slate/60`.
 
 ```tsx
 import HeroStats from '@/components/ui/HeroStats'
@@ -117,21 +117,27 @@ Sur toutes les pages qui contiennent une comparaison entre deux options (LAMal v
 Les icônes checkmark positives utilisent `text-brand` (jamais `text-[#22c55e]`).
 Les tirets négatifs utilisent `text-slate` (jamais `text-[#f59e0b]`).
 
-### 0.8 H1 et H2 — couleur brand obligatoire
+### 0.8 Tous les titres en noir
 
-**Tous** les H1 et H2 du site utilisent `text-[#1d4ed8]` (brand blue).
-Jamais `text-ink` sur un H1 ou H2. Jamais `text-[#0f2040]` (navy) sur un titre.
+**Tous** les titres du site utilisent `text-ink` (#1a1a1a) : H1, H2, H3, titre du formulaire, titre de la FAQ, labels "En bref" et "Sommaire". Un seul token de couleur, sans exception. Aucune différence visuelle entre les titres d'une section à l'autre.
 
 ```tsx
 {/* ✓ Correct */}
-<h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4">
+<h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
+<h2 className="text-2xl font-semibold text-ink mb-3">Besoin d'aide ?</h2>
 
 {/* ✗ Interdit */}
-<h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
-<h1 className="text-4xl sm:text-5xl font-bold text-[#0f2040] leading-tight mb-4">
+<h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4">
+<h2 className="text-2xl font-semibold text-[#0f2040] mb-3">
 ```
 
-La classe `.article-h2` dans `globals.css` utilise `text-brand` — ne jamais la surcharger avec `text-ink`.
+La classe `.article-h2` dans `globals.css` utilise `text-ink`. Ne jamais surcharger avec `text-brand` ou `text-[#1d4ed8]`.
+
+**Exception — titre du formulaire au survol :**
+Le titre H2 "Besoin d'aide ?" passe en bleu CTA au survol. Cet effet s'applique uniquement au titre du formulaire, pas aux autres titres.
+```tsx
+<h2 className="text-2xl font-semibold text-ink hover:text-brand transition-colors mb-3">Besoin d'aide ?</h2>
+```
 
 ### 0.9 Ordre alphabétique des cantons
 
@@ -230,12 +236,12 @@ Variables CSS complémentaires (globals.css) :
 .container-xl → max-w-6xl mx-auto px-6
 
 /* Article typography */
-.article-h2 → text-2xl font-semibold text-[#1d4ed8] border-b border-edge pb-4 mb-6 mt-14 first:mt-0
+.article-h2 → text-2xl font-semibold text-ink border-b border-edge pb-4 mb-6 mt-14 first:mt-0
 .article-h3 → text-[18px] font-semibold text-ink mb-3 mt-8
 .article-p  → text-[17px] text-slate leading-relaxed mb-4
 
 /* Navigation TOC */
-.toc-link → text-[13.5px] text-slate hover:text-ink py-1.5 pl-4
+.toc-link → text-[13.5px] text-ink hover:text-brand py-1.5 pl-4
             border-l-2 border-edge hover:border-brand transition-all
 
 /* Tableau */
@@ -248,8 +254,8 @@ Variables CSS complémentaires (globals.css) :
 
 | Élément | Classes Tailwind utilisées |
 |---|---|
-| H1 hero (toutes les pages) | `text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight` |
-| H2 section | `.article-h2` (= `text-2xl font-semibold text-[#1d4ed8]`) |
+| H1 hero (toutes les pages) | `text-4xl sm:text-5xl font-bold text-ink leading-tight` |
+| H2 section | `.article-h2` (= `text-2xl font-semibold text-ink`) |
 | H3 sous-section | `.article-h3` |
 | Intro hero | `text-[18px] text-slate max-w-2xl leading-relaxed` |
 | Corps article | `.article-p` (text-[17px] text-slate) |
@@ -462,7 +468,7 @@ import CantonCombobox, { CANTON_NAMES } from '@/components/ui/CantonCombobox'
 
 ### 3.11 `<HeroStats>` — components/ui/HeroStats.tsx
 
-Server Component. Grille 3 tuiles sur fond bleu clair `bg-[#dbeafe]`, chiffre en bleu brand `text-[#1d4ed8]`, label en `text-slate`.
+Server Component. Grille 3 tuiles sur fond gris clair `bg-cloud` (identique à la zone "En bref"), chiffre en bleu brand `text-[#1d4ed8]`, label en `text-slate`.
 Obligatoire dans Zone 1 de toutes les pages. Aucune page ne définit son propre style de tuile.
 
 ```tsx
@@ -704,7 +710,7 @@ export default function PageGuide() {
             { label: titreH1 },
           ]} />
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4 max-w-3xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
             {titreH1}
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
@@ -875,7 +881,7 @@ export default function PageHub() {
       {/* ── ZONE 1 — Accroche, fond blanc ── */}
       <section className="bg-white border-b border-edge pt-12 pb-14">
         <div className="container-xl">
-          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4 max-w-3xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
             {titreH1}
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
@@ -922,7 +928,7 @@ export default function PageHub() {
       <div className="container-xl">
         <div id="formulaire" className="scroll-mt-16 border-t border-edge pt-12 mt-4">
           <div className="text-center mb-6">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#1d4ed8] leading-tight mb-3">
+            <h2 className="text-2xl sm:text-3xl font-bold text-ink leading-tight mb-3">
               Vous préférez qu'on s'occupe de tout ?
             </h2>
             <p className="text-[15px] sm:text-[17px] text-slate leading-relaxed">
@@ -934,6 +940,10 @@ export default function PageHub() {
         </div>
       </div>
 
+      {/* Bandeau éditorial — après le formulaire, avant le footer */}
+      <div className="container-xl">
+        <AuthorBio publishedDate={publishedDateFR} updatedDate={updatedDateFR} />
+      </div>
     </>
   )
 }
@@ -941,7 +951,7 @@ export default function PageHub() {
 
 **Règles Template B :**
 
-1. **Pas de MSIBand, pas de bloc En bref, pas de sommaire.** Cartes sans statistiques — titre et description courte uniquement. FAQ limitée à 3 questions.
+1. **Pas de bloc En bref, pas de sommaire.** Bandeau `<AuthorBio>` après le formulaire, avant le footer. Cartes sans statistiques — titre et description courte uniquement. FAQ limitée à 3 questions.
 
 2. **Espacement réduit entre sections.** L'espacement vertical entre les sections est réduit de moitié par rapport aux valeurs par défaut. La page doit être fluide et continue, pas une succession de blocs isolés avec du vide entre eux. En pratique : `py-10` au lieu de `py-20`, `py-[3.75rem]` au lieu de `py-[7.5rem]`, `mb-6` au lieu de `mb-12`.
 
@@ -1004,7 +1014,7 @@ export default function PageOutil() {
             { label: titreH1 },
           ]} />
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4 max-w-3xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
             {titreH1}
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
@@ -1174,13 +1184,16 @@ Messages d'erreur en rouge directement sous le champ concerné :
 ```
 L'erreur disparaît dès que l'utilisateur recommence à saisir.
 
-### 7.4 Étape 4 — Texte de réassurance (au-dessus du bouton soumettre)
+### 7.4 Étape 4 — Saisie téléphone : filtre de caractères
+
+Le champ numéro de téléphone n'accepte que les chiffres, espaces, tirets, parenthèses et le signe `+`.
+Tout autre caractère est silencieusement ignoré à la saisie (aucun message d'erreur).
 
 ```tsx
-<p className="text-[12px] text-slate text-center leading-relaxed">
-  Vos données sont confidentielles et ne sont jamais transmises à des tiers sans votre accord.
-</p>
+onChange={e => { set({ telephone: e.target.value.replace(/[^0-9\s\-\(\)\+]/g, '') }); if (phoneError) setPhoneError('') }}
 ```
+
+La phrase de réassurance "Vos données sont confidentielles et ne sont jamais transmises à des tiers sans votre accord." est supprimée. Ne pas la remettre.
 
 ### 7.5 Étapes 1 et 3 — Bouton désactivé sans sélection
 
@@ -1206,7 +1219,7 @@ Bouton désactivé visuellement (`disabled:opacity-40 disabled:cursor-not-allowe
 <div className="container-xl">
   <div id="formulaire" className="scroll-mt-16 border-t border-edge pt-12 mt-4">
     <div className="text-center mb-6">
-      <h2 className="text-2xl sm:text-3xl font-bold text-[#1d4ed8] leading-tight mb-3">
+      <h2 className="text-2xl sm:text-3xl font-bold text-ink leading-tight mb-3">
         Vous préférez qu'on s'occupe de tout ?
       </h2>
       <p className="text-[15px] sm:text-[17px] text-slate leading-relaxed">
@@ -1384,13 +1397,16 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 - [ ] Dates datePublished / dateModified cohérentes avec le bandeau MSI
 
 **Titres et chiffres clés**
-- [ ] H1 et H2 : `text-[#1d4ed8]` (brand blue) — jamais `text-ink`, jamais `text-[#0f2040]` sur les titres (§0.8)
-- [ ] Tuiles statistiques Zone 1 : composant `<HeroStats>` obligatoire — chiffre en `text-[#1d4ed8]`, label en `text-slate`, fond `bg-[#dbeafe]` (§0.5)
+- [ ] Tous les titres (H1, H2, H3, FAQ, formulaire) : `text-ink` — jamais `text-[#1d4ed8]`, jamais `text-[#0f2040]` (§0.8)
+- [ ] Titre formulaire "Besoin d'aide ?" : `hover:text-brand transition-colors` (§0.8)
+- [ ] Tuiles statistiques Zone 1 : composant `<HeroStats>` obligatoire — fond `bg-cloud`, chiffre `text-[#1d4ed8]`, label `text-slate` (§0.5)
 - [ ] Aucune grille de tuiles inline — utiliser `<HeroStats>` uniquement
-- [ ] Aucun badge au-dessus du H1 (§0.6) — pas de `<div className="badge">Données OFSP 2026</div>`
+- [ ] Aucun badge au-dessus du H1 (§0.6)
 - [ ] Comparaisons : bleu (`bg-[#dbeafe]`) pour l'option avantageuse, neutre (`bg-cloud border border-edge`) pour l'option coûteuse — jamais vert ni orange (§0.7)
 - [ ] FAQ : séparateur `border-t border-edge pt-8` sur la section `<section id="faq">` (§0.10)
 - [ ] Cantons dans la navigation : ordre alphabétique français (§0.9)
+- [ ] Formulaire : pas de phrase de réassurance "confidentielles..." ; filtre téléphone actif (§7.4)
+- [ ] Homepage (Template B) : `<AuthorBio>` après le formulaire, avant le footer
 
 **Header**
 - [ ] CTA centré horizontalement sur mobile : `flex-1` sur logo ET conteneur hamburger (§10.1)
@@ -1541,7 +1557,7 @@ Exemple d'usage correct (section stats, liste avantages) :
 | `components/ui/StickyBar.tsx` | Props, seuil d'apparition |
 | `components/ui/EmailCTA.tsx` | Props |
 | `components/ui/LeadForm.tsx` | Props, compact |
-| `components/ui/HeroStats.tsx` | Tuiles statistiques Zone 1 — fond navy, chiffre bleu, `{ value, label, sub }[]` |
+| `components/ui/HeroStats.tsx` | Tuiles statistiques Zone 1 — fond `bg-cloud`, chiffre `text-[#1d4ed8]`, `{ value, label, sub }[]` |
 | `components/ui/CantonSearch.tsx` | Navigation automatique |
 | `components/ui/CantonCombobox.tsx` | Props, CANTON_NAMES export |
 | `components/ui/Header.tsx` | Structure menu, couleurs |

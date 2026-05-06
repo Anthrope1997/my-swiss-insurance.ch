@@ -675,7 +675,7 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
                 type="tel"
                 placeholder={selectedCountry.placeholder || 'Numéro de téléphone'}
                 value={form.telephone}
-                onChange={e => { set({ telephone: e.target.value }); if (phoneError) setPhoneError('') }}
+                onChange={e => { set({ telephone: e.target.value.replace(/[^0-9\s\-\(\)\+]/g, '') }); if (phoneError) setPhoneError('') }}
                 onBlur={validatePhoneOnBlur}
                 className="input-field !h-11 !text-[14px] flex-1"
               />
@@ -706,10 +706,6 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
               {error}
             </p>
           )}
-
-          <p className="text-[12px] text-slate text-center leading-relaxed">
-            Vos données sont confidentielles et ne sont jamais transmises à des tiers sans votre accord.
-          </p>
 
           <button
             type="submit"

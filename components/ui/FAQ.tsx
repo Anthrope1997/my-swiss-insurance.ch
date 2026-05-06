@@ -17,7 +17,7 @@ export default function FAQ({ items, title = 'Questions fréquentes' }: FAQProps
 
   return (
     <section className="mb-8">
-      <h2 className="text-2xl font-semibold text-[#0f2040] mb-8">{title}</h2>
+      <h2 className="text-2xl font-semibold text-ink mb-8">{title}</h2>
       <div className="divide-y divide-[#e2e8f0]">
         {items.map((item, i) => (
           <div key={i} className="py-4">
@@ -25,7 +25,7 @@ export default function FAQ({ items, title = 'Questions fréquentes' }: FAQProps
               onClick={() => setOpen(open === i ? null : i)}
               className="w-full flex items-center justify-between gap-4 text-left"
             >
-              <span className="text-[#0f2040] font-medium text-base">{item.question}</span>
+              <span className="text-ink font-medium text-base">{item.question}</span>
               <span className="text-[#1d4ed8] font-bold text-lg flex-shrink-0">
                 {open === i ? '−' : '+'}
               </span>

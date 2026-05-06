@@ -92,7 +92,7 @@
 
   /* ── Article typography ── */
   .article-h2 {
-    @apply text-2xl font-semibold text-brand border-b border-edge pb-4 mb-6 mt-14 first:mt-0;
+    @apply text-2xl font-semibold text-ink border-b border-edge pb-4 mb-6 mt-14 first:mt-0;
   }
   .article-h3 {
     @apply text-[18px] font-semibold text-ink mb-3 mt-8;
@@ -103,7 +103,7 @@
 
   /* ── TOC ── */
   .toc-link {
-    @apply block text-[13.5px] text-slate hover:text-ink py-1.5 pl-4
+    @apply block text-[13.5px] text-ink hover:text-brand py-1.5 pl-4
            border-l-2 border-edge hover:border-brand transition-all duration-150;
   }
 

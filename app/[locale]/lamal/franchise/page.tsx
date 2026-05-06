@@ -124,7 +124,7 @@ export default function FranchisePage() {
             { label: 'Franchise LAMal' },
           ]} />
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
             Franchise LAMal : quel montant choisir en 2026 ?
           </h1>
           <p className="text-[18px] text-slate leading-relaxed mb-10">
@@ -437,7 +437,7 @@ export default function FranchisePage() {
 
           {/* Formulaire */}
           <div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4">
-            <h2 className="text-2xl font-semibold text-ink mb-3">Besoin d&apos;aide ?</h2>
+            <h2 className="text-2xl font-semibold text-ink hover:text-brand transition-colors mb-3">Besoin d&apos;aide ?</h2>
             <p className="text-[16px] text-slate mb-6 leading-relaxed">
               Un expert vous rappelle sous 24 heures pour établir avec vous une solution
               personnalisée. Gratuit, sans engagement.

@@ -5,6 +5,7 @@ import CantonSearch from '@/components/ui/CantonSearch'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
 import HeroStats from '@/components/ui/HeroStats'
+import AuthorBio from '@/components/ui/AuthorBio'
 
 export const metadata: Metadata = {
   title: 'Primes LAMal 2026 : comparez et économisez — My Swiss Insurance',
@@ -192,7 +193,7 @@ export default function LamalPage() {
             { label: 'LAMal' },
           ]} />
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
             Économisez sur votre prime LAMal en 2026
           </h1>
 
@@ -232,7 +233,7 @@ export default function LamalPage() {
         <div className="container-xl">
 
           <div className="mb-6">
-            <h2 className="text-3xl font-bold text-[#1d4ed8] leading-tight mb-4">
+            <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
               Tout comprendre sur l'assurance maladie suisse
             </h2>
             <p className="text-[17px] text-slate leading-relaxed">
@@ -281,7 +282,7 @@ export default function LamalPage() {
         <div className="container-xl">
 
           <div className="mb-6">
-            <h2 className="text-3xl font-bold text-[#1d4ed8] leading-tight mb-4">
+            <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
               Votre assurance LAMal selon votre situation
             </h2>
             <p className="text-[17px] text-slate leading-relaxed">
@@ -327,7 +328,7 @@ export default function LamalPage() {
         <div className="container-xl">
 
           <div className="mb-8">
-            <h2 className="text-3xl font-bold text-[#1d4ed8] leading-tight mb-4">
+            <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
               Primes et économies par canton en 2026
             </h2>
             <p className="text-[17px] text-slate leading-relaxed">
@@ -379,7 +380,7 @@ export default function LamalPage() {
         <div className="container-xl">
 
           <div className="mb-6">
-            <h2 className="text-3xl font-bold text-[#1d4ed8] leading-tight mb-4">
+            <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
               Une source de référence sur la LAMal en Suisse
             </h2>
             <p className="text-[17px] text-slate leading-relaxed">
@@ -414,13 +415,18 @@ export default function LamalPage() {
       {/* ── 7. FORMULAIRE ───────────────────────────────────────────────────── */}
       <div className="container-xl">
         <div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4">
-          <h2 className="text-2xl font-semibold text-ink mb-3">Besoin d'aide ?</h2>
+          <h2 className="text-2xl font-semibold text-ink hover:text-brand transition-colors mb-3">Besoin d'aide ?</h2>
           <p className="text-[16px] text-slate mb-6 leading-relaxed">
             Un expert vous rappelle sous 24 heures pour établir avec vous une solution
             personnalisée. Gratuit, sans engagement.
           </p>
           <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
         </div>
+      </div>
+
+      {/* Bandeau éditorial */}
+      <div className="container-xl">
+        <AuthorBio publishedDate="1er janvier 2026" updatedDate="6 mai 2026" />
       </div>
     </>
   )
