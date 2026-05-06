@@ -84,12 +84,48 @@ Les labels uppercase "À retenir" et "Recommandation" ne portent **pas** de deux
 ### 0.5 Tuiles statistiques — composant unique
 
 **Toutes** les tuiles statistiques héro (Zone 1) utilisent le composant `<HeroStats>`.
-**Aucune page ne définit son propre style de tuile** : pas de grille `bg-cloud/60 border border-edge` inline.
+**Aucune page ne définit son propre style de tuile** : pas de grille inline, pas de tuiles `bg-cloud`, `bg-[#f0fdf4]`, `bg-[#eff6ff]` dans la zone héro.
+Style de référence : fond `bg-[#0f2040]` navy, chiffre `text-[#60a5fa]`, label `text-white/80`, sous-label `text-white/50`.
 
 ```tsx
 import HeroStats from '@/components/ui/HeroStats'
 <HeroStats stats={heroStats} className="mb-8" />
 // className porte uniquement l'espacement vertical
+```
+
+Les pages cantons (`CantonPage.tsx`) utilisent également `<HeroStats>` en Zone 1 pour les 3 chiffres clés (meilleure prime, économie annuelle, subside maximal). Pour le subside maximal, utiliser `"–"` comme valeur et `"Barème non publié"` comme `sub` si `subsideMensuelMax` est null.
+
+### 0.6 Aucun badge au-dessus du H1
+
+**Aucun** badge (`.badge`, `<span>`, `<div>` ou autre) ne doit apparaître au-dessus du H1 sur aucune page du site.
+La mention de la source des données apparaît uniquement :
+- Dans le footer
+- Dans les `sub` des tuiles `<HeroStats>` (ex : `sub: "données OFSP 2026"`)
+
+Supprimer tout `<div className="badge mb-5">Données OFSP 2026</div>` ou équivalent.
+
+### 0.7 Couleur fonctionnelle dans les comparaisons
+
+Sur toutes les pages qui contiennent une comparaison entre deux options (LAMal vs GKV, LAMal vs SSN, option A vs option B) :
+
+| État | Classes de fond | Classes de texte | Usage |
+|---|---|---|---|
+| Option avantageuse / économie | `bg-[#f0fdf4] border border-[#86efac]` | `text-[#166534]` | Savings, avantages financiers, options recommandées |
+| Option coûteuse / à risque | `bg-[#fff7ed] border border-[#fdba74]` | `text-[#9a3412]` | Coûts élevés, risques, points d'attention |
+
+Ne pas utiliser `bg-[#eff6ff]` pour les valeurs avantageuses — réservé aux accents informatifs neutres.
+
+### 0.8 H1 — couleur navy obligatoire
+
+**Tous** les H1 du site utilisent `text-[#0f2040]` (navy, token `--navy` dans `globals.css`).
+Jamais `text-ink` sur un H1. Jamais `text-brand` sur un H1.
+
+```tsx
+{/* ✓ Correct */}
+<h1 className="text-4xl sm:text-5xl font-bold text-[#0f2040] leading-tight mb-4">
+
+{/* ✗ Interdit */}
+<h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
 ```
 
 ---
@@ -175,7 +211,7 @@ Variables CSS complémentaires (globals.css) :
 
 | Élément | Classes Tailwind utilisées |
 |---|---|
-| H1 hero (guide, franchise) | `text-4xl sm:text-5xl font-bold text-ink leading-tight` |
+| H1 hero (toutes les pages) | `text-4xl sm:text-5xl font-bold text-[#0f2040] leading-tight` |
 | H2 section | `.article-h2` |
 | H3 sous-section | `.article-h3` |
 | Intro hero | `text-[18px] text-slate max-w-2xl leading-relaxed` |
@@ -1175,15 +1211,17 @@ Les chiffres clés apparaissent dans le texte brut, pas uniquement dans les tabl
 | Breakpoint | Contenu |
 |---|---|
 | Desktop `≥768px` | bouclier MSI → "My Swiss Insurance" → CTA "Recevez les meilleures offres" → hamburger |
-| Mobile `<768px` | bouclier MSI (sans texte) → CTA → hamburger |
-| Très petit `<380px` | bouclier MSI → CTA "Être conseillé" → hamburger |
+| Mobile `<768px` | bouclier MSI (sans texte) → **CTA centré** → hamburger |
+| Très petit `<380px` | bouclier MSI → CTA "Être conseillé" centré → hamburger |
 
 Implémentation :
 - Logo : SVG bouclier blanc `w-7 h-7` **directement** sur le fond `#0f2040` — **pas de conteneur bleu**, pas de `rounded-md bg-[#1d4ed8]`
 - Texte "My Swiss Insurance" : `hidden md:inline` (masqué sous 768px)
 - Ne jamais afficher "MSI" comme texte séparé
 - CTA libellés : `hidden min-[380px]:inline` / `min-[380px]:hidden` (jamais `sm:hidden`)
+- **CTA centré sur mobile** : utiliser `flex-1` sur logo ET sur le conteneur hamburger (`<div className="flex-1 flex justify-end">`). Le CTA se retrouve visuellement centré entre les deux `flex-1`.
 - Aligner `items-center` sur le conteneur flex du header pour centrage vertical
+- **Menu hamburger** : le contenu du dropdown utilise `.container-xl` pour aligner son contenu avec le reste de la page. Pas de `px-4` direct sur le panneau du menu.
 
 **Comportement du CTA header :**
 Au clic → overlay sombre (`bg-black/60`) sur tout l'écran + modal centré contenant :
@@ -1248,9 +1286,15 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 - [ ] Dates datePublished / dateModified cohérentes avec le bandeau MSI
 
 **Titres et chiffres clés**
-- [ ] H1 : `text-ink` — jamais `text-brand` sur les titres de page
-- [ ] Tuiles statistiques Zone 1 : composant `<HeroStats>` obligatoire — chiffre en `text-[#60a5fa]` (bleu navy), label en `text-white/80`, fond `bg-[#0f2040]`
-- [ ] Aucune grille de tuiles inline (`bg-cloud/60 border border-edge`) — utiliser `<HeroStats>` uniquement
+- [ ] H1 : `text-[#0f2040]` (navy) — jamais `text-ink`, jamais `text-brand` sur les titres de page (§0.8)
+- [ ] Tuiles statistiques Zone 1 : composant `<HeroStats>` obligatoire — chiffre en `text-[#60a5fa]` (bleu navy), label en `text-white/80`, fond `bg-[#0f2040]` (§0.5)
+- [ ] Aucune grille de tuiles inline — utiliser `<HeroStats>` uniquement
+- [ ] Aucun badge au-dessus du H1 (§0.6) — pas de `<div className="badge">Données OFSP 2026</div>`
+- [ ] Comparaisons : couleur fonctionnelle verte (`bg-[#f0fdf4]`) pour l'option avantageuse, orange (`bg-[#fff7ed]`) pour l'option coûteuse (§0.7)
+
+**Header**
+- [ ] CTA centré horizontalement sur mobile : `flex-1` sur logo ET conteneur hamburger (§10.1)
+- [ ] Menu hamburger : dropdown contient `.container-xl` — pas de `px-4` direct sur le panneau (§10.1)
 
 **Visuels**
 - [ ] Toutes les cellules de tableau : `text-left`, `whitespace-nowrap`

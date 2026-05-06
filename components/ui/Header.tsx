@@ -126,9 +126,9 @@ export default function Header() {
         `}</style>
 
         <div className="container-xl">
-          <div className="flex items-center h-16 gap-3">
+          <div className="flex items-center h-16">
 
-            {/* Logo — LEFT, flex-1 */}
+            {/* Logo — flex-1 = ancre gauche, CTA se centre entre les deux flex-1 */}
             <Link href="/lamal" className="flex items-center gap-2.5 flex-1">
               <ShieldIcon />
               <span className="font-semibold text-white text-[15px] hidden md:inline">
@@ -136,7 +136,7 @@ export default function Header() {
               </span>
             </Link>
 
-            {/* CTA — "Recevez les meilleures offres" ≥380px, "Être conseillé" <380px */}
+            {/* CTA — centré sur mobile grâce aux deux flex-1 de part et d'autre */}
             <button
               onClick={() => setOfferOpen(true)}
               className="shrink-0 bg-[#1d4ed8] hover:bg-[#1e40af] text-white font-medium
@@ -146,28 +146,30 @@ export default function Header() {
               <span className="min-[380px]:hidden">Être conseillé</span>
             </button>
 
-            {/* Hamburger — RIGHT */}
-            <button
-              onClick={() => setMobileOpen(o => !o)}
-              className="p-2 flex flex-col justify-center items-center gap-[5px] shrink-0"
-              aria-label={mobileOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
-            >
-              <span className={`block w-5 h-[2px] bg-white rounded-full transition-all duration-300 origin-center
-                ${mobileOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
-              <span className={`block w-5 h-[2px] bg-white rounded-full transition-all duration-300
-                ${mobileOpen ? 'opacity-0 scale-x-0' : ''}`} />
-              <span className={`block w-5 h-[2px] bg-white rounded-full transition-all duration-300 origin-center
-                ${mobileOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
-            </button>
+            {/* Hamburger — flex-1 + justify-end = ancre droite */}
+            <div className="flex-1 flex justify-end">
+              <button
+                onClick={() => setMobileOpen(o => !o)}
+                className="p-2 flex flex-col justify-center items-center gap-[5px]"
+                aria-label={mobileOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+              >
+                <span className={`block w-5 h-[2px] bg-white rounded-full transition-all duration-300 origin-center
+                  ${mobileOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
+                <span className={`block w-5 h-[2px] bg-white rounded-full transition-all duration-300
+                  ${mobileOpen ? 'opacity-0 scale-x-0' : ''}`} />
+                <span className={`block w-5 h-[2px] bg-white rounded-full transition-all duration-300 origin-center
+                  ${mobileOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
+              </button>
+            </div>
 
           </div>
         </div>
 
         {/* Dropdown menu — navigation only, no CTA */}
         {mobileOpen && (
-          <div className="menu-slide bg-[#0f2040]/95 backdrop-blur-sm border-t border-white/10
-                          px-4 pb-6 overflow-y-auto"
+          <div className="menu-slide bg-[#0f2040]/95 backdrop-blur-sm border-t border-white/10 overflow-y-auto"
             style={{ maxHeight: '85vh' }}>
+            <div className="container-xl py-2 pb-6">
 
             {menuSections.map(section => (
               <div key={section.id}>
@@ -201,6 +203,7 @@ export default function Header() {
               </div>
             ))}
 
+            </div>
           </div>
         )}
       </header>

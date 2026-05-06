@@ -184,7 +184,7 @@ export default function LamalPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }} />
 
       {/* ── 1. HERO ────────────────────────────────────────────────────────── */}
-      <section className="bg-white border-b border-edge pt-12 pb-14">
+      <section className="bg-white border-b border-edge pt-10 pb-12">
         <div className="container-xl">
 
           <Breadcrumb items={[
@@ -192,7 +192,7 @@ export default function LamalPage() {
             { label: 'LAMal' },
           ]} />
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold text-[#0f2040] leading-tight mb-4">
             Économisez sur votre prime LAMal en 2026
           </h1>
 
@@ -228,7 +228,7 @@ export default function LamalPage() {
       </section>
 
       {/* ── 2. GUIDES LAMAL ─────────────────────────────────────────────────── */}
-      <section className="bg-white border-t border-edge py-[3.75rem]">
+      <section className="bg-white border-t border-edge py-12">
         <div className="container-xl">
 
           <div className="mb-6">
@@ -277,7 +277,7 @@ export default function LamalPage() {
       </section>
 
       {/* ── 3. PAR SITUATION DE VIE ─────────────────────────────────────────── */}
-      <section className="bg-white border-t border-edge py-[3.75rem]">
+      <section className="bg-white border-t border-edge py-12">
         <div className="container-xl">
 
           <div className="mb-6">
@@ -323,10 +323,10 @@ export default function LamalPage() {
       </section>
 
       {/* ── 4. PAR CANTON ───────────────────────────────────────────────────── */}
-      <section className="bg-white border-t border-edge py-[3.75rem]">
+      <section className="bg-white border-t border-edge py-12">
         <div className="container-xl">
 
-          <div className="max-w-2xl mb-8">
+          <div className="mb-8">
             <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
               Primes et économies par canton en 2026
             </h2>
@@ -350,9 +350,9 @@ export default function LamalPage() {
                 <p className="text-slate text-[13px] mb-4">
                   À partir de <span className="font-semibold text-ink">{c.primeMin} CHF par mois</span>
                 </p>
-                <div className="bg-[#eff6ff] rounded-lg px-3 py-2 mb-5">
-                  <p className="text-[12px] text-brand font-medium">Économie possible</p>
-                  <p className="text-[18px] font-bold text-ink leading-tight">
+                <div className="bg-[#f0fdf4] border border-[#86efac] rounded-lg px-3 py-2 mb-5">
+                  <p className="text-[12px] text-[#166534] font-medium">Économie possible</p>
+                  <p className="text-[18px] font-bold text-[#166534] leading-tight">
                     {c.economieAn} CHF par an
                   </p>
                 </div>
@@ -375,7 +375,7 @@ export default function LamalPage() {
       </section>
 
       {/* ── 5. À PROPOS ─────────────────────────────────────────────────────── */}
-      <section className="bg-white border-t border-edge py-[3.75rem]">
+      <section className="bg-white border-t border-edge py-12">
         <div className="container-xl">
 
           <div className="mb-6">
@@ -405,7 +405,7 @@ export default function LamalPage() {
       </section>
 
       {/* ── 6. FAQ ──────────────────────────────────────────────────────────── */}
-      <div className="container-xl py-[3.75rem]">
+      <div className="container-xl py-12">
         <FAQ items={faqItems} title="Questions fréquentes sur la LAMal" />
       </div>
 

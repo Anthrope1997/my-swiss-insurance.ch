@@ -254,10 +254,10 @@ export default function ComparateurClient() {
             { label: 'LAMal', href: '/lamal' },
             { label: 'Comparateur de caisses' },
           ]} />
-          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-[#0f2040] leading-tight mb-4">
             Comparateur de caisses maladie LAMal 2026
           </h1>
-          <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
+          <p className="text-[18px] text-slate leading-relaxed mb-10">
             En Suisse, les primes LAMal varient jusqu'à 97% au sein d'une même région selon l'assureur choisi.
             Comparez toutes les caisses selon votre code postal, votre franchise et votre modèle d'assurance.
           </p>
@@ -521,7 +521,7 @@ export default function ComparateurClient() {
       {/* ── CONVERSION POST-RÉSULTATS ──────────────────────────────────────── */}
       {showResults && (
         <section className="bg-[#0f2040] border-b border-white/10 py-12">
-          <div className="container-xl max-w-2xl text-center">
+          <div className="container-xl text-center">
             <p className="text-[16px] text-white/80 mb-8 leading-relaxed">
               Un expert confirme la caisse optimale pour votre profil, vérifie vos droits aux subsides et gère le changement à votre place.
             </p>

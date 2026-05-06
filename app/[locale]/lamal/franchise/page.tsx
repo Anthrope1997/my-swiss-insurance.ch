@@ -124,10 +124,10 @@ export default function FranchisePage() {
             { label: 'Franchise LAMal' },
           ]} />
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-[#0f2040] leading-tight mb-4">
             Franchise LAMal : quel montant choisir en 2026 ?
           </h1>
-          <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
+          <p className="text-[18px] text-slate leading-relaxed mb-10">
             La franchise est le montant annuel que vous payez avant que votre caisse intervienne.
             Choisir le bon niveau, entre 300 et 2 500 CHF par an, peut économiser jusqu&apos;à 120 CHF par mois sur votre prime.
           </p>
