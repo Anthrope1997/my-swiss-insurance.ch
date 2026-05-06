@@ -99,7 +99,7 @@ export default function FrontalierFrancePage() {
             { label: 'Frontaliers français' },
           ]} />
           <div className="badge mb-5">Données OFSP 2026</div>
-          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-2xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4">
             LAMal pour les frontaliers français en Suisse romande 2026
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed">
@@ -219,7 +219,7 @@ export default function FrontalierFrancePage() {
             <section id="option-lamal">
               <h2 className="article-h2">Pourquoi choisir la LAMal suisse ?</h2>
 
-              <div className="bg-[#f0fdf4] border border-[#86efac] rounded-[8px] p-5 mb-5">
+              <div className="bg-[#dbeafe] rounded-[8px] p-5 mb-5">
                 <h3 className="font-semibold text-ink text-[15px] mb-3">Avantages de la LAMal</h3>
                 <ul className="space-y-2 text-[13px] text-slate">
                   {[
@@ -230,7 +230,7 @@ export default function FrontalierFrancePage() {
                     "Couverture accidents automatique en cas d'emploi salarié (LAA)",
                   ].map((item, i) => (
                     <li key={i} className="flex gap-2">
-                      <svg className="w-3.5 h-3.5 text-[#22c55e] mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-3.5 h-3.5 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                       </svg>
                       {item}
@@ -409,7 +409,7 @@ export default function FrontalierFrancePage() {
             </section>
 
             {/* FAQ */}
-            <section id="faq" className="scroll-mt-20">
+            <section id="faq" className="scroll-mt-20 border-t border-edge pt-8">
               <FAQ items={faqItems} />
             </section>
 

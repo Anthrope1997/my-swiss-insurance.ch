@@ -97,7 +97,7 @@ export default function MaSituationPage() {
             { label: 'Ma situation' },
           ]} />
           <div className="badge mb-5">Données OFSP 2026</div>
-          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-2xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4">
             LAMal selon votre situation professionnelle en 2026
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed">
@@ -266,7 +266,7 @@ export default function MaSituationPage() {
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                <div className="bg-[#f0fdf4] border border-[#86efac] rounded-[8px] p-5">
+                <div className="bg-[#dbeafe] rounded-[8px] p-5">
                   <h3 className="font-semibold text-ink text-[15px] mb-3">Ce qui reste actif</h3>
                   <ul className="space-y-2 text-[13px] text-slate">
                     <li>• Couverture LAMal sans interruption</li>
@@ -274,7 +274,7 @@ export default function MaSituationPage() {
                     <li>• Droit aux subsides cantonaux (souvent prioritaire)</li>
                   </ul>
                 </div>
-                <div className="bg-[#fff7ed] border border-[#fed7aa] rounded-[8px] p-5">
+                <div className="bg-cloud border border-edge rounded-[8px] p-5">
                   <h3 className="font-semibold text-ink text-[15px] mb-3">Points d'attention</h3>
                   <ul className="space-y-2 text-[13px] text-slate">
                     <li>• LAA accidents cesse 30 jours après la fin des indemnités</li>
@@ -343,7 +343,7 @@ export default function MaSituationPage() {
             </section>
 
             {/* FAQ */}
-            <section id="faq" className="scroll-mt-20">
+            <section id="faq" className="scroll-mt-20 border-t border-edge pt-8">
               <FAQ items={faqItems} />
             </section>
 

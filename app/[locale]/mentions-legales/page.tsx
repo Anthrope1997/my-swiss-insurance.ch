@@ -13,13 +13,13 @@ export default function MentionsLegalesPage() {
     <div className="container-xl py-16 max-w-3xl">
       <Breadcrumb items={[{ label: 'Accueil', href: '/' }, { label: 'Mentions légales' }]} className="mb-8" />
 
-      <h1 className="text-4xl font-bold text-ink mb-2">Mentions légales</h1>
+      <h1 className="text-4xl font-bold text-[#1d4ed8] mb-2">Mentions légales</h1>
       <p className="text-slate text-[14px] mb-12">Dernière mise à jour : avril 2026</p>
 
       <div className="space-y-10 text-[15px] text-slate leading-relaxed">
 
         <section>
-          <h2 className="text-xl font-semibold text-ink mb-3">Éditeur du site</h2>
+          <h2 className="text-xl font-semibold text-[#1d4ed8] mb-3">Éditeur du site</h2>
           <p>
             My Swiss Insurance<br />
             Suisse romande, Suisse<br />
@@ -30,7 +30,7 @@ export default function MentionsLegalesPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-ink mb-3">Objet du service</h2>
+          <h2 className="text-xl font-semibold text-[#1d4ed8] mb-3">Objet du service</h2>
           <p>
             My Swiss Insurance est un service d'information et de mise en relation gratuit destiné
             aux résidents en Suisse romande souhaitant comparer les caisses maladie LAMal. Ce site
@@ -40,7 +40,7 @@ export default function MentionsLegalesPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-ink mb-3">Droit applicable</h2>
+          <h2 className="text-xl font-semibold text-[#1d4ed8] mb-3">Droit applicable</h2>
           <p>
             Le présent site et ses contenus sont soumis au droit suisse. Tout litige relatif à
             l'utilisation de ce site sera soumis aux tribunaux compétents en Suisse romande.
@@ -48,7 +48,7 @@ export default function MentionsLegalesPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-ink mb-3">Protection des données</h2>
+          <h2 className="text-xl font-semibold text-[#1d4ed8] mb-3">Protection des données</h2>
           <p>
             Le traitement des données personnelles collectées via ce site est régi par la{' '}
             <strong className="text-ink">Loi fédérale sur la Protection des Données (LPD, RS 235.1)</strong>{' '}
@@ -72,7 +72,7 @@ export default function MentionsLegalesPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-ink mb-3">Propriété intellectuelle</h2>
+          <h2 className="text-xl font-semibold text-[#1d4ed8] mb-3">Propriété intellectuelle</h2>
           <p>
             L'ensemble des contenus de ce site (textes, graphiques, logos) sont la propriété de
             My Swiss Insurance ou de ses partenaires. Toute reproduction sans autorisation préalable
@@ -81,7 +81,7 @@ export default function MentionsLegalesPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-ink mb-3">Sources des données</h2>
+          <h2 className="text-xl font-semibold text-[#1d4ed8] mb-3">Sources des données</h2>
           <p>
             Les données relatives aux primes LAMal sont issues des publications officielles de
             l'Office fédéral de la santé publique (OFSP) et de priminfo.ch. My Swiss Insurance
@@ -91,7 +91,7 @@ export default function MentionsLegalesPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-ink mb-3">Limitation de responsabilité</h2>
+          <h2 className="text-xl font-semibold text-[#1d4ed8] mb-3">Limitation de responsabilité</h2>
           <p>
             Les informations fournies sur ce site ont un caractère indicatif et ne constituent pas
             un conseil personnalisé en assurance. My Swiss Insurance décline toute responsabilité

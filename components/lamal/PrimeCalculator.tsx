@@ -123,12 +123,12 @@ export default function PrimeCalculator({ canton }: { canton: Canton }) {
       {results && (
         <div className="space-y-3">
           {/* Result 1 — free */}
-          <div className="bg-[#f0fdf4] border border-[#86efac] rounded-[8px] px-5 py-4 flex items-center justify-between">
+          <div className="bg-[#dbeafe] rounded-[8px] px-5 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <span className="w-6 h-6 rounded-full bg-[#22c55e] text-white text-xs font-bold flex items-center justify-center shrink-0">1</span>
+              <span className="w-6 h-6 rounded-full bg-[#1d4ed8] text-white text-xs font-bold flex items-center justify-center shrink-0">1</span>
               <span className="font-semibold text-[#0f2040] text-[16px]">{results[0].caisse}</span>
             </div>
-            <span className="text-2xl font-bold text-[#16a34a]">{results[0].prime} CHF<span className="text-sm font-normal text-[#475569]">/mois</span></span>
+            <span className="text-2xl font-bold text-[#1d4ed8]">{results[0].prime} CHF<span className="text-sm font-normal text-[#475569]">/mois</span></span>
           </div>
 
           {/* Results 2 & 3 — blurred */}
@@ -189,11 +189,11 @@ export default function PrimeCalculator({ canton }: { canton: Canton }) {
               </form>
             </div>
           ) : (
-            <div className="bg-[#f0fdf4] border border-[#86efac] rounded-[8px] p-4 flex items-center gap-3 mt-4">
-              <svg className="w-5 h-5 text-[#16a34a] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-[#dbeafe] rounded-[8px] p-4 flex items-center gap-3 mt-4">
+              <svg className="w-5 h-5 text-[#1d4ed8] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              <p className="text-[14px] text-[#16a34a] font-medium">
+              <p className="text-[14px] text-[#1d4ed8] font-medium">
                 Votre comparaison a été envoyée à <strong>{email}</strong>. Vérifiez votre boîte mail.
               </p>
             </div>

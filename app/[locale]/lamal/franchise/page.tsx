@@ -124,7 +124,7 @@ export default function FranchisePage() {
             { label: 'Franchise LAMal' },
           ]} />
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-[#0f2040] leading-tight mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4">
             Franchise LAMal : quel montant choisir en 2026 ?
           </h1>
           <p className="text-[18px] text-slate leading-relaxed mb-10">
@@ -431,7 +431,7 @@ export default function FranchisePage() {
           </section>
 
           {/* 5 — FAQ */}
-          <section id="faq">
+          <section id="faq" className="border-t border-edge pt-8">
             <FAQ items={faqItems} title="5. Questions fréquentes sur la franchise LAMal" />
           </section>
 

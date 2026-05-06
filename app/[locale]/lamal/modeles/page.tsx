@@ -155,7 +155,7 @@ export default function ModelesPage() {
             { label: 'Modèles LAMal' },
           ]} />
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4">
             Modèles LAMal 2026 : lequel choisir ?
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
@@ -264,7 +264,7 @@ export default function ModelesPage() {
                         <ul className="space-y-1.5">
                           {m.avantages.map((a, i) => (
                             <li key={i} className="flex gap-2 text-[13px] text-slate">
-                              <svg className="w-3.5 h-3.5 text-[#22c55e] mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg className="w-3.5 h-3.5 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                               </svg>
                               {a}
@@ -328,7 +328,7 @@ export default function ModelesPage() {
             </section>
 
             {/* 4 — FAQ */}
-            <section id="faq">
+            <section id="faq" className="border-t border-edge pt-8">
               <FAQ items={faqItems} title="4. Questions fréquentes sur les modèles LAMal" />
             </section>
 

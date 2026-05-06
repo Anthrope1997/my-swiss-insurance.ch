@@ -102,7 +102,7 @@ export default function MaFamillePage() {
             { label: 'Ma famille' },
           ]} />
           <div className="badge mb-5">Données OFSP 2026</div>
-          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-2xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4">
             LAMal pour votre famille en 2026
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed">
@@ -270,7 +270,7 @@ export default function MaFamillePage() {
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                <div className="bg-[#f0fdf4] border border-[#86efac] rounded-[8px] p-5">
+                <div className="bg-[#dbeafe] rounded-[8px] p-5">
                   <h3 className="font-semibold text-ink text-[15px] mb-3">Ce que la LAMal couvre</h3>
                   <ul className="space-y-2 text-[13px] text-slate">
                     {[
@@ -284,7 +284,7 @@ export default function MaFamillePage() {
                       'Consultations supplémentaires en cas de grossesse à risque',
                     ].map((item, i) => (
                       <li key={i} className="flex gap-2">
-                        <svg className="w-3.5 h-3.5 text-[#22c55e] mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-3.5 h-3.5 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                         </svg>
                         {item}
@@ -292,7 +292,7 @@ export default function MaFamillePage() {
                     ))}
                   </ul>
                 </div>
-                <div className="bg-[#fff7ed] border border-[#fed7aa] rounded-[8px] p-5">
+                <div className="bg-cloud border border-edge rounded-[8px] p-5">
                   <h3 className="font-semibold text-ink text-[15px] mb-3">Ce que la LAMal ne couvre pas</h3>
                   <ul className="space-y-2 text-[13px] text-slate">
                     {[
@@ -304,7 +304,7 @@ export default function MaFamillePage() {
                       'Soins esthétiques post-grossesse',
                     ].map((item, i) => (
                       <li key={i} className="flex gap-2">
-                        <span className="text-[#f59e0b] font-bold shrink-0 mt-0.5">–</span>
+                        <span className="text-slate font-bold shrink-0 mt-0.5">–</span>
                         {item}
                       </li>
                     ))}
@@ -359,7 +359,7 @@ export default function MaFamillePage() {
             </section>
 
             {/* FAQ */}
-            <section id="faq" className="scroll-mt-20">
+            <section id="faq" className="scroll-mt-20 border-t border-edge pt-8">
               <FAQ items={faqItems} />
             </section>
 

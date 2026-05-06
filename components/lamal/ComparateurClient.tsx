@@ -141,7 +141,7 @@ function InfoTooltip({ text }: { text: string }) {
         i
       </button>
       {show && (
-        <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 bg-[var(--navy)] text-white text-[12px] leading-relaxed rounded-lg px-3 py-2.5 shadow-xl z-50 pointer-events-none">
+        <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 bg-[var(--navy)] text-white text-[12px] leading-relaxed rounded-lg px-3 py-2.5 shadow-xl z-50 pointer-events-none whitespace-pre-line">
           {text}
           <span className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-[var(--navy)]" />
         </span>
@@ -254,7 +254,7 @@ export default function ComparateurClient() {
             { label: 'LAMal', href: '/lamal' },
             { label: 'Comparateur de caisses' },
           ]} />
-          <h1 className="text-4xl sm:text-5xl font-bold text-[#0f2040] leading-tight mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4">
             Comparateur de caisses maladie LAMal 2026
           </h1>
           <p className="text-[18px] text-slate leading-relaxed mb-10">
@@ -332,7 +332,7 @@ export default function ComparateurClient() {
               <div>
                 <label className="flex items-center text-[13px] font-medium text-ink mb-1.5">
                   Modèle d'assurance
-                  <InfoTooltip text="Standard : libre choix du médecin et spécialiste. Médecin de famille (−15 %) : passage obligatoire par votre médecin traitant. HMO (−18 %) : soins via le réseau HMO. Télémédecine (−20 %) : première consultation par téléphone. Les réductions varient selon la caisse et le canton." />
+                  <InfoTooltip text={"Standard : libre choix du médecin et spécialiste.\nMédecin de famille (−15 %) : passage obligatoire par votre médecin traitant.\nHMO (−18 %) : soins via le réseau HMO.\nTélémédecine (−20 %) : première consultation par téléphone.\nLes réductions varient selon la caisse et le canton."} />
                 </label>
                 <div className="relative">
                   <select

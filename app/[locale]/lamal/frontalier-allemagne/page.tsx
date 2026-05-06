@@ -89,7 +89,7 @@ export default function FrontalierAllemagnePage() {
             { label: 'Frontaliers allemands' },
           ]} />
           <div className="badge mb-5">Données OFSP 2026</div>
-          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-2xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4">
             LAMal pour les frontaliers allemands en Suisse 2026
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed">
@@ -359,7 +359,7 @@ export default function FrontalierAllemagnePage() {
             </section>
 
             {/* FAQ */}
-            <section id="faq" className="scroll-mt-20">
+            <section id="faq" className="scroll-mt-20 border-t border-edge pt-8">
               <FAQ items={faqItems} />
             </section>
 

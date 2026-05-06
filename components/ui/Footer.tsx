@@ -30,12 +30,12 @@ const columns: {
     title: 'Par canton',
     ctaLink: { href: '/lamal/cantons', label: 'Tous les cantons →' },
     links: [
-      { href: '/lamal/canton/zurich',    label: 'Zurich'    },
-      { href: '/lamal/canton/berne',     label: 'Berne'     },
-      { href: '/lamal/canton/vaud',      label: 'Vaud'      },
       { href: '/lamal/canton/argovie',   label: 'Argovie'   },
-      { href: '/lamal/canton/saint-gall', label: 'Saint-Gall' },
+      { href: '/lamal/canton/berne',     label: 'Berne'     },
       { href: '/lamal/canton/geneve',    label: 'Genève'    },
+      { href: '/lamal/canton/saint-gall', label: 'Saint-Gall' },
+      { href: '/lamal/canton/vaud',      label: 'Vaud'      },
+      { href: '/lamal/canton/zurich',    label: 'Zurich'    },
     ],
   },
   {

@@ -85,7 +85,7 @@ Les labels uppercase "À retenir" et "Recommandation" ne portent **pas** de deux
 
 **Toutes** les tuiles statistiques héro (Zone 1) utilisent le composant `<HeroStats>`.
 **Aucune page ne définit son propre style de tuile** : pas de grille inline, pas de tuiles `bg-cloud`, `bg-[#f0fdf4]`, `bg-[#eff6ff]` dans la zone héro.
-Style de référence : fond `bg-[#0f2040]` navy, chiffre `text-[#60a5fa]`, label `text-white/80`, sous-label `text-white/50`.
+Style de référence : fond `bg-[#dbeafe]` (bleu clair), chiffre `text-[#1d4ed8]` (brand), label `text-slate`, sous-label `text-slate/60`.
 
 ```tsx
 import HeroStats from '@/components/ui/HeroStats'
@@ -110,22 +110,59 @@ Sur toutes les pages qui contiennent une comparaison entre deux options (LAMal v
 
 | État | Classes de fond | Classes de texte | Usage |
 |---|---|---|---|
-| Option avantageuse / économie | `bg-[#f0fdf4] border border-[#86efac]` | `text-[#166534]` | Savings, avantages financiers, options recommandées |
-| Option coûteuse / à risque | `bg-[#fff7ed] border border-[#fdba74]` | `text-[#9a3412]` | Coûts élevés, risques, points d'attention |
+| Option avantageuse / économie | `bg-[#dbeafe]` (sans bordure) | `text-[#1d4ed8]` | Savings, avantages financiers, options recommandées |
+| Option coûteuse / à risque | `bg-cloud border border-edge` | `text-slate` | Coûts élevés, risques, points d'attention |
 
-Ne pas utiliser `bg-[#eff6ff]` pour les valeurs avantageuses — réservé aux accents informatifs neutres.
+**Pas de vert, pas d'orange.** Le vert `bg-[#f0fdf4]`/`text-[#166534]` et l'orange `bg-[#fff7ed]`/`text-[#f59e0b]` sont bannis sur l'ensemble du site.
+Les icônes checkmark positives utilisent `text-brand` (jamais `text-[#22c55e]`).
+Les tirets négatifs utilisent `text-slate` (jamais `text-[#f59e0b]`).
 
-### 0.8 H1 — couleur navy obligatoire
+### 0.8 H1 et H2 — couleur brand obligatoire
 
-**Tous** les H1 du site utilisent `text-[#0f2040]` (navy, token `--navy` dans `globals.css`).
-Jamais `text-ink` sur un H1. Jamais `text-brand` sur un H1.
+**Tous** les H1 et H2 du site utilisent `text-[#1d4ed8]` (brand blue).
+Jamais `text-ink` sur un H1 ou H2. Jamais `text-[#0f2040]` (navy) sur un titre.
 
 ```tsx
 {/* ✓ Correct */}
-<h1 className="text-4xl sm:text-5xl font-bold text-[#0f2040] leading-tight mb-4">
+<h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4">
 
 {/* ✗ Interdit */}
 <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
+<h1 className="text-4xl sm:text-5xl font-bold text-[#0f2040] leading-tight mb-4">
+```
+
+La classe `.article-h2` dans `globals.css` utilise `text-brand` — ne jamais la surcharger avec `text-ink`.
+
+### 0.9 Ordre alphabétique des cantons
+
+Les listes de cantons dans la navigation (header, footer, pages hub) sont triées dans l'ordre alphabétique français :
+**Argovie · Berne · Genève · Saint-Gall · Vaud · Zurich** (et ainsi de suite pour les 26 cantons).
+Exception : les tableaux de données (primes, économies) sont triés par valeur décroissante (§12.1).
+
+### 0.10 Séparateur avant la FAQ
+
+Chaque bloc FAQ sur une page article doit être visuellement séparé de la section précédente :
+
+```tsx
+{/* Template A et C */}
+<section id="faq" className="border-t border-edge pt-8">
+  <FAQ items={faqItems} title="..." />
+</section>
+
+{/* Si la section a déjà scroll-mt */}
+<section id="faq" className="scroll-mt-20 border-t border-edge pt-8">
+```
+
+La homepage utilise un wrapper `<section className="bg-white border-t border-edge py-12">` (voir §6 Template B).
+
+### 0.11 Tooltip multiline
+
+Pour afficher plusieurs options sur des lignes distinctes dans un tooltip `<InfoTooltip>` :
+- Ajouter `whitespace-pre-line` sur le `<span>` du tooltip
+- Utiliser `\n` comme séparateur de lignes dans la chaîne `text`
+
+```tsx
+<InfoTooltip text={"Option A : description.\nOption B (−15 %) : description.\nOption C (−18 %) : description."} />
 ```
 
 ---
@@ -193,7 +230,7 @@ Variables CSS complémentaires (globals.css) :
 .container-xl → max-w-6xl mx-auto px-6
 
 /* Article typography */
-.article-h2 → text-2xl font-semibold text-ink border-b border-edge pb-4 mb-6 mt-14 first:mt-0
+.article-h2 → text-2xl font-semibold text-[#1d4ed8] border-b border-edge pb-4 mb-6 mt-14 first:mt-0
 .article-h3 → text-[18px] font-semibold text-ink mb-3 mt-8
 .article-p  → text-[17px] text-slate leading-relaxed mb-4
 
@@ -211,8 +248,8 @@ Variables CSS complémentaires (globals.css) :
 
 | Élément | Classes Tailwind utilisées |
 |---|---|
-| H1 hero (toutes les pages) | `text-4xl sm:text-5xl font-bold text-[#0f2040] leading-tight` |
-| H2 section | `.article-h2` |
+| H1 hero (toutes les pages) | `text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight` |
+| H2 section | `.article-h2` (= `text-2xl font-semibold text-[#1d4ed8]`) |
 | H3 sous-section | `.article-h3` |
 | Intro hero | `text-[18px] text-slate max-w-2xl leading-relaxed` |
 | Corps article | `.article-p` (text-[17px] text-slate) |
@@ -425,7 +462,7 @@ import CantonCombobox, { CANTON_NAMES } from '@/components/ui/CantonCombobox'
 
 ### 3.11 `<HeroStats>` — components/ui/HeroStats.tsx
 
-Server Component. Grille 3 tuiles sur fond navy `#0f2040`, chiffre en bleu `#60a5fa`, label en blanc.
+Server Component. Grille 3 tuiles sur fond bleu clair `bg-[#dbeafe]`, chiffre en bleu brand `text-[#1d4ed8]`, label en `text-slate`.
 Obligatoire dans Zone 1 de toutes les pages. Aucune page ne définit son propre style de tuile.
 
 ```tsx
@@ -667,7 +704,7 @@ export default function PageGuide() {
             { label: titreH1 },
           ]} />
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4 max-w-3xl">
             {titreH1}
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
@@ -756,8 +793,8 @@ export default function PageGuide() {
 
           </section>
 
-          {/* FAQ — 1ère question ouverte par défaut, TOUJOURS avant le formulaire */}
-          <section id="faq">
+          {/* FAQ — 1ère question ouverte par défaut, TOUJOURS avant le formulaire — séparateur obligatoire */}
+          <section id="faq" className="border-t border-edge pt-8">
             <FAQ items={faqItems} title="{N}. Questions fréquentes sur {sujet}" />
           </section>
 
@@ -838,7 +875,7 @@ export default function PageHub() {
       {/* ── ZONE 1 — Accroche, fond blanc ── */}
       <section className="bg-white border-b border-edge pt-12 pb-14">
         <div className="container-xl">
-          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4 max-w-3xl">
             {titreH1}
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
@@ -876,15 +913,17 @@ export default function PageHub() {
       {/* ── ZONE 3 ── */}
       {/* FAQ — 3 questions maximum, 1ère ouverte par défaut */}
       <div className="container-xl pb-8">
-        <FAQ items={faqItems} title="Questions fréquentes" />
+        <section id="faq" className="border-t border-edge pt-8">
+          <FAQ items={faqItems} title="Questions fréquentes" />
+        </section>
       </div>
 
-      {/* Formulaire */}
-      <section id="formulaire" className="bg-cloud border-y border-edge py-10 sm:py-16 scroll-mt-16">
-        <div className="container-xl max-w-2xl">
+      {/* Formulaire — même style que les pages guides (border-t, fond blanc) */}
+      <div className="container-xl">
+        <div id="formulaire" className="scroll-mt-16 border-t border-edge pt-12 mt-4">
           <div className="text-center mb-6">
-            <h2 className="text-2xl sm:text-3xl font-bold text-ink leading-tight mb-3">
-              Besoin d'aide ?
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#1d4ed8] leading-tight mb-3">
+              Vous préférez qu'on s'occupe de tout ?
             </h2>
             <p className="text-[15px] sm:text-[17px] text-slate leading-relaxed">
               Un expert vous rappelle sous 24 heures pour établir avec vous une solution
@@ -893,7 +932,7 @@ export default function PageHub() {
           </div>
           <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
         </div>
-      </section>
+      </div>
 
     </>
   )
@@ -965,7 +1004,7 @@ export default function PageOutil() {
             { label: titreH1 },
           ]} />
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4 max-w-3xl">
             {titreH1}
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
@@ -1031,8 +1070,8 @@ export default function PageOutil() {
             </section>
           )}
 
-          {/* FAQ — 1ère question ouverte par défaut */}
-          <section id="faq">
+          {/* FAQ — 1ère question ouverte par défaut — séparateur obligatoire */}
+          <section id="faq" className="border-t border-edge pt-8">
             <FAQ items={faqItems} title="{N}. Questions fréquentes" />
           </section>
 
@@ -1105,20 +1144,21 @@ Position dans le layout : après les guides associés, avant `</main>`.
 
 **Code minimal (homepage) :**
 ```tsx
-<section id="formulaire" className="bg-cloud border-y border-edge py-10 sm:py-16 scroll-mt-16">
-  <div className="container-xl max-w-2xl">
+{/* Homepage : même structure que les pages guides — fond blanc, border-t */}
+<div className="container-xl">
+  <div id="formulaire" className="scroll-mt-16 border-t border-edge pt-12 mt-4">
     <div className="text-center mb-6">
-      <h2 className="text-2xl sm:text-3xl font-bold text-ink leading-tight mb-3">
-        Besoin d'aide ?
+      <h2 className="text-2xl sm:text-3xl font-bold text-[#1d4ed8] leading-tight mb-3">
+        Vous préférez qu'on s'occupe de tout ?
       </h2>
       <p className="text-[15px] sm:text-[17px] text-slate leading-relaxed">
         Un expert vous rappelle sous 24 heures pour établir avec vous une solution
         personnalisée. Gratuit, sans engagement.
       </p>
     </div>
-    <MultiStepLeadForm redirectOnSuccess="/merci" />
+    <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
   </div>
-</section>
+</div>
 ```
 
 Hauteur champs internes au formulaire : `h-11` (44px) via `!h-11` override.
@@ -1286,11 +1326,13 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 - [ ] Dates datePublished / dateModified cohérentes avec le bandeau MSI
 
 **Titres et chiffres clés**
-- [ ] H1 : `text-[#0f2040]` (navy) — jamais `text-ink`, jamais `text-brand` sur les titres de page (§0.8)
-- [ ] Tuiles statistiques Zone 1 : composant `<HeroStats>` obligatoire — chiffre en `text-[#60a5fa]` (bleu navy), label en `text-white/80`, fond `bg-[#0f2040]` (§0.5)
+- [ ] H1 et H2 : `text-[#1d4ed8]` (brand blue) — jamais `text-ink`, jamais `text-[#0f2040]` sur les titres (§0.8)
+- [ ] Tuiles statistiques Zone 1 : composant `<HeroStats>` obligatoire — chiffre en `text-[#1d4ed8]`, label en `text-slate`, fond `bg-[#dbeafe]` (§0.5)
 - [ ] Aucune grille de tuiles inline — utiliser `<HeroStats>` uniquement
 - [ ] Aucun badge au-dessus du H1 (§0.6) — pas de `<div className="badge">Données OFSP 2026</div>`
-- [ ] Comparaisons : couleur fonctionnelle verte (`bg-[#f0fdf4]`) pour l'option avantageuse, orange (`bg-[#fff7ed]`) pour l'option coûteuse (§0.7)
+- [ ] Comparaisons : bleu (`bg-[#dbeafe]`) pour l'option avantageuse, neutre (`bg-cloud border border-edge`) pour l'option coûteuse — jamais vert ni orange (§0.7)
+- [ ] FAQ : séparateur `border-t border-edge pt-8` sur la section `<section id="faq">` (§0.10)
+- [ ] Cantons dans la navigation : ordre alphabétique français (§0.9)
 
 **Header**
 - [ ] CTA centré horizontalement sur mobile : `flex-1` sur logo ET conteneur hamburger (§10.1)

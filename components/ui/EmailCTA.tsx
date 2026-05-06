@@ -28,12 +28,12 @@ export default function EmailCTA({ subject }: Props) {
 
   if (status === 'success') {
     return (
-      <div className="bg-[#f0fdf4] border border-[#86efac] rounded-[8px] px-6 py-5 text-center">
-        <svg className="w-8 h-8 text-[#16a34a] mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="bg-[#dbeafe] rounded-[8px] px-6 py-5 text-center">
+        <svg className="w-8 h-8 text-[#1d4ed8] mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
         </svg>
-        <p className="font-semibold text-[#166534]">Envoyé !</p>
-        <p className="text-[14px] text-[#166534] mt-0.5">Vérifiez votre boîte mail sous 5 minutes.</p>
+        <p className="font-semibold text-[#1d4ed8]">Envoyé !</p>
+        <p className="text-[14px] text-[#1d4ed8] mt-0.5">Vérifiez votre boîte mail sous 5 minutes.</p>
       </div>
     )
   }

@@ -475,9 +475,9 @@ export default function PrimeCalculatorReal() {
                       const maxNette = results![results!.length - 1].prime_nette
                       const saving   = maxNette - row.prime_nette
                       return (
-                        <tr key={i} className={i === 0 ? 'bg-[#f0fdf4]' : ''}>
+                        <tr key={i} className={i === 0 ? 'bg-[#dbeafe]' : ''}>
                           <td>
-                            <span className={`inline-flex items-center justify-center w-6 h-6 rounded-full text-[12px] font-bold ${i === 0 ? 'bg-green-500 text-white' : 'bg-cloud text-slate'}`}>
+                            <span className={`inline-flex items-center justify-center w-6 h-6 rounded-full text-[12px] font-bold ${i === 0 ? 'bg-[#1d4ed8] text-white' : 'bg-cloud text-slate'}`}>
                               {i + 1}
                             </span>
                           </td>

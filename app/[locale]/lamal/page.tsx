@@ -150,10 +150,10 @@ const situations = [
 ]
 
 const cantonCards = [
-  { nom: 'Zurich',  primeMin: '489', economieAn: "4'285", href: '/lamal/canton/zurich' },
-  { nom: 'Berne',   primeMin: '533', economieAn: "4'447",   href: '/lamal/canton/berne'  },
-  { nom: 'Vaud',    primeMin: '579', economieAn: "4'220", href: '/lamal/canton/vaud'   },
+  { nom: 'Berne',   primeMin: '533', economieAn: "4'447", href: '/lamal/canton/berne'  },
   { nom: 'Genève',  primeMin: '634', economieAn: "5'653", href: '/lamal/canton/geneve' },
+  { nom: 'Vaud',    primeMin: '579', economieAn: "4'220", href: '/lamal/canton/vaud'   },
+  { nom: 'Zurich',  primeMin: '489', economieAn: "4'285", href: '/lamal/canton/zurich' },
 ]
 
 const aproposFaits = [
@@ -192,7 +192,7 @@ export default function LamalPage() {
             { label: 'LAMal' },
           ]} />
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-[#0f2040] leading-tight mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4">
             Économisez sur votre prime LAMal en 2026
           </h1>
 
@@ -232,7 +232,7 @@ export default function LamalPage() {
         <div className="container-xl">
 
           <div className="mb-6">
-            <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
+            <h2 className="text-3xl font-bold text-[#1d4ed8] leading-tight mb-4">
               Tout comprendre sur l'assurance maladie suisse
             </h2>
             <p className="text-[17px] text-slate leading-relaxed">
@@ -281,7 +281,7 @@ export default function LamalPage() {
         <div className="container-xl">
 
           <div className="mb-6">
-            <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
+            <h2 className="text-3xl font-bold text-[#1d4ed8] leading-tight mb-4">
               Votre assurance LAMal selon votre situation
             </h2>
             <p className="text-[17px] text-slate leading-relaxed">
@@ -327,7 +327,7 @@ export default function LamalPage() {
         <div className="container-xl">
 
           <div className="mb-8">
-            <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
+            <h2 className="text-3xl font-bold text-[#1d4ed8] leading-tight mb-4">
               Primes et économies par canton en 2026
             </h2>
             <p className="text-[17px] text-slate leading-relaxed">
@@ -350,9 +350,9 @@ export default function LamalPage() {
                 <p className="text-slate text-[13px] mb-4">
                   À partir de <span className="font-semibold text-ink">{c.primeMin} CHF par mois</span>
                 </p>
-                <div className="bg-[#f0fdf4] border border-[#86efac] rounded-lg px-3 py-2 mb-5">
-                  <p className="text-[12px] text-[#166534] font-medium">Économie possible</p>
-                  <p className="text-[18px] font-bold text-[#166534] leading-tight">
+                <div className="bg-[#dbeafe] rounded-lg px-3 py-2 mb-5">
+                  <p className="text-[12px] text-[#1d4ed8] font-medium">Économie possible</p>
+                  <p className="text-[18px] font-bold text-[#1d4ed8] leading-tight">
                     {c.economieAn} CHF par an
                   </p>
                 </div>
@@ -379,7 +379,7 @@ export default function LamalPage() {
         <div className="container-xl">
 
           <div className="mb-6">
-            <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
+            <h2 className="text-3xl font-bold text-[#1d4ed8] leading-tight mb-4">
               Une source de référence sur la LAMal en Suisse
             </h2>
             <p className="text-[17px] text-slate leading-relaxed">
@@ -405,25 +405,23 @@ export default function LamalPage() {
       </section>
 
       {/* ── 6. FAQ ──────────────────────────────────────────────────────────── */}
-      <div className="container-xl py-12">
-        <FAQ items={faqItems} title="Questions fréquentes sur la LAMal" />
-      </div>
-
-      {/* ── 7. FORMULAIRE ───────────────────────────────────────────────────── */}
-      <section id="formulaire" className="bg-cloud border-y border-edge py-10 sm:py-16 scroll-mt-16">
-        <div className="container-xl max-w-2xl">
-          <div className="text-center mb-6">
-            <h2 className="text-2xl sm:text-3xl font-bold text-ink leading-tight mb-3">
-              Besoin d'aide ?
-            </h2>
-            <p className="text-[15px] sm:text-[17px] text-slate leading-relaxed">
-              Un expert vous rappelle sous 24 heures pour établir avec vous une solution
-              personnalisée. Gratuit, sans engagement.
-            </p>
-          </div>
-          <MultiStepLeadForm redirectOnSuccess="/merci" />
+      <section className="bg-white border-t border-edge py-12">
+        <div className="container-xl">
+          <FAQ items={faqItems} title="Questions fréquentes sur la LAMal" />
         </div>
       </section>
+
+      {/* ── 7. FORMULAIRE ───────────────────────────────────────────────────── */}
+      <div className="container-xl">
+        <div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4">
+          <h2 className="text-2xl font-semibold text-ink mb-3">Besoin d'aide ?</h2>
+          <p className="text-[16px] text-slate mb-6 leading-relaxed">
+            Un expert vous rappelle sous 24 heures pour établir avec vous une solution
+            personnalisée. Gratuit, sans engagement.
+          </p>
+          <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
+        </div>
+      </div>
     </>
   )
 }

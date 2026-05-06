@@ -94,7 +94,7 @@ export default function SubsidesPage() {
             { label: 'Calculateur de subsides' },
           ]} />
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4">
             Calculateur de subsides LAMal 2026
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
@@ -205,7 +205,7 @@ export default function SubsidesPage() {
             </section>
 
             {/* §4 — FAQ */}
-            <section id="faq" className="scroll-mt-24">
+            <section id="faq" className="scroll-mt-24 border-t border-edge pt-8">
               <FAQ items={faqItems} title="4. Questions fréquentes sur les subsides" />
             </section>
 

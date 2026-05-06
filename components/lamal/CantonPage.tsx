@@ -137,13 +137,13 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
         <div className="container-xl">
           <div className="badge mb-5">Données OFSP 2026</div>
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-5">
+          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-5">
             Assurance maladie dans le canton de {canton.name}
           </h1>
 
           <p className="text-lg text-slate leading-relaxed mb-10">
             Dans le canton de {canton.name} en 2026, les assurés {canton.demonym} peuvent économiser jusqu'à{' '}
-            <strong className="text-[#16a34a]">CHF {formatChf(canton.economieAn)} par an</strong> en changeant
+            <strong className="text-[#1d4ed8]">CHF {formatChf(canton.economieAn)} par an</strong> en changeant
             de caisse, pour des prestations identiques. Le canton se classe{' '}
             <strong className="text-ink">{ordinal(canton.rang)} sur 26</strong> cantons suisses. La prime varie
             selon votre commune de résidence, votre franchise et votre modèle d'assurance.
@@ -158,12 +158,12 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
               <p className="text-4xl font-bold text-ink leading-none">{cheapest.prime}</p>
               <p className="text-[14px] text-slate mt-2">CHF par mois</p>
             </div>
-            <div className="bg-[#f0fdf4] border border-[#86efac] rounded-xl px-5 py-5">
-              <p className="text-[11px] font-semibold text-[#166534] uppercase tracking-widest mb-3">
+            <div className="bg-[#dbeafe] rounded-xl px-5 py-5">
+              <p className="text-[11px] font-semibold text-[#1d4ed8] uppercase tracking-widest mb-3">
                 Économie annuelle
               </p>
-              <p className="text-4xl font-bold text-[#166534] leading-none">{formatChf(canton.economieAn)}</p>
-              <p className="text-[14px] text-[#166534] mt-2">CHF par an</p>
+              <p className="text-4xl font-bold text-[#1d4ed8] leading-none">{formatChf(canton.economieAn)}</p>
+              <p className="text-[14px] text-[#1d4ed8] mt-2">CHF par an</p>
             </div>
             <div className="bg-[#eff6ff] border border-[#bfdbfe] rounded-xl px-5 py-5">
               <p className="text-[11px] font-semibold text-brand uppercase tracking-widest mb-3">
@@ -224,7 +224,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
 
         {/* ── Top caisses ──────────────────────────────────────────────── */}
         <section id="top-caisses">
-          <h2 className="text-2xl font-semibold text-ink border-b border-edge pb-4 mb-5">
+          <h2 className="text-2xl font-semibold text-[#1d4ed8] border-b border-edge pb-4 mb-5">
             Quelles caisses sont les moins chères dans le {canton.cantonDe} en 2026 ?
           </h2>
           <p className="text-[15px] text-slate mb-6">
@@ -259,7 +259,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
                         {formatChf(c.prime * 12)} CHF
                       </td>
                       <td className="text-left whitespace-nowrap hidden md:table-cell">
-                        <span className="text-[#16a34a] font-semibold">
+                        <span className="text-[#1d4ed8] font-semibold">
                           {formatChf(econAn)} CHF par an
                         </span>
                       </td>
@@ -294,7 +294,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
 
         {/* ── Franchise ────────────────────────────────────────────────── */}
         <section id="franchise">
-          <h2 className="text-2xl font-semibold text-ink border-b border-edge pb-4 mb-5">
+          <h2 className="text-2xl font-semibold text-[#1d4ed8] border-b border-edge pb-4 mb-5">
             Quelle franchise choisir dans le canton de {canton.name} ?
           </h2>
           <p className="text-[15px] text-slate mb-6">
@@ -329,15 +329,15 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
             </table>
           </div>
           <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div className="bg-[#f0fdf4] border border-[#86efac] rounded-[8px] px-4 py-3">
-              <p className="text-[13px] font-semibold text-[#166534] mb-0.5">Peu de frais médicaux</p>
-              <p className="text-[13px] text-[#166534]">
+            <div className="bg-[#dbeafe] rounded-[8px] px-4 py-3">
+              <p className="text-[13px] font-semibold text-[#1d4ed8] mb-0.5">Peu de frais médicaux</p>
+              <p className="text-[13px] text-[#1d4ed8]">
                 Franchise 2 500 CHF : économie de CHF {formatChf(economieFranchise)} par an sur la prime.
               </p>
             </div>
-            <div className="bg-[#fff7ed] border border-[#fdba74] rounded-[8px] px-4 py-3">
-              <p className="text-[13px] font-semibold text-[#9a3412] mb-0.5">Frais médicaux élevés</p>
-              <p className="text-[13px] text-[#9a3412]">
+            <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
+              <p className="text-[13px] font-semibold text-slate mb-0.5">Frais médicaux élevés</p>
+              <p className="text-[13px] text-slate">
                 Franchise 300 CHF : reste à charge plafonné à CHF 1 000 par an.
               </p>
             </div>
@@ -351,7 +351,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
 
         {/* ── Subsides ─────────────────────────────────────────────────── */}
         <section id="subsides">
-          <h2 className="text-2xl font-semibold text-ink border-b border-edge pb-4 mb-5">
+          <h2 className="text-2xl font-semibold text-[#1d4ed8] border-b border-edge pb-4 mb-5">
             Quels subsides LAMal dans le {canton.cantonDe} ?
           </h2>
           <div className="border border-edge rounded-[8px] overflow-hidden mb-5">
@@ -418,7 +418,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
 
         {/* ── Navigation cantons ───────────────────────────────────────── */}
         <section>
-          <h2 className="text-xl font-semibold text-ink mb-4">Dans quel canton les primes sont-elles moins chères ?</h2>
+          <h2 className="text-xl font-semibold text-[#1d4ed8] mb-4">Dans quel canton les primes sont-elles moins chères ?</h2>
           <div className="flex flex-wrap gap-2 mb-8">
             {otherCantons.map((c) => (
               <Link

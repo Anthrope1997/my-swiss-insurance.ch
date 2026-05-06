@@ -160,7 +160,7 @@ export default function GuideLamalPage() {
         <div className="container-xl">
           <Breadcrumb items={[{ label: 'Accueil', href: '/' }, { label: 'LAMal', href: '/lamal' }, { label: 'Comprendre la LAMal' }]} />
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4">
             Guide complet LAMal 2026
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
@@ -633,7 +633,7 @@ export default function GuideLamalPage() {
             </section>
 
             {/* 10 — FAQ */}
-            <section id="faq">
+            <section id="faq" className="border-t border-edge pt-8">
               <FAQ items={faqItems} title="10. Questions fréquentes sur la LAMal" />
             </section>
 

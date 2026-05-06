@@ -121,7 +121,7 @@ export default function LamalVsLcaPage() {
             { label: 'LAMal vs assurance complémentaire' },
           ]} />
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4">
             Assurance de base et complémentaire : quelles différences ?
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
@@ -347,7 +347,7 @@ export default function LamalVsLcaPage() {
             </section>
 
             {/* 6 — FAQ */}
-            <section id="faq">
+            <section id="faq" className="border-t border-edge pt-8">
               <FAQ items={faqItems} title="6. Questions fréquentes : LAMal et assurance complémentaire" />
             </section>
 

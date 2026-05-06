@@ -30,12 +30,12 @@ export default function AProposPage() {
       <div className="container-xl py-16 max-w-3xl">
         <Breadcrumb items={[{ label: 'Accueil', href: '/' }, { label: 'À propos' }]} className="mb-8" />
 
-        <h1 className="text-4xl font-bold text-ink mb-10">À propos de My Swiss Insurance</h1>
+        <h1 className="text-4xl font-bold text-[#1d4ed8] mb-10">À propos de My Swiss Insurance</h1>
 
         <div className="space-y-10 text-[15px] text-slate leading-relaxed">
 
           <section>
-            <h2 className="text-xl font-semibold text-ink mb-3">Notre mission</h2>
+            <h2 className="text-xl font-semibold text-[#1d4ed8] mb-3">Notre mission</h2>
             <p>
               My Swiss Insurance est un service d'information indépendant dédié à aider
               les résidents de Suisse romande à comprendre et optimiser leur assurance maladie LAMal.
@@ -47,7 +47,7 @@ export default function AProposPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-ink mb-3">Notre équipe</h2>
+            <h2 className="text-xl font-semibold text-[#1d4ed8] mb-3">Notre équipe</h2>
             <p>
               My Swiss Insurance est édité par une équipe indépendante basée en Suisse romande,
               spécialisée dans l'analyse des assurances sociales suisses.
@@ -60,7 +60,7 @@ export default function AProposPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-ink mb-3">Nos données</h2>
+            <h2 className="text-xl font-semibold text-[#1d4ed8] mb-3">Nos données</h2>
             <p>
               Toutes les données de primes proviennent du comparateur officiel de l'OFSP
               (priminfo.admin.ch), mis à jour annuellement. Les données affichées sont celles
@@ -69,7 +69,7 @@ export default function AProposPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-ink mb-3">Contact</h2>
+            <h2 className="text-xl font-semibold text-[#1d4ed8] mb-3">Contact</h2>
             <p>
               Email :{' '}
               <a href="mailto:contact@my-swiss-insurance.ch" className="text-brand hover:underline">
@@ -84,7 +84,7 @@ export default function AProposPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-ink mb-3">Conformité</h2>
+            <h2 className="text-xl font-semibold text-[#1d4ed8] mb-3">Conformité</h2>
             <p>
               Politique de confidentialité conforme à la{' '}
               <strong className="text-ink">LPD (RS 235.1)</strong>.

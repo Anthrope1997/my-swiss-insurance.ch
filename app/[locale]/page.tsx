@@ -193,7 +193,7 @@ export default function HomePage() {
 
           <div className="badge mb-5">Données OFSP 2026</div>
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-5 max-w-2xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-5 max-w-2xl">
             Économisez sur votre assurance maladie suisse en 2026
           </h1>
 
@@ -233,7 +233,7 @@ export default function HomePage() {
         <div className="container-xl">
 
           <div className="max-w-2xl mb-12">
-            <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
+            <h2 className="text-3xl font-bold text-[#1d4ed8] leading-tight mb-4">
               Tout comprendre sur l'assurance maladie suisse
             </h2>
             <p className="text-[17px] text-slate leading-relaxed">
@@ -296,7 +296,7 @@ export default function HomePage() {
         <div className="container-xl">
 
           <div className="max-w-2xl mb-12">
-            <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
+            <h2 className="text-3xl font-bold text-[#1d4ed8] leading-tight mb-4">
               Des conseils adaptés à votre profil
             </h2>
             <p className="text-[17px] text-slate leading-relaxed">
@@ -342,7 +342,7 @@ export default function HomePage() {
         <div className="container-xl">
 
           <div className="max-w-2xl mb-8">
-            <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
+            <h2 className="text-3xl font-bold text-[#1d4ed8] leading-tight mb-4">
               Primes et économies par canton en 2026
             </h2>
             <p className="text-[17px] text-slate leading-relaxed">
@@ -401,7 +401,7 @@ export default function HomePage() {
         <div className="container-xl">
 
           <div className="max-w-2xl mb-12">
-            <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
+            <h2 className="text-3xl font-bold text-[#1d4ed8] leading-tight mb-4">
               Une source de référence sur la LAMal en Suisse
             </h2>
             <p className="text-[17px] text-slate leading-relaxed">
@@ -430,7 +430,7 @@ export default function HomePage() {
         <div className="container-xl max-w-2xl">
 
           <div className="text-center mb-6">
-            <h2 className="text-2xl sm:text-3xl font-bold text-ink leading-tight mb-3">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#1d4ed8] leading-tight mb-3">
               Vous préférez qu'on s'occupe de tout ?
             </h2>
             <p className="text-[15px] sm:text-[17px] text-slate leading-relaxed">

@@ -93,7 +93,7 @@ export default function ParProfilPage() {
             { label: 'LAMal', href: '/lamal' },
             { label: 'Par situation de vie' },
           ]} />
-          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4">
             LAMal par situation de vie
           </h1>
           <p className="text-[18px] text-slate leading-relaxed">

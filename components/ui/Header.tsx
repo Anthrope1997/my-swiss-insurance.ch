@@ -43,12 +43,12 @@ const menuSections: {
       </svg>
     ),
     links: [
-      { href: '/lamal/canton/zurich',     label: 'Zurich'     },
-      { href: '/lamal/canton/berne',      label: 'Berne'      },
-      { href: '/lamal/canton/vaud',       label: 'Vaud'       },
       { href: '/lamal/canton/argovie',    label: 'Argovie'    },
-      { href: '/lamal/canton/saint-gall', label: 'Saint-Gall' },
+      { href: '/lamal/canton/berne',      label: 'Berne'      },
       { href: '/lamal/canton/geneve',     label: 'Genève'     },
+      { href: '/lamal/canton/saint-gall', label: 'Saint-Gall' },
+      { href: '/lamal/canton/vaud',       label: 'Vaud'       },
+      { href: '/lamal/canton/zurich',     label: 'Zurich'     },
     ],
     ctaLink: { href: '/lamal/cantons', label: 'Tous les cantons →' },
   },
@@ -128,15 +128,18 @@ export default function Header() {
         <div className="container-xl">
           <div className="flex items-center h-16">
 
-            {/* Logo — flex-1 = ancre gauche, CTA se centre entre les deux flex-1 */}
-            <Link href="/lamal" className="flex items-center gap-2.5 flex-1">
+            {/* Logo — flex-1 mobile, auto desktop */}
+            <Link href="/lamal" className="flex items-center gap-2.5 flex-1 md:flex-none">
               <ShieldIcon />
               <span className="font-semibold text-white text-[15px] hidden md:inline">
                 My Swiss Insurance
               </span>
             </Link>
 
-            {/* CTA — centré sur mobile grâce aux deux flex-1 de part et d'autre */}
+            {/* Spacer desktop uniquement — aligne CTA+hamburger à droite */}
+            <div className="hidden md:block flex-1" />
+
+            {/* CTA — centré mobile (flex-1 symétrique), aligné droite desktop */}
             <button
               onClick={() => setOfferOpen(true)}
               className="shrink-0 bg-[#1d4ed8] hover:bg-[#1e40af] text-white font-medium
@@ -146,8 +149,8 @@ export default function Header() {
               <span className="min-[380px]:hidden">Être conseillé</span>
             </button>
 
-            {/* Hamburger — flex-1 + justify-end = ancre droite */}
-            <div className="flex-1 flex justify-end">
+            {/* Hamburger — flex-1 mobile (ancre droite), ml-3 desktop */}
+            <div className="flex-1 flex justify-end md:flex-none md:ml-3">
               <button
                 onClick={() => setMobileOpen(o => !o)}
                 className="p-2 flex flex-col justify-center items-center gap-[5px]"

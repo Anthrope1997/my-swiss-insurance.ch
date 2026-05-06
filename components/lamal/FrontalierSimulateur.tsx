@@ -146,8 +146,8 @@ export default function FrontalierSimulateur() {
   if (resultat) {
     const colors = {
       lamal: { bg: 'bg-[#eff6ff]', border: 'border-[#1d4ed8]', text: 'text-[#1d4ed8]', icon: '✓' },
-      pays: { bg: 'bg-[#f0fdf4]', border: 'border-[#22c55e]', text: 'text-[#16a34a]', icon: '✓' },
-      neutre: { bg: 'bg-[#fff7ed]', border: 'border-[#f59e0b]', text: 'text-[#d97706]', icon: '→' },
+      pays: { bg: 'bg-[#dbeafe]', border: 'border-[#1d4ed8]', text: 'text-[#1d4ed8]', icon: '✓' },
+      neutre: { bg: 'bg-cloud', border: 'border-edge', text: 'text-slate', icon: '→' },
     }
     const c = colors[resultat.niveau]
 

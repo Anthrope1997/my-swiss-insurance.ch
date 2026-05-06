@@ -16,7 +16,7 @@ export default function MerciPage() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h1 className="text-3xl font-bold text-ink mb-3">Demande bien reçue</h1>
+        <h1 className="text-3xl font-bold text-[#1d4ed8] mb-3">Demande bien reçue</h1>
         <p className="text-[17px] text-slate leading-relaxed mb-8">
           Un expert vous contacte sous 24 heures ouvrables.
         </p>

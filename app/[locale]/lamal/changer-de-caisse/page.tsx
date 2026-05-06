@@ -112,7 +112,7 @@ export default function ChangerDeCaissePage() {
             { label: 'Changer de caisse maladie' },
           ]} />
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-3xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4">
             Comment changer de caisse maladie en Suisse
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
@@ -323,7 +323,7 @@ export default function ChangerDeCaissePage() {
             </section>
 
             {/* 6 — FAQ */}
-            <section id="faq">
+            <section id="faq" className="border-t border-edge pt-8">
               <FAQ items={faqItems} title="6. Questions fréquentes sur le changement de caisse" />
             </section>
 
