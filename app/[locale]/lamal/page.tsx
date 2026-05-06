@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Primes LAMal 2026 : comparez et économisez',
     description:
-      'Jusqu\'à 2 753 CHF d\'économie par an. Comparez gratuitement 34 caisses LAMal. Données OFSP 2026.',
+      'Jusqu\'à 5 653 CHF d\'économie par an. Comparez gratuitement 34 caisses LAMal. Données OFSP 2026.',
     url: 'https://my-swiss-insurance.ch/lamal',
     type: 'website',
   },

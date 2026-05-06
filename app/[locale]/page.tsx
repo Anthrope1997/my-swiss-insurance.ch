@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Économisez sur votre assurance maladie suisse en 2026',
     description:
-      'Jusqu\'à 2 753 CHF d\'économie par an. Comparez gratuitement 34 caisses LAMal. Données OFSP 2026.',
+      'Jusqu\'à 5 653 CHF d\'économie par an. Comparez gratuitement 34 caisses LAMal. Données OFSP 2026.',
     url: 'https://my-swiss-insurance.ch',
     type: 'website',
   },
@@ -35,7 +35,7 @@ const faqSchema = {
       name: 'Combien peut-on économiser en changeant de caisse LAMal ?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Jusqu\'à 2 753 CHF par an pour un adulte de 35 ans à Genève (franchise 300 CHF, modèle standard, source OFSP 2026). Les 34 caisses agréées proposent les mêmes prestations de base à des prix très différents selon le canton.',
+        text: 'Jusqu\'à 5 653 CHF par an pour un adulte de 35 ans à Genève (tous modèles et franchises confondus, source OFSP 2026). Les 34 caisses agréées proposent les mêmes prestations de base à des prix très différents selon le canton.',
       },
     },
     {
