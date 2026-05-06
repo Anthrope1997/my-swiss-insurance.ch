@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import CantonCombobox, { CANTON_NAMES } from '@/components/ui/CantonCombobox'
 
@@ -54,7 +54,6 @@ const STEP3_OPTIONS = [
   { id: 'retraite', label: 'Retraité(e)' },
 ]
 
-
 const PAYS_FRONTALIERS = [
   'France', 'Allemagne', 'Italie', 'Autriche', 'Liechtenstein',
 ]
@@ -72,6 +71,107 @@ const STEP_CONTEXT = [
   'Quelques infos sur votre situation',
   'Votre profil familial',
   'Pour vous recontacter sous 24 heures',
+]
+
+interface PhoneCountry {
+  code: string
+  dialCode: string
+  flag: string
+  name: string
+  placeholder: string
+}
+
+const PHONE_PRIORITY: PhoneCountry[] = [
+  { code: 'CH', dialCode: '+41', flag: '🇨🇭', name: 'Suisse',         placeholder: '079 000 00 00' },
+  { code: 'DE', dialCode: '+49', flag: '🇩🇪', name: 'Allemagne',      placeholder: '030 12345678'  },
+  { code: 'AT', dialCode: '+43', flag: '🇦🇹', name: 'Autriche',       placeholder: '0660 1234567'  },
+  { code: 'FR', dialCode: '+33', flag: '🇫🇷', name: 'France',         placeholder: '06 12 34 56 78'},
+  { code: 'IT', dialCode: '+39', flag: '🇮🇹', name: 'Italie',         placeholder: '320 1234567'   },
+  { code: 'LI', dialCode: '+423',flag: '🇱🇮', name: 'Liechtenstein',  placeholder: '790 12345'     },
+]
+
+const PHONE_REST: PhoneCountry[] = [
+  { code: 'ZA', dialCode: '+27',  flag: '🇿🇦', name: 'Afrique du Sud',       placeholder: '' },
+  { code: 'DZ', dialCode: '+213', flag: '🇩🇿', name: 'Algérie',               placeholder: '' },
+  { code: 'AD', dialCode: '+376', flag: '🇦🇩', name: 'Andorre',               placeholder: '' },
+  { code: 'AO', dialCode: '+244', flag: '🇦🇴', name: 'Angola',                placeholder: '' },
+  { code: 'SA', dialCode: '+966', flag: '🇸🇦', name: 'Arabie saoudite',       placeholder: '' },
+  { code: 'AR', dialCode: '+54',  flag: '🇦🇷', name: 'Argentine',             placeholder: '' },
+  { code: 'AM', dialCode: '+374', flag: '🇦🇲', name: 'Arménie',               placeholder: '' },
+  { code: 'AU', dialCode: '+61',  flag: '🇦🇺', name: 'Australie',             placeholder: '' },
+  { code: 'AZ', dialCode: '+994', flag: '🇦🇿', name: 'Azerbaïdjan',           placeholder: '' },
+  { code: 'BE', dialCode: '+32',  flag: '🇧🇪', name: 'Belgique',              placeholder: '' },
+  { code: 'BY', dialCode: '+375', flag: '🇧🇾', name: 'Biélorussie',           placeholder: '' },
+  { code: 'BO', dialCode: '+591', flag: '🇧🇴', name: 'Bolivie',               placeholder: '' },
+  { code: 'BA', dialCode: '+387', flag: '🇧🇦', name: 'Bosnie-Herzégovine',    placeholder: '' },
+  { code: 'BR', dialCode: '+55',  flag: '🇧🇷', name: 'Brésil',                placeholder: '' },
+  { code: 'BG', dialCode: '+359', flag: '🇧🇬', name: 'Bulgarie',              placeholder: '' },
+  { code: 'CA', dialCode: '+1',   flag: '🇨🇦', name: 'Canada',                placeholder: '' },
+  { code: 'CL', dialCode: '+56',  flag: '🇨🇱', name: 'Chili',                 placeholder: '' },
+  { code: 'CN', dialCode: '+86',  flag: '🇨🇳', name: 'Chine',                 placeholder: '' },
+  { code: 'CO', dialCode: '+57',  flag: '🇨🇴', name: 'Colombie',              placeholder: '' },
+  { code: 'KR', dialCode: '+82',  flag: '🇰🇷', name: 'Corée du Sud',          placeholder: '' },
+  { code: 'CI', dialCode: '+225', flag: '🇨🇮', name: "Côte d'Ivoire",         placeholder: '' },
+  { code: 'HR', dialCode: '+385', flag: '🇭🇷', name: 'Croatie',               placeholder: '' },
+  { code: 'DK', dialCode: '+45',  flag: '🇩🇰', name: 'Danemark',              placeholder: '' },
+  { code: 'EG', dialCode: '+20',  flag: '🇪🇬', name: 'Égypte',                placeholder: '' },
+  { code: 'AE', dialCode: '+971', flag: '🇦🇪', name: 'Émirats arabes unis',   placeholder: '' },
+  { code: 'ES', dialCode: '+34',  flag: '🇪🇸', name: 'Espagne',               placeholder: '' },
+  { code: 'US', dialCode: '+1',   flag: '🇺🇸', name: 'États-Unis',            placeholder: '' },
+  { code: 'FI', dialCode: '+358', flag: '🇫🇮', name: 'Finlande',              placeholder: '' },
+  { code: 'GH', dialCode: '+233', flag: '🇬🇭', name: 'Ghana',                 placeholder: '' },
+  { code: 'GR', dialCode: '+30',  flag: '🇬🇷', name: 'Grèce',                 placeholder: '' },
+  { code: 'HU', dialCode: '+36',  flag: '🇭🇺', name: 'Hongrie',               placeholder: '' },
+  { code: 'IN', dialCode: '+91',  flag: '🇮🇳', name: 'Inde',                  placeholder: '' },
+  { code: 'ID', dialCode: '+62',  flag: '🇮🇩', name: 'Indonésie',             placeholder: '' },
+  { code: 'IQ', dialCode: '+964', flag: '🇮🇶', name: 'Irak',                  placeholder: '' },
+  { code: 'IR', dialCode: '+98',  flag: '🇮🇷', name: 'Iran',                  placeholder: '' },
+  { code: 'IE', dialCode: '+353', flag: '🇮🇪', name: 'Irlande',               placeholder: '' },
+  { code: 'IL', dialCode: '+972', flag: '🇮🇱', name: 'Israël',                placeholder: '' },
+  { code: 'JP', dialCode: '+81',  flag: '🇯🇵', name: 'Japon',                 placeholder: '' },
+  { code: 'JO', dialCode: '+962', flag: '🇯🇴', name: 'Jordanie',              placeholder: '' },
+  { code: 'KZ', dialCode: '+7',   flag: '🇰🇿', name: 'Kazakhstan',            placeholder: '' },
+  { code: 'KE', dialCode: '+254', flag: '🇰🇪', name: 'Kenya',                 placeholder: '' },
+  { code: 'XK', dialCode: '+383', flag: '🇽🇰', name: 'Kosovo',                placeholder: '' },
+  { code: 'KW', dialCode: '+965', flag: '🇰🇼', name: 'Koweït',                placeholder: '' },
+  { code: 'LB', dialCode: '+961', flag: '🇱🇧', name: 'Liban',                 placeholder: '' },
+  { code: 'LU', dialCode: '+352', flag: '🇱🇺', name: 'Luxembourg',            placeholder: '' },
+  { code: 'MG', dialCode: '+261', flag: '🇲🇬', name: 'Madagascar',            placeholder: '' },
+  { code: 'MY', dialCode: '+60',  flag: '🇲🇾', name: 'Malaisie',              placeholder: '' },
+  { code: 'ML', dialCode: '+223', flag: '🇲🇱', name: 'Mali',                  placeholder: '' },
+  { code: 'MA', dialCode: '+212', flag: '🇲🇦', name: 'Maroc',                 placeholder: '' },
+  { code: 'MX', dialCode: '+52',  flag: '🇲🇽', name: 'Mexique',               placeholder: '' },
+  { code: 'MD', dialCode: '+373', flag: '🇲🇩', name: 'Moldavie',              placeholder: '' },
+  { code: 'MN', dialCode: '+976', flag: '🇲🇳', name: 'Mongolie',              placeholder: '' },
+  { code: 'MZ', dialCode: '+258', flag: '🇲🇿', name: 'Mozambique',            placeholder: '' },
+  { code: 'NG', dialCode: '+234', flag: '🇳🇬', name: 'Nigéria',               placeholder: '' },
+  { code: 'NO', dialCode: '+47',  flag: '🇳🇴', name: 'Norvège',               placeholder: '' },
+  { code: 'NZ', dialCode: '+64',  flag: '🇳🇿', name: 'Nouvelle-Zélande',      placeholder: '' },
+  { code: 'PK', dialCode: '+92',  flag: '🇵🇰', name: 'Pakistan',              placeholder: '' },
+  { code: 'NL', dialCode: '+31',  flag: '🇳🇱', name: 'Pays-Bas',              placeholder: '' },
+  { code: 'PE', dialCode: '+51',  flag: '🇵🇪', name: 'Pérou',                 placeholder: '' },
+  { code: 'PH', dialCode: '+63',  flag: '🇵🇭', name: 'Philippines',           placeholder: '' },
+  { code: 'PL', dialCode: '+48',  flag: '🇵🇱', name: 'Pologne',               placeholder: '' },
+  { code: 'PT', dialCode: '+351', flag: '🇵🇹', name: 'Portugal',              placeholder: '' },
+  { code: 'RO', dialCode: '+40',  flag: '🇷🇴', name: 'Roumanie',              placeholder: '' },
+  { code: 'GB', dialCode: '+44',  flag: '🇬🇧', name: 'Royaume-Uni',           placeholder: '' },
+  { code: 'RU', dialCode: '+7',   flag: '🇷🇺', name: 'Russie',                placeholder: '' },
+  { code: 'SN', dialCode: '+221', flag: '🇸🇳', name: 'Sénégal',               placeholder: '' },
+  { code: 'RS', dialCode: '+381', flag: '🇷🇸', name: 'Serbie',                placeholder: '' },
+  { code: 'SK', dialCode: '+421', flag: '🇸🇰', name: 'Slovaquie',             placeholder: '' },
+  { code: 'SI', dialCode: '+386', flag: '🇸🇮', name: 'Slovénie',              placeholder: '' },
+  { code: 'SE', dialCode: '+46',  flag: '🇸🇪', name: 'Suède',                 placeholder: '' },
+  { code: 'SY', dialCode: '+963', flag: '🇸🇾', name: 'Syrie',                 placeholder: '' },
+  { code: 'TW', dialCode: '+886', flag: '🇹🇼', name: 'Taïwan',                placeholder: '' },
+  { code: 'TZ', dialCode: '+255', flag: '🇹🇿', name: 'Tanzanie',              placeholder: '' },
+  { code: 'CZ', dialCode: '+420', flag: '🇨🇿', name: 'Tchéquie',              placeholder: '' },
+  { code: 'TH', dialCode: '+66',  flag: '🇹🇭', name: 'Thaïlande',             placeholder: '' },
+  { code: 'TN', dialCode: '+216', flag: '🇹🇳', name: 'Tunisie',               placeholder: '' },
+  { code: 'TR', dialCode: '+90',  flag: '🇹🇷', name: 'Turquie',               placeholder: '' },
+  { code: 'UA', dialCode: '+380', flag: '🇺🇦', name: 'Ukraine',               placeholder: '' },
+  { code: 'UY', dialCode: '+598', flag: '🇺🇾', name: 'Uruguay',               placeholder: '' },
+  { code: 'VE', dialCode: '+58',  flag: '🇻🇪', name: 'Venezuela',             placeholder: '' },
+  { code: 'VN', dialCode: '+84',  flag: '🇻🇳', name: 'Viêt Nam',              placeholder: '' },
 ]
 
 interface FormData {
@@ -97,6 +197,15 @@ function CheckIcon() {
   )
 }
 
+function normalizePhone(localNumber: string, dialCode: string): string {
+  const stripped = localNumber.replace(/[\s\-\(\)\.]/g, '')
+  if (!stripped) return ''
+  if (stripped.startsWith('+')) return stripped
+  if (stripped.startsWith('00')) return '+' + stripped.slice(2)
+  if (stripped.startsWith('0')) return dialCode + stripped.slice(1)
+  return dialCode + stripped
+}
+
 export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuccess?: string } = {}) {
   const router = useRouter()
   const [step, setStep] = useState(1)
@@ -109,6 +218,12 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
   })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [error, setError] = useState('')
+  const [selectedCountry, setSelectedCountry] = useState<PhoneCountry>(PHONE_PRIORITY[0])
+  const [showPhoneDropdown, setShowPhoneDropdown] = useState(false)
+  const [phoneError, setPhoneError] = useState('')
+  const [emailError, setEmailError] = useState('')
+  const phoneGroupRef = useRef<HTMLDivElement>(null)
+  const phoneDropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     function onIntent(e: Event) {
@@ -120,6 +235,17 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
     return () => window.removeEventListener('canton-form-intent', onIntent)
   }, [])
 
+  useEffect(() => {
+    if (!showPhoneDropdown) return
+    function handleOutsideClick(e: MouseEvent) {
+      if (phoneDropdownRef.current && !phoneDropdownRef.current.contains(e.target as Node)) {
+        setShowPhoneDropdown(false)
+      }
+    }
+    document.addEventListener('mousedown', handleOutsideClick)
+    return () => document.removeEventListener('mousedown', handleOutsideClick)
+  }, [showPhoneDropdown])
+
   function set(patch: Partial<FormData>) {
     setForm(f => ({ ...f, ...patch }))
   }
@@ -129,8 +255,63 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
     ? (isValidCanton(form.canton) && form.codePostal !== '' && form.trancheAge !== '')
     : (form.pays !== '' && isValidCanton(form.cantonTravail) && form.trancheAge !== '')
 
+  function validatePhone(): boolean {
+    const local = form.telephone.trim()
+    if (!local) {
+      setPhoneError('Votre numéro est requis pour vous recontacter.')
+      return false
+    }
+    const digits = local.replace(/\D/g, '')
+    if (digits.length < 6 || digits.length > 15) {
+      setPhoneError('Ce numéro ne semble pas valide.')
+      return false
+    }
+    setPhoneError('')
+    return true
+  }
+
+  function validatePhoneOnBlur(e: React.FocusEvent<HTMLInputElement>) {
+    if (phoneGroupRef.current && phoneGroupRef.current.contains(e.relatedTarget as Node)) return
+    const local = form.telephone.trim()
+    if (!local) return
+    const digits = local.replace(/\D/g, '')
+    if (digits.length < 6 || digits.length > 15) {
+      setPhoneError('Ce numéro ne semble pas valide.')
+    } else {
+      setPhoneError('')
+    }
+  }
+
+  function validateEmail(): boolean {
+    const email = form.email.trim()
+    if (!email) {
+      setEmailError('Votre adresse e-mail est requise pour vous recontacter.')
+      return false
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      setEmailError('Cette adresse e-mail ne semble pas valide.')
+      return false
+    }
+    setEmailError('')
+    return true
+  }
+
+  function validateEmailOnBlur() {
+    const email = form.email.trim()
+    if (!email) return
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      setEmailError('Cette adresse e-mail ne semble pas valide.')
+    } else {
+      setEmailError('')
+    }
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    const phoneOk = validatePhone()
+    const emailOk = validateEmail()
+    if (!phoneOk || !emailOk) return
+
     setStatus('loading')
     setError('')
     try {
@@ -140,7 +321,7 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
         body: JSON.stringify({
           nom: `${form.prenom} ${form.nom}`.trim(),
           email: form.email,
-          telephone: form.telephone,
+          telephone: normalizePhone(form.telephone, selectedCountry.dialCode),
           ...(form.residenceType === 'resident'
             ? { codePostal: form.codePostal, canton: form.canton }
             : { pays: form.pays, cantonTravail: form.cantonTravail }
@@ -421,7 +602,7 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
                 type="text" required placeholder="Marie"
                 value={form.prenom}
                 onChange={e => set({ prenom: e.target.value })}
-                className="input-field"
+                className="input-field !h-11 !text-[14px]"
               />
             </div>
             <div>
@@ -430,42 +611,114 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
                 type="text" required placeholder="Dupont"
                 value={form.nom}
                 onChange={e => set({ nom: e.target.value })}
-                className="input-field"
+                className="input-field !h-11 !text-[14px]"
               />
             </div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label className="block text-[13px] font-medium text-ink mb-1.5">Téléphone</label>
+
+          {/* Téléphone avec sélecteur de pays */}
+          <div>
+            <label className="block text-[13px] font-medium text-ink mb-1.5">Téléphone</label>
+            <div className="flex gap-2 items-start" ref={phoneGroupRef}>
+              {/* Sélecteur indicatif */}
+              <div className="relative shrink-0" ref={phoneDropdownRef}>
+                <button
+                  type="button"
+                  onClick={() => setShowPhoneDropdown(v => !v)}
+                  className="flex items-center gap-1.5 h-11 px-3 border border-edge rounded-md bg-white hover:border-brand focus:border-brand focus:outline-none focus:ring-2 focus:ring-[#dbeafe] transition-colors"
+                  aria-label="Sélectionner l'indicatif pays"
+                >
+                  <span className="text-[18px] leading-none">{selectedCountry.flag}</span>
+                  <span className="text-[13px] text-slate font-medium tabular-nums">{selectedCountry.dialCode}</span>
+                  <svg className="w-3 h-3 text-slate shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                {showPhoneDropdown && (
+                  <div className="absolute z-50 top-full left-0 mt-1 w-64 bg-white border border-edge rounded-md shadow-lg max-h-60 overflow-y-auto">
+                    {PHONE_PRIORITY.map(country => (
+                      <button
+                        key={country.code}
+                        type="button"
+                        onClick={() => { setSelectedCountry(country); setShowPhoneDropdown(false) }}
+                        className={[
+                          'w-full flex items-center gap-2.5 px-3 py-2 text-[13px] hover:bg-cloud text-left transition-colors',
+                          selectedCountry.code === country.code ? 'bg-[#eff6ff] text-brand' : 'text-ink',
+                        ].join(' ')}
+                      >
+                        <span className="text-[15px] leading-none shrink-0">{country.flag}</span>
+                        <span className="flex-1">{country.name}</span>
+                        <span className="text-slate tabular-nums">{country.dialCode}</span>
+                      </button>
+                    ))}
+                    <div className="border-t border-edge my-1" />
+                    {PHONE_REST.map(country => (
+                      <button
+                        key={country.code}
+                        type="button"
+                        onClick={() => { setSelectedCountry(country); setShowPhoneDropdown(false) }}
+                        className={[
+                          'w-full flex items-center gap-2.5 px-3 py-2 text-[13px] hover:bg-cloud text-left transition-colors',
+                          selectedCountry.code === country.code ? 'bg-[#eff6ff] text-brand' : 'text-ink',
+                        ].join(' ')}
+                      >
+                        <span className="text-[15px] leading-none shrink-0">{country.flag}</span>
+                        <span className="flex-1">{country.name}</span>
+                        <span className="text-slate tabular-nums">{country.dialCode}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+              {/* Numéro local */}
               <input
-                type="tel" required placeholder="+41 79 000 00 00"
+                type="tel"
+                placeholder={selectedCountry.placeholder || 'Numéro de téléphone'}
                 value={form.telephone}
-                onChange={e => set({ telephone: e.target.value })}
-                className="input-field"
+                onChange={e => { set({ telephone: e.target.value }); if (phoneError) setPhoneError('') }}
+                onBlur={validatePhoneOnBlur}
+                className="input-field !h-11 !text-[14px] flex-1"
               />
             </div>
-            <div>
-              <label className="block text-[13px] font-medium text-ink mb-1.5">Adresse e-mail</label>
-              <input
-                type="email" required placeholder="marie@exemple.ch"
-                value={form.email}
-                onChange={e => set({ email: e.target.value })}
-                className="input-field"
-              />
-            </div>
+            {phoneError && (
+              <p className="text-red-600 text-[13px] mt-1">{phoneError}</p>
+            )}
           </div>
+
+          {/* Adresse e-mail */}
+          <div>
+            <label className="block text-[13px] font-medium text-ink mb-1.5">Adresse e-mail</label>
+            <input
+              type="email"
+              placeholder="marie@exemple.ch"
+              value={form.email}
+              onChange={e => { set({ email: e.target.value }); if (emailError) setEmailError('') }}
+              onBlur={validateEmailOnBlur}
+              className="input-field !h-11 !text-[14px]"
+            />
+            {emailError && (
+              <p className="text-red-600 text-[13px] mt-1">{emailError}</p>
+            )}
+          </div>
+
           {error && (
             <p className="text-red-600 text-[13px] border border-red-200 bg-red-50 rounded-md px-3 py-2">
               {error}
             </p>
           )}
+
+          <p className="text-[12px] text-slate text-center leading-relaxed">
+            Vos données sont confidentielles et ne sont jamais transmises à des tiers sans votre accord.
+          </p>
+
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="w-full btn-primary h-12 text-[15px] mt-1 disabled:opacity-60"
+            className="w-full btn-primary h-12 text-[15px] disabled:opacity-60"
           >
             {status === 'loading' ? 'Envoi en cours…' : 'Envoyer ma demande →'}
           </button>
+
           <p className="text-[12px] text-slate/60 text-center leading-relaxed">
             Vos données sont protégées conformément à la LPD, sans engagement, réponse sous 24 heures.
           </p>

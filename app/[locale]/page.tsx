@@ -65,7 +65,7 @@ const webSiteSchema = {
 // ── Données ──────────────────────────────────────────────────────────────────
 
 const stats = [
-  { value: "2'753 CHF", label: 'Économie annuelle possible', sub: 'à Genève, adulte 35 ans' },
+  { value: "5'653 CHF", label: 'Économie annuelle possible', sub: 'à Genève, tous profils' },
   { value: '34',        label: 'Caisses agréées',            sub: 'données OFSP 2026'        },
   { value: '25 à 30 %', label: 'Bénéficiaires de subsides',  sub: 'de la population suisse'  },
 ]

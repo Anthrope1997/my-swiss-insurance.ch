@@ -1128,6 +1128,64 @@ Position dans le layout : après les guides associés, avant `</main>`.
 
 **Sous-titre (immuable) :** `Un expert vous rappelle sous 24 heures pour établir avec vous une solution personnalisée. Gratuit, sans engagement.`
 
+### 7.1 Étape 4 — Champ téléphone
+
+Le champ téléphone est composé de deux éléments côte à côte :
+
+1. **Sélecteur d'indicatif pays** (bouton custom, pas un `<select>`) :
+   - Affiche : drapeau emoji + indicatif (ex. 🇨🇭 +41) + chevron
+   - Valeur par défaut : Suisse (+41)
+   - Dropdown : groupe prioritaire (CH, DE, AT, FR, IT, LI) puis séparateur `<hr>` puis tous les autres pays triés alphabétiquement en français
+   - Fermeture au clic extérieur via `useRef` + `mousedown` listener
+
+2. **Champ numéro local** (flex-1) :
+   - Placeholder adapté au pays sélectionné (ex. "079 000 00 00" pour CH)
+   - L'indicatif pré-rempli n'est pas comptabilisé dans la validation de longueur
+
+**Normalisation au moment de la soumission** (fonction `normalizePhone`) :
+- Supprimer espaces, tirets, parenthèses, points
+- `00XX` → `+XX`
+- `0XXXXXXXX` → `{dialCode}XXXXXXXX` (supprime le 0 trunk)
+- `+XX...` → inchangé
+- Sinon → `{dialCode}{numéro}`
+
+**Validation du numéro** :
+- Vide → message : "Votre numéro est requis pour vous recontacter."
+- Moins de 6 ou plus de 15 chiffres (après suppression des non-chiffres) → message : "Ce numéro ne semble pas valide."
+- `onBlur` : valide uniquement si non vide ; ne se déclenche pas si le focus reste dans le groupe téléphone (sélecteur + champ)
+- À la soumission : valide entièrement y compris le vide
+
+### 7.2 Étape 4 — Champ e-mail
+
+- Validation `onBlur` : si non vide et format invalide → message d'erreur
+- À la soumission : valide entièrement y compris le vide
+- Regex : `/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/`
+
+Messages d'erreur exacts :
+- Vide : "Votre adresse e-mail est requise pour vous recontacter."
+- Format invalide : "Cette adresse e-mail ne semble pas valide."
+
+### 7.3 Étape 4 — Affichage des erreurs
+
+Messages d'erreur en rouge directement sous le champ concerné :
+```tsx
+{phoneError && <p className="text-red-600 text-[13px] mt-1">{phoneError}</p>}
+{emailError && <p className="text-red-600 text-[13px] mt-1">{emailError}</p>}
+```
+L'erreur disparaît dès que l'utilisateur recommence à saisir.
+
+### 7.4 Étape 4 — Texte de réassurance (au-dessus du bouton soumettre)
+
+```tsx
+<p className="text-[12px] text-slate text-center leading-relaxed">
+  Vos données sont confidentielles et ne sont jamais transmises à des tiers sans votre accord.
+</p>
+```
+
+### 7.5 Étapes 1 et 3 — Bouton désactivé sans sélection
+
+Bouton désactivé visuellement (`disabled:opacity-40 disabled:cursor-not-allowed`). Aucun message d'erreur.
+
 **Code minimal (pages guides) :**
 ```tsx
 <div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4">
