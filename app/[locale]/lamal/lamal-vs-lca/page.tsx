@@ -158,7 +158,11 @@ export default function LamalVsLcaPage() {
 
             {/* 1 — Comparaison visuelle */}
             <section id="comparaison" className="pt-2">
-              <h2 className="article-h2">1. Assurance maladie LAMal et complémentaire en un coup d'œil</h2>
+              <h2 className="article-h2">1. Qu&apos;est-ce qui distingue la LAMal de la complémentaire ?</h2>
+              <p className="article-p">
+                La LAMal couvre les soins essentiels pour tous les résidents : médecin, hôpital, médicaments.
+                La complémentaire couvre ce qu&apos;elle exclut, comme la chambre privée, les soins dentaires ou les lunettes.
+              </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div className="bg-cloud border border-edge rounded-[8px] p-6">
                   <h3 className="article-h3 mt-0">LAMal : assurance de base</h3>
@@ -209,7 +213,11 @@ export default function LamalVsLcaPage() {
 
             {/* 2 — Tableau comparatif */}
             <section id="tableau">
-              <h2 className="article-h2">2. Tableau comparatif</h2>
+              <h2 className="article-h2">2. Quelles différences entre LAMal et LCA ?</h2>
+              <p className="article-p">
+                La LAMal est encadrée par la loi fédérale : prestations standardisées, admission garantie, primes approuvées par l&apos;OFSP.
+                La LCA relève du droit privé : l&apos;assureur fixe librement les prestations, les primes et peut refuser un candidat.
+              </p>
               <div className="border border-edge rounded-[8px] overflow-hidden">
                 <table className="stripe-table w-full">
                   <thead>
@@ -234,7 +242,7 @@ export default function LamalVsLcaPage() {
 
             {/* 3 — Types de LCA */}
             <section id="types">
-              <h2 className="article-h2">3. Les principaux types d'assurances complémentaires</h2>
+              <h2 className="article-h2">3. Quels types de complémentaires souscrire en Suisse ?</h2>
               <div className="space-y-4">
                 {[
                   {
@@ -274,7 +282,7 @@ export default function LamalVsLcaPage() {
             {/* 4 — Quand souscrire */}
             <section id="quand">
               <h2 className="article-h2">4. Quand souscrire une complémentaire ?</h2>
-              <div className="callout-warning flex gap-3 mb-6">
+              <div className="callout flex gap-3 mb-6">
                 <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
                      viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
                      strokeLinecap="round" strokeLinejoin="round">
@@ -283,12 +291,11 @@ export default function LamalVsLcaPage() {
                   <line x1="10" y1="21" x2="14" y2="21" />
                 </svg>
                 <div>
-                  <p className="font-semibold mb-1">Le moment de souscription compte</p>
-                  <p className="text-[15px]">
-                    Plus vous souscrivez tôt et en bonne santé, moins vous risquez d'être exclu ou de payer
-                    une surprime. Si vous avez déjà une maladie au moment de la souscription, l'assureur
-                    peut refuser de vous couvrir pour cette condition, ou alors accepter, mais à un tarif
-                    plus élevé.
+                  <p className="font-semibold text-ink mb-1">Le moment de souscription compte</p>
+                  <p className="text-[15px] leading-relaxed">
+                    Plus vous souscrivez tôt et en bonne santé, moins vous risquez d&apos;être exclu ou de payer
+                    une surprime. Si vous avez déjà une maladie au moment de la souscription, l&apos;assureur
+                    peut refuser de vous couvrir pour cette condition, ou accepter à un tarif plus élevé.
                   </p>
                 </div>
               </div>
@@ -311,7 +318,7 @@ export default function LamalVsLcaPage() {
 
             {/* 5 — Cas concrets */}
             <section id="cas-concrets">
-              <h2 className="article-h2">5. Cas concrets</h2>
+              <h2 className="article-h2">5. Dans quels cas une complémentaire est-elle utile ?</h2>
               <div className="space-y-4">
                 {[
                   {

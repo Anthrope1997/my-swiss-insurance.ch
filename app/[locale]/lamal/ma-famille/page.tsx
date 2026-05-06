@@ -146,7 +146,7 @@ export default function MaFamillePage() {
 
             {/* Nouveau-né */}
             <section id="nouveau-ne" className="pt-2">
-              <h2 className="article-h2">Nouveau-né et nourrisson</h2>
+              <h2 className="article-h2">Nouveau-né : comment l'affilier dès la naissance ?</h2>
               <p className="article-p">
                 Tout enfant né en Suisse ou s'y installant doit être affilié à la LAMal.
                 L'affiliation est obligatoire dans les 3 mois suivant la naissance.
@@ -177,7 +177,7 @@ export default function MaFamillePage() {
 
             {/* Enfants */}
             <section id="enfants">
-              <h2 className="article-h2">Enfants de 0 à 18 ans</h2>
+              <h2 className="article-h2">Enfants : quelle franchise choisir de 0 à 18 ans ?</h2>
               <p className="article-p">
                 Les enfants bénéficient d'un tarif de prime nettement inférieur aux adultes
                 et d'un régime de participation aux frais allégé. La quote-part est plafonnée
@@ -229,7 +229,7 @@ export default function MaFamillePage() {
 
             {/* Jeunes adultes */}
             <section id="jeunes-adultes">
-              <h2 className="article-h2">Jeunes adultes de 19 à 25 ans</h2>
+              <h2 className="article-h2">Jeunes adultes : comment profiter du tarif réduit ?</h2>
               <p className="article-p">
                 La catégorie tarifaire jeune adulte offre des primes réduites d'environ 20 à 25 %
                 par rapport au tarif adulte complet. Elle s'applique automatiquement de 19 à 25 ans.
@@ -261,7 +261,7 @@ export default function MaFamillePage() {
             {/* Maternité */}
             <section id="maternite">
               <h2 className="article-h2">
-                Maternité : couverture LAMal complète
+                Maternité : qu'est-ce que la LAMal prend en charge ?
               </h2>
               <p className="article-p">
                 La LAMal couvre entièrement la maternité physiologique sans franchise ni
@@ -312,17 +312,18 @@ export default function MaFamillePage() {
                 </div>
               </div>
 
-              <div className="callout-warning text-[15px]">
-                <strong>LCA hospitalière :</strong> pour une chambre semi-privée ou privée
+              <div className="callout text-[15px]">
+                <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">À retenir</p>
+                <p><strong>LCA hospitalière :</strong> pour une chambre semi-privée ou privée
                 et le libre choix du médecin accoucheur, une LCA hospitalière est nécessaire.
                 Elle doit être souscrite <strong>avant</strong> la grossesse — une grossesse
-                en cours est considérée comme état préexistant et peut entraîner des exclusions.
+                en cours est considérée comme état préexistant et peut entraîner des exclusions.</p>
               </div>
             </section>
 
             {/* Retraité */}
             <section id="retraite">
-              <h2 className="article-h2">LAMal à la retraite</h2>
+              <h2 className="article-h2">Retraite : quels choix LAMal après 65 ans ?</h2>
               <p className="article-p">
                 Il n'existe pas de tarif senior en LAMal. Le tarif adulte s'applique à partir
                 de 26 ans et reste identique quel que soit l'âge. Les retraités ne paient donc

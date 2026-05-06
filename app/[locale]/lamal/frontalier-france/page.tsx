@@ -185,11 +185,11 @@ export default function FrontalierFrancePage() {
 
             {/* Le droit d'option */}
             <section id="droit-option">
-              <h2 className="article-h2">Le droit d'option : fonctionnement</h2>
+              <h2 className="article-h2">Comment fonctionne le droit d'option ?</h2>
 
-              <div className="callout-warning mb-5">
-                <p className="font-semibold text-[#0f2040] mb-1">Délai de 3 mois — à ne pas manquer</p>
-                <p className="text-[15px] text-[#475569]">
+              <div className="callout mb-5">
+                <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">À retenir</p>
+                <p className="text-[15px]">
                   Dès le premier jour de travail en Suisse, vous disposez de 3 mois pour exercer
                   votre droit d'option. Ce choix est en principe définitif sauf changement de situation.
                   Passé ce délai, la LAMal suisse est généralement appliquée par défaut.
@@ -217,7 +217,7 @@ export default function FrontalierFrancePage() {
 
             {/* Option LAMal */}
             <section id="option-lamal">
-              <h2 className="article-h2">Option LAMal suisse</h2>
+              <h2 className="article-h2">Pourquoi choisir la LAMal suisse ?</h2>
 
               <div className="bg-[#f0fdf4] border border-[#86efac] rounded-[8px] p-5 mb-5">
                 <h3 className="font-semibold text-ink text-[15px] mb-3">Avantages de la LAMal</h3>
@@ -252,7 +252,7 @@ export default function FrontalierFrancePage() {
 
             {/* Option Sécurité sociale */}
             <section id="option-secu">
-              <h2 className="article-h2">Option Sécurité sociale française</h2>
+              <h2 className="article-h2">Pourquoi rester à la Sécurité sociale française ?</h2>
 
               <div className="bg-cloud border border-edge rounded-[8px] p-5 mb-5">
                 <h3 className="font-semibold text-ink text-[15px] mb-3">Avantages du maintien en France</h3>
@@ -292,7 +292,7 @@ export default function FrontalierFrancePage() {
 
             {/* Cas Genève */}
             <section id="geneve">
-              <h2 className="article-h2">Cas particulier des frontaliers genevois</h2>
+              <h2 className="article-h2">Qu'est-ce qui change pour les frontaliers genevois ?</h2>
               <p className="article-p">
                 Genève est le canton suisse avec le plus grand nombre de frontaliers français
                 (environ 100 000 personnes). Des dispositions spécifiques s'appliquent dans
@@ -367,6 +367,10 @@ export default function FrontalierFrancePage() {
             {/* LAMal ou Sécurité sociale */}
             <section id="comment-decider">
               <h2 className="article-h2">LAMal ou Sécurité sociale : comment décider ?</h2>
+              <p className="article-p">
+                Le choix dépend principalement de là où vous recevez vos soins et de la composition
+                de votre famille. Les critères ci-dessous orientent la décision dans la majorité des cas.
+              </p>
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-5">
                 <table className="stripe-table w-full">
                   <thead>

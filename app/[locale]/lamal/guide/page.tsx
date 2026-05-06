@@ -124,10 +124,10 @@ const assureurs = [
 ]
 
 const economies = [
-  { canton: 'Genève',    mensuel: 'CHF 229', annuel: 'CHF 2 753' },
-  { canton: 'Neuchâtel', mensuel: 'CHF 146', annuel: 'CHF 1 747' },
-  { canton: 'Valais',    mensuel: 'CHF 120', annuel: 'CHF 1 445' },
-  { canton: 'Vaud',      mensuel: 'CHF 112', annuel: 'CHF 1 347' },
+  { canton: 'Genève',    mensuel: 'CHF 471', annuel: 'CHF 5 653' },
+  { canton: 'Neuchâtel', mensuel: 'CHF 391', annuel: 'CHF 4 686' },
+  { canton: 'Valais',    mensuel: 'CHF 321', annuel: 'CHF 3 846' },
+  { canton: 'Vaud',      mensuel: 'CHF 352', annuel: 'CHF 4 220' },
 ]
 
 const toc = [
@@ -145,7 +145,7 @@ const toc = [
 
 const heroStats = [
   { value: '34',        label: 'Caisses agréées',        sub: 'données OFSP 2026'       },
-  { value: 'CHF 2 753', label: 'Économie maximale possible',  sub: 'à Genève, adulte 35 ans' },
+  { value: 'CHF 5 653', label: 'Économie maximale possible',  sub: 'à Genève, adulte 35 ans' },
   { value: '26',        label: 'Cantons couverts',        sub: 'primes officielles OFSP' },
 ]
 
@@ -258,7 +258,7 @@ export default function GuideLamalPage() {
                 ))}
               </ul>
 
-              <div className="callout-warning flex gap-3">
+              <div className="callout flex gap-3">
                 <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
                      viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
                      strokeLinecap="round" strokeLinejoin="round">
@@ -266,12 +266,14 @@ export default function GuideLamalPage() {
                   <line x1="9.5" y1="18" x2="14.5" y2="18" />
                   <line x1="10" y1="21" x2="14" y2="21" />
                 </svg>
-                <p className="text-[14px]">
-                  <strong>Non couvert par la LAMal de base :</strong>{' '}
-                  soins dentaires (sauf accident ou maladie grave), lunettes et lentilles,
-                  médecine alternative non prescrite, chambre privée à l'hôpital.
-                  Ces prestations relèvent des assurances complémentaires LCA.
-                </p>
+                <div>
+                  <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">À retenir</p>
+                  <p className="text-[15px] leading-relaxed">
+                    Non couvert par la LAMal de base : soins dentaires (sauf accident ou maladie grave),
+                    lunettes et lentilles, médecine alternative non prescrite, chambre privée à l&apos;hôpital.
+                    Ces prestations relèvent des assurances complémentaires LCA.
+                  </p>
+                </div>
               </div>
 
               <div className="mt-6">
@@ -509,7 +511,7 @@ export default function GuideLamalPage() {
               <p className="text-[13px] text-slate/60 mb-6">
                 Profil : adulte 35 ans, modèle standard, franchise 300 CHF.
               </p>
-              <div className="callout-warning flex gap-3">
+              <div className="callout flex gap-3">
                 <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
                      viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
                      strokeLinecap="round" strokeLinejoin="round">
@@ -517,18 +519,27 @@ export default function GuideLamalPage() {
                   <line x1="9.5" y1="18" x2="14.5" y2="18" />
                   <line x1="10" y1="21" x2="14" y2="21" />
                 </svg>
-                <p className="text-[15px]">
-                  <strong>Ces chiffres sont des estimations</strong> reposant sur les écarts de primes
-                  constatés en 2026 pour un adulte, modèle standard, franchise 300 CHF.
-                  Les économies réelles dépendent de votre situation individuelle.
-                </p>
+                <div>
+                  <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">À retenir</p>
+                  <p className="text-[15px] leading-relaxed">
+                    Ces chiffres sont des estimations reposant sur les écarts de primes constatés en 2026
+                    pour un adulte, modèle standard, franchise 300 CHF. Les économies réelles dépendent
+                    de votre situation individuelle.
+                  </p>
+                </div>
               </div>
 
             </section>
 
             {/* 8 — Changer */}
             <section id="changer">
-              <h2 className="article-h2">8. Comment changer de caisse maladie</h2>
+              <h2 className="article-h2">8. Comment changer de caisse maladie ?</h2>
+
+              <p className="article-p">
+                Le changement ordinaire se fait au 1er janvier, sur résiliation envoyée avant le 30 novembre.
+                En cas de hausse de prime annoncée par votre caisse, un délai exceptionnel permet de résilier
+                dans le mois suivant la notification, pour un changement au 31 décembre.
+              </p>
 
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-6">
                 <table className="stripe-table w-full">
@@ -599,7 +610,7 @@ export default function GuideLamalPage() {
                 la base de la déclaration d'impôts. Pour les autres, une demande est à déposer auprès du
                 service cantonal compétent, généralement avant le 31 mars.
               </p>
-              <div className="callout-success flex gap-3">
+              <div className="callout flex gap-3">
                 <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
                      viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
                      strokeLinecap="round" strokeLinejoin="round">
@@ -608,14 +619,14 @@ export default function GuideLamalPage() {
                   <line x1="10" y1="21" x2="14" y2="21" />
                 </svg>
                 <p className="text-[15px]">
-                  <strong>Astuce :</strong> Si vous pensez avoir droit à un subside mais n'en avez pas reçu,
+                  <strong>Astuce :</strong> si vous pensez avoir droit à un subside mais n&apos;en avez pas reçu,
                   contactez votre caisse maladie ou le service cantonal. Les subsides non réclamés ne sont
                   pas versés rétroactivement dans la plupart des cantons.
                 </p>
               </div>
 
               <div className="mt-6">
-                <Link href="#subsides" className="text-brand hover:underline text-[15px] font-medium">
+                <Link href="/lamal/subsides" className="text-brand hover:underline text-[15px] font-medium">
                   Calculer mes subsides LAMal →
                 </Link>
               </div>

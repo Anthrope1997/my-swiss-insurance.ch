@@ -55,13 +55,13 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
     {
       question: `Le canton de ${canton.name} est-il cher pour l'assurance maladie ?`,
       answer:
-        `Avec une prime moyenne de ${canton.primeMoyenne} CHF par mois pour un adulte (franchise 300 CHF, modèle standard), le canton de ${canton.name} se classe au ${ordinal(canton.rang)} rang sur 26 cantons suisses, du moins cher au plus cher (source OFSP 2026). ` +
+        `Avec une prime moyenne de ${canton.primeMoyenne} CHF par mois pour un adulte (tous modèles et franchises confondus), le canton de ${canton.name} se classe au ${ordinal(canton.rang)} rang sur 26 cantons suisses, du moins cher au plus cher (source OFSP 2026). ` +
         `Les primes varient selon votre commune de résidence${canton.nbRegions > 1 ? `, le canton compte ${canton.nbRegions} régions tarifaires OFSP` : ''}, votre franchise et le modèle d'assurance choisi.`,
     },
     {
       question: `Quelle est la différence de prime entre adulte et jeune adulte dans le canton de ${canton.name} ?`,
       answer:
-        `Dans le canton de ${canton.name} en 2026, la prime mensuelle moyenne pour un jeune adulte de 19 à 25 ans est de ${canton.primeMoyenneJA} CHF, contre ${canton.primeMoyenne} CHF pour un adulte de 26 ans et plus (franchise 300 CHF, modèle standard, source OFSP 2026). ` +
+        `Dans le canton de ${canton.name} en 2026, la prime standard (franchise 300 CHF, modèle de base) est de ${canton.primeMoyenneJA} CHF par mois pour un jeune adulte de 19 à 25 ans. La prime moyenne tous profils confondus est de ${canton.primeMoyenne} CHF pour un adulte. ` +
         `Cet écart de ${canton.primeMoyenne - canton.primeMoyenneJA} CHF par mois représente ${formatChf((canton.primeMoyenne - canton.primeMoyenneJA) * 12)} CHF par an.`,
     },
     {
@@ -92,7 +92,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
     '@type': 'Article',
     headline: `Assurance maladie dans le canton de ${canton.name}`,
     description:
-      `Prime LAMal moyenne ${canton.primeMoyenne} CHF par mois dans le ${canton.cantonDe}. ` +
+      `Prime LAMal moyenne ${canton.primeMoyenne} CHF par mois dans le ${canton.cantonDe} (tous modèles et franchises). ` +
       `Caisse la moins chère : ${cheapest.name} à ${cheapest.prime} CHF par mois. ` +
       `Économie maximum CHF ${canton.economieAn} par an. Données OFSP 2026.`,
     datePublished: '2026-01-01',
@@ -137,11 +137,11 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
         <div className="container-xl">
           <div className="badge mb-5">Données OFSP 2026</div>
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-5 max-w-3xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-5">
             Assurance maladie dans le canton de {canton.name}
           </h1>
 
-          <p className="text-lg text-slate leading-relaxed mb-10 max-w-2xl">
+          <p className="text-lg text-slate leading-relaxed mb-10">
             Dans le canton de {canton.name} en 2026, les assurés {canton.demonym} peuvent économiser jusqu'à{' '}
             <strong className="text-[#16a34a]">CHF {formatChf(canton.economieAn)} par an</strong> en changeant
             de caisse, pour des prestations identiques. Le canton se classe{' '}
@@ -201,7 +201,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
           </div>
 
           {/* Encadré régions tarifaires */}
-          <div className="bg-cloud border border-edge rounded-xl px-5 py-4 max-w-2xl">
+          <div className="bg-cloud border border-edge rounded-xl px-5 py-4">
             <p className="text-[13px] font-semibold text-ink mb-1.5">
               {canton.nbRegions > 1
                 ? `${canton.nbRegions} régions tarifaires dans le canton`
@@ -225,9 +225,9 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
         {/* ── Top caisses ──────────────────────────────────────────────── */}
         <section id="top-caisses">
           <h2 className="text-2xl font-semibold text-ink border-b border-edge pb-4 mb-5">
-            Caisses les moins chères, {canton.name} 2026
+            Quelles caisses sont les moins chères dans le {canton.cantonDe} en 2026 ?
           </h2>
-          <p className="text-[15px] text-slate mb-6 max-w-2xl">
+          <p className="text-[15px] text-slate mb-6">
             Classement pour un adulte de 35 ans, franchise 300 CHF, modèle standard, sans couverture accident,
             en moyenne sur {canton.nbRegions > 1 ? `les ${canton.nbRegions} régions tarifaires` : `l'ensemble`} du canton.
             Les primes varient selon votre profil exact et votre commune.
@@ -297,7 +297,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
           <h2 className="text-2xl font-semibold text-ink border-b border-edge pb-4 mb-5">
             Quelle franchise choisir dans le canton de {canton.name} ?
           </h2>
-          <p className="text-[15px] text-slate mb-6 max-w-2xl">
+          <p className="text-[15px] text-slate mb-6">
             Tableau établi pour <strong className="text-ink">{canton.caisseRef}</strong>, adulte de 35 ans,
             sans couverture accident. Le coût total inclut la prime annuelle, la franchise et la quote-part
             (10 %, maximum 700 CHF par an).
@@ -352,7 +352,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
         {/* ── Subsides ─────────────────────────────────────────────────── */}
         <section id="subsides">
           <h2 className="text-2xl font-semibold text-ink border-b border-edge pb-4 mb-5">
-            Subsides LAMal, {canton.name}
+            Quels subsides LAMal dans le {canton.cantonDe} ?
           </h2>
           <div className="border border-edge rounded-[8px] overflow-hidden mb-5">
             <table className="w-full text-[14px]">
@@ -418,7 +418,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
 
         {/* ── Navigation cantons ───────────────────────────────────────── */}
         <section>
-          <h2 className="text-xl font-semibold text-ink mb-4">Comparer avec d'autres cantons</h2>
+          <h2 className="text-xl font-semibold text-ink mb-4">Dans quel canton les primes sont-elles moins chères ?</h2>
           <div className="flex flex-wrap gap-2 mb-8">
             {otherCantons.map((c) => (
               <Link

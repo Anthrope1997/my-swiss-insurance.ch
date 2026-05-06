@@ -9,7 +9,7 @@ import HeroStats from '@/components/ui/HeroStats'
 export const metadata: Metadata = {
   title: 'Primes LAMal 2026 : comparez et économisez — My Swiss Insurance',
   description:
-    'Comparez les primes LAMal 2026 gratuitement. Jusqu\'à 2 753 CHF d\'économie par an à Genève. 34 caisses, données OFSP officielles, résultat immédiat.',
+    'Comparez les primes LAMal 2026 gratuitement. Jusqu\'à 5 653 CHF d\'économie par an à Genève. 34 caisses, données OFSP officielles, résultat immédiat.',
   alternates: { canonical: 'https://my-swiss-insurance.ch/lamal' },
   openGraph: {
     title: 'Primes LAMal 2026 : comparez et économisez',
@@ -27,7 +27,7 @@ const faqItems = [
   },
   {
     question: 'Combien peut-on économiser en changeant de caisse LAMal ?',
-    answer: "Jusqu'à 2 753 CHF par an pour un adulte de 35 ans à Genève (franchise 300 CHF, modèle standard, source OFSP 2026). Les 34 caisses agréées proposent les mêmes prestations de base à des prix très différents selon le canton.",
+    answer: "Jusqu'à 5 653 CHF par an pour un adulte de 35 ans à Genève (franchise 300 CHF, modèle standard, source OFSP 2026). Les 34 caisses agréées proposent les mêmes prestations de base à des prix très différents selon le canton.",
   },
   {
     question: 'Qui a droit à un subside LAMal en Suisse ?',
@@ -150,10 +150,10 @@ const situations = [
 ]
 
 const cantonCards = [
-  { nom: 'Zurich',  primeMin: '412', economieAn: "1'243", href: '/lamal/canton/zurich' },
-  { nom: 'Berne',   primeMin: '389', economieAn: '987',   href: '/lamal/canton/berne'  },
-  { nom: 'Vaud',    primeMin: '591', economieAn: "1'347", href: '/lamal/canton/vaud'   },
-  { nom: 'Genève',  primeMin: '594', economieAn: "2'753", href: '/lamal/canton/geneve' },
+  { nom: 'Zurich',  primeMin: '489', economieAn: "4'285", href: '/lamal/canton/zurich' },
+  { nom: 'Berne',   primeMin: '533', economieAn: "4'447",   href: '/lamal/canton/berne'  },
+  { nom: 'Vaud',    primeMin: '579', economieAn: "4'220", href: '/lamal/canton/vaud'   },
+  { nom: 'Genève',  primeMin: '634', economieAn: "5'653", href: '/lamal/canton/geneve' },
 ]
 
 const aproposFaits = [
@@ -184,7 +184,7 @@ export default function LamalPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }} />
 
       {/* ── 1. HERO ────────────────────────────────────────────────────────── */}
-      <section className="bg-white pt-[7.5rem] pb-24 sm:pt-[10.5rem] sm:pb-[7.5rem]">
+      <section className="bg-white border-b border-edge pt-12 pb-14">
         <div className="container-xl">
 
           <Breadcrumb items={[
@@ -192,13 +192,13 @@ export default function LamalPage() {
             { label: 'LAMal' },
           ]} />
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-5 max-w-2xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
             Économisez sur votre prime LAMal en 2026
           </h1>
 
-          <p className="text-[18px] text-slate leading-relaxed mb-8 max-w-2xl">
+          <p className="text-[18px] text-slate leading-relaxed mb-8">
             En Suisse, toutes les caisses couvrent les mêmes prestations de base. Seul le prix
-            diffère, jusqu'à 2 753 CHF par an d'écart pour un même profil à Genève.
+            diffère, jusqu'à 5 653 CHF par an d'écart pour un même profil à Genève.
             Comparez gratuitement et trouvez la caisse la moins chère pour votre situation.
           </p>
 
@@ -228,10 +228,10 @@ export default function LamalPage() {
       </section>
 
       {/* ── 2. GUIDES LAMAL ─────────────────────────────────────────────────── */}
-      <section className="bg-white border-t border-edge py-[7.5rem]">
+      <section className="bg-white border-t border-edge py-[3.75rem]">
         <div className="container-xl">
 
-          <div className="max-w-2xl mb-12">
+          <div className="mb-6">
             <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
               Tout comprendre sur l'assurance maladie suisse
             </h2>
@@ -277,10 +277,10 @@ export default function LamalPage() {
       </section>
 
       {/* ── 3. PAR SITUATION DE VIE ─────────────────────────────────────────── */}
-      <section className="bg-white border-t border-edge py-[7.5rem]">
+      <section className="bg-white border-t border-edge py-[3.75rem]">
         <div className="container-xl">
 
-          <div className="max-w-2xl mb-12">
+          <div className="mb-6">
             <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
               Votre assurance LAMal selon votre situation
             </h2>
@@ -323,7 +323,7 @@ export default function LamalPage() {
       </section>
 
       {/* ── 4. PAR CANTON ───────────────────────────────────────────────────── */}
-      <section className="bg-white border-t border-edge py-[7.5rem]">
+      <section className="bg-white border-t border-edge py-[3.75rem]">
         <div className="container-xl">
 
           <div className="max-w-2xl mb-8">
@@ -375,10 +375,10 @@ export default function LamalPage() {
       </section>
 
       {/* ── 5. À PROPOS ─────────────────────────────────────────────────────── */}
-      <section className="bg-white border-t border-edge py-[7.5rem]">
+      <section className="bg-white border-t border-edge py-[3.75rem]">
         <div className="container-xl">
 
-          <div className="max-w-2xl mb-12">
+          <div className="mb-6">
             <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
               Une source de référence sur la LAMal en Suisse
             </h2>
@@ -405,7 +405,7 @@ export default function LamalPage() {
       </section>
 
       {/* ── 6. FAQ ──────────────────────────────────────────────────────────── */}
-      <div className="container-xl pb-8 pt-[7.5rem]">
+      <div className="container-xl py-[3.75rem]">
         <FAQ items={faqItems} title="Questions fréquentes sur la LAMal" />
       </div>
 

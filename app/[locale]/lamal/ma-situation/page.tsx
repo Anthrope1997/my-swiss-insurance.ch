@@ -140,7 +140,7 @@ export default function MaSituationPage() {
 
             {/* Salarié */}
             <section id="salarie" className="pt-2">
-              <h2 className="article-h2">LAMal pour les salariés</h2>
+              <h2 className="article-h2">Salarié : quelle couverture LAMal ?</h2>
               <p className="article-p">
                 Le salarié bénéficie du cadre le plus complet : la LAMal de base couvre
                 les soins médicaux, et la LAA (loi sur l'assurance-accidents, RS 832.20)
@@ -209,7 +209,7 @@ export default function MaSituationPage() {
             {/* Indépendant */}
             <section id="independant">
               <h2 className="article-h2">
-                LAMal pour les indépendants et freelances
+                Indépendant : comment couvrir les accidents ?
               </h2>
               <p className="article-p">
                 L'indépendant supporte l'intégralité de sa prime LAMal sans contribution
@@ -217,11 +217,11 @@ export default function MaSituationPage() {
                 par rapport au salarié exige une planification spécifique.
               </p>
 
-              <div className="callout-warning mb-6">
-                <p className="font-semibold text-[#0f2040] mb-1">
-                  Pas de LAA employeur : une lacune à combler
+              <div className="callout mb-6">
+                <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">
+                  À retenir
                 </p>
-                <p className="text-[15px] text-[#475569]">
+                <p className="text-[15px]">
                   Sans couverture accidents spécifique, un accident professionnel ou de loisirs
                   est pris en charge par la LAMal uniquement, avec des franchises et des
                   quote-parts qui s'appliquent normalement. La couverture accidents optionnelle
@@ -258,7 +258,7 @@ export default function MaSituationPage() {
 
             {/* Chômeur */}
             <section id="chomeur">
-              <h2 className="article-h2">LAMal en situation de chômage</h2>
+              <h2 className="article-h2">Chômage : quels droits LAMal ?</h2>
               <p className="article-p">
                 La LAMal est obligatoire pendant le chômage et la couverture ne s'interrompt
                 pas. En revanche, plusieurs mécanismes de protection renforcée s'activent
@@ -295,7 +295,7 @@ export default function MaSituationPage() {
             {/* Nouvel arrivant expatrié */}
             <section id="expatrie">
               <h2 className="article-h2">
-                Nouvel arrivant et expatrié en Suisse
+                Nouvel arrivant : comment s'affilier en 90 jours ?
               </h2>
               <p className="article-p">
                 Dès l'établissement du domicile en Suisse, la LAMal devient obligatoire.

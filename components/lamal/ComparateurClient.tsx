@@ -79,7 +79,7 @@ const cantonTable = [
   { canton: 'Neuchâtel',           code: 'NE', prime: 663.19, economie: 1747, slug: 'neuchatel' },
   { canton: 'Bâle-Ville',          code: 'BS', prime: 668.40, economie: 1150, slug: null },
   { canton: 'Tessin',              code: 'TI', prime: 686.10, economie: 1200, slug: null },
-  { canton: 'Genève',              code: 'GE', prime: 710.41, economie: 2753, slug: 'geneve' },
+  { canton: 'Genève',              code: 'GE', prime: 710.41, economie: 5653, slug: 'geneve' },
 ]
 
 const faqItems = [
@@ -264,7 +264,7 @@ export default function ComparateurClient() {
           {/* StatsGrid */}
           <HeroStats stats={[
             { value: '34 caisses',  label: 'Comparées en temps réel',  sub: 'Données officielles OFSP 2026'      },
-            { value: 'CHF 2 753',   label: 'Économie possible par an', sub: 'Canton de Genève, modèle standard'  },
+            { value: 'CHF 5 653',   label: 'Économie possible par an', sub: 'Canton de Genève, tous profils confondus'  },
             { value: '97%',         label: 'Écart de prime possible',  sub: 'Entre caisses dans une même région' },
           ]} className="mb-8" />
         </div>
@@ -560,7 +560,7 @@ export default function ComparateurClient() {
               <thead>
                 <tr>
                   <th className="text-left whitespace-nowrap">Assureur</th>
-                  <th className="text-center whitespace-nowrap">Part de marché</th>
+                  <th className="text-left whitespace-nowrap">Part de marché</th>
                   <th className="hidden sm:table-cell text-left whitespace-nowrap">Caractéristiques</th>
                 </tr>
               </thead>
@@ -568,7 +568,7 @@ export default function ComparateurClient() {
                 {assureurs.map(a => (
                   <tr key={a.name}>
                     <td className="font-semibold text-ink">{a.name}</td>
-                    <td className="text-center font-medium text-brand">{a.part}%</td>
+                    <td className="font-medium text-brand">{a.part}%</td>
                     <td className="hidden sm:table-cell text-slate">{a.note}</td>
                   </tr>
                 ))}
@@ -646,7 +646,7 @@ export default function ComparateurClient() {
       </section>
 
       {/* ── FORMULAIRE ────────────────────────────────────────────────────── */}
-      <section className="bg-white border-b border-edge py-12">
+      <div id="contact" className="scroll-mt-20 bg-white border-b border-edge py-12">
         <div className="container-xl">
           <h2 className="text-2xl font-semibold text-ink mb-3">Besoin d'aide ?</h2>
           <p className="text-[16px] text-slate mb-6 leading-relaxed">
@@ -655,7 +655,7 @@ export default function ComparateurClient() {
           </p>
           <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
         </div>
-      </section>
+      </div>
 
       {/* ── AUTEUR + GUIDES ───────────────────────────────────────────────── */}
       <div className="container-xl py-12 space-y-8">

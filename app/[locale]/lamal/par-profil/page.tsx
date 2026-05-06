@@ -93,10 +93,10 @@ export default function ParProfilPage() {
             { label: 'LAMal', href: '/lamal' },
             { label: 'Par situation de vie' },
           ]} />
-          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4 max-w-2xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
             LAMal par situation de vie
           </h1>
-          <p className="text-[18px] text-slate max-w-2xl leading-relaxed">
+          <p className="text-[18px] text-slate leading-relaxed">
             Choisissez votre profil pour accéder à des conseils personnalisés :
             franchise optimale, modèle recommandé et points d'attention spécifiques.
           </p>
@@ -106,7 +106,7 @@ export default function ParProfilPage() {
       <div className="container-xl py-12">
 
         {/* Hub cards */}
-        <div className="grid grid-cols-1 gap-6 mb-16 max-w-3xl">
+        <div className="grid grid-cols-1 gap-6 mb-16">
           {hubCards.map((card) => (
             <Link
               key={card.href}
@@ -144,14 +144,12 @@ export default function ParProfilPage() {
         </div>
 
         {/* Contact */}
-        <NeedHelpSection className="max-w-3xl" />
+        <NeedHelpSection />
 
-        <div className="max-w-3xl">
-          <AuthorBio publishedDate="1er janvier 2026" updatedDate="13 avril 2026" />
-        </div>
+        <AuthorBio publishedDate="1er janvier 2026" updatedDate="13 avril 2026" />
 
         {/* Guides associés */}
-        <section className="mt-8 pt-8 border-t border-edge max-w-3xl">
+        <section className="mt-8 pt-8 border-t border-edge">
           <h3 className="text-[15px] font-semibold text-ink mb-4">Guides associés</h3>
           <div className="flex flex-col gap-2">
             {[

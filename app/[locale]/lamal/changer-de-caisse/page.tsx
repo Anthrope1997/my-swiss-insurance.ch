@@ -147,9 +147,12 @@ export default function ChangerDeCaissePage() {
 
             {/* 1 — Dates clés */}
             <section id="dates" className="pt-2">
-              <h2 className="article-h2">1. Dates clés 2026/2027</h2>
-              <div className="callout-warning">
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <h2 className="article-h2">1. Quand peut-on changer de caisse en 2026 ?</h2>
+              <p className="article-p">
+                Le calendrier de changement est strict. La résiliation ordinaire doit parvenir à votre caisse
+                avant le 30 novembre pour une prise d&apos;effet au 1er janvier.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {[
                     { date: '30 novembre 2026', desc: 'Date limite de résiliation ordinaire pour changer au 1er janvier 2027' },
                     { date: 'Octobre à novembre', desc: 'Annonce des nouvelles primes par les assureurs. Vérifiez si votre prime augmente.' },
@@ -161,12 +164,15 @@ export default function ChangerDeCaissePage() {
                     </div>
                   ))}
                 </div>
-              </div>
             </section>
 
             {/* 2 — Délais */}
             <section id="delais">
-              <h2 className="article-h2">2. Délais et situations</h2>
+              <h2 className="article-h2">2. Quels délais s'appliquent selon votre situation ?</h2>
+              <p className="article-p">
+                Les délais varient selon la raison du changement. Le cas ordinaire impose le 30 novembre,
+                mais plusieurs situations ouvrent des droits de résiliation hors délai.
+              </p>
               <div className="border border-edge rounded-[8px] overflow-hidden">
                 <table className="stripe-table w-full">
                   <thead>
@@ -196,7 +202,7 @@ export default function ChangerDeCaissePage() {
 
             {/* 3 — Étapes */}
             <section id="etapes">
-              <h2 className="article-h2">3. Les 5 étapes pour changer</h2>
+              <h2 className="article-h2">3. Comment changer de caisse en 5 étapes ?</h2>
               <div className="space-y-6">
                 {[
                   {
@@ -243,7 +249,7 @@ export default function ChangerDeCaissePage() {
 
             {/* 4 — Lettre */}
             <section id="lettre">
-              <h2 className="article-h2">4. Modèle de lettre de résiliation</h2>
+              <h2 className="article-h2">4. Comment rédiger sa lettre de résiliation ?</h2>
               <p className="article-p">
                 À envoyer par courrier recommandé avant le 30 novembre. Adaptez les champs entre crochets.
               </p>
@@ -284,7 +290,7 @@ export default function ChangerDeCaissePage() {
 
             {/* 5 — Cas particuliers */}
             <section id="cas">
-              <h2 className="article-h2">5. Cas particuliers</h2>
+              <h2 className="article-h2">5. Quels sont les cas de résiliation anticipée ?</h2>
               <div className="space-y-4">
                 {[
                   {

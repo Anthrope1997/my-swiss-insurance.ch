@@ -191,7 +191,12 @@ export default function ModelesPage() {
 
             {/* 1 — Comparatif */}
             <section id="comparatif" className="pt-2">
-              <h2 className="article-h2">1. Comparatif des 4 modèles</h2>
+              <h2 className="article-h2">1. Comment les 4 modèles se comparent-ils ?</h2>
+              <p className="article-p">
+                Tous les modèles couvrent les mêmes prestations LAMal. La différence porte uniquement
+                sur la porte d&apos;entrée dans le système de soins : libre pour le standard, imposée pour les
+                trois modèles alternatifs qui offrent en contrepartie jusqu&apos;à 24% de réduction de prime.
+              </p>
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-6">
                 <table className="stripe-table w-full">
                   <thead>
@@ -228,15 +233,15 @@ export default function ModelesPage() {
                   <line x1="10" y1="21" x2="14" y2="21" />
                 </svg>
                 <div>
-                  <p className="font-semibold text-ink mb-1">À retenir</p>
-                  <p className="text-[15px]">Toutes les prestations médicales sont identiques quel que soit le modèle. Seule la porte d'entrée dans le système de soins diffère. Les remboursements sont les mêmes.</p>
+                  <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">À retenir</p>
+                  <p className="text-[15px] leading-relaxed">Toutes les prestations médicales sont identiques quel que soit le modèle. Seule la porte d&apos;entrée dans le système de soins diffère. Les remboursements sont les mêmes.</p>
                 </div>
               </div>
             </section>
 
             {/* 2 — Détails */}
             <section id="details">
-              <h2 className="article-h2">2. Les 4 modèles en détail</h2>
+              <h2 className="article-h2">2. Comment fonctionne chaque modèle ?</h2>
               <div className="space-y-6">
                 {modeles.map((m) => (
                   <div key={m.id} className={`bg-white border ${m.borderColor} border-l-4 rounded-[8px] p-6`}>
@@ -294,12 +299,12 @@ export default function ModelesPage() {
 
             {/* 3 — Changement */}
             <section id="changement">
-              <h2 className="article-h2">3. Comment changer de modèle</h2>
+              <h2 className="article-h2">3. Comment changer de modèle ?</h2>
               <p className="article-p">
                 Le modèle se choisit une fois par an. Le changement est possible à chaque renouvellement
                 annuel, indépendamment d'un éventuel changement de caisse.
               </p>
-              <div className="callout-warning flex gap-3">
+              <div className="callout flex gap-3">
                 <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
                      viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
                      strokeLinecap="round" strokeLinejoin="round">
@@ -307,10 +312,13 @@ export default function ModelesPage() {
                   <line x1="9.5" y1="18" x2="14.5" y2="18" />
                   <line x1="10" y1="21" x2="14" y2="21" />
                 </svg>
-                <p className="text-[15px]">
-                  <strong>Date limite :</strong> avis de changement à envoyer avant le <strong>30 novembre</strong>{' '}
-                  pour une prise d'effet au 1er janvier. Passé ce délai, votre modèle actuel est reconduit.
-                </p>
+                <div>
+                  <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">À retenir</p>
+                  <p className="text-[15px] leading-relaxed">
+                    Avis de changement à envoyer avant le 30 novembre pour une prise d&apos;effet au
+                    1er janvier. Passé ce délai, votre modèle actuel est reconduit.
+                  </p>
+                </div>
               </div>
               <div className="mt-5">
                 <Link href="/lamal/changer-de-caisse" className="text-brand hover:underline text-[15px] font-medium">

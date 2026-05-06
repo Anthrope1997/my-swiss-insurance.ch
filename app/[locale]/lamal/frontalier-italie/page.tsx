@@ -135,7 +135,7 @@ export default function FrontalierItaliePage() {
 
             {/* Cantons concernés */}
             <section id="qui" className="pt-2">
-              <h2 className="article-h2">Cantons suisses et accords bilatéraux applicables</h2>
+              <h2 className="article-h2">Quels cantons et accords bilatéraux s'appliquent ?</h2>
               <p className="article-p">
                 Les accords bilatéraux Suisse-UE (ALCP, règlements CE 883/2004 et 987/2009)
                 régissent la coordination de sécurité sociale entre la Suisse et l'Italie.
@@ -173,8 +173,11 @@ export default function FrontalierItaliePage() {
 
             {/* Comparaison LAMal vs SSN */}
             <section id="comparaison">
-              <h2 className="article-h2">LAMal suisse vs SSN italien : comparaison</h2>
-
+              <h2 className="article-h2">Quelles différences entre LAMal et SSN italien ?</h2>
+              <p className="article-p">
+                Le SSN est financé par l'impôt et gratuit au point de service — la LAMal est une
+                prime fixe individuelle. La qualité des soins italiens varie fortement selon la région.
+              </p>
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-5">
                 <table className="stripe-table w-full">
                   <thead>
@@ -212,7 +215,7 @@ export default function FrontalierItaliePage() {
 
             {/* Option LAMal */}
             <section id="option-lamal">
-              <h2 className="article-h2">Choisir la LAMal suisse</h2>
+              <h2 className="article-h2">Pourquoi choisir la LAMal suisse ?</h2>
               <div className="space-y-4">
                 {[
                   {
@@ -234,7 +237,7 @@ export default function FrontalierItaliePage() {
 
             {/* Option SSN */}
             <section id="option-ssn">
-              <h2 className="article-h2">Choisir le SSN avec le formulaire S1</h2>
+              <h2 className="article-h2">Comment s'inscrire au SSN avec le formulaire S1 ?</h2>
               <p className="article-p">
                 Si vous optez pour le Servizio Sanitario Nazionale, votre employeur suisse
                 vous remet le formulaire S1. Ce document est le pivot de votre inscription
@@ -301,6 +304,10 @@ export default function FrontalierItaliePage() {
             {/* LAMal ou SSN */}
             <section id="comment-decider">
               <h2 className="article-h2">LAMal ou SSN : comment décider ?</h2>
+              <p className="article-p">
+                Si vos soins ont lieu principalement au Tessin ou en Suisse, la LAMal offre un accès
+                complet sans avance de frais. Si votre famille et vos médecins sont en Italie, le SSN reste plus adapté.
+              </p>
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-5">
                 <table className="stripe-table w-full">
                   <thead>

@@ -38,7 +38,7 @@ const cantons = [
 
 export default function CantonHubPage() {
   return (
-    <div className="container-xl py-16 max-w-4xl">
+    <div className="container-xl py-[3.75rem]">
       <Breadcrumb
         items={[
           { label: 'Accueil', href: '/' },
@@ -51,7 +51,7 @@ export default function CantonHubPage() {
       <div className="mb-10">
         <span className="badge mb-4">Données OFSP 2026</span>
         <h1 className="text-4xl font-bold text-ink mb-4">Primes LAMal par canton</h1>
-        <p className="text-slate text-[17px] leading-relaxed max-w-2xl">
+        <p className="text-slate text-[17px] leading-relaxed">
           En Suisse, les primes LAMal varient selon votre canton de résidence. Sélectionnez votre
           canton pour consulter les primes 2026 et trouver la caisse maladie la moins chère.
         </p>

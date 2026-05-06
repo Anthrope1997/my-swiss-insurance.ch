@@ -135,7 +135,7 @@ export default function FrontalierAllemagnePage() {
 
             {/* Cantons et accords bilatéraux */}
             <section id="qui" className="pt-2">
-              <h2 className="article-h2">Cantons et accords bilatéraux applicables</h2>
+              <h2 className="article-h2">Quels cantons et accords bilatéraux s'appliquent ?</h2>
               <p className="article-p">
                 Les accords bilatéraux Suisse-UE (ALCP, règlements CE 883/2004 et 987/2009)
                 définissent les règles de coordination de sécurité sociale entre la Suisse
@@ -176,8 +176,11 @@ export default function FrontalierAllemagnePage() {
 
             {/* Comparaison LAMal vs GKV */}
             <section id="comparaison">
-              <h2 className="article-h2">LAMal suisse vs GKV allemand : principales différences</h2>
-
+              <h2 className="article-h2">Quelles sont les différences entre LAMal et GKV ?</h2>
+              <p className="article-p">
+                La structure de financement est le cœur de la différence : prime fixe individuelle
+                côté suisse, cotisation proportionnelle au salaire côté allemand. La situation de votre famille change souvent la donne.
+              </p>
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-5">
                 <table className="stripe-table w-full">
                   <thead>
@@ -216,7 +219,7 @@ export default function FrontalierAllemagnePage() {
 
             {/* Cas particulier bâlois */}
             <section id="bale">
-              <h2 className="article-h2">Cas particulier des frontaliers bâlois</h2>
+              <h2 className="article-h2">Qu'est-ce qui change pour les frontaliers bâlois ?</h2>
               <p className="article-p">
                 La région de Bâle (Bâle-Ville et Bâle-Campagne) est l'un des pôles frontaliers
                 les plus actifs de Suisse. Elle attire des travailleurs frontaliers d'Allemagne
@@ -244,7 +247,7 @@ export default function FrontalierAllemagnePage() {
 
             {/* Formulaire S1 */}
             <section id="s1">
-              <h2 className="article-h2">Formulaire S1 pour l'option GKV</h2>
+              <h2 className="article-h2">Comment obtenir et utiliser le formulaire S1 ?</h2>
               <p className="article-p">
                 Si vous optez pour le GKV allemand, votre employeur suisse doit vous fournir
                 le formulaire S1 (anciennement E106). Ce document est indispensable pour
@@ -314,6 +317,10 @@ export default function FrontalierAllemagnePage() {
             {/* LAMal ou GKV */}
             <section id="comment-decider">
               <h2 className="article-h2">LAMal ou GKV : comment décider ?</h2>
+              <p className="article-p">
+                Pour la plupart des familles avec enfants, le GKV est souvent plus économique grâce
+                à la co-assurance gratuite. Pour un célibataire soigné principalement en Suisse, la LAMal est généralement préférable.
+              </p>
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-5">
                 <table className="stripe-table w-full">
                   <thead>

@@ -1116,7 +1116,7 @@ Voir section 7. Titre et sous-titre immuables. Soumission → /fr/merci.
 ```
 
 - **Aucun bouton** (`btn-primary`, `btn-secondary`) dans le corps des sections article
-- **Aucun nudge sombre ni intermédiaire** entre les sections — ni `bg-[var(--navy)]` conditionnel, ni encadrés `bg-cloud` avec `btn-primary`. Le formulaire en bas de page est le seul point de conversion.
+- **Aucun nudge sombre ni intermédiaire** entre les sections — ni `bg-[var(--navy)]` conditionnel, ni encadrés `bg-cloud` avec `btn-primary`. Le formulaire en bas de page est le seul point de conversion. **Exception Template C :** un nudge sombre `bg-[#0f2040]` est autorisé immédiatement après l'affichage des résultats de l'outil (conditionnel `{showResults && ...}`), avec 1 phrase et `<MultiStepLeadForm>`. Ce nudge remplace le formulaire standard en bas de page pour les pages outils.
 - Les liens texte pointent uniquement vers d'autres pages de contenu (guides, cantons, situations)
 - Ils ne pointent jamais vers `#contact` ou `/lamal/comparateur` depuis le corps d'une section
 
@@ -1222,7 +1222,7 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 **CTAs**
 - [ ] Aucun `btn-primary` ni `btn-secondary` dans le hero des pages de contenu
 - [ ] Corps des sections : liens texte `text-brand` uniquement, jamais de bouton
-- [ ] Aucun nudge sombre ou intermédiaire entre les sections
+- [ ] Aucun nudge sombre ou intermédiaire entre les sections (exception Template C : nudge après `{showResults}` uniquement)
 - [ ] TOC sidebar : aucun bouton de conversion
 
 **Structure — Zones éditoriales (§5)**
@@ -1249,8 +1249,8 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 
 **Titres et chiffres clés**
 - [ ] H1 : `text-ink` — jamais `text-brand` sur les titres de page
-- [ ] Valeurs numériques hero stats : `font-bold text-ink` — jamais de couleur bleue sur les chiffres
-- [ ] Texte explicatif sous les valeurs : couleur standard (`text-slate`, `text-ink/70`)
+- [ ] Tuiles statistiques Zone 1 : composant `<HeroStats>` obligatoire — chiffre en `text-[#60a5fa]` (bleu navy), label en `text-white/80`, fond `bg-[#0f2040]`
+- [ ] Aucune grille de tuiles inline (`bg-cloud/60 border border-edge`) — utiliser `<HeroStats>` uniquement
 
 **Visuels**
 - [ ] Toutes les cellules de tableau : `text-left`, `whitespace-nowrap`
@@ -1397,6 +1397,7 @@ Exemple d'usage correct (section stats, liste avantages) :
 | `components/ui/StickyBar.tsx` | Props, seuil d'apparition |
 | `components/ui/EmailCTA.tsx` | Props |
 | `components/ui/LeadForm.tsx` | Props, compact |
+| `components/ui/HeroStats.tsx` | Tuiles statistiques Zone 1 — fond navy, chiffre bleu, `{ value, label, sub }[]` |
 | `components/ui/CantonSearch.tsx` | Navigation automatique |
 | `components/ui/CantonCombobox.tsx` | Props, CANTON_NAMES export |
 | `components/ui/Header.tsx` | Structure menu, couleurs |

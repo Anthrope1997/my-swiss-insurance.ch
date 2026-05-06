@@ -7,7 +7,7 @@ import HeroStats from '@/components/ui/HeroStats'
 export const metadata: Metadata = {
   title: 'Économisez sur votre assurance maladie suisse en 2026 — My Swiss Insurance',
   description:
-    'Comparez les primes LAMal 2026 gratuitement. Jusqu\'à 2 753 CHF d\'économie par an à Genève. 34 caisses, données OFSP officielles, résultat immédiat.',
+    'Comparez les primes LAMal 2026 gratuitement. Jusqu\'à 5 653 CHF d\'économie par an à Genève. 34 caisses, données OFSP officielles, résultat immédiat.',
   alternates: { canonical: 'https://my-swiss-insurance.ch' },
   openGraph: {
     title: 'Économisez sur votre assurance maladie suisse en 2026',
@@ -154,10 +154,10 @@ const situations = [
 ]
 
 const cantonCards = [
-  { nom: 'Zurich',  primeMin: '412', economieAn: "1'243", href: '/lamal/canton/zurich' },
-  { nom: 'Berne',   primeMin: '389', economieAn: '987',   href: '/lamal/canton/berne'  },
-  { nom: 'Vaud',    primeMin: '591', economieAn: "1'347", href: '/lamal/canton/vaud'   },
-  { nom: 'Genève',  primeMin: '594', economieAn: "2'753", href: '/lamal/canton/geneve' },
+  { nom: 'Zurich',  primeMin: '489', economieAn: "4'285", href: '/lamal/canton/zurich' },
+  { nom: 'Berne',   primeMin: '533', economieAn: "4'447",   href: '/lamal/canton/berne'  },
+  { nom: 'Vaud',    primeMin: '579', economieAn: "4'220", href: '/lamal/canton/vaud'   },
+  { nom: 'Genève',  primeMin: '634', economieAn: "5'653", href: '/lamal/canton/geneve' },
 ]
 
 const aproposFaits = [
@@ -199,7 +199,7 @@ export default function HomePage() {
 
           <p className="text-[18px] text-slate leading-relaxed mb-8 max-w-2xl">
             En Suisse, toutes les caisses couvrent les mêmes prestations de base. Seul le prix
-            diffère, jusqu'à 2 753 CHF par an d'écart pour un même profil à Genève.
+            diffère, jusqu'à 5 653 CHF par an d'écart pour un même profil à Genève.
             Comparez gratuitement et trouvez la caisse la moins chère pour votre situation.
           </p>
 
