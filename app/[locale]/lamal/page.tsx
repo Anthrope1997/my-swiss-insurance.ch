@@ -426,7 +426,9 @@ export default function LamalPage() {
 
       {/* Bandeau éditorial */}
       <div className="container-xl pb-12">
-        <AuthorBio publishedDate="1er janvier 2026" updatedDate="6 mai 2026" />
+        <div className="border-t border-edge pt-8 mt-4">
+          <AuthorBio publishedDate="1er janvier 2026" updatedDate="6 mai 2026" />
+        </div>
       </div>
     </>
   )

@@ -161,6 +161,31 @@ Chaque bloc FAQ sur une page article doit être visuellement séparé de la sect
 
 La homepage utilise un wrapper `<section className="bg-white border-t border-edge py-12">` (voir §6 Template B).
 
+### 0.12 Séparateurs de section — entre les blocs majeurs de page
+
+Un séparateur visuel (`border-t border-edge`) est **obligatoire** entre chaque bloc majeur en bas de page. S'applique à **tous les templates** sans exception.
+
+| Transition | Implémentation |
+|---|---|
+| Formulaire → Bandeau éditorial (AuthorBio) | `border-t border-edge pt-8 mt-4` sur le wrapper de l'AuthorBio |
+| Bandeau éditorial → Guides associés | `border-t border-edge pt-8 mt-4` (déjà dans `<section className="pt-8 border-t...">`) |
+| Guides associés → Footer | Natif — le footer a sa propre bordure |
+
+```tsx
+{/* ✓ Correct — séparateur avant AuthorBio */}
+<div className="border-t border-edge pt-8 mt-4">
+  <AuthorBio publishedDate="..." updatedDate="..." />
+</div>
+
+{/* ✓ Correct — séparateur avant guides associés */}
+<section className="pt-8 border-t border-edge mt-4">
+  <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">Guides associés</p>
+  ...
+</section>
+```
+
+---
+
 ### 0.11 Tooltip multiline
 
 Pour afficher plusieurs options sur des lignes distinctes dans un tooltip `<InfoTooltip>` :
@@ -671,7 +696,15 @@ Trois templates couvrent l'ensemble des pages du site. Chaque template est la so
 
 ### Template A — Page guide (toutes les pages éditoriales sauf homepage)
 
-Source de référence : `app/[locale]/lamal/guide/page.tsx`
+Source de référence : `app/[locale]/lamal/franchise/page.tsx`
+
+**Éléments obligatoires sur TOUTES les pages guides sans exception :**
+
+1. **Bloc "En bref"** — exactement 3 phrases autonomes avec fait chiffré, placé avant le Sommaire en Zone 2
+2. **Sommaire colonne unique** — liens vers les H2 de Zone 3, dans Zone 2
+3. **2 phrases d'entrée directe** au début de chaque section H2 de Zone 3, avant tout tableau ou liste
+
+Si l'un de ces trois éléments est absent d'une page guide, c'est une erreur à corriger immédiatement.
 
 **Input nécessaire :**
 - `titreH1`, `intro` : 2-3 phrases — enjeu émotionnel, pas résumé de la page
@@ -744,12 +777,12 @@ export default function PageGuide() {
 
           {/* Bloc En bref — exactement 3 phrases autonomes avec fait chiffré vérifiable */}
           <div className="bg-white border border-edge rounded-xl p-5">
-            <p className="text-base font-semibold text-ink mb-3">
+            <p className="text-2xl font-semibold text-ink mb-3">
               En bref
             </p>
             <ul className="space-y-3">
               {enBref.map((phrase, i) => (
-                <li key={i} className="flex gap-2.5 text-[15px] text-ink leading-relaxed">
+                <li key={i} className="flex gap-2.5 text-[17px] text-slate leading-relaxed">
                   <span className="text-brand font-bold shrink-0 mt-0.5" aria-hidden="true">•</span>
                   <span>{phrase}</span>
                 </li>
@@ -759,13 +792,13 @@ export default function PageGuide() {
 
           {/* Sommaire colonne unique */}
           <div className="bg-white border border-edge rounded-xl p-5">
-            <p className="text-base font-semibold text-ink mb-3">
+            <p className="text-2xl font-semibold text-ink mb-3">
               Sommaire
             </p>
             <ul className="space-y-1">
               {toc.map((item, i) => (
                 <li key={item.id}>
-                  <a href={`#${item.id}`} className="toc-link">{i + 1}. {item.label}</a>
+                  <a href={`#${item.id}`} className="block text-[17px] text-slate leading-relaxed hover:text-brand hover:bg-cloud px-2 py-1 rounded transition-colors">{i + 1}. {item.label}</a>
                 </li>
               ))}
             </ul>
@@ -976,7 +1009,9 @@ export default function PageHub() {
 
 ### Template C — Pages outils (comparateur, calculateur de subsides)
 
-Source de référence : `app/[locale]/lamal/comparateur/page.tsx`, `app/[locale]/lamal/subsides/page.tsx`
+Source de référence **unique** : `app/[locale]/lamal/comparateur/page.tsx`
+
+**Le comparateur de primes est la référence unique pour tous les comparateurs présents et à venir.** Aucun comparateur ne définit son propre style. Même structure hero, mêmes tuiles `<HeroStats>`, mêmes champs, même bouton primaire, même style de sections éditoriales. Toute déviation par rapport à cette référence est une erreur à corriger.
 
 **Input nécessaire :**
 - `titreH1`, `intro` : 2-3 phrases qui posent l'enjeu de l'outil
@@ -1139,6 +1174,40 @@ export default function PageOutil() {
   )
 }
 ```
+
+---
+
+### Template D — Pages cantons
+
+Les pages cantons suivent **Template A avec les adaptations suivantes** :
+
+**Adaptations obligatoires (spécifiques aux cantons) :**
+- Titres H1, H2, H3 : toujours `text-ink` — jamais `text-[#1d4ed8]` ni couleur bleue
+- Aucun badge (`.badge`, `<span>`, `<div>`) au-dessus du H1 — source dans `sub` des tuiles HeroStats uniquement
+- Tuiles statistiques : style identique aux pages guides — `bg-cloud`, chiffre `text-[#1d4ed8]`, label `text-slate`
+- Zone 3 : 2 phrases d'entrée directe au début de chaque section H2, avant tout tableau ou donnée
+- Séparateurs `border-t border-edge` entre tous les blocs majeurs (voir §0.12)
+
+**Hérités de Template A :**
+- Zone 1 : Breadcrumb JSON-LD + H1 + intro + `<HeroStats>`
+- Zone 2 : `bg-cloud` avec En bref (3 phrases) + Sommaire colonne unique
+- Zone 3 : sections avec H2 question directe + 2 phrases d'entrée
+- Fin de page : FAQ → Formulaire → AuthorBio → Guides associés
+
+---
+
+### Template E — Pages légales (mentions légales, confidentialité, à propos)
+
+**Règles spécifiques aux pages légales :**
+- Tout le corps du texte est en `text-ink` ou `text-slate` uniquement
+- Aucune couleur bleue (`text-brand`, `text-[#1d4ed8]`) dans le corps du texte — les informations légales ne comportent pas de mise en valeur colorée
+- Les **liens** restent en `text-brand hover:underline` pour rester identifiables et cliquables
+- Titres H2 : `article-h2` (= `text-2xl font-semibold text-ink`)
+- Pas de `<HeroStats>`, pas de Zone 2, pas de FAQ
+- Pas de formulaire de conversion (`<MultiStepLeadForm>`) en bas de page
+- Structure : Zone 1 (H1 + intro) → Zone 3 (sections de texte) → `<AuthorBio>` → Footer
+
+---
 
 **Règles Template C :** pas de MSIBand, pas de bloc En bref, pas de sommaire. Pas d'AnchorLabels numérotés devant les H2. Pas de bordure dashed sous les phrases d'entrée. L'outil est toujours premier en Zone 2. Maximum 2 couleurs de fond alternées (bg-white / bg-cloud). Chaque tableau en Zone 3 est précédé d'au moins 2 phrases contenant les chiffres clés. Nudge sombre `bg-[#0f2040]` uniquement après l'affichage des résultats de l'outil (conditionnel `{showResults && ...}`). Ordre bas de page : Nudge résultats (si outil) → FAQ → Formulaire → AuthorBio → Guides associés → Footer.
 
@@ -1451,7 +1520,10 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 - [ ] Formulaire : pas de phrase de réassurance "confidentielles..." ; filtre téléphone actif (§7.4)
 - [ ] Formulaire modal (CTA header) : `w-full` dans la modal, tuiles d'options sur une ligne (§7.6)
 - [ ] Homepage (Template B) : ordre fin de page → formulaire → `<AuthorBio>` → footer, pas de guides associés (§6 Template B règle 1)
-- [ ] Labels "En bref" et "Sommaire" : `text-base font-semibold text-ink` — jamais uppercase/tracking (§5 Zone 2)
+- [ ] Labels "En bref" et "Sommaire" : `text-2xl font-semibold text-ink` — jamais `text-base`, uppercase, tracking (§5 Zone 2)
+- [ ] Texte En bref : `text-[17px] text-slate leading-relaxed` — jamais `text-[15px] text-ink`
+- [ ] Liens Sommaire : `hover:text-brand hover:bg-cloud px-2 py-1 rounded` — jamais `toc-link` (border-l interdit)
+- [ ] Séparateurs présents entre formulaire → AuthorBio → Guides associés (§0.12)
 - [ ] Pages canton : un seul `<StickyBar>` visible à tout moment — pas de doublon layout/CantonPage (§3.10)
 - [ ] Subsides : structure identique au comparateur de primes (§6 Template C)
 

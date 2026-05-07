@@ -5,6 +5,7 @@ import FAQ from '@/components/ui/FAQ'
 import Link from 'next/link'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import FrontalierSimulateur from '@/components/lamal/FrontalierSimulateur'
+import HeroStats from '@/components/ui/HeroStats'
 
 export const metadata: Metadata = {
   title: 'LAMal pour les frontaliers italiens en Suisse 2026',
@@ -74,6 +75,29 @@ const faqSchema = {
   })),
 }
 
+const toc = [
+  { id: 'qui',           label: 'Cantons concernés'    },
+  { id: 'comparaison',   label: 'LAMal vs SSN'          },
+  { id: 'option-lamal',  label: 'Option LAMal'           },
+  { id: 'option-ssn',    label: 'Option SSN'             },
+  { id: 'primes',        label: 'Primes 2026'            },
+  { id: 'comment-decider', label: 'Comment décider'      },
+  { id: 'simulateur',    label: 'Simulateur'             },
+  { id: 'faq',           label: 'Questions fréquentes'  },
+]
+
+const heroStats = [
+  { value: '3 mois',   label: "Délai droit d'option",   sub: 'dès le premier jour de travail en Suisse' },
+  { value: '~CHF 686', label: 'Prime mensuelle Tessin',  sub: 'adulte, modèle standard, franchise 300 CHF' },
+  { value: '−20%',     label: 'Réduction prime possible', sub: 'avec modèle Telmed ou médecin famille'    },
+]
+
+const enBref = [
+  "Les frontaliers italo-suisses (Tessin, Grisons, Valais) ont un droit d'option entre la LAMal suisse et le SSN italien — à exercer dans les 3 mois suivant le début de l'emploi.",
+  "Le SSN est financé par l'impôt et gratuit au point de service en Italie — la LAMal offre en échange un accès complet au réseau médical suisse de qualité homogène.",
+  "Si votre famille et vos médecins sont en Italie, le SSN reste plus adapté ; si vous vous soignez principalement en Suisse, la LAMal est généralement préférable.",
+]
+
 export default function FrontalierItaliePage() {
   return (
     <>
@@ -88,50 +112,50 @@ export default function FrontalierItaliePage() {
             { label: 'Frontaliers', href: '/lamal/frontalier' },
             { label: 'Frontaliers italiens' },
           ]} />
-          <div className="badge mb-5">Données OFSP 2026</div>
-          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
             LAMal pour les frontaliers italiens en Suisse 2026
           </h1>
-          <p className="text-[18px] text-slate max-w-2xl leading-relaxed">
+          <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
             Les frontaliers italo-suisses travaillant dans les cantons du Tessin, des Grisons
             ou du Valais disposent du droit d'option entre la LAMal suisse et le Servizio
             Sanitario Nazionale (SSN) italien. Ce guide explique les différences entre les
             deux systèmes, la procédure de choix et les cas particuliers.
           </p>
+
+          <HeroStats stats={heroStats} className="mb-8" />
         </div>
       </section>
 
+      {/* ── Zone 2 — Navigation rapide ── */}
+      <div className="bg-cloud border-b border-edge py-8">
+        <div className="container-xl grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="bg-white border border-edge rounded-xl p-5">
+            <p className="text-2xl font-semibold text-ink mb-3">En bref</p>
+            <ul className="space-y-3">
+              {enBref.map((phrase, i) => (
+                <li key={i} className="flex gap-2.5 text-[17px] text-slate leading-relaxed">
+                  <span className="text-brand font-bold shrink-0 mt-0.5" aria-hidden="true">•</span>
+                  <span>{phrase}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="bg-white border border-edge rounded-xl p-5">
+            <p className="text-2xl font-semibold text-ink mb-3">Sommaire</p>
+            <ul className="space-y-1">
+              {toc.map((item) => (
+                <li key={item.id}>
+                  <a href={`#${item.id}`} className="block text-[17px] text-slate leading-relaxed hover:text-brand hover:bg-cloud px-2 py-1 rounded transition-colors">{item.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Zone 3 — Contenu détaillé ── */}
       <div className="container-xl py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-12 items-start">
-
-          {/* TOC */}
-          <aside className="hidden lg:block">
-            <nav className="sticky top-24">
-              <p className="text-2xl font-semibold text-ink mb-4 px-4">
-                Sommaire
-              </p>
-              <ul className="space-y-0.5">
-                {[
-                  { id: 'qui', label: 'Cantons concernés' },
-                  { id: 'comparaison', label: 'LAMal vs SSN' },
-                  { id: 'option-lamal', label: 'Option LAMal' },
-                  { id: 'option-ssn', label: 'Option SSN' },
-                  { id: 'primes', label: 'Primes 2026' },
-                  { id: 'comment-decider', label: 'Comment décider' },
-                  { id: 'simulateur', label: 'Simulateur' },
-                  { id: 'faq', label: 'Questions fréquentes' },
-                  { id: 'contact', label: "Besoin d'aide" },
-                ].map(item => (
-                  <li key={item.id}>
-                    <a href={`#${item.id}`} className="block text-[17px] text-slate leading-relaxed hover:text-brand hover:bg-cloud px-4 py-1 rounded transition-colors">{item.label}</a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </aside>
-
-          {/* Article */}
-          <article className="min-w-0 space-y-4">
+        <article className="space-y-4">
 
             {/* Cantons concernés */}
             <section id="qui" className="pt-2">
@@ -353,7 +377,9 @@ export default function FrontalierItaliePage() {
             {/* Contact */}
             <NeedHelpSection />
 
-            <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
+            <div className="border-t border-edge pt-8 mt-4">
+              <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
+            </div>
 
             {/* Guides associés */}
             <section className="mt-8 pt-8 border-t border-edge">
@@ -375,8 +401,7 @@ export default function FrontalierItaliePage() {
               </div>
             </section>
 
-          </article>
-        </div>
+        </article>
       </div>
     </>
   )

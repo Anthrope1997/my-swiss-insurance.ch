@@ -140,6 +140,12 @@ const guidesAssocies = [
   { href: '/lamal/changer-de-caisse', label: 'Changer de caisse maladie' },
 ]
 
+const enBref = [
+  "La LAMal propose 4 modèles d'assurance : standard, médecin de famille, HMO et Telmed — tous couvrent exactement les mêmes prestations.",
+  "Les modèles alternatifs réduisent la prime jusqu'à 24% (Telmed) en imposant une porte d'entrée médicale obligatoire avant toute consultation chez un spécialiste.",
+  "Le choix se fait une fois par an avant le 30 novembre ; le modèle standard reste la référence si vous consultez régulièrement plusieurs spécialistes.",
+]
+
 export default function ModelesPage() {
   return (
     <>
@@ -155,7 +161,7 @@ export default function ModelesPage() {
             { label: 'Modèles LAMal' },
           ]} />
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
             Modèles LAMal 2026 : lequel choisir ?
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
@@ -168,26 +174,36 @@ export default function ModelesPage() {
         </div>
       </section>
 
-      {/* ── Layout 2 colonnes ── */}
+      {/* ── Zone 2 — Navigation rapide ── */}
+      <div className="bg-cloud border-b border-edge py-8">
+        <div className="container-xl grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="bg-white border border-edge rounded-xl p-5">
+            <p className="text-2xl font-semibold text-ink mb-3">En bref</p>
+            <ul className="space-y-3">
+              {enBref.map((phrase, i) => (
+                <li key={i} className="flex gap-2.5 text-[17px] text-slate leading-relaxed">
+                  <span className="text-brand font-bold shrink-0 mt-0.5" aria-hidden="true">•</span>
+                  <span>{phrase}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="bg-white border border-edge rounded-xl p-5">
+            <p className="text-2xl font-semibold text-ink mb-3">Sommaire</p>
+            <ul className="space-y-1">
+              {toc.map((item) => (
+                <li key={item.id}>
+                  <a href={`#${item.id}`} className="block text-[17px] text-slate leading-relaxed hover:text-brand hover:bg-cloud px-2 py-1 rounded transition-colors">{item.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Zone 3 — Contenu détaillé ── */}
       <div className="container-xl py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-12 items-start">
-
-          <aside className="hidden lg:block">
-            <nav className="sticky top-24">
-              <p className="text-2xl font-semibold text-ink mb-4 px-4">
-                Sommaire
-              </p>
-              <ul className="space-y-0.5">
-                {toc.map(item => (
-                  <li key={item.id}>
-                    <a href={`#${item.id}`} className="block text-[17px] text-slate leading-relaxed hover:text-brand hover:bg-cloud px-4 py-1 rounded transition-colors">{item.label}</a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </aside>
-
-          <article className="min-w-0 space-y-4">
+        <article className="space-y-4">
 
             {/* 1 — Comparatif */}
             <section id="comparatif" className="pt-2">
@@ -336,7 +352,9 @@ export default function ModelesPage() {
             <NeedHelpSection />
 
             {/* Bandeau MSI */}
-            <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
+            <div className="border-t border-edge pt-8 mt-4">
+              <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
+            </div>
 
             {/* Guides associés */}
             <section className="pt-8 border-t border-edge mt-4">
@@ -356,8 +374,7 @@ export default function ModelesPage() {
               </div>
             </section>
 
-          </article>
-        </div>
+        </article>
       </div>
     </>
   )

@@ -4,6 +4,7 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
 import Link from 'next/link'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
+import HeroStats from '@/components/ui/HeroStats'
 
 export const metadata: Metadata = {
   title: 'LAMal selon votre situation professionnelle en 2026',
@@ -83,6 +84,26 @@ const faqSchema = {
   })),
 }
 
+const toc = [
+  { id: 'salarie',     label: 'Salarié'                },
+  { id: 'independant', label: 'Indépendant'             },
+  { id: 'chomeur',     label: 'Chômeur'                 },
+  { id: 'expatrie',    label: 'Nouvel arrivant'         },
+  { id: 'faq',         label: 'Questions fréquentes'   },
+]
+
+const heroStats = [
+  { value: '90 jours', label: "Délai d'affiliation",  sub: 'dès la prise de domicile en Suisse' },
+  { value: '8 h/sem',  label: 'Seuil couverture LAA', sub: 'accidents non professionnels inclus' },
+  { value: '25–30%',   label: 'Économie possible',    sub: 'avec franchise 2 000–2 500 CHF'     },
+]
+
+const enBref = [
+  "Le salarié bénéficie d'une couverture accidents automatique (LAA) dès 8 heures de travail par semaine — l'indépendant doit l'activer lui-même via la LAMal.",
+  "En cas de chômage, la LAMal reste obligatoire sans interruption et la perte de revenu ouvre souvent des droits prioritaires aux subsides cantonaux.",
+  "Tout nouvel arrivant dispose de 90 jours pour s'affilier à une caisse — si ce délai est respecté, la couverture est rétroactive à la date d'arrivée.",
+]
+
 export default function MaSituationPage() {
   return (
     <>
@@ -96,47 +117,50 @@ export default function MaSituationPage() {
             { label: 'LAMal', href: '/lamal' },
             { label: 'Ma situation' },
           ]} />
-          <div className="badge mb-5">Données OFSP 2026</div>
-          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
             LAMal selon votre situation professionnelle en 2026
           </h1>
-          <p className="text-[18px] text-slate max-w-2xl leading-relaxed">
+          <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
             Salarié, indépendant, en situation de chômage ou nouvel arrivant en Suisse :
             votre statut professionnel détermine directement votre couverture accidents,
             votre franchise optimale et vos droits aux subsides cantonaux.
             Ce guide synthétise les règles essentielles par profil.
           </p>
+
+          <HeroStats stats={heroStats} className="mb-8" />
         </div>
       </section>
 
+      {/* ── Zone 2 — Navigation rapide ── */}
+      <div className="bg-cloud border-b border-edge py-8">
+        <div className="container-xl grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="bg-white border border-edge rounded-xl p-5">
+            <p className="text-2xl font-semibold text-ink mb-3">En bref</p>
+            <ul className="space-y-3">
+              {enBref.map((phrase, i) => (
+                <li key={i} className="flex gap-2.5 text-[17px] text-slate leading-relaxed">
+                  <span className="text-brand font-bold shrink-0 mt-0.5" aria-hidden="true">•</span>
+                  <span>{phrase}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="bg-white border border-edge rounded-xl p-5">
+            <p className="text-2xl font-semibold text-ink mb-3">Sommaire</p>
+            <ul className="space-y-1">
+              {toc.map((item) => (
+                <li key={item.id}>
+                  <a href={`#${item.id}`} className="block text-[17px] text-slate leading-relaxed hover:text-brand hover:bg-cloud px-2 py-1 rounded transition-colors">{item.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Zone 3 — Contenu détaillé ── */}
       <div className="container-xl py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-12 items-start">
-
-          {/* TOC */}
-          <aside className="hidden lg:block">
-            <nav className="sticky top-24">
-              <p className="text-2xl font-semibold text-ink mb-4 px-4">
-                Sommaire
-              </p>
-              <ul className="space-y-0.5">
-                {[
-                  { id: 'salarie', label: 'Salarié' },
-                  { id: 'independant', label: 'Indépendant' },
-                  { id: 'chomeur', label: 'Chômeur' },
-                  { id: 'expatrie', label: 'Nouvel arrivant' },
-                  { id: 'faq', label: 'Questions fréquentes' },
-                  { id: 'contact', label: "Besoin d'aide" },
-                ].map(item => (
-                  <li key={item.id}>
-                    <a href={`#${item.id}`} className="block text-[17px] text-slate leading-relaxed hover:text-brand hover:bg-cloud px-4 py-1 rounded transition-colors">{item.label}</a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </aside>
-
-          {/* Article */}
-          <article className="min-w-0 space-y-4">
+        <article className="space-y-4">
 
             {/* Salarié */}
             <section id="salarie" className="pt-2">
@@ -350,7 +374,9 @@ export default function MaSituationPage() {
             {/* Contact */}
             <NeedHelpSection />
 
-            <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
+            <div className="border-t border-edge pt-8 mt-4">
+              <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
+            </div>
 
             {/* Guides associés */}
             <section className="mt-8 pt-8 border-t border-edge">
@@ -373,8 +399,7 @@ export default function MaSituationPage() {
               </div>
             </section>
 
-          </article>
-        </div>
+        </article>
       </div>
     </>
   )

@@ -4,6 +4,7 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
 import Link from 'next/link'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
+import HeroStats from '@/components/ui/HeroStats'
 
 export const metadata: Metadata = {
   title: 'LAMal pour votre famille en 2026 : enfants, maternité et retraite',
@@ -88,6 +89,27 @@ const faqSchema = {
   })),
 }
 
+const toc = [
+  { id: 'nouveau-ne',    label: 'Nouveau-né'            },
+  { id: 'enfants',       label: 'Enfants'                },
+  { id: 'jeunes-adultes',label: 'Jeunes adultes'         },
+  { id: 'maternite',     label: 'Maternité'              },
+  { id: 'retraite',      label: 'Retraite'               },
+  { id: 'faq',           label: 'Questions fréquentes'  },
+]
+
+const heroStats = [
+  { value: '3 mois',   label: "Délai d'affiliation nourrisson", sub: 'couverture rétroactive à la naissance' },
+  { value: '0 CHF',    label: 'Franchise recommandée',          sub: 'nourrissons et jeunes enfants'         },
+  { value: '−20–25%',  label: 'Réduction jeune adulte',         sub: 'tarif réduit de 19 à 25 ans'          },
+]
+
+const enBref = [
+  "En Suisse, il n'existe pas d'assurance familiale groupée : chaque enfant doit être affilié individuellement dès la naissance, dans les 3 mois suivant sa naissance.",
+  "La maternité est entièrement couverte sans franchise ni quote-part (art. 64 LAMal) — consultations prénatales, accouchement et soins post-partum inclus.",
+  "Le tarif jeune adulte (19–25 ans) réduit la prime de 20 à 25% ; à 26 ans, la bascule vers le tarif adulte est automatique.",
+]
+
 export default function MaFamillePage() {
   return (
     <>
@@ -101,48 +123,50 @@ export default function MaFamillePage() {
             { label: 'LAMal', href: '/lamal' },
             { label: 'Ma famille' },
           ]} />
-          <div className="badge mb-5">Données OFSP 2026</div>
-          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
             LAMal pour votre famille en 2026
           </h1>
-          <p className="text-[18px] text-slate max-w-2xl leading-relaxed">
+          <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
             La Suisse n'a pas d'assurance familiale groupée : chaque membre de la famille
             dispose de son propre contrat LAMal, avec des règles spécifiques selon l'âge.
             Nourrissons, enfants, jeunes adultes, maternité, retraite — ce guide couvre
             chaque étape avec les chiffres et les règles légales applicables en 2026.
           </p>
+
+          <HeroStats stats={heroStats} className="mb-8" />
         </div>
       </section>
 
+      {/* ── Zone 2 — Navigation rapide ── */}
+      <div className="bg-cloud border-b border-edge py-8">
+        <div className="container-xl grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="bg-white border border-edge rounded-xl p-5">
+            <p className="text-2xl font-semibold text-ink mb-3">En bref</p>
+            <ul className="space-y-3">
+              {enBref.map((phrase, i) => (
+                <li key={i} className="flex gap-2.5 text-[17px] text-slate leading-relaxed">
+                  <span className="text-brand font-bold shrink-0 mt-0.5" aria-hidden="true">•</span>
+                  <span>{phrase}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="bg-white border border-edge rounded-xl p-5">
+            <p className="text-2xl font-semibold text-ink mb-3">Sommaire</p>
+            <ul className="space-y-1">
+              {toc.map((item) => (
+                <li key={item.id}>
+                  <a href={`#${item.id}`} className="block text-[17px] text-slate leading-relaxed hover:text-brand hover:bg-cloud px-2 py-1 rounded transition-colors">{item.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Zone 3 — Contenu détaillé ── */}
       <div className="container-xl py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-12 items-start">
-
-          {/* TOC */}
-          <aside className="hidden lg:block">
-            <nav className="sticky top-24">
-              <p className="text-2xl font-semibold text-ink mb-4 px-4">
-                Sommaire
-              </p>
-              <ul className="space-y-0.5">
-                {[
-                  { id: 'nouveau-ne', label: 'Nouveau-né' },
-                  { id: 'enfants', label: 'Enfants' },
-                  { id: 'jeunes-adultes', label: 'Jeunes adultes' },
-                  { id: 'maternite', label: 'Maternité' },
-                  { id: 'retraite', label: 'Retraite' },
-                  { id: 'faq', label: 'Questions fréquentes' },
-                  { id: 'contact', label: "Besoin d'aide" },
-                ].map(item => (
-                  <li key={item.id}>
-                    <a href={`#${item.id}`} className="block text-[17px] text-slate leading-relaxed hover:text-brand hover:bg-cloud px-4 py-1 rounded transition-colors">{item.label}</a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </aside>
-
-          {/* Article */}
-          <article className="min-w-0 space-y-4">
+        <article className="space-y-4">
 
             {/* Nouveau-né */}
             <section id="nouveau-ne" className="pt-2">
@@ -366,7 +390,9 @@ export default function MaFamillePage() {
             {/* Contact */}
             <NeedHelpSection />
 
-            <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
+            <div className="border-t border-edge pt-8 mt-4">
+              <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
+            </div>
 
             {/* Guides associés */}
             <section className="mt-8 pt-8 border-t border-edge">
@@ -389,8 +415,7 @@ export default function MaFamillePage() {
               </div>
             </section>
 
-          </article>
-        </div>
+        </article>
       </div>
     </>
   )

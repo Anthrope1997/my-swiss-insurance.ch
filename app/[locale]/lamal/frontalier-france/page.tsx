@@ -5,6 +5,7 @@ import FAQ from '@/components/ui/FAQ'
 import Link from 'next/link'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import FrontalierSimulateur from '@/components/lamal/FrontalierSimulateur'
+import HeroStats from '@/components/ui/HeroStats'
 
 export const metadata: Metadata = {
   title: 'LAMal pour les frontaliers français en Suisse romande 2026',
@@ -84,6 +85,30 @@ const faqSchema = {
   })),
 }
 
+const toc = [
+  { id: 'qui',           label: 'Qui est concerné'        },
+  { id: 'droit-option',  label: "Droit d'option"          },
+  { id: 'option-lamal',  label: 'Option LAMal'             },
+  { id: 'option-secu',   label: 'Option Sécu française'   },
+  { id: 'geneve',        label: 'Cas Genève'               },
+  { id: 'primes',        label: 'Primes 2026'              },
+  { id: 'comment-decider', label: 'Comment décider'        },
+  { id: 'simulateur',    label: 'Simulateur'               },
+  { id: 'faq',           label: 'Questions fréquentes'    },
+]
+
+const heroStats = [
+  { value: '3 mois',   label: "Délai droit d'option",    sub: 'dès le premier jour de travail en Suisse' },
+  { value: '~100 000', label: 'Frontaliers genevois',    sub: 'le plus grand flux franco-suisse'         },
+  { value: '−20%',     label: 'Réduction prime possible', sub: 'avec modèle Telmed ou médecin famille'   },
+]
+
+const enBref = [
+  "Les frontaliers franco-suisses ont un droit d'option entre la LAMal suisse et la Sécurité sociale française — ce choix doit être exercé dans les 3 mois suivant le début de l'emploi.",
+  "La LAMal offre un accès complet au réseau médical suisse et ouvre des droits aux subsides cantonaux, mais ne couvre pas les soins programmés en France.",
+  "Une fois exercé, le droit d'option est en principe définitif — un changement n'est possible qu'en cas de mariage, divorce, départ à la retraite ou perte d'emploi prolongée.",
+]
+
 export default function FrontalierFrancePage() {
   return (
     <>
@@ -98,51 +123,50 @@ export default function FrontalierFrancePage() {
             { label: 'Frontaliers', href: '/lamal/frontalier' },
             { label: 'Frontaliers français' },
           ]} />
-          <div className="badge mb-5">Données OFSP 2026</div>
-          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
             LAMal pour les frontaliers français en Suisse romande 2026
           </h1>
-          <p className="text-[18px] text-slate max-w-2xl leading-relaxed">
+          <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
             Les frontaliers franco-suisses qui travaillent dans les cantons de Genève, Vaud,
             Neuchâtel, Jura ou Valais disposent d'un droit d'option entre la LAMal suisse
             et la Sécurité sociale française. Ce choix est structurant, difficile à inverser,
             et doit être exercé dans les 3 mois suivant le début de l'emploi en Suisse.
           </p>
+
+          <HeroStats stats={heroStats} className="mb-8" />
         </div>
       </section>
 
+      {/* ── Zone 2 — Navigation rapide ── */}
+      <div className="bg-cloud border-b border-edge py-8">
+        <div className="container-xl grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="bg-white border border-edge rounded-xl p-5">
+            <p className="text-2xl font-semibold text-ink mb-3">En bref</p>
+            <ul className="space-y-3">
+              {enBref.map((phrase, i) => (
+                <li key={i} className="flex gap-2.5 text-[17px] text-slate leading-relaxed">
+                  <span className="text-brand font-bold shrink-0 mt-0.5" aria-hidden="true">•</span>
+                  <span>{phrase}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="bg-white border border-edge rounded-xl p-5">
+            <p className="text-2xl font-semibold text-ink mb-3">Sommaire</p>
+            <ul className="space-y-1">
+              {toc.map((item) => (
+                <li key={item.id}>
+                  <a href={`#${item.id}`} className="block text-[17px] text-slate leading-relaxed hover:text-brand hover:bg-cloud px-2 py-1 rounded transition-colors">{item.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Zone 3 — Contenu détaillé ── */}
       <div className="container-xl py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-12 items-start">
-
-          {/* TOC */}
-          <aside className="hidden lg:block">
-            <nav className="sticky top-24">
-              <p className="text-2xl font-semibold text-ink mb-4 px-4">
-                Sommaire
-              </p>
-              <ul className="space-y-0.5">
-                {[
-                  { id: 'qui', label: 'Qui est concerné' },
-                  { id: 'droit-option', label: "Droit d'option" },
-                  { id: 'option-lamal', label: 'Option LAMal' },
-                  { id: 'option-secu', label: 'Option Sécu française' },
-                  { id: 'geneve', label: 'Cas Genève' },
-                  { id: 'primes', label: 'Primes 2026' },
-                  { id: 'comment-decider', label: 'Comment décider' },
-                  { id: 'simulateur', label: 'Simulateur' },
-                  { id: 'faq', label: 'Questions fréquentes' },
-                  { id: 'contact', label: "Besoin d'aide" },
-                ].map(item => (
-                  <li key={item.id}>
-                    <a href={`#${item.id}`} className="block text-[17px] text-slate leading-relaxed hover:text-brand hover:bg-cloud px-4 py-1 rounded transition-colors">{item.label}</a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </aside>
-
-          {/* Article */}
-          <article className="min-w-0 space-y-4">
+        <article className="space-y-4">
 
             {/* Qui est concerné */}
             <section id="qui" className="pt-2">
@@ -416,7 +440,9 @@ export default function FrontalierFrancePage() {
             {/* Contact */}
             <NeedHelpSection />
 
-            <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
+            <div className="border-t border-edge pt-8 mt-4">
+              <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
+            </div>
 
             {/* Guides associés */}
             <section className="mt-8 pt-8 border-t border-edge">
@@ -438,8 +464,7 @@ export default function FrontalierFrancePage() {
               </div>
             </section>
 
-          </article>
-        </div>
+        </article>
       </div>
     </>
   )

@@ -5,6 +5,7 @@ import FAQ from '@/components/ui/FAQ'
 import Link from 'next/link'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import FrontalierSimulateur from '@/components/lamal/FrontalierSimulateur'
+import HeroStats from '@/components/ui/HeroStats'
 
 export const metadata: Metadata = {
   title: 'LAMal pour les frontaliers allemands en Suisse 2026',
@@ -74,6 +75,29 @@ const faqSchema = {
   })),
 }
 
+const toc = [
+  { id: 'qui',           label: 'Cantons concernés'     },
+  { id: 'comparaison',   label: 'LAMal vs GKV'          },
+  { id: 'bale',          label: 'Cas bâlois'             },
+  { id: 's1',            label: 'Formulaire S1'          },
+  { id: 'primes',        label: 'Primes 2026'            },
+  { id: 'comment-decider', label: 'Comment décider'      },
+  { id: 'simulateur',    label: 'Simulateur'             },
+  { id: 'faq',           label: 'Questions fréquentes'  },
+]
+
+const heroStats = [
+  { value: '3 mois',  label: "Délai droit d'option",   sub: 'dès le premier jour de travail en Suisse' },
+  { value: '~14,6%',  label: 'Cotisation GKV',          sub: 'du salaire brut, partagée employeur/employé' },
+  { value: 'CHF 262', label: 'Économie max. mensuelle', sub: 'à Bâle-Ville, entre caisses LAMal'        },
+]
+
+const enBref = [
+  "Les frontaliers germano-suisses ont un droit d'option entre la LAMal suisse et le GKV allemand — à exercer dans les 3 mois suivant le début de l'emploi.",
+  "Le GKV couvre gratuitement les membres de la famille sans revenu, ce qui le rend souvent plus économique pour les familles avec conjoint ou enfants restés en Allemagne.",
+  "Avec la LAMal, l'accès au réseau médical suisse est complet — avec le GKV, les soins en Suisse sont limités aux urgences.",
+]
+
 export default function FrontalierAllemagnePage() {
   return (
     <>
@@ -88,50 +112,50 @@ export default function FrontalierAllemagnePage() {
             { label: 'Frontaliers', href: '/lamal/frontalier' },
             { label: 'Frontaliers allemands' },
           ]} />
-          <div className="badge mb-5">Données OFSP 2026</div>
-          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
             LAMal pour les frontaliers allemands en Suisse 2026
           </h1>
-          <p className="text-[18px] text-slate max-w-2xl leading-relaxed">
+          <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
             Les frontaliers germano-suisses qui travaillent dans les cantons de Bâle-Ville,
             Bâle-Campagne, Schaffhouse, Thurgovie, Saint-Gall ou Argovie disposent du droit
             d'option entre la LAMal suisse et le système d'assurance maladie légale allemand (GKV).
             Ce guide explique les différences, les démarches et les cas particuliers.
           </p>
+
+          <HeroStats stats={heroStats} className="mb-8" />
         </div>
       </section>
 
+      {/* ── Zone 2 — Navigation rapide ── */}
+      <div className="bg-cloud border-b border-edge py-8">
+        <div className="container-xl grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="bg-white border border-edge rounded-xl p-5">
+            <p className="text-2xl font-semibold text-ink mb-3">En bref</p>
+            <ul className="space-y-3">
+              {enBref.map((phrase, i) => (
+                <li key={i} className="flex gap-2.5 text-[17px] text-slate leading-relaxed">
+                  <span className="text-brand font-bold shrink-0 mt-0.5" aria-hidden="true">•</span>
+                  <span>{phrase}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="bg-white border border-edge rounded-xl p-5">
+            <p className="text-2xl font-semibold text-ink mb-3">Sommaire</p>
+            <ul className="space-y-1">
+              {toc.map((item) => (
+                <li key={item.id}>
+                  <a href={`#${item.id}`} className="block text-[17px] text-slate leading-relaxed hover:text-brand hover:bg-cloud px-2 py-1 rounded transition-colors">{item.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Zone 3 — Contenu détaillé ── */}
       <div className="container-xl py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-12 items-start">
-
-          {/* TOC */}
-          <aside className="hidden lg:block">
-            <nav className="sticky top-24">
-              <p className="text-2xl font-semibold text-ink mb-4 px-4">
-                Sommaire
-              </p>
-              <ul className="space-y-0.5">
-                {[
-                  { id: 'qui', label: 'Cantons concernés' },
-                  { id: 'comparaison', label: 'LAMal vs GKV' },
-                  { id: 'bale', label: 'Cas bâlois' },
-                  { id: 's1', label: 'Formulaire S1' },
-                  { id: 'primes', label: 'Primes 2026' },
-                  { id: 'comment-decider', label: 'Comment décider' },
-                  { id: 'simulateur', label: 'Simulateur' },
-                  { id: 'faq', label: 'Questions fréquentes' },
-                  { id: 'contact', label: "Besoin d'aide" },
-                ].map(item => (
-                  <li key={item.id}>
-                    <a href={`#${item.id}`} className="block text-[17px] text-slate leading-relaxed hover:text-brand hover:bg-cloud px-4 py-1 rounded transition-colors">{item.label}</a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </aside>
-
-          {/* Article */}
-          <article className="min-w-0 space-y-4">
+        <article className="space-y-4">
 
             {/* Cantons et accords bilatéraux */}
             <section id="qui" className="pt-2">
@@ -366,7 +390,9 @@ export default function FrontalierAllemagnePage() {
             {/* Contact */}
             <NeedHelpSection />
 
-            <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
+            <div className="border-t border-edge pt-8 mt-4">
+              <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
+            </div>
 
             {/* Guides associés */}
             <section className="mt-8 pt-8 border-t border-edge">
@@ -388,8 +414,7 @@ export default function FrontalierAllemagnePage() {
               </div>
             </section>
 
-          </article>
-        </div>
+        </article>
       </div>
     </>
   )
