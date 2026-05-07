@@ -122,7 +122,7 @@ export default function SubsidesPage() {
 
             {/* §1 — Comment ça fonctionne */}
             <section id="fonctionnement" className="scroll-mt-24">
-              <h2 className="article-h2">1. Comment ça fonctionne</h2>
+              <h2 className="article-h2">Comment ça fonctionne</h2>
 
               <h3 className="article-h3">Le revenu déterminant</h3>
               <p className="article-p">
@@ -146,7 +146,7 @@ export default function SubsidesPage() {
               </p>
 
               <div className="callout flex gap-3">
-                <svg className="text-brand shrink-0 mt-0.5" width="20" height="20"
+                <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
                      viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
                      strokeLinecap="round" strokeLinejoin="round">
                   <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
@@ -163,7 +163,7 @@ export default function SubsidesPage() {
 
             {/* §2 — Réforme 2025 */}
             <section id="reforme-2025" className="scroll-mt-24">
-              <h2 className="article-h2">2. Réforme 2025 : garanties renforcées</h2>
+              <h2 className="article-h2">Réforme 2025 : garanties renforcées</h2>
               <p className="article-p">
                 Depuis le 1er janvier 2025, la loi fédérale garantit des montants minimaux de subside
                 pour les enfants et les jeunes adultes, indépendamment du canton de résidence.
@@ -206,19 +206,17 @@ export default function SubsidesPage() {
 
             {/* §3 — FAQ */}
             <section id="faq" className="scroll-mt-24 border-t border-edge pt-8">
-              <FAQ items={faqItems} title="3. Questions fréquentes sur les subsides" />
+              <FAQ items={faqItems} title="Questions fréquentes sur les subsides" />
             </section>
 
             {/* §5 — Formulaire contact */}
             <NeedHelpSection />
 
             {/* §6 — Bandeau MSI */}
-            <div className="border-t border-edge pt-8 mt-4">
-              <AuthorBio publishedDate="1er janvier 2026" updatedDate="30 avril 2026" />
-            </div>
+            <AuthorBio publishedDate="1er janvier 2026" updatedDate="30 avril 2026" />
 
             {/* §7 — Guides associés */}
-            <section className="pt-8 border-t border-edge mt-4">
+            <section>
               <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
                 Guides associés
               </p>

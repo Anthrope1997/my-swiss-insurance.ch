@@ -211,7 +211,7 @@ export default function GuideLamalPage() {
 
             {/* 1 — Définition */}
             <section id="definition" className="pt-2">
-              <h2 className="article-h2">1. Qu'est-ce que la LAMal ?</h2>
+              <h2 className="article-h2">Qu'est-ce que la LAMal ?</h2>
               <p className="article-p">
                 La <strong>loi fédérale sur l'assurance-maladie (LAMal)</strong> est la loi suisse qui rend
                 l'assurance maladie de base obligatoire pour toute personne résidant en Suisse, en vigueur
@@ -230,7 +230,7 @@ export default function GuideLamalPage() {
 
             {/* 2 — Couverture */}
             <section id="couverture">
-              <h2 className="article-h2">2. Ce que couvre la LAMal</h2>
+              <h2 className="article-h2">Ce que couvre la LAMal</h2>
               <p className="article-p">
                 Le catalogue des prestations obligatoires est défini et révisé par l'OFSP.
                 Voici les prestations prises en charge après franchise et quote-part :
@@ -299,7 +299,7 @@ export default function GuideLamalPage() {
 
             {/* 3 — Primes */}
             <section id="primes">
-              <h2 className="article-h2">3. Primes LAMal 2026 par canton</h2>
+              <h2 className="article-h2">Primes LAMal 2026 par canton</h2>
               <p className="article-p">
                 Primes moyennes indicatives 2026 pour un <strong>adulte (26 ans et +)</strong>,
                 modèle standard, franchise de 300 CHF. Les primes effectives varient selon l'assureur.
@@ -343,7 +343,7 @@ export default function GuideLamalPage() {
 
             {/* 4 — Assureurs */}
             <section id="assureurs">
-              <h2 className="article-h2">4. Principaux assureurs LAMal en Suisse</h2>
+              <h2 className="article-h2">Principaux assureurs LAMal en Suisse</h2>
               <p className="article-p">
                 34 caisses sont agréées par l'OFSP. Les prestations de base sont identiques
                 chez tous les assureurs. Seules les primes, la qualité du service et les options
@@ -388,7 +388,7 @@ export default function GuideLamalPage() {
 
             {/* 5 — Franchise */}
             <section id="franchise">
-              <h2 className="article-h2">5. Choisir sa franchise LAMal</h2>
+              <h2 className="article-h2">Choisir sa franchise LAMal</h2>
               <p className="article-p">
                 La franchise est le montant annuel que vous payez avant que l'assurance intervienne.
                 Une franchise élevée réduit la prime mensuelle mais augmente le risque financier en cas de maladie.
@@ -447,7 +447,7 @@ export default function GuideLamalPage() {
 
             {/* 6 — Modèles */}
             <section id="modeles">
-              <h2 className="article-h2">6. Les 4 modèles d'assurance LAMal</h2>
+              <h2 className="article-h2">Les 4 modèles d'assurance LAMal</h2>
               <p className="article-p">
                 Chaque modèle impose des contraintes différentes sur l'accès aux soins.
                 Les modèles alternatifs réduisent la prime en échange d'une porte d'entrée obligatoire.
@@ -503,7 +503,7 @@ export default function GuideLamalPage() {
 
             {/* 7 — Économies */}
             <section id="economies">
-              <h2 className="article-h2">7. Économies possibles en changeant de caisse</h2>
+              <h2 className="article-h2">Économies possibles en changeant de caisse</h2>
               <p className="article-p">
                 Certains cantons sont en effet divisés en plusieurs régions de prime. Les écarts de
                 primes entre caisses au sein d'une même région sont significatifs. Voici l'économie
@@ -547,7 +547,7 @@ export default function GuideLamalPage() {
 
             {/* 8 — Changer */}
             <section id="changer">
-              <h2 className="article-h2">8. Comment changer de caisse maladie ?</h2>
+              <h2 className="article-h2">Comment changer de caisse maladie ?</h2>
 
               <p className="article-p">
                 Le changement ordinaire se fait au 1er janvier, sur résiliation envoyée avant le 30 novembre.
@@ -608,7 +608,7 @@ export default function GuideLamalPage() {
 
             {/* 9 — Subsides */}
             <section id="subsides">
-              <h2 className="article-h2">9. Subsides LAMal : qui y a droit ?</h2>
+              <h2 className="article-h2">Subsides LAMal : qui y a droit ?</h2>
               <p className="article-p">
                 Les <strong>subsides de primes</strong> sont des aides financières versées par les cantons
                 aux personnes dont les revenus sont modestes. 28 % de la population suisse en bénéficient.
@@ -648,19 +648,17 @@ export default function GuideLamalPage() {
 
             {/* 10 — FAQ */}
             <section id="faq" className="border-t border-edge pt-8">
-              <FAQ items={faqItems} title="10. Questions fréquentes sur la LAMal" />
+              <FAQ items={faqItems} title="Questions fréquentes sur la LAMal" />
             </section>
 
             {/* Formulaire contact */}
             <NeedHelpSection />
 
             {/* Bandeau MSI */}
-            <div className="border-t border-edge pt-8 mt-4">
-              <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
-            </div>
+            <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
 
             {/* Guides associés */}
-            <section className="pt-8 border-t border-edge mt-4">
+            <section>
               <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
                 Guides associés
               </p>

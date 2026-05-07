@@ -166,27 +166,70 @@ Chaque bloc FAQ sur une page article doit être visuellement séparé de la sect
 
 La homepage utilise un wrapper `<section className="bg-white border-t border-edge py-12">` (voir §6 Template B).
 
-### 0.12 Séparateurs de section — entre les blocs majeurs de page
+### 0.12 Séparateurs de section — règles globales
 
-Un séparateur visuel (`border-t border-edge`) est **obligatoire** entre chaque bloc majeur en bas de page. S'applique à **tous les templates** sans exception.
+**Règles :**
+- **Un seul** séparateur visuel (`border-t border-edge`) entre deux sections de contenu distinctes.
+- **Jamais deux séparateurs consécutifs.**
+- **Pas de séparateur** entre le formulaire et l'AuthorBio — l'`<AuthorBio>` suit directement sans wrapper `border-t`.
+- **Pas de séparateur** entre l'AuthorBio et les guides associés.
+- **Séparateur obligatoire** avant la FAQ (voir §0.10).
+- **Séparateur obligatoire** avant le formulaire (`#contact`).
 
 | Transition | Implémentation |
 |---|---|
-| Formulaire → Bandeau éditorial (AuthorBio) | `border-t border-edge pt-8 mt-4` sur le wrapper de l'AuthorBio |
-| Bandeau éditorial → Guides associés | `border-t border-edge pt-8 mt-4` (déjà dans `<section className="pt-8 border-t...">`) |
+| Section précédente → FAQ | `border-t border-edge pt-8` sur `<section id="faq">` (voir §0.10) |
+| Dernière section → Formulaire | `border-t border-edge pt-12 mt-4` sur le wrapper `#contact` |
+| Formulaire → AuthorBio | **Aucun séparateur** — `<AuthorBio>` suit directement |
+| AuthorBio → Guides associés | **Aucun séparateur** — la section guides suit directement |
 | Guides associés → Footer | Natif — le footer a sa propre bordure |
 
 ```tsx
-{/* ✓ Correct — séparateur avant AuthorBio */}
-<div className="border-t border-edge pt-8 mt-4">
-  <AuthorBio publishedDate="..." updatedDate="..." />
+{/* ✓ Correct — formulaire puis AuthorBio sans séparateur */}
+<div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4">
+  ...
 </div>
+<AuthorBio publishedDate="..." updatedDate="..." />
 
-{/* ✓ Correct — séparateur avant guides associés */}
-<section className="pt-8 border-t border-edge mt-4">
+{/* ✓ Correct — guides associés sans séparateur après AuthorBio */}
+<section>
   <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">Guides associés</p>
   ...
 </section>
+
+{/* ✗ Interdit — double séparateur consécutif */}
+<div className="border-t border-edge pt-8 mt-4">
+  <AuthorBio ... />
+</div>
+<section className="pt-8 border-t border-edge mt-4">
+  ...
+</section>
+```
+
+### 0.13 Numérotation des H2 — jamais de préfixe numérique
+
+Les titres H2 ne portent **jamais** de préfixe numérique (`1.`, `2.`, etc.).
+La numérotation appartient au **sommaire uniquement** — les liens du sommaire affichent `{i + 1}. {item.label}`, pas les H2.
+
+```tsx
+{/* ✓ Correct */}
+<h2 className="article-h2">Comment choisir sa franchise ?</h2>
+
+{/* ✗ Interdit */}
+<h2 className="article-h2">3. Comment choisir sa franchise ?</h2>
+
+{/* ✓ Correct — numéro uniquement dans le sommaire */}
+<a href={`#${item.id}`} ...>{i + 1}. {item.label}</a>
+```
+
+Cela inclut les titres de FAQ : le titre passé à `<FAQ title="..." />` ne commence pas par un numéro.
+
+```tsx
+{/* ✓ Correct */}
+<FAQ items={faqItems} title="Questions fréquentes sur les subsides" />
+
+{/* ✗ Interdit */}
+<FAQ items={faqItems} title="3. Questions fréquentes sur les subsides" />
 ```
 
 ---
@@ -821,8 +864,8 @@ export default function PageGuide() {
           {/* ── Pattern section — répéter pour chaque entrée du sommaire ── */}
           <section id="{id}">
 
-            {/* H2 toujours formulé comme une question directe */}
-            <h2 className="article-h2">{n}. {questionDirecte}</h2>
+            {/* H2 toujours formulé comme une question directe — jamais de préfixe numérique (§0.13) */}
+            <h2 className="article-h2">{questionDirecte}</h2>
 
             {/* 2 phrases d'entrée directement sous le H2, sans séparateur */}
             <p className="article-p mb-6">{phraseEntree1} {phraseEntree2}</p>
@@ -856,7 +899,7 @@ export default function PageGuide() {
 
           {/* FAQ — 1ère question ouverte par défaut, TOUJOURS avant le formulaire — séparateur obligatoire */}
           <section id="faq" className="border-t border-edge pt-8">
-            <FAQ items={faqItems} title="{N}. Questions fréquentes sur {sujet}" />
+            <FAQ items={faqItems} title="Questions fréquentes sur {sujet}" />
           </section>
 
           {/* Formulaire */}
@@ -869,11 +912,11 @@ export default function PageGuide() {
             <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
           </div>
 
-          {/* Bandeau MSI — après le formulaire, avant les guides associés */}
+          {/* Bandeau MSI — après le formulaire, sans séparateur (§0.12) */}
           <AuthorBio publishedDate={publishedDateFR} updatedDate={updatedDateFR} />
 
-          {/* Guides associés */}
-          <section className="pt-8 border-t border-edge mt-4">
+          {/* Guides associés — sans séparateur après AuthorBio (§0.12) */}
+          <section>
             <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
               Guides associés
             </p>
@@ -1099,7 +1142,7 @@ export default function PageOutil() {
 
           {/* Section éditoriale — phrase d'entrée directe avant tout tableau ou liste */}
           <section id="{id}">
-            <h2 className="article-h2">{n}. {questionDirecte}</h2>
+            <h2 className="article-h2">{questionDirecte}</h2>
             <p className="article-p mb-6">{phraseEntree1} {phraseEntree2}</p>
             {/* Contenu */}
           </section>
@@ -1108,7 +1151,7 @@ export default function PageOutil() {
           {/* OBLIGATOIRE : phrase1 et phrase2 contiennent les chiffres clés du tableau */}
           {/* Un tableau sans phrase d'introduction n'est pas indexable par les moteurs IA */}
           <section id="{id-tableau}">
-            <h2 className="article-h2">{n}. {questionDirecte}</h2>
+            <h2 className="article-h2">{questionDirecte}</h2>
             <p className="article-p mb-6">{phrase1} {phrase2}</p>
             <div className="overflow-x-auto border border-edge rounded-[8px]">
               <table className="stripe-table w-full">
@@ -1139,7 +1182,7 @@ export default function PageOutil() {
 
           {/* FAQ — 1ère question ouverte par défaut — séparateur obligatoire */}
           <section id="faq" className="border-t border-edge pt-8">
-            <FAQ items={faqItems} title="{N}. Questions fréquentes" />
+            <FAQ items={faqItems} title="Questions fréquentes" />
           </section>
 
           {/* Formulaire */}
@@ -1152,11 +1195,11 @@ export default function PageOutil() {
             <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
           </div>
 
-          {/* Bandeau MSI */}
+          {/* Bandeau MSI — sans séparateur (§0.12) */}
           <AuthorBio publishedDate={publishedDateFR} updatedDate={updatedDateFR} />
 
-          {/* Guides associés */}
-          <section className="pt-8 border-t border-edge mt-4">
+          {/* Guides associés — sans séparateur après AuthorBio (§0.12) */}
+          <section>
             <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
               Guides associés
             </p>
@@ -1195,6 +1238,13 @@ Les pages cantons suivent **Template A avec les adaptations suivantes** :
 - Zone 3 : 2 phrases d'entrée directe au début de chaque section H2, avant tout tableau ou donnée
 - Séparateurs `border-t border-edge` entre tous les blocs majeurs (voir §0.12)
 - **`<StickyBar>` supprimé définitivement** — ne jamais instancier dans `<CantonPage>` ni dans aucun layout parent (voir §3.5 et §3.10)
+
+**Adaptations supplémentaires — obligatoires sur les pages cantons :**
+- **Tableau — fond uniforme :** les cellules `<th>` n'ont pas de fond `bg-cloud` distinct. Les en-têtes et cellules de données utilisent le même fond (alternance gérée par `stripe-table`). Ne jamais ajouter de classe `bg-cloud` ou `bg-*` spécifique sur `<thead>` ou ses `<th>`.
+- **Encadrés franchise — libellés normalisés :** utiliser "Si vous êtes rarement malade" (jamais "Peu de frais médicaux") et "Si vous avez des soins réguliers" (jamais "Frais médicaux élevés").
+- **Navigation entre cantons :** remplacer toutes les listes de pastilles/liens cantons par le composant `<CantonSearch />` (hors footer, hors tableaux de données). Ne jamais créer une liste ou grille de liens cantons inline.
+- **Bloc tarif supprimé :** aucun bloc "régions tarifaires" ni tableau de primes entre la Zone 1 (hero) et la Zone 2 (En bref + Sommaire). Structure canonique : Zone 1 → Zone 2 → Zone 3.
+- **Guides associés :** même composant grille 2×2 que les pages guides (Template A) — pas de style de liste spécifique aux cantons.
 
 **Hérités de Template A :**
 - Zone 1 : Breadcrumb JSON-LD + H1 + intro + `<HeroStats>`
@@ -1427,7 +1477,7 @@ Les chiffres clés apparaissent dans le texte brut, pas uniquement dans les tabl
 - Bloc texte : "My Swiss Insurance" (`text-sm font-semibold`) / "Service éditorial indépendant" (`text-sm`) / "Publié le..." (`text-sm`)
 - Pas de badge "Données OFSP 2026"
 **FAQ :** TOUJOURS avant le formulaire.
-**Ordre bas de page (Template A) :** Formulaire (#contact) → Bandeau MSI → Guides associés → Footer.
+**Ordre bas de page (Template A) :** Formulaire (#contact) → Bandeau MSI → Guides associés → Footer. Aucun séparateur entre Formulaire → AuthorBio ni entre AuthorBio → Guides associés (§0.12).
 
 ---
 
@@ -1531,8 +1581,16 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 - [ ] Labels "En bref" et "Sommaire" : `text-2xl font-semibold text-ink` — jamais `text-base`, uppercase, tracking (§5 Zone 2)
 - [ ] Texte En bref : `text-[17px] text-slate leading-relaxed` — jamais `text-[15px] text-ink`
 - [ ] Liens Sommaire : `hover:text-brand hover:bg-cloud px-2 py-1 rounded` — jamais `toc-link` (border-l interdit)
-- [ ] Séparateurs présents entre formulaire → AuthorBio → Guides associés (§0.12)
+- [ ] Séparateurs : obligatoire avant FAQ et avant formulaire ; aucun séparateur entre formulaire → AuthorBio → Guides associés (§0.12)
+- [ ] Jamais deux séparateurs consécutifs (§0.12)
+- [ ] H2 sans préfixe numérique — numéros uniquement dans le sommaire (§0.13)
+- [ ] Titre FAQ sans préfixe numérique (§0.13)
 - [ ] Pages canton : `<StickyBar>` supprimé définitivement — jamais instancié dans `<CantonPage>` ni dans le layout parent (§3.5, §3.10, Template D)
+- [ ] Pages canton — tableau : pas de `bg-cloud` sur `<thead>` ni `<th>` (Template D)
+- [ ] Pages canton — franchise : "Si vous êtes rarement malade" / "Si vous avez des soins réguliers" (Template D)
+- [ ] Pages canton — navigation cantons : `<CantonSearch />` uniquement, jamais de liste de pastilles/liens (Template D)
+- [ ] Pages canton — pas de bloc tarif entre Zone 1 et Zone 2 (Template D)
+- [ ] Pages canton — guides associés : grille 2×2 standard identique aux pages guides (Template D)
 - [ ] Subsides : structure identique au comparateur de primes (§6 Template C)
 
 **Header**
@@ -1600,6 +1658,9 @@ Colonnes déplacées dans un encadré texte : Économie par mois · Seuil d'équ
 
 **Usage réservé :** astuces et remarques utiles à l'utilisateur.
 **Jamais** pour des sources, références, mentions légales ou informations purement factuelles sans valeur conseil.
+
+**Icône ampoule : toujours visible, jamais omise.** Un callout sans icône est une erreur à corriger.
+**Style de fond :** fond légèrement teinté (jamais de fond plein coloré) + contour bleu CTA — la classe `.callout` applique ce style globalement. S'applique à tous les templates sans exception.
 
 Chaque encadré bleu doit comporter une **icône ampoule outline** à gauche du texte :
 - Taille : **20px** (`width="20" height="20"`)

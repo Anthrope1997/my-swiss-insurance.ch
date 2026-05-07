@@ -2,10 +2,10 @@ import AuthorBio from '@/components/ui/AuthorBio'
 import FAQ from '@/components/ui/FAQ'
 import HeroStats from '@/components/ui/HeroStats'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
+import CantonSearch from '@/components/ui/CantonSearch'
 import SubsidesCalculator from '@/components/lamal/SubsidesCalculator'
 import Link from 'next/link'
 import type { Canton } from '@/data/lamal/cantons'
-import { allCantons } from '@/data/lamal/cantons'
 import type { Canton as SubsideCanton } from '@/lib/lamal/calcul-subside'
 
 const SLUG_TO_SUBSIDE: Record<string, SubsideCanton> = {
@@ -142,8 +142,6 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
     ],
   }
 
-  const otherCantons = allCantons.filter((c) => c.slug !== canton.slug)
-
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
@@ -168,23 +166,6 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
           </p>
 
           <HeroStats stats={heroStats} className="mb-10" />
-
-          {/* Encadré régions tarifaires */}
-          <div className="bg-cloud border border-edge rounded-xl px-5 py-4">
-            <p className="text-[13px] font-semibold text-ink mb-1.5">
-              {canton.nbRegions > 1
-                ? `${canton.nbRegions} régions tarifaires dans le canton`
-                : 'Tarif uniforme dans le canton'}
-            </p>
-            <p className="text-[14px] text-slate leading-relaxed">
-              {canton.nbRegions > 1
-                ? `Dans le canton de ${canton.name}, les primes LAMal varient selon votre commune de résidence. L'OFSP divise le territoire en ${canton.nbRegions} régions tarifaires (${canton.regions.map((r) => r.id).join(' et ')}), avec des primes allant de ${Math.min(...canton.regions.map((r) => r.prime)).toFixed(0)} à ${Math.max(...canton.regions.map((r) => r.prime)).toFixed(0)} CHF par mois en moyenne.`
-                : `Dans le canton de ${canton.name}, les primes LAMal sont uniformes pour l'ensemble des communes. La prime exacte dépend de votre caisse, de votre franchise et de votre modèle d'assurance.`}{' '}
-              <Link href="/lamal/comparateur" className="text-brand hover:underline font-medium">
-                Utilisez le comparateur pour votre code postal exact →
-              </Link>
-            </p>
-          </div>
         </div>
       </section>
 
@@ -326,13 +307,13 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
           </div>
           <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div className="bg-[#dbeafe] rounded-[8px] px-4 py-3">
-              <p className="text-[13px] font-semibold text-[#1d4ed8] mb-0.5">Peu de frais médicaux</p>
+              <p className="text-[13px] font-semibold text-[#1d4ed8] mb-0.5">Si vous êtes rarement malade</p>
               <p className="text-[13px] text-[#1d4ed8]">
                 Franchise 2 500 CHF : économie de CHF {formatChf(economieFranchise)} par an sur la prime.
               </p>
             </div>
             <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
-              <p className="text-[13px] font-semibold text-slate mb-0.5">Frais médicaux élevés</p>
+              <p className="text-[13px] font-semibold text-slate mb-0.5">Si vous avez des soins réguliers</p>
               <p className="text-[13px] text-slate">
                 Franchise 300 CHF : reste à charge plafonné à CHF 1 000 par an.
               </p>
@@ -410,41 +391,34 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
         <NeedHelpSection />
 
         {/* ── Mise à jour ──────────────────────────────────────────────── */}
-        <div className="border-t border-edge pt-8 mt-4">
-          <AuthorBio publishedDate="1er janvier 2026" updatedDate="21 avril 2026" />
-        </div>
+        <AuthorBio publishedDate="1er janvier 2026" updatedDate="21 avril 2026" />
 
-        {/* ── Navigation cantons ───────────────────────────────────────── */}
+        {/* ── Recherche par canton ─────────────────────────────────────── */}
         <section>
-          <h2 className="text-xl font-semibold text-ink mb-4">Dans quel canton les primes sont-elles moins chères ?</h2>
-          <div className="flex flex-wrap gap-2 mb-8">
-            {otherCantons.map((c) => (
-              <Link
-                key={c.slug}
-                href={`/lamal/canton/${c.slug}`}
-                className="text-[14px] font-medium text-brand bg-[#dbeafe] hover:bg-brand hover:text-white px-3 py-1.5 rounded-full transition-colors"
-              >
-                {c.name}
-              </Link>
-            ))}
-          </div>
-          <h3 className="text-[16px] font-semibold text-ink mb-3">Pages utiles</h3>
-          <div className="flex flex-col gap-2">
+          <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
+            Comparer un autre canton
+          </p>
+          <CantonSearch />
+        </section>
+
+        {/* ── Guides associés ──────────────────────────────────────────── */}
+        <section>
+          <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
+            Guides associés
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {[
-              { href: '/lamal/guide',             label: 'Comprendre la LAMal' },
+              { href: '/lamal/guide',             label: 'Comprendre la LAMal'       },
+              { href: '/lamal/franchise',         label: 'Choisir sa franchise'      },
               { href: '/lamal/changer-de-caisse', label: 'Changer de caisse maladie' },
-              { href: '/lamal/comparateur',       label: 'Comparateur de primes 2026' },
-              { href: '/lamal/subsides',           label: 'Calculateur de subsides' },
-            ].map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-[15px] text-brand hover:underline flex items-center gap-1"
-              >
-                <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              { href: '/lamal/subsides',           label: 'Calculateur de subsides'   },
+            ].map(({ href, label }) => (
+              <Link key={href} href={href}
+                className="flex items-center gap-2 text-[14px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
-                {link.label}
+                {label}
               </Link>
             ))}
           </div>

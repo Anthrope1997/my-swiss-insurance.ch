@@ -535,7 +535,7 @@ export default function ComparateurClient() {
         <div className="container-xl">
 
           <h2 className="article-h2 !mt-0">
-            1. Quels assureurs dominent le marché suisse ?
+            Quels assureurs dominent le marché suisse ?
           </h2>
           <p className="article-p mb-10">
             8 groupes se partagent la totalité du marché de l'assurance maladie obligatoire en Suisse.
@@ -586,7 +586,7 @@ export default function ComparateurClient() {
         <div className="container-xl">
 
           <h2 className="article-h2 !mt-0">
-            2. Quelle est la prime LAMal dans votre canton ?
+            Quelle est la prime LAMal dans votre canton ?
           </h2>
           <p className="article-p mb-8">
             Primes de référence pour un adulte de 35 ans, modèle standard, franchise 300 CHF, sans couverture accident.
@@ -641,7 +641,7 @@ export default function ComparateurClient() {
       {/* ── FAQ ───────────────────────────────────────────────────────────── */}
       <section className="bg-white border-b border-edge py-16">
         <div className="container-xl">
-          <FAQ items={faqItems} title="3. Vos questions sur la prime LAMal" />
+          <FAQ items={faqItems} title="Vos questions sur la prime LAMal" />
         </div>
       </section>
 

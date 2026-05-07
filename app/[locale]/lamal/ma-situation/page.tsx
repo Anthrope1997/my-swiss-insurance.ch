@@ -147,9 +147,9 @@ export default function MaSituationPage() {
           <div className="bg-white border border-edge rounded-xl p-5">
             <p className="text-2xl font-semibold text-ink mb-3">Sommaire</p>
             <ul className="space-y-1">
-              {toc.map((item) => (
+              {toc.map((item, i) => (
                 <li key={item.id}>
-                  <a href={`#${item.id}`} className="block text-[17px] text-slate leading-relaxed hover:text-brand hover:bg-cloud px-2 py-1 rounded transition-colors">{item.label}</a>
+                  <a href={`#${item.id}`} className="block text-[17px] text-slate leading-relaxed hover:text-brand hover:bg-cloud px-2 py-1 rounded transition-colors">{i + 1}. {item.label}</a>
                 </li>
               ))}
             </ul>
@@ -240,16 +240,23 @@ export default function MaSituationPage() {
                 par rapport au salarié exige une planification spécifique.
               </p>
 
-              <div className="callout mb-6">
-                <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">
-                  À retenir
-                </p>
-                <p className="text-[15px]">
-                  Sans couverture accidents spécifique, un accident professionnel ou de loisirs
-                  est pris en charge par la LAMal uniquement, avec des franchises et des
-                  quote-parts qui s'appliquent normalement. La couverture accidents optionnelle
-                  via la LAMal (art. 8 LAMal) ou une LAA volontaire sont les deux solutions.
-                </p>
+              <div className="callout flex gap-3 mb-6">
+                <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
+                     strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
+                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
+                  <line x1="10" y1="21" x2="14" y2="21" />
+                </svg>
+                <div>
+                  <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">À retenir</p>
+                  <p className="text-[15px]">
+                    Sans couverture accidents spécifique, un accident professionnel ou de loisirs
+                    est pris en charge par la LAMal uniquement, avec des franchises et des
+                    quote-parts qui s'appliquent normalement. La couverture accidents optionnelle
+                    via la LAMal (art. 8 LAMal) ou une LAA volontaire sont les deux solutions.
+                  </p>
+                </div>
               </div>
 
               <div className="space-y-4">
@@ -307,11 +314,20 @@ export default function MaSituationPage() {
                 </div>
               </div>
 
-              <div className="callout text-[15px]">
-                <strong>Subsides cantonaux :</strong> la perte d'emploi réduit le revenu déterminant
-                et ouvre généralement des droits aux subsides. Contactez votre service cantonal
-                ou votre ORP dès le début du chômage — les subsides non réclamés ne sont
-                pas versés rétroactivement dans la plupart des cantons.
+              <div className="callout flex gap-3">
+                <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
+                     strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
+                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
+                  <line x1="10" y1="21" x2="14" y2="21" />
+                </svg>
+                <p className="text-[15px]">
+                  <strong>Subsides cantonaux :</strong> la perte d'emploi réduit le revenu déterminant
+                  et ouvre généralement des droits aux subsides. Contactez votre service cantonal
+                  ou votre ORP dès le début du chômage — les subsides non réclamés ne sont
+                  pas versés rétroactivement dans la plupart des cantons.
+                </p>
               </div>
             </section>
 
@@ -325,10 +341,19 @@ export default function MaSituationPage() {
                 Le délai de 90 jours pour s'affilier est une règle absolue : ne le manquez pas.
               </p>
 
-              <div className="callout text-[15px] mb-6">
-                <strong>90 jours pour choisir :</strong> si vous respectez ce délai, la couverture
-                est rétroactive à la date d'arrivée. Profitez de ce délai pour comparer les
-                caisses — changer après le 1er janvier est plus contraignant.
+              <div className="callout flex gap-3 mb-6">
+                <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
+                     strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
+                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
+                  <line x1="10" y1="21" x2="14" y2="21" />
+                </svg>
+                <p className="text-[15px]">
+                  <strong>90 jours pour choisir :</strong> si vous respectez ce délai, la couverture
+                  est rétroactive à la date d'arrivée. Profitez de ce délai pour comparer les
+                  caisses — changer après le 1er janvier est plus contraignant.
+                </p>
               </div>
 
               <div className="space-y-4">
@@ -373,26 +398,26 @@ export default function MaSituationPage() {
             {/* Contact */}
             <NeedHelpSection />
 
-            <div className="border-t border-edge pt-8 mt-4">
-              <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
-            </div>
+            <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
 
             {/* Guides associés */}
-            <section className="mt-8 pt-8 border-t border-edge">
-              <h3 className="text-[15px] font-semibold text-ink mb-4">Guides associés</h3>
-              <div className="flex flex-col gap-2">
+            <section>
+              <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
+                Guides associés
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {[
-                  { href: '/lamal/ma-famille', label: 'LAMal pour votre famille' },
+                  { href: '/lamal/ma-famille', label: 'LAMal pour votre famille'   },
                   { href: '/lamal/frontalier', label: 'LAMal pour les frontaliers' },
-                  { href: '/lamal/franchise', label: 'Choisir sa franchise LAMal' },
-                  { href: '/lamal/guide', label: 'Guide complet LAMal 2026' },
-                ].map(link => (
-                  <Link key={link.href} href={link.href}
-                    className="text-[15px] text-brand hover:underline flex items-center gap-1">
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  { href: '/lamal/franchise',  label: 'Choisir sa franchise LAMal' },
+                  { href: '/lamal/guide',      label: 'Guide complet LAMal 2026'   },
+                ].map(({ href, label }) => (
+                  <Link key={href} href={href}
+                    className="flex items-center gap-2 text-[14px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                    <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
-                    {link.label}
+                    {label}
                   </Link>
                 ))}
               </div>
