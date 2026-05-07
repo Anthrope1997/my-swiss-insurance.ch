@@ -107,7 +107,7 @@ export default function FrontalierAllemagnePage() {
           {/* TOC */}
           <aside className="hidden lg:block">
             <nav className="sticky top-24">
-              <p className="text-base font-semibold text-ink mb-4 px-4">
+              <p className="text-2xl font-semibold text-ink mb-4 px-4">
                 Sommaire
               </p>
               <ul className="space-y-0.5">
@@ -123,7 +123,7 @@ export default function FrontalierAllemagnePage() {
                   { id: 'contact', label: "Besoin d'aide" },
                 ].map(item => (
                   <li key={item.id}>
-                    <a href={`#${item.id}`} className="toc-link">{item.label}</a>
+                    <a href={`#${item.id}`} className="block text-[17px] text-slate leading-relaxed hover:text-brand hover:bg-cloud px-4 py-1 rounded transition-colors">{item.label}</a>
                   </li>
                 ))}
               </ul>

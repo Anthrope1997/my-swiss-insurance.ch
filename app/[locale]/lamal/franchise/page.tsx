@@ -142,12 +142,12 @@ export default function FranchisePage() {
         <div className="container-xl grid grid-cols-1 md:grid-cols-2 gap-5">
 
           <div className="bg-white border border-edge rounded-xl p-5">
-            <p className="text-base font-semibold text-ink mb-3">
+            <p className="text-2xl font-semibold text-ink mb-3">
               En bref
             </p>
             <ul className="space-y-3">
               {enBref.map((phrase, i) => (
-                <li key={i} className="flex gap-2.5 text-[15px] text-ink leading-relaxed">
+                <li key={i} className="flex gap-2.5 text-[17px] text-slate leading-relaxed">
                   <span className="text-brand font-bold shrink-0 mt-0.5" aria-hidden="true">•</span>
                   <span>{phrase}</span>
                 </li>
@@ -156,13 +156,13 @@ export default function FranchisePage() {
           </div>
 
           <div className="bg-white border border-edge rounded-xl p-5">
-            <p className="text-base font-semibold text-ink mb-3">
+            <p className="text-2xl font-semibold text-ink mb-3">
               Sommaire
             </p>
             <ul className="space-y-1">
               {toc.map((item) => (
                 <li key={item.id}>
-                  <a href={`#${item.id}`} className="toc-link">{item.label}</a>
+                  <a href={`#${item.id}`} className="block text-[17px] text-slate leading-relaxed hover:text-brand hover:bg-cloud px-2 py-1 rounded transition-colors">{item.label}</a>
                 </li>
               ))}
             </ul>

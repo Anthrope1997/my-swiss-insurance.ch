@@ -34,9 +34,9 @@ export default function StickyBar({ cantonName, economieAn }: Props) {
       aria-hidden={!visible}
       className={[
         'fixed left-0 right-0 z-40 transition-opacity duration-300',
-        'bottom-0 md:bottom-auto md:top-16',
+        'bottom-0',
         'bg-ink shadow-lg',
-        'border-t border-white/10 md:border-t-0 md:border-b md:border-white/10',
+        'border-t border-white/10',
         visible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none',
       ].join(' ')}
     >

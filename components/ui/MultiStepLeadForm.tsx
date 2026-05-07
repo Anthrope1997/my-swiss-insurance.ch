@@ -389,14 +389,14 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
                 key={opt.id}
                 onClick={() => set({ intent: opt.id })}
                 className={[
-                  'flex items-center gap-3 text-left px-4 py-4 rounded-lg border-2 transition-colors duration-150 text-[14px] font-medium',
+                  'flex items-center gap-3 text-left px-4 py-4 rounded-lg border-2 transition-colors duration-150 !text-[14px] font-medium',
                   form.intent === opt.id
                     ? 'border-brand bg-[#eff6ff] text-brand'
                     : 'border-edge bg-white text-ink hover:border-brand hover:bg-[#f8fbff]',
                 ].join(' ')}
               >
                 <span className={[
-                  'w-7 h-7 rounded-md flex items-center justify-center shrink-0 transition-colors duration-150',
+                  'w-7 h-7 rounded-md hidden sm:flex items-center justify-center shrink-0 transition-colors duration-150',
                   form.intent === opt.id ? 'bg-brand text-white' : 'bg-[#dbeafe] text-brand',
                 ].join(' ')}>
                   {opt.icon}

@@ -214,34 +214,36 @@ export default function Header() {
       {/* Modal overlay — "Recevez les meilleures offres" */}
       {offerOpen && (
         <div
-          className="fixed inset-0 bg-black/60 z-[60] flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black/60 z-[60] overflow-y-auto"
           onClick={() => setOfferOpen(false)}
         >
-          <div
-            className="bg-white rounded-xl w-[95%] max-w-[600px] max-h-[90vh] overflow-y-auto"
-            onClick={e => e.stopPropagation()}
-          >
-            <div className="px-8 pt-8 pb-4">
-              <div className="flex items-start justify-between gap-4 mb-6">
-                <p className="text-[15px] text-slate leading-relaxed">
-                  Un conseiller spécialisé compare les caisses adaptées à votre situation
-                  et vous présente les offres les plus avantageuses{' '}
-                  <strong>sous 24 heures</strong>.
-                  C'est <strong>gratuit et sans engagement</strong>.
-                </p>
-                <button
-                  onClick={() => setOfferOpen(false)}
-                  className="shrink-0 text-slate hover:text-ink transition-colors -mt-2"
-                  aria-label="Fermer"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
+          <div className="flex min-h-full items-center justify-center px-4 pt-20 pb-4">
+            <div
+              className="bg-white rounded-xl w-full max-w-[600px]"
+              onClick={e => e.stopPropagation()}
+            >
+              <div className="px-4 pt-6 pb-3 sm:px-8 sm:pt-8 sm:pb-4">
+                <div className="flex items-start justify-between gap-4 mb-6">
+                  <p className="text-[15px] text-slate leading-relaxed">
+                    Un conseiller spécialisé compare les caisses adaptées à votre situation
+                    et vous présente les offres les plus avantageuses{' '}
+                    <strong>sous 24 heures</strong>.
+                    C'est <strong>gratuit et sans engagement</strong>.
+                  </p>
+                  <button
+                    onClick={() => setOfferOpen(false)}
+                    className="shrink-0 text-slate hover:text-ink transition-colors -mt-2"
+                    aria-label="Fermer"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
               </div>
-            </div>
-            <div className="px-8 pb-8">
-              <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
+              <div className="px-3 pb-4 sm:px-8 sm:pb-8">
+                <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
+              </div>
             </div>
           </div>
         </div>

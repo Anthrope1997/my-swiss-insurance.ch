@@ -62,7 +62,7 @@ const webSiteSchema = {
 // ── Données ──────────────────────────────────────────────────────────────────
 
 const stats = [
-  { value: "5'653 CHF", label: 'Économie annuelle possible', sub: 'à Genève, tous profils' },
+  { value: '5 653 CHF', label: 'Économie maximale possible en Suisse', sub: 'Adulte 35 ans, tous profils confondus' },
   { value: '34',        label: 'Caisses agréées',            sub: 'données OFSP 2026'        },
   { value: '25 à 30 %', label: 'Bénéficiaires de subsides',  sub: 'de la population suisse'  },
 ]
@@ -425,7 +425,7 @@ export default function LamalPage() {
       </div>
 
       {/* Bandeau éditorial */}
-      <div className="container-xl">
+      <div className="container-xl pb-12">
         <AuthorBio publishedDate="1er janvier 2026" updatedDate="6 mai 2026" />
       </div>
     </>

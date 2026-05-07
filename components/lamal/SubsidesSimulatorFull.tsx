@@ -127,15 +127,11 @@ export default function SubsidesSimulatorFull() {
   return (
     <div className="bg-[#dbeafe] border-2 border-[#1d4ed8] rounded-xl p-6 space-y-5">
 
-      <p className="text-[11px] font-semibold text-[#1d4ed8] uppercase tracking-widest">
-        Estimez votre subside en 30 secondes
-      </p>
-
       {/* ── Row 1 : canton + revenu ── */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
 
         <div>
-          <label className="block text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-2">
+          <label className="block text-[14px] font-medium text-ink mb-2">
             Canton de résidence
           </label>
           <div className="relative">
@@ -154,7 +150,7 @@ export default function SubsidesSimulatorFull() {
         </div>
 
         <div>
-          <label className="block text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-2">
+          <label className="block text-[14px] font-medium text-ink mb-2">
             Revenu déterminant annuel (CHF)
           </label>
           <input
@@ -176,7 +172,7 @@ export default function SubsidesSimulatorFull() {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
 
         <div>
-          <label className="block text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-2">
+          <label className="block text-[14px] font-medium text-ink mb-2">
             Situation familiale
           </label>
           <div className="relative">
@@ -193,7 +189,7 @@ export default function SubsidesSimulatorFull() {
         </div>
 
         <div>
-          <label className="block text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-2">
+          <label className="block text-[14px] font-medium text-ink mb-2">
             Enfants à charge
           </label>
           <div className="relative">
@@ -211,7 +207,7 @@ export default function SubsidesSimulatorFull() {
         </div>
 
         <div>
-          <label className="block text-[11px] font-semibold text-slate/60 uppercase tracking-widest mb-2">
+          <label className="block text-[14px] font-medium text-ink mb-2">
             Âge
           </label>
           <div className="relative">
