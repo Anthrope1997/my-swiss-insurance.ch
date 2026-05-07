@@ -32,7 +32,7 @@ const faqItems = [
   },
   {
     question: 'Qui a droit à un subside LAMal en Suisse ?',
-    answer: "25 à 30 % de la population suisse bénéficie d'une réduction individuelle des primes (subside). Les conditions varient selon le canton et le revenu déterminant. Un simulateur est disponible sur my-swiss-insurance.ch.",
+    answer: "28 % de la population suisse bénéficient d'une réduction individuelle des primes (subside). Les conditions varient selon le canton et le revenu déterminant. Un simulateur est disponible sur my-swiss-insurance.ch.",
   },
 ]
 
@@ -64,7 +64,7 @@ const webSiteSchema = {
 const stats = [
   { value: '5 653 CHF', label: 'Économie maximale possible en Suisse', sub: 'Adulte 35 ans, tous profils confondus' },
   { value: '34',        label: 'Caisses agréées',            sub: 'données OFSP 2026'        },
-  { value: '25 à 30 %', label: 'Bénéficiaires de subsides',  sub: 'de la population suisse'  },
+  { value: '28 %',      label: 'Bénéficiaires de subsides',  sub: 'de la population suisse'  },
 ]
 
 const guides = [
@@ -206,25 +206,6 @@ export default function LamalPage() {
           {/* Stats */}
           <HeroStats stats={stats} className="mb-10 pb-10 border-b border-edge" />
 
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:items-start">
-            <div className="flex flex-col items-start gap-1.5">
-              <Link href="/lamal/comparateur" className="btn-primary text-[15px] py-3.5 px-7 w-full sm:w-auto">
-                Comparer les primes gratuitement
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
-              <span className="text-[12px] text-slate/60 pl-1">Résultat immédiat, sans inscription</span>
-            </div>
-            <div className="flex flex-col items-start gap-1.5">
-              <a href="#formulaire" className="btn-secondary text-[15px] py-3.5 px-7 w-full sm:w-auto">
-                Être rappelé par un expert sous 24 heures
-              </a>
-              <span className="text-[12px] text-slate/60 pl-1">Gratuit, sans engagement</span>
-            </div>
-          </div>
-
         </div>
       </section>
 
@@ -237,7 +218,7 @@ export default function LamalPage() {
               Tout comprendre sur l'assurance maladie suisse
             </h2>
             <p className="text-[17px] text-slate leading-relaxed">
-              L'assurance maladie LAMal est obligatoire pour tous les résidents en Suisse depuis
+              L'assurance maladie de base LAMal est obligatoire pour tous les résidents en Suisse depuis
               1996. Nos guides couvrent chaque aspect pour vous aider à faire le bon choix :
               franchises, modèles alternatifs et subsides cantonaux.
             </p>

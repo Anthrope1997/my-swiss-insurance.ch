@@ -94,14 +94,14 @@ const toc = [
 
 const heroStats = [
   { value: '90 jours', label: "Délai d'affiliation",  sub: 'dès la prise de domicile en Suisse' },
-  { value: '8 h/sem',  label: 'Seuil couverture LAA', sub: 'accidents non professionnels inclus' },
+  { value: '8 heures', label: 'Seuil couverture LAA', sub: 'par semaine, accidents non professionnels inclus' },
   { value: '25–30%',   label: 'Économie possible',    sub: 'avec franchise 2 000–2 500 CHF'     },
 ]
 
 const enBref = [
-  "Le salarié bénéficie d'une couverture accidents automatique (LAA) dès 8 heures de travail par semaine — l'indépendant doit l'activer lui-même via la LAMal.",
+  "Le salarié bénéficie d'une couverture accidents automatique (LAA) dès 8 heures de travail par semaine : l'indépendant doit l'activer lui-même via la LAMal.",
   "En cas de chômage, la LAMal reste obligatoire sans interruption et la perte de revenu ouvre souvent des droits prioritaires aux subsides cantonaux.",
-  "Tout nouvel arrivant dispose de 90 jours pour s'affilier à une caisse — si ce délai est respecté, la couverture est rétroactive à la date d'arrivée.",
+  "Tout nouvel arrivant dispose de 90 jours pour s'affilier à une caisse : si ce délai est respecté, la couverture est rétroactive à la date d'arrivée.",
 ]
 
 export default function MaSituationPage() {
@@ -122,9 +122,8 @@ export default function MaSituationPage() {
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
             Salarié, indépendant, en situation de chômage ou nouvel arrivant en Suisse :
-            votre statut professionnel détermine directement votre couverture accidents,
-            votre franchise optimale et vos droits aux subsides cantonaux.
-            Ce guide synthétise les règles essentielles par profil.
+            votre statut professionnel détermine directement la gestion de votre assurance maladie de base LAMal,
+            votre couverture accidents et vos droits aux subsides cantonaux.
           </p>
 
           <HeroStats stats={heroStats} className="mb-8" />

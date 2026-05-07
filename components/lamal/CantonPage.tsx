@@ -1,8 +1,7 @@
 import AuthorBio from '@/components/ui/AuthorBio'
 import FAQ from '@/components/ui/FAQ'
-import FormScrollButton from '@/components/ui/FormScrollButton'
+import HeroStats from '@/components/ui/HeroStats'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
-import StickyBar from '@/components/ui/StickyBar'
 import SubsidesCalculator from '@/components/lamal/SubsidesCalculator'
 import Link from 'next/link'
 import type { Canton } from '@/data/lamal/cantons'
@@ -29,6 +28,29 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
   const rowMin = canton.franchiseTable.find((r) => r.franchise === 300)!
   const rowMax = canton.franchiseTable.find((r) => r.franchise === 2500)!
   const economieFranchise = rowMin.cout0 - rowMax.cout0
+
+  const heroStats = [
+    { value: `${cheapest.prime} CHF`, label: 'Meilleure prime', sub: `par mois, adulte 35 ans, ${canton.villePrincipale}` },
+    { value: `${formatChf(canton.economieAn)} CHF`, label: 'Économie annuelle max.', sub: 'en changeant de caisse' },
+    {
+      value: canton.subside.subsideMensuelMax ? `${canton.subside.subsideMensuelMax} CHF` : '–',
+      label: 'Subside mensuel max.',
+      sub: canton.subside.subsideMensuelMax ? 'barème cantonal 2026' : 'Barème non publié',
+    },
+  ]
+
+  const enBref = [
+    `${cheapest.name} est la caisse la moins chère dans le ${canton.cantonDe} dès ${cheapest.prime} CHF par mois (adulte 35 ans, franchise 300 CHF, modèle standard).`,
+    `En changeant de caisse, un assuré économise jusqu'à ${formatChf(canton.economieAn)} CHF par an pour des prestations identiques.`,
+    `28 % des résidents en Suisse bénéficient d'un subside LAMal : vérifiez votre droit dans le simulateur ci-dessous.`,
+  ]
+
+  const toc = [
+    { id: 'top-caisses', label: 'Caisses les moins chères' },
+    { id: 'franchise',   label: 'Choisir sa franchise'    },
+    { id: 'subsides',    label: 'Subsides LAMal'          },
+    { id: 'faq',         label: 'Questions fréquentes'    },
+  ]
 
   const faqItems = [
     {
@@ -130,75 +152,22 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       )}
 
-      <StickyBar cantonName={canton.name} economieAn={canton.economieAn} />
-
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
       <section className="bg-white border-b border-edge pt-12 pb-14">
         <div className="container-xl">
-          <div className="badge mb-5">Données OFSP 2026</div>
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-5">
-            Assurance maladie dans le canton de {canton.name}
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-5">
+            Assurance maladie de base LAMal dans le canton de {canton.name}
           </h1>
 
-          <p className="text-lg text-slate leading-relaxed mb-10">
-            Dans le canton de {canton.name} en 2026, les assurés {canton.demonym} peuvent économiser jusqu'à{' '}
-            <strong className="text-[#1d4ed8]">CHF {formatChf(canton.economieAn)} par an</strong> en changeant
-            de caisse, pour des prestations identiques. Le canton se classe{' '}
-            <strong className="text-ink">{ordinal(canton.rang)} sur 26</strong> cantons suisses. La prime varie
-            selon votre commune de résidence, votre franchise et votre modèle d'assurance.
+          <p className="text-[18px] text-slate leading-relaxed mb-8">
+            Dans le canton de {canton.name} en 2026, les assurés peuvent économiser jusqu'à{' '}
+            <strong>CHF {formatChf(canton.economieAn)} par an</strong> en changeant de caisse,
+            à prestations identiques. Le canton se classe{' '}
+            <strong>{ordinal(canton.rang)} sur 26</strong> cantons suisses.
           </p>
 
-          {/* 3 chiffres clés */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-3">
-            <div className="bg-cloud border border-edge rounded-xl px-5 py-5">
-              <p className="text-[11px] font-semibold text-slate uppercase tracking-widest mb-3">
-                Meilleure prime
-              </p>
-              <p className="text-4xl font-bold text-ink leading-none">{cheapest.prime}</p>
-              <p className="text-[14px] text-slate mt-2">CHF par mois</p>
-            </div>
-            <div className="bg-[#dbeafe] rounded-xl px-5 py-5">
-              <p className="text-[11px] font-semibold text-[#1d4ed8] uppercase tracking-widest mb-3">
-                Économie annuelle
-              </p>
-              <p className="text-4xl font-bold text-[#1d4ed8] leading-none">{formatChf(canton.economieAn)}</p>
-              <p className="text-[14px] text-[#1d4ed8] mt-2">CHF par an</p>
-            </div>
-            <div className="bg-[#eff6ff] border border-[#bfdbfe] rounded-xl px-5 py-5">
-              <p className="text-[11px] font-semibold text-brand uppercase tracking-widest mb-3">
-                Subside mensuel maximal
-              </p>
-              {canton.subside.subsideMensuelMax ? (
-                <>
-                  <p className="text-4xl font-bold text-brand leading-none">
-                    {canton.subside.subsideMensuelMax}
-                  </p>
-                  <p className="text-[14px] text-brand mt-2">CHF par mois</p>
-                </>
-              ) : (
-                <>
-                  <p className="text-4xl font-bold text-slate leading-none">–</p>
-                  <p className="text-[14px] text-slate mt-2">Barème non publié</p>
-                </>
-              )}
-            </div>
-          </div>
-
-          <p className="text-[12px] text-slate/60 mb-10">
-            Données pour un adulte de 35 ans habitant à {canton.villePrincipale}. Utilisez le comparateur
-            pour une simulation personnalisée.
-          </p>
-
-          {/* 2 CTAs */}
-          <div className="flex flex-col sm:flex-row gap-3 mb-10">
-            <FormScrollButton intent="compare" className="btn-primary text-[15px] px-8 py-3.5">
-              Comparer ma prime →
-            </FormScrollButton>
-            <FormScrollButton className="btn-secondary text-[15px] px-8 py-3.5">
-              Être rappelé gratuitement
-            </FormScrollButton>
-          </div>
+          <HeroStats stats={heroStats} className="mb-10" />
 
           {/* Encadré régions tarifaires */}
           <div className="bg-cloud border border-edge rounded-xl px-5 py-4">
@@ -219,12 +188,39 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
         </div>
       </section>
 
+      {/* ── Zone 2 — En bref + Sommaire ──────────────────────────────────── */}
+      <div className="bg-cloud border-b border-edge py-8">
+        <div className="container-xl grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="bg-white border border-edge rounded-xl p-5">
+            <p className="text-2xl font-semibold text-ink mb-3">En bref</p>
+            <ul className="space-y-3">
+              {enBref.map((phrase, i) => (
+                <li key={i} className="flex gap-2.5 text-[17px] text-slate leading-relaxed">
+                  <span className="text-brand font-bold shrink-0 mt-0.5" aria-hidden="true">•</span>
+                  <span>{phrase}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="bg-white border border-edge rounded-xl p-5">
+            <p className="text-2xl font-semibold text-ink mb-3">Sommaire</p>
+            <ul className="space-y-1">
+              {toc.map((item) => (
+                <li key={item.id}>
+                  <a href={`#${item.id}`} className="block text-[17px] text-slate leading-relaxed hover:text-brand hover:bg-cloud px-2 py-1 rounded transition-colors">{item.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
       {/* ── Contenu principal ─────────────────────────────────────────────── */}
       <div className="container-xl py-14 space-y-16">
 
         {/* ── Top caisses ──────────────────────────────────────────────── */}
         <section id="top-caisses">
-          <h2 className="text-2xl font-semibold text-[#1d4ed8] border-b border-edge pb-4 mb-5">
+          <h2 className="article-h2">
             Quelles caisses sont les moins chères dans le {canton.cantonDe} en 2026 ?
           </h2>
           <p className="text-[15px] text-slate mb-6">
@@ -294,7 +290,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
 
         {/* ── Franchise ────────────────────────────────────────────────── */}
         <section id="franchise">
-          <h2 className="text-2xl font-semibold text-[#1d4ed8] border-b border-edge pb-4 mb-5">
+          <h2 className="article-h2">
             Quelle franchise choisir dans le canton de {canton.name} ?
           </h2>
           <p className="text-[15px] text-slate mb-6">
@@ -351,7 +347,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
 
         {/* ── Subsides ─────────────────────────────────────────────────── */}
         <section id="subsides">
-          <h2 className="text-2xl font-semibold text-[#1d4ed8] border-b border-edge pb-4 mb-5">
+          <h2 className="article-h2">
             Quels subsides LAMal dans le {canton.cantonDe} ?
           </h2>
           <div className="border border-edge rounded-[8px] overflow-hidden mb-5">
@@ -406,19 +402,21 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
         </section>
 
         {/* ── FAQ ──────────────────────────────────────────────────────── */}
-        <div id="faq">
+        <section id="faq" className="border-t border-edge pt-8">
           <FAQ items={faqItems} />
-        </div>
+        </section>
 
         {/* ── Formulaire multi-étapes ───────────────────────────────────── */}
         <NeedHelpSection />
 
         {/* ── Mise à jour ──────────────────────────────────────────────── */}
-        <AuthorBio publishedDate="1er janvier 2026" updatedDate="21 avril 2026" />
+        <div className="border-t border-edge pt-8 mt-4">
+          <AuthorBio publishedDate="1er janvier 2026" updatedDate="21 avril 2026" />
+        </div>
 
         {/* ── Navigation cantons ───────────────────────────────────────── */}
         <section>
-          <h2 className="text-xl font-semibold text-[#1d4ed8] mb-4">Dans quel canton les primes sont-elles moins chères ?</h2>
+          <h2 className="text-xl font-semibold text-ink mb-4">Dans quel canton les primes sont-elles moins chères ?</h2>
           <div className="flex flex-wrap gap-2 mb-8">
             {otherCantons.map((c) => (
               <Link

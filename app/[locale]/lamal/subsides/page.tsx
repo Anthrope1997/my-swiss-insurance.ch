@@ -34,7 +34,7 @@ const faqItems = [
   {
     question: 'Quand suis-je éligible aux subsides LAMal ?',
     answer:
-      "Vous êtes éligible si votre revenu déterminant est inférieur aux seuils fixés par votre canton de résidence. Ces seuils varient de 27 000 CHF/an (Jura) à plus de 65 000 CHF/an (Neuchâtel) selon le canton, votre situation familiale et le nombre d'enfants à charge. Environ 2,5 millions de personnes en bénéficient en Suisse.",
+      "Vous êtes éligible si votre revenu déterminant est inférieur aux seuils fixés par votre canton de résidence. Ces seuils varient de 27 000 CHF par an (Jura) à plus de 65 000 CHF par an (Neuchâtel) selon le canton, votre situation familiale et le nombre d'enfants à charge. Environ 2,5 millions de personnes en bénéficient en Suisse.",
   },
   {
     question: 'Comment est calculé le revenu déterminant ?',
@@ -98,12 +98,12 @@ export default function SubsidesPage() {
             Calculateur de subsides LAMal 2026
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
-            Estimez en 30 secondes le subside auquel vous avez droit selon votre canton,
+            Estimez en 30 secondes le subside sur votre assurance maladie de base LAMal selon votre canton,
             votre revenu et votre situation familiale. Données officielles 2026 pour les 26 cantons.
           </p>
 
           <HeroStats stats={[
-            { value: '2,5 millions', label: 'Bénéficiaires en Suisse', sub: 'Soit environ 29% de la population' },
+            { value: '2,5 millions', label: 'Bénéficiaires en Suisse', sub: 'Soit environ 28 % de la population' },
             { value: '26 cantons',   label: 'Barèmes distincts',       sub: 'Critères et montants variables'    },
             { value: '≤ 643 CHF',   label: 'Subside mensuel maximum', sub: 'Canton de Neuchâtel, barème 2026'  },
           ]} className="mb-8" />
@@ -213,7 +213,9 @@ export default function SubsidesPage() {
             <NeedHelpSection />
 
             {/* §6 — Bandeau MSI */}
-            <AuthorBio publishedDate="1er janvier 2026" updatedDate="30 avril 2026" />
+            <div className="border-t border-edge pt-8 mt-4">
+              <AuthorBio publishedDate="1er janvier 2026" updatedDate="30 avril 2026" />
+            </div>
 
             {/* §7 — Guides associés */}
             <section className="pt-8 border-t border-edge mt-4">

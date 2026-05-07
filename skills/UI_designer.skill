@@ -76,16 +76,19 @@ La distinction sémantique est indiquée par le style du label, pas par une clas
 
 `callout-success` est identique à `callout` — utiliser `callout` partout.
 
-### 0.4 Espacement des deux-points (typographie française)
+### 0.4 Espacement des deux-points (typographie française) — règle globale
 
-Espace avant et après `:` dans tous les textes visibles (labels, titres, tableaux).
+**Règle absolue, sans exception :** le deux-points est **précédé et suivi d'une espace** dans tous les textes visibles du site : titres, introductions, labels, tableaux, CTAs, blocs "En bref", callouts, placeholders. Écrire ` : ` (espace + deux-points + espace), jamais `:` seul.
+- Bien : `Franchise 300 CHF : prime de référence`
+- Mal : `Franchise 300 CHF: prime de référence`
+
 Les labels uppercase "À retenir" et "Recommandation" ne portent **pas** de deux-points finaux.
 
 ### 0.5 Tuiles statistiques — composant unique
 
 **Toutes** les tuiles statistiques héro (Zone 1) utilisent le composant `<HeroStats>`.
 **Aucune page ne définit son propre style de tuile** : pas de grille inline, pas de tuiles `bg-[#dbeafe]`, `bg-[#f0fdf4]`, `bg-[#eff6ff]` dans la zone héro.
-Style de référence : fond `bg-cloud` (gris clair, identique à la zone "En bref"), chiffre `text-[#1d4ed8]` (brand), label `text-slate`, sous-label `text-slate/60`.
+Style de référence : fond `bg-cloud` (gris clair, identique à la zone "En bref"), chiffre `text-[#1d4ed8]` (brand), label **`text-ink`** (noir, pas `text-slate`), sous-label `text-slate/60`.
 
 ```tsx
 import HeroStats from '@/components/ui/HeroStats'
@@ -120,6 +123,8 @@ Les tirets négatifs utilisent `text-slate` (jamais `text-[#f59e0b]`).
 ### 0.8 Tous les titres en noir
 
 **Tous** les titres du site utilisent `text-ink` (#1a1a1a) : H1, H2, H3, titre du formulaire, titre de la FAQ, labels "En bref" et "Sommaire". Un seul token de couleur, sans exception. Aucune différence visuelle entre les titres d'une section à l'autre.
+
+**Jamais de bleu sur un H1. Sans exception.** `text-[#1d4ed8]`, `text-brand`, `text-[#0f2040]` sont interdits sur tout élément H1 du site, quelle que soit la page.
 
 ```tsx
 {/* ✓ Correct */}
@@ -413,6 +418,8 @@ import FormScrollButton from '@/components/ui/FormScrollButton'
 Client Component. Barre fixe **toujours en bas d'écran (`bottom-0`) sur tous les breakpoints**, apparaît à 40 % de scroll.
 Scroll vers `#formulaire`, dispatche intent "compare".
 
+**Pages cantons : StickyBar supprimé définitivement.** `<StickyBar>` n'est **jamais** instancié sur les pages cantons (`CantonPage.tsx` et pages dérivées). Aucune exception.
+
 **Règle de positionnement critique :** `StickyBar` ne doit **jamais** être visible en même temps que le header. Utiliser uniquement `bottom-0` — ne jamais utiliser `md:top-16` ou tout autre positionnement qui placerait la barre sous le header sur desktop. Les deux éléments seraient alors visibles simultanément, créant un double bandeau. Structure correcte :
 ```tsx
 className={[
@@ -500,13 +507,13 @@ import CantonCombobox, { CANTON_NAMES } from '@/components/ui/CantonCombobox'
 | `<PrimeCalculatorReal>` | PrimeCalculatorReal.tsx | Calcul prime avec données réelles |
 | `<SubsidesCalculator>` | SubsidesCalculator.tsx | Calculateur subsides LAMal |
 
-**`<CantonPage>` — StickyBar unique :** un seul `<StickyBar>` doit être visible à tout moment pendant le scroll. Ne jamais instancier `<StickyBar>` à la fois dans `<CantonPage>` et dans le layout ou la page parente — cela produirait deux bandeaux empilés visibles simultanément. Si `<CantonPage>` inclut déjà `<StickyBar>`, le supprimer de tout layout ou page parente. En cas de refactoring, garder l'instance dans `<CantonPage>` et supprimer l'autre.
+**`<CantonPage>` — StickyBar supprimé définitivement :** `<StickyBar>` est **supprimé** des pages cantons. Ne jamais instancier `<StickyBar>` dans `<CantonPage>`, ni dans le layout, ni dans la page parente. Cette décision est définitive et sans exception.
 
 ---
 
 ### 3.11 `<HeroStats>` — components/ui/HeroStats.tsx
 
-Server Component. Grille 3 tuiles sur fond gris clair `bg-cloud` (identique à la zone "En bref"), chiffre en bleu brand `text-[#1d4ed8]`, label en `text-slate`.
+Server Component. Grille 3 tuiles sur fond gris clair `bg-cloud` (identique à la zone "En bref"), chiffre en bleu brand `text-[#1d4ed8]`, label en **`text-ink`** (noir — jamais `text-slate`).
 Obligatoire dans Zone 1 de toutes les pages. Aucune page ne définit son propre style de tuile.
 
 ```tsx
@@ -1182,11 +1189,12 @@ export default function PageOutil() {
 Les pages cantons suivent **Template A avec les adaptations suivantes** :
 
 **Adaptations obligatoires (spécifiques aux cantons) :**
-- Titres H1, H2, H3 : toujours `text-ink` — jamais `text-[#1d4ed8]` ni couleur bleue
+- Titres H1, H2, H3 : toujours `text-ink` — jamais `text-[#1d4ed8]` ni couleur bleue. **Jamais de bleu sur un H1.**
 - Aucun badge (`.badge`, `<span>`, `<div>`) au-dessus du H1 — source dans `sub` des tuiles HeroStats uniquement
-- Tuiles statistiques : style identique aux pages guides — `bg-cloud`, chiffre `text-[#1d4ed8]`, label `text-slate`
+- Tuiles statistiques : style identique aux pages guides — `bg-cloud`, chiffre `text-[#1d4ed8]`, label **`text-ink`** (noir)
 - Zone 3 : 2 phrases d'entrée directe au début de chaque section H2, avant tout tableau ou donnée
 - Séparateurs `border-t border-edge` entre tous les blocs majeurs (voir §0.12)
+- **`<StickyBar>` supprimé définitivement** — ne jamais instancier dans `<CantonPage>` ni dans aucun layout parent (voir §3.5 et §3.10)
 
 **Hérités de Template A :**
 - Zone 1 : Breadcrumb JSON-LD + H1 + intro + `<HeroStats>`
@@ -1329,7 +1337,7 @@ Hauteur champs standalone (`input-field` par défaut) : `h-12` (48px).
 
 **Largeur :** le conteneur modal fait `w-full max-w-[600px]` (pas `w-[95%]`). Le formulaire remplit ce conteneur à 100% (`w-full`). Padding interne responsive : `px-4 sm:px-8`.
 
-**Tuiles d'options (étape 1) — mobile :** 4 tuiles en colonne unique (`grid grid-cols-1`), une par ligne. Sur mobile, les icônes sont masquées (`hidden sm:flex`) pour gagner de la place. Le texte des tuiles utilise `!text-[14px]` (avec `!important`) pour empêcher l'upscaling automatique mobile de `globals.css` (qui monte `text-[14px]` à 16px sur < 767px). Sans ce `!`, le texte "Trouver la caisse la moins chère" à 16px dépasse la largeur disponible et force un retour à la ligne.
+**Tuiles d'options (étape 1) — mobile :** 4 tuiles en colonne unique (`grid grid-cols-1`), une par ligne. Les icônes sont **toujours visibles**, y compris sur mobile — ne jamais utiliser `hidden sm:flex` sur les icônes des tuiles d'options. Le texte des tuiles utilise `!text-[14px]` (avec `!important`) pour empêcher l'upscaling automatique mobile de `globals.css` (qui monte `text-[14px]` à 16px sur < 767px). Sans ce `!`, le texte "Trouver la caisse la moins chère" à 16px dépasse la largeur disponible et force un retour à la ligne.
 
 Structure correcte de la modal :
 ```tsx
@@ -1511,20 +1519,20 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 **Titres et chiffres clés**
 - [ ] Tous les titres (H1, H2, H3, FAQ, formulaire) : `text-ink` — jamais `text-[#1d4ed8]`, jamais `text-[#0f2040]` (§0.8)
 - [ ] Titre formulaire "Besoin d'aide ?" : `hover:text-brand transition-colors` (§0.8)
-- [ ] Tuiles statistiques Zone 1 : composant `<HeroStats>` obligatoire — fond `bg-cloud`, chiffre `text-[#1d4ed8]`, label `text-slate` (§0.5)
+- [ ] Tuiles statistiques Zone 1 : composant `<HeroStats>` obligatoire — fond `bg-cloud`, chiffre `text-[#1d4ed8]`, label **`text-ink`** (jamais `text-slate`) (§0.5)
 - [ ] Aucune grille de tuiles inline — utiliser `<HeroStats>` uniquement
 - [ ] Aucun badge au-dessus du H1 (§0.6)
 - [ ] Comparaisons : bleu (`bg-[#dbeafe]`) pour l'option avantageuse, neutre (`bg-cloud border border-edge`) pour l'option coûteuse — jamais vert ni orange (§0.7)
 - [ ] FAQ : séparateur `border-t border-edge pt-8` sur la section `<section id="faq">` (§0.10)
 - [ ] Cantons dans la navigation : ordre alphabétique français (§0.9)
 - [ ] Formulaire : pas de phrase de réassurance "confidentielles..." ; filtre téléphone actif (§7.4)
-- [ ] Formulaire modal (CTA header) : `w-full` dans la modal, tuiles d'options sur une ligne (§7.6)
+- [ ] Formulaire modal (CTA header) : `w-full` dans la modal, tuiles d'options sur une ligne, icônes visibles sur mobile (jamais `hidden sm:flex` sur les icônes) (§7.6)
 - [ ] Homepage (Template B) : ordre fin de page → formulaire → `<AuthorBio>` → footer, pas de guides associés (§6 Template B règle 1)
 - [ ] Labels "En bref" et "Sommaire" : `text-2xl font-semibold text-ink` — jamais `text-base`, uppercase, tracking (§5 Zone 2)
 - [ ] Texte En bref : `text-[17px] text-slate leading-relaxed` — jamais `text-[15px] text-ink`
 - [ ] Liens Sommaire : `hover:text-brand hover:bg-cloud px-2 py-1 rounded` — jamais `toc-link` (border-l interdit)
 - [ ] Séparateurs présents entre formulaire → AuthorBio → Guides associés (§0.12)
-- [ ] Pages canton : un seul `<StickyBar>` visible à tout moment — pas de doublon layout/CantonPage (§3.10)
+- [ ] Pages canton : `<StickyBar>` supprimé définitivement — jamais instancié dans `<CantonPage>` ni dans le layout parent (§3.5, §3.10, Template D)
 - [ ] Subsides : structure identique au comparateur de primes (§6 Template C)
 
 **Header**

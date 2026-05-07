@@ -16,7 +16,7 @@ export default function HeroStats({
       {stats.map(s => (
         <div key={s.label} className="bg-cloud rounded-xl px-5 py-4">
           <div className="text-2xl font-bold text-[#1d4ed8] leading-none">{s.value}</div>
-          <div className="text-[13px] font-medium text-slate mt-1">{s.label}</div>
+          <div className="text-[13px] font-medium text-ink mt-1">{s.label}</div>
           <div className="text-[12px] text-slate/60 mt-0.5">{s.sub}</div>
         </div>
       ))}

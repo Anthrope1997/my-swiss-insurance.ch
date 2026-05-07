@@ -133,3 +133,33 @@ Lire chaque paragraphe à voix haute.
 - Si c'est difficile à lire à voix haute, réécrire.
 - Si la phrase peut commencer directement par le fait principal, la réécrire pour qu'elle commence par ce fait.
 - Si un mot peut être supprimé sans changer le sens, le supprimer.
+
+---
+
+## 6. Règles chiffrées
+
+### Subsides
+Le chiffre de référence pour les bénéficiaires de subsides est **28 %** de la population suisse. Supprimer toute autre valeur (25 %, 30 %, "environ 1 personne sur 3", etc.). Cette valeur est non négociable.
+
+### Cantons cités en exemple
+Quand plusieurs cantons sont cités en exemple dans un texte non cantonal, les citer dans l'ordre alphabétique : **Berne, Genève, Vaud, Zurich**. Ne pas en ajouter ni en retirer.
+
+---
+
+## 7. Règles géographiques
+
+### Textes d'introduction généraux
+Les pages non cantonales (guide, comparateur, franchise, modèles…) ne comportent **aucune référence géographique spécifique à un canton** dans les introductions et textes généraux. Écrire "En Suisse" et non "à Genève" ou "dans le canton de Vaud". Exception : les tableaux de données et les callouts contenant des exemples chiffrés peuvent mentionner un canton.
+
+### Mention LAMal
+L'expression "assurance maladie de base LAMal" apparaît **exactement une fois** par page, naturellement intégrée dans le texte (introduction, premier paragraphe ou H1). Elle n'est pas répétée dans le corps de l'article.
+
+---
+
+## 8. Typographie
+
+### Espaces autour des deux-points
+Le deux-points est **précédé et suivi d'une espace** dans tous les textes visibles : titres, introductions, labels, tableaux, CTAs, blocs "En bref", callouts. Sans exception.
+
+- Bien : `Franchise 300 CHF : prime de référence`
+- Mal : `Franchise 300 CHF: prime de référence`

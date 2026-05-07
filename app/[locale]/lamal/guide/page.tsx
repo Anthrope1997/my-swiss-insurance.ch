@@ -150,8 +150,8 @@ const heroStats = [
 ]
 
 const enBref = [
-  "La LAMal rend l'assurance maladie obligatoire pour toute personne résidant en Suisse depuis 1996 — les prestations de base sont identiques chez les 34 caisses agréées.",
-  "Les primes varient fortement selon le canton : de CHF 403/mois à Zoug à CHF 710/mois à Genève pour un adulte avec franchise 300 CHF.",
+  "La LAMal rend l'assurance maladie obligatoire pour toute personne résidant en Suisse depuis 1996 : les prestations de base sont identiques chez les 34 caisses agréées.",
+  "Les primes varient fortement selon le canton : de CHF 403 par mois dans le canton le moins cher à CHF 710 par mois pour le plus cher, adulte avec franchise 300 CHF.",
   "En combinant la bonne franchise et un modèle alternatif, un adulte peut économiser jusqu'à CHF 1 440 par an sur sa prime mensuelle.",
 ]
 
@@ -171,7 +171,7 @@ export default function GuideLamalPage() {
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
             Choisissez la bonne franchise et le bon modèle, vérifiez vos droits aux subsides,
-            et économisez sur votre assurance maladie.
+            et économisez sur votre assurance maladie de base LAMal.
           </p>
 
           <HeroStats stats={heroStats} className="mb-8" />
@@ -611,7 +611,7 @@ export default function GuideLamalPage() {
               <h2 className="article-h2">9. Subsides LAMal : qui y a droit ?</h2>
               <p className="article-p">
                 Les <strong>subsides de primes</strong> sont des aides financières versées par les cantons
-                aux personnes dont les revenus sont modestes. Environ 25 à 30% de la population suisse en bénéficie.
+                aux personnes dont les revenus sont modestes. 28 % de la population suisse en bénéficient.
               </p>
               <p className="article-p">
                 Les critères d'éligibilité varient selon le canton. En règle générale, les subsides sont
