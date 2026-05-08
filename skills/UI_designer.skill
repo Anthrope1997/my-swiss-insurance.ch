@@ -171,6 +171,7 @@ La homepage utilise un wrapper `<section className="bg-white border-t border-edg
 **Règles :**
 - **Un seul** séparateur visuel (`border-t border-edge`) entre deux sections de contenu distinctes.
 - **Jamais deux séparateurs consécutifs.**
+- **Pas de séparateur entre le hero (Zone 1) et la suite** — la `border-b border-edge` du hero IS le séparateur ; Zone 2 ou Zone 3 commence directement après.
 - **Pas de séparateur** entre le formulaire et l'AuthorBio — l'`<AuthorBio>` suit directement sans wrapper `border-t`.
 - **Pas de séparateur** entre l'AuthorBio et les guides associés.
 - **Séparateur obligatoire** avant la FAQ (voir §0.10).
@@ -178,13 +179,25 @@ La homepage utilise un wrapper `<section className="bg-white border-t border-edg
 
 | Transition | Implémentation |
 |---|---|
+| Zone 1 (hero) → Zone 2 / Zone 3 | **Aucun séparateur** — `border-b border-edge` du hero suffit |
 | Section précédente → FAQ | `border-t border-edge pt-8` sur `<section id="faq">` (voir §0.10) |
 | Dernière section → Formulaire | `border-t border-edge pt-12 mt-4` sur le wrapper `#contact` |
 | Formulaire → AuthorBio | **Aucun séparateur** — `<AuthorBio>` suit directement |
 | AuthorBio → Guides associés | **Aucun séparateur** — la section guides suit directement |
 | Guides associés → Footer | Natif — le footer a sa propre bordure |
 
+**Espacement fin de page (référence : guide/page.tsx) :**
+Le formulaire (`#contact`) se termine par son propre padding. L'`<AuthorBio>` suit sans marge supplémentaire. Les guides associés suivent `<AuthorBio>` directement. Ce gabarit est identique sur toutes les pages Template A, B et C.
+
 ```tsx
+{/* ✓ Correct — hero avec border-b, Zone 3 sans séparateur supplémentaire */}
+<section className="bg-white border-b border-edge pt-12 pb-14">
+  <div className="container-xl">...</div>
+</section>
+<div className="container-xl py-10">  {/* Zone 3 — aucun border-t ici */}
+  ...
+</div>
+
 {/* ✓ Correct — formulaire puis AuthorBio sans séparateur */}
 <div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4">
   ...
@@ -197,7 +210,11 @@ La homepage utilise un wrapper `<section className="bg-white border-t border-edg
   ...
 </section>
 
-{/* ✗ Interdit — double séparateur consécutif */}
+{/* ✗ Interdit — séparateur après hero */}
+<section className="bg-white border-b border-edge pt-12 pb-14">...</section>
+<section className="border-t border-edge pt-8">...</section>  {/* ← double séparateur */}
+
+{/* ✗ Interdit — double séparateur consécutif en fin de page */}
 <div className="border-t border-edge pt-8 mt-4">
   <AuthorBio ... />
 </div>
@@ -208,7 +225,7 @@ La homepage utilise un wrapper `<section className="bg-white border-t border-edg
 
 ### 0.13 Numérotation des H2 — jamais de préfixe numérique
 
-Les titres H2 ne portent **jamais** de préfixe numérique (`1.`, `2.`, etc.).
+Les titres H2 ne portent **jamais** de préfixe numérique (`1.`, `2.`, etc.), sur **aucune page, aucun template, aucun composant** du site.
 La numérotation appartient au **sommaire uniquement** — les liens du sommaire affichent `{i + 1}. {item.label}`, pas les H2.
 
 ```tsx
@@ -222,7 +239,7 @@ La numérotation appartient au **sommaire uniquement** — les liens du sommaire
 <a href={`#${item.id}`} ...>{i + 1}. {item.label}</a>
 ```
 
-Cela inclut les titres de FAQ : le titre passé à `<FAQ title="..." />` ne commence pas par un numéro.
+Cela inclut les titres de FAQ : le titre passé à `<FAQ title="..." />` ne commence pas par un numéro. Cela inclut également les titres de section passés en `string` à d'autres composants.
 
 ```tsx
 {/* ✓ Correct */}
@@ -242,6 +259,23 @@ Pour afficher plusieurs options sur des lignes distinctes dans un tooltip `<Info
 
 ```tsx
 <InfoTooltip text={"Option A : description.\nOption B (−15 %) : description.\nOption C (−18 %) : description."} />
+```
+
+### 0.14 Icônes des tuiles de formulaire — toujours visibles sur mobile
+
+Les icônes SVG dans les tuiles de sélection de l'étape 1 du formulaire (`<MultiStepLeadForm>`) sont **toujours visibles sur mobile**, identiques au desktop. Aucun CSS ne les masque (`hidden`, `sm:block`, `md:block`, etc.).
+
+Le texte des tuiles utilise `!text-[14px]` pour garantir la lisibilité sur petit écran.
+
+```tsx
+{/* ✓ Correct — icône toujours visible */}
+<div className="flex flex-col items-center gap-2 p-3">
+  <svg className="w-5 h-5 text-brand" .../>
+  <span className="!text-[14px] font-medium text-center text-ink">...</span>
+</div>
+
+{/* ✗ Interdit — icône masquée sur mobile */}
+<svg className="hidden sm:block w-5 h-5 text-brand" .../>
 ```
 
 ---

@@ -396,7 +396,7 @@ export default function MultiStepLeadForm({ redirectOnSuccess }: { redirectOnSuc
                 ].join(' ')}
               >
                 <span className={[
-                  'w-7 h-7 rounded-md hidden sm:flex items-center justify-center shrink-0 transition-colors duration-150',
+                  'w-7 h-7 rounded-md flex items-center justify-center shrink-0 transition-colors duration-150',
                   form.intent === opt.id ? 'bg-brand text-white' : 'bg-[#dbeafe] text-brand',
                 ].join(' ')}>
                   {opt.icon}

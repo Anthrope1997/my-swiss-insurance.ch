@@ -128,7 +128,7 @@ export default function FrontalierFrancePage() {
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
             Les frontaliers franco-suisses qui travaillent dans les cantons de Genève, Vaud,
-            Neuchâtel, Jura ou Valais disposent d'un droit d'option entre la LAMal suisse
+            Neuchâtel, Jura ou Valais disposent d&apos;un droit d&apos;option entre l&apos;assurance maladie de base LAMal
             et la Sécurité sociale française. Ce choix est structurant, difficile à inverser,
             et doit être exercé dans les 3 mois suivant le début de l'emploi en Suisse.
           </p>
@@ -440,25 +440,25 @@ export default function FrontalierFrancePage() {
             {/* Contact */}
             <NeedHelpSection />
 
-            <div className="border-t border-edge pt-8 mt-4">
-              <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
-            </div>
+            <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
 
             {/* Guides associés */}
-            <section className="mt-8 pt-8 border-t border-edge">
-              <h3 className="text-[15px] font-semibold text-ink mb-4">Guides associés</h3>
-              <div className="flex flex-col gap-2">
+            <section>
+              <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
+                Guides associés
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {[
-                  { href: '/lamal/frontalier', label: 'Hub frontaliers' },
-                  { href: '/lamal/ma-situation', label: 'LAMal selon votre situation professionnelle' },
-                  { href: '/lamal/guide', label: 'Guide complet LAMal 2026' },
-                ].map(link => (
-                  <Link key={link.href} href={link.href}
-                    className="text-[15px] text-brand hover:underline flex items-center gap-1">
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  { href: '/lamal/frontalier',   label: 'Hub frontaliers'                              },
+                  { href: '/lamal/ma-situation',  label: 'LAMal selon votre situation professionnelle' },
+                  { href: '/lamal/guide',          label: 'Guide complet LAMal 2026'                    },
+                ].map(({ href, label }) => (
+                  <Link key={href} href={href}
+                    className="flex items-center gap-2 text-[14px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                    <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
-                    {link.label}
+                    {label}
                   </Link>
                 ))}
               </div>

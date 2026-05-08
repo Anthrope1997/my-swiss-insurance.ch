@@ -127,8 +127,8 @@ export default function MaFamillePage() {
             LAMal pour votre famille en 2026
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
-            La Suisse n'a pas d'assurance familiale groupée : chaque membre de la famille
-            dispose de son propre contrat LAMal, avec des règles spécifiques selon l'âge.
+            La Suisse n&apos;a pas d&apos;assurance familiale groupée : chaque membre de la famille
+            dispose de son propre contrat d&apos;assurance maladie de base LAMal, avec des règles spécifiques selon l&apos;âge.
             Nourrissons, enfants, jeunes adultes, maternité, retraite — ce guide couvre
             chaque étape avec les chiffres et les règles légales applicables en 2026.
           </p>
@@ -390,26 +390,26 @@ export default function MaFamillePage() {
             {/* Contact */}
             <NeedHelpSection />
 
-            <div className="border-t border-edge pt-8 mt-4">
-              <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
-            </div>
+            <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
 
             {/* Guides associés */}
-            <section className="mt-8 pt-8 border-t border-edge">
-              <h3 className="text-[15px] font-semibold text-ink mb-4">Guides associés</h3>
-              <div className="flex flex-col gap-2">
+            <section>
+              <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
+                Guides associés
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {[
                   { href: '/lamal/ma-situation', label: 'LAMal selon votre situation professionnelle' },
-                  { href: '/lamal/franchise', label: 'Choisir sa franchise LAMal' },
-                  { href: '/lamal/lamal-vs-lca', label: 'LAMal vs assurance complémentaire LCA' },
-                  { href: '/lamal/guide', label: 'Guide complet LAMal 2026' },
-                ].map(link => (
-                  <Link key={link.href} href={link.href}
-                    className="text-[15px] text-brand hover:underline flex items-center gap-1">
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  { href: '/lamal/franchise',    label: 'Choisir sa franchise LAMal'                 },
+                  { href: '/lamal/lamal-vs-lca', label: 'LAMal vs assurance complémentaire LCA'      },
+                  { href: '/lamal/guide',         label: 'Guide complet LAMal 2026'                   },
+                ].map(({ href, label }) => (
+                  <Link key={href} href={href}
+                    className="flex items-center gap-2 text-[14px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                    <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
-                    {link.label}
+                    {label}
                   </Link>
                 ))}
               </div>

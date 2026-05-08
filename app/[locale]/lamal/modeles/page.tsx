@@ -165,9 +165,9 @@ export default function ModelesPage() {
             Modèles LAMal 2026 : lequel choisir ?
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
-            La LAMal propose quatre modèles d'assurance. Le modèle standard offre le plus de liberté.
-            Les trois modèles alternatifs (médecin de famille, HMO, Telmed) réduisent la prime jusqu'à
-            24% en échange d'un interlocuteur médical imposé avant toute consultation chez un spécialiste.
+            L&apos;assurance maladie de base LAMal propose quatre modèles d&apos;assurance. Le modèle standard offre le plus de liberté.
+            Les trois modèles alternatifs (médecin de famille, HMO, Telmed) réduisent la prime jusqu&apos;à
+            24 % en échange d&apos;un interlocuteur médical imposé avant toute consultation chez un spécialiste.
           </p>
 
           <HeroStats stats={heroStats} className="mb-8" />
@@ -207,7 +207,7 @@ export default function ModelesPage() {
 
             {/* 1 — Comparatif */}
             <section id="comparatif" className="pt-2">
-              <h2 className="article-h2">1. Comment les 4 modèles se comparent-ils ?</h2>
+              <h2 className="article-h2">Comment les 4 modèles se comparent-ils ?</h2>
               <p className="article-p">
                 Tous les modèles couvrent les mêmes prestations LAMal. La différence porte uniquement
                 sur la porte d&apos;entrée dans le système de soins : libre pour le standard, imposée pour les
@@ -257,7 +257,7 @@ export default function ModelesPage() {
 
             {/* 2 — Détails */}
             <section id="details">
-              <h2 className="article-h2">2. Comment fonctionne chaque modèle ?</h2>
+              <h2 className="article-h2">Comment fonctionne chaque modèle ?</h2>
               <div className="space-y-6">
                 {modeles.map((m) => (
                   <div key={m.id} className={`bg-white border ${m.borderColor} border-l-4 rounded-[8px] p-6`}>
@@ -315,7 +315,7 @@ export default function ModelesPage() {
 
             {/* 3 — Changement */}
             <section id="changement">
-              <h2 className="article-h2">3. Comment changer de modèle ?</h2>
+              <h2 className="article-h2">Comment changer de modèle ?</h2>
               <p className="article-p">
                 Le modèle se choisit une fois par an. Le changement est possible à chaque renouvellement
                 annuel, indépendamment d'un éventuel changement de caisse.
@@ -345,19 +345,17 @@ export default function ModelesPage() {
 
             {/* 4 — FAQ */}
             <section id="faq" className="border-t border-edge pt-8">
-              <FAQ items={faqItems} title="4. Questions fréquentes sur les modèles LAMal" />
+              <FAQ items={faqItems} title="Questions fréquentes sur les modèles LAMal" />
             </section>
 
             {/* Formulaire */}
             <NeedHelpSection />
 
             {/* Bandeau MSI */}
-            <div className="border-t border-edge pt-8 mt-4">
-              <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
-            </div>
+            <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
 
             {/* Guides associés */}
-            <section className="pt-8 border-t border-edge mt-4">
+            <section>
               <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
                 Guides associés
               </p>

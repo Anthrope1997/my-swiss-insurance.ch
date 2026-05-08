@@ -199,7 +199,7 @@ export default function LamalPage() {
 
           <p className="text-[18px] text-slate leading-relaxed mb-8">
             En Suisse, toutes les caisses couvrent les mêmes prestations de base. Seul le prix
-            diffère, jusqu'à 5 653 CHF par an d'écart pour un même profil à Genève.
+            diffère — jusqu'à 5 653 CHF par an d'écart pour un même profil.
             Comparez gratuitement et trouvez la caisse la moins chère pour votre situation.
           </p>
 
@@ -210,7 +210,7 @@ export default function LamalPage() {
       </section>
 
       {/* ── 2. GUIDES LAMAL ─────────────────────────────────────────────────── */}
-      <section className="bg-white border-t border-edge py-12">
+      <section className="bg-white py-12">
         <div className="container-xl">
 
           <div className="mb-6">
@@ -366,9 +366,9 @@ export default function LamalPage() {
             </h2>
             <p className="text-[17px] text-slate leading-relaxed">
               My Swiss Insurance s'appuie sur les données officielles de l'Office fédéral de la
-              santé publique (OFSP), des cantons et des caisses maladie. Cela permet à chacun
-              (résidents, expatriés ou frontaliers) de choisir l'assurance maladie LAMal la plus
-              adaptée à sa situation. Toutes les informations sont mises à jour chaque année.
+              santé publique (OFSP), des cantons et des caisses maladie. Chaque résident, expatrié
+              ou frontalier peut ainsi identifier la couverture la plus adaptée à sa situation.
+              Toutes les informations sont mises à jour chaque année.
             </p>
           </div>
 

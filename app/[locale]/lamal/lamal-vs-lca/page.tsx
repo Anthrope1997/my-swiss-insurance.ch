@@ -131,7 +131,7 @@ export default function LamalVsLcaPage() {
             Assurance de base et complémentaire : quelles différences ?
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
-            L'assurance de base LAMal rembourse les soins essentiels : médecin, hôpital, médicaments sur ordonnance.
+            L'assurance maladie de base LAMal rembourse les soins essentiels : médecin, hôpital, médicaments sur ordonnance.
             L'assurance complémentaire couvre ce qu'elle exclut : chambre privée à l'hôpital,
             médecine alternative, soins dentaires, lunettes. Elle est facultative, mais peut faire
             une vraie différence selon votre situation.
@@ -174,7 +174,7 @@ export default function LamalVsLcaPage() {
 
             {/* 1 — Comparaison visuelle */}
             <section id="comparaison" className="pt-2">
-              <h2 className="article-h2">1. Qu&apos;est-ce qui distingue la LAMal de la complémentaire ?</h2>
+              <h2 className="article-h2">Qu&apos;est-ce qui distingue la LAMal de la complémentaire ?</h2>
               <p className="article-p">
                 La LAMal couvre les soins essentiels pour tous les résidents : médecin, hôpital, médicaments.
                 La complémentaire couvre ce qu&apos;elle exclut, comme la chambre privée, les soins dentaires ou les lunettes.
@@ -229,7 +229,7 @@ export default function LamalVsLcaPage() {
 
             {/* 2 — Tableau comparatif */}
             <section id="tableau">
-              <h2 className="article-h2">2. Quelles différences entre LAMal et LCA ?</h2>
+              <h2 className="article-h2">Quelles différences entre LAMal et LCA ?</h2>
               <p className="article-p">
                 La LAMal est encadrée par la loi fédérale : prestations standardisées, admission garantie, primes approuvées par l&apos;OFSP.
                 La LCA relève du droit privé : l&apos;assureur fixe librement les prestations, les primes et peut refuser un candidat.
@@ -258,7 +258,7 @@ export default function LamalVsLcaPage() {
 
             {/* 3 — Types de LCA */}
             <section id="types">
-              <h2 className="article-h2">3. Quels types de complémentaires souscrire en Suisse ?</h2>
+              <h2 className="article-h2">Quels types de complémentaires souscrire en Suisse ?</h2>
               <div className="space-y-4">
                 {[
                   {
@@ -297,7 +297,7 @@ export default function LamalVsLcaPage() {
 
             {/* 4 — Quand souscrire */}
             <section id="quand">
-              <h2 className="article-h2">4. Quand souscrire une complémentaire ?</h2>
+              <h2 className="article-h2">Quand souscrire une complémentaire ?</h2>
               <div className="callout flex gap-3 mb-6">
                 <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
                      viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
@@ -334,7 +334,7 @@ export default function LamalVsLcaPage() {
 
             {/* 5 — Cas concrets */}
             <section id="cas-concrets">
-              <h2 className="article-h2">5. Dans quels cas une complémentaire est-elle utile ?</h2>
+              <h2 className="article-h2">Dans quels cas une complémentaire est-elle utile ?</h2>
               <div className="space-y-4">
                 {[
                   {
@@ -364,19 +364,17 @@ export default function LamalVsLcaPage() {
 
             {/* 6 — FAQ */}
             <section id="faq" className="border-t border-edge pt-8">
-              <FAQ items={faqItems} title="6. Questions fréquentes : LAMal et assurance complémentaire" />
+              <FAQ items={faqItems} title="Questions fréquentes : LAMal et assurance complémentaire" />
             </section>
 
             {/* Formulaire */}
             <NeedHelpSection />
 
             {/* Bandeau MSI */}
-            <div className="border-t border-edge pt-8 mt-4">
-              <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
-            </div>
+            <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
 
             {/* Guides associés */}
-            <section className="pt-8 border-t border-edge mt-4">
+            <section>
               <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
                 Guides associés
               </p>

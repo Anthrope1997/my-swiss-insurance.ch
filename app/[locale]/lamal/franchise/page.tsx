@@ -128,7 +128,7 @@ export default function FranchisePage() {
             Franchise LAMal : quel montant choisir en 2026 ?
           </h1>
           <p className="text-[18px] text-slate leading-relaxed mb-10">
-            La franchise est le montant annuel que vous payez avant que votre caisse intervienne.
+            La franchise est le montant annuel que vous payez avant que votre assurance maladie de base LAMal intervienne.
             Choisir le bon niveau, entre 300 et 2 500 CHF par an, peut économiser jusqu&apos;à 120 CHF par mois sur votre prime.
           </p>
 
@@ -177,7 +177,7 @@ export default function FranchisePage() {
 
           {/* 1 — Définition */}
           <section id="definition">
-            <h2 className="article-h2">1. Franchise et quote-part : quelle différence ?</h2>
+            <h2 className="article-h2">Franchise et quote-part : quelle différence ?</h2>
 
             <p className="article-p mb-6">
               La franchise et la quote-part sont les deux mécanismes de participation aux frais médicaux.
@@ -249,7 +249,7 @@ export default function FranchisePage() {
 
           {/* 2 — Tableau comparatif */}
           <section id="tableau">
-            <h2 className="article-h2">2. Quelle franchise choisir selon vos frais médicaux annuels ?</h2>
+            <h2 className="article-h2">Quelle franchise choisir selon vos frais médicaux annuels ?</h2>
 
             <p className="article-p mb-6">
               La franchise 2 500 CHF est avantageuse si vos frais médicaux annuels restent sous 1 440 CHF.
@@ -315,7 +315,7 @@ export default function FranchisePage() {
 
           {/* 3 — Franchise enfant */}
           <section id="enfants">
-            <h2 className="article-h2">3. Quelle franchise choisir pour un enfant ?</h2>
+            <h2 className="article-h2">Quelle franchise choisir pour un enfant ?</h2>
 
             <p className="article-p mb-6">
               Les franchises enfant sont distinctes des franchises adultes, de 0 à 600 CHF par an.
@@ -371,7 +371,7 @@ export default function FranchisePage() {
 
           {/* 4 — Changement */}
           <section id="changement">
-            <h2 className="article-h2">4. Comment changer de franchise ?</h2>
+            <h2 className="article-h2">Comment changer de franchise ?</h2>
 
             <p className="article-p mb-6">
               Le changement de franchise suit un calendrier strict et n&apos;est possible qu&apos;une fois par an.
@@ -432,7 +432,7 @@ export default function FranchisePage() {
 
           {/* 5 — FAQ */}
           <section id="faq" className="border-t border-edge pt-8">
-            <FAQ items={faqItems} title="5. Questions fréquentes sur la franchise LAMal" />
+            <FAQ items={faqItems} title="Questions fréquentes sur la franchise LAMal" />
           </section>
 
           {/* Formulaire */}
@@ -449,7 +449,7 @@ export default function FranchisePage() {
           <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
 
           {/* Guides associés */}
-          <section className="pt-8 border-t border-edge mt-4">
+          <section>
             <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
               Guides associés
             </p>

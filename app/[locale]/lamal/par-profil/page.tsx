@@ -93,12 +93,12 @@ export default function ParProfilPage() {
             { label: 'LAMal', href: '/lamal' },
             { label: 'Par situation de vie' },
           ]} />
-          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
             LAMal par situation de vie
           </h1>
           <p className="text-[18px] text-slate leading-relaxed">
-            Choisissez votre profil pour accéder à des conseils personnalisés :
-            franchise optimale, modèle recommandé et points d'attention spécifiques.
+            Choisissez votre profil pour des conseils personnalisés sur votre assurance maladie de base LAMal :
+            franchise optimale, modèle recommandé et points d&apos;attention spécifiques.
           </p>
         </div>
       </section>
@@ -149,20 +149,22 @@ export default function ParProfilPage() {
         <AuthorBio publishedDate="1er janvier 2026" updatedDate="13 avril 2026" />
 
         {/* Guides associés */}
-        <section className="mt-8 pt-8 border-t border-edge">
-          <h3 className="text-[15px] font-semibold text-ink mb-4">Guides associés</h3>
-          <div className="flex flex-col gap-2">
+        <section>
+          <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
+            Guides associés
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {[
-              { href: '/lamal/guide', label: 'Guide complet LAMal 2026' },
-              { href: '/lamal/comparateur', label: 'Comparateur de caisses' },
-              { href: '/lamal/changer-de-caisse', label: 'Changer de caisse maladie' },
-            ].map((link) => (
-              <Link key={link.href} href={link.href}
-                className="text-[15px] text-brand hover:underline flex items-center gap-1">
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              { href: '/lamal/guide',             label: 'Guide complet LAMal 2026'    },
+              { href: '/lamal/comparateur',        label: 'Comparateur de caisses'      },
+              { href: '/lamal/changer-de-caisse',  label: 'Changer de caisse maladie'  },
+            ].map(({ href, label }) => (
+              <Link key={href} href={href}
+                className="flex items-center gap-2 text-[14px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
-                {link.label}
+                {label}
               </Link>
             ))}
           </div>

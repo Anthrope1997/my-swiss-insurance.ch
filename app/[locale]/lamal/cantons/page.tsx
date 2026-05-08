@@ -49,11 +49,10 @@ export default function CantonHubPage() {
       />
 
       <div className="mb-10">
-        <span className="badge mb-4">Données OFSP 2026</span>
-        <h1 className="text-4xl font-bold text-[#1d4ed8] mb-4">Primes LAMal par canton</h1>
+        <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">Primes LAMal par canton</h1>
         <p className="text-slate text-[17px] leading-relaxed">
-          En Suisse, les primes LAMal varient selon votre canton de résidence. Sélectionnez votre
-          canton pour consulter les primes 2026 et trouver la caisse maladie la moins chère.
+          En Suisse, les primes de l&apos;assurance maladie de base LAMal varient selon le canton de résidence.
+          Sélectionnez votre canton pour consulter les primes 2026 et trouver la caisse la moins chère.
         </p>
       </div>
 
@@ -74,7 +73,14 @@ export default function CantonHubPage() {
         ))}
       </div>
 
-      <div className="callout">
+      <div className="callout flex gap-3">
+        <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
+             viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
+             strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
+          <line x1="9.5" y1="18" x2="14.5" y2="18" />
+          <line x1="10" y1="21" x2="14" y2="21" />
+        </svg>
         <p className="text-[14px] text-slate leading-relaxed">
           <strong className="text-ink">Comment sont calculées les primes ?</strong> Les montants
           affichés correspondent aux primes moyennes cantonales pour un adulte de 26 ans et plus,

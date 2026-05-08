@@ -82,15 +82,13 @@ export default function FrontalierPage() {
             { label: 'LAMal', href: '/lamal' },
             { label: 'Frontaliers' },
           ]} />
-          <div className="badge mb-5">Données OFSP 2026</div>
-          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
             LAMal pour les frontaliers en Suisse romande 2026
           </h1>
           <p className="text-[18px] text-slate max-w-2xl leading-relaxed">
-            Les travailleurs frontaliers ont un droit d'option : s'affilier à la LAMal suisse
+            Les travailleurs frontaliers ont un droit d&apos;option : s&apos;affilier à l&apos;assurance maladie de base LAMal
             ou rester couverts dans leur pays de résidence. Ce choix dépend de la nationalité,
-            du canton de travail et de la situation personnelle. Choisissez votre profil
-            pour accéder au guide adapté.
+            du canton de travail et de la situation personnelle.
           </p>
         </div>
       </section>
@@ -139,20 +137,22 @@ export default function FrontalierPage() {
         <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
 
         {/* Guides associés */}
-        <section className="mt-8 pt-8 border-t border-edge">
-          <h3 className="text-[15px] font-semibold text-ink mb-4">Guides associés</h3>
-          <div className="flex flex-col gap-2">
+        <section>
+          <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
+            Guides associés
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {[
               { href: '/lamal/ma-situation', label: 'LAMal selon votre situation professionnelle' },
-              { href: '/lamal/par-profil', label: 'LAMal par situation de vie' },
-              { href: '/lamal/guide', label: 'Guide complet LAMal 2026' },
-            ].map((link) => (
-              <Link key={link.href} href={link.href}
-                className="text-[15px] text-brand hover:underline flex items-center gap-1">
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              { href: '/lamal/par-profil',   label: 'LAMal par situation de vie'                 },
+              { href: '/lamal/guide',         label: 'Guide complet LAMal 2026'                   },
+            ].map(({ href, label }) => (
+              <Link key={href} href={href}
+                className="flex items-center gap-2 text-[14px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
-                {link.label}
+                {label}
               </Link>
             ))}
           </div>
