@@ -360,9 +360,9 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
         .step-anim { animation: stepIn 0.18s ease-out; }
       `}</style>
 
-      {/* ── Top: progress bar + step labels (stable header) ── */}
+      {/* ── Top: progress bar + step labels ── */}
       <div>
-        <div className="flex gap-1.5 mb-5">
+        <div className={`flex gap-1.5 ${fullscreen ? 'mb-2' : 'mb-5'}`}>
           {[1, 2, 3, 4].map(i => (
             <div
               key={i}
@@ -370,26 +370,26 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
             />
           ))}
         </div>
-        <p className="text-[11px] font-semibold text-slate uppercase tracking-widest mb-1">
+        <p className={`text-[11px] font-semibold text-slate uppercase tracking-widest ${fullscreen ? 'mb-0' : 'mb-1'}`}>
           {d.form.etape} {step} {d.form.sur} 4
         </p>
-        <p className="text-[18px] font-semibold text-ink mb-1">{STEP_LABELS[step - 1]}</p>
-        <p className="text-[13px] text-slate mb-6">{STEP_CONTEXT[step - 1]}</p>
+        <p className={`font-semibold text-ink ${fullscreen ? 'text-[16px] mb-0' : 'text-[18px] mb-1'}`}>{STEP_LABELS[step - 1]}</p>
+        <p className={`text-[13px] text-slate ${fullscreen ? 'mb-3' : 'mb-6'}`}>{STEP_CONTEXT[step - 1]}</p>
       </div>
 
-      {/* ── Middle: step content (flex-1, fills space between header and buttons) ── */}
-      <div className={fullscreen ? 'flex-1 min-h-0 overflow-y-auto pb-20' : 'flex-1'}>
+      {/* ── Middle: step content ── */}
+      <div className={fullscreen ? 'flex-1 min-h-0 overflow-hidden pb-[120px]' : 'flex-1'}>
 
         {/* Step 1 — Objectif */}
         {step === 1 && (
           <div className="step-anim">
-            <div className="grid grid-cols-1 gap-3">
+            <div className={`grid grid-cols-1 ${fullscreen ? 'gap-2' : 'gap-3'}`}>
               {STEP1_OPTIONS.map(opt => (
                 <button
                   key={opt.id}
                   onClick={() => set({ intent: opt.id })}
                   className={[
-                    'flex items-center gap-3 text-left px-4 py-4 rounded-lg border-2 transition-colors duration-150 !text-[14px] font-medium',
+                    `flex items-center gap-3 text-left px-4 ${fullscreen ? 'py-3' : 'py-4'} rounded-lg border-2 transition-colors duration-150 !text-[14px] font-medium`,
                     form.intent === opt.id
                       ? 'border-brand bg-blue-light2 text-brand'
                       : 'border-edge bg-white text-ink hover:border-brand hover:bg-blue-hint',
@@ -410,7 +410,7 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
 
         {/* Step 2 — Situation */}
         {step === 2 && (
-          <div className="step-anim space-y-3">
+          <div className={`step-anim ${fullscreen ? 'space-y-2' : 'space-y-3'}`}>
             <div className="flex bg-cloud rounded-lg p-1 gap-1">
               <button
                 type="button"
@@ -439,10 +439,10 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
             </div>
 
             {form.residenceType === 'resident' && (
-              <div className="rounded-md border border-edge bg-white p-4 space-y-3">
-                <div className="grid grid-cols-2 gap-3">
+              <div className={`rounded-md border border-edge bg-white ${fullscreen ? 'p-3 space-y-2' : 'p-4 space-y-3'}`}>
+                <div className={`grid grid-cols-2 ${fullscreen ? 'gap-2' : 'gap-3'}`}>
                   <div>
-                    <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.canton}</label>
+                    <label className={`block text-[13px] font-medium text-ink ${fullscreen ? 'mb-1' : 'mb-1.5'}`}>{d.form.champs.canton}</label>
                     <CantonCombobox
                       value={form.canton}
                       onChange={v => set({ canton: v })}
@@ -450,25 +450,25 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
                     />
                   </div>
                   <div>
-                    <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.npa}</label>
+                    <label className={`block text-[13px] font-medium text-ink ${fullscreen ? 'mb-1' : 'mb-1.5'}`}>{d.form.champs.npa}</label>
                     <input
                       type="text"
                       inputMode="numeric"
                       placeholder="1000"
                       value={form.codePostal}
                       onChange={e => set({ codePostal: e.target.value })}
-                      className="input-field !h-11"
+                      className={`input-field ${fullscreen ? '!h-10' : '!h-11'}`}
                       maxLength={4}
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.trancheAge}</label>
+                  <label className={`block text-[13px] font-medium text-ink ${fullscreen ? 'mb-1' : 'mb-1.5'}`}>{d.form.champs.trancheAge}</label>
                   <div className="relative">
                     <select
                       value={form.trancheAge}
                       onChange={e => set({ trancheAge: e.target.value })}
-                      className="select-field !h-11 pr-9"
+                      className={`select-field ${fullscreen ? '!h-10' : '!h-11'} pr-9`}
                     >
                       <option value="">{d.form.champs.selectPlaceholder}</option>
                       {TRANCHES_AGE.map(t => (
@@ -485,24 +485,24 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
             )}
 
             {form.residenceType === 'frontalier' && (
-              <div className="rounded-md border border-edge bg-white p-4 space-y-3">
-                <div className="grid grid-cols-2 gap-3">
+              <div className={`rounded-md border border-edge bg-white ${fullscreen ? 'p-3 space-y-2' : 'p-4 space-y-3'}`}>
+                <div className={`grid grid-cols-2 ${fullscreen ? 'gap-2' : 'gap-3'}`}>
                   <div>
-                    <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.pays}</label>
+                    <label className={`block text-[13px] font-medium text-ink ${fullscreen ? 'mb-1' : 'mb-1.5'}`}>{d.form.champs.pays}</label>
                     <input
                       type="text"
                       list="pays-frontaliers-list"
                       placeholder="France"
                       value={form.pays}
                       onChange={e => set({ pays: e.target.value })}
-                      className="input-field !h-11"
+                      className={`input-field ${fullscreen ? '!h-10' : '!h-11'}`}
                     />
                     <datalist id="pays-frontaliers-list">
                       {PAYS_FRONTALIERS.map(p => <option key={p} value={p} />)}
                     </datalist>
                   </div>
                   <div>
-                    <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.cantonTravail}</label>
+                    <label className={`block text-[13px] font-medium text-ink ${fullscreen ? 'mb-1' : 'mb-1.5'}`}>{d.form.champs.cantonTravail}</label>
                     <CantonCombobox
                       value={form.cantonTravail}
                       onChange={v => set({ cantonTravail: v })}
@@ -511,12 +511,12 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
                   </div>
                 </div>
                 <div>
-                  <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.trancheAge}</label>
+                  <label className={`block text-[13px] font-medium text-ink ${fullscreen ? 'mb-1' : 'mb-1.5'}`}>{d.form.champs.trancheAge}</label>
                   <div className="relative">
                     <select
                       value={form.trancheAge}
                       onChange={e => set({ trancheAge: e.target.value })}
-                      className="select-field !h-11 pr-9"
+                      className={`select-field ${fullscreen ? '!h-10' : '!h-11'} pr-9`}
                     >
                       <option value="">{d.form.champs.selectPlaceholder}</option>
                       {TRANCHES_AGE.map(t => (
@@ -537,13 +537,13 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
         {/* Step 3 — Profil de ménage */}
         {step === 3 && (
           <div className="step-anim">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className={`grid grid-cols-1 sm:grid-cols-2 ${fullscreen ? 'gap-2' : 'gap-3'}`}>
               {STEP3_OPTIONS.map(opt => (
                 <button
                   key={opt.id}
                   onClick={() => set({ situation: opt.id })}
                   className={[
-                    'text-left px-4 py-4 rounded-lg border-2 transition-colors duration-150 text-[14px] font-medium',
+                    `text-left px-4 ${fullscreen ? 'py-3' : 'py-4'} rounded-lg border-2 transition-colors duration-150 text-[14px] font-medium`,
                     form.situation === opt.id
                       ? 'border-brand bg-blue-light2 text-brand'
                       : 'border-edge bg-white text-ink hover:border-brand hover:bg-blue-hint',
@@ -558,36 +558,36 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
 
         {/* Step 4 — Coordonnées */}
         {step === 4 && (
-          <form id="lead-form-step4" className="step-anim space-y-4" onSubmit={handleSubmit}>
-            <div className="grid grid-cols-2 gap-3">
+          <form id="lead-form-step4" className={`step-anim ${fullscreen ? 'space-y-2' : 'space-y-4'}`} onSubmit={handleSubmit}>
+            <div className={`grid grid-cols-2 ${fullscreen ? 'gap-2' : 'gap-3'}`}>
               <div>
-                <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.prenom}</label>
+                <label className={`block text-[13px] font-medium text-ink ${fullscreen ? 'mb-1' : 'mb-1.5'}`}>{d.form.champs.prenom}</label>
                 <input
                   type="text" required placeholder="Marie"
                   value={form.prenom}
                   onChange={e => set({ prenom: e.target.value })}
-                  className="input-field !h-11"
+                  className={`input-field ${fullscreen ? '!h-10' : '!h-11'}`}
                 />
               </div>
               <div>
-                <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.nom}</label>
+                <label className={`block text-[13px] font-medium text-ink ${fullscreen ? 'mb-1' : 'mb-1.5'}`}>{d.form.champs.nom}</label>
                 <input
                   type="text" required placeholder="Dupont"
                   value={form.nom}
                   onChange={e => set({ nom: e.target.value })}
-                  className="input-field !h-11"
+                  className={`input-field ${fullscreen ? '!h-10' : '!h-11'}`}
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.telephone}</label>
+              <label className={`block text-[13px] font-medium text-ink ${fullscreen ? 'mb-1' : 'mb-1.5'}`}>{d.form.champs.telephone}</label>
               <div className="flex gap-2 items-start" ref={phoneGroupRef}>
                 <div className="relative shrink-0" ref={phoneDropdownRef}>
                   <button
                     type="button"
                     onClick={() => setShowPhoneDropdown(v => !v)}
-                    className="flex items-center gap-1.5 h-11 px-3 border border-edge rounded-md bg-white hover:border-brand focus:border-brand focus:outline-none focus:ring-2 focus:ring-blue-tint transition-colors"
+                    className={`flex items-center gap-1.5 ${fullscreen ? 'h-10' : 'h-11'} px-3 border border-edge rounded-md bg-white hover:border-brand focus:border-brand focus:outline-none focus:ring-2 focus:ring-blue-tint transition-colors`}
                     aria-label="Sélectionner l'indicatif pays"
                   >
                     <span className="text-[18px] leading-none">{selectedCountry.flag}</span>
@@ -638,7 +638,7 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
                   value={form.telephone}
                   onChange={e => { set({ telephone: e.target.value.replace(/[^0-9\s\-\(\)\+]/g, '') }); if (phoneError) setPhoneError('') }}
                   onBlur={validatePhoneOnBlur}
-                  className="input-field !h-11 flex-1"
+                  className={`input-field ${fullscreen ? '!h-10' : '!h-11'} flex-1`}
                 />
               </div>
               {phoneError && (
@@ -647,14 +647,14 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
             </div>
 
             <div>
-              <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.email}</label>
+              <label className={`block text-[13px] font-medium text-ink ${fullscreen ? 'mb-1' : 'mb-1.5'}`}>{d.form.champs.email}</label>
               <input
                 type="email"
                 placeholder="marie@exemple.ch"
                 value={form.email}
                 onChange={e => { set({ email: e.target.value }); if (emailError) setEmailError('') }}
                 onBlur={validateEmailOnBlur}
-                className="input-field !h-11"
+                className={`input-field ${fullscreen ? '!h-10' : '!h-11'}`}
               />
               {emailError && (
                 <p className="text-red-600 text-[13px] mt-1">{emailError}</p>
@@ -671,8 +671,8 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
 
       </div>
 
-      {/* ── Bottom: navigation buttons (always visible at bottom) ── */}
-      <div className={fullscreen ? 'absolute bottom-0 left-0 right-0 bg-white border-t border-edge px-4 py-4' : 'pt-5'}>
+      {/* ── Bottom: navigation buttons (position absolue en mode fullscreen) ── */}
+      <div className={fullscreen ? 'absolute bottom-0 left-0 right-0 bg-white border-t border-edge px-4 py-3' : 'pt-5'}>
         {step === 1 && (
           <button
             onClick={() => setStep(2)}
@@ -719,17 +719,17 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
               type="submit"
               form="lead-form-step4"
               disabled={status === 'loading'}
-              className="w-full btn-primary h-12 text-[15px] disabled:opacity-60"
+              className={`w-full btn-primary text-[15px] disabled:opacity-60 ${fullscreen ? 'h-11' : 'h-12'}`}
             >
               {status === 'loading' ? d.form.loading : d.form.envoyer}
             </button>
-            <p className="text-[12px] text-slate/60 text-center leading-relaxed mt-3">
+            <p className={`text-slate/60 text-center leading-snug ${fullscreen ? 'text-[11px] mt-1.5' : 'text-[12px] mt-3'}`}>
               {d.form.legal}
             </p>
             <button
               type="button"
               onClick={() => setStep(3)}
-              className="block text-[13px] text-slate hover:text-ink mt-2"
+              className={`block text-[13px] text-slate hover:text-ink ${fullscreen ? 'mt-1' : 'mt-2'}`}
             >
               {d.form.retour}
             </button>
