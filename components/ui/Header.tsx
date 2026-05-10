@@ -3,7 +3,9 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
-import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
+import LeadFormModal from '@/components/ui/LeadFormModal'
+import ShieldIcon from '@/components/shared/ShieldIcon'
+import fr from '@/dictionaries/fr.json'
 
 const menuSections: {
   id: string
@@ -22,13 +24,13 @@ const menuSections: {
       </svg>
     ),
     links: [
-      { href: '/lamal/guide',             label: 'Comprendre la LAMal'     },
-      { href: '/lamal/franchise',         label: 'Choisir sa franchise'    },
-      { href: '/lamal/modeles',           label: 'Les 4 modèles LAMal'     },
-      { href: '/lamal/lamal-vs-lca',      label: 'LAMal vs complémentaire' },
-      { href: '/lamal/changer-de-caisse', label: 'Changer de caisse'       },
-      { href: '/lamal/comparateur',       label: 'Comparateur de caisses'  },
-      { href: '/lamal/subsides',           label: 'Calculateur de subsides' },
+      { href: '/sante/guide',             label: 'Comprendre la LAMal'     },
+      { href: '/sante/franchise',         label: 'Choisir sa franchise'    },
+      { href: '/sante/modeles',           label: 'Les 4 modèles LAMal'     },
+      { href: '/sante/lamal-vs-lca',      label: 'LAMal vs complémentaire' },
+      { href: '/sante/changer-de-caisse', label: 'Changer de caisse'       },
+      { href: '/sante/comparateur',       label: 'Comparateur de caisses'  },
+      { href: '/sante/subsides',           label: 'Calculateur de subsides' },
     ],
   },
   {
@@ -43,14 +45,14 @@ const menuSections: {
       </svg>
     ),
     links: [
-      { href: '/lamal/canton/argovie',    label: 'Argovie'    },
-      { href: '/lamal/canton/berne',      label: 'Berne'      },
-      { href: '/lamal/canton/geneve',     label: 'Genève'     },
-      { href: '/lamal/canton/saint-gall', label: 'Saint-Gall' },
-      { href: '/lamal/canton/vaud',       label: 'Vaud'       },
-      { href: '/lamal/canton/zurich',     label: 'Zurich'     },
+      { href: '/sante/canton/argovie',    label: 'Argovie'    },
+      { href: '/sante/canton/berne',      label: 'Berne'      },
+      { href: '/sante/canton/geneve',     label: 'Genève'     },
+      { href: '/sante/canton/saint-gall', label: 'Saint-Gall' },
+      { href: '/sante/canton/vaud',       label: 'Vaud'       },
+      { href: '/sante/canton/zurich',     label: 'Zurich'     },
     ],
-    ctaLink: { href: '/lamal/cantons', label: 'Tous les cantons →' },
+    ctaLink: { href: '/sante/cantons', label: 'Tous les cantons →' },
   },
   {
     id: 'situation',
@@ -62,21 +64,12 @@ const menuSections: {
       </svg>
     ),
     links: [
-      { href: '/lamal/ma-situation', label: 'Ma situation' },
-      { href: '/lamal/ma-famille',   label: 'Ma famille'   },
-      { href: '/lamal/frontalier',   label: 'Frontaliers'  },
+      { href: '/sante/ma-situation', label: 'Ma situation' },
+      { href: '/sante/ma-famille',   label: 'Ma famille'   },
+      { href: '/sante/frontalier',   label: 'Frontaliers'  },
     ],
   },
 ]
-
-function ShieldIcon() {
-  return (
-    <svg className="w-7 h-7 text-white shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-    </svg>
-  )
-}
 
 function ChevronDown({ rotated }: { rotated: boolean }) {
   return (
@@ -100,11 +93,6 @@ export default function Header() {
     setExpandedSection(null)
   }, [pathname])
 
-  useEffect(() => {
-    document.body.style.overflow = offerOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [offerOpen])
-
   function close() {
     setMobileOpen(false)
     setExpandedSection(null)
@@ -116,7 +104,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="bg-[#0f2040] sticky top-0 z-50">
+      <header className="bg-navy sticky top-0 z-50">
         <style>{`
           @keyframes slideDown {
             from { opacity: 0; transform: translateY(-8px); }
@@ -129,7 +117,7 @@ export default function Header() {
           <div className="flex items-center h-16">
 
             {/* Logo — flex-1 mobile, auto desktop */}
-            <Link href="/lamal" className="flex items-center gap-2.5 flex-1 md:flex-none">
+            <Link href="/sante" className="flex items-center gap-2.5 flex-1 md:flex-none">
               <ShieldIcon />
               <span className="font-semibold text-white text-[15px] hidden md:inline">
                 My Swiss Insurance
@@ -142,11 +130,11 @@ export default function Header() {
             {/* CTA — centré mobile (flex-1 symétrique), aligné droite desktop */}
             <button
               onClick={() => setOfferOpen(true)}
-              className="shrink-0 bg-[#1d4ed8] hover:bg-[#1e40af] text-white font-medium
+              className="shrink-0 bg-brand hover:bg-brand-dark text-white font-medium
                          px-4 py-2 rounded-md text-[13px] transition-colors"
             >
-              <span className="hidden min-[380px]:inline">Recevez les meilleures offres</span>
-              <span className="min-[380px]:hidden">Être conseillé</span>
+              <span className="hidden min-[380px]:inline">{fr.header.ctaFull}</span>
+              <span className="min-[380px]:hidden">{fr.header.ctaShort}</span>
             </button>
 
             {/* Hamburger — flex-1 mobile (ancre droite), ml-3 desktop */}
@@ -170,7 +158,7 @@ export default function Header() {
 
         {/* Dropdown menu — navigation only, no CTA */}
         {mobileOpen && (
-          <div className="menu-slide bg-[#0f2040]/95 backdrop-blur-sm border-t border-white/10 overflow-y-auto"
+          <div className="menu-slide bg-navy/95 backdrop-blur-sm border-t border-white/10 overflow-y-auto"
             style={{ maxHeight: '85vh' }}>
             <div className="container-xl py-2 pb-6">
 
@@ -211,43 +199,7 @@ export default function Header() {
         )}
       </header>
 
-      {/* Modal overlay — "Recevez les meilleures offres" */}
-      {offerOpen && (
-        <div
-          className="fixed inset-0 bg-black/60 z-[60] overflow-y-auto"
-          onClick={() => setOfferOpen(false)}
-        >
-          <div className="flex min-h-full items-center justify-center px-4 pt-20 pb-4">
-            <div
-              className="bg-white rounded-xl w-full max-w-[600px]"
-              onClick={e => e.stopPropagation()}
-            >
-              <div className="px-4 pt-6 pb-3 sm:px-8 sm:pt-8 sm:pb-4">
-                <div className="flex items-start justify-between gap-4 mb-6">
-                  <p className="text-[15px] text-slate leading-relaxed">
-                    Un conseiller spécialisé compare les caisses adaptées à votre situation
-                    et vous présente les offres les plus avantageuses{' '}
-                    <strong>sous 24 heures</strong>.
-                    C'est <strong>gratuit et sans engagement</strong>.
-                  </p>
-                  <button
-                    onClick={() => setOfferOpen(false)}
-                    className="shrink-0 text-slate hover:text-ink transition-colors -mt-2"
-                    aria-label="Fermer"
-                  >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              <div className="px-3 pb-4 sm:px-8 sm:pb-8">
-                <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <LeadFormModal open={offerOpen} onClose={() => setOfferOpen(false)} />
     </>
   )
 }

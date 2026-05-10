@@ -13,13 +13,13 @@ export default function PolitiqueConfidentialitePage() {
     <div className="container-xl py-16 max-w-3xl">
       <Breadcrumb items={[{ label: 'Accueil', href: '/' }, { label: 'Politique de confidentialité' }]} className="mb-8" />
 
-      <h1 className="text-4xl font-bold text-[#1d4ed8] mb-2">Politique de confidentialité</h1>
+      <h1 className="text-4xl font-bold text-brand mb-2">Politique de confidentialité</h1>
       <p className="text-slate text-[14px] mb-12">Dernière mise à jour : avril 2026</p>
 
       <div className="prose-legal space-y-10 text-[15px] text-slate leading-relaxed">
 
         <section>
-          <h2 className="text-xl font-semibold text-[#1d4ed8] mb-3">Loi applicable</h2>
+          <h2 className="text-xl font-semibold text-brand mb-3">Loi applicable</h2>
           <p>
             Le traitement de vos données personnelles est régi par la{' '}
             <strong className="text-ink">Loi fédérale sur la Protection des Données (LPD, RS 235.1)</strong>{' '}
@@ -29,7 +29,7 @@ export default function PolitiqueConfidentialitePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-[#1d4ed8] mb-3">Responsable du traitement</h2>
+          <h2 className="text-xl font-semibold text-brand mb-3">Responsable du traitement</h2>
           <p>
             My Swiss Insurance<br />
             <a href="mailto:contact@my-swiss-insurance.ch" className="text-brand hover:underline">
@@ -40,7 +40,7 @@ export default function PolitiqueConfidentialitePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-[#1d4ed8] mb-3">Données collectées</h2>
+          <h2 className="text-xl font-semibold text-brand mb-3">Données collectées</h2>
           <p>Lors de la soumission du formulaire de comparaison, nous collectons :</p>
           <ul className="list-disc list-inside space-y-1 mt-2">
             <li>Prénom et nom</li>
@@ -52,7 +52,7 @@ export default function PolitiqueConfidentialitePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-[#1d4ed8] mb-3">Base légale et finalité du traitement</h2>
+          <h2 className="text-xl font-semibold text-brand mb-3">Base légale et finalité du traitement</h2>
           <p>
             Vos données sont traitées sur la base de votre <strong className="text-ink">consentement (LPD art. 6)</strong>{' '}
             dans le but de vous fournir une comparaison personnalisée des caisses maladie et de vous
@@ -65,7 +65,7 @@ export default function PolitiqueConfidentialitePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-[#1d4ed8] mb-3">Durée de conservation</h2>
+          <h2 className="text-xl font-semibold text-brand mb-3">Durée de conservation</h2>
           <p>
             Vos données sont conservées <strong className="text-ink">24 mois maximum</strong> à compter
             de votre dernière interaction avec notre service, puis supprimées ou anonymisées.
@@ -73,7 +73,7 @@ export default function PolitiqueConfidentialitePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-[#1d4ed8] mb-3">Vos droits (LPD art. 25)</h2>
+          <h2 className="text-xl font-semibold text-brand mb-3">Vos droits (LPD art. 25)</h2>
           <p>Conformément à la LPD (RS 235.1), vous disposez des droits suivants :</p>
           <ul className="list-disc list-inside space-y-1 mt-2">
             <li>Droit d'accès à vos données</li>
@@ -92,7 +92,7 @@ export default function PolitiqueConfidentialitePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-[#1d4ed8] mb-3">Retrait du consentement</h2>
+          <h2 className="text-xl font-semibold text-brand mb-3">Retrait du consentement</h2>
           <p>
             Vous pouvez retirer votre consentement à tout moment en nous contactant par e-mail.
             Le retrait du consentement ne remet pas en cause la licéité du traitement effectué
@@ -101,7 +101,7 @@ export default function PolitiqueConfidentialitePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-[#1d4ed8] mb-3">Cookies et données de navigation</h2>
+          <h2 className="text-xl font-semibold text-brand mb-3">Cookies et données de navigation</h2>
           <p>
             Ce site utilise des cookies techniques nécessaires à son fonctionnement. Aucun cookie
             publicitaire ou de suivi tiers n'est utilisé sans votre consentement explicite.
@@ -109,7 +109,7 @@ export default function PolitiqueConfidentialitePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-[#1d4ed8] mb-3">Autorité compétente</h2>
+          <h2 className="text-xl font-semibold text-brand mb-3">Autorité compétente</h2>
           <p>
             Pour toute réclamation relative à la protection de vos données, vous pouvez contacter le{' '}
             <strong className="text-ink">

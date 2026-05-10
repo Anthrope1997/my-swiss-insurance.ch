@@ -9,14 +9,24 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Navy & Slate palette
-        brand: '#1d4ed8',
+        // Bleu principal
+        brand:        '#1d4ed8',
         'brand-dark': '#1e40af',
-        'brand-light': '#3b82f6',
-        ink: '#1a1a1a',
-        slate: '#475569',
-        edge: '#e2e8f0',
-        cloud: '#f1f5f9',
+        'brand-light':'#3b82f6',
+        // Bleu pâle
+        'blue-tint':  '#dbeafe',
+        'blue-light2':'#eff6ff',
+        'blue-hint':  '#f8fafc',
+        // Marine
+        navy:         '#0f2040',
+        // Neutrals
+        ink:          '#1a1a1a',
+        slate:        '#475569',
+        muted:        '#94a3b8',
+        edge:         '#e2e8f0',
+        cloud:        '#f1f5f9',
+        // Icône callout
+        'callout-icon':'#378ADD',
       },
       fontFamily: {
         sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],

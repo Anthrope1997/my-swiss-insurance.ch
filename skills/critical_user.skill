@@ -75,6 +75,7 @@ Il signale immédiatement :
 - Deux chiffres contradictoires sur la même page (ex. "jusqu'à 5 653 CHF" dans le hero et "jusqu'à 2 753 CHF" dans le corps)
 - Un chiffre sans source visible ou avec une source peu crédible
 - L'absence de la mention "assurance maladie de base LAMal" sur une page qui ne l'explique jamais
+- Toute URL Schema.org (JSON-LD `BreadcrumbList`, `Article`, `FAQPage`) qui contient encore `/lamal/` au lieu de `/sante/`
 
 ### Règles éditoriales — Michel connaît les règles du site
 

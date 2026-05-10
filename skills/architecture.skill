@@ -1,0 +1,282 @@
+---
+name: Architecture
+description: >
+  Structure de fichiers, URLs, composants et règles d'architecture pour my-swiss-insurance.ch.
+  Source de vérité post-refactoring (mai 2026) : toutes les routes sont sous /sante/, tous les
+  composants UI sont dans components/ui/ et components/shared/, les composants domaine dans
+  components/sante/.
+---
+
+# My Swiss Insurance — Architecture Skill
+
+> **Règle d'or :** en cas de conflit entre ce skill et le code existant, le code fait foi.
+> Ce skill décrit l'état post-refactoring de mai 2026. Vérifier avant tout ajout qu'un composant ou une route n'existe pas déjà.
+
+---
+
+## 1. Stack et contraintes globales
+
+| Technologie | Rôle |
+|---|---|
+| **Next.js 16 (App Router)** | SSG/SSR, segment `[locale]` pour le routing FR |
+| **TypeScript** | Typage fort — `npx tsc --noEmit` doit passer à 0 erreur avant tout commit |
+| **Tailwind CSS** | Utility-first — tokens définis dans `tailwind.config.ts`, jamais de hex inline |
+| **Vercel** | Déploiement automatique, CDN mondial, fonctions serverless pour `/api/` |
+
+**Modèle économique :** leads vendus à des courtiers — **100 CHF par lead qualifié**.
+Capture via `<UnifiedLeadForm>` (4 étapes) → POST `/api/leads` → webhook Google Sheets.
+
+**GEO (Generative Engine Optimization) :**
+- Pages SSR via `[locale]` — aucune page 100% statique côté client
+- Schema.org JSON-LD sur chaque page : `BreadcrumbList` + `Article` + `FAQPage` (si applicable)
+- Structure H1 > H2 > H3 stricte, jamais de sauts
+- Chiffres clés en texte brut, pas uniquement dans les tableaux
+- URLs Schema.org : toujours `/sante/`, jamais `/lamal/`
+
+---
+
+## 2. Routes — structure complète
+
+```
+/fr                                    → Homepage (Template B)
+/fr/merci                              → Confirmation formulaire (robots: noindex)
+/fr/a-propos                           → À propos
+/fr/mentions-legales                   → Mentions légales
+/fr/politique-confidentialite          → Politique de confidentialité
+
+/fr/sante                              → Hub LAMal (Template B)
+/fr/sante/guide                        → Guide complet (Template A — GEO prioritaire)
+/fr/sante/comparateur                  → Comparateur de caisses (Template C — outil)
+/fr/sante/subsides                     → Simulateur de subsides (Template C — outil)
+/fr/sante/franchise                    → Guide franchises (Template A)
+/fr/sante/lamal-vs-lca                 → Différences LAMal/LCA (Template A)
+/fr/sante/changer-de-caisse            → Résiliation et changement (Template A)
+/fr/sante/modeles                      → Modèles d'assurance (Template A)
+/fr/sante/par-profil                   → Hub "Par situation" (Template B)
+/fr/sante/ma-situation                 → Salarié, indépendant, chômeur (Template A)
+/fr/sante/ma-famille                   → Famille, enfants, maternité, retraite (Template A)
+/fr/sante/frontalier                   → Hub frontaliers (Template B)
+/fr/sante/frontalier-france            → Guide frontaliers français (Template C)
+/fr/sante/frontalier-allemagne         → Guide frontaliers allemands (Template C)
+/fr/sante/frontalier-italie            → Guide frontaliers italiens (Template C)
+/fr/sante/canton/{slug}                → Pages cantons — 26 cantons (Template D)
+/fr/sante/cantons                      → Hub cantons (liste/index)
+
+/api/leads                             → POST : capture du formulaire
+/api/primes                            → GET : recherche de primes par NPA
+```
+
+**Slugs cantons (26) :**
+`vaud`, `geneve`, `fribourg`, `valais`, `neuchatel`, `jura`, `berne`, `zurich`,
+`argovie`, `bale-campagne`, `bale-ville`, `glaris`, `grisons`, `lucerne`,
+`nidwald`, `obwald`, `saint-gall`, `schaffhouse`, `schwyz`, `soleure`,
+`tessin`, `thurgovie`, `uri`, `zoug`,
+`appenzell-rhodes-exterieures`, `appenzell-rhodes-interieures`
+
+**Redirects permanents (next.config.mjs) :**
+- `/fr` → `/fr/sante`
+- `/fr/lamal` → `/fr/sante`
+- `/fr/lamal/:path*` → `/fr/sante/:path*`
+- `/sante/salarie-independant` → `/sante/ma-situation`
+- `/sante/famille-retraite` → `/sante/ma-famille`
+- `/sante/maternite` → `/sante/ma-famille`
+- `/sante/expatrie-frontalier` → `/sante/frontalier`
+- `/sante/frontalier-choix-assurance` → `/sante/frontalier`
+- `/confidentialite` → `/politique-confidentialite`
+
+---
+
+## 3. Règles d'architecture — invariants
+
+1. **Jamais de hex inline** : utiliser les tokens Tailwind de `tailwind.config.ts` (`brand`, `navy`, `slate`, `edge`, `blue-tint`, `cloud`, `muted`, `callout-icon`, etc.)
+2. **Jamais de texte visible codé en dur** : tout texte UI passe par `dictionaries/fr.json`, importé via `import fr from '@/dictionaries/fr.json'`
+3. **Vérifier avant de créer** : consulter `components/ui/`, `components/shared/`, `components/sante/` avant tout nouveau composant
+4. **`npx tsc --noEmit` à 0 erreur** avant tout commit
+5. **Header.tsx et Footer.tsx : ne jamais modifier pour du contenu de page** — ils sont globaux
+6. **StickyBar.tsx supprimé définitivement** — jamais à recréer ni réimporter
+7. **MultiStepLeadForm, LeadForm, LeadFormPopup supprimés** — remplacés par `<UnifiedLeadForm>`
+8. **URLs Schema.org : toujours `/sante/`**, jamais `/lamal/`
+9. **Données tarifaires** : ne pas modifier `data/sante/primes.json` (58 MB, généré par script Python)
+10. **Source unique subsides** : `lib/sante/calcul-subside.ts` + données dans `data/sante/cantons.ts`
+
+---
+
+## 4. Catalogue des composants
+
+### 4.1 components/ui/ — Composants génériques (toutes les pages)
+
+| Fichier | Rôle | Props clés |
+|---|---|---|
+| `Header.tsx` | Navigation globale — ne pas modifier | — |
+| `Footer.tsx` | Pied de page global — ne pas modifier | — |
+| `Breadcrumb.tsx` | JSON-LD BreadcrumbList uniquement (pas de visuel) | `items: {name, href}[]` |
+| `FAQ.tsx` | Accordéon FAQ + JSON-LD FAQPage | `items: {q, a}[]` |
+| `AuthorBio.tsx` | Bandeau MSI (après formulaire, avant guides associés) | `publishedDate, updatedDate` |
+| `HeroStats.tsx` | Tuiles statistiques Zone 1 — obligatoire, jamais inline | `stats: {value, label, sub}[]` |
+| `CantonSearch.tsx` | Autocomplete navigation 26 cantons → `/sante/canton/{slug}` | — |
+| `CantonCombobox.tsx` | Combobox canton (formulaire) | `CANTON_NAMES` export |
+| `UnifiedLeadForm.tsx` | Formulaire 4 étapes — seul formulaire du site | `redirectOnSuccess?: string` |
+| `LeadFormModal.tsx` | Modal wrapper pour UnifiedLeadForm | — |
+| `FormScrollButton.tsx` | Scroll vers `#contact` | CustomEvent |
+| `EmailCTA.tsx` | CTA email secondaire | — |
+| `NeedHelpSection.tsx` | Section "Besoin d'aide ?" | — |
+
+### 4.2 components/shared/ — Composants partagés inter-domaines
+
+> **Règle absolue : vérifier l'existence dans `components/shared/` AVANT d'en créer un nouveau.**
+> Tous les textes de ces composants viennent de `fr.json` sous `shared.*`.
+
+| Fichier | Rôle | Props |
+|---|---|---|
+| `GuideCard.tsx` | Carte guide avec flèche | `href, title, desc, cta?` |
+| `SituationCard.tsx` | Carte situation de vie | `href, title, desc` |
+| `CantonCard.tsx` | Carte canton avec prime | `href, name, prime, slug` |
+| `StatTile.tsx` | Tuile statistique standalone | `value, label, sub?` |
+| `InfoBox.tsx` | Encadré informatif | `title?, children` |
+| `RelatedGuides.tsx` | Grille 2×2 guides associés | `guides: {href, title, desc}[]` |
+| `ShieldIcon.tsx` | Icône bouclier SVG MSI | `className?` |
+
+### 4.3 components/sante/ — Composants domaine santé
+
+| Fichier | Rôle | Type |
+|---|---|---|
+| `CantonPage.tsx` | Template D — toutes les pages canton | Server Component |
+| `ComparateurClient.tsx` | Comparateur de caisses interactif | Client Component |
+| `PrimeCalculator.tsx` | Calculateur de primes basique | Client Component |
+| `PrimeCalculatorReal.tsx` | Calculateur primes avec données OFSP réelles | Client Component |
+| `SubsidesCalculator.tsx` | Calculateur subsides simplifié | Client Component |
+| `SubsidesSimulatorFull.tsx` | Simulateur subsides 26 cantons complet | Client Component |
+| `FrontalierSimulateur.tsx` | Simulateur droit d'option frontaliers | Client Component |
+
+---
+
+## 5. Sources de données
+
+| Fichier | Rôle | Modifier ? |
+|---|---|---|
+| `data/sante/cantons.ts` | Données par canton (primes, franchises) — source de vérité pages canton | Oui |
+| `data/sante/primes-2026.ts` | Constantes tarifaires OFSP 2026 | Oui |
+| `data/sante/primes.json` | Dataset complet (58 MB, généré par script) | **Non — script Python uniquement** |
+| `data/sante/regions.json` | Régions tarifaires OFSP | Non |
+| `data/sante/npa_to_region.json` | Mapping NPA → région tarifaire | Non |
+| `data/sante/stats.json` | Statistiques pré-calculées | Non |
+| `lib/sante/calcul-subside.ts` | Fonctions de calcul subsides | Oui |
+| `lib/sante/calcul-prime.ts` | Coefficients et helper d'estimation de prime | Oui |
+| `lib/shared/formatters.ts` | `formatChf`, `formatChfPerMonth`, `formatChfPerYear`, `formatPercent` | Oui |
+| `dictionaries/fr.json` | Labels UI officiels — source unique de tous les textes visibles | Oui |
+
+**Source unique subsides :** `lib/sante/calcul-subside.ts` consomme `data/sante/cantons.ts`.
+Ne pas créer de données subsides locales dans les composants.
+
+---
+
+## 6. Structure de fichiers — arborescence complète
+
+```
+my-swiss-insurance.ch/
+│
+├── app/
+│   ├── globals.css              ← Tailwind + classes utilitaires (.btn-primary, .callout, etc.)
+│   ├── layout.tsx               ← RootLayout : Header + Footer (ne pas modifier)
+│   ├── api/
+│   │   ├── leads/route.ts       ← POST /api/leads
+│   │   └── primes/route.ts      ← GET /api/primes
+│   └── [locale]/
+│       ├── layout.tsx           ← Layout locale (passthrough)
+│       ├── page.tsx             ← Homepage /fr (Template B)
+│       ├── a-propos/page.tsx
+│       ├── merci/page.tsx       ← Confirmation (robots: noindex)
+│       ├── mentions-legales/page.tsx
+│       ├── politique-confidentialite/page.tsx
+│       └── sante/
+│           ├── page.tsx         ← Hub LAMal
+│           ├── guide/page.tsx
+│           ├── comparateur/page.tsx
+│           ├── subsides/page.tsx
+│           ├── franchise/page.tsx
+│           ├── changer-de-caisse/page.tsx
+│           ├── lamal-vs-lca/page.tsx
+│           ├── modeles/page.tsx
+│           ├── par-profil/page.tsx
+│           ├── ma-situation/page.tsx
+│           ├── ma-famille/page.tsx
+│           ├── frontalier/page.tsx
+│           ├── frontalier-france/page.tsx
+│           ├── frontalier-allemagne/page.tsx
+│           ├── frontalier-italie/page.tsx
+│           ├── cantons/page.tsx
+│           └── canton/
+│               └── [slug]/page.tsx  ← 26 cantons via CantonPage.tsx
+│
+├── components/
+│   ├── ui/                      ← Composants génériques (voir §4.1)
+│   ├── shared/                  ← Composants partagés inter-domaines (voir §4.2)
+│   └── sante/                   ← Composants domaine santé (voir §4.3)
+│
+├── data/
+│   └── sante/                   ← Données tarifaires (voir §5)
+│
+├── dictionaries/
+│   └── fr.json                  ← SOURCE UNIQUE de tous les textes UI
+│
+├── lib/
+│   ├── sante/                   ← Fonctions calcul (calcul-prime.ts, calcul-subside.ts)
+│   ├── shared/                  ← Utilitaires partagés (formatters.ts)
+│   └── i18n/
+│       └── get-dictionary.ts    ← Chargeur dictionnaire par locale
+│
+├── skills/                      ← Skills IA pour le projet
+│   ├── UI_designer.skill
+│   ├── Copywriter.skill
+│   ├── Critical_user.skill
+│   └── architecture.skill       ← Ce fichier
+│
+├── scripts/                     ← Scripts Python (ne pas modifier)
+│   ├── compute_stats.py
+│   └── scrape_primes.py
+│
+├── proxy.ts                     ← Redirect / → /fr
+├── next.config.mjs              ← Redirects /lamal → /sante
+├── tailwind.config.ts           ← Tokens design system
+├── tsconfig.json
+└── package.json
+```
+
+---
+
+## 7. Checklist d'audit architecture
+
+Utiliser cette checklist après tout ajout de page ou composant :
+
+**Routes et URLs**
+- [ ] Toutes les nouvelles routes sont sous `/sante/`, jamais sous `/lamal/`
+- [ ] URLs Schema.org (JSON-LD) ne contiennent aucun `/lamal/`
+- [ ] Redirects dans `next.config.mjs` si une ancienne URL existe
+
+**Composants**
+- [ ] Aucun composant recréé s'il existe dans `components/ui/`, `components/shared/` ou `components/sante/`
+- [ ] `StickyBar.tsx` absent de tous les imports
+- [ ] `MultiStepLeadForm`, `LeadForm`, `LeadFormPopup` absents de tous les imports
+- [ ] `<UnifiedLeadForm>` utilisé pour tout formulaire de lead
+
+**Textes**
+- [ ] Aucun texte visible en dur dans le JSX
+- [ ] Tous les textes ajoutés dans `dictionaries/fr.json` avant usage
+
+**Couleurs**
+- [ ] Aucun hex inline — tokens Tailwind uniquement
+- [ ] `npx tsc --noEmit` à 0 erreur
+
+**Données**
+- [ ] Données subsides : `lib/sante/calcul-subside.ts` uniquement
+- [ ] `data/sante/primes.json` non modifié manuellement
+
+---
+
+## Prompt d'audit rapide
+
+Pour auditer une page ou un composant, utiliser ce prompt :
+
+> "Audite `[fichier]` selon le skill architecture.
+> Vérifier : (1) URLs et imports sans `/lamal/` ; (2) absence de `StickyBar`, `LeadForm`, `MultiStepLeadForm` ; (3) aucun hex inline, tokens Tailwind uniquement ; (4) aucun texte visible en dur, tout dans `fr.json` ; (5) données subsides via `lib/sante/calcul-subside.ts` uniquement.
+> Lister uniquement les violations trouvées."

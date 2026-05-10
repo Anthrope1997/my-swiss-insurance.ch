@@ -163,3 +163,15 @@ Le deux-points est **précédé et suivi d'une espace** dans tous les textes vis
 
 - Bien : `Franchise 300 CHF : prime de référence`
 - Mal : `Franchise 300 CHF: prime de référence`
+
+---
+
+## 9. Règle technique — dictionnaire de textes
+
+Tout texte visible produit pour le site doit d'abord être ajouté dans `dictionaries/fr.json` avant d'être utilisé dans un composant. Aucun string littéral en dur dans le JSX : labels, boutons, titres, descriptions, placeholders, messages — tous passent par le dictionnaire.
+
+Procédure systématique :
+1. Identifier la clé appropriée dans `fr.json` (ou créer une clé sous la section la plus logique)
+2. Ajouter le texte dans `fr.json`
+3. Importer dans le composant : `import fr from '@/dictionaries/fr.json'`
+4. Référencer via `{fr.section.cle}` dans le JSX

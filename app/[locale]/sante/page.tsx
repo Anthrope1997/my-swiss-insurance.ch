@@ -1,0 +1,415 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import fr from '@/dictionaries/fr.json'
+import UnifiedLeadForm from '@/components/ui/UnifiedLeadForm'
+import CantonSearch from '@/components/ui/CantonSearch'
+import Breadcrumb from '@/components/ui/Breadcrumb'
+import FAQ from '@/components/ui/FAQ'
+import HeroStats from '@/components/ui/HeroStats'
+import AuthorBio from '@/components/ui/AuthorBio'
+
+export const metadata: Metadata = {
+  title: 'Primes LAMal 2026 : comparez et économisez — My Swiss Insurance',
+  description:
+    'Comparez les primes LAMal 2026 gratuitement. Jusqu\'à 5 653 CHF d\'économie par an à Genève. 34 caisses, données OFSP officielles, résultat immédiat.',
+  alternates: { canonical: 'https://my-swiss-insurance.ch/sante' },
+  openGraph: {
+    title: 'Primes LAMal 2026 : comparez et économisez',
+    description:
+      'Jusqu\'à 5 653 CHF d\'économie par an. Comparez gratuitement 34 caisses LAMal. Données OFSP 2026.',
+    url: 'https://my-swiss-insurance.ch/sante',
+    type: 'website',
+  },
+}
+
+const faqItems = [
+  {
+    question: "L'assurance maladie est-elle obligatoire en Suisse ?",
+    answer: "Oui, la LAMal rend l'assurance maladie obligatoire pour tout résident en Suisse depuis 1996. L'affiliation doit intervenir dans les 3 mois suivant l'arrivée.",
+  },
+  {
+    question: 'Combien peut-on économiser en changeant de caisse LAMal ?',
+    answer: "Jusqu'à 5 653 CHF par an pour un adulte de 35 ans à Genève (franchise 300 CHF, modèle standard, source OFSP 2026). Les 34 caisses agréées proposent les mêmes prestations de base à des prix très différents selon le canton.",
+  },
+  {
+    question: 'Qui a droit à un subside LAMal en Suisse ?',
+    answer: "28 % de la population suisse bénéficient d'une réduction individuelle des primes (subside). Les conditions varient selon le canton et le revenu déterminant. Un simulateur est disponible sur my-swiss-insurance.ch.",
+  },
+]
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map(item => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+}
+
+const webSiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'My Swiss Insurance',
+  url: 'https://my-swiss-insurance.ch',
+  description: 'Comparateur de primes LAMal 2026. Données officielles OFSP pour tous les cantons suisses.',
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: { '@type': 'EntryPoint', urlTemplate: 'https://my-swiss-insurance.ch/sante/comparateur?q={search_term_string}' },
+    'query-input': 'required name=search_term_string',
+  },
+}
+
+// ── Données ──────────────────────────────────────────────────────────────────
+
+const stats = [
+  { value: '5 653 CHF', label: 'Économie maximale possible en Suisse', sub: 'Adulte 35 ans, tous profils confondus' },
+  { value: '34',        label: 'Caisses agréées',            sub: 'données OFSP 2026'        },
+  { value: '28 %',      label: 'Bénéficiaires de subsides',  sub: 'de la population suisse'  },
+]
+
+const guides = [
+  {
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+          d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+      </svg>
+    ),
+    title: 'Comprendre la LAMal',
+    desc: 'Fonctionnement, prestations, subsides et primes 2026 par canton',
+    href: '/sante/guide',
+  },
+  {
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+          d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+      </svg>
+    ),
+    title: 'Choisir sa franchise',
+    desc: 'Trouvez la franchise la plus avantageuse en fonction de vos frais médicaux',
+    href: '/sante/franchise',
+  },
+  {
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+          d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+      </svg>
+    ),
+    title: "Les 4 modèles d'assurance",
+    desc: "Standard, médecin de famille, HMO, Telmed : jusqu'à 24 % d'économie sur la prime",
+    href: '/sante/modeles',
+  },
+  {
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+      </svg>
+    ),
+    title: 'LAMal vs complémentaire',
+    desc: "La complémentaire vous couvre là où l'assurance maladie LAMal obligatoire s'arrête",
+    href: '/sante/lamal-vs-lca',
+  },
+]
+
+const situations = [
+  {
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+      </svg>
+    ),
+    title: 'Ma situation',
+    desc: 'Salarié, indépendant, chômeur, nouvel arrivant',
+    href: '/sante/ma-situation',
+  },
+  {
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+      </svg>
+    ),
+    title: 'Ma famille',
+    desc: 'Enfants, maternité, jeunes adultes, retraite',
+    href: '/sante/ma-famille',
+  },
+  {
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+          d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+    title: 'Frontaliers',
+    desc: "Droit d'option, LAMal ou système du pays de résidence",
+    href: '/sante/frontalier',
+  },
+]
+
+const cantonCards = [
+  { nom: 'Berne',   primeMin: '533', economieAn: "4'447", href: '/sante/canton/berne'  },
+  { nom: 'Genève',  primeMin: '634', economieAn: "5'653", href: '/sante/canton/geneve' },
+  { nom: 'Vaud',    primeMin: '579', economieAn: "4'220", href: '/sante/canton/vaud'   },
+  { nom: 'Zurich',  primeMin: '489', economieAn: "4'285", href: '/sante/canton/zurich' },
+]
+
+const aproposFaits = [
+  {
+    label: 'Source des données',
+    desc: "Données officielles de l'OFSP, des 26 cantons suisses et des caisses maladie",
+  },
+  {
+    label: 'Couverture',
+    desc: 'Toutes les caisses agréées en Suisse, pour chaque canton',
+  },
+  {
+    label: 'Mise à jour',
+    desc: "Chaque automne après la publication des nouvelles primes par l'OFSP",
+  },
+  {
+    label: 'Service',
+    desc: 'Comparer les primes est gratuit et immédiat, se faire conseiller par un expert aussi',
+  },
+]
+
+// ── Page ─────────────────────────────────────────────────────────────────────
+
+export default function LamalPage() {
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }} />
+
+      {/* ── 1. HERO ────────────────────────────────────────────────────────── */}
+      <section className="bg-white border-b border-edge pt-10 pb-12">
+        <div className="container-xl">
+
+          <Breadcrumb items={[
+            { label: 'Accueil', href: '/' },
+            { label: 'LAMal' },
+          ]} />
+
+          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
+            Économisez sur votre prime LAMal en 2026
+          </h1>
+
+          <p className="text-[18px] text-slate leading-relaxed mb-8">
+            En Suisse, toutes les caisses couvrent les mêmes prestations de base. Seul le prix
+            diffère — jusqu'à 5 653 CHF par an d'écart pour un même profil.
+            Comparez gratuitement et trouvez la caisse la moins chère pour votre situation.
+          </p>
+
+          {/* Stats */}
+          <HeroStats stats={stats} className="mb-10 pb-10 border-b border-edge" />
+
+        </div>
+      </section>
+
+      {/* ── 2. GUIDES LAMAL ─────────────────────────────────────────────────── */}
+      <section className="bg-white py-12">
+        <div className="container-xl">
+
+          <div className="mb-6">
+            <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
+              Tout comprendre sur l'assurance maladie suisse
+            </h2>
+            <p className="text-[17px] text-slate leading-relaxed">
+              L'assurance maladie de base LAMal est obligatoire pour tous les résidents en Suisse depuis
+              1996. Nos guides couvrent chaque aspect pour vous aider à faire le bon choix :
+              franchises, modèles alternatifs et subsides cantonaux.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {guides.map(g => (
+              <Link
+                key={g.href} href={g.href}
+                className="group flex flex-col bg-white border border-edge rounded-xl p-6
+                           hover:border-brand hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
+              >
+                <div className="mb-4">
+                  <div className="w-9 h-9 bg-blue-tint border border-brand/20 rounded-lg
+                                  flex items-center justify-center text-brand
+                                  group-hover:bg-brand group-hover:text-white group-hover:border-brand
+                                  transition-colors duration-200">
+                    {g.icon}
+                  </div>
+                </div>
+                <h3 className="font-semibold text-ink text-[16px] mb-2
+                               group-hover:text-brand transition-colors">
+                  {g.title}
+                </h3>
+                <p className="text-slate text-[14px] leading-relaxed flex-1">{g.desc}</p>
+                <div className="flex items-center gap-1 mt-4 text-brand text-[13px] font-medium">
+                  Lire le guide
+                  <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200"
+                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ── 3. PAR SITUATION DE VIE ─────────────────────────────────────────── */}
+      <section className="bg-white border-t border-edge py-12">
+        <div className="container-xl">
+
+          <div className="mb-6">
+            <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
+              Votre assurance LAMal selon votre situation
+            </h2>
+            <p className="text-[17px] text-slate leading-relaxed">
+              Votre situation personnelle détermine le contrat LAMal le plus avantageux pour vous.
+              Franchise, modèle et éligibilité aux subsides varient selon votre profil.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+            {situations.map(s => (
+              <Link
+                key={s.href} href={s.href}
+                className="group flex flex-col bg-white border border-edge rounded-xl p-6
+                           hover:border-brand hover:shadow-md transition-all duration-200"
+              >
+                <div className="w-9 h-9 bg-blue-tint border border-brand/20 rounded-lg
+                                flex items-center justify-center text-brand mb-4
+                                group-hover:bg-brand group-hover:text-white group-hover:border-brand
+                                transition-colors duration-200">
+                  {s.icon}
+                </div>
+                <h3 className="font-semibold text-ink text-[17px] mb-2
+                               group-hover:text-brand transition-colors">
+                  {s.title}
+                </h3>
+                <p className="text-slate text-[15px] leading-relaxed flex-1">{s.desc}</p>
+                <div className="flex items-center gap-1 mt-5 text-brand text-[13px] font-medium">
+                  Découvrir
+                  <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200"
+                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ── 4. PAR CANTON ───────────────────────────────────────────────────── */}
+      <section className="bg-white border-t border-edge py-12">
+        <div className="container-xl">
+
+          <div className="mb-8">
+            <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
+              Primes et économies par canton en 2026
+            </h2>
+            <p className="text-[17px] text-slate leading-relaxed">
+              Sélectionnez votre canton pour accéder aux données détaillées : primes, classement
+              des caisses et simulateur de subsides.
+            </p>
+          </div>
+
+          <div className="mb-10">
+            <CantonSearch />
+          </div>
+
+          {/* 4 cantons les plus peuplés */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-3">
+            {cantonCards.map(c => (
+              <Link key={c.nom} href={c.href}
+                className="group bg-white border border-edge rounded-xl p-6 flex flex-col
+                           hover:border-brand hover:shadow-md transition-all duration-200">
+                <p className="font-bold text-ink text-[22px] mb-1">{c.nom}</p>
+                <p className="text-slate text-[13px] mb-4">
+                  À partir de <span className="font-semibold text-ink">{c.primeMin} CHF par mois</span>
+                </p>
+                <div className="bg-blue-tint rounded-lg px-3 py-2 mb-5">
+                  <p className="text-[12px] text-brand font-medium">{fr.shared.economiePossible}</p>
+                  <p className="text-[18px] font-bold text-brand leading-tight">
+                    {c.economieAn} CHF par an
+                  </p>
+                </div>
+                <div className="mt-auto flex items-center gap-1 text-[13px] font-medium text-brand">
+                  Consulter la page canton
+                  <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200"
+                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          <p className="text-[12px] text-slate/70 mb-8">
+            Adulte 35 ans, modèle standard, franchise 300 CHF. Source OFSP 2026.
+          </p>
+
+        </div>
+      </section>
+
+      {/* ── 5. À PROPOS ─────────────────────────────────────────────────────── */}
+      <section className="bg-white border-t border-edge py-12">
+        <div className="container-xl">
+
+          <div className="mb-6">
+            <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
+              Une source de référence sur la LAMal en Suisse
+            </h2>
+            <p className="text-[17px] text-slate leading-relaxed">
+              My Swiss Insurance s'appuie sur les données officielles de l'Office fédéral de la
+              santé publique (OFSP), des cantons et des caisses maladie. Chaque résident, expatrié
+              ou frontalier peut ainsi identifier la couverture la plus adaptée à sa situation.
+              Toutes les informations sont mises à jour chaque année.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {aproposFaits.map(f => (
+              <div key={f.label} className="border-t-2 border-brand pt-5">
+                <p className="text-[12px] font-semibold text-brand uppercase tracking-wide mb-2">
+                  {f.label}
+                </p>
+                <p className="text-[15px] text-slate leading-relaxed">{f.desc}</p>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ── 6. FAQ ──────────────────────────────────────────────────────────── */}
+      <section className="bg-white border-t border-edge py-12">
+        <div className="container-xl">
+          <FAQ items={faqItems} title="Questions fréquentes sur la LAMal" />
+        </div>
+      </section>
+
+      {/* ── 7. FORMULAIRE ───────────────────────────────────────────────────── */}
+      <div className="container-xl">
+        <div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4">
+          <h2 className="text-2xl font-semibold text-ink hover:text-brand transition-colors mb-3">Besoin d'aide ?</h2>
+          <p className="text-[16px] text-slate mb-6 leading-relaxed">
+            Un expert vous rappelle sous 24 heures pour établir avec vous une solution
+            personnalisée. Gratuit, sans engagement.
+          </p>
+          <UnifiedLeadForm redirectOnSuccess="/fr/merci" />
+        </div>
+      </div>
+
+      {/* Bandeau éditorial */}
+      <div className="container-xl pb-12">
+        <AuthorBio publishedDate="1er janvier 2026" updatedDate="6 mai 2026" />
+      </div>
+    </>
+  )
+}

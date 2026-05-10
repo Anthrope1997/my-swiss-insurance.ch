@@ -1,37 +1,9 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import { CANTONS, CANTON_NOMS } from '@/data/shared/cantons'
 
-const CANTONS: { nom: string; code: string }[] = [
-  { nom: 'Argovie',                       code: 'AG' },
-  { nom: 'Appenzell Rhodes-Extérieures',  code: 'AR' },
-  { nom: 'Appenzell Rhodes-Intérieures',  code: 'AI' },
-  { nom: 'Bâle-Campagne',                 code: 'BL' },
-  { nom: 'Bâle-Ville',                    code: 'BS' },
-  { nom: 'Berne',                          code: 'BE' },
-  { nom: 'Fribourg',                       code: 'FR' },
-  { nom: 'Genève',                         code: 'GE' },
-  { nom: 'Glaris',                         code: 'GL' },
-  { nom: 'Grisons',                        code: 'GR' },
-  { nom: 'Jura',                           code: 'JU' },
-  { nom: 'Lucerne',                        code: 'LU' },
-  { nom: 'Neuchâtel',                      code: 'NE' },
-  { nom: 'Nidwald',                        code: 'NW' },
-  { nom: 'Obwald',                         code: 'OW' },
-  { nom: 'Saint-Gall',                     code: 'SG' },
-  { nom: 'Schaffhouse',                    code: 'SH' },
-  { nom: 'Schwyz',                         code: 'SZ' },
-  { nom: 'Soleure',                        code: 'SO' },
-  { nom: 'Tessin',                         code: 'TI' },
-  { nom: 'Thurgovie',                      code: 'TG' },
-  { nom: 'Uri',                            code: 'UR' },
-  { nom: 'Valais',                         code: 'VS' },
-  { nom: 'Vaud',                           code: 'VD' },
-  { nom: 'Zoug',                           code: 'ZG' },
-  { nom: 'Zurich',                         code: 'ZH' },
-]
-
-export const CANTON_NAMES = CANTONS.map(c => c.nom)
+export const CANTON_NAMES = CANTON_NOMS
 
 interface Props {
   value: string

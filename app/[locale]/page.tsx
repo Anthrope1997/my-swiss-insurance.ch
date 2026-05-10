@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
+import UnifiedLeadForm from '@/components/ui/UnifiedLeadForm'
 import CantonSearch from '@/components/ui/CantonSearch'
 import HeroStats from '@/components/ui/HeroStats'
 
@@ -57,7 +57,7 @@ const webSiteSchema = {
   description: 'Comparateur de primes LAMal 2026. Données officielles OFSP pour tous les cantons suisses.',
   potentialAction: {
     '@type': 'SearchAction',
-    target: { '@type': 'EntryPoint', urlTemplate: 'https://my-swiss-insurance.ch/lamal/comparateur?q={search_term_string}' },
+    target: { '@type': 'EntryPoint', urlTemplate: 'https://my-swiss-insurance.ch/sante/comparateur?q={search_term_string}' },
     'query-input': 'required name=search_term_string',
   },
 }
@@ -80,7 +80,7 @@ const guides = [
     ),
     title: 'Comprendre la LAMal',
     desc: 'Fonctionnement, prestations, primes 2026 par canton et droits de chacun',
-    href: '/lamal/guide',
+    href: '/sante/guide',
   },
   {
     icon: (
@@ -91,7 +91,7 @@ const guides = [
     ),
     title: 'Choisir sa franchise',
     desc: 'Trouvez la franchise la plus avantageuse selon vos frais médicaux habituels',
-    href: '/lamal/franchise',
+    href: '/sante/franchise',
   },
   {
     icon: (
@@ -102,7 +102,7 @@ const guides = [
     ),
     title: 'Les 4 modèles d\'assurance',
     desc: 'Standard, médecin de famille, HMO, Telmed : jusqu\'à 24 % d\'économie sur la prime',
-    href: '/lamal/modeles',
+    href: '/sante/modeles',
   },
   {
     icon: (
@@ -113,7 +113,7 @@ const guides = [
     ),
     title: 'LAMal vs complémentaire',
     desc: 'Obligatoire ou facultative, quand souscrire une LCA et pour quel profil',
-    href: '/lamal/lamal-vs-lca',
+    href: '/sante/lamal-vs-lca',
   },
 ]
 
@@ -127,7 +127,7 @@ const situations = [
     ),
     title: 'Ma situation',
     desc: 'Salarié, indépendant, chômeur, nouvel arrivant',
-    href: '/lamal/ma-situation',
+    href: '/sante/ma-situation',
   },
   {
     icon: (
@@ -138,7 +138,7 @@ const situations = [
     ),
     title: 'Ma famille',
     desc: 'Enfants, maternité, jeunes adultes, retraite',
-    href: '/lamal/ma-famille',
+    href: '/sante/ma-famille',
   },
   {
     icon: (
@@ -149,15 +149,15 @@ const situations = [
     ),
     title: 'Frontaliers',
     desc: 'Droit d\'option, LAMal ou système du pays de résidence',
-    href: '/lamal/frontalier',
+    href: '/sante/frontalier',
   },
 ]
 
 const cantonCards = [
-  { nom: 'Zurich',  primeMin: '489', economieAn: "4'285", href: '/lamal/canton/zurich' },
-  { nom: 'Berne',   primeMin: '533', economieAn: "4'447",   href: '/lamal/canton/berne'  },
-  { nom: 'Vaud',    primeMin: '579', economieAn: "4'220", href: '/lamal/canton/vaud'   },
-  { nom: 'Genève',  primeMin: '634', economieAn: "5'653", href: '/lamal/canton/geneve' },
+  { nom: 'Zurich',  primeMin: '489', economieAn: "4'285", href: '/sante/canton/zurich' },
+  { nom: 'Berne',   primeMin: '533', economieAn: "4'447",   href: '/sante/canton/berne'  },
+  { nom: 'Vaud',    primeMin: '579', economieAn: "4'220", href: '/sante/canton/vaud'   },
+  { nom: 'Genève',  primeMin: '634', economieAn: "5'653", href: '/sante/canton/geneve' },
 ]
 
 const aproposFaits = [
@@ -193,7 +193,7 @@ export default function HomePage() {
 
           <div className="badge mb-5">Données OFSP 2026</div>
 
-          <h1 className="text-4xl sm:text-5xl font-bold text-[#1d4ed8] leading-tight mb-5 max-w-2xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-brand leading-tight mb-5 max-w-2xl">
             Économisez sur votre assurance maladie suisse en 2026
           </h1>
 
@@ -209,7 +209,7 @@ export default function HomePage() {
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-3 sm:items-start">
             <div className="flex flex-col items-start gap-1.5">
-              <Link href="/lamal/comparateur" className="btn-primary text-[15px] py-3.5 px-7 w-full sm:w-auto">
+              <Link href="/sante/comparateur" className="btn-primary text-[15px] py-3.5 px-7 w-full sm:w-auto">
                 Comparer les primes gratuitement
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -233,7 +233,7 @@ export default function HomePage() {
         <div className="container-xl">
 
           <div className="max-w-2xl mb-12">
-            <h2 className="text-3xl font-bold text-[#1d4ed8] leading-tight mb-4">
+            <h2 className="text-3xl font-bold text-brand leading-tight mb-4">
               Tout comprendre sur l'assurance maladie suisse
             </h2>
             <p className="text-[17px] text-slate leading-relaxed">
@@ -251,7 +251,7 @@ export default function HomePage() {
                            hover:border-brand hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
               >
                 <div className="mb-4">
-                  <div className="w-9 h-9 bg-[#dbeafe] border border-[#1d4ed8]/20 rounded-lg
+                  <div className="w-9 h-9 bg-blue-tint border border-brand/20 rounded-lg
                                   flex items-center justify-center text-brand
                                   group-hover:bg-brand group-hover:text-white group-hover:border-brand
                                   transition-colors duration-200">
@@ -296,7 +296,7 @@ export default function HomePage() {
         <div className="container-xl">
 
           <div className="max-w-2xl mb-12">
-            <h2 className="text-3xl font-bold text-[#1d4ed8] leading-tight mb-4">
+            <h2 className="text-3xl font-bold text-brand leading-tight mb-4">
               Des conseils adaptés à votre profil
             </h2>
             <p className="text-[17px] text-slate leading-relaxed">
@@ -312,7 +312,7 @@ export default function HomePage() {
                 className="group flex flex-col bg-white border border-edge rounded-xl p-6
                            hover:border-brand hover:shadow-md transition-all duration-200"
               >
-                <div className="w-9 h-9 bg-[#dbeafe] border border-[#1d4ed8]/20 rounded-lg
+                <div className="w-9 h-9 bg-blue-tint border border-brand/20 rounded-lg
                                 flex items-center justify-center text-brand mb-4
                                 group-hover:bg-brand group-hover:text-white group-hover:border-brand
                                 transition-colors duration-200">
@@ -342,7 +342,7 @@ export default function HomePage() {
         <div className="container-xl">
 
           <div className="max-w-2xl mb-8">
-            <h2 className="text-3xl font-bold text-[#1d4ed8] leading-tight mb-4">
+            <h2 className="text-3xl font-bold text-brand leading-tight mb-4">
               Primes et économies par canton en 2026
             </h2>
             <p className="text-[17px] text-slate leading-relaxed">
@@ -366,7 +366,7 @@ export default function HomePage() {
                 <p className="text-slate text-[13px] mb-4">
                   À partir de <span className="font-semibold text-ink">{c.primeMin} CHF</span>/mois
                 </p>
-                <div className="bg-[#eff6ff] rounded-lg px-3 py-2 mb-5">
+                <div className="bg-blue-light2 rounded-lg px-3 py-2 mb-5">
                   <p className="text-[12px] text-brand font-medium">Économie possible</p>
                   <p className="text-[18px] font-bold text-ink leading-tight">
                     {c.economieAn} CHF/an
@@ -388,7 +388,7 @@ export default function HomePage() {
             <p className="text-[15px] text-slate mb-3">
               Vous souhaitez comparer toutes les caisses pour un profil précis ?
             </p>
-            <Link href="/lamal/comparateur" className="btn-primary text-[14px]">
+            <Link href="/sante/comparateur" className="btn-primary text-[14px]">
               Ouvrir le comparateur →
             </Link>
           </div>
@@ -401,7 +401,7 @@ export default function HomePage() {
         <div className="container-xl">
 
           <div className="max-w-2xl mb-12">
-            <h2 className="text-3xl font-bold text-[#1d4ed8] leading-tight mb-4">
+            <h2 className="text-3xl font-bold text-brand leading-tight mb-4">
               Une source de référence sur la LAMal en Suisse
             </h2>
             <p className="text-[17px] text-slate leading-relaxed">
@@ -430,7 +430,7 @@ export default function HomePage() {
         <div className="container-xl max-w-2xl">
 
           <div className="text-center mb-6">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#1d4ed8] leading-tight mb-3">
+            <h2 className="text-2xl sm:text-3xl font-bold text-brand leading-tight mb-3">
               Vous préférez qu'on s'occupe de tout ?
             </h2>
             <p className="text-[15px] sm:text-[17px] text-slate leading-relaxed">
@@ -440,7 +440,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <MultiStepLeadForm redirectOnSuccess="/merci" />
+          <UnifiedLeadForm redirectOnSuccess="/merci" />
 
         </div>
       </section>

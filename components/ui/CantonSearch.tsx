@@ -2,35 +2,13 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { CANTONS as RAW_CANTONS } from '@/data/shared/cantons'
 
-const CANTONS: { nom: string; code: string; slug: string }[] = [
-  { nom: 'Argovie',                       code: 'AG', slug: 'argovie' },
-  { nom: 'Appenzell Rh.-Int.',            code: 'AI', slug: 'appenzell-rhodes-interieures' },
-  { nom: 'Appenzell Rh.-Ext.',            code: 'AR', slug: 'appenzell-rhodes-exterieures' },
-  { nom: 'Bâle-Campagne',                code: 'BL', slug: 'bale-campagne' },
-  { nom: 'Bâle-Ville',                   code: 'BS', slug: 'bale-ville' },
-  { nom: 'Berne',                         code: 'BE', slug: 'berne' },
-  { nom: 'Fribourg',                      code: 'FR', slug: 'fribourg' },
-  { nom: 'Genève',                        code: 'GE', slug: 'geneve' },
-  { nom: 'Glaris',                        code: 'GL', slug: 'glaris' },
-  { nom: 'Grisons',                       code: 'GR', slug: 'grisons' },
-  { nom: 'Jura',                          code: 'JU', slug: 'jura' },
-  { nom: 'Lucerne',                       code: 'LU', slug: 'lucerne' },
-  { nom: 'Neuchâtel',                     code: 'NE', slug: 'neuchatel' },
-  { nom: 'Nidwald',                       code: 'NW', slug: 'nidwald' },
-  { nom: 'Obwald',                        code: 'OW', slug: 'obwald' },
-  { nom: 'Saint-Gall',                    code: 'SG', slug: 'saint-gall' },
-  { nom: 'Schaffhouse',                   code: 'SH', slug: 'schaffhouse' },
-  { nom: 'Schwyz',                        code: 'SZ', slug: 'schwyz' },
-  { nom: 'Soleure',                       code: 'SO', slug: 'soleure' },
-  { nom: 'Tessin',                        code: 'TI', slug: 'tessin' },
-  { nom: 'Thurgovie',                     code: 'TG', slug: 'thurgovie' },
-  { nom: 'Uri',                           code: 'UR', slug: 'uri' },
-  { nom: 'Valais',                        code: 'VS', slug: 'valais' },
-  { nom: 'Vaud',                          code: 'VD', slug: 'vaud' },
-  { nom: 'Zoug',                          code: 'ZG', slug: 'zoug' },
-  { nom: 'Zurich',                        code: 'ZH', slug: 'zurich' },
-]
+const CANTONS = RAW_CANTONS.map(c => ({
+  nom:  c.nomCourt ?? c.nom,
+  code: c.code,
+  slug: c.slug,
+}))
 
 export default function CantonSearch() {
   const router = useRouter()
@@ -58,7 +36,7 @@ export default function CantonSearch() {
   function select(c: typeof CANTONS[number]) {
     setQuery(c.nom)
     setOpen(false)
-    router.push(`/lamal/canton/${c.slug}`)
+    router.push(`/sante/canton/${c.slug}`)
   }
 
   return (

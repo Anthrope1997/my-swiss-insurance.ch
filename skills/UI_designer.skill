@@ -13,13 +13,20 @@ present_files:
   - components/ui/AuthorBio.tsx
   - components/ui/Breadcrumb.tsx
   - components/ui/FAQ.tsx
-  - components/ui/MultiStepLeadForm.tsx
+  - components/ui/UnifiedLeadForm.tsx
+  - components/ui/LeadFormModal.tsx
   - components/ui/FormScrollButton.tsx
-  - components/ui/StickyBar.tsx
   - components/ui/Header.tsx
   - components/ui/Footer.tsx
-  - app/[locale]/lamal/guide/page.tsx
-  - app/[locale]/lamal/franchise/page.tsx
+  - components/shared/ShieldIcon.tsx
+  - components/shared/GuideCard.tsx
+  - components/shared/SituationCard.tsx
+  - components/shared/CantonCard.tsx
+  - components/shared/RelatedGuides.tsx
+  - components/shared/StatTile.tsx
+  - components/shared/InfoBox.tsx
+  - app/[locale]/sante/guide/page.tsx
+  - app/[locale]/sante/franchise/page.tsx
 ---
 
 # My Swiss Insurance — UI Skill
@@ -88,7 +95,7 @@ Les labels uppercase "À retenir" et "Recommandation" ne portent **pas** de deux
 
 **Toutes** les tuiles statistiques héro (Zone 1) utilisent le composant `<HeroStats>`.
 **Aucune page ne définit son propre style de tuile** : pas de grille inline, pas de tuiles `bg-[#dbeafe]`, `bg-[#f0fdf4]`, `bg-[#eff6ff]` dans la zone héro.
-Style de référence : fond `bg-cloud` (gris clair, identique à la zone "En bref"), chiffre `text-[#1d4ed8]` (brand), label **`text-ink`** (noir, pas `text-slate`), sous-label `text-slate/60`.
+Style de référence : fond `bg-cloud` (gris clair, identique à la zone "En bref"), chiffre `text-brand`, label **`text-ink`** (noir, pas `text-slate`), sous-label `text-slate/60`.
 
 ```tsx
 import HeroStats from '@/components/ui/HeroStats'
@@ -113,7 +120,7 @@ Sur toutes les pages qui contiennent une comparaison entre deux options (LAMal v
 
 | État | Classes de fond | Classes de texte | Usage |
 |---|---|---|---|
-| Option avantageuse / économie | `bg-[#dbeafe]` (sans bordure) | `text-[#1d4ed8]` | Savings, avantages financiers, options recommandées |
+| Option avantageuse / économie | `bg-blue-tint` (sans bordure) | `text-brand` | Savings, avantages financiers, options recommandées |
 | Option coûteuse / à risque | `bg-cloud border border-edge` | `text-slate` | Coûts élevés, risques, points d'attention |
 
 **Pas de vert, pas d'orange.** Le vert `bg-[#f0fdf4]`/`text-[#166534]` et l'orange `bg-[#fff7ed]`/`text-[#f59e0b]` sont bannis sur l'ensemble du site.
@@ -124,7 +131,7 @@ Les tirets négatifs utilisent `text-slate` (jamais `text-[#f59e0b]`).
 
 **Tous** les titres du site utilisent `text-ink` (#1a1a1a) : H1, H2, H3, titre du formulaire, titre de la FAQ, labels "En bref" et "Sommaire". Un seul token de couleur, sans exception. Aucune différence visuelle entre les titres d'une section à l'autre.
 
-**Jamais de bleu sur un H1. Sans exception.** `text-[#1d4ed8]`, `text-brand`, `text-[#0f2040]` sont interdits sur tout élément H1 du site, quelle que soit la page.
+**Jamais de bleu sur un H1. Sans exception.** `text-brand`, `text-navy` sont interdits sur tout élément H1 du site, quelle que soit la page.
 
 ```tsx
 {/* ✓ Correct */}
@@ -263,7 +270,7 @@ Pour afficher plusieurs options sur des lignes distinctes dans un tooltip `<Info
 
 ### 0.14 Icônes des tuiles de formulaire — toujours visibles sur mobile
 
-Les icônes SVG dans les tuiles de sélection de l'étape 1 du formulaire (`<MultiStepLeadForm>`) sont **toujours visibles sur mobile**, identiques au desktop. Aucun CSS ne les masque (`hidden`, `sm:block`, `md:block`, etc.).
+Les icônes SVG dans les tuiles de sélection de l'étape 1 du formulaire (`<UnifiedLeadForm>`) sont **toujours visibles sur mobile**, identiques au desktop. Aucun CSS ne les masque (`hidden`, `sm:block`, `md:block`, etc.).
 
 Le texte des tuiles utilise `!text-[14px]` pour garantir la lisibilité sur petit écran.
 
@@ -428,7 +435,7 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 
 <Breadcrumb items={[
   { label: 'Accueil', href: '/' },
-  { label: 'LAMal', href: '/lamal' },
+  { label: 'LAMal', href: '/sante' },
   { label: 'Choisir sa franchise' },  // dernier item : pas de href
 ]} />
 // className?: string  (acceptée mais ignorée — pas d'élément visuel)
@@ -455,16 +462,26 @@ Règle : toujours placer `<FAQ>` **avant** le formulaire.
 
 ---
 
-### 3.3 `<MultiStepLeadForm>` — components/ui/MultiStepLeadForm.tsx
+### 3.3 `<UnifiedLeadForm>` — components/ui/UnifiedLeadForm.tsx
 
 Client Component. 4 étapes : Objectif → Situation → Profil → Coordonnées.
 Soumission POST /api/leads, puis redirection vers `redirectOnSuccess`.
+Tous les textes (labels, boutons, messages) proviennent de `dictionaries/fr.json`.
 
 ```tsx
-import MultiStepLeadForm from '@/components/ui/MultiStepLeadForm'
+import UnifiedLeadForm from '@/components/ui/UnifiedLeadForm'
 
-<MultiStepLeadForm redirectOnSuccess="/fr/merci" />
+<UnifiedLeadForm redirectOnSuccess="/fr/merci" />
 // redirectOnSuccess?: string
+```
+
+Pour afficher le formulaire dans une modal déclenchée par un bouton :
+
+```tsx
+import LeadFormModal from '@/components/ui/LeadFormModal'
+
+<LeadFormModal open={offerOpen} onClose={() => setOfferOpen(false)} />
+// open: boolean | onClose: () => void
 ```
 
 Étapes internes (non configurables) :
@@ -490,30 +507,11 @@ import FormScrollButton from '@/components/ui/FormScrollButton'
 
 ---
 
-### 3.5 `<StickyBar>` — components/ui/StickyBar.tsx
+### 3.5 `<StickyBar>` — ~~SUPPRIMÉ~~
 
-Client Component. Barre fixe **toujours en bas d'écran (`bottom-0`) sur tous les breakpoints**, apparaît à 40 % de scroll.
-Scroll vers `#formulaire`, dispatche intent "compare".
-
-**Pages cantons : StickyBar supprimé définitivement.** `<StickyBar>` n'est **jamais** instancié sur les pages cantons (`CantonPage.tsx` et pages dérivées). Aucune exception.
-
-**Règle de positionnement critique :** `StickyBar` ne doit **jamais** être visible en même temps que le header. Utiliser uniquement `bottom-0` — ne jamais utiliser `md:top-16` ou tout autre positionnement qui placerait la barre sous le header sur desktop. Les deux éléments seraient alors visibles simultanément, créant un double bandeau. Structure correcte :
-```tsx
-className={[
-  'fixed left-0 right-0 z-40 transition-opacity duration-300',
-  'bottom-0',
-  'bg-ink shadow-lg',
-  'border-t border-white/10',
-  visible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none',
-].join(' ')}
-```
-
-```tsx
-import StickyBar from '@/components/ui/StickyBar'
-
-<StickyBar cantonName="Vaud" economieAn={1347} />
-// cantonName: string | economieAn: number
-```
+`StickyBar.tsx` a été **supprimé définitivement** du projet lors du refactoring.
+Ne jamais recréer ce composant. Ne jamais instancier `<StickyBar>` nulle part.
+La clé `stickyBar` a également été supprimée de `dictionaries/fr.json`.
 
 ---
 
@@ -573,7 +571,7 @@ import CantonCombobox, { CANTON_NAMES } from '@/components/ui/CantonCombobox'
 
 ---
 
-### 3.10 Composants domaine LAMal — components/lamal/
+### 3.10 Composants domaine santé — components/sante/
 
 | Composant | Fichier | Usage |
 |---|---|---|
@@ -583,14 +581,44 @@ import CantonCombobox, { CANTON_NAMES } from '@/components/ui/CantonCombobox'
 | `<PrimeCalculator>` | PrimeCalculator.tsx | Calcul prime par profil |
 | `<PrimeCalculatorReal>` | PrimeCalculatorReal.tsx | Calcul prime avec données réelles |
 | `<SubsidesCalculator>` | SubsidesCalculator.tsx | Calculateur subsides LAMal |
+| `<SubsidesSimulatorFull>` | SubsidesSimulatorFull.tsx | Simulateur subsides 26 cantons |
 
-**`<CantonPage>` — StickyBar supprimé définitivement :** `<StickyBar>` est **supprimé** des pages cantons. Ne jamais instancier `<StickyBar>` dans `<CantonPage>`, ni dans le layout, ni dans la page parente. Cette décision est définitive et sans exception.
+**`<CantonPage>` — StickyBar supprimé définitivement :** Ne jamais instancier `<StickyBar>` dans `<CantonPage>`, ni dans le layout, ni dans la page parente.
 
 ---
 
-### 3.11 `<HeroStats>` — components/ui/HeroStats.tsx
+### 3.11 Composants partagés — components/shared/
 
-Server Component. Grille 3 tuiles sur fond gris clair `bg-cloud` (identique à la zone "En bref"), chiffre en bleu brand `text-[#1d4ed8]`, label en **`text-ink`** (noir — jamais `text-slate`).
+**Règle absolue : vérifier l'existence d'un composant dans `components/shared/` AVANT d'en créer un nouveau.**
+
+| Composant | Fichier | Props principales | Usage |
+|---|---|---|---|
+| `<ShieldIcon>` | ShieldIcon.tsx | `className?` | Icône bouclier SVG (logo, AuthorBio) |
+| `<GuideCard>` | GuideCard.tsx | `href, title, desc, cta?` | Carte guide avec flèche, texte depuis fr.json |
+| `<SituationCard>` | SituationCard.tsx | `href, title, desc, cta?` | Carte situation de vie |
+| `<CantonCard>` | CantonCard.tsx | `nom, primeMin, economieAn, href` | Carte canton avec prime et économie |
+| `<RelatedGuides>` | RelatedGuides.tsx | `guides[], title?` | Grille 2 colonnes de liens guides |
+| `<StatTile>` | StatTile.tsx | `label, desc` | Tuile statistique `border-t-2 border-brand` |
+| `<InfoBox>` | InfoBox.tsx | `title, items: string[]` | Encadré liste à puces (ex : "En bref") |
+
+**Règles d'usage :**
+- **Les encadrés bleus** (fond `bg-blue-tint`, liste à puces) utilisent **toujours `<InfoBox>`** — jamais de JSX inline équivalent.
+- **Les tuiles statistiques** de type border-top utilisent **toujours `<StatTile>`** — jamais de div inline.
+- **Les grilles de liens guides** utilisent **toujours `<RelatedGuides>`** — jamais de grid inline.
+- **Tous les textes visibles** de ces composants proviennent de `dictionaries/fr.json` sous la clé `shared.*`.
+
+```tsx
+import InfoBox from '@/components/shared/InfoBox'
+import RelatedGuides from '@/components/shared/RelatedGuides'
+import StatTile from '@/components/shared/StatTile'
+import CantonCard from '@/components/shared/CantonCard'
+```
+
+---
+
+### 3.12 `<HeroStats>` — components/ui/HeroStats.tsx
+
+Server Component. Grille 3 tuiles sur fond gris clair `bg-cloud` (identique à la zone "En bref"), chiffre en bleu brand `text-brand`, label en **`text-ink`** (noir — jamais `text-slate`).
 Obligatoire dans Zone 1 de toutes les pages. Aucune page ne définit son propre style de tuile.
 
 ```tsx
@@ -621,6 +649,7 @@ const heroStats = [
 8. **Jamais "à Vaud"** → "dans le canton de Vaud"
 9. **Ton** : informatif, neutre, professionnel
 10. **Français exclusif dans tout texte visible** : remplacer tout mot non français sans exception — textes, labels, boutons, titres, placeholders, messages d'erreur. Exemples : `top` → "meilleur", `check` → "vérifier", `dashboard` → "tableau de bord". Les termes intégrés au français courant sont acceptables : "profil", "standard", "email". En cas de doute, toujours privilégier le mot français.
+11. **Jamais de texte visible codé en dur** : tout texte UI doit d'abord être ajouté dans `dictionaries/fr.json` puis importé via `import fr from '@/dictionaries/fr.json'` dans le composant. Aucun string littéral visible dans le JSX — labels, boutons, messages, titres, placeholders sans exception.
 
 ---
 
@@ -734,7 +763,7 @@ Chaque section de Zone 3 suit ce pattern sans exception :
 
   {/* Bloc "À retenir" — informations critiques uniquement (variante uppercase du callout) */}
   <div className="callout flex gap-3 my-4">
-    <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
+    <svg className="text-callout-icon shrink-0 mt-0.5" width="20" height="20"
          viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
          strokeLinecap="round" strokeLinejoin="round">
       <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
@@ -780,7 +809,7 @@ Trois templates couvrent l'ensemble des pages du site. Chaque template est la so
 
 ### Template A — Page guide (toutes les pages éditoriales sauf homepage)
 
-Source de référence : `app/[locale]/lamal/franchise/page.tsx`
+Source de référence : `app/[locale]/sante/franchise/page.tsx`
 
 **Éléments obligatoires sur TOUTES les pages guides sans exception :**
 
@@ -838,7 +867,7 @@ export default function PageGuide() {
           {/* Breadcrumb — JSON-LD BreadcrumbList uniquement, aucun affichage visuel */}
           <Breadcrumb items={[
             { label: 'Accueil', href: '/' },
-            { label: 'LAMal', href: '/lamal' },
+            { label: 'LAMal', href: '/sante' },
             { label: titreH1 },
           ]} />
 
@@ -909,7 +938,7 @@ export default function PageGuide() {
             {/* KeyFact — 1 maximum par section, uniquement si information critique */}
             {/* (délai légal, montant exact, règle sans exception) */}
             <div className="callout flex gap-3 my-4">
-              <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
+              <svg className="text-callout-icon shrink-0 mt-0.5" width="20" height="20"
                    viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
                    strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
@@ -943,7 +972,7 @@ export default function PageGuide() {
               Un expert vous rappelle sous 24 heures pour établir avec vous une solution
               personnalisée. Gratuit, sans engagement.
             </p>
-            <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
+            <UnifiedLeadForm redirectOnSuccess="/fr/merci" />
           </div>
 
           {/* Bandeau MSI — après le formulaire, sans séparateur (§0.12) */}
@@ -980,7 +1009,7 @@ export default function PageGuide() {
 
 ### Template B — Homepage et pages hub
 
-Source de référence : `app/[locale]/page.tsx`, `app/[locale]/lamal/page.tsx`
+Source de référence : `app/[locale]/page.tsx`, `app/[locale]/sante/page.tsx`
 
 **Input nécessaire :**
 - `titreH1`, `intro` : 2-3 phrases — ce que fait le site ou la section, établit la crédibilité
@@ -1068,7 +1097,7 @@ export default function PageHub() {
               personnalisée. Gratuit, sans engagement.
             </p>
           </div>
-          <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
+          <UnifiedLeadForm redirectOnSuccess="/fr/merci" />
         </div>
       </div>
 
@@ -1093,7 +1122,7 @@ export default function PageHub() {
 
 ### Template C — Pages outils (comparateur, calculateur de subsides)
 
-Source de référence **unique** : `app/[locale]/lamal/comparateur/page.tsx`
+Source de référence **unique** : `app/[locale]/sante/comparateur/page.tsx`
 
 **Le comparateur de primes est la référence unique pour tous les comparateurs présents et à venir.** Aucun comparateur ne définit son propre style. Même structure hero, mêmes tuiles `<HeroStats>`, mêmes champs, même bouton primaire, même style de sections éditoriales. Toute déviation par rapport à cette référence est une erreur à corriger.
 
@@ -1144,7 +1173,7 @@ export default function PageOutil() {
 
           <Breadcrumb items={[
             { label: 'Accueil', href: '/' },
-            { label: 'LAMal', href: '/lamal' },
+            { label: 'LAMal', href: '/sante' },
             { label: titreH1 },
           ]} />
 
@@ -1204,12 +1233,12 @@ export default function PageOutil() {
           {/* Conversion post-résultats — outils interactifs uniquement (ex : comparateur) */}
           {/* Insérer ce bloc immédiatement après l'affichage des résultats */}
           {showResults && (
-            <section className="bg-[#0f2040] border-b border-white/10 py-12">
+            <section className="bg-navy border-b border-white/10 py-12">
               <div className="container-xl max-w-2xl text-center">
                 <p className="text-[16px] text-white/80 mb-8 leading-relaxed">
                   {phraseNudge}  {/* 1 phrase — valeur expert : confirme, vérifie, gère */}
                 </p>
-                <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
+                <UnifiedLeadForm redirectOnSuccess="/fr/merci" />
               </div>
             </section>
           )}
@@ -1226,7 +1255,7 @@ export default function PageOutil() {
               Un expert vous rappelle sous 24 heures pour établir avec vous une solution
               personnalisée. Gratuit, sans engagement.
             </p>
-            <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
+            <UnifiedLeadForm redirectOnSuccess="/fr/merci" />
           </div>
 
           {/* Bandeau MSI — sans séparateur (§0.12) */}
@@ -1268,7 +1297,7 @@ Les pages cantons suivent **Template A avec les adaptations suivantes** :
 **Adaptations obligatoires (spécifiques aux cantons) :**
 - Titres H1, H2, H3 : toujours `text-ink` — jamais `text-[#1d4ed8]` ni couleur bleue. **Jamais de bleu sur un H1.**
 - Aucun badge (`.badge`, `<span>`, `<div>`) au-dessus du H1 — source dans `sub` des tuiles HeroStats uniquement
-- Tuiles statistiques : style identique aux pages guides — `bg-cloud`, chiffre `text-[#1d4ed8]`, label **`text-ink`** (noir)
+- Tuiles statistiques : style identique aux pages guides — `bg-cloud`, chiffre `text-brand`, label **`text-ink`** (noir)
 - Zone 3 : 2 phrases d'entrée directe au début de chaque section H2, avant tout tableau ou donnée
 - Séparateurs `border-t border-edge` entre tous les blocs majeurs (voir §0.12)
 - **`<StickyBar>` supprimé définitivement** — ne jamais instancier dans `<CantonPage>` ni dans aucun layout parent (voir §3.5 et §3.10)
@@ -1296,14 +1325,14 @@ Les pages cantons suivent **Template A avec les adaptations suivantes** :
 - Les **liens** restent en `text-brand hover:underline` pour rester identifiables et cliquables
 - Titres H2 : `article-h2` (= `text-2xl font-semibold text-ink`)
 - Pas de `<HeroStats>`, pas de Zone 2, pas de FAQ
-- Pas de formulaire de conversion (`<MultiStepLeadForm>`) en bas de page
+- Pas de formulaire de conversion (`<UnifiedLeadForm>`) en bas de page
 - Structure : Zone 1 (H1 + intro) → Zone 3 (sections de texte) → `<AuthorBio>` → Footer
 
 ---
 
-**Règles Template C :** pas de MSIBand, pas de bloc En bref, pas de sommaire. Pas d'AnchorLabels numérotés devant les H2. Pas de bordure dashed sous les phrases d'entrée. L'outil est toujours premier en Zone 2. Maximum 2 couleurs de fond alternées (bg-white / bg-cloud). Chaque tableau en Zone 3 est précédé d'au moins 2 phrases contenant les chiffres clés. Nudge sombre `bg-[#0f2040]` uniquement après l'affichage des résultats de l'outil (conditionnel `{showResults && ...}`). Ordre bas de page : Nudge résultats (si outil) → FAQ → Formulaire → AuthorBio → Guides associés → Footer.
+**Règles Template C :** pas de MSIBand, pas de bloc En bref, pas de sommaire. Pas d'AnchorLabels numérotés devant les H2. Pas de bordure dashed sous les phrases d'entrée. L'outil est toujours premier en Zone 2. Maximum 2 couleurs de fond alternées (bg-white / bg-cloud). Chaque tableau en Zone 3 est précédé d'au moins 2 phrases contenant les chiffres clés. Nudge sombre `bg-navy` uniquement après l'affichage des résultats de l'outil (conditionnel `{showResults && ...}`). Ordre bas de page : Nudge résultats (si outil) → FAQ → Formulaire → AuthorBio → Guides associés → Footer.
 
-**Comparateur de primes et comparateur de subsides — parité obligatoire :** la page subsides (`app/[locale]/lamal/subsides/page.tsx`) suit exactement la même structure que la page comparateur de primes (`app/[locale]/lamal/comparateur/page.tsx`) : même hero Zone 1, mêmes tuiles statistiques `<HeroStats>`, même structure de Zone 2 avec l'outil en premier, même structure de sections éditoriales en Zone 3, même formulaire en bas de page, mêmes couleurs et tokens. Toute différence structurelle ou visuelle entre ces deux pages est une erreur à corriger.
+**Comparateur de primes et comparateur de subsides — parité obligatoire :** la page subsides (`app/[locale]/sante/subsides/page.tsx`) suit exactement la même structure que la page comparateur de primes (`app/[locale]/sante/comparateur/page.tsx`) : même hero Zone 1, mêmes tuiles statistiques `<HeroStats>`, même structure de Zone 2 avec l'outil en premier, même structure de sections éditoriales en Zone 3, même formulaire en bas de page, mêmes couleurs et tokens. Toute différence structurelle ou visuelle entre ces deux pages est une erreur à corriger.
 
 **Labels de champs dans les outils interactifs :** toujours en style normal — `text-[14px] font-medium text-ink mb-2`. Ne jamais utiliser `uppercase`, `tracking-widest`, `text-[11px]`, ni `text-slate/60` sur des labels de champs de formulaire. La distinction uppercase est réservée aux blocs "À retenir" et "Recommandation" (callouts critiques). Le titre d'un outil (ex : "Estimez votre subside en 30 secondes") ne doit pas apparaître comme un label uppercase à l'intérieur de l'outil — l'outil est déjà contextualisé par le H2 de section.
 
@@ -1389,7 +1418,7 @@ Bouton désactivé visuellement (`disabled:opacity-40 disabled:cursor-not-allowe
     Un expert vous rappelle sous 24 heures pour établir avec vous une solution
     personnalisée. Gratuit, sans engagement.
   </p>
-  <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
+  <UnifiedLeadForm redirectOnSuccess="/fr/merci" />
 </div>
 ```
 
@@ -1407,7 +1436,7 @@ Bouton désactivé visuellement (`disabled:opacity-40 disabled:cursor-not-allowe
         personnalisée. Gratuit, sans engagement.
       </p>
     </div>
-    <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
+    <UnifiedLeadForm redirectOnSuccess="/fr/merci" />
   </div>
 </div>
 ```
@@ -1432,7 +1461,7 @@ Structure correcte de la modal :
         {/* header modal */}
       </div>
       <div className="px-3 pb-4 sm:px-8 sm:pb-8">
-        <MultiStepLeadForm redirectOnSuccess="/fr/merci" />
+        <UnifiedLeadForm redirectOnSuccess="/fr/merci" />
       </div>
     </div>
   </div>
@@ -1461,13 +1490,13 @@ Voir section 7. Titre et sous-titre immuables. Soumission → /fr/merci.
 
 ```tsx
 {/* Lien texte vers une autre page de contenu */}
-<Link href="/lamal/franchise" className="text-brand hover:underline">
+<Link href="/sante/franchise" className="text-brand hover:underline">
   Comprendre les franchises LAMal →
 </Link>
 ```
 
 - **Aucun bouton** (`btn-primary`, `btn-secondary`) dans le corps des sections article
-- **Aucun nudge sombre ni intermédiaire** entre les sections — ni `bg-[var(--navy)]` conditionnel, ni encadrés `bg-cloud` avec `btn-primary`. Le formulaire en bas de page est le seul point de conversion. **Exception Template C :** un nudge sombre `bg-[#0f2040]` est autorisé immédiatement après l'affichage des résultats de l'outil (conditionnel `{showResults && ...}`), avec 1 phrase et `<MultiStepLeadForm>`. Ce nudge remplace le formulaire standard en bas de page pour les pages outils.
+- **Aucun nudge sombre ni intermédiaire** entre les sections — ni `bg-[var(--navy)]` conditionnel, ni encadrés `bg-cloud` avec `btn-primary`. Le formulaire en bas de page est le seul point de conversion. **Exception Template C :** un nudge sombre `bg-navy` est autorisé immédiatement après l'affichage des résultats de l'outil (conditionnel `{showResults && ...}`), avec 1 phrase et `<UnifiedLeadForm>`. Ce nudge remplace le formulaire standard en bas de page pour les pages outils.
 - Les liens texte pointent uniquement vers d'autres pages de contenu (guides, cantons, situations)
 - Ils ne pointent jamais vers `#contact` ou `/lamal/comparateur` depuis le corps d'une section
 
@@ -1507,7 +1536,7 @@ Les chiffres clés apparaissent dans le texte brut, pas uniquement dans les tabl
 
 **AuthorBio — layout :**
 - `flex-row items-center gap-3` — logo bouclier | bloc texte
-- Logo : carré bleu `bg-[#1d4ed8] rounded-md w-9 h-9` avec shield SVG blanc `w-5 h-5` — jamais d'avatar rond, jamais de texte "MSI"
+- Logo : carré bleu `bg-brand rounded-md w-9 h-9` avec shield SVG blanc `w-5 h-5` — jamais d'avatar rond, jamais de texte "MSI"
 - Bloc texte : "My Swiss Insurance" (`text-sm font-semibold`) / "Service éditorial indépendant" (`text-sm`) / "Publié le..." (`text-sm`)
 - Pas de badge "Données OFSP 2026"
 **FAQ :** TOUJOURS avant le formulaire.
@@ -1530,7 +1559,7 @@ Les chiffres clés apparaissent dans le texte brut, pas uniquement dans les tabl
 | Très petit `<380px` | bouclier MSI → CTA "Être conseillé" centré → hamburger |
 
 Implémentation :
-- Logo : SVG bouclier blanc `w-7 h-7` **directement** sur le fond `#0f2040` — **pas de conteneur bleu**, pas de `rounded-md bg-[#1d4ed8]`
+- Logo : SVG bouclier blanc `w-7 h-7` **directement** sur le fond `navy` (`bg-navy`) — **pas de conteneur bleu**, pas de `rounded-md bg-brand`
 - Texte "My Swiss Insurance" : `hidden md:inline` (masqué sous 768px)
 - Ne jamais afficher "MSI" comme texte séparé
 - CTA libellés : `hidden min-[380px]:inline` / `min-[380px]:hidden` (jamais `sm:hidden`)
@@ -1541,20 +1570,20 @@ Implémentation :
 **Comportement du CTA header :**
 Au clic → overlay sombre (`bg-black/60`) sur tout l'écran + modal centré contenant :
 1. Texte (immuable) : `"Un conseiller spécialisé compare les caisses adaptées à votre situation et vous présente les offres les plus avantageuses `**`sous 24 heures`**`. C'est `**`gratuit et sans engagement`**`."`
-2. `<MultiStepLeadForm redirectOnSuccess="/fr/merci" />`
+2. `<UnifiedLeadForm redirectOnSuccess="/fr/merci" />`
 3. Bouton de fermeture (×) en haut à droite, `-mt-2` (8px au-dessus de l'alignement normal)
 4. Modal : `w-full max-w-[600px]`, centrée H+V avec `pt-20` sous le header (voir §7.6)
 5. Clic sur l'overlay ferme la modal
 
 **Menu hamburger :** aucun CTA de conversion à l'intérieur. Uniquement des liens de navigation.
 
-**Footer** (`components/ui/Footer.tsx`) — fond `bg-[#0f2040]`.
+**Footer** (`components/ui/Footer.tsx`) — fond `bg-navy`.
 Colonnes : Guides · Par canton · Par situation de vie · Légal.
 Texte brandmark : `Comparez les caisses maladie suisses et optimisez votre LAMal. Service gratuit.`
 Sources officielles : OFSP · admin.ch · priminfo.ch.
-Logo footer : lien vers `/lamal` (et non vers `/`).
+Logo footer : lien vers `/sante` (et non vers `/`).
 
-**Redirection** : `/fr` → `/fr/lamal` (301, dans `next.config.mjs`). Tous les liens internes (logo, footer, hamburger) pointent vers `/lamal`.
+**Redirection** : `/fr` → `/fr/sante` (301, dans `next.config.mjs`). Tous les liens internes (logo, footer, hamburger) pointent vers `/sante`.
 
 Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 
@@ -1564,7 +1593,7 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 
 **Composants**
 - [ ] Composant existant utilisé (pas recréé)
-- [ ] Import path correct (`@/components/ui/...` ou `@/components/lamal/...`)
+- [ ] Import path correct (`@/components/ui/...` ou `@/components/sante/...`)
 - [ ] Template correspondant au type de page utilisé
 
 **Éditorial**
@@ -1603,10 +1632,10 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 **Titres et chiffres clés**
 - [ ] Tous les titres (H1, H2, H3, FAQ, formulaire) : `text-ink` — jamais `text-[#1d4ed8]`, jamais `text-[#0f2040]` (§0.8)
 - [ ] Titre formulaire "Besoin d'aide ?" : `hover:text-brand transition-colors` (§0.8)
-- [ ] Tuiles statistiques Zone 1 : composant `<HeroStats>` obligatoire — fond `bg-cloud`, chiffre `text-[#1d4ed8]`, label **`text-ink`** (jamais `text-slate`) (§0.5)
+- [ ] Tuiles statistiques Zone 1 : composant `<HeroStats>` obligatoire — fond `bg-cloud`, chiffre `text-brand`, label **`text-ink`** (jamais `text-slate`) (§0.5)
 - [ ] Aucune grille de tuiles inline — utiliser `<HeroStats>` uniquement
 - [ ] Aucun badge au-dessus du H1 (§0.6)
-- [ ] Comparaisons : bleu (`bg-[#dbeafe]`) pour l'option avantageuse, neutre (`bg-cloud border border-edge`) pour l'option coûteuse — jamais vert ni orange (§0.7)
+- [ ] Comparaisons : bleu (`bg-blue-tint`) pour l'option avantageuse, neutre (`bg-cloud border border-edge`) pour l'option coûteuse — jamais vert ni orange (§0.7)
 - [ ] FAQ : séparateur `border-t border-edge pt-8` sur la section `<section id="faq">` (§0.10)
 - [ ] Cantons dans la navigation : ordre alphabétique français (§0.9)
 - [ ] Formulaire : pas de phrase de réassurance "confidentielles..." ; filtre téléphone actif (§7.4)
@@ -1639,7 +1668,7 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 - [ ] Icônes : trait fin, couleur brand, max 4-5 par page, non décoratives
 
 **Header**
-- [ ] Logo : SVG bouclier blanc `w-7 h-7` sans conteneur bleu (`bg-[#1d4ed8] rounded-md` supprimé)
+- [ ] Logo : SVG bouclier blanc `w-7 h-7` sans conteneur bleu (`bg-brand rounded-md` supprimé)
 - [ ] Mobile (<768px) : bouclier seul, texte "My Swiss Insurance" masqué (`hidden md:inline`)
 - [ ] Desktop (≥768px) : bouclier + "My Swiss Insurance" visible
 - [ ] CTA ≥380px : "Recevez les meilleures offres" ; <380px : "Être conseillé"
@@ -1698,7 +1727,7 @@ Colonnes déplacées dans un encadré texte : Économie par mois · Seuil d'équ
 
 Chaque encadré bleu doit comporter une **icône ampoule outline** à gauche du texte :
 - Taille : **20px** (`width="20" height="20"`)
-- Couleur : `#378ADD` (bleu clair du design system)
+- Couleur : `text-callout-icon` (`#378ADD` bleu clair du design system)
 - Trait : `strokeWidth={2}`, sans rayons, sans remplissage
 - **Jamais un emoji. Jamais une image raster.**
 - Reproduire en SVG inline avec ce code exact :
@@ -1713,7 +1742,7 @@ Deux variantes — même icône, label différent :
 ```tsx
 {/* Variante astuce */}
 <div className="callout flex gap-3">
-  <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
+  <svg className="text-callout-icon shrink-0 mt-0.5" width="20" height="20"
        viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
        strokeLinecap="round" strokeLinejoin="round">
     <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
@@ -1728,7 +1757,7 @@ Deux variantes — même icône, label différent :
 
 {/* Variante "À retenir" / "Recommandation" */}
 <div className="callout flex gap-3 my-4">
-  <svg className="text-[#378ADD] shrink-0 mt-0.5" width="20" height="20"
+  <svg className="text-callout-icon shrink-0 mt-0.5" width="20" height="20"
        viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
        strokeLinecap="round" strokeLinejoin="round">
     <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
@@ -1774,16 +1803,15 @@ Exemple d'usage correct (section stats, liste avantages) :
 | `components/ui/AuthorBio.tsx` | Bandeau MSI — composant de référence (props: publishedDate, updatedDate) |
 | `components/ui/Breadcrumb.tsx` | Props, BreadcrumbList auto |
 | `components/ui/FAQ.tsx` | Props, comportement accordéon |
-| `components/ui/MultiStepLeadForm.tsx` | Étapes, options, POST /api/leads |
+| `components/ui/UnifiedLeadForm.tsx` | Étapes, options, POST /api/leads |
+| `components/ui/LeadFormModal.tsx` | Modal wrapper pour UnifiedLeadForm |
 | `components/ui/FormScrollButton.tsx` | Props, CustomEvent |
-| `components/ui/StickyBar.tsx` | Props, seuil d'apparition |
 | `components/ui/EmailCTA.tsx` | Props |
-| `components/ui/LeadForm.tsx` | Props, compact |
-| `components/ui/HeroStats.tsx` | Tuiles statistiques Zone 1 — fond `bg-cloud`, chiffre `text-[#1d4ed8]`, `{ value, label, sub }[]` |
+| `components/ui/HeroStats.tsx` | Tuiles statistiques Zone 1 — fond `bg-cloud`, chiffre `text-brand`, `{ value, label, sub }[]` |
 | `components/ui/CantonSearch.tsx` | Navigation automatique |
 | `components/ui/CantonCombobox.tsx` | Props, CANTON_NAMES export |
 | `components/ui/Header.tsx` | Structure menu, couleurs |
 | `components/ui/Footer.tsx` | Structure, colonnes |
-| `app/[locale]/lamal/guide/page.tsx` | Référence Template A |
-| `app/[locale]/page.tsx` | Référence Template D + section formulaire homepage |
+| `app/[locale]/sante/guide/page.tsx` | Référence Template A |
+| `app/[locale]/page.tsx` | Référence Template B (homepage) |
 | `dictionaries/fr.json` | Labels UI officiels |

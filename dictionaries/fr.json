@@ -15,6 +15,10 @@
       "rappel": "Être rappelé gratuitement"
     }
   },
+  "header": {
+    "ctaFull": "Recevez les meilleures offres",
+    "ctaShort": "Être conseillé"
+  },
   "metrics": {
     "meilleurePrime": "Meilleure prime",
     "economieAnnuelle": "Économie annuelle",
@@ -45,15 +49,21 @@
     "titre": "Questions fréquentes"
   },
   "form": {
-    "titre": "Recevoir un conseil gratuit",
+    "titre": "Recevoir un conseil personnalisé",
     "etape": "Étape",
     "sur": "sur",
     "labels": ["Votre objectif", "Votre situation", "Votre profil", "Vos coordonnées"],
+    "contexts": [
+      "Dites-nous ce que vous recherchez",
+      "Quelques infos sur votre situation",
+      "Votre profil familial",
+      "Pour vous recontacter sous 24 heures"
+    ],
     "objectifs": {
       "compare": "Trouver la caisse la moins chère",
       "switch": "Changer de caisse facilement",
       "subsides": "Vérifier mes subsides",
-      "conseil": "Optimiser ma franchise et mon modèle"
+      "conseil": "Ajuster mon contrat"
     },
     "profils": {
       "seul": "Seul(e)",
@@ -61,32 +71,68 @@
       "famille": "Famille avec enfants",
       "retraite": "Retraité(e)"
     },
+    "residenceType": {
+      "resident": "Résident suisse",
+      "frontalier": "Frontalier"
+    },
     "champs": {
+      "canton": "Canton",
+      "npa": "NPA",
+      "trancheAge": "Tranche d'âge",
+      "pays": "Pays",
+      "cantonTravail": "Canton de travail",
       "codePostal": "Code postal (NPA)",
       "profil": "Profil",
       "prenom": "Prénom",
       "nom": "Nom",
       "telephone": "Téléphone",
-      "email": "Adresse e-mail"
+      "email": "Adresse e-mail",
+      "selectPlaceholder": "Sélectionner"
     },
+    "commencer": "Commencer →",
+    "continuer": "Continuer →",
+    "envoyer": "Envoyer ma demande →",
     "submit": "Recevoir mon conseil gratuit →",
     "loading": "Envoi en cours…",
-    "legal": "Vos données sont protégées conformément à la LPD · Sans engagement · Réponse sous 24 heures",
+    "legal": "Vos données sont protégées conformément à la LPD, sans engagement, réponse sous 24 heures.",
     "succes": {
       "titre": "Demande envoyée",
       "message": "Un expert vous contacte sous 24 heures ouvrables."
     },
-    "retour": "← Retour",
-    "continuer": "Continuer →"
+    "retour": "← Retour"
   },
-  "stickyBar": {
-    "economie": "Économisez jusqu'à",
-    "parAn": "par an",
-    "enChangeant": "en changeant de caisse",
-    "cta": "Comparer ma prime →"
+  "needHelp": {
+    "titre": "Besoin d'aide ?",
+    "description": "Un expert vous rappelle sous 24 heures pour établir avec vous une solution personnalisée. Gratuit, sans engagement."
+  },
+  "modal": {
+    "introPart1": "Un conseiller spécialisé compare les caisses adaptées à votre situation et vous présente les offres les plus avantageuses",
+    "introDelai": "sous 24 heures",
+    "introSuffix": "C'est",
+    "introGratuit": "gratuit et sans engagement",
+    "fermer": "Fermer"
+  },
+  "authorBio": {
+    "organisation": "My Swiss Insurance",
+    "service": "Service éditorial indépendant · Lausanne, Suisse romande",
+    "publie": "Publié le",
+    "miseAJour": "mis à jour le"
+  },
+  "shared": {
+    "lireGuide": "Lire le guide",
+    "decouvrir": "Découvrir",
+    "consulterCanton": "Consulter la page canton",
+    "aPartirDe": "À partir de",
+    "chfParMois": "CHF par mois",
+    "economiePossible": "Économie possible",
+    "rarementMalade": "Si vous êtes rarement malade",
+    "chfParAn": "CHF par an",
+    "guidesAssocies": "Guides associés"
   },
   "footer": {
+    "tagline": "Comparez les caisses maladie suisses et optimisez votre LAMal. Service gratuit.",
     "droits": "Tous droits réservés",
-    "lpd": "Protection des données (LPD)"
+    "lpd": "Protection des données (LPD)",
+    "sources": "Sources officielles :"
   }
 }
