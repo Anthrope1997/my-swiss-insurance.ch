@@ -318,8 +318,12 @@ export default function GuideLamalPage() {
                     {premiums.map((c) => (
                       <tr key={c.code}>
                         <td className="font-medium text-ink whitespace-nowrap">
-                          <span className="text-slate/60 text-[12px] mr-2">{c.code}</span>
-                          {c.name}
+                          <div className="flex items-center gap-2">
+                            <span className="inline-flex items-center justify-center w-10 py-0.5 rounded text-[16px] font-bold bg-navy text-white shrink-0 text-center">
+                              {c.code}
+                            </span>
+                            {c.name}
+                          </div>
                         </td>
                         <td className="font-semibold text-ink whitespace-nowrap">CHF {c.prime.toFixed(2)}</td>
                         <td className="text-slate whitespace-nowrap">
