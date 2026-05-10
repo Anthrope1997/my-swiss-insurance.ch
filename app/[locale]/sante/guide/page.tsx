@@ -480,7 +480,7 @@ export default function GuideLamalPage() {
                   {
                     title: 'Telmed (conseil téléphonique)',
                     reduction: "jusqu'à −24%",
-                    border: 'border-brand-light',
+                    border: 'border-brand',
                     desc: 'Première consultation par téléphone ou application avant tout rendez-vous en cabinet (Medgate, Medi24...). Disponible 24 heures sur 24. Réduction moyenne de 12% (de −5% à −24%) selon la caisse.',
                   },
                 ].map((m, i) => (
