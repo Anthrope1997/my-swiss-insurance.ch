@@ -417,216 +417,168 @@ export default function ComparateurClient() {
             )}
 
             {/* ── Résultats (dans le même encadré) ─────────────────────── */}
-            {showResults && results && results.length > 0 && (() => {
-              const totalCount  = results.length
-              const displayRows = totalCount > 6
-                ? [...results.slice(0, 5), results[totalCount - 1]]
-                : results
+            {showResults && results && results.length > 0 && (
+              <>
+                {/* Séparateur 0.5px */}
+                <div
+                  ref={resultsRef}
+                  className="mt-6"
+                  style={{ borderTop: '0.5px solid var(--border)' }}
+                />
 
-              return (
-                <>
-                  {/* Séparateur 0.5px */}
-                  <div
-                    ref={resultsRef}
-                    className="mt-6"
-                    style={{ borderTop: '0.5px solid var(--border)' }}
-                  />
-
-                  {/* En-tête résultats */}
-                  <div className="mt-5 mb-4">
-                    {/* Desktop : filtres + compteur */}
-                    <div className="hidden md:flex items-start justify-between gap-4">
-                      <p className="text-[14px] text-slate">
-                        <span className="font-semibold text-ink">{npaInfo?.ville}</span>
-                        {npaInfo && <> ({npaInfo.regionId})</>}
-                        {', '}Franchise {franchise.toLocaleString('fr-CH')} CHF
-                        {', '}{MODELE_LABELS[modele]}
-                      </p>
-                      <p className="text-[13px] font-medium text-slate shrink-0">
-                        {results.length} caisses comparées
-                      </p>
-                    </div>
-                    {/* Mobile : compteur seul, aligné à gauche */}
-                    <p className="md:hidden text-[13px] font-medium text-slate">
+                {/* En-tête résultats */}
+                <div className="mt-5 mb-4">
+                  {/* Desktop : filtres + compteur */}
+                  <div className="hidden md:flex items-start justify-between gap-4">
+                    <p className="text-[14px] text-slate">
+                      <span className="font-semibold text-ink">{npaInfo?.ville}</span>
+                      {npaInfo && <> ({npaInfo.regionId})</>}
+                      {', '}Franchise {franchise.toLocaleString('fr-CH')} CHF
+                      {', '}{MODELE_LABELS[modele]}
+                    </p>
+                    <p className="text-[13px] font-medium text-slate shrink-0">
                       {results.length} caisses comparées
                     </p>
                   </div>
+                  {/* Mobile : compteur seul, aligné à gauche */}
+                  <p className="md:hidden text-[13px] font-medium text-slate">
+                    {results.length} caisses comparées
+                  </p>
+                </div>
 
-                  {/* ── Version desktop (md+) ── */}
-                  <div className="hidden md:block space-y-2">
-                    {displayRows.map((row, i) => {
-                      const isFirst  = i === 0
-                      const isRef    = i === displayRows.length - 1 && totalCount > 6
-                      const realRank = isRef ? totalCount : i + 1
-
-                      return (
-                        <div
-                          key={`${row.assureur}-${i}`}
-                          className={`flex items-center gap-4 px-4 py-3 rounded-[8px] border border-edge transition-all ${
-                            isFirst ? 'bg-blue-tint' : 'bg-white'
-                          }`}
-                        >
-                          {/* Rang */}
-                          <div
-                            className={`shrink-0 flex items-center justify-center text-[12px] font-bold rounded-full ${
-                              isFirst ? 'bg-brand text-white' : isRef ? 'bg-transparent text-slate' : 'bg-cloud text-slate'
-                            }`}
-                            style={{
-                              width: 28,
-                              height: 28,
-                              ...(isRef ? { border: '0.5px solid var(--border)' } : {}),
-                            }}
-                          >
-                            {realRank}
-                          </div>
-
-                          {/* Nom + badge */}
-                          <div className="flex-1 min-w-0 flex items-center gap-2 flex-wrap">
-                            <span className={`text-[14px] text-ink ${isFirst ? 'font-medium' : 'font-normal'}`}>
-                              {row.assureur}
-                            </span>
-                            {isFirst && (
-                              <span className="text-[10px] font-medium px-2 py-0.5 bg-blue-tint text-brand rounded-full">
-                                Meilleure prime
-                              </span>
-                            )}
-                            {isRef && (
-                              <span className="text-[11px] text-slate/60">Référence</span>
-                            )}
-                          </div>
-
-                          {/* Prime mensuelle */}
-                          <div className="text-right shrink-0">
-                            <p className={`text-[15px] text-ink ${isFirst ? 'font-medium' : 'font-normal'}`}>
-                              CHF {fmtChf(row.prime_nette)}
-                            </p>
-                            <p className="text-[10px] text-slate">par mois</p>
-                          </div>
-
-                          {/* Bouton Demander une offre */}
-                          <button
-                            onClick={scrollToContact}
-                            className="shrink-0 text-[12px] font-medium whitespace-nowrap rounded-[7px] h-[34px] px-[14px] bg-brand text-white hover:bg-brand-dark cursor-pointer"
-                          >
-                            Demander une offre
-                          </button>
-                        </div>
-                      )
-                    })}
-                  </div>
-
-                  {/* ── Version mobile (<md) ── */}
-                  <div className="md:hidden space-y-2">
-                    {displayRows.map((row, i) => {
-                      const isFirst    = i === 0
-                      const isRef      = i === displayRows.length - 1 && totalCount > 6
-                      const realRank   = isRef ? totalCount : i + 1
-                      const isSelected = selectedMobile === row.assureur
-
-                      return (
-                        <button
-                          key={`${row.assureur}-${i}`}
-                          type="button"
-                          onClick={() => setSelectedMobile(row.assureur)}
-                          className={`w-full flex items-center gap-3 px-4 py-3 rounded-[8px] border border-edge text-left transition-all ${
-                            isSelected ? 'bg-blue-tint' : 'bg-white'
-                          }`}
-                        >
-                          {/* Radio */}
-                          <div
-                            className={`shrink-0 rounded-full flex items-center justify-center ${isSelected ? 'bg-brand' : 'bg-white'}`}
-                            style={{
-                              width: 20,
-                              height: 20,
-                              border: isSelected ? '1.5px solid var(--blue)' : '1.5px solid var(--border)',
-                            }}
-                          >
-                            <div
-                              className="rounded-full bg-white"
-                              style={{ width: 7, height: 7, opacity: isSelected ? 1 : 0 }}
-                            />
-                          </div>
-
-                          {/* Rang */}
-                          <div
-                            className={`shrink-0 flex items-center justify-center text-[12px] font-bold rounded-full ${
-                              isFirst ? 'bg-brand text-white' : isRef ? 'bg-transparent text-slate' : 'bg-cloud text-slate'
-                            }`}
-                            style={{
-                              width: 24,
-                              height: 24,
-                              ...(isRef ? { border: '0.5px solid var(--border)' } : {}),
-                            }}
-                          >
-                            {realRank}
-                          </div>
-
-                          {/* Nom + badge */}
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2 flex-wrap">
-                              <span className={`text-[14px] text-ink ${isFirst ? 'font-medium' : 'font-normal'}`}>
-                                {row.assureur}
-                              </span>
-                              {isFirst && (
-                                <span className="text-[10px] font-medium px-2 py-0.5 bg-blue-tint text-brand rounded-full">
-                                  Meilleure prime
-                                </span>
-                              )}
-                              {isRef && (
-                                <span className="text-[11px] text-slate/60">Référence</span>
-                              )}
-                            </div>
-                          </div>
-
-                          {/* Prime mensuelle */}
-                          <div className="text-right shrink-0">
-                            <p className={`text-[14px] text-ink ${isFirst ? 'font-medium' : 'font-normal'}`}>
-                              CHF {fmtChf(row.prime_nette)}
-                            </p>
-                            <p className="text-[10px] text-slate">par mois</p>
-                          </div>
-                        </button>
-                      )
-                    })}
-
-                    {/* CTA mobile pleine largeur */}
-                    {selectedMobile && (
-                      <button
-                        onClick={scrollToContact}
-                        className="w-full bg-brand hover:bg-brand-dark text-white font-medium mt-2 rounded-[8px] h-[44px] text-[13px]"
+                {/* ── Version desktop (md+) ── */}
+                <div className="hidden md:block space-y-2">
+                  {results.map((row, i) => {
+                    const isFirst = i === 0
+                    return (
+                      <div
+                        key={`${row.assureur}-${i}`}
+                        className={`flex items-center gap-4 px-4 py-3 rounded-[8px] border border-edge transition-all ${
+                          isFirst ? 'bg-blue-tint' : 'bg-white'
+                        }`}
                       >
-                        Demander une offre pour {selectedMobile}
-                      </button>
-                    )}
-                  </div>
+                        {/* Rang */}
+                        <div
+                          className={`shrink-0 flex items-center justify-center text-[12px] font-bold rounded-full ${
+                            isFirst ? 'bg-brand text-white' : 'bg-cloud text-slate'
+                          }`}
+                          style={{ width: 28, height: 28 }}
+                        >
+                          {i + 1}
+                        </div>
 
-                  {/* Source OFSP */}
-                  <div
-                    className="mt-4 pt-3"
-                    style={{ borderTop: '0.5px solid var(--border)' }}
-                  >
-                    <p className="text-[11px] text-slate">
-                      Source : Office fédéral de la santé publique (OFSP) 2026. Primes nettes après remboursements.
-                    </p>
-                  </div>
-                </>
-              )
-            })()}
+                        {/* Nom + badge */}
+                        <div className="flex-1 min-w-0 flex items-center gap-2 flex-wrap">
+                          <span className={`text-[16px] text-ink ${isFirst ? 'font-medium' : 'font-normal'}`}>
+                            {row.assureur}
+                          </span>
+                          {isFirst && (
+                            <span className="text-[10px] font-medium px-2 py-0.5 bg-blue-tint text-brand rounded-full">
+                              Meilleure prime
+                            </span>
+                          )}
+                        </div>
+
+                        {/* Prime mensuelle */}
+                        <div className="text-right shrink-0">
+                          <p className={`text-[16px] text-ink ${isFirst ? 'font-medium' : 'font-normal'}`}>
+                            CHF {fmtChf(row.prime_nette)}
+                          </p>
+                          <p className="text-[10px] text-slate">par mois</p>
+                        </div>
+
+                        {/* Bouton Demander une offre */}
+                        <button
+                          onClick={scrollToContact}
+                          className="shrink-0 text-[12px] font-medium whitespace-nowrap rounded-[7px] h-[34px] px-[14px] bg-brand text-white hover:bg-brand-dark"
+                        >
+                          Demander une offre
+                        </button>
+                      </div>
+                    )
+                  })}
+                </div>
+
+                {/* ── Version mobile (<md) ── */}
+                <div className="md:hidden space-y-2">
+                  {results.map((row, i) => {
+                    const isFirst    = i === 0
+                    const isSelected = selectedMobile === row.assureur
+                    return (
+                      <button
+                        key={`${row.assureur}-${i}`}
+                        type="button"
+                        onClick={() => setSelectedMobile(row.assureur)}
+                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-[8px] border border-edge text-left transition-all ${
+                          isSelected ? 'bg-blue-tint' : 'bg-white'
+                        }`}
+                      >
+                        {/* Radio */}
+                        <div
+                          className={`shrink-0 rounded-full flex items-center justify-center ${isSelected ? 'bg-brand' : 'bg-white'}`}
+                          style={{
+                            width: 20,
+                            height: 20,
+                            border: isSelected ? '1.5px solid var(--blue)' : '1.5px solid var(--border)',
+                          }}
+                        >
+                          <div
+                            className="rounded-full bg-white"
+                            style={{ width: 7, height: 7, opacity: isSelected ? 1 : 0 }}
+                          />
+                        </div>
+
+                        {/* Rang */}
+                        <div
+                          className={`shrink-0 flex items-center justify-center text-[12px] font-bold rounded-full ${
+                            isFirst ? 'bg-brand text-white' : 'bg-cloud text-slate'
+                          }`}
+                          style={{ width: 24, height: 24 }}
+                        >
+                          {i + 1}
+                        </div>
+
+                        {/* Nom (sans badge sur mobile) */}
+                        <span className={`flex-1 min-w-0 text-[16px] text-ink truncate ${isFirst ? 'font-medium' : 'font-normal'}`}>
+                          {row.assureur}
+                        </span>
+
+                        {/* Prime mensuelle */}
+                        <div className="text-right shrink-0">
+                          <p className={`text-[16px] text-ink ${isFirst ? 'font-medium' : 'font-normal'}`}>
+                            CHF {fmtChf(row.prime_nette)}
+                          </p>
+                          <p className="text-[10px] text-slate">par mois</p>
+                        </div>
+                      </button>
+                    )
+                  })}
+
+                  {/* CTA mobile pleine largeur */}
+                  {selectedMobile && (
+                    <button
+                      onClick={scrollToContact}
+                      className="w-full bg-brand hover:bg-brand-dark text-white font-medium mt-2 rounded-[8px] h-[44px] text-[13px]"
+                    >
+                      Demander une offre pour {selectedMobile}
+                    </button>
+                  )}
+                </div>
+
+                {/* Source OFSP */}
+                <div
+                  className="mt-4 pt-3"
+                  style={{ borderTop: '0.5px solid var(--border)' }}
+                >
+                  <p className="text-[11px] text-slate">
+                    Source : Office fédéral de la santé publique (OFSP) 2026. Primes nettes après remboursements.
+                  </p>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </section>
-
-      {/* ── CONVERSION POST-RÉSULTATS ──────────────────────────────────────── */}
-      {showResults && (
-        <section className="bg-navy border-b border-white/10 py-12">
-          <div className="container-xl text-center">
-            <p className="text-[16px] text-white/80 mb-8 leading-relaxed">
-              Un expert confirme la caisse optimale pour votre profil, vérifie vos droits aux subsides et gère le changement à votre place.
-            </p>
-            <UnifiedLeadForm redirectOnSuccess="/fr/merci" />
-          </div>
-        </section>
-      )}
 
       {/* ── PARTS DE MARCHÉ ───────────────────────────────────────────────── */}
       <section id="assureurs" className="bg-white border-b border-edge py-16">
