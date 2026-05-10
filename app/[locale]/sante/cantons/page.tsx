@@ -110,7 +110,7 @@ export default function CantonHubPage() {
         </div>
       </div>
 
-      <div className="container-xl pb-12">
+      <div className="container-xl mt-4 pb-12">
         <AuthorBio publishedDate="1er janvier 2026" updatedDate="10 mai 2026" />
       </div>
     </>

@@ -1101,8 +1101,8 @@ export default function PageHub() {
         </div>
       </div>
 
-      {/* Bandeau éditorial — après le formulaire, avant le footer */}
-      <div className="container-xl">
+      {/* Bandeau éditorial — mt-4 aligne sur l'espace que space-y-4 crée dans les pages guides */}
+      <div className="container-xl mt-4 pb-12">
         <AuthorBio publishedDate={publishedDateFR} updatedDate={updatedDateFR} />
       </div>
     </>
