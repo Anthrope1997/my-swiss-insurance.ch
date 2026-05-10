@@ -493,7 +493,7 @@ export default function ComparateurClient() {
                           <div className="[flex-grow:3]" />
 
                           {/* Prime mensuelle */}
-                          <div className="shrink-0 w-28 text-right">
+                          <div className="shrink-0 w-28">
                             <p className={`text-[16px] text-ink ${isFirst ? 'font-medium' : 'font-normal'}`}>
                               CHF {fmtChf(row.prime_nette)}
                             </p>
@@ -678,15 +678,15 @@ export default function ComparateurClient() {
                       key={row.code}
                       className="flex items-center gap-3 px-4 py-2.5 rounded-lg bg-white border border-edge"
                     >
-                      <span className="w-9 shrink-0 text-center py-0.5 rounded text-[11px] font-bold bg-navy text-white">
+                      <span className="w-10 shrink-0 text-center py-0.5 rounded text-[16px] font-bold bg-navy text-white">
                         {row.code}
                       </span>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between gap-2 mb-1">
-                          <span className="text-[13px] font-medium truncate text-ink">
+                          <span className="text-[16px] font-medium truncate text-ink">
                             {row.canton}
                           </span>
-                          <span className="text-[13px] font-semibold shrink-0 text-ink">
+                          <span className="text-[16px] font-semibold shrink-0 text-ink">
                             CHF {fmtChf(row.prime)}
                           </span>
                         </div>
@@ -704,7 +704,7 @@ export default function ComparateurClient() {
             )
           })()}
 
-          <p className="text-[12px] text-slate/60 mb-6">Source : OFSP 2026.</p>
+          <p className="text-[13px] text-slate/60 mb-6">Source : OFSP 2026.</p>
         </div>
       </section>
 
