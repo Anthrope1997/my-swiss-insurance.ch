@@ -558,7 +558,7 @@ export default function ComparateurClient() {
                           </span>
 
                           {/* Prime mensuelle */}
-                          <div className="text-right shrink-0">
+                          <div className="shrink-0">
                             <p className={`text-[16px] text-ink ${isFirst ? 'font-medium' : 'font-normal'}`}>
                               CHF {fmtChf(row.prime_nette)}
                             </p>
