@@ -258,8 +258,8 @@ export default function ComparateurClient() {
             Comparateur de caisses maladie LAMal 2026
           </h1>
           <p className="text-[18px] text-slate leading-relaxed mb-10">
-            En Suisse, les primes LAMal varient jusqu'à 97% au sein d'une même région selon l'assureur choisi.
-            Comparez toutes les caisses selon votre code postal, votre franchise et votre modèle d'assurance.
+            En Suisse, les primes de l&apos;assurance maladie de base LAMal varient jusqu&apos;à 97 % au sein d&apos;une même région selon l&apos;assureur.
+            Comparez toutes les caisses selon votre code postal, votre franchise et votre modèle.
           </p>
           {/* StatsGrid */}
           <HeroStats stats={[
@@ -661,7 +661,7 @@ export default function ComparateurClient() {
       <div className="container-xl py-12 space-y-8">
         <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
 
-        <section className="pt-8 border-t border-edge">
+        <section>
           <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
             Guides associés
           </p>
