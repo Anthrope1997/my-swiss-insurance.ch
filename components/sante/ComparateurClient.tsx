@@ -488,7 +488,7 @@ export default function ComparateurClient() {
                           </div>
 
                           {/* Prime mensuelle */}
-                          <div className="text-right shrink-0">
+                          <div className="shrink-0">
                             <p className={`text-[16px] text-ink ${isFirst ? 'font-medium' : 'font-normal'}`}>
                               CHF {fmtChf(row.prime_nette)}
                             </p>
@@ -500,7 +500,7 @@ export default function ComparateurClient() {
                             onClick={scrollToContact}
                             className="shrink-0 text-[16px] font-semibold whitespace-nowrap rounded-md py-2.5 px-5 bg-brand text-white hover:bg-brand-dark transition-colors duration-150"
                           >
-                            Demander une offre
+                            Demander une offre &gt;
                           </button>
                         </div>
                       )
@@ -575,7 +575,7 @@ export default function ComparateurClient() {
                       onClick={scrollToContact}
                       className="w-full bg-brand hover:bg-brand-dark text-white font-semibold mt-2 rounded-md py-4 text-[16px] transition-colors duration-150"
                     >
-                      Demander une offre pour {selectedMobile}
+                      Demander une offre pour {selectedMobile} &gt;
                     </button>
                   )}
                 </div>
