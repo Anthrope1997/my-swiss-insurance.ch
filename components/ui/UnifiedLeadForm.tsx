@@ -351,7 +351,7 @@ export default function UnifiedLeadForm({ redirectOnSuccess }: { redirectOnSucce
   }
 
   return (
-    <div className="card-sm flex flex-col min-h-[520px]">
+    <div className="card-sm lead-form-card">
       <style>{`
         @keyframes stepIn {
           from { opacity: 0; transform: translateY(8px); }

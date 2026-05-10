@@ -109,6 +109,30 @@
     @apply text-[17px] text-slate leading-relaxed mb-4;
   }
 
+  /* ── HeroStats ── */
+  .hero-stats {
+    margin-bottom: 2.5rem; /* mb-10 */
+  }
+
+  /* ── Homepage formulaire section ── */
+  #formulaire {
+    padding-top: 2.5rem;
+    padding-bottom: 4rem;
+  }
+  @media (min-width: 640px) {
+    #formulaire {
+      padding-top: 4rem;
+      padding-bottom: 5rem;
+    }
+  }
+
+  /* ── Lead form card ── */
+  .lead-form-card {
+    min-height: 520px;
+    display: flex;
+    flex-direction: column;
+  }
+
   /* ── TOC ── */
   .toc-link {
     @apply block text-[13.5px] text-ink hover:text-brand py-1.5 pl-4

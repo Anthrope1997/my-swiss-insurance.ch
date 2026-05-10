@@ -204,7 +204,7 @@ export default function HomePage() {
           </p>
 
           {/* Stats */}
-          <HeroStats stats={stats} className="mb-10" />
+          <HeroStats stats={stats} className="hero-stats" />
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-3 sm:items-start">
@@ -426,7 +426,7 @@ export default function HomePage() {
       </section>
 
       {/* ── 6. FORMULAIRE ───────────────────────────────────────────────────── */}
-      <section id="formulaire" className="bg-cloud border-y border-edge pt-10 pb-16 sm:pt-16 sm:pb-20 scroll-mt-16">
+      <section id="formulaire" className="bg-cloud border-y border-edge">
         <div className="container-xl max-w-2xl">
 
           <div className="text-center mb-6">
