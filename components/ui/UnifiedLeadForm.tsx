@@ -223,6 +223,10 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen, tagline
   const phoneDropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }, [step])
+
+  useEffect(() => {
     function onIntent(e: Event) {
       const intent = (e as CustomEvent<string>).detail
       setForm(f => ({ ...f, intent }))
