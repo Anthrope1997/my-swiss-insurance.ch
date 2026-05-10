@@ -9,13 +9,6 @@ export default function DevisClient() {
   const ref = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    // Empêche le scroll du document (iOS scroll le document pour amener le champ
-    // actif en vue quand le clavier apparaît — on bloque ça ici)
-    const html = document.documentElement
-    const body = document.body
-    html.style.overflow = 'hidden'
-    body.style.overflow = 'hidden'
-
     const vv = window.visualViewport
     if (!vv) return
 
@@ -23,15 +16,19 @@ export default function DevisClient() {
       if (ref.current) {
         ref.current.style.height = `${vv!.height - HEADER}px`
       }
+      // iOS scrolle la page quand un input est focalisé — on remet à 0
+      if (window.scrollY > 0) window.scrollTo(0, 0)
     }
 
     fit()
     vv.addEventListener('resize', fit)
+    vv.addEventListener('scroll', fit)
+    window.addEventListener('scroll', fit)
 
     return () => {
-      html.style.overflow = ''
-      body.style.overflow = ''
       vv.removeEventListener('resize', fit)
+      vv.removeEventListener('scroll', fit)
+      window.removeEventListener('scroll', fit)
     }
   }, [])
 

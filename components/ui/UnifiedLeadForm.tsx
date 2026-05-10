@@ -351,7 +351,7 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
   }
 
   return (
-    <div className={fullscreen ? 'h-full flex flex-col relative' : 'card-sm lead-form-card'}>
+    <div className={fullscreen ? 'h-full flex flex-col' : 'card-sm lead-form-card'}>
       <style>{`
         @keyframes stepIn {
           from { opacity: 0; transform: translateY(8px); }
@@ -378,7 +378,7 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
       </div>
 
       {/* ── Middle: step content ── */}
-      <div className={fullscreen ? 'flex-1 min-h-0 overflow-y-auto pb-[120px]' : 'flex-1'}>
+      <div className={fullscreen ? 'flex-1 min-h-0 overflow-y-auto' : 'flex-1'}>
 
         {/* Step 1 — Objectif */}
         {step === 1 && (
@@ -672,7 +672,7 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
       </div>
 
       {/* ── Bottom: navigation buttons (position absolue en mode fullscreen) ── */}
-      <div className={fullscreen ? 'absolute bottom-0 left-0 right-0 bg-white border-t border-edge px-4 py-3' : 'pt-5'}>
+      <div className={fullscreen ? 'shrink-0 border-t border-edge px-4 pt-3 pb-4' : 'pt-5'}>
         {step === 1 && (
           <button
             onClick={() => setStep(2)}
