@@ -448,117 +448,132 @@ export default function ComparateurClient() {
 
                 {/* ── Version desktop (md+) ── */}
                 <div className="hidden md:block space-y-2">
-                  {results.map((row, i) => {
-                    const isFirst = i === 0
-                    return (
-                      <div
-                        key={`${row.assureur}-${i}`}
-                        className={`flex items-center gap-4 px-4 py-3 rounded-[8px] border border-edge transition-all ${
-                          isFirst ? 'bg-blue-tint' : 'bg-white'
-                        }`}
-                      >
-                        {/* Rang */}
+                  {(() => {
+                    const total = results.length
+                    const rows  = total > 6 ? [...results.slice(0, 5), results[total - 1]] : results
+                    return rows.map((row, i) => {
+                      const isFirst = i === 0
+                      const isRef   = i === rows.length - 1 && total > 6
+                      const rank    = isRef ? total : i + 1
+                      return (
                         <div
-                          className={`shrink-0 flex items-center justify-center text-[12px] font-bold rounded-full ${
-                            isFirst ? 'bg-brand text-white' : 'bg-cloud text-slate'
+                          key={`${row.assureur}-${i}`}
+                          className={`flex items-center gap-4 px-4 py-3 rounded-[8px] border border-edge transition-all ${
+                            isFirst ? 'bg-blue-tint' : 'bg-white'
                           }`}
-                          style={{ width: 28, height: 28 }}
                         >
-                          {i + 1}
-                        </div>
+                          {/* Rang */}
+                          <div
+                            className={`shrink-0 flex items-center justify-center text-[12px] font-bold rounded-full ${
+                              isFirst ? 'bg-brand text-white' : isRef ? 'bg-transparent text-slate' : 'bg-cloud text-slate'
+                            }`}
+                            style={{ width: 28, height: 28, ...(isRef ? { border: '0.5px solid var(--border)' } : {}) }}
+                          >
+                            {rank}
+                          </div>
 
-                        {/* Nom + badge */}
-                        <div className="flex-1 min-w-0 flex items-center gap-2 flex-wrap">
-                          <span className={`text-[16px] text-ink ${isFirst ? 'font-medium' : 'font-normal'}`}>
-                            {row.assureur}
-                          </span>
-                          {isFirst && (
-                            <span className="text-[10px] font-medium px-2 py-0.5 bg-blue-tint text-brand rounded-full">
-                              Meilleure prime
+                          {/* Nom + badge */}
+                          <div className="flex-1 min-w-0 flex items-center gap-2 flex-wrap">
+                            <span className={`text-[16px] text-ink ${isFirst ? 'font-medium' : 'font-normal'}`}>
+                              {row.assureur}
                             </span>
-                          )}
-                        </div>
+                            {isFirst && (
+                              <span className="text-[10px] font-medium px-2 py-0.5 bg-blue-tint text-brand rounded-full">
+                                Meilleure prime
+                              </span>
+                            )}
+                            {isRef && (
+                              <span className="text-[11px] text-slate/60">Référence</span>
+                            )}
+                          </div>
 
-                        {/* Prime mensuelle */}
-                        <div className="text-right shrink-0">
-                          <p className={`text-[16px] text-ink ${isFirst ? 'font-medium' : 'font-normal'}`}>
-                            CHF {fmtChf(row.prime_nette)}
-                          </p>
-                          <p className="text-[10px] text-slate">par mois</p>
-                        </div>
+                          {/* Prime mensuelle */}
+                          <div className="text-right shrink-0">
+                            <p className={`text-[16px] text-ink ${isFirst ? 'font-medium' : 'font-normal'}`}>
+                              CHF {fmtChf(row.prime_nette)}
+                            </p>
+                            <p className="text-[10px] text-slate">par mois</p>
+                          </div>
 
-                        {/* Bouton Demander une offre */}
-                        <button
-                          onClick={scrollToContact}
-                          className="shrink-0 text-[12px] font-medium whitespace-nowrap rounded-[7px] h-[34px] px-[14px] bg-brand text-white hover:bg-brand-dark"
-                        >
-                          Demander une offre
-                        </button>
-                      </div>
-                    )
-                  })}
+                          {/* Bouton Demander une offre */}
+                          <button
+                            onClick={scrollToContact}
+                            className="shrink-0 text-[16px] font-semibold whitespace-nowrap rounded-md py-2.5 px-5 bg-brand text-white hover:bg-brand-dark transition-colors duration-150"
+                          >
+                            Demander une offre
+                          </button>
+                        </div>
+                      )
+                    })
+                  })()}
                 </div>
 
                 {/* ── Version mobile (<md) ── */}
                 <div className="md:hidden space-y-2">
-                  {results.map((row, i) => {
-                    const isFirst    = i === 0
-                    const isSelected = selectedMobile === row.assureur
-                    return (
-                      <button
-                        key={`${row.assureur}-${i}`}
-                        type="button"
-                        onClick={() => setSelectedMobile(row.assureur)}
-                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-[8px] border border-edge text-left transition-all ${
-                          isSelected ? 'bg-blue-tint' : 'bg-white'
-                        }`}
-                      >
-                        {/* Radio */}
-                        <div
-                          className={`shrink-0 rounded-full flex items-center justify-center ${isSelected ? 'bg-brand' : 'bg-white'}`}
-                          style={{
-                            width: 20,
-                            height: 20,
-                            border: isSelected ? '1.5px solid var(--blue)' : '1.5px solid var(--border)',
-                          }}
-                        >
-                          <div
-                            className="rounded-full bg-white"
-                            style={{ width: 7, height: 7, opacity: isSelected ? 1 : 0 }}
-                          />
-                        </div>
-
-                        {/* Rang */}
-                        <div
-                          className={`shrink-0 flex items-center justify-center text-[12px] font-bold rounded-full ${
-                            isFirst ? 'bg-brand text-white' : 'bg-cloud text-slate'
+                  {(() => {
+                    const total = results.length
+                    const rows  = total > 6 ? [...results.slice(0, 5), results[total - 1]] : results
+                    return rows.map((row, i) => {
+                      const isFirst    = i === 0
+                      const isRef      = i === rows.length - 1 && total > 6
+                      const rank       = isRef ? total : i + 1
+                      const isSelected = selectedMobile === row.assureur
+                      return (
+                        <button
+                          key={`${row.assureur}-${i}`}
+                          type="button"
+                          onClick={() => setSelectedMobile(row.assureur)}
+                          className={`w-full flex items-center gap-3 px-4 py-3 rounded-[8px] border border-edge text-left transition-all ${
+                            isSelected ? 'bg-blue-tint' : 'bg-white'
                           }`}
-                          style={{ width: 24, height: 24 }}
                         >
-                          {i + 1}
-                        </div>
+                          {/* Radio */}
+                          <div
+                            className={`shrink-0 rounded-full flex items-center justify-center ${isSelected ? 'bg-brand' : 'bg-white'}`}
+                            style={{
+                              width: 20,
+                              height: 20,
+                              border: isSelected ? '1.5px solid var(--blue)' : '1.5px solid var(--border)',
+                            }}
+                          >
+                            <div
+                              className="rounded-full bg-white"
+                              style={{ width: 7, height: 7, opacity: isSelected ? 1 : 0 }}
+                            />
+                          </div>
 
-                        {/* Nom (sans badge sur mobile) */}
-                        <span className={`flex-1 min-w-0 text-[16px] text-ink truncate ${isFirst ? 'font-medium' : 'font-normal'}`}>
-                          {row.assureur}
-                        </span>
+                          {/* Rang */}
+                          <div
+                            className={`shrink-0 flex items-center justify-center text-[12px] font-bold rounded-full ${
+                              isFirst ? 'bg-brand text-white' : isRef ? 'bg-transparent text-slate' : 'bg-cloud text-slate'
+                            }`}
+                            style={{ width: 24, height: 24, ...(isRef ? { border: '0.5px solid var(--border)' } : {}) }}
+                          >
+                            {rank}
+                          </div>
 
-                        {/* Prime mensuelle */}
-                        <div className="text-right shrink-0">
-                          <p className={`text-[16px] text-ink ${isFirst ? 'font-medium' : 'font-normal'}`}>
-                            CHF {fmtChf(row.prime_nette)}
-                          </p>
-                          <p className="text-[10px] text-slate">par mois</p>
-                        </div>
-                      </button>
-                    )
-                  })}
+                          {/* Nom (sans badge sur mobile) */}
+                          <span className={`flex-1 min-w-0 text-[16px] text-ink truncate ${isFirst ? 'font-medium' : 'font-normal'}`}>
+                            {row.assureur}
+                          </span>
+
+                          {/* Prime mensuelle */}
+                          <div className="text-right shrink-0">
+                            <p className={`text-[16px] text-ink ${isFirst ? 'font-medium' : 'font-normal'}`}>
+                              CHF {fmtChf(row.prime_nette)}
+                            </p>
+                            <p className="text-[10px] text-slate">par mois</p>
+                          </div>
+                        </button>
+                      )
+                    })
+                  })()}
 
                   {/* CTA mobile pleine largeur */}
                   {selectedMobile && (
                     <button
                       onClick={scrollToContact}
-                      className="w-full bg-brand hover:bg-brand-dark text-white font-medium mt-2 rounded-[8px] h-[44px] text-[13px]"
+                      className="w-full bg-brand hover:bg-brand-dark text-white font-semibold mt-2 rounded-md py-4 text-[16px] transition-colors duration-150"
                     >
                       Demander une offre pour {selectedMobile}
                     </button>
