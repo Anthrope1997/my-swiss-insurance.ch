@@ -268,6 +268,31 @@ Pour afficher plusieurs options sur des lignes distinctes dans un tooltip `<Info
 <InfoTooltip text={"Option A : description.\nOption B (−15 %) : description.\nOption C (−18 %) : description."} />
 ```
 
+### 0.15 Tailles de police — deux niveaux de corps de texte uniquement
+
+**Règle absolue :** le corps de texte n'utilise que **deux tailles**, sans exception.
+
+| Taille | Classe | Usage |
+|---|---|---|
+| **16px** | `text-[16px]` ou `text-base` | Police standard — tout le contenu courant : noms, primes, descriptions, labels, boutons CTA |
+| **13px** | `text-[13px]` | Police réduite — métadonnées, sources, compteurs, labels de formulaire, badges, placeholders |
+
+**Interdits dans le contenu :** `text-[14px]`, `text-[15px]`, `text-[13.5px]`. Ces valeurs intermédiaires sont bannies.
+
+Les tailles supérieures à 16px (`text-[17px]`, `text-[18px]`, `text-2xl`, `text-4xl`, etc.) restent inchangées pour les titres et introductions.
+
+```tsx
+{/* ✓ Correct */}
+<span className="text-[16px] text-ink">{row.assureur}</span>
+<p className="text-[13px] text-slate/60">Source : OFSP 2026</p>
+
+{/* ✗ Interdit */}
+<span className="text-[14px]">...</span>
+<p className="text-[15px]">...</p>
+```
+
+---
+
 ### 0.14 Icônes des tuiles de formulaire — toujours visibles sur mobile
 
 Les icônes SVG dans les tuiles de sélection de l'étape 1 du formulaire (`<UnifiedLeadForm>`) sont **toujours visibles sur mobile**, identiques au desktop. Aucun CSS ne les masque (`hidden`, `sm:block`, `md:block`, etc.).
@@ -370,12 +395,11 @@ Variables CSS complémentaires (globals.css) :
 |---|---|
 | H1 hero (toutes les pages) | `text-4xl sm:text-5xl font-bold text-ink leading-tight` |
 | H2 section | `.article-h2` (= `text-2xl font-semibold text-ink`) |
-| H3 sous-section | `.article-h3` |
-| Intro hero | `text-[18px] text-slate max-w-2xl leading-relaxed` |
+| H3 sous-section | `.article-h3` (= `text-[18px] font-semibold text-ink`) |
+| Intro hero | `text-[18px] text-slate leading-relaxed` |
 | Corps article | `.article-p` (text-[17px] text-slate) |
-| Labels formulaire | `text-[13px] font-medium text-ink mb-1.5` |
-| Badges | `.badge` |
-| Métadonnées | `text-[13px] text-slate/60` |
+| Contenu courant (noms, primes, boutons) | `text-[16px]` — police standard (voir §0.15) |
+| Labels formulaire, badges, métadonnées, sources | `text-[13px]` — police réduite (voir §0.15) |
 
 ### 2.4 Tableaux — règle mobile (< 768px)
 
