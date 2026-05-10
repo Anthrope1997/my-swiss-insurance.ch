@@ -487,21 +487,21 @@ export default function ComparateurClient() {
                             )}
                           </div>
 
-                          {/* Prime mensuelle */}
-                          <div className="shrink-0">
-                            <p className={`text-[16px] text-ink ${isFirst ? 'font-medium' : 'font-normal'}`}>
-                              CHF {fmtChf(row.prime_nette)}
-                            </p>
-                            <p className="text-[10px] text-slate">par mois</p>
+                          {/* Prime + CTA groupés à droite */}
+                          <div className="shrink-0 flex items-center gap-8">
+                            <div>
+                              <p className={`text-[16px] text-ink ${isFirst ? 'font-medium' : 'font-normal'}`}>
+                                CHF {fmtChf(row.prime_nette)}
+                              </p>
+                              <p className="text-[10px] text-slate">par mois</p>
+                            </div>
+                            <button
+                              onClick={scrollToContact}
+                              className="shrink-0 text-[16px] font-semibold whitespace-nowrap rounded-md py-2.5 px-5 bg-brand text-white hover:bg-brand-dark transition-colors duration-150"
+                            >
+                              Demander une offre →
+                            </button>
                           </div>
-
-                          {/* Bouton Demander une offre */}
-                          <button
-                            onClick={scrollToContact}
-                            className="shrink-0 text-[16px] font-semibold whitespace-nowrap rounded-md py-2.5 px-5 bg-brand text-white hover:bg-brand-dark transition-colors duration-150"
-                          >
-                            Demander une offre &gt;
-                          </button>
                         </div>
                       )
                     })
@@ -575,7 +575,7 @@ export default function ComparateurClient() {
                       onClick={scrollToContact}
                       className="w-full bg-brand hover:bg-brand-dark text-white font-semibold mt-2 rounded-md py-4 text-[16px] transition-colors duration-150"
                     >
-                      Demander une offre pour {selectedMobile} &gt;
+                      Demander une offre pour {selectedMobile}
                     </button>
                   )}
                 </div>
