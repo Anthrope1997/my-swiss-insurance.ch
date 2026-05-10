@@ -457,7 +457,7 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
                       placeholder="1000"
                       value={form.codePostal}
                       onChange={e => set({ codePostal: e.target.value })}
-                      className="input-field !h-11 !text-[14px]"
+                      className="input-field !h-11"
                       maxLength={4}
                     />
                   </div>
@@ -468,7 +468,7 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
                     <select
                       value={form.trancheAge}
                       onChange={e => set({ trancheAge: e.target.value })}
-                      className="select-field !h-11 !text-[14px] pr-9"
+                      className="select-field !h-11 pr-9"
                     >
                       <option value="">{d.form.champs.selectPlaceholder}</option>
                       {TRANCHES_AGE.map(t => (
@@ -495,7 +495,7 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
                       placeholder="France"
                       value={form.pays}
                       onChange={e => set({ pays: e.target.value })}
-                      className="input-field !h-11 !text-[14px]"
+                      className="input-field !h-11"
                     />
                     <datalist id="pays-frontaliers-list">
                       {PAYS_FRONTALIERS.map(p => <option key={p} value={p} />)}
@@ -516,7 +516,7 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
                     <select
                       value={form.trancheAge}
                       onChange={e => set({ trancheAge: e.target.value })}
-                      className="select-field !h-11 !text-[14px] pr-9"
+                      className="select-field !h-11 pr-9"
                     >
                       <option value="">{d.form.champs.selectPlaceholder}</option>
                       {TRANCHES_AGE.map(t => (
@@ -566,7 +566,7 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
                   type="text" required placeholder="Marie"
                   value={form.prenom}
                   onChange={e => set({ prenom: e.target.value })}
-                  className="input-field !h-11 !text-[14px]"
+                  className="input-field !h-11"
                 />
               </div>
               <div>
@@ -575,7 +575,7 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
                   type="text" required placeholder="Dupont"
                   value={form.nom}
                   onChange={e => set({ nom: e.target.value })}
-                  className="input-field !h-11 !text-[14px]"
+                  className="input-field !h-11"
                 />
               </div>
             </div>
@@ -638,7 +638,7 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
                   value={form.telephone}
                   onChange={e => { set({ telephone: e.target.value.replace(/[^0-9\s\-\(\)\+]/g, '') }); if (phoneError) setPhoneError('') }}
                   onBlur={validatePhoneOnBlur}
-                  className="input-field !h-11 !text-[14px] flex-1"
+                  className="input-field !h-11 flex-1"
                 />
               </div>
               {phoneError && (
@@ -654,7 +654,7 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
                 value={form.email}
                 onChange={e => { set({ email: e.target.value }); if (emailError) setEmailError('') }}
                 onBlur={validateEmailOnBlur}
-                className="input-field !h-11 !text-[14px]"
+                className="input-field !h-11"
               />
               {emailError && (
                 <p className="text-red-600 text-[13px] mt-1">{emailError}</p>

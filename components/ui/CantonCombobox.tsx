@@ -54,7 +54,7 @@ export default function CantonCombobox({ value, onChange, placeholder = 'Vaud ou
           autoComplete="off"
           onChange={e => { onChange(e.target.value); setOpen(true) }}
           onFocus={() => { if (value.length > 0) setOpen(true) }}
-          className="input-field !h-11 !text-[14px] pl-9"
+          className="input-field !h-11 pl-9"
         />
       </div>
 
