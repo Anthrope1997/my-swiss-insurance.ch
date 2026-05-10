@@ -490,7 +490,7 @@ export default function ComparateurClient() {
                           </div>
 
                           {/* Prime + CTA — bloc fixe à droite, toujours d'aplomb */}
-                          <div className="shrink-0 flex items-center gap-8">
+                          <div className="shrink-0 flex items-center" style={{ gap: 'clamp(2rem, 6vw, 6rem)' }}>
                             <div className="w-28">
                               <p className={`text-[16px] text-ink ${isFirst ? 'font-medium' : 'font-normal'}`}>
                                 CHF {fmtChf(row.prime_nette)}
