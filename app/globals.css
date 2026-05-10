@@ -141,10 +141,10 @@
 
   /* ── Tables ── */
   .stripe-table thead th {
-    @apply bg-cloud text-[13px] font-semibold text-ink px-4 py-3 text-left border-b border-edge;
+    @apply bg-cloud text-[16px] font-semibold text-ink px-4 py-3 text-left border-b border-edge;
   }
   .stripe-table td {
-    @apply px-4 py-3 text-[13px] text-slate border-b border-edge;
+    @apply px-4 py-3 text-[16px] text-slate border-b border-edge;
   }
   .stripe-table tr:last-child td {
     @apply border-b-0;
@@ -167,7 +167,4 @@
   .text-\[14px\]  { font-size: 16px; }
   .text-\[15px\]  { font-size: 16px; }
 
-  /* En-têtes et cellules de tableau — 16px minimum */
-  .stripe-table th { font-size: 16px; }
-  .stripe-table td { font-size: 16px; }
 }

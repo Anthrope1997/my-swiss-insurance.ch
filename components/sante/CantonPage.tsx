@@ -273,7 +273,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
             (10 %, maximum 700 CHF par an).
           </p>
           <div className="border border-edge rounded-[8px] overflow-hidden">
-            <table className="stripe-table w-full text-[13px]">
+            <table className="stripe-table w-full text-[16px]">
               <thead>
                 <tr>
                   <th className="text-left whitespace-nowrap">Franchise</th>
@@ -325,7 +325,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
             Quels subsides LAMal dans le {canton.cantonDe} ?
           </h2>
           <div className="border border-edge rounded-[8px] overflow-hidden mb-5">
-            <table className="w-full text-[13px]">
+            <table className="w-full text-[16px]">
               <tbody>
                 {[
                   ['Seuil de revenu déterminant', canton.subside.seuilRevenu],

@@ -297,7 +297,7 @@ Les tailles supérieures à 16px (`text-[17px]`, `text-[18px]`, `text-2xl`, `tex
 
 Les icônes SVG dans les tuiles de sélection de l'étape 1 du formulaire (`<UnifiedLeadForm>`) sont **toujours visibles sur mobile**, identiques au desktop. Aucun CSS ne les masque (`hidden`, `sm:block`, `md:block`, etc.).
 
-Le texte des tuiles utilise `!text-[14px]` pour garantir la lisibilité sur petit écran.
+Le texte des tuiles utilise `!text-[16px]` pour garantir la taille standard sur toutes les tailles d'écran.
 
 ```tsx
 {/* ✓ Correct — icône toujours visible */}
@@ -384,8 +384,8 @@ Variables CSS complémentaires (globals.css) :
             border-l-2 border-edge hover:border-brand transition-all
 
 /* Tableau */
-.stripe-table thead th → bg-cloud text-[13px] font-semibold text-ink px-4 py-3 border-b border-edge
-.stripe-table td       → px-4 py-3 text-[14px] text-slate border-b border-edge
+.stripe-table thead th → bg-cloud text-[16px] font-semibold text-ink px-4 py-3 border-b border-edge
+.stripe-table td       → px-4 py-3 text-[16px] text-slate border-b border-edge
 .stripe-table tr:hover td → bg-cloud/60
 ```
 
@@ -429,7 +429,7 @@ Règle globale via media query — **ne pas modifier ces valeurs dans les compos
 | Corps de texte | 15px | `.article-p` (déjà 17px) |
 | Textes secondaires, notes, métadonnées | 16px | `.text-xs`, `.text-sm`, `.text-[12px]`, `.text-[13px]`, `.text-[14px]`, `.text-[15px]` |
 | Labels uppercase | 14px | `.text-[11px]` |
-| Tableaux | 16px | `.stripe-table th` et `.stripe-table td` |
+| Tableaux | 16px | `.stripe-table` — déjà 16px par défaut, pas de surcharge mobile nécessaire |
 
 ```css
 @media (max-width: 767px) {
@@ -440,8 +440,6 @@ Règle globale via media query — **ne pas modifier ces valeurs dans les compos
   .text-\[13px\]  { font-size: 16px; }
   .text-\[14px\]  { font-size: 16px; }
   .text-\[15px\]  { font-size: 16px; }
-  .stripe-table th { font-size: 16px; }
-  .stripe-table td { font-size: 16px; }
 }
 ```
 
@@ -1474,7 +1472,7 @@ Hauteur champs standalone (`input-field` par défaut) : `h-12` (48px).
 
 **Largeur :** le conteneur modal fait `w-full max-w-[600px]` (pas `w-[95%]`). Le formulaire remplit ce conteneur à 100% (`w-full`). Padding interne responsive : `px-4 sm:px-8`.
 
-**Tuiles d'options (étape 1) — mobile :** 4 tuiles en colonne unique (`grid grid-cols-1`), une par ligne. Les icônes sont **toujours visibles**, y compris sur mobile — ne jamais utiliser `hidden sm:flex` sur les icônes des tuiles d'options. Le texte des tuiles utilise `!text-[14px]` (avec `!important`) pour empêcher l'upscaling automatique mobile de `globals.css` (qui monte `text-[14px]` à 16px sur < 767px). Sans ce `!`, le texte "Trouver la caisse la moins chère" à 16px dépasse la largeur disponible et force un retour à la ligne.
+**Tuiles d'options (étape 1) — mobile :** 4 tuiles en colonne unique (`grid grid-cols-1`), une par ligne. Les icônes sont **toujours visibles**, y compris sur mobile — ne jamais utiliser `hidden sm:flex` sur les icônes des tuiles d'options. Le texte des tuiles utilise `!text-[16px]` (avec `!important`) pour garantir la taille standard sur toutes les tailles d'écran.
 
 Structure correcte de la modal :
 ```tsx
@@ -1702,8 +1700,8 @@ Ne jamais modifier Header.tsx ni Footer.tsx pour ajouter du contenu de page.
 
 **Typographie mobile**
 - [ ] Minimum mobile effectif : **16px** pour tout texte de contenu (14px pour labels uppercase)
-- [ ] `text-xs`, `text-sm`, `text-[12px]`, `text-[13px]`, `text-[14px]` remontent à 15px via globals.css
-- [ ] Tableaux : th et td remontent à 15px sur mobile
+- [ ] `text-xs`, `text-sm`, `text-[12px]`, `text-[13px]`, `text-[14px]` remontent à 16px via globals.css
+- [ ] Tableaux : th et td sont déjà en 16px (défaut), pas de surcharge mobile
 
 **Build**
 - [ ] `npm run build` passe sans erreur avant commit
