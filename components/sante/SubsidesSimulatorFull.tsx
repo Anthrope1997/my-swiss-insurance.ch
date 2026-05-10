@@ -361,33 +361,20 @@ export default function SubsidesSimulatorFull() {
               ))}
             </div>
 
-            {/* Prime de référence + CTA expert */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-cloud border border-edge rounded-[8px] px-5 py-4">
-              <p className="text-[16px] text-slate">
-                Prime de référence {cantonData.nom} (adulte, f=300) :{' '}
-                <span className="font-semibold text-ink">CHF {cantonData.primeMoyenne}/mois</span>
-              </p>
-              {/* Desktop → modale */}
+            {/* CTA expert */}
+            <div style={{ borderTop: '0.5px solid var(--border)' }} className="pt-2 flex flex-col sm:flex-row gap-3">
               <button
                 onClick={() => setOfferOpen(true)}
-                className="hidden md:inline-block shrink-0 bg-brand hover:bg-brand-dark text-white font-semibold text-[16px] px-5 py-2.5 rounded-md transition-colors duration-150 whitespace-nowrap"
+                className="hidden md:inline-block btn-primary"
               >
                 Vérifier mes droits avec un expert →
               </button>
-              {/* Mobile → page /devis */}
               <Link
                 href="/devis"
-                className="md:hidden block w-full text-center bg-brand hover:bg-brand-dark text-white font-semibold text-[16px] px-5 py-2.5 rounded-md transition-colors duration-150"
+                className="md:hidden btn-primary text-center"
               >
                 Vérifier mes droits avec un expert →
               </Link>
-            </div>
-
-            {/* CTA expert */}
-            <div style={{ borderTop: '0.5px solid var(--border)' }} className="pt-4">
-              <a href="#contact" className="text-[16px] text-brand hover:underline">
-                Vous souhaitez qu&apos;un expert vérifie vos droits et effectue la démarche pour vous ? →
-              </a>
             </div>
 
           </div>
