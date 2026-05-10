@@ -318,7 +318,7 @@ export default function GuideLamalPage() {
                     {premiums.map((c) => (
                       <tr key={c.code}>
                         <td className="font-medium text-ink whitespace-nowrap">
-                          <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-4">
                             <span className="inline-flex items-center justify-center w-10 py-0.5 rounded text-[16px] font-bold bg-navy text-white shrink-0 text-center">
                               {c.code}
                             </span>
