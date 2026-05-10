@@ -281,14 +281,14 @@ export default function PrimeCalculatorReal() {
 
         <div className="px-6 py-5 border-b border-edge">
           <p className="font-semibold text-ink text-[16px]">Votre profil</p>
-          <p className="text-[13px] text-slate mt-0.5">Entrez votre code postal pour comparer toutes les caisses</p>
+          <p className="text-[16px] text-slate mt-0.5">Entrez votre code postal pour comparer toutes les caisses</p>
         </div>
 
         <div className="px-6 py-5 space-y-5">
 
           {/* NPA */}
           <div>
-            <label className="block text-sm font-medium text-ink mb-1">
+            <label className="block text-[16px] font-medium text-ink mb-1">
               Code postal (NPA)
             </label>
             <div className="relative max-w-xs">
@@ -302,18 +302,18 @@ export default function PrimeCalculatorReal() {
                 className="input-field"
               />
               {npaLoading && (
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-slate text-xs animate-pulse">
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-slate text-[13px] animate-pulse">
                   recherche…
                 </span>
               )}
             </div>
             {npaInfo && (
-              <p className="mt-1.5 text-[13px] text-brand font-medium">
+              <p className="mt-1.5 text-[16px] text-brand font-medium">
                 ✓ {npaInfo.commune} · {npaInfo.canton}
               </p>
             )}
             {npaError && (
-              <p className="mt-1.5 text-[13px] text-red-500">{npaError}</p>
+              <p className="mt-1.5 text-[16px] text-red-500">{npaError}</p>
             )}
           </div>
 
@@ -321,7 +321,7 @@ export default function PrimeCalculatorReal() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
 
             <div>
-              <label className="block text-sm font-medium text-ink mb-1">Tranche d'âge</label>
+              <label className="block text-[16px] font-medium text-ink mb-1">Tranche d'âge</label>
               <div className="relative">
                 <select
                   value={ageGroup}
@@ -337,7 +337,7 @@ export default function PrimeCalculatorReal() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-ink mb-1">Franchise annuelle</label>
+              <label className="block text-[16px] font-medium text-ink mb-1">Franchise annuelle</label>
               <div className="relative">
                 <select
                   value={franchise}
@@ -354,7 +354,7 @@ export default function PrimeCalculatorReal() {
 
             <div>
               <div className="flex items-center gap-1.5 mb-1">
-                <label className="block text-sm font-medium text-ink">Modèle d'assurance</label>
+                <label className="block text-[16px] font-medium text-ink">Modèle d'assurance</label>
                 <button
                   type="button"
                   onClick={() => setShowModeleInfo(v => !v)}
@@ -389,7 +389,7 @@ export default function PrimeCalculatorReal() {
                   onChange={e => setAccident(e.target.checked)}
                   className="w-4 h-4 rounded accent-brand cursor-pointer"
                 />
-                <span className="text-[13px] text-slate">Inclure la couverture accident</span>
+                <span className="text-[16px] text-slate">Inclure la couverture accident</span>
                 <button
                   type="button"
                   onClick={() => setShowAccidentInfo(v => !v)}
@@ -400,7 +400,7 @@ export default function PrimeCalculatorReal() {
                 </button>
               </label>
             ) : (
-              <p className="text-[13px] text-slate">
+              <p className="text-[16px] text-slate">
                 Couverture accident incluse automatiquement pour les enfants.
               </p>
             )}
@@ -415,7 +415,7 @@ export default function PrimeCalculatorReal() {
           </div>
 
           {calcError && (
-            <p className="text-[13px] text-red-500">{calcError}</p>
+            <p className="text-[16px] text-red-500">{calcError}</p>
           )}
         </div>
       </div>
@@ -439,7 +439,7 @@ export default function PrimeCalculatorReal() {
                     <span className="font-semibold text-ink">
                       Économie potentielle&nbsp;: CHF&nbsp;{(saving * 12).toFixed(0)}/an
                     </span>
-                    <span className="text-slate text-[13px]">
+                    <span className="text-slate text-[16px]">
                       {' '}(CHF&nbsp;{saving.toFixed(2)}/mois) entre la caisse la moins chère et la plus chère pour ce profil.
                     </span>
                   </div>
@@ -452,7 +452,7 @@ export default function PrimeCalculatorReal() {
                   <h3 className="text-[17px] font-semibold text-ink">
                     {results.length} offres — {npaInfo?.commune} · {npaInfo?.canton}
                   </h3>
-                  <p className="text-[13px] text-slate mt-0.5">
+                  <p className="text-[16px] text-slate mt-0.5">
                     {MODELE_LABELS[modele]} · Franchise CHF&nbsp;{franchise} · {AGE_LABELS[ageGroup]}
                   </p>
                 </div>
@@ -508,7 +508,7 @@ export default function PrimeCalculatorReal() {
                     <p className="font-semibold text-ink text-[16px]">
                       Obtenez votre analyse personnalisée
                     </p>
-                    <p className="text-[13px] text-slate mt-0.5">
+                    <p className="text-[16px] text-slate mt-0.5">
                       Un expert vous aide à choisir la meilleure caisse pour votre profil.
                     </p>
                   </div>
@@ -539,7 +539,7 @@ export default function PrimeCalculatorReal() {
                       </button>
                     </div>
                     {gateStatus === 'error' && (
-                      <p className="mt-2 text-[13px] text-red-500">Une erreur est survenue. Réessayez.</p>
+                      <p className="mt-2 text-[16px] text-red-500">Une erreur est survenue. Réessayez.</p>
                     )}
                     <p className="mt-3 text-[12px] text-slate/60">
                       Sans engagement · Conformément à la LPD ·{' '}

@@ -131,7 +131,7 @@ export default function SubsidesSimulatorFull() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
 
         <div>
-          <label className="block text-[13px] font-medium text-ink mb-2">
+          <label className="block text-[16px] font-medium text-ink mb-2">
             Canton de résidence
           </label>
           <div className="relative">
@@ -150,7 +150,7 @@ export default function SubsidesSimulatorFull() {
         </div>
 
         <div>
-          <label className="block text-[13px] font-medium text-ink mb-2">
+          <label className="block text-[16px] font-medium text-ink mb-2">
             Revenu déterminant annuel (CHF)
           </label>
           <input
@@ -172,14 +172,14 @@ export default function SubsidesSimulatorFull() {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
 
         <div>
-          <label className="block text-[13px] font-medium text-ink mb-2">
+          <label className="block text-[16px] font-medium text-ink mb-2">
             Situation familiale
           </label>
           <div className="relative">
             <select
               value={form.situation}
               onChange={e => set({ situation: e.target.value as Situation })}
-              className="select-field pr-9 text-[13px]"
+              className="select-field pr-9 text-[16px]"
             >
               <option value="seul">Personne seule</option>
               <option value="couple">Couple</option>
@@ -189,14 +189,14 @@ export default function SubsidesSimulatorFull() {
         </div>
 
         <div>
-          <label className="block text-[13px] font-medium text-ink mb-2">
+          <label className="block text-[16px] font-medium text-ink mb-2">
             Enfants à charge
           </label>
           <div className="relative">
             <select
               value={form.nbEnfants}
               onChange={e => set({ nbEnfants: parseInt(e.target.value) })}
-              className="select-field pr-9 text-[13px]"
+              className="select-field pr-9 text-[16px]"
             >
               {[0, 1, 2, 3, 4].map(n => (
                 <option key={n} value={n}>{n === 0 ? 'Aucun' : `${n} enfant${n > 1 ? 's' : ''}`}</option>
@@ -207,14 +207,14 @@ export default function SubsidesSimulatorFull() {
         </div>
 
         <div>
-          <label className="block text-[13px] font-medium text-ink mb-2">
+          <label className="block text-[16px] font-medium text-ink mb-2">
             Âge
           </label>
           <div className="relative">
             <select
               value={form.isJeune ? 'jeune' : 'adulte'}
               onChange={e => set({ isJeune: e.target.value === 'jeune' })}
-              className="select-field pr-9 text-[13px]"
+              className="select-field pr-9 text-[16px]"
             >
               <option value="adulte">Adulte (26 ans et plus)</option>
               <option value="jeune">Jeune adulte (19 à 25 ans)</option>
@@ -247,7 +247,7 @@ export default function SubsidesSimulatorFull() {
 
           {/* Revenu non renseigné — canton standard */}
           {showResult && !hasRevenu && (
-            <p className="text-[13px] text-slate/70">
+            <p className="text-[16px] text-slate/70">
               Entrez votre revenu déterminant pour obtenir une estimation chiffrée.
             </p>
           )}
@@ -263,7 +263,7 @@ export default function SubsidesSimulatorFull() {
                 </div>
                 <div>
                   <p className="font-semibold text-ink text-[16px]">Revenu hors barème</p>
-                  <p className="text-[13px] text-slate mt-0.5">
+                  <p className="text-[16px] text-slate mt-0.5">
                     Votre revenu dépasse le seuil d&apos;éligibilité dans le canton de {cantonData.nom}.
                   </p>
                 </div>
@@ -364,7 +364,7 @@ function InfoGrid({ cantonData }: { cantonData: CantonSubside2026 }) {
       ].map(({ label, value }) => (
         <div key={label} className="bg-white border border-edge rounded-[8px] px-4 py-3">
           <p className="text-[11px] text-slate/60 uppercase tracking-wide mb-1">{label}</p>
-          <p className="text-[13px] font-medium text-ink">{value}</p>
+          <p className="text-[16px] font-medium text-ink">{value}</p>
         </div>
       ))}
     </div>
@@ -374,7 +374,7 @@ function InfoGrid({ cantonData }: { cantonData: CantonSubside2026 }) {
 function PrimeLien({ cantonData }: { cantonData: CantonSubside2026 }) {
   return (
     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white border border-edge rounded-[8px] px-4 py-3">
-      <p className="text-[13px] text-slate">
+      <p className="text-[16px] text-slate">
         Prime de référence {cantonData.nom} (adulte, f=300) :{' '}
         <span className="font-semibold text-ink">CHF {cantonData.primeMoyenne} par mois</span>
       </p>
@@ -382,7 +382,7 @@ function PrimeLien({ cantonData }: { cantonData: CantonSubside2026 }) {
         href={cantonData.lien}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-brand hover:underline text-[13px] font-medium shrink-0"
+        className="text-brand hover:underline text-[16px] font-medium shrink-0"
       >
         Service cantonal officiel →
       </a>
@@ -393,7 +393,7 @@ function PrimeLien({ cantonData }: { cantonData: CantonSubside2026 }) {
 function CtaExpert() {
   return (
     <div className="border-t border-edge pt-3">
-      <a href="#contact" className="text-[13px] text-brand hover:underline">
+      <a href="#contact" className="text-[16px] text-brand hover:underline">
         Vous souhaitez qu&apos;un expert vérifie vos droits et effectue la démarche pour vous ? →
       </a>
     </div>

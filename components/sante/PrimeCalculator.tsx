@@ -59,7 +59,7 @@ export default function PrimeCalculator({ canton }: { canton: Canton }) {
     } catch { setGateStatus('error') }
   }
 
-  const selectClass = "w-full border border-edge rounded-md px-3 py-2.5 text-[13px] text-navy bg-white focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent"
+  const selectClass = "w-full border border-edge rounded-md px-3 py-2.5 text-[16px] text-navy bg-white focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent"
 
   return (
     <section id="calculateur" className="scroll-mt-24">
@@ -74,7 +74,7 @@ export default function PrimeCalculator({ canton }: { canton: Canton }) {
       <div className="bg-cloud border border-edge rounded-[8px] p-6 mb-6">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
           <div>
-            <label className="block text-[12px] font-semibold text-slate uppercase tracking-wide mb-1.5">
+            <label className="block text-[16px] font-semibold text-slate uppercase tracking-wide mb-1.5">
               Tranche d'âge
             </label>
             <select className={selectClass} value={age} onChange={(e) => setAge(e.target.value)}>
@@ -84,7 +84,7 @@ export default function PrimeCalculator({ canton }: { canton: Canton }) {
             </select>
           </div>
           <div>
-            <label className="block text-[12px] font-semibold text-slate uppercase tracking-wide mb-1.5">
+            <label className="block text-[16px] font-semibold text-slate uppercase tracking-wide mb-1.5">
               Franchise
             </label>
             <select className={selectClass} value={franchise} onChange={(e) => setFranchise(e.target.value)}>
@@ -94,7 +94,7 @@ export default function PrimeCalculator({ canton }: { canton: Canton }) {
             </select>
           </div>
           <div>
-            <label className="block text-[12px] font-semibold text-slate uppercase tracking-wide mb-1.5">
+            <label className="block text-[16px] font-semibold text-slate uppercase tracking-wide mb-1.5">
               Modèle
             </label>
             <select className={selectClass} value={modele} onChange={(e) => setModele(e.target.value)}>
@@ -106,7 +106,7 @@ export default function PrimeCalculator({ canton }: { canton: Canton }) {
         </div>
 
         <div className="flex items-center justify-between">
-          <p className="text-[13px] text-slate">
+          <p className="text-[16px] text-slate">
             Canton : <strong className="text-navy">{canton.name}</strong>
             <span className="ml-2 text-slate/60">(pré-rempli)</span>
           </p>
@@ -128,7 +128,7 @@ export default function PrimeCalculator({ canton }: { canton: Canton }) {
               <span className="w-6 h-6 rounded-full bg-brand text-white text-xs font-bold flex items-center justify-center shrink-0">1</span>
               <span className="font-semibold text-navy text-[16px]">{results[0].caisse}</span>
             </div>
-            <span className="text-2xl font-bold text-brand">{results[0].prime} CHF<span className="text-sm font-normal text-slate">/mois</span></span>
+            <span className="text-2xl font-bold text-brand">{results[0].prime} CHF<span className="text-[13px] font-normal text-slate">/mois</span></span>
           </div>
 
           {/* Results 2 & 3 — blurred */}
@@ -139,14 +139,14 @@ export default function PrimeCalculator({ canton }: { canton: Canton }) {
                   <span className="w-6 h-6 rounded-full bg-edge text-slate text-xs font-bold flex items-center justify-center shrink-0">{i + 1}</span>
                   <span className="font-semibold text-navy text-[16px]">{results[i].caisse}</span>
                 </div>
-                <span className="text-2xl font-bold text-navy">{results[i].prime} CHF<span className="text-sm font-normal text-slate">/mois</span></span>
+                <span className="text-2xl font-bold text-navy">{results[i].prime} CHF<span className="text-[13px] font-normal text-slate">/mois</span></span>
               </div>
               <div className="absolute inset-0 flex items-center justify-center gap-2 bg-white/60">
                 <svg className="w-4 h-4 text-slate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                     d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
-                <span className="text-[13px] font-medium text-slate">Débloquez pour voir</span>
+                <span className="text-[16px] font-medium text-slate">Débloquez pour voir</span>
               </div>
             </div>
           ))}
@@ -157,19 +157,19 @@ export default function PrimeCalculator({ canton }: { canton: Canton }) {
               <h3 className="text-[18px] font-semibold text-navy mb-1">
                 Débloquez votre comparaison complète
               </h3>
-              <p className="text-[13px] text-slate mb-5">
+              <p className="text-[16px] text-slate mb-5">
                 Top 3 complet + économie annuelle calculée · Gratuit · Sans engagement
               </p>
               <form onSubmit={handleGate} className="space-y-3">
                 <input
                   type="text" placeholder="Votre prénom" required
                   value={prenom} onChange={(e) => setPrenom(e.target.value)}
-                  className="w-full border border-edge rounded-md px-3 py-2.5 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand"
+                  className="w-full border border-edge rounded-md px-3 py-2.5 text-[16px] focus:outline-none focus:ring-2 focus:ring-brand"
                 />
                 <input
                   type="email" placeholder="Votre email" required
                   value={email} onChange={(e) => setEmail(e.target.value)}
-                  className="w-full border border-edge rounded-md px-3 py-2.5 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand"
+                  className="w-full border border-edge rounded-md px-3 py-2.5 text-[16px] focus:outline-none focus:ring-2 focus:ring-brand"
                 />
                 <button
                   type="submit"
@@ -179,7 +179,7 @@ export default function PrimeCalculator({ canton }: { canton: Canton }) {
                   {gateStatus === 'loading' ? 'Envoi en cours…' : 'Recevoir ma comparaison gratuite →'}
                 </button>
                 {gateStatus === 'error' && (
-                  <p className="text-[13px] text-red-600 text-center">Une erreur est survenue. Réessayez.</p>
+                  <p className="text-[16px] text-red-600 text-center">Une erreur est survenue. Réessayez.</p>
                 )}
                 <p className="text-[11px] text-slate/60 text-center leading-relaxed">
                   Données traitées conformément à notre{' '}
@@ -193,7 +193,7 @@ export default function PrimeCalculator({ canton }: { canton: Canton }) {
               <svg className="w-5 h-5 text-brand shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              <p className="text-[13px] text-brand font-medium">
+              <p className="text-[16px] text-brand font-medium">
                 Votre comparaison a été envoyée à <strong>{email}</strong>. Vérifiez votre boîte mail.
               </p>
             </div>
