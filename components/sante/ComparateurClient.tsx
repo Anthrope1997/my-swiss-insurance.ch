@@ -473,7 +473,7 @@ export default function ComparateurClient() {
                           </div>
 
                           {/* Nom + badge */}
-                          <div className="flex-1 min-w-0 flex items-center gap-2 flex-wrap">
+                          <div className="shrink min-w-0 flex items-center gap-2 flex-wrap">
                             <span className={`text-[16px] text-ink ${isFirst ? 'font-medium' : 'font-normal'}`}>
                               {row.assureur}
                             </span>
@@ -487,21 +487,27 @@ export default function ComparateurClient() {
                             )}
                           </div>
 
-                          {/* Prime + CTA groupés à droite */}
-                          <div className="shrink-0 flex items-center gap-8">
-                            <div>
-                              <p className={`text-[16px] text-ink ${isFirst ? 'font-medium' : 'font-normal'}`}>
-                                CHF {fmtChf(row.prime_nette)}
-                              </p>
-                              <p className="text-[10px] text-slate">par mois</p>
-                            </div>
-                            <button
-                              onClick={scrollToContact}
-                              className="shrink-0 text-[16px] font-semibold whitespace-nowrap rounded-md py-2.5 px-5 bg-brand text-white hover:bg-brand-dark transition-colors duration-150"
-                            >
-                              Demander une offre →
-                            </button>
+                          {/* Espace 3/4 entre nom et prime */}
+                          <div className="[flex-grow:3]" />
+
+                          {/* Prime mensuelle */}
+                          <div className="shrink-0">
+                            <p className={`text-[16px] text-ink ${isFirst ? 'font-medium' : 'font-normal'}`}>
+                              CHF {fmtChf(row.prime_nette)}
+                            </p>
+                            <p className="text-[10px] text-slate">par mois</p>
                           </div>
+
+                          {/* Espace 1/4 entre prime et CTA */}
+                          <div className="[flex-grow:1]" />
+
+                          {/* CTA */}
+                          <button
+                            onClick={scrollToContact}
+                            className="shrink-0 text-[16px] font-semibold whitespace-nowrap rounded-md py-2.5 px-5 bg-brand text-white hover:bg-brand-dark transition-colors duration-150"
+                          >
+                            Demander une offre →
+                          </button>
                         </div>
                       )
                     })
