@@ -92,7 +92,15 @@
 
   /* ── Article typography ── */
   .article-h2 {
-    @apply text-2xl font-semibold text-ink border-b border-edge pb-4 mb-6 mt-14 first:mt-0;
+    @apply text-2xl font-semibold text-ink mb-6;
+  }
+  /* Séparateur au-dessus du titre — toutes les sections sauf la première */
+  article > section + section > .article-h2 {
+    @apply border-t border-edge pt-6;
+  }
+  /* Scroll offset pour les ancres du sommaire — compense la hauteur du header fixe */
+  section[id] {
+    scroll-margin-top: 80px;
   }
   .article-h3 {
     @apply text-[18px] font-semibold text-ink mb-3 mt-8;

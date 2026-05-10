@@ -351,7 +351,7 @@ export default function UnifiedLeadForm({ redirectOnSuccess }: { redirectOnSucce
   }
 
   return (
-    <div className="card-sm">
+    <div className="card-sm flex flex-col min-h-[520px]">
       <style>{`
         @keyframes stepIn {
           from { opacity: 0; transform: translateY(8px); }
@@ -360,48 +360,320 @@ export default function UnifiedLeadForm({ redirectOnSuccess }: { redirectOnSucce
         .step-anim { animation: stepIn 0.18s ease-out; }
       `}</style>
 
-      {/* Progress bar */}
-      <div className="flex gap-1.5 mb-5">
-        {[1, 2, 3, 4].map(i => (
-          <div
-            key={i}
-            className={`h-1 flex-1 rounded-full transition-colors duration-300 ${i <= step ? 'bg-brand' : 'bg-edge'}`}
-          />
-        ))}
+      {/* ── Top: progress bar + step labels (stable header) ── */}
+      <div>
+        <div className="flex gap-1.5 mb-5">
+          {[1, 2, 3, 4].map(i => (
+            <div
+              key={i}
+              className={`h-1 flex-1 rounded-full transition-colors duration-300 ${i <= step ? 'bg-brand' : 'bg-edge'}`}
+            />
+          ))}
+        </div>
+        <p className="text-[11px] font-semibold text-slate uppercase tracking-widest mb-1">
+          {d.form.etape} {step} {d.form.sur} 4
+        </p>
+        <p className="text-[18px] font-semibold text-ink mb-1">{STEP_LABELS[step - 1]}</p>
+        <p className="text-[13px] text-slate mb-6">{STEP_CONTEXT[step - 1]}</p>
       </div>
 
-      {/* Step label + context */}
-      <p className="text-[11px] font-semibold text-slate uppercase tracking-widest mb-1">
-        {d.form.etape} {step} {d.form.sur} 4
-      </p>
-      <p className="text-[18px] font-semibold text-ink mb-1">{STEP_LABELS[step - 1]}</p>
-      <p className="text-[13px] text-slate mb-6">{STEP_CONTEXT[step - 1]}</p>
+      {/* ── Middle: step content (flex-1, fills space between header and buttons) ── */}
+      <div className="flex-1">
 
-      {/* Step 1 — Objectif */}
-      {step === 1 && (
-        <div className="step-anim">
-          <div className="grid grid-cols-1 gap-3 mb-4">
-            {STEP1_OPTIONS.map(opt => (
+        {/* Step 1 — Objectif */}
+        {step === 1 && (
+          <div className="step-anim">
+            <div className="grid grid-cols-1 gap-3">
+              {STEP1_OPTIONS.map(opt => (
+                <button
+                  key={opt.id}
+                  onClick={() => set({ intent: opt.id })}
+                  className={[
+                    'flex items-center gap-3 text-left px-4 py-4 rounded-lg border-2 transition-colors duration-150 !text-[14px] font-medium',
+                    form.intent === opt.id
+                      ? 'border-brand bg-blue-light2 text-brand'
+                      : 'border-edge bg-white text-ink hover:border-brand hover:bg-blue-hint',
+                  ].join(' ')}
+                >
+                  <span className={[
+                    'w-7 h-7 rounded-md flex items-center justify-center shrink-0 transition-colors duration-150',
+                    form.intent === opt.id ? 'bg-brand text-white' : 'bg-blue-tint text-brand',
+                  ].join(' ')}>
+                    {opt.icon}
+                  </span>
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Step 2 — Situation */}
+        {step === 2 && (
+          <div className="step-anim space-y-3">
+            <div className="flex bg-cloud rounded-lg p-1 gap-1">
               <button
-                key={opt.id}
-                onClick={() => set({ intent: opt.id })}
+                type="button"
+                onClick={() => set({ residenceType: 'resident' })}
                 className={[
-                  'flex items-center gap-3 text-left px-4 py-4 rounded-lg border-2 transition-colors duration-150 !text-[14px] font-medium',
-                  form.intent === opt.id
-                    ? 'border-brand bg-blue-light2 text-brand'
-                    : 'border-edge bg-white text-ink hover:border-brand hover:bg-blue-hint',
+                  'flex-1 py-2 text-[13px] font-medium rounded-md transition-all duration-150',
+                  form.residenceType === 'resident'
+                    ? 'bg-white text-brand shadow-sm'
+                    : 'text-slate hover:text-ink',
                 ].join(' ')}
               >
-                <span className={[
-                  'w-7 h-7 rounded-md flex items-center justify-center shrink-0 transition-colors duration-150',
-                  form.intent === opt.id ? 'bg-brand text-white' : 'bg-blue-tint text-brand',
-                ].join(' ')}>
-                  {opt.icon}
-                </span>
-                {opt.label}
+                {d.form.residenceType.resident}
               </button>
-            ))}
+              <button
+                type="button"
+                onClick={() => set({ residenceType: 'frontalier' })}
+                className={[
+                  'flex-1 py-2 text-[13px] font-medium rounded-md transition-all duration-150',
+                  form.residenceType === 'frontalier'
+                    ? 'bg-white text-brand shadow-sm'
+                    : 'text-slate hover:text-ink',
+                ].join(' ')}
+              >
+                {d.form.residenceType.frontalier}
+              </button>
+            </div>
+
+            {form.residenceType === 'resident' && (
+              <div className="rounded-md border border-edge bg-white p-4 space-y-3">
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.canton}</label>
+                    <CantonCombobox
+                      value={form.canton}
+                      onChange={v => set({ canton: v })}
+                      placeholder="Vaud ou VD"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.npa}</label>
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      placeholder="1000"
+                      value={form.codePostal}
+                      onChange={e => set({ codePostal: e.target.value })}
+                      className="input-field !h-11 !text-[14px]"
+                      maxLength={4}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.trancheAge}</label>
+                  <div className="relative">
+                    <select
+                      value={form.trancheAge}
+                      onChange={e => set({ trancheAge: e.target.value })}
+                      className="select-field !h-11 !text-[14px] pr-9"
+                    >
+                      <option value="">{d.form.champs.selectPlaceholder}</option>
+                      {TRANCHES_AGE.map(t => (
+                        <option key={t.value} value={t.value}>{t.label}</option>
+                      ))}
+                    </select>
+                    <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate pointer-events-none"
+                      fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {form.residenceType === 'frontalier' && (
+              <div className="rounded-md border border-edge bg-white p-4 space-y-3">
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.pays}</label>
+                    <input
+                      type="text"
+                      list="pays-frontaliers-list"
+                      placeholder="France"
+                      value={form.pays}
+                      onChange={e => set({ pays: e.target.value })}
+                      className="input-field !h-11 !text-[14px]"
+                    />
+                    <datalist id="pays-frontaliers-list">
+                      {PAYS_FRONTALIERS.map(p => <option key={p} value={p} />)}
+                    </datalist>
+                  </div>
+                  <div>
+                    <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.cantonTravail}</label>
+                    <CantonCombobox
+                      value={form.cantonTravail}
+                      onChange={v => set({ cantonTravail: v })}
+                      placeholder="Genève ou GE"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.trancheAge}</label>
+                  <div className="relative">
+                    <select
+                      value={form.trancheAge}
+                      onChange={e => set({ trancheAge: e.target.value })}
+                      className="select-field !h-11 !text-[14px] pr-9"
+                    >
+                      <option value="">{d.form.champs.selectPlaceholder}</option>
+                      {TRANCHES_AGE.map(t => (
+                        <option key={t.value} value={t.value}>{t.label}</option>
+                      ))}
+                    </select>
+                    <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate pointer-events-none"
+                      fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
+        )}
+
+        {/* Step 3 — Profil de ménage */}
+        {step === 3 && (
+          <div className="step-anim">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {STEP3_OPTIONS.map(opt => (
+                <button
+                  key={opt.id}
+                  onClick={() => set({ situation: opt.id })}
+                  className={[
+                    'text-left px-4 py-4 rounded-lg border-2 transition-colors duration-150 text-[14px] font-medium',
+                    form.situation === opt.id
+                      ? 'border-brand bg-blue-light2 text-brand'
+                      : 'border-edge bg-white text-ink hover:border-brand hover:bg-blue-hint',
+                  ].join(' ')}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Step 4 — Coordonnées */}
+        {step === 4 && (
+          <form id="lead-form-step4" className="step-anim space-y-4" onSubmit={handleSubmit}>
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.prenom}</label>
+                <input
+                  type="text" required placeholder="Marie"
+                  value={form.prenom}
+                  onChange={e => set({ prenom: e.target.value })}
+                  className="input-field !h-11 !text-[14px]"
+                />
+              </div>
+              <div>
+                <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.nom}</label>
+                <input
+                  type="text" required placeholder="Dupont"
+                  value={form.nom}
+                  onChange={e => set({ nom: e.target.value })}
+                  className="input-field !h-11 !text-[14px]"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.telephone}</label>
+              <div className="flex gap-2 items-start" ref={phoneGroupRef}>
+                <div className="relative shrink-0" ref={phoneDropdownRef}>
+                  <button
+                    type="button"
+                    onClick={() => setShowPhoneDropdown(v => !v)}
+                    className="flex items-center gap-1.5 h-11 px-3 border border-edge rounded-md bg-white hover:border-brand focus:border-brand focus:outline-none focus:ring-2 focus:ring-blue-tint transition-colors"
+                    aria-label="Sélectionner l'indicatif pays"
+                  >
+                    <span className="text-[18px] leading-none">{selectedCountry.flag}</span>
+                    <span className="text-[13px] text-slate font-medium tabular-nums">{selectedCountry.dialCode}</span>
+                    <svg className="w-3 h-3 text-slate shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                  {showPhoneDropdown && (
+                    <div className="absolute z-50 top-full left-0 mt-1 w-64 bg-white border border-edge rounded-md shadow-lg max-h-60 overflow-y-auto">
+                      {PHONE_PRIORITY.map(country => (
+                        <button
+                          key={country.code}
+                          type="button"
+                          onClick={() => { setSelectedCountry(country); setShowPhoneDropdown(false) }}
+                          className={[
+                            'w-full flex items-center gap-2.5 px-3 py-2 text-[13px] hover:bg-cloud text-left transition-colors',
+                            selectedCountry.code === country.code ? 'bg-blue-light2 text-brand' : 'text-ink',
+                          ].join(' ')}
+                        >
+                          <span className="text-[15px] leading-none shrink-0">{country.flag}</span>
+                          <span className="flex-1">{country.name}</span>
+                          <span className="text-slate tabular-nums">{country.dialCode}</span>
+                        </button>
+                      ))}
+                      <div className="border-t border-edge my-1" />
+                      {PHONE_REST.map(country => (
+                        <button
+                          key={country.code}
+                          type="button"
+                          onClick={() => { setSelectedCountry(country); setShowPhoneDropdown(false) }}
+                          className={[
+                            'w-full flex items-center gap-2.5 px-3 py-2 text-[13px] hover:bg-cloud text-left transition-colors',
+                            selectedCountry.code === country.code ? 'bg-blue-light2 text-brand' : 'text-ink',
+                          ].join(' ')}
+                        >
+                          <span className="text-[15px] leading-none shrink-0">{country.flag}</span>
+                          <span className="flex-1">{country.name}</span>
+                          <span className="text-slate tabular-nums">{country.dialCode}</span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                <input
+                  type="tel"
+                  placeholder={selectedCountry.placeholder || 'Numéro de téléphone'}
+                  value={form.telephone}
+                  onChange={e => { set({ telephone: e.target.value.replace(/[^0-9\s\-\(\)\+]/g, '') }); if (phoneError) setPhoneError('') }}
+                  onBlur={validatePhoneOnBlur}
+                  className="input-field !h-11 !text-[14px] flex-1"
+                />
+              </div>
+              {phoneError && (
+                <p className="text-red-600 text-[13px] mt-1">{phoneError}</p>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.email}</label>
+              <input
+                type="email"
+                placeholder="marie@exemple.ch"
+                value={form.email}
+                onChange={e => { set({ email: e.target.value }); if (emailError) setEmailError('') }}
+                onBlur={validateEmailOnBlur}
+                className="input-field !h-11 !text-[14px]"
+              />
+              {emailError && (
+                <p className="text-red-600 text-[13px] mt-1">{emailError}</p>
+              )}
+            </div>
+
+            {error && (
+              <p className="text-red-600 text-[13px] border border-red-200 bg-red-50 rounded-md px-3 py-2">
+                {error}
+              </p>
+            )}
+          </form>
+        )}
+
+      </div>
+
+      {/* ── Bottom: navigation buttons (always visible at bottom) ── */}
+      <div className="pt-5">
+        {step === 1 && (
           <button
             onClick={() => setStep(2)}
             disabled={!form.intent}
@@ -409,138 +681,10 @@ export default function UnifiedLeadForm({ redirectOnSuccess }: { redirectOnSucce
           >
             {d.form.commencer}
           </button>
-        </div>
-      )}
+        )}
 
-      {/* Step 2 — Situation */}
-      {step === 2 && (
-        <div className="step-anim space-y-3">
-
-          {/* Segmented control */}
-          <div className="flex bg-cloud rounded-lg p-1 gap-1">
-            <button
-              type="button"
-              onClick={() => set({ residenceType: 'resident' })}
-              className={[
-                'flex-1 py-2 text-[13px] font-medium rounded-md transition-all duration-150',
-                form.residenceType === 'resident'
-                  ? 'bg-white text-brand shadow-sm'
-                  : 'text-slate hover:text-ink',
-              ].join(' ')}
-            >
-              {d.form.residenceType.resident}
-            </button>
-            <button
-              type="button"
-              onClick={() => set({ residenceType: 'frontalier' })}
-              className={[
-                'flex-1 py-2 text-[13px] font-medium rounded-md transition-all duration-150',
-                form.residenceType === 'frontalier'
-                  ? 'bg-white text-brand shadow-sm'
-                  : 'text-slate hover:text-ink',
-              ].join(' ')}
-            >
-              {d.form.residenceType.frontalier}
-            </button>
-          </div>
-
-          {/* Résident branch */}
-          {form.residenceType === 'resident' && (
-            <div className="rounded-md border border-edge bg-white p-4 space-y-3">
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.canton}</label>
-                  <CantonCombobox
-                    value={form.canton}
-                    onChange={v => set({ canton: v })}
-                    placeholder="Vaud ou VD"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.npa}</label>
-                  <input
-                    type="text"
-                    inputMode="numeric"
-                    placeholder="1000"
-                    value={form.codePostal}
-                    onChange={e => set({ codePostal: e.target.value })}
-                    className="input-field !h-11 !text-[14px]"
-                    maxLength={4}
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.trancheAge}</label>
-                <div className="relative">
-                  <select
-                    value={form.trancheAge}
-                    onChange={e => set({ trancheAge: e.target.value })}
-                    className="select-field !h-11 !text-[14px] pr-9"
-                  >
-                    <option value="">{d.form.champs.selectPlaceholder}</option>
-                    {TRANCHES_AGE.map(t => (
-                      <option key={t.value} value={t.value}>{t.label}</option>
-                    ))}
-                  </select>
-                  <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate pointer-events-none"
-                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Frontalier branch */}
-          {form.residenceType === 'frontalier' && (
-            <div className="rounded-md border border-edge bg-white p-4 space-y-3">
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.pays}</label>
-                  <input
-                    type="text"
-                    list="pays-frontaliers-list"
-                    placeholder="France"
-                    value={form.pays}
-                    onChange={e => set({ pays: e.target.value })}
-                    className="input-field !h-11 !text-[14px]"
-                  />
-                  <datalist id="pays-frontaliers-list">
-                    {PAYS_FRONTALIERS.map(p => <option key={p} value={p} />)}
-                  </datalist>
-                </div>
-                <div>
-                  <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.cantonTravail}</label>
-                  <CantonCombobox
-                    value={form.cantonTravail}
-                    onChange={v => set({ cantonTravail: v })}
-                    placeholder="Genève ou GE"
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.trancheAge}</label>
-                <div className="relative">
-                  <select
-                    value={form.trancheAge}
-                    onChange={e => set({ trancheAge: e.target.value })}
-                    className="select-field !h-11 !text-[14px] pr-9"
-                  >
-                    <option value="">{d.form.champs.selectPlaceholder}</option>
-                    {TRANCHES_AGE.map(t => (
-                      <option key={t.value} value={t.value}>{t.label}</option>
-                    ))}
-                  </select>
-                  <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate pointer-events-none"
-                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-          )}
-
-          <div className="flex gap-3 pt-1">
+        {step === 2 && (
+          <div className="flex gap-3">
             <button onClick={() => setStep(1)} className="btn-secondary text-[14px] px-5 py-2.5">
               {d.form.retour}
             </button>
@@ -552,28 +696,9 @@ export default function UnifiedLeadForm({ redirectOnSuccess }: { redirectOnSucce
               {d.form.continuer}
             </button>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Step 3 — Profil de ménage */}
-      {step === 3 && (
-        <div className="step-anim">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
-            {STEP3_OPTIONS.map(opt => (
-              <button
-                key={opt.id}
-                onClick={() => set({ situation: opt.id })}
-                className={[
-                  'text-left px-4 py-4 rounded-lg border-2 transition-colors duration-150 text-[14px] font-medium',
-                  form.situation === opt.id
-                    ? 'border-brand bg-blue-light2 text-brand'
-                    : 'border-edge bg-white text-ink hover:border-brand hover:bg-blue-hint',
-                ].join(' ')}
-              >
-                {opt.label}
-              </button>
-            ))}
-          </div>
+        {step === 3 && (
           <div className="flex gap-3">
             <button onClick={() => setStep(2)} className="btn-secondary text-[14px] px-5 py-2.5">
               {d.form.retour}
@@ -586,140 +711,31 @@ export default function UnifiedLeadForm({ redirectOnSuccess }: { redirectOnSucce
               {d.form.continuer}
             </button>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Step 4 — Coordonnées */}
-      {step === 4 && (
-        <form className="step-anim space-y-4" onSubmit={handleSubmit}>
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.prenom}</label>
-              <input
-                type="text" required placeholder="Marie"
-                value={form.prenom}
-                onChange={e => set({ prenom: e.target.value })}
-                className="input-field !h-11 !text-[14px]"
-              />
-            </div>
-            <div>
-              <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.nom}</label>
-              <input
-                type="text" required placeholder="Dupont"
-                value={form.nom}
-                onChange={e => set({ nom: e.target.value })}
-                className="input-field !h-11 !text-[14px]"
-              />
-            </div>
-          </div>
-
-          {/* Téléphone avec sélecteur de pays */}
-          <div>
-            <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.telephone}</label>
-            <div className="flex gap-2 items-start" ref={phoneGroupRef}>
-              {/* Sélecteur indicatif */}
-              <div className="relative shrink-0" ref={phoneDropdownRef}>
-                <button
-                  type="button"
-                  onClick={() => setShowPhoneDropdown(v => !v)}
-                  className="flex items-center gap-1.5 h-11 px-3 border border-edge rounded-md bg-white hover:border-brand focus:border-brand focus:outline-none focus:ring-2 focus:ring-blue-tint transition-colors"
-                  aria-label="Sélectionner l'indicatif pays"
-                >
-                  <span className="text-[18px] leading-none">{selectedCountry.flag}</span>
-                  <span className="text-[13px] text-slate font-medium tabular-nums">{selectedCountry.dialCode}</span>
-                  <svg className="w-3 h-3 text-slate shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                {showPhoneDropdown && (
-                  <div className="absolute z-50 top-full left-0 mt-1 w-64 bg-white border border-edge rounded-md shadow-lg max-h-60 overflow-y-auto">
-                    {PHONE_PRIORITY.map(country => (
-                      <button
-                        key={country.code}
-                        type="button"
-                        onClick={() => { setSelectedCountry(country); setShowPhoneDropdown(false) }}
-                        className={[
-                          'w-full flex items-center gap-2.5 px-3 py-2 text-[13px] hover:bg-cloud text-left transition-colors',
-                          selectedCountry.code === country.code ? 'bg-blue-light2 text-brand' : 'text-ink',
-                        ].join(' ')}
-                      >
-                        <span className="text-[15px] leading-none shrink-0">{country.flag}</span>
-                        <span className="flex-1">{country.name}</span>
-                        <span className="text-slate tabular-nums">{country.dialCode}</span>
-                      </button>
-                    ))}
-                    <div className="border-t border-edge my-1" />
-                    {PHONE_REST.map(country => (
-                      <button
-                        key={country.code}
-                        type="button"
-                        onClick={() => { setSelectedCountry(country); setShowPhoneDropdown(false) }}
-                        className={[
-                          'w-full flex items-center gap-2.5 px-3 py-2 text-[13px] hover:bg-cloud text-left transition-colors',
-                          selectedCountry.code === country.code ? 'bg-blue-light2 text-brand' : 'text-ink',
-                        ].join(' ')}
-                      >
-                        <span className="text-[15px] leading-none shrink-0">{country.flag}</span>
-                        <span className="flex-1">{country.name}</span>
-                        <span className="text-slate tabular-nums">{country.dialCode}</span>
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-              {/* Numéro local */}
-              <input
-                type="tel"
-                placeholder={selectedCountry.placeholder || 'Numéro de téléphone'}
-                value={form.telephone}
-                onChange={e => { set({ telephone: e.target.value.replace(/[^0-9\s\-\(\)\+]/g, '') }); if (phoneError) setPhoneError('') }}
-                onBlur={validatePhoneOnBlur}
-                className="input-field !h-11 !text-[14px] flex-1"
-              />
-            </div>
-            {phoneError && (
-              <p className="text-red-600 text-[13px] mt-1">{phoneError}</p>
-            )}
-          </div>
-
-          {/* Adresse e-mail */}
-          <div>
-            <label className="block text-[13px] font-medium text-ink mb-1.5">{d.form.champs.email}</label>
-            <input
-              type="email"
-              placeholder="marie@exemple.ch"
-              value={form.email}
-              onChange={e => { set({ email: e.target.value }); if (emailError) setEmailError('') }}
-              onBlur={validateEmailOnBlur}
-              className="input-field !h-11 !text-[14px]"
-            />
-            {emailError && (
-              <p className="text-red-600 text-[13px] mt-1">{emailError}</p>
-            )}
-          </div>
-
-          {error && (
-            <p className="text-red-600 text-[13px] border border-red-200 bg-red-50 rounded-md px-3 py-2">
-              {error}
+        {step === 4 && (
+          <>
+            <button
+              type="submit"
+              form="lead-form-step4"
+              disabled={status === 'loading'}
+              className="w-full btn-primary h-12 text-[15px] disabled:opacity-60"
+            >
+              {status === 'loading' ? d.form.loading : d.form.envoyer}
+            </button>
+            <p className="text-[12px] text-slate/60 text-center leading-relaxed mt-3">
+              {d.form.legal}
             </p>
-          )}
-
-          <button
-            type="submit"
-            disabled={status === 'loading'}
-            className="w-full btn-primary h-12 text-[15px] disabled:opacity-60"
-          >
-            {status === 'loading' ? d.form.loading : d.form.envoyer}
-          </button>
-
-          <p className="text-[12px] text-slate/60 text-center leading-relaxed">
-            {d.form.legal}
-          </p>
-          <button type="button" onClick={() => setStep(3)} className="block text-[13px] text-slate hover:text-ink">
-            {d.form.retour}
-          </button>
-        </form>
-      )}
+            <button
+              type="button"
+              onClick={() => setStep(3)}
+              className="block text-[13px] text-slate hover:text-ink mt-2"
+            >
+              {d.form.retour}
+            </button>
+          </>
+        )}
+      </div>
     </div>
   )
 }
