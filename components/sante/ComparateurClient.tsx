@@ -430,14 +430,14 @@ export default function ComparateurClient() {
                 <div className="mt-5 mb-4">
                   {/* Desktop : filtres + compteur */}
                   <div className="hidden md:flex items-start justify-between gap-4">
-                    <p className="text-[14px] text-slate">
-                      <span className="font-semibold text-ink">{npaInfo?.ville}</span>
+                    <p className="text-[14px] text-ink">
+                      <span className="font-semibold">{npaInfo?.ville}</span>
                       {npaInfo && <> ({npaInfo.regionId})</>}
                       {', '}Franchise {franchise.toLocaleString('fr-CH')} CHF
                       {', '}{MODELE_LABELS[modele]}
                     </p>
-                    <p className="text-[14px] text-slate/60 shrink-0">
-                      {results.length} caisses comparées
+                    <p className="text-[14px] text-ink shrink-0">
+                      {results.length} comparées
                     </p>
                   </div>
                   {/* Mobile : compteur seul, aligné à gauche */}
