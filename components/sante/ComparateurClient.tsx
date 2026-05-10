@@ -408,7 +408,7 @@ export default function ComparateurClient() {
                   Calcul en cours…
                 </>
               ) : (
-                'Comparer les primes →'
+                'Comparer les primes'
               )}
             </button>
 
