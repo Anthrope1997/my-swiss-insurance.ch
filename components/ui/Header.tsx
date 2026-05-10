@@ -131,7 +131,7 @@ export default function Header() {
             <Link
               href="/devis"
               className="md:hidden shrink-0 bg-brand hover:bg-brand-dark text-white font-medium
-                         px-4 py-2 rounded-md text-[13px] transition-colors"
+                         px-4 py-2 rounded-md text-[16px] transition-colors"
             >
               <span className="hidden min-[380px]:inline">{fr.header.ctaFull}</span>
               <span className="min-[380px]:hidden">{fr.header.ctaShort}</span>
@@ -139,7 +139,7 @@ export default function Header() {
             <button
               onClick={() => setOfferOpen(true)}
               className="hidden md:inline-block shrink-0 bg-brand hover:bg-brand-dark text-white font-medium
-                         px-4 py-2 rounded-md text-[13px] transition-colors"
+                         px-4 py-2 rounded-md text-[16px] transition-colors"
             >
               {fr.header.ctaFull}
             </button>
