@@ -90,12 +90,12 @@ const faqSchema = {
 }
 
 const toc = [
-  { id: 'nouveau-ne',    label: 'Nouveau-né'            },
-  { id: 'enfants',       label: 'Enfants'                },
-  { id: 'jeunes-adultes',label: 'Jeunes adultes'         },
-  { id: 'maternite',     label: 'Maternité'              },
-  { id: 'retraite',      label: 'Retraite'               },
-  { id: 'faq',           label: 'Questions fréquentes'  },
+  { id: 'nouveau-ne',    label: '1. Nouveau-né'          },
+  { id: 'enfants',       label: '2. Enfants'              },
+  { id: 'jeunes-adultes',label: '3. Jeunes adultes'       },
+  { id: 'maternite',     label: '4. Maternité'            },
+  { id: 'retraite',      label: '5. Retraite'             },
+  { id: 'faq',           label: '6. Questions fréquentes'},
 ]
 
 const heroStats = [
@@ -170,7 +170,7 @@ export default function MaFamillePage() {
 
             {/* Nouveau-né */}
             <section id="nouveau-ne" className="pt-2">
-              <h2 className="article-h2">Nouveau-né : comment l'affilier dès la naissance ?</h2>
+              <h2 className="article-h2">1. Nouveau-né : comment l'affilier dès la naissance ?</h2>
               <p className="article-p">
                 Tout enfant né en Suisse ou s'y installant doit être affilié à la LAMal.
                 L'affiliation est obligatoire dans les 3 mois suivant la naissance.
@@ -201,7 +201,7 @@ export default function MaFamillePage() {
 
             {/* Enfants */}
             <section id="enfants">
-              <h2 className="article-h2">Enfants : quelle franchise choisir de 0 à 18 ans ?</h2>
+              <h2 className="article-h2">2. Enfants : quelle franchise choisir de 0 à 18 ans ?</h2>
               <p className="article-p">
                 Les enfants bénéficient d'un tarif de prime nettement inférieur aux adultes
                 et d'un régime de participation aux frais allégé. La quote-part est plafonnée
@@ -253,7 +253,7 @@ export default function MaFamillePage() {
 
             {/* Jeunes adultes */}
             <section id="jeunes-adultes">
-              <h2 className="article-h2">Jeunes adultes : comment profiter du tarif réduit ?</h2>
+              <h2 className="article-h2">3. Jeunes adultes : comment profiter du tarif réduit ?</h2>
               <p className="article-p">
                 La catégorie tarifaire jeune adulte offre des primes réduites d'environ 20 à 25 %
                 par rapport au tarif adulte complet. Elle s'applique automatiquement de 19 à 25 ans.
@@ -285,7 +285,7 @@ export default function MaFamillePage() {
             {/* Maternité */}
             <section id="maternite">
               <h2 className="article-h2">
-                Maternité : qu'est-ce que la LAMal prend en charge ?
+                4. Maternité : qu'est-ce que la LAMal prend en charge ?
               </h2>
               <p className="article-p">
                 La LAMal couvre entièrement la maternité physiologique sans franchise ni
@@ -347,7 +347,7 @@ export default function MaFamillePage() {
 
             {/* Retraité */}
             <section id="retraite">
-              <h2 className="article-h2">Retraite : quels choix LAMal après 65 ans ?</h2>
+              <h2 className="article-h2">5. Retraite : quels choix LAMal après 65 ans ?</h2>
               <p className="article-p">
                 Il n'existe pas de tarif senior en LAMal. Le tarif adulte s'applique à partir
                 de 26 ans et reste identique quel que soit l'âge. Les retraités ne paient donc
@@ -384,7 +384,7 @@ export default function MaFamillePage() {
 
             {/* FAQ */}
             <section id="faq" className="scroll-mt-20 border-t border-edge pt-8">
-              <FAQ items={faqItems} />
+              <FAQ items={faqItems} title="6. Questions fréquentes" />
             </section>
 
             {/* Contact */}

@@ -76,14 +76,14 @@ const faqSchema = {
 }
 
 const toc = [
-  { id: 'qui',           label: 'Cantons concernés'     },
-  { id: 'comparaison',   label: 'LAMal vs GKV'          },
-  { id: 'bale',          label: 'Cas bâlois'             },
-  { id: 's1',            label: 'Formulaire S1'          },
-  { id: 'primes',        label: 'Primes 2026'            },
-  { id: 'comment-decider', label: 'Comment décider'      },
-  { id: 'simulateur',    label: 'Simulateur'             },
-  { id: 'faq',           label: 'Questions fréquentes'  },
+  { id: 'qui',           label: '1. Cantons concernés'  },
+  { id: 'comparaison',   label: '2. LAMal vs GKV'        },
+  { id: 'bale',          label: '3. Cas bâlois'           },
+  { id: 's1',            label: '4. Formulaire S1'        },
+  { id: 'primes',        label: '5. Primes 2026'          },
+  { id: 'comment-decider', label: '6. Comment décider'    },
+  { id: 'simulateur',    label: '7. Simulateur'           },
+  { id: 'faq',           label: '8. Questions fréquentes'},
 ]
 
 const heroStats = [
@@ -159,7 +159,7 @@ export default function FrontalierAllemagnePage() {
 
             {/* Cantons et accords bilatéraux */}
             <section id="qui" className="pt-2">
-              <h2 className="article-h2">Quels cantons et accords bilatéraux s'appliquent ?</h2>
+              <h2 className="article-h2">1. Quels cantons et accords bilatéraux s'appliquent ?</h2>
               <p className="article-p">
                 Les accords bilatéraux Suisse-UE (ALCP, règlements CE 883/2004 et 987/2009)
                 définissent les règles de coordination de sécurité sociale entre la Suisse
@@ -200,7 +200,7 @@ export default function FrontalierAllemagnePage() {
 
             {/* Comparaison LAMal vs GKV */}
             <section id="comparaison">
-              <h2 className="article-h2">Quelles sont les différences entre LAMal et GKV ?</h2>
+              <h2 className="article-h2">2. Quelles sont les différences entre LAMal et GKV ?</h2>
               <p className="article-p">
                 La structure de financement est le cœur de la différence : prime fixe individuelle
                 côté suisse, cotisation proportionnelle au salaire côté allemand. La situation de votre famille change souvent la donne.
@@ -243,7 +243,7 @@ export default function FrontalierAllemagnePage() {
 
             {/* Cas particulier bâlois */}
             <section id="bale">
-              <h2 className="article-h2">Qu'est-ce qui change pour les frontaliers bâlois ?</h2>
+              <h2 className="article-h2">3. Qu'est-ce qui change pour les frontaliers bâlois ?</h2>
               <p className="article-p">
                 La région de Bâle (Bâle-Ville et Bâle-Campagne) est l'un des pôles frontaliers
                 les plus actifs de Suisse. Elle attire des travailleurs frontaliers d'Allemagne
@@ -271,7 +271,7 @@ export default function FrontalierAllemagnePage() {
 
             {/* Formulaire S1 */}
             <section id="s1">
-              <h2 className="article-h2">Comment obtenir et utiliser le formulaire S1 ?</h2>
+              <h2 className="article-h2">4. Comment obtenir et utiliser le formulaire S1 ?</h2>
               <p className="article-p">
                 Si vous optez pour le GKV allemand, votre employeur suisse doit vous fournir
                 le formulaire S1 (anciennement E106). Ce document est indispensable pour
@@ -297,7 +297,7 @@ export default function FrontalierAllemagnePage() {
 
             {/* Primes indicatives 2026 */}
             <section id="primes">
-              <h2 className="article-h2">Primes indicatives 2026 dans votre canton de travail</h2>
+              <h2 className="article-h2">5. Primes indicatives 2026 dans votre canton de travail</h2>
               <p className="article-p">
                 Adulte de 35 ans, franchise 300 CHF, modèle standard, données indicatives OFSP 2026.
                 L'écart entre la caisse la moins chère et la plus chère peut dépasser CHF 260 par mois dans les cantons bâlois.
@@ -340,7 +340,7 @@ export default function FrontalierAllemagnePage() {
 
             {/* LAMal ou GKV */}
             <section id="comment-decider">
-              <h2 className="article-h2">LAMal ou GKV : comment décider ?</h2>
+              <h2 className="article-h2">6. LAMal ou GKV : comment décider ?</h2>
               <p className="article-p">
                 Pour la plupart des familles avec enfants, le GKV est souvent plus économique grâce
                 à la co-assurance gratuite. Pour un célibataire soigné principalement en Suisse, la LAMal est généralement préférable.
@@ -375,7 +375,7 @@ export default function FrontalierAllemagnePage() {
 
             {/* Simulateur de décision */}
             <section id="simulateur">
-              <h2 className="article-h2">Simulateur de décision</h2>
+              <h2 className="article-h2">7. Simulateur de décision</h2>
               <p className="article-p">
                 Répondez à 5 questions pour obtenir une recommandation personnalisée adaptée à votre situation de frontalier germano-suisse.
               </p>
@@ -384,7 +384,7 @@ export default function FrontalierAllemagnePage() {
 
             {/* FAQ */}
             <section id="faq" className="scroll-mt-20 border-t border-edge pt-8">
-              <FAQ items={faqItems} />
+              <FAQ items={faqItems} title="8. Questions fréquentes" />
             </section>
 
             {/* Contact */}

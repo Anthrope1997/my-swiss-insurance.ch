@@ -76,14 +76,14 @@ const faqSchema = {
 }
 
 const toc = [
-  { id: 'qui',           label: 'Cantons concernés'    },
-  { id: 'comparaison',   label: 'LAMal vs SSN'          },
-  { id: 'option-lamal',  label: 'Option LAMal'           },
-  { id: 'option-ssn',    label: 'Option SSN'             },
-  { id: 'primes',        label: 'Primes 2026'            },
-  { id: 'comment-decider', label: 'Comment décider'      },
-  { id: 'simulateur',    label: 'Simulateur'             },
-  { id: 'faq',           label: 'Questions fréquentes'  },
+  { id: 'qui',           label: '1. Cantons concernés' },
+  { id: 'comparaison',   label: '2. LAMal vs SSN'       },
+  { id: 'option-lamal',  label: '3. Option LAMal'        },
+  { id: 'option-ssn',    label: '4. Option SSN'          },
+  { id: 'primes',        label: '5. Primes 2026'         },
+  { id: 'comment-decider', label: '6. Comment décider'   },
+  { id: 'simulateur',    label: '7. Simulateur'          },
+  { id: 'faq',           label: '8. Questions fréquentes'},
 ]
 
 const heroStats = [
@@ -159,7 +159,7 @@ export default function FrontalierItaliePage() {
 
             {/* Cantons concernés */}
             <section id="qui" className="pt-2">
-              <h2 className="article-h2">Quels cantons et accords bilatéraux s'appliquent ?</h2>
+              <h2 className="article-h2">1. Quels cantons et accords bilatéraux s'appliquent ?</h2>
               <p className="article-p">
                 Les accords bilatéraux Suisse-UE (ALCP, règlements CE 883/2004 et 987/2009)
                 régissent la coordination de sécurité sociale entre la Suisse et l'Italie.
@@ -197,7 +197,7 @@ export default function FrontalierItaliePage() {
 
             {/* Comparaison LAMal vs SSN */}
             <section id="comparaison">
-              <h2 className="article-h2">Quelles différences entre LAMal et SSN italien ?</h2>
+              <h2 className="article-h2">2. Quelles différences entre LAMal et SSN italien ?</h2>
               <p className="article-p">
                 Le SSN est financé par l'impôt et gratuit au point de service — la LAMal est une
                 prime fixe individuelle. La qualité des soins italiens varie fortement selon la région.
@@ -239,7 +239,7 @@ export default function FrontalierItaliePage() {
 
             {/* Option LAMal */}
             <section id="option-lamal">
-              <h2 className="article-h2">Pourquoi choisir la LAMal suisse ?</h2>
+              <h2 className="article-h2">3. Pourquoi choisir la LAMal suisse ?</h2>
               <div className="space-y-4">
                 {[
                   {
@@ -261,7 +261,7 @@ export default function FrontalierItaliePage() {
 
             {/* Option SSN */}
             <section id="option-ssn">
-              <h2 className="article-h2">Comment s'inscrire au SSN avec le formulaire S1 ?</h2>
+              <h2 className="article-h2">4. Comment s'inscrire au SSN avec le formulaire S1 ?</h2>
               <p className="article-p">
                 Si vous optez pour le Servizio Sanitario Nazionale, votre employeur suisse
                 vous remet le formulaire S1. Ce document est le pivot de votre inscription
@@ -287,7 +287,7 @@ export default function FrontalierItaliePage() {
 
             {/* Primes indicatives 2026 */}
             <section id="primes">
-              <h2 className="article-h2">Primes indicatives 2026 dans votre canton de travail</h2>
+              <h2 className="article-h2">5. Primes indicatives 2026 dans votre canton de travail</h2>
               <p className="article-p">
                 Adulte de 35 ans, franchise 300 CHF, modèle standard, données indicatives OFSP 2026.
                 Le Tessin affiche les primes les plus élevées parmi les cantons frontaliers italiens.
@@ -327,7 +327,7 @@ export default function FrontalierItaliePage() {
 
             {/* LAMal ou SSN */}
             <section id="comment-decider">
-              <h2 className="article-h2">LAMal ou SSN : comment décider ?</h2>
+              <h2 className="article-h2">6. LAMal ou SSN : comment décider ?</h2>
               <p className="article-p">
                 Si vos soins ont lieu principalement au Tessin ou en Suisse, la LAMal offre un accès
                 complet sans avance de frais. Si votre famille et vos médecins sont en Italie, le SSN reste plus adapté.
@@ -362,7 +362,7 @@ export default function FrontalierItaliePage() {
 
             {/* Simulateur de décision */}
             <section id="simulateur">
-              <h2 className="article-h2">Simulateur de décision</h2>
+              <h2 className="article-h2">7. Simulateur de décision</h2>
               <p className="article-p">
                 Répondez à 5 questions pour obtenir une recommandation personnalisée adaptée à votre situation de frontalier italo-suisse.
               </p>
@@ -371,7 +371,7 @@ export default function FrontalierItaliePage() {
 
             {/* FAQ */}
             <section id="faq" className="scroll-mt-20 border-t border-edge pt-8">
-              <FAQ items={faqItems} />
+              <FAQ items={faqItems} title="8. Questions fréquentes" />
             </section>
 
             {/* Contact */}

@@ -163,7 +163,7 @@ export default function ChangerDeCaissePage() {
 
             {/* 1 — Dates clés */}
             <section id="dates" className="pt-2">
-              <h2 className="article-h2">Quand peut-on changer de caisse en 2026 ?</h2>
+              <h2 className="article-h2">1. Quand peut-on changer de caisse en 2026 ?</h2>
               <p className="article-p">
                 Le calendrier de changement est strict. La résiliation ordinaire doit parvenir à votre caisse
                 avant le 30 novembre pour une prise d&apos;effet au 1er janvier.
@@ -184,7 +184,7 @@ export default function ChangerDeCaissePage() {
 
             {/* 2 — Délais */}
             <section id="delais">
-              <h2 className="article-h2">Quels délais s'appliquent selon votre situation ?</h2>
+              <h2 className="article-h2">2. Quels délais s'appliquent selon votre situation ?</h2>
               <p className="article-p">
                 Les délais varient selon la raison du changement. Le cas ordinaire impose le 30 novembre,
                 mais plusieurs situations ouvrent des droits de résiliation hors délai.
@@ -218,7 +218,7 @@ export default function ChangerDeCaissePage() {
 
             {/* 3 — Étapes */}
             <section id="etapes">
-              <h2 className="article-h2">Comment changer de caisse en 5 étapes ?</h2>
+              <h2 className="article-h2">3. Comment changer de caisse en 5 étapes ?</h2>
               <div className="space-y-6">
                 {[
                   {
@@ -265,7 +265,7 @@ export default function ChangerDeCaissePage() {
 
             {/* 4 — Lettre */}
             <section id="lettre">
-              <h2 className="article-h2">Comment rédiger sa lettre de résiliation ?</h2>
+              <h2 className="article-h2">4. Comment rédiger sa lettre de résiliation ?</h2>
               <p className="article-p">
                 À envoyer par courrier recommandé avant le 30 novembre. Adaptez les champs entre crochets.
               </p>
@@ -306,7 +306,7 @@ export default function ChangerDeCaissePage() {
 
             {/* 5 — Cas particuliers */}
             <section id="cas">
-              <h2 className="article-h2">Quels sont les cas de résiliation anticipée ?</h2>
+              <h2 className="article-h2">5. Quels sont les cas de résiliation anticipée ?</h2>
               <div className="space-y-4">
                 {[
                   {
@@ -340,7 +340,7 @@ export default function ChangerDeCaissePage() {
 
             {/* 6 — FAQ */}
             <section id="faq" className="border-t border-edge pt-8">
-              <FAQ items={faqItems} title="Questions fréquentes sur le changement de caisse" />
+              <FAQ items={faqItems} title="6. Questions fréquentes sur le changement de caisse" />
             </section>
 
             {/* Formulaire */}

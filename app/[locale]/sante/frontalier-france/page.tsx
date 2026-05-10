@@ -86,15 +86,15 @@ const faqSchema = {
 }
 
 const toc = [
-  { id: 'qui',           label: 'Qui est concerné'        },
-  { id: 'droit-option',  label: "Droit d'option"          },
-  { id: 'option-lamal',  label: 'Option LAMal'             },
-  { id: 'option-secu',   label: 'Option Sécu française'   },
-  { id: 'geneve',        label: 'Cas Genève'               },
-  { id: 'primes',        label: 'Primes 2026'              },
-  { id: 'comment-decider', label: 'Comment décider'        },
-  { id: 'simulateur',    label: 'Simulateur'               },
-  { id: 'faq',           label: 'Questions fréquentes'    },
+  { id: 'qui',           label: '1. Qui est concerné'      },
+  { id: 'droit-option',  label: "2. Droit d'option"        },
+  { id: 'option-lamal',  label: '3. Option LAMal'           },
+  { id: 'option-secu',   label: '4. Option Sécu française' },
+  { id: 'geneve',        label: '5. Cas Genève'             },
+  { id: 'primes',        label: '6. Primes 2026'            },
+  { id: 'comment-decider', label: '7. Comment décider'      },
+  { id: 'simulateur',    label: '8. Simulateur'             },
+  { id: 'faq',           label: '9. Questions fréquentes'  },
 ]
 
 const heroStats = [
@@ -170,7 +170,7 @@ export default function FrontalierFrancePage() {
 
             {/* Qui est concerné */}
             <section id="qui" className="pt-2">
-              <h2 className="article-h2">Qui est concerné par ce droit d'option ?</h2>
+              <h2 className="article-h2">1. Qui est concerné par ce droit d'option ?</h2>
               <p className="article-p">
                 Le droit d'option s'applique aux personnes résidant en France et
                 travaillant en Suisse (statut frontalier). Les accords bilatéraux Suisse-UE
@@ -209,7 +209,7 @@ export default function FrontalierFrancePage() {
 
             {/* Le droit d'option */}
             <section id="droit-option">
-              <h2 className="article-h2">Comment fonctionne le droit d'option ?</h2>
+              <h2 className="article-h2">2. Comment fonctionne le droit d'option ?</h2>
 
               <div className="callout mb-5">
                 <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">À retenir</p>
@@ -241,7 +241,7 @@ export default function FrontalierFrancePage() {
 
             {/* Option LAMal */}
             <section id="option-lamal">
-              <h2 className="article-h2">Pourquoi choisir la LAMal suisse ?</h2>
+              <h2 className="article-h2">3. Pourquoi choisir la LAMal suisse ?</h2>
 
               <div className="bg-blue-tint rounded-[8px] p-5 mb-5">
                 <h3 className="font-semibold text-ink text-[15px] mb-3">Avantages de la LAMal</h3>
@@ -276,7 +276,7 @@ export default function FrontalierFrancePage() {
 
             {/* Option Sécurité sociale */}
             <section id="option-secu">
-              <h2 className="article-h2">Pourquoi rester à la Sécurité sociale française ?</h2>
+              <h2 className="article-h2">4. Pourquoi rester à la Sécurité sociale française ?</h2>
 
               <div className="bg-cloud border border-edge rounded-[8px] p-5 mb-5">
                 <h3 className="font-semibold text-ink text-[15px] mb-3">Avantages du maintien en France</h3>
@@ -316,7 +316,7 @@ export default function FrontalierFrancePage() {
 
             {/* Cas Genève */}
             <section id="geneve">
-              <h2 className="article-h2">Qu'est-ce qui change pour les frontaliers genevois ?</h2>
+              <h2 className="article-h2">5. Qu'est-ce qui change pour les frontaliers genevois ?</h2>
               <p className="article-p">
                 Genève est le canton suisse avec le plus grand nombre de frontaliers français
                 (environ 100 000 personnes). Des dispositions spécifiques s'appliquent dans
@@ -348,7 +348,7 @@ export default function FrontalierFrancePage() {
 
             {/* Primes indicatives 2026 */}
             <section id="primes">
-              <h2 className="article-h2">Primes indicatives 2026 dans votre canton de travail</h2>
+              <h2 className="article-h2">6. Primes indicatives 2026 dans votre canton de travail</h2>
               <p className="article-p">
                 Adulte de 35 ans, franchise 300 CHF, modèle standard, données OFSP 2026.
                 L'écart entre la caisse la moins chère et la plus chère peut dépasser CHF 200 par mois dans le même canton.
@@ -390,7 +390,7 @@ export default function FrontalierFrancePage() {
 
             {/* LAMal ou Sécurité sociale */}
             <section id="comment-decider">
-              <h2 className="article-h2">LAMal ou Sécurité sociale : comment décider ?</h2>
+              <h2 className="article-h2">7. LAMal ou Sécurité sociale : comment décider ?</h2>
               <p className="article-p">
                 Le choix dépend principalement de là où vous recevez vos soins et de la composition
                 de votre famille. Les critères ci-dessous orientent la décision dans la majorité des cas.
@@ -425,7 +425,7 @@ export default function FrontalierFrancePage() {
 
             {/* Simulateur de décision */}
             <section id="simulateur">
-              <h2 className="article-h2">Simulateur de décision</h2>
+              <h2 className="article-h2">8. Simulateur de décision</h2>
               <p className="article-p">
                 Répondez à 5 questions pour obtenir une recommandation personnalisée adaptée à votre situation de frontalier franco-suisse.
               </p>
@@ -434,7 +434,7 @@ export default function FrontalierFrancePage() {
 
             {/* FAQ */}
             <section id="faq" className="scroll-mt-20 border-t border-edge pt-8">
-              <FAQ items={faqItems} />
+              <FAQ items={faqItems} title="9. Questions fréquentes" />
             </section>
 
             {/* Contact */}

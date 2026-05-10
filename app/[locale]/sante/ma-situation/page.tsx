@@ -163,7 +163,7 @@ export default function MaSituationPage() {
 
             {/* Salarié */}
             <section id="salarie" className="pt-2">
-              <h2 className="article-h2">Salarié : quelle couverture LAMal ?</h2>
+              <h2 className="article-h2">1. Salarié : quelle couverture LAMal ?</h2>
               <p className="article-p">
                 Le salarié bénéficie du cadre le plus complet : la LAMal de base couvre
                 les soins médicaux, et la LAA (loi sur l'assurance-accidents, RS 832.20)
@@ -232,7 +232,7 @@ export default function MaSituationPage() {
             {/* Indépendant */}
             <section id="independant">
               <h2 className="article-h2">
-                Indépendant : comment couvrir les accidents ?
+                2. Indépendant : comment couvrir les accidents ?
               </h2>
               <p className="article-p">
                 L'indépendant supporte l'intégralité de sa prime LAMal sans contribution
@@ -288,7 +288,7 @@ export default function MaSituationPage() {
 
             {/* Chômeur */}
             <section id="chomeur">
-              <h2 className="article-h2">Chômage : quels droits LAMal ?</h2>
+              <h2 className="article-h2">3. Chômage : quels droits LAMal ?</h2>
               <p className="article-p">
                 La LAMal est obligatoire pendant le chômage et la couverture ne s'interrompt
                 pas. En revanche, plusieurs mécanismes de protection renforcée s'activent
@@ -334,7 +334,7 @@ export default function MaSituationPage() {
             {/* Nouvel arrivant expatrié */}
             <section id="expatrie">
               <h2 className="article-h2">
-                Nouvel arrivant : comment s'affilier en 90 jours ?
+                4. Nouvel arrivant : comment s'affilier en 90 jours ?
               </h2>
               <p className="article-p">
                 Dès l'établissement du domicile en Suisse, la LAMal devient obligatoire.
@@ -392,7 +392,7 @@ export default function MaSituationPage() {
 
             {/* FAQ */}
             <section id="faq" className="scroll-mt-20 border-t border-edge pt-8">
-              <FAQ items={faqItems} />
+              <FAQ items={faqItems} title="5. Questions fréquentes" />
             </section>
 
             {/* Contact */}
