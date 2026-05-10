@@ -38,14 +38,12 @@ export default function DevisClient() {
       style={{ height: `calc(100dvh - ${HEADER}px)` }}
       className="flex flex-col overflow-hidden bg-white"
     >
-      <div className="shrink-0 px-4 pt-5 pb-3">
-        <p className="text-[16px] text-slate leading-snug text-center">
-          Un conseiller spécialisé vous présente les offres les plus avantageuses sous 24 heures.
-          C&apos;est gratuit et sans engagement.
-        </p>
-      </div>
-      <div className="flex-1 min-h-0 relative px-4">
-        <UnifiedLeadForm redirectOnSuccess="/fr/merci" fullscreen />
+      <div className="flex-1 min-h-0 relative px-4 pt-4">
+        <UnifiedLeadForm
+          redirectOnSuccess="/fr/merci"
+          fullscreen
+          tagline="Un conseiller spécialisé vous présente les offres les plus avantageuses sous 24 heures. C'est gratuit et sans engagement."
+        />
       </div>
     </main>
   )

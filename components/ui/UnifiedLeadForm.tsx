@@ -203,7 +203,7 @@ function normalizePhone(localNumber: string, dialCode: string): string {
   return dialCode + stripped
 }
 
-export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { redirectOnSuccess?: string; fullscreen?: boolean } = {}) {
+export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen, tagline }: { redirectOnSuccess?: string; fullscreen?: boolean; tagline?: string } = {}) {
   const router = useRouter()
   const [step, setStep] = useState(1)
   const [form, setForm] = useState<FormData>({
@@ -373,6 +373,9 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
         <p className={`text-[11px] font-semibold text-slate uppercase tracking-widest ${fullscreen ? 'mb-0' : 'mb-1'}`}>
           {d.form.etape} {step} {d.form.sur} 4
         </p>
+        {tagline && step === 1 && (
+          <p className="text-[14px] text-slate leading-snug mt-1 mb-2">{tagline}</p>
+        )}
         <p className={`font-semibold text-ink ${fullscreen ? 'text-[16px] mb-0' : 'text-[18px] mb-1'}`}>{STEP_LABELS[step - 1]}</p>
         <p className={`text-[13px] text-slate ${fullscreen ? 'mb-3' : 'mb-6'}`}>{STEP_CONTEXT[step - 1]}</p>
       </div>
