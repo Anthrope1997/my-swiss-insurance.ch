@@ -10,21 +10,17 @@ export const metadata: Metadata = {
 
 export default function DevisPage() {
   return (
-    <main className="min-h-screen bg-surface">
-      <div className="container-xl py-12 md:py-20">
-        <div className="max-w-[600px] mx-auto">
-          <div className="mb-8 text-center">
-            <h1 className="text-3xl md:text-4xl font-bold text-ink mb-3">
-              Obtenez votre devis personnalisé
-            </h1>
-            <p className="text-[17px] text-slate leading-relaxed">
-              Comparez gratuitement les primes LAMal 2026. Un expert vous répond sous 24 h.
-            </p>
-          </div>
-          <div className="bg-white rounded-xl shadow-sm border border-edge p-6 md:p-8">
-            <UnifiedLeadForm redirectOnSuccess="/fr/merci" />
-          </div>
+    <main className="min-h-screen bg-white">
+      <div className="px-4 py-10">
+        <div className="mb-7 text-center">
+          <h1 className="text-2xl font-bold text-ink mb-2">
+            Obtenez votre devis personnalisé
+          </h1>
+          <p className="text-[16px] text-slate leading-relaxed">
+            Comparez gratuitement les primes LAMal 2026.<br />Un expert vous répond sous 24 h.
+          </p>
         </div>
+        <UnifiedLeadForm redirectOnSuccess="/fr/merci" />
       </div>
     </main>
   )

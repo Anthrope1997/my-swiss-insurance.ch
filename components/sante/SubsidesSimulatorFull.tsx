@@ -393,7 +393,7 @@ function PrimeLien({ cantonData }: { cantonData: CantonSubside2026 }) {
 function CtaExpert() {
   return (
     <div className="border-t border-edge pt-3">
-      <a href="/devis" className="text-[14px] text-brand hover:underline">
+      <a href="#contact" className="text-[14px] text-brand hover:underline">
         Vous souhaitez qu&apos;un expert vérifie vos droits et effectue la démarche pour vous ? →
       </a>
     </div>
