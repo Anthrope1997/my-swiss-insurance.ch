@@ -478,12 +478,12 @@ export default function ComparateurClient() {
                               {row.assureur}
                             </span>
                             {isFirst && (
-                              <span className="text-[10px] font-medium px-2 py-0.5 bg-blue-tint text-brand rounded-full">
+                              <span className="text-[16px] font-medium px-2 py-0.5 bg-blue-tint text-brand rounded-full">
                                 Meilleure prime
                               </span>
                             )}
                             {isRef && (
-                              <span className="text-[11px] text-slate/60">Référence</span>
+                              <span className="text-[16px] text-slate/60">Référence</span>
                             )}
                           </div>
 
