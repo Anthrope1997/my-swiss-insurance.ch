@@ -114,14 +114,6 @@ function fmtChf(n: number, decimals = 2): string {
   })
 }
 
-function fmtAn(n: number): string {
-  // Swiss apostrophe thousands separator, no decimals
-  const s = String(Math.round(n))
-  if (s.length <= 3) return s
-  if (s.length <= 6) return s.slice(0, s.length - 3) + '\u2019' + s.slice(s.length - 3)
-  return s.slice(0, s.length - 6) + '\u2019' + s.slice(s.length - 6, s.length - 3) + '\u2019' + s.slice(s.length - 3)
-}
-
 // ─── Info tooltip ────────────────────────────────────────────────────────────
 
 function InfoTooltip({ text }: { text: string }) {
@@ -141,9 +133,9 @@ function InfoTooltip({ text }: { text: string }) {
         i
       </button>
       {show && (
-        <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 bg-[var(--navy)] text-white text-[12px] leading-relaxed rounded-lg px-3 py-2.5 shadow-xl z-50 pointer-events-none whitespace-pre-line">
+        <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 bg-navy text-white text-[12px] leading-relaxed rounded-lg px-3 py-2.5 shadow-xl z-50 pointer-events-none whitespace-pre-line">
           {text}
-          <span className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-[var(--navy)]" />
+          <span className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-navy" />
         </span>
       )}
     </span>
@@ -164,10 +156,11 @@ export default function ComparateurClient() {
   const [accident, setAccident]     = useState(false)
 
   // — Results state —
-  const [results, setResults]       = useState<PrimeRow[] | null>(null)
-  const [calcLoading, setCalcLoading] = useState(false)
-  const [calcError, setCalcError]   = useState('')
-  const [showResults, setShowResults] = useState(false)
+  const [results, setResults]           = useState<PrimeRow[] | null>(null)
+  const [calcLoading, setCalcLoading]   = useState(false)
+  const [calcError, setCalcError]       = useState('')
+  const [showResults, setShowResults]   = useState(false)
+  const [selectedMobile, setSelectedMobile] = useState('')
 
   const resultsRef = useRef<HTMLDivElement>(null)
 
@@ -228,6 +221,7 @@ export default function ComparateurClient() {
         (a: PrimeRow, b: PrimeRow) => a.prime_nette - b.prime_nette,
       )
       setResults(sorted)
+      setSelectedMobile(sorted.length > 0 ? sorted[0].assureur : '')
       setShowResults(true)
       setTimeout(() => {
         resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -239,8 +233,12 @@ export default function ComparateurClient() {
     }
   }
 
+  // — Scroll to contact form —
+  const scrollToContact = () => {
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+  }
+
   const franchises = profil === 'enfant' ? FRANCHISES_ENFANT : FRANCHISES_ADULTE
-  const maxPrime   = results ? results[results.length - 1].prime_nette : 0
 
   // ── Render ────────────────────────────────────────────────────────────────
 
@@ -261,7 +259,6 @@ export default function ComparateurClient() {
             En Suisse, les primes de l&apos;assurance maladie de base LAMal varient jusqu&apos;à 97 % au sein d&apos;une même région selon l&apos;assureur.
             Comparez toutes les caisses selon votre code postal, votre franchise et votre modèle.
           </p>
-          {/* StatsGrid */}
           <HeroStats stats={[
             { value: '34 caisses',  label: 'Comparées en temps réel',  sub: 'Données officielles OFSP 2026'      },
             { value: 'CHF 5 653',   label: 'Économie possible par an', sub: 'Canton de Genève, tous profils confondus'  },
@@ -274,7 +271,7 @@ export default function ComparateurClient() {
       <section className="bg-white border-b border-edge py-12">
         <div className="container-xl">
 
-          {/* Form */}
+          {/* Encadré blanc unique : formulaire + résultats */}
           <div className="bg-white border border-edge rounded-xl p-6 sm:p-8 shadow-sm">
 
             {/* Ligne 1 — 3 colonnes */}
@@ -331,7 +328,7 @@ export default function ComparateurClient() {
               {/* Modèle */}
               <div>
                 <label className="flex items-center text-[13px] font-medium text-ink mb-1.5">
-                  Modèle d'assurance
+                  Modèle d&apos;assurance
                   <InfoTooltip text={"Standard : libre choix du médecin et spécialiste.\nMédecin de famille (−15 %) : passage obligatoire par votre médecin traitant.\nHMO (−18 %) : soins via le réseau HMO.\nTélémédecine (−20 %) : première consultation par téléphone.\nLes réductions varient selon la caisse et le canton."} />
                 </label>
                 <div className="relative">
@@ -418,66 +415,159 @@ export default function ComparateurClient() {
             {calcError && (
               <p className="mt-3 text-[13px] text-red-500 text-center">{calcError}</p>
             )}
-          </div>
 
-          {/* ── Résultats ────────────────────────────────────────────────── */}
-          {showResults && results && results.length > 0 && (
-            <div ref={resultsRef} className="mt-6">
+            {/* ── Résultats (dans le même encadré) ─────────────────────── */}
+            {showResults && results && results.length > 0 && (() => {
+              const totalCount  = results.length
+              const displayRows = totalCount > 6
+                ? [...results.slice(0, 5), results[totalCount - 1]]
+                : results
 
-              {/* En-tête résultats */}
-              <div className="flex items-start justify-between gap-4 mb-4">
-                <p className="text-[14px] text-slate">
-                  <span className="font-semibold text-ink">{npaInfo?.ville}</span>
-                  {npaInfo && <> ({npaInfo.regionId})</>}
-                  {', '}Franchise {franchise.toLocaleString('fr-CH')} CHF
-                  {', '}{MODELE_LABELS[modele]}
-                </p>
-                <p className="text-[13px] font-medium text-slate shrink-0">
-                  {results.length} caisses comparées
-                </p>
-              </div>
+              return (
+                <>
+                  {/* Séparateur 0.5px */}
+                  <div
+                    ref={resultsRef}
+                    className="mt-6"
+                    style={{ borderTop: '0.5px solid var(--border)' }}
+                  />
 
-              {/* Liste des caisses — top 5 + référence */}
-              {(() => {
-                const totalCount = results.length
-                const displayRows = totalCount > 6
-                  ? [...results.slice(0, 5), results[totalCount - 1]]
-                  : results
-                return (
-                  <div className="space-y-2">
+                  {/* En-tête résultats */}
+                  <div className="flex items-start justify-between gap-4 mt-5 mb-4">
+                    <p className="text-[14px] text-slate">
+                      <span className="font-semibold text-ink">{npaInfo?.ville}</span>
+                      {npaInfo && <> ({npaInfo.regionId})</>}
+                      {', '}Franchise {franchise.toLocaleString('fr-CH')} CHF
+                      {', '}{MODELE_LABELS[modele]}
+                    </p>
+                    <p className="text-[13px] font-medium text-slate shrink-0">
+                      {results.length} caisses comparées
+                    </p>
+                  </div>
+
+                  {/* ── Version desktop (md+) ── */}
+                  <div className="hidden md:block space-y-2">
                     {displayRows.map((row, i) => {
-                      const isFirst   = i === 0
-                      const isRef     = i === displayRows.length - 1 && totalCount > 6
-                      const realRank  = isRef ? totalCount : i + 1
-                      const economieAn = Math.round((maxPrime - row.prime_nette) * 12)
+                      const isFirst  = i === 0
+                      const isRef    = i === displayRows.length - 1 && totalCount > 6
+                      const realRank = isRef ? totalCount : i + 1
 
                       return (
                         <div
                           key={`${row.assureur}-${i}`}
-                          className={`flex items-center gap-3 sm:gap-4 px-4 py-3.5 rounded-[8px] border transition-all ${
-                            isFirst
-                              ? 'border-brand bg-[var(--blue-tint)]'
-                              : isRef
-                              ? 'border-edge bg-cloud opacity-60'
-                              : 'border-edge bg-white'
-                          }`}
+                          className={`flex items-center gap-4 px-4 py-3 rounded-[8px] border border-edge transition-all ${
+                            isFirst ? 'bg-blue-tint' : 'bg-white'
+                          } ${isRef ? 'opacity-60' : ''}`}
                         >
                           {/* Rang */}
-                          <div className={`w-7 h-7 shrink-0 rounded-full flex items-center justify-center text-[12px] font-bold ${
-                            isFirst ? 'bg-brand text-white' : 'bg-edge text-slate'
-                          }`}>
+                          <div
+                            className={`shrink-0 flex items-center justify-center text-[12px] font-bold rounded-full ${
+                              isFirst ? 'bg-brand text-white' : isRef ? 'bg-transparent text-slate' : 'bg-cloud text-slate'
+                            }`}
+                            style={{
+                              width: 28,
+                              height: 28,
+                              ...(isRef ? { border: '0.5px solid var(--border)' } : {}),
+                            }}
+                          >
+                            {realRank}
+                          </div>
+
+                          {/* Nom + badge */}
+                          <div className="flex-1 min-w-0 flex items-center gap-2 flex-wrap">
+                            <span className={`text-[14px] text-ink ${isFirst ? 'font-medium' : 'font-normal'}`}>
+                              {row.assureur}
+                            </span>
+                            {isFirst && (
+                              <span className="text-[10px] font-medium px-2 py-0.5 bg-blue-tint text-brand rounded-full">
+                                Meilleure prime
+                              </span>
+                            )}
+                            {isRef && (
+                              <span className="text-[11px] text-slate/60">Référence</span>
+                            )}
+                          </div>
+
+                          {/* Prime mensuelle */}
+                          <div className="text-right shrink-0">
+                            <p className={`text-[15px] text-ink ${isFirst ? 'font-medium' : 'font-normal'}`}>
+                              CHF {fmtChf(row.prime_nette)}
+                            </p>
+                            <p className="text-[10px] text-slate">par mois</p>
+                          </div>
+
+                          {/* Bouton Demander une offre */}
+                          <button
+                            onClick={isRef ? undefined : scrollToContact}
+                            disabled={isRef}
+                            className={`shrink-0 text-[12px] font-medium whitespace-nowrap rounded-[7px] h-[34px] px-[14px] ${
+                              isRef
+                                ? 'bg-cloud text-slate border border-edge cursor-default'
+                                : 'bg-brand text-white hover:bg-brand-dark cursor-pointer'
+                            }`}
+                          >
+                            Demander une offre
+                          </button>
+                        </div>
+                      )
+                    })}
+                  </div>
+
+                  {/* ── Version mobile (<md) ── */}
+                  <div className="md:hidden space-y-2">
+                    {displayRows.map((row, i) => {
+                      const isFirst    = i === 0
+                      const isRef      = i === displayRows.length - 1 && totalCount > 6
+                      const realRank   = isRef ? totalCount : i + 1
+                      const isSelected = selectedMobile === row.assureur
+
+                      return (
+                        <button
+                          key={`${row.assureur}-${i}`}
+                          type="button"
+                          onClick={() => !isRef && setSelectedMobile(row.assureur)}
+                          className={`w-full flex items-center gap-3 px-4 py-3 rounded-[8px] border border-edge text-left transition-all ${
+                            isSelected ? 'bg-blue-tint' : 'bg-white'
+                          } ${isRef ? 'opacity-60' : ''}`}
+                        >
+                          {/* Radio */}
+                          <div
+                            className={`shrink-0 rounded-full flex items-center justify-center ${isSelected ? 'bg-brand' : 'bg-white'}`}
+                            style={{
+                              width: 20,
+                              height: 20,
+                              border: isSelected ? '1.5px solid var(--blue)' : '1.5px solid var(--border)',
+                            }}
+                          >
+                            <div
+                              className="rounded-full bg-white"
+                              style={{ width: 7, height: 7, opacity: isSelected ? 1 : 0 }}
+                            />
+                          </div>
+
+                          {/* Rang */}
+                          <div
+                            className={`shrink-0 flex items-center justify-center text-[12px] font-bold rounded-full ${
+                              isFirst ? 'bg-brand text-white' : isRef ? 'bg-transparent text-slate' : 'bg-cloud text-slate'
+                            }`}
+                            style={{
+                              width: 24,
+                              height: 24,
+                              ...(isRef ? { border: '0.5px solid var(--border)' } : {}),
+                            }}
+                          >
                             {realRank}
                           </div>
 
                           {/* Nom + badge */}
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 flex-wrap">
-                              <span className={`font-medium text-[14px] sm:text-[15px] ${isFirst ? 'text-brand' : 'text-ink'}`}>
+                              <span className={`text-[14px] text-ink ${isFirst ? 'font-medium' : 'font-normal'}`}>
                                 {row.assureur}
                               </span>
                               {isFirst && (
-                                <span className="text-[11px] font-semibold bg-brand text-white px-2 py-0.5 rounded-full">
-                                  Meilleur prix
+                                <span className="text-[10px] font-medium px-2 py-0.5 bg-blue-tint text-brand rounded-full">
+                                  Meilleure prime
                                 </span>
                               )}
                               {isRef && (
@@ -486,35 +576,41 @@ export default function ComparateurClient() {
                             </div>
                           </div>
 
-                          {/* Prix */}
+                          {/* Prime mensuelle */}
                           <div className="text-right shrink-0">
-                            <p className={`font-semibold text-[15px] ${isFirst ? 'text-brand' : 'text-ink'}`}>
+                            <p className={`text-[14px] text-ink ${isFirst ? 'font-medium' : 'font-normal'}`}>
                               CHF {fmtChf(row.prime_nette)}
                             </p>
-                            <p className="text-[11px] text-slate">par mois</p>
+                            <p className="text-[10px] text-slate">par mois</p>
                           </div>
-
-                          {/* Économie */}
-                          {!isRef && economieAn > 0 && (
-                            <div className="text-right shrink-0 hidden sm:block">
-                              <p className="text-[13px] font-semibold text-brand">
-                                CHF {fmtAn(economieAn)}
-                              </p>
-                              <p className="text-[11px] text-slate">par an</p>
-                            </div>
-                          )}
-                        </div>
+                        </button>
                       )
                     })}
-                  </div>
-                )
-              })()}
 
-              <p className="mt-3 text-[12px] text-slate/60">
-                Source : Office fédéral de la santé publique (OFSP) 2026. Primes nettes après remboursements.
-              </p>
-            </div>
-          )}
+                    {/* CTA mobile pleine largeur */}
+                    {selectedMobile && (
+                      <button
+                        onClick={scrollToContact}
+                        className="w-full bg-brand hover:bg-brand-dark text-white font-medium mt-2 rounded-[8px] h-[44px] text-[13px]"
+                      >
+                        Demander une offre pour {selectedMobile}
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Source OFSP */}
+                  <div
+                    className="mt-4 pt-3"
+                    style={{ borderTop: '0.5px solid var(--border)' }}
+                  >
+                    <p className="text-[11px] text-slate">
+                      Source : Office fédéral de la santé publique (OFSP) 2026. Primes nettes après remboursements.
+                    </p>
+                  </div>
+                </>
+              )
+            })()}
+          </div>
         </div>
       </section>
 
@@ -538,9 +634,9 @@ export default function ComparateurClient() {
             Quels assureurs dominent le marché suisse ?
           </h2>
           <p className="article-p mb-10">
-            8 groupes se partagent la totalité du marché de l'assurance maladie obligatoire en Suisse.
+            8 groupes se partagent la totalité du marché de l&apos;assurance maladie obligatoire en Suisse.
             Les prestations LAMal sont strictement identiques chez tous les assureurs agréés.
-            La différence porte uniquement sur le prix et la qualité du service.
+            La différence porte uniquement sur la prime et la qualité du service.
           </p>
 
           {/* Grille top 4 */}
@@ -590,7 +686,7 @@ export default function ComparateurClient() {
           </h2>
           <p className="article-p mb-8">
             Primes de référence pour un adulte de 35 ans, modèle standard, franchise 300 CHF, sans couverture accident.
-            Les écarts entre caisses au sein d'un même canton peuvent atteindre plusieurs centaines de francs par mois.
+            Les écarts entre caisses au sein d&apos;un même canton peuvent atteindre plusieurs centaines de francs par mois.
           </p>
 
           {/* Tableau cantons avec barres */}
@@ -598,31 +694,28 @@ export default function ComparateurClient() {
             const maxP = cantonTable[cantonTable.length - 1].prime
             return (
               <div className="space-y-1 mb-4">
-                {cantonTable.map((row, i) => {
+                {cantonTable.map((row) => {
                   const barPct = Math.round((row.prime / maxP) * 100)
-                  const isMin  = false
                   return (
                     <div
                       key={row.code}
-                      className={`flex items-center gap-3 px-4 py-2.5 rounded-lg ${isMin ? 'bg-cloud border border-edge' : 'bg-white border border-edge'}`}
+                      className="flex items-center gap-3 px-4 py-2.5 rounded-lg bg-white border border-edge"
                     >
-                      {/* Badge code */}
-                      <span className={`w-9 shrink-0 text-center py-0.5 rounded text-[11px] font-bold ${isMin ? 'bg-brand text-white' : 'bg-[var(--navy)] text-white'}`}>
+                      <span className="w-9 shrink-0 text-center py-0.5 rounded text-[11px] font-bold bg-navy text-white">
                         {row.code}
                       </span>
-                      {/* Canton + barre */}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between gap-2 mb-1">
-                          <span className={`text-[13px] font-medium truncate ${isMin ? 'text-brand' : 'text-ink'}`}>
+                          <span className="text-[13px] font-medium truncate text-ink">
                             {row.canton}
                           </span>
-                          <span className={`text-[13px] font-semibold shrink-0 ${isMin ? 'text-brand' : 'text-ink'}`}>
+                          <span className="text-[13px] font-semibold shrink-0 text-ink">
                             CHF {fmtChf(row.prime)}
                           </span>
                         </div>
                         <div className="h-1.5 bg-edge rounded-full overflow-hidden">
                           <div
-                            className={`h-full rounded-full ${isMin ? 'bg-brand' : 'bg-brand'}`}
+                            className="h-full rounded-full bg-brand"
                             style={{ width: `${barPct}%` }}
                           />
                         </div>
@@ -648,7 +741,7 @@ export default function ComparateurClient() {
       {/* ── FORMULAIRE ────────────────────────────────────────────────────── */}
       <div id="contact" className="scroll-mt-20 bg-white border-b border-edge py-12">
         <div className="container-xl">
-          <h2 className="text-2xl font-semibold text-ink hover:text-brand transition-colors mb-3">Besoin d'aide ?</h2>
+          <h2 className="text-2xl font-semibold text-ink hover:text-brand transition-colors mb-3">Besoin d&apos;aide ?</h2>
           <p className="text-[16px] text-slate mb-6 leading-relaxed">
             Un expert vous rappelle sous 24 heures pour comparer les caisses adaptées à votre profil.
             Gratuit, sans engagement.
