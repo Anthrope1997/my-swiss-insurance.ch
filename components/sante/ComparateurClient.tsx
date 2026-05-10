@@ -7,6 +7,7 @@ import AuthorBio from '@/components/ui/AuthorBio'
 import FAQ from '@/components/ui/FAQ'
 import UnifiedLeadForm from '@/components/ui/UnifiedLeadForm'
 import HeroStats from '@/components/ui/HeroStats'
+import LeadFormModal from '@/components/ui/LeadFormModal'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -161,6 +162,7 @@ export default function ComparateurClient() {
   const [calcError, setCalcError]       = useState('')
   const [showResults, setShowResults]   = useState(false)
   const [selectedMobile, setSelectedMobile] = useState('')
+  const [offerOpen, setOfferOpen]           = useState(false)
 
   const resultsRef = useRef<HTMLDivElement>(null)
 
@@ -491,7 +493,7 @@ export default function ComparateurClient() {
                           <div className="[flex-grow:3]" />
 
                           {/* Prime mensuelle */}
-                          <div className="shrink-0">
+                          <div className="shrink-0 w-28 text-right">
                             <p className={`text-[16px] text-ink ${isFirst ? 'font-medium' : 'font-normal'}`}>
                               CHF {fmtChf(row.prime_nette)}
                             </p>
@@ -501,9 +503,9 @@ export default function ComparateurClient() {
                           {/* Espace 1/4 entre prime et CTA */}
                           <div className="[flex-grow:1]" />
 
-                          {/* CTA */}
+                          {/* CTA desktop → modale */}
                           <button
-                            onClick={scrollToContact}
+                            onClick={() => setOfferOpen(true)}
                             className="shrink-0 text-[16px] font-semibold whitespace-nowrap rounded-md py-2.5 px-5 bg-brand text-white hover:bg-brand-dark transition-colors duration-150"
                           >
                             Demander une offre →
@@ -575,14 +577,14 @@ export default function ComparateurClient() {
                     })
                   })()}
 
-                  {/* CTA mobile pleine largeur */}
+                  {/* CTA mobile pleine largeur → page /devis */}
                   {selectedMobile && (
-                    <button
-                      onClick={scrollToContact}
-                      className="w-full bg-brand hover:bg-brand-dark text-white font-semibold mt-2 rounded-md py-4 text-[16px] transition-colors duration-150"
+                    <Link
+                      href="/devis"
+                      className="block w-full bg-brand hover:bg-brand-dark text-white font-semibold mt-2 rounded-md py-4 text-[16px] transition-colors duration-150 text-center"
                     >
                       Demander une offre pour {selectedMobile}
-                    </button>
+                    </Link>
                   )}
                 </div>
 
@@ -751,6 +753,8 @@ export default function ComparateurClient() {
           </div>
         </section>
       </div>
+
+      <LeadFormModal open={offerOpen} onClose={() => setOfferOpen(false)} />
     </>
   )
 }
