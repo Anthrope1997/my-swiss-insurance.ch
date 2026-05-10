@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import DevisClient from './DevisClient'
+import UnifiedLeadForm from '@/components/ui/UnifiedLeadForm'
 
 export const metadata: Metadata = {
   title: 'Obtenir un devis LAMal — My Swiss Insurance',
@@ -9,5 +9,14 @@ export const metadata: Metadata = {
 }
 
 export default function DevisPage() {
-  return <DevisClient />
+  return (
+    <main className="min-h-screen bg-surface">
+      <div className="px-4 py-8 max-w-[560px] mx-auto">
+        <UnifiedLeadForm
+          redirectOnSuccess="/fr/merci"
+          tagline="Un conseiller spécialisé vous présente les offres les plus avantageuses sous 24 heures. C'est gratuit et sans engagement."
+        />
+      </div>
+    </main>
+  )
 }
