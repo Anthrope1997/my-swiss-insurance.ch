@@ -1,12 +1,14 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import {
   type Canton, type Situation, type SubsideResult,
   calculerSubsideGE, calculerSubsideVS, calculerSubsideNE,
   calculerSubsideVD, calculerSubsideJU, calculerSubsideFR,
 } from '@/lib/sante/calcul-subside'
 import { SUBSIDES_2026, type CantonSubside2026 } from '@/lib/data/subsides-2026'
+import LeadFormModal from '@/components/ui/LeadFormModal'
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -100,6 +102,7 @@ export default function SubsidesSimulatorFull() {
     canton: '', revenu: '', situation: 'seul', nbEnfants: 0, isJeune: false,
   })
   const [submitted, setSubmitted] = useState(false)
+  const [offerOpen, setOfferOpen] = useState(false)
 
   const set = (patch: Partial<FormState>) => {
     setSubmitted(false)
@@ -267,55 +270,55 @@ export default function SubsidesSimulatorFull() {
 
             {/* Résultat chiffré */}
             {showResult && hasRevenu && result && hasAmount && (
-              <div className="rounded-[8px] bg-navy overflow-hidden">
+              <div className="rounded-[8px] bg-blue-tint border border-brand/20 overflow-hidden">
 
                 {/* Montant principal */}
                 <div className="px-6 py-5 flex items-end justify-between gap-4 flex-wrap">
                   <div>
-                    <p className="text-[13px] text-white/50 uppercase tracking-wide mb-1">
+                    <p className="text-[13px] text-brand/70 uppercase tracking-wide mb-1">
                       Estimation subside mensuel
                       {result.label && result.label !== 'Ordinaire' ? ` — ${result.label}` : ''}
                     </p>
-                    <p className="text-4xl font-bold text-white">
+                    <p className="text-4xl font-bold text-ink">
                       CHF {fmt(result.total)}
-                      <span className="text-[16px] font-normal text-white/50 ml-2">/mois</span>
+                      <span className="text-[16px] font-normal text-slate ml-2">/mois</span>
                     </p>
                   </div>
                   <div>
-                    <p className="text-[13px] text-white/50 mb-0.5">par année</p>
-                    <p className="text-xl font-semibold text-white">CHF {fmt(result.total * 12)}</p>
+                    <p className="text-[13px] text-slate mb-0.5">par année</p>
+                    <p className="text-xl font-semibold text-ink">CHF {fmt(result.total * 12)}</p>
                   </div>
                 </div>
 
                 {/* Ventilation (si couple ou enfants) */}
                 {(form.nbEnfants > 0 || form.situation === 'couple') && (
-                  <div className={`grid gap-px bg-white/10 border-t border-white/10 ${
+                  <div className={`grid gap-px border-t border-brand/10 ${
                     form.nbEnfants > 0 && form.situation === 'couple' ? 'grid-cols-3' : 'grid-cols-2'
                   }`}>
-                    <div className="bg-navy px-5 py-4">
-                      <p className="text-[13px] text-white/50 mb-0.5">
+                    <div className="bg-white/60 px-5 py-4">
+                      <p className="text-[13px] text-slate mb-0.5">
                         {form.situation === 'couple' ? 'Par adulte' : 'Adulte'}
                       </p>
-                      <p className="text-[16px] font-bold text-white">
+                      <p className="text-[16px] font-bold text-ink">
                         CHF {fmt(result.adulte)}
-                        <span className="text-[13px] font-normal text-white/50">/mois</span>
+                        <span className="text-[13px] font-normal text-slate">/mois</span>
                       </p>
                     </div>
                     {form.nbEnfants > 0 && (
-                      <div className="bg-navy px-5 py-4">
-                        <p className="text-[13px] text-white/50 mb-0.5">Par enfant</p>
-                        <p className="text-[16px] font-bold text-white">
+                      <div className="bg-white/60 px-5 py-4">
+                        <p className="text-[13px] text-slate mb-0.5">Par enfant</p>
+                        <p className="text-[16px] font-bold text-ink">
                           CHF {fmt(result.enfant)}
-                          <span className="text-[13px] font-normal text-white/50">/mois</span>
+                          <span className="text-[13px] font-normal text-slate">/mois</span>
                         </p>
                       </div>
                     )}
                     {form.situation === 'couple' && (
-                      <div className="bg-navy px-5 py-4">
-                        <p className="text-[13px] text-white/50 mb-0.5">Total ménage</p>
-                        <p className="text-[16px] font-bold text-white">
+                      <div className="bg-white/60 px-5 py-4">
+                        <p className="text-[13px] text-slate mb-0.5">Total ménage</p>
+                        <p className="text-[16px] font-bold text-ink">
                           CHF {fmt(result.total)}
-                          <span className="text-[13px] font-normal text-white/50">/mois</span>
+                          <span className="text-[13px] font-normal text-slate">/mois</span>
                         </p>
                       </div>
                     )}
@@ -324,16 +327,16 @@ export default function SubsidesSimulatorFull() {
 
                 {/* Notes */}
                 {(result.note || !PRECISE_CANTONS.has(form.canton)) && (
-                  <div className="px-6 py-4 border-t border-white/10 space-y-2">
+                  <div className="px-6 py-4 border-t border-brand/10 space-y-2">
                     {result.note && (
-                      <p className="text-[13px] text-white/50 leading-relaxed">{result.note}</p>
+                      <p className="text-[13px] text-slate leading-relaxed">{result.note}</p>
                     )}
                     {!PRECISE_CANTONS.has(form.canton) && (
                       <div className="flex items-start gap-2">
-                        <svg className="w-3.5 h-3.5 text-amber-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-3.5 h-3.5 text-amber-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
                         </svg>
-                        <p className="text-[13px] text-amber-300 leading-relaxed">
+                        <p className="text-[13px] text-amber-700 leading-relaxed">
                           Estimation indicative — le montant réel est calculé par le service cantonal sur la base de votre dossier fiscal.
                         </p>
                       </div>
@@ -358,20 +361,26 @@ export default function SubsidesSimulatorFull() {
               ))}
             </div>
 
-            {/* Prime de référence + lien officiel */}
+            {/* Prime de référence + CTA expert */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-cloud border border-edge rounded-[8px] px-5 py-4">
               <p className="text-[16px] text-slate">
                 Prime de référence {cantonData.nom} (adulte, f=300) :{' '}
                 <span className="font-semibold text-ink">CHF {cantonData.primeMoyenne}/mois</span>
               </p>
-              <a
-                href={cantonData.lien}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-brand hover:underline text-[16px] font-medium shrink-0"
+              {/* Desktop → modale */}
+              <button
+                onClick={() => setOfferOpen(true)}
+                className="hidden md:inline-block shrink-0 bg-brand hover:bg-brand-dark text-white font-semibold text-[16px] px-5 py-2.5 rounded-md transition-colors duration-150 whitespace-nowrap"
               >
-                Service cantonal officiel →
-              </a>
+                Vérifier mes droits avec un expert →
+              </button>
+              {/* Mobile → page /devis */}
+              <Link
+                href="/devis"
+                className="md:hidden block w-full text-center bg-brand hover:bg-brand-dark text-white font-semibold text-[16px] px-5 py-2.5 rounded-md transition-colors duration-150"
+              >
+                Vérifier mes droits avec un expert →
+              </Link>
             </div>
 
             {/* CTA expert */}
@@ -385,6 +394,7 @@ export default function SubsidesSimulatorFull() {
         </div>
       )}
 
+      <LeadFormModal open={offerOpen} onClose={() => setOfferOpen(false)} />
     </div>
   )
 }
