@@ -203,7 +203,7 @@ function normalizePhone(localNumber: string, dialCode: string): string {
   return dialCode + stripped
 }
 
-export default function UnifiedLeadForm({ redirectOnSuccess }: { redirectOnSuccess?: string } = {}) {
+export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { redirectOnSuccess?: string; fullscreen?: boolean } = {}) {
   const router = useRouter()
   const [step, setStep] = useState(1)
   const [form, setForm] = useState<FormData>({
@@ -351,7 +351,7 @@ export default function UnifiedLeadForm({ redirectOnSuccess }: { redirectOnSucce
   }
 
   return (
-    <div className="card-sm lead-form-card">
+    <div className={fullscreen ? 'h-full flex flex-col relative' : 'card-sm lead-form-card'}>
       <style>{`
         @keyframes stepIn {
           from { opacity: 0; transform: translateY(8px); }
@@ -378,7 +378,7 @@ export default function UnifiedLeadForm({ redirectOnSuccess }: { redirectOnSucce
       </div>
 
       {/* ── Middle: step content (flex-1, fills space between header and buttons) ── */}
-      <div className="flex-1">
+      <div className={fullscreen ? 'flex-1 min-h-0 overflow-y-auto pb-20' : 'flex-1'}>
 
         {/* Step 1 — Objectif */}
         {step === 1 && (
@@ -672,7 +672,7 @@ export default function UnifiedLeadForm({ redirectOnSuccess }: { redirectOnSucce
       </div>
 
       {/* ── Bottom: navigation buttons (always visible at bottom) ── */}
-      <div className="pt-5">
+      <div className={fullscreen ? 'absolute bottom-0 left-0 right-0 bg-white border-t border-edge px-4 py-4' : 'pt-5'}>
         {step === 1 && (
           <button
             onClick={() => setStep(2)}
