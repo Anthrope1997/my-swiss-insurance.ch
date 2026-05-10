@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import AuthorBio from '@/components/ui/AuthorBio'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import Link from 'next/link'
-import NeedHelpSection from '@/components/ui/NeedHelpSection'
+import UnifiedLeadForm from '@/components/ui/UnifiedLeadForm'
 
 export const metadata: Metadata = {
   title: 'LAMal par situation de vie — Salarié, famille, expatrié 2026',
@@ -12,19 +12,9 @@ export const metadata: Metadata = {
     title: 'LAMal par situation de vie — Conseils personnalisés 2026',
     description: 'Salarié, famille, expatrié : quelle LAMal choisir selon votre situation ?',
     url: 'https://my-swiss-insurance.ch/sante/par-profil',
-    type: 'article',
+    type: 'website',
   },
   alternates: { canonical: 'https://my-swiss-insurance.ch/sante/par-profil' },
-}
-
-const articleSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Article',
-  headline: 'LAMal par situation de vie : conseils personnalisés 2026',
-  datePublished: '2026-01-01',
-  dateModified: '2026-04-13',
-  author: { '@type': 'Organization', name: 'La rédaction My Swiss Insurance' },
-  publisher: { '@type': 'Organization', name: 'My Swiss Insurance' },
 }
 
 const hubCards = [
@@ -84,8 +74,7 @@ const hubCards = [
 export default function ParProfilPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-
+      {/* ── 1. HERO ── */}
       <section className="bg-white border-b border-edge pt-12 pb-14">
         <div className="container-xl">
           <Breadcrumb items={[
@@ -103,73 +92,62 @@ export default function ParProfilPage() {
         </div>
       </section>
 
-      <div className="container-xl py-12">
-
-        {/* Hub cards */}
-        <div className="grid grid-cols-1 gap-6 mb-16">
-          {hubCards.map((card) => (
-            <Link
-              key={card.href}
-              href={card.href}
-              className="group flex gap-6 bg-white border border-edge hover:border-brand rounded-[12px] p-6 transition-colors duration-150"
-            >
-              <div className="w-14 h-14 bg-blue-light2 border border-blue-200 rounded-[10px] flex items-center justify-center text-brand shrink-0 group-hover:bg-blue-tint transition-colors duration-150">
-                {card.icon}
-              </div>
-              <div className="flex-1 min-w-0">
-                <h2 className="text-[18px] font-semibold text-ink mb-2 group-hover:text-brand transition-colors duration-150">
-                  {card.title}
-                </h2>
-                <p className="text-[15px] text-slate leading-relaxed mb-4">
-                  {card.description}
-                </p>
-                <ul className="space-y-1.5">
-                  {card.highlights.map((h, i) => (
-                    <li key={i} className="flex items-start gap-2 text-[14px] text-slate">
-                      <svg className="w-3.5 h-3.5 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                      </svg>
-                      {h}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="flex items-center shrink-0 text-brand">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* Contact */}
-        <NeedHelpSection />
-
-        <AuthorBio publishedDate="1er janvier 2026" updatedDate="13 avril 2026" />
-
-        {/* Guides associés */}
-        <section>
-          <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
-            Guides associés
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {[
-              { href: '/sante/guide',             label: 'Guide complet LAMal 2026'    },
-              { href: '/sante/comparateur',        label: 'Comparateur de caisses'      },
-              { href: '/sante/changer-de-caisse',  label: 'Changer de caisse maladie'  },
-            ].map(({ href, label }) => (
-              <Link key={href} href={href}
-                className="flex items-center gap-2 text-[14px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
-                <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-                {label}
+      {/* ── 2. HUB CARDS ── */}
+      <section className="bg-white py-12">
+        <div className="container-xl">
+          <div className="grid grid-cols-1 gap-6">
+            {hubCards.map((card) => (
+              <Link
+                key={card.href}
+                href={card.href}
+                className="group flex gap-6 bg-white border border-edge hover:border-brand rounded-[12px] p-6 transition-colors duration-150"
+              >
+                <div className="w-14 h-14 bg-blue-tint border border-brand/20 rounded-[10px] flex items-center justify-center text-brand shrink-0 group-hover:bg-brand group-hover:text-white group-hover:border-brand transition-colors duration-150">
+                  {card.icon}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h2 className="text-[18px] font-semibold text-ink mb-2 group-hover:text-brand transition-colors duration-150">
+                    {card.title}
+                  </h2>
+                  <p className="text-[15px] text-slate leading-relaxed mb-4">
+                    {card.description}
+                  </p>
+                  <ul className="space-y-1.5">
+                    {card.highlights.map((h, i) => (
+                      <li key={i} className="flex items-start gap-2 text-[14px] text-slate">
+                        <svg className="w-3.5 h-3.5 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                        </svg>
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="flex items-center shrink-0 text-brand">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
               </Link>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
+      {/* ── 3. FORMULAIRE ── */}
+      <div className="container-xl">
+        <div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4">
+          <h2 className="text-2xl font-semibold text-ink hover:text-brand transition-colors mb-3">Besoin d&apos;aide ?</h2>
+          <p className="text-[16px] text-slate mb-6 leading-relaxed">
+            Un expert vous rappelle sous 24 heures pour établir avec vous une solution
+            personnalisée. Gratuit, sans engagement.
+          </p>
+          <UnifiedLeadForm redirectOnSuccess="/fr/merci" />
+        </div>
+      </div>
+
+      <div className="container-xl pb-12">
+        <AuthorBio publishedDate="1er janvier 2026" updatedDate="13 avril 2026" />
       </div>
     </>
   )
