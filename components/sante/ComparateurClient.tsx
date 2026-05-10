@@ -436,7 +436,7 @@ export default function ComparateurClient() {
                       {', '}Franchise {franchise.toLocaleString('fr-CH')} CHF
                       {', '}{MODELE_LABELS[modele]}
                     </p>
-                    <p className="text-[13px] font-medium text-slate shrink-0">
+                    <p className="text-[11px] text-slate/60 shrink-0">
                       {results.length} caisses comparées
                     </p>
                   </div>
