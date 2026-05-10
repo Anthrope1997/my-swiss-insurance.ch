@@ -29,12 +29,7 @@ const cards = [
       'Cas particulier des frontaliers genevois',
       'Simulateur de décision LAMal / Sécu inclus',
     ],
-    icon: (
-      <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75}
-          d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
-      </svg>
-    ),
+    flag: '🇫🇷',
   },
   {
     href: '/sante/frontalier-allemagne',
@@ -46,12 +41,7 @@ const cards = [
       'Cas particuliers des frontaliers bâlois',
       'Simulateur de décision LAMal / GKV inclus',
     ],
-    icon: (
-      <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75}
-          d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
-      </svg>
-    ),
+    flag: '🇩🇪',
   },
   {
     href: '/sante/frontalier-italie',
@@ -63,12 +53,7 @@ const cards = [
       'Tessin, Grisons, Valais : cantons concernés',
       'Simulateur de décision LAMal / SSN inclus',
     ],
-    icon: (
-      <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75}
-          d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
-      </svg>
-    ),
+    flag: '🇮🇹',
   },
 ]
 
@@ -104,8 +89,8 @@ export default function FrontalierPage() {
                 href={card.href}
                 className="group flex gap-6 bg-white border border-edge hover:border-brand rounded-[12px] p-6 transition-colors duration-150"
               >
-                <div className="w-14 h-14 bg-blue-tint border border-brand/20 rounded-[10px] flex items-center justify-center text-brand shrink-0 group-hover:bg-brand group-hover:text-white group-hover:border-brand transition-colors duration-150">
-                  {card.icon}
+                <div className="w-14 h-14 bg-blue-tint border border-brand/20 rounded-[10px] flex items-center justify-center shrink-0 text-3xl transition-colors duration-150">
+                  {card.flag}
                 </div>
                 <div className="flex-1 min-w-0">
                   <h2 className="text-[18px] font-semibold text-ink mb-2 group-hover:text-brand transition-colors duration-150">
