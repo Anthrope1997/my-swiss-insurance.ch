@@ -433,14 +433,21 @@ export default function ComparateurClient() {
                   />
 
                   {/* En-tête résultats */}
-                  <div className="flex items-start justify-between gap-4 mt-5 mb-4">
-                    <p className="text-[14px] text-slate">
-                      <span className="font-semibold text-ink">{npaInfo?.ville}</span>
-                      {npaInfo && <> ({npaInfo.regionId})</>}
-                      {', '}Franchise {franchise.toLocaleString('fr-CH')} CHF
-                      {', '}{MODELE_LABELS[modele]}
-                    </p>
-                    <p className="text-[13px] font-medium text-slate shrink-0">
+                  <div className="mt-5 mb-4">
+                    {/* Desktop : filtres + compteur */}
+                    <div className="hidden md:flex items-start justify-between gap-4">
+                      <p className="text-[14px] text-slate">
+                        <span className="font-semibold text-ink">{npaInfo?.ville}</span>
+                        {npaInfo && <> ({npaInfo.regionId})</>}
+                        {', '}Franchise {franchise.toLocaleString('fr-CH')} CHF
+                        {', '}{MODELE_LABELS[modele]}
+                      </p>
+                      <p className="text-[13px] font-medium text-slate shrink-0">
+                        {results.length} caisses comparées
+                      </p>
+                    </div>
+                    {/* Mobile : compteur seul, aligné à gauche */}
+                    <p className="md:hidden text-[13px] font-medium text-slate">
                       {results.length} caisses comparées
                     </p>
                   </div>
@@ -457,7 +464,7 @@ export default function ComparateurClient() {
                           key={`${row.assureur}-${i}`}
                           className={`flex items-center gap-4 px-4 py-3 rounded-[8px] border border-edge transition-all ${
                             isFirst ? 'bg-blue-tint' : 'bg-white'
-                          } ${isRef ? 'opacity-60' : ''}`}
+                          }`}
                         >
                           {/* Rang */}
                           <div
@@ -498,13 +505,8 @@ export default function ComparateurClient() {
 
                           {/* Bouton Demander une offre */}
                           <button
-                            onClick={isRef ? undefined : scrollToContact}
-                            disabled={isRef}
-                            className={`shrink-0 text-[12px] font-medium whitespace-nowrap rounded-[7px] h-[34px] px-[14px] ${
-                              isRef
-                                ? 'bg-cloud text-slate border border-edge cursor-default'
-                                : 'bg-brand text-white hover:bg-brand-dark cursor-pointer'
-                            }`}
+                            onClick={scrollToContact}
+                            className="shrink-0 text-[12px] font-medium whitespace-nowrap rounded-[7px] h-[34px] px-[14px] bg-brand text-white hover:bg-brand-dark cursor-pointer"
                           >
                             Demander une offre
                           </button>
@@ -525,10 +527,10 @@ export default function ComparateurClient() {
                         <button
                           key={`${row.assureur}-${i}`}
                           type="button"
-                          onClick={() => !isRef && setSelectedMobile(row.assureur)}
+                          onClick={() => setSelectedMobile(row.assureur)}
                           className={`w-full flex items-center gap-3 px-4 py-3 rounded-[8px] border border-edge text-left transition-all ${
                             isSelected ? 'bg-blue-tint' : 'bg-white'
-                          } ${isRef ? 'opacity-60' : ''}`}
+                          }`}
                         >
                           {/* Radio */}
                           <div
