@@ -12,14 +12,9 @@ export default function DevisPage() {
   return (
     <main className="min-h-screen bg-white">
       <div className="px-4 py-10">
-        <div className="mb-7 text-center">
-          <h1 className="text-2xl font-bold text-ink mb-2">
-            Obtenez votre devis personnalisé
-          </h1>
-          <p className="text-[16px] text-slate leading-relaxed">
-            Comparez gratuitement les primes LAMal 2026.<br />Un expert vous répond sous 24 h.
-          </p>
-        </div>
+        <p className="text-[16px] text-slate leading-relaxed text-center mb-7">
+          Un conseiller spécialisé vous présente les offres les plus avantageuses sous 24 heures. C&apos;est gratuit et sans engagement.
+        </p>
         <UnifiedLeadForm redirectOnSuccess="/fr/merci" />
       </div>
     </main>
