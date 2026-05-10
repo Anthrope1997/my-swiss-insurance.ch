@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
-import LeadFormModal from '@/components/ui/LeadFormModal'
 import ShieldIcon from '@/components/shared/ShieldIcon'
 import fr from '@/dictionaries/fr.json'
 
@@ -86,7 +85,6 @@ export default function Header() {
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [expandedSection, setExpandedSection] = useState<string | null>(null)
-  const [offerOpen, setOfferOpen] = useState(false)
 
   useEffect(() => {
     setMobileOpen(false)
@@ -128,14 +126,14 @@ export default function Header() {
             <div className="hidden md:block flex-1" />
 
             {/* CTA — centré mobile (flex-1 symétrique), aligné droite desktop */}
-            <button
-              onClick={() => setOfferOpen(true)}
+            <Link
+              href="/devis"
               className="shrink-0 bg-brand hover:bg-brand-dark text-white font-medium
                          px-4 py-2 rounded-md text-[13px] transition-colors"
             >
               <span className="hidden min-[380px]:inline">{fr.header.ctaFull}</span>
               <span className="min-[380px]:hidden">{fr.header.ctaShort}</span>
-            </button>
+            </Link>
 
             {/* Hamburger — flex-1 mobile (ancre droite), ml-3 desktop */}
             <div className="flex-1 flex justify-end md:flex-none md:ml-3">
@@ -199,7 +197,6 @@ export default function Header() {
         )}
       </header>
 
-      <LeadFormModal open={offerOpen} onClose={() => setOfferOpen(false)} />
     </>
   )
 }
