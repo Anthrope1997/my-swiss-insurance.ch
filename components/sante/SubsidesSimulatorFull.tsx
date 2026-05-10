@@ -131,7 +131,7 @@ export default function SubsidesSimulatorFull() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
 
         <div>
-          <label className="block text-[14px] font-medium text-ink mb-2">
+          <label className="block text-[13px] font-medium text-ink mb-2">
             Canton de résidence
           </label>
           <div className="relative">
@@ -150,7 +150,7 @@ export default function SubsidesSimulatorFull() {
         </div>
 
         <div>
-          <label className="block text-[14px] font-medium text-ink mb-2">
+          <label className="block text-[13px] font-medium text-ink mb-2">
             Revenu déterminant annuel (CHF)
           </label>
           <input
@@ -172,14 +172,14 @@ export default function SubsidesSimulatorFull() {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
 
         <div>
-          <label className="block text-[14px] font-medium text-ink mb-2">
+          <label className="block text-[13px] font-medium text-ink mb-2">
             Situation familiale
           </label>
           <div className="relative">
             <select
               value={form.situation}
               onChange={e => set({ situation: e.target.value as Situation })}
-              className="select-field pr-9 text-[14px]"
+              className="select-field pr-9 text-[13px]"
             >
               <option value="seul">Personne seule</option>
               <option value="couple">Couple</option>
@@ -189,14 +189,14 @@ export default function SubsidesSimulatorFull() {
         </div>
 
         <div>
-          <label className="block text-[14px] font-medium text-ink mb-2">
+          <label className="block text-[13px] font-medium text-ink mb-2">
             Enfants à charge
           </label>
           <div className="relative">
             <select
               value={form.nbEnfants}
               onChange={e => set({ nbEnfants: parseInt(e.target.value) })}
-              className="select-field pr-9 text-[14px]"
+              className="select-field pr-9 text-[13px]"
             >
               {[0, 1, 2, 3, 4].map(n => (
                 <option key={n} value={n}>{n === 0 ? 'Aucun' : `${n} enfant${n > 1 ? 's' : ''}`}</option>
@@ -207,14 +207,14 @@ export default function SubsidesSimulatorFull() {
         </div>
 
         <div>
-          <label className="block text-[14px] font-medium text-ink mb-2">
+          <label className="block text-[13px] font-medium text-ink mb-2">
             Âge
           </label>
           <div className="relative">
             <select
               value={form.isJeune ? 'jeune' : 'adulte'}
               onChange={e => set({ isJeune: e.target.value === 'jeune' })}
-              className="select-field pr-9 text-[14px]"
+              className="select-field pr-9 text-[13px]"
             >
               <option value="adulte">Adulte (26 ans et plus)</option>
               <option value="jeune">Jeune adulte (19 à 25 ans)</option>
@@ -262,7 +262,7 @@ export default function SubsidesSimulatorFull() {
                   </svg>
                 </div>
                 <div>
-                  <p className="font-semibold text-ink text-[15px]">Revenu hors barème</p>
+                  <p className="font-semibold text-ink text-[16px]">Revenu hors barème</p>
                   <p className="text-[13px] text-slate mt-0.5">
                     Votre revenu dépasse le seuil d&apos;éligibilité dans le canton de {cantonData.nom}.
                   </p>
@@ -393,7 +393,7 @@ function PrimeLien({ cantonData }: { cantonData: CantonSubside2026 }) {
 function CtaExpert() {
   return (
     <div className="border-t border-edge pt-3">
-      <a href="#contact" className="text-[14px] text-brand hover:underline">
+      <a href="#contact" className="text-[13px] text-brand hover:underline">
         Vous souhaitez qu&apos;un expert vérifie vos droits et effectue la démarche pour vous ? →
       </a>
     </div>

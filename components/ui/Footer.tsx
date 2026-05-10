@@ -59,9 +59,9 @@ export default function Footer() {
           <div className="col-span-2 md:col-span-1">
             <Link href="/sante" className="flex items-center gap-2.5 mb-5">
               <ShieldIcon />
-              <span className="text-white font-semibold text-[15px]">My Swiss Insurance</span>
+              <span className="text-white font-semibold text-[16px]">My Swiss Insurance</span>
             </Link>
-            <p className="text-[14px] leading-relaxed">{fr.footer.tagline}</p>
+            <p className="text-[13px] leading-relaxed">{fr.footer.tagline}</p>
           </div>
 
           {/* Link columns */}
@@ -74,7 +74,7 @@ export default function Footer() {
                 {col.links.map((link) => (
                   <li key={link.href}>
                     <Link href={link.href}
-                      className="text-[14px] hover:text-white transition-colors duration-150">
+                      className="text-[13px] hover:text-white transition-colors duration-150">
                       {link.label}
                     </Link>
                   </li>

@@ -247,7 +247,7 @@ export default function GuideLamalPage() {
                   'Médicaments sur la Liste des spécialités (LS)',
                   'Soins infirmiers à domicile (spitex)',
                 ].map((item, i) => (
-                  <li key={i} className="flex gap-3 text-[15px] text-slate">
+                  <li key={i} className="flex gap-3 text-[16px] text-slate">
                     <svg className="w-4 h-4 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                     </svg>
@@ -263,7 +263,7 @@ export default function GuideLamalPage() {
                   'Chirurgie, soins intensifs, réhabilitation',
                   'Maternité (accouchement, soins pré et post-partum)',
                 ].map((item, i) => (
-                  <li key={i} className="flex gap-3 text-[15px] text-slate">
+                  <li key={i} className="flex gap-3 text-[16px] text-slate">
                     <svg className="w-4 h-4 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                     </svg>
@@ -282,7 +282,7 @@ export default function GuideLamalPage() {
                 </svg>
                 <div>
                   <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">À retenir</p>
-                  <p className="text-[15px] leading-relaxed">
+                  <p className="text-[16px] leading-relaxed">
                     Non couvert par la LAMal de base : soins dentaires (sauf accident ou maladie grave),
                     lunettes et lentilles, médecine alternative non prescrite, chambre privée à l&apos;hôpital.
                     Ces prestations relèvent des assurances complémentaires LCA.
@@ -291,7 +291,7 @@ export default function GuideLamalPage() {
               </div>
 
               <div className="mt-6">
-                <Link href="/sante/lamal-vs-lca" className="text-brand hover:underline text-[15px] font-medium">
+                <Link href="/sante/lamal-vs-lca" className="text-brand hover:underline text-[16px] font-medium">
                   Comprendre la différence LAMal et complémentaire →
                 </Link>
               </div>
@@ -335,7 +335,7 @@ export default function GuideLamalPage() {
               </p>
 
               <div className="mt-6">
-                <Link href="/sante/comparateur" className="text-brand hover:underline text-[15px] font-medium">
+                <Link href="/sante/comparateur" className="text-brand hover:underline text-[16px] font-medium">
                   Trouver la caisse la moins chère dans mon canton →
                 </Link>
               </div>
@@ -377,7 +377,7 @@ export default function GuideLamalPage() {
                   <line x1="9.5" y1="18" x2="14.5" y2="18" />
                   <line x1="10" y1="21" x2="14" y2="21" />
                 </svg>
-                <p className="text-[15px]">
+                <p className="text-[16px]">
                   La caisse la moins chère dans votre canton n'est pas forcément la même que celle de
                   votre voisin. Les écarts entre assureurs dans un même canton atteignent jusqu'à
                   CHF 180 par mois pour un adulte.
@@ -430,7 +430,7 @@ export default function GuideLamalPage() {
                 </svg>
                 <div>
                   <p className="font-semibold text-ink mb-2">Comment lire le tableau ?</p>
-                  <p className="text-[15px]">
+                  <p className="text-[16px]">
                     <strong>Exemple 300 vs 2 500 CHF par an :</strong> l'économie annuelle sur la prime est de CHF 1 440.
                     Si vos frais médicaux annuels dépassent <strong>CHF 1 440</strong>, la franchise 300 CHF est plus avantageuse.
                     En dessous, la franchise 2 500 CHF vous fait économiser davantage au total.
@@ -439,7 +439,7 @@ export default function GuideLamalPage() {
               </div>
 
               <div className="mt-6">
-                <Link href="/sante/franchise" className="text-brand hover:underline text-[15px] font-medium">
+                <Link href="/sante/franchise" className="text-brand hover:underline text-[16px] font-medium">
                   Guide complet : choisir sa franchise LAMal →
                 </Link>
               </div>
@@ -489,13 +489,13 @@ export default function GuideLamalPage() {
                         </span>
                       )}
                     </div>
-                    <p className="text-[15px] text-slate">{m.desc}</p>
+                    <p className="text-[16px] text-slate">{m.desc}</p>
                   </div>
                 ))}
               </div>
 
               <div className="mt-6">
-                <Link href="/sante/modeles" className="text-brand hover:underline text-[15px] font-medium">
+                <Link href="/sante/modeles" className="text-brand hover:underline text-[16px] font-medium">
                   Comparer les 4 modèles en détail →
                 </Link>
               </div>
@@ -516,9 +516,9 @@ export default function GuideLamalPage() {
                     <p className="font-semibold text-ink mb-1">{r.canton}</p>
                     <p className="text-2xl font-bold text-brand">
                       {r.annuel}
-                      <span className="text-[14px] font-normal text-slate"> par an</span>
+                      <span className="text-[13px] font-normal text-slate"> par an</span>
                     </p>
-                    <p className="text-[14px] text-slate mt-0.5">soit {r.mensuel} par mois d'économie</p>
+                    <p className="text-[13px] text-slate mt-0.5">soit {r.mensuel} par mois d'économie</p>
                   </div>
                 ))}
               </div>
@@ -535,7 +535,7 @@ export default function GuideLamalPage() {
                 </svg>
                 <div>
                   <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">À retenir</p>
-                  <p className="text-[15px] leading-relaxed">
+                  <p className="text-[16px] leading-relaxed">
                     Ces chiffres sont des estimations reposant sur les écarts de primes constatés en 2026
                     pour un adulte, modèle standard, franchise 300 CHF. Les économies réelles dépendent
                     de votre situation individuelle.
@@ -592,15 +592,15 @@ export default function GuideLamalPage() {
                       {s.n}
                     </span>
                     <div>
-                      <span className="font-semibold text-ink text-[15px]">{s.t} : </span>
-                      <span className="text-slate text-[15px]">{s.d}</span>
+                      <span className="font-semibold text-ink text-[16px]">{s.t} : </span>
+                      <span className="text-slate text-[16px]">{s.d}</span>
                     </div>
                   </li>
                 ))}
               </ol>
 
               <div className="mt-6">
-                <Link href="/sante/changer-de-caisse" className="text-brand hover:underline text-[15px] font-medium">
+                <Link href="/sante/changer-de-caisse" className="text-brand hover:underline text-[16px] font-medium">
                   Guide complet : changer de caisse avant le 30 novembre →
                 </Link>
               </div>
@@ -632,7 +632,7 @@ export default function GuideLamalPage() {
                   <line x1="9.5" y1="18" x2="14.5" y2="18" />
                   <line x1="10" y1="21" x2="14" y2="21" />
                 </svg>
-                <p className="text-[15px]">
+                <p className="text-[16px]">
                   <strong>Astuce :</strong> si vous pensez avoir droit à un subside mais n&apos;en avez pas reçu,
                   contactez votre caisse maladie ou le service cantonal. Les subsides non réclamés ne sont
                   pas versés rétroactivement dans la plupart des cantons.
@@ -640,7 +640,7 @@ export default function GuideLamalPage() {
               </div>
 
               <div className="mt-6">
-                <Link href="/sante/subsides" className="text-brand hover:underline text-[15px] font-medium">
+                <Link href="/sante/subsides" className="text-brand hover:underline text-[16px] font-medium">
                   Calculer mes subsides LAMal →
                 </Link>
               </div>
@@ -670,7 +670,7 @@ export default function GuideLamalPage() {
                   { href: '/sante/changer-de-caisse', label: 'Changer de caisse maladie' },
                 ].map(({ href, label }) => (
                   <Link key={href} href={href}
-                    className="flex items-center gap-2 text-[14px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                    className="flex items-center gap-2 text-[13px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
                     <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>

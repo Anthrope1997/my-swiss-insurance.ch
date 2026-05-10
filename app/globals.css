@@ -144,7 +144,7 @@
     @apply bg-cloud text-[13px] font-semibold text-ink px-4 py-3 text-left border-b border-edge;
   }
   .stripe-table td {
-    @apply px-4 py-3 text-[14px] text-slate border-b border-edge;
+    @apply px-4 py-3 text-[13px] text-slate border-b border-edge;
   }
   .stripe-table tr:last-child td {
     @apply border-b-0;

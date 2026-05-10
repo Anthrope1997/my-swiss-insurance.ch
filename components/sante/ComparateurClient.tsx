@@ -430,13 +430,13 @@ export default function ComparateurClient() {
                 <div className="mt-5 mb-4">
                   {/* Desktop : filtres + compteur */}
                   <div className="hidden md:flex items-start justify-between gap-4">
-                    <p className="text-[14px] text-ink">
+                    <p className="text-[16px] text-ink">
                       <span className="font-semibold">{npaInfo?.ville}</span>
                       {npaInfo && <> ({npaInfo.regionId})</>}
                       {', '}Franchise {franchise.toLocaleString('fr-CH')} CHF
                       {', '}{MODELE_LABELS[modele]}
                     </p>
-                    <p className="text-[14px] text-ink shrink-0">
+                    <p className="text-[16px] text-ink shrink-0">
                       {results.length} comparées
                     </p>
                   </div>
@@ -735,7 +735,7 @@ export default function ComparateurClient() {
               { href: '/sante/changer-de-caisse', label: 'Changer de caisse maladie' },
             ].map(({ href, label }) => (
               <Link key={href} href={href}
-                className="flex items-center gap-2 text-[14px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                className="flex items-center gap-2 text-[13px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
                 <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>

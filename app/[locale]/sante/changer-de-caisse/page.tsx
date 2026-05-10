@@ -176,7 +176,7 @@ export default function ChangerDeCaissePage() {
                   ].map((item) => (
                     <div key={item.date} className="bg-white border border-edge rounded-[6px] p-4">
                       <p className="text-[12px] font-semibold text-brand uppercase tracking-wide mb-1">{item.date}</p>
-                      <p className="text-[14px] text-slate">{item.desc}</p>
+                      <p className="text-[16px] text-slate">{item.desc}</p>
                     </div>
                   ))}
                 </div>
@@ -253,9 +253,9 @@ export default function ChangerDeCaissePage() {
                     </div>
                     <div className="pt-1">
                       <h3 className="font-semibold text-ink text-[17px] mb-1">{step.title}</h3>
-                      <p className="text-[15px] text-slate mb-2">{step.desc}</p>
+                      <p className="text-[16px] text-slate mb-2">{step.desc}</p>
                       {step.tip && (
-                        <p className="text-[15px] text-slate mt-1">{step.tip}</p>
+                        <p className="text-[16px] text-slate mt-1">{step.tip}</p>
                       )}
                     </div>
                   </div>
@@ -269,7 +269,7 @@ export default function ChangerDeCaissePage() {
               <p className="article-p">
                 À envoyer par courrier recommandé avant le 30 novembre. Adaptez les champs entre crochets.
               </p>
-              <div className="bg-cloud border border-edge rounded-[8px] p-7 font-mono text-[14px] leading-relaxed text-slate">
+              <div className="bg-cloud border border-edge rounded-[8px] p-7 font-mono text-[13px] leading-relaxed text-slate">
                 <p className="text-right mb-6">
                   [Prénom Nom]<br />
                   [Adresse]<br />
@@ -332,7 +332,7 @@ export default function ChangerDeCaissePage() {
                 ].map((cas, i) => (
                   <div key={i} className="border-l-4 border-brand bg-white border border-edge rounded-[8px] p-5">
                     <h3 className="font-semibold text-ink text-[16px] mb-2">{cas.titre}</h3>
-                    <p className="text-[15px] text-slate">{cas.desc}</p>
+                    <p className="text-[16px] text-slate">{cas.desc}</p>
                   </div>
                 ))}
               </div>
@@ -357,7 +357,7 @@ export default function ChangerDeCaissePage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {guidesAssocies.map(({ href, label }) => (
                   <Link key={href} href={href}
-                    className="flex items-center gap-2 text-[14px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                    className="flex items-center gap-2 text-[13px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
                     <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>

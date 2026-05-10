@@ -191,7 +191,7 @@ export default function MaFamillePage() {
                 ))}
               </div>
 
-              <div className="callout text-[15px]">
+              <div className="callout text-[16px]">
                 <strong>Liberté de choix :</strong> les parents peuvent affilier leur nourrisson
                 à n'importe quelle caisse, y compris une caisse différente de la leur. Comparez
                 les primes enfant séparément — la caisse la moins chère pour les adultes
@@ -244,8 +244,8 @@ export default function MaFamillePage() {
                   },
                 ].map((item, i) => (
                   <div key={i} className="border border-edge rounded-[8px] p-5 bg-white">
-                    <h3 className="font-semibold text-ink text-[15px] mb-2">{item.titre}</h3>
-                    <p className="text-[14px] text-slate">{item.desc}</p>
+                    <h3 className="font-semibold text-ink text-[16px] mb-2">{item.titre}</h3>
+                    <p className="text-[16px] text-slate">{item.desc}</p>
                   </div>
                 ))}
               </div>
@@ -275,8 +275,8 @@ export default function MaFamillePage() {
                   },
                 ].map((item, i) => (
                   <div key={i} className="border border-edge rounded-[8px] p-5 bg-white">
-                    <h3 className="font-semibold text-ink text-[15px] mb-2">{item.titre}</h3>
-                    <p className="text-[14px] text-slate">{item.desc}</p>
+                    <h3 className="font-semibold text-ink text-[16px] mb-2">{item.titre}</h3>
+                    <p className="text-[16px] text-slate">{item.desc}</p>
                   </div>
                 ))}
               </div>
@@ -295,7 +295,7 @@ export default function MaFamillePage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                 <div className="bg-blue-tint rounded-[8px] p-5">
-                  <h3 className="font-semibold text-ink text-[15px] mb-3">Ce que la LAMal couvre</h3>
+                  <h3 className="font-semibold text-ink text-[16px] mb-3">Ce que la LAMal couvre</h3>
                   <ul className="space-y-2 text-[13px] text-slate">
                     {[
                       '7 consultations médicales prénatales standard',
@@ -317,7 +317,7 @@ export default function MaFamillePage() {
                   </ul>
                 </div>
                 <div className="bg-cloud border border-edge rounded-[8px] p-5">
-                  <h3 className="font-semibold text-ink text-[15px] mb-3">Ce que la LAMal ne couvre pas</h3>
+                  <h3 className="font-semibold text-ink text-[16px] mb-3">Ce que la LAMal ne couvre pas</h3>
                   <ul className="space-y-2 text-[13px] text-slate">
                     {[
                       'Chambre privée ou semi-privée à la maternité (LCA hospitalière)',
@@ -336,7 +336,7 @@ export default function MaFamillePage() {
                 </div>
               </div>
 
-              <div className="callout text-[15px]">
+              <div className="callout text-[16px]">
                 <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">À retenir</p>
                 <p><strong>LCA hospitalière :</strong> pour une chambre semi-privée ou privée
                 et le libre choix du médecin accoucheur, une LCA hospitalière est nécessaire.
@@ -375,8 +375,8 @@ export default function MaFamillePage() {
                   },
                 ].map((item, i) => (
                   <div key={i} className="border border-edge rounded-[8px] p-5 bg-white">
-                    <h3 className="font-semibold text-ink text-[15px] mb-2">{item.titre}</h3>
-                    <p className="text-[14px] text-slate">{item.desc}</p>
+                    <h3 className="font-semibold text-ink text-[16px] mb-2">{item.titre}</h3>
+                    <p className="text-[16px] text-slate">{item.desc}</p>
                   </div>
                 ))}
               </div>
@@ -405,7 +405,7 @@ export default function MaFamillePage() {
                   { href: '/sante/guide',         label: 'Guide complet LAMal 2026'                   },
                 ].map(({ href, label }) => (
                   <Link key={href} href={href}
-                    className="flex items-center gap-2 text-[14px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                    className="flex items-center gap-2 text-[13px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
                     <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>

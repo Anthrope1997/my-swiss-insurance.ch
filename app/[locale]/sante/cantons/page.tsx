@@ -73,7 +73,7 @@ export default function CantonHubPage() {
                 <span className="w-9 h-9 rounded-md bg-cloud flex items-center justify-center shrink-0 text-[11px] font-bold text-slate group-hover:bg-brand group-hover:text-white transition-colors duration-150">
                   {canton.code}
                 </span>
-                <span className="text-[14px] font-medium text-ink group-hover:text-brand transition-colors duration-150">
+                <span className="text-[16px] font-medium text-ink group-hover:text-brand transition-colors duration-150">
                   {canton.name}
                 </span>
               </Link>
@@ -88,7 +88,7 @@ export default function CantonHubPage() {
               <line x1="9.5" y1="18" x2="14.5" y2="18" />
               <line x1="10" y1="21" x2="14" y2="21" />
             </svg>
-            <p className="text-[14px] text-slate leading-relaxed">
+            <p className="text-[16px] text-slate leading-relaxed">
               <strong className="text-ink">Comment sont calculées les primes ?</strong> Les montants
               affichés correspondent aux primes moyennes cantonales pour un adulte de 26 ans et plus,
               avec une franchise ordinaire de 300 CHF par an et le modèle médecin de famille (HMO ou

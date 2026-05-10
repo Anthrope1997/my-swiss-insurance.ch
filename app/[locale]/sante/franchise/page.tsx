@@ -332,7 +332,7 @@ export default function FranchisePage() {
               </svg>
               <div>
                 <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">Recommandation</p>
-                <p className="text-[15px] leading-relaxed">La franchise 0 CHF par an est conseillée pour les
+                <p className="text-[16px] leading-relaxed">La franchise 0 CHF par an est conseillée pour les
                   jeunes enfants qui consultent fréquemment. À partir de l&apos;adolescence (15 à 18 ans),
                   une franchise plus élevée peut être envisagée si l&apos;enfant est en bonne santé.</p>
               </div>
@@ -418,7 +418,7 @@ export default function FranchisePage() {
               </svg>
               <div>
                 <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">À retenir</p>
-                <p className="text-[15px] leading-relaxed">La demande doit parvenir à votre caisse avant le 30 novembre pour une prise d&apos;effet au 1er janvier.
+                <p className="text-[16px] leading-relaxed">La demande doit parvenir à votre caisse avant le 30 novembre pour une prise d&apos;effet au 1er janvier.
                   Passé ce délai, votre franchise reste inchangée pour toute l&apos;année suivante.</p>
               </div>
             </div>
@@ -456,7 +456,7 @@ export default function FranchisePage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {guidesAssocies.map(({ href, label }) => (
                 <Link key={href} href={href}
-                  className="flex items-center gap-2 text-[14px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                  className="flex items-center gap-2 text-[13px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
                   <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>

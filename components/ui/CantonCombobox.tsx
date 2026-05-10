@@ -67,7 +67,7 @@ export default function CantonCombobox({ value, onChange, placeholder = 'Vaud ou
                 onClick={() => select(c)}
                 className="w-full flex items-center justify-between px-3 py-2.5 text-left hover:bg-cloud transition-colors duration-100"
               >
-                <span className="text-[14px] text-ink">{c.nom}</span>
+                <span className="text-[16px] text-ink">{c.nom}</span>
                 <span className="text-[11px] font-semibold text-slate/50 uppercase tracking-wide">
                   {c.code}
                 </span>

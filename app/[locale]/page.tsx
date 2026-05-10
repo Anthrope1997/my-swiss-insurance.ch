@@ -209,7 +209,7 @@ export default function HomePage() {
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-3 sm:items-start">
             <div className="flex flex-col items-start gap-1.5">
-              <Link href="/sante/comparateur" className="btn-primary text-[15px] py-3.5 px-7 w-full sm:w-auto">
+              <Link href="/sante/comparateur" className="btn-primary text-[16px] py-3.5 px-7 w-full sm:w-auto">
                 Comparer les primes gratuitement
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -218,7 +218,7 @@ export default function HomePage() {
               <span className="text-[12px] text-slate/60 pl-1">Résultat immédiat, sans inscription</span>
             </div>
             <div className="flex flex-col items-start gap-1.5">
-              <a href="#formulaire" className="btn-secondary text-[15px] py-3.5 px-7 w-full sm:w-auto">
+              <a href="#formulaire" className="btn-secondary text-[16px] py-3.5 px-7 w-full sm:w-auto">
                 Être rappelé par un expert sous 24 heures
               </a>
               <span className="text-[12px] text-slate/60 pl-1">Gratuit, sans engagement</span>
@@ -262,7 +262,7 @@ export default function HomePage() {
                                group-hover:text-brand transition-colors">
                   {g.title}
                 </h3>
-                <p className="text-slate text-[14px] leading-relaxed flex-1">{g.desc}</p>
+                <p className="text-slate text-[16px] leading-relaxed flex-1">{g.desc}</p>
                 <div className="flex items-center gap-1 mt-4 text-brand text-[13px] font-medium">
                   Lire le guide
                   <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200"
@@ -279,11 +279,11 @@ export default function HomePage() {
                           sm:items-center justify-between gap-4">
             <div>
               <p className="font-semibold text-ink text-[16px]">Vous souhaitez changer de caisse ?</p>
-              <p className="text-slate text-[14px] mt-0.5">
+              <p className="text-slate text-[16px] mt-0.5">
                 Un expert s'en occupe pour vous : démarches, résiliation et souscription incluses
               </p>
             </div>
-            <a href="#formulaire" className="btn-primary text-[14px] whitespace-nowrap shrink-0">
+            <a href="#formulaire" className="btn-primary text-[16px] whitespace-nowrap shrink-0">
               Prendre rendez-vous →
             </a>
           </div>
@@ -322,7 +322,7 @@ export default function HomePage() {
                                group-hover:text-brand transition-colors">
                   {s.title}
                 </h3>
-                <p className="text-slate text-[15px] leading-relaxed flex-1">{s.desc}</p>
+                <p className="text-slate text-[16px] leading-relaxed flex-1">{s.desc}</p>
                 <div className="flex items-center gap-1 mt-5 text-brand text-[13px] font-medium">
                   Découvrir
                   <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200"
@@ -385,10 +385,10 @@ export default function HomePage() {
 
           {/* Nudge */}
           <div className="text-center">
-            <p className="text-[15px] text-slate mb-3">
+            <p className="text-[16px] text-slate mb-3">
               Vous souhaitez comparer toutes les caisses pour un profil précis ?
             </p>
-            <Link href="/sante/comparateur" className="btn-primary text-[14px]">
+            <Link href="/sante/comparateur" className="btn-primary text-[16px]">
               Ouvrir le comparateur →
             </Link>
           </div>
@@ -417,7 +417,7 @@ export default function HomePage() {
                 <p className="text-[12px] font-semibold text-brand uppercase tracking-wide mb-2">
                   {f.label}
                 </p>
-                <p className="text-[15px] text-slate leading-relaxed">{f.desc}</p>
+                <p className="text-[16px] text-slate leading-relaxed">{f.desc}</p>
               </div>
             ))}
           </div>
@@ -433,7 +433,7 @@ export default function HomePage() {
             <h2 className="text-2xl sm:text-3xl font-bold text-brand leading-tight mb-3">
               Vous préférez qu'on s'occupe de tout ?
             </h2>
-            <p className="text-[15px] sm:text-[17px] text-slate leading-relaxed">
+            <p className="text-[16px] sm:text-[17px] text-slate leading-relaxed">
               Un expert analyse votre profil, trouve la meilleure caisse pour votre situation
               et gère le changement de votre côté. Gratuit, sans engagement, réponse sous
               24 heures.

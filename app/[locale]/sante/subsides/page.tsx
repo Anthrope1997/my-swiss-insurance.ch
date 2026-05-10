@@ -153,7 +153,7 @@ export default function SubsidesPage() {
                   <line x1="9.5" y1="18" x2="14.5" y2="18" />
                   <line x1="10" y1="21" x2="14" y2="21" />
                 </svg>
-                <p className="text-[15px]">
+                <p className="text-[16px]">
                   <strong>À retenir :</strong> si vous pensez avoir droit à un subside mais n&apos;en avez pas reçu,
                   contactez votre caisse maladie ou le service cantonal compétent. Les subsides non réclamés
                   ne sont pas versés rétroactivement dans la plupart des cantons.
@@ -228,7 +228,7 @@ export default function SubsidesPage() {
                   { href: '/sante/changer-de-caisse', label: 'Changer de caisse maladie' },
                 ].map(({ href, label }) => (
                   <Link key={href} href={href}
-                    className="flex items-center gap-2 text-[14px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                    className="flex items-center gap-2 text-[13px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
                     <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>

@@ -175,7 +175,7 @@ export default function MaSituationPage() {
                   <h3 className="font-semibold text-ink text-[16px] mb-2">
                     Couverture accidents LAA dès 8 heures par semaine
                   </h3>
-                  <p className="text-[15px] text-slate">
+                  <p className="text-[16px] text-slate">
                     Au-delà de 8 heures hebdomadaires, l'employeur couvre à la fois les accidents
                     professionnels et les accidents non professionnels via la LAA. En dessous de ce seuil,
                     seuls les accidents professionnels sont couverts — les accidents non professionnels
@@ -188,7 +188,7 @@ export default function MaSituationPage() {
                   <h3 className="font-semibold text-ink text-[16px] mb-2">
                     Arrêt maladie : la LAMal ne couvre pas le revenu
                   </h3>
-                  <p className="text-[15px] text-slate">
+                  <p className="text-[16px] text-slate">
                     La LAMal prend en charge les soins médicaux pendant un arrêt maladie, mais
                     ne verse aucune indemnité de remplacement de revenu. Cette protection relève
                     d'une assurance perte de gain (indemnités journalières). Si votre employeur ne
@@ -201,7 +201,7 @@ export default function MaSituationPage() {
                   <h3 className="font-semibold text-ink text-[16px] mb-2">
                     Perte d'emploi : droits aux subsides prioritaires
                   </h3>
-                  <p className="text-[15px] text-slate">
+                  <p className="text-[16px] text-slate">
                     En cas de chômage, la LAMal continue sans interruption et votre couverture
                     accidents reste active via l'assurance chômage pendant toute la durée des
                     indemnités, puis 30 jours après leur terme. La baisse de revenu ouvre
@@ -214,7 +214,7 @@ export default function MaSituationPage() {
                   <h3 className="font-semibold text-ink text-[16px] mb-2">
                     Franchise optimale pour un salarié
                   </h3>
-                  <p className="text-[15px] text-slate">
+                  <p className="text-[16px] text-slate">
                     La franchise optimale dépend de votre fréquence de soins. Pour un salarié
                     en bonne santé, la franchise 2 500 CHF réduit la prime de ~CHF 120 par mois.
                     Pour un salarié avec un médecin de famille régulier ou un traitement en cours,
@@ -250,7 +250,7 @@ export default function MaSituationPage() {
                 </svg>
                 <div>
                   <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">À retenir</p>
-                  <p className="text-[15px]">
+                  <p className="text-[16px]">
                     Sans couverture accidents spécifique, un accident professionnel ou de loisirs
                     est pris en charge par la LAMal uniquement, avec des franchises et des
                     quote-parts qui s'appliquent normalement. La couverture accidents optionnelle
@@ -279,8 +279,8 @@ export default function MaSituationPage() {
                   },
                 ].map((item, i) => (
                   <div key={i} className="border border-edge rounded-[8px] p-5 bg-white">
-                    <h3 className="font-semibold text-ink text-[15px] mb-2">{item.titre}</h3>
-                    <p className="text-[14px] text-slate">{item.desc}</p>
+                    <h3 className="font-semibold text-ink text-[16px] mb-2">{item.titre}</h3>
+                    <p className="text-[16px] text-slate">{item.desc}</p>
                   </div>
                 ))}
               </div>
@@ -297,7 +297,7 @@ export default function MaSituationPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                 <div className="bg-blue-tint rounded-[8px] p-5">
-                  <h3 className="font-semibold text-ink text-[15px] mb-3">Ce qui reste actif</h3>
+                  <h3 className="font-semibold text-ink text-[16px] mb-3">Ce qui reste actif</h3>
                   <ul className="space-y-2 text-[13px] text-slate">
                     <li>• Couverture LAMal sans interruption</li>
                     <li>• Couverture LAA accidents via l'assurance chômage</li>
@@ -305,7 +305,7 @@ export default function MaSituationPage() {
                   </ul>
                 </div>
                 <div className="bg-cloud border border-edge rounded-[8px] p-5">
-                  <h3 className="font-semibold text-ink text-[15px] mb-3">Points d'attention</h3>
+                  <h3 className="font-semibold text-ink text-[16px] mb-3">Points d'attention</h3>
                   <ul className="space-y-2 text-[13px] text-slate">
                     <li>• LAA accidents cesse 30 jours après la fin des indemnités</li>
                     <li>• Subsides : demande à faire rapidement, sans attendre</li>
@@ -322,7 +322,7 @@ export default function MaSituationPage() {
                   <line x1="9.5" y1="18" x2="14.5" y2="18" />
                   <line x1="10" y1="21" x2="14" y2="21" />
                 </svg>
-                <p className="text-[15px]">
+                <p className="text-[16px]">
                   <strong>Subsides cantonaux :</strong> la perte d'emploi réduit le revenu déterminant
                   et ouvre généralement des droits aux subsides. Contactez votre service cantonal
                   ou votre ORP dès le début du chômage — les subsides non réclamés ne sont
@@ -349,7 +349,7 @@ export default function MaSituationPage() {
                   <line x1="9.5" y1="18" x2="14.5" y2="18" />
                   <line x1="10" y1="21" x2="14" y2="21" />
                 </svg>
-                <p className="text-[15px]">
+                <p className="text-[16px]">
                   <strong>90 jours pour choisir :</strong> si vous respectez ce délai, la couverture
                   est rétroactive à la date d'arrivée. Profitez de ce délai pour comparer les
                   caisses — changer après le 1er janvier est plus contraignant.
@@ -376,15 +376,15 @@ export default function MaSituationPage() {
                   },
                 ].map((item, i) => (
                   <div key={i} className="border border-edge rounded-[8px] p-5 bg-white">
-                    <h3 className="font-semibold text-ink text-[15px] mb-2">{item.titre}</h3>
-                    <p className="text-[14px] text-slate">{item.desc}</p>
+                    <h3 className="font-semibold text-ink text-[16px] mb-2">{item.titre}</h3>
+                    <p className="text-[16px] text-slate">{item.desc}</p>
                   </div>
                 ))}
               </div>
 
               <div className="mt-5">
                 <Link href="/sante/frontalier"
-                  className="text-brand hover:underline text-[15px] font-medium">
+                  className="text-brand hover:underline text-[16px] font-medium">
                   Guide complet pour les frontaliers →
                 </Link>
               </div>
@@ -413,7 +413,7 @@ export default function MaSituationPage() {
                   { href: '/sante/guide',      label: 'Guide complet LAMal 2026'   },
                 ].map(({ href, label }) => (
                   <Link key={href} href={href}
-                    className="flex items-center gap-2 text-[14px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                    className="flex items-center gap-2 text-[13px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
                     <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>

@@ -109,12 +109,12 @@ export default function ParProfilPage() {
                   <h2 className="text-[18px] font-semibold text-ink mb-2 group-hover:text-brand transition-colors duration-150">
                     {card.title}
                   </h2>
-                  <p className="text-[15px] text-slate leading-relaxed mb-4">
+                  <p className="text-[16px] text-slate leading-relaxed mb-4">
                     {card.description}
                   </p>
                   <ul className="space-y-1.5">
                     {card.highlights.map((h, i) => (
-                      <li key={i} className="flex items-start gap-2 text-[14px] text-slate">
+                      <li key={i} className="flex items-start gap-2 text-[16px] text-slate">
                         <svg className="w-3.5 h-3.5 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                         </svg>

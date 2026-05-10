@@ -180,7 +180,7 @@ export default function FrontalierFrancePage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                 <div className="bg-cloud border border-edge rounded-[8px] p-5">
-                  <h3 className="font-semibold text-ink text-[15px] mb-3">Cantons principalement concernés</h3>
+                  <h3 className="font-semibold text-ink text-[16px] mb-3">Cantons principalement concernés</h3>
                   <ul className="space-y-1.5 text-[13px] text-slate">
                     {['Genève (le plus grand flux frontalier)', 'Vaud', 'Neuchâtel', 'Jura', 'Valais'].map((c, i) => (
                       <li key={i} className="flex gap-2">
@@ -190,7 +190,7 @@ export default function FrontalierFrancePage() {
                   </ul>
                 </div>
                 <div className="bg-cloud border border-edge rounded-[8px] p-5">
-                  <h3 className="font-semibold text-ink text-[15px] mb-3">Conditions du statut frontalier</h3>
+                  <h3 className="font-semibold text-ink text-[16px] mb-3">Conditions du statut frontalier</h3>
                   <ul className="space-y-1.5 text-[13px] text-slate">
                     {[
                       'Résidence habituelle en France',
@@ -213,7 +213,7 @@ export default function FrontalierFrancePage() {
 
               <div className="callout mb-5">
                 <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">À retenir</p>
-                <p className="text-[15px]">
+                <p className="text-[16px]">
                   Dès le premier jour de travail en Suisse, vous disposez de 3 mois pour exercer
                   votre droit d'option. Ce choix est en principe définitif sauf changement de situation.
                   Passé ce délai, la LAMal suisse est généralement appliquée par défaut.
@@ -232,8 +232,8 @@ export default function FrontalierFrancePage() {
                   },
                 ].map((item, i) => (
                   <div key={i} className="border border-edge rounded-[8px] p-5 bg-white">
-                    <h3 className="font-semibold text-ink text-[15px] mb-2">{item.titre}</h3>
-                    <p className="text-[14px] text-slate">{item.desc}</p>
+                    <h3 className="font-semibold text-ink text-[16px] mb-2">{item.titre}</h3>
+                    <p className="text-[16px] text-slate">{item.desc}</p>
                   </div>
                 ))}
               </div>
@@ -244,7 +244,7 @@ export default function FrontalierFrancePage() {
               <h2 className="article-h2">3. Pourquoi choisir la LAMal suisse ?</h2>
 
               <div className="bg-blue-tint rounded-[8px] p-5 mb-5">
-                <h3 className="font-semibold text-ink text-[15px] mb-3">Avantages de la LAMal</h3>
+                <h3 className="font-semibold text-ink text-[16px] mb-3">Avantages de la LAMal</h3>
                 <ul className="space-y-2 text-[13px] text-slate">
                   {[
                     'Droits identiques à un résident suisse : accès complet au réseau médical suisse',
@@ -264,8 +264,8 @@ export default function FrontalierFrancePage() {
               </div>
 
               <div className="border border-edge rounded-[8px] p-5 bg-white mb-5">
-                <h3 className="font-semibold text-ink text-[15px] mb-2">Se faire soigner en France avec la LAMal</h3>
-                <p className="text-[14px] text-slate">
+                <h3 className="font-semibold text-ink text-[16px] mb-2">Se faire soigner en France avec la LAMal</h3>
+                <p className="text-[16px] text-slate">
                   La LAMal prend en charge les soins urgents en France dans la limite du double
                   du tarif suisse. Les soins non urgents programmés en France sont généralement
                   exclus. Si vous consultez régulièrement en France (médecin de famille, spécialiste),
@@ -279,7 +279,7 @@ export default function FrontalierFrancePage() {
               <h2 className="article-h2">4. Pourquoi rester à la Sécurité sociale française ?</h2>
 
               <div className="bg-cloud border border-edge rounded-[8px] p-5 mb-5">
-                <h3 className="font-semibold text-ink text-[15px] mb-3">Avantages du maintien en France</h3>
+                <h3 className="font-semibold text-ink text-[16px] mb-3">Avantages du maintien en France</h3>
                 <ul className="space-y-2 text-[13px] text-slate">
                   {[
                     'Continuité avec votre médecin traitant et réseau de soins français',
@@ -307,8 +307,8 @@ export default function FrontalierFrancePage() {
                   },
                 ].map((item, i) => (
                   <div key={i} className="border border-edge rounded-[8px] p-5 bg-white">
-                    <h3 className="font-semibold text-ink text-[15px] mb-2">{item.titre}</h3>
-                    <p className="text-[14px] text-slate">{item.desc}</p>
+                    <h3 className="font-semibold text-ink text-[16px] mb-2">{item.titre}</h3>
+                    <p className="text-[16px] text-slate">{item.desc}</p>
                   </div>
                 ))}
               </div>
@@ -339,8 +339,8 @@ export default function FrontalierFrancePage() {
                   },
                 ].map((item, i) => (
                   <div key={i} className="border border-edge rounded-[8px] p-5 bg-white">
-                    <h3 className="font-semibold text-ink text-[15px] mb-2">{item.titre}</h3>
-                    <p className="text-[14px] text-slate">{item.desc}</p>
+                    <h3 className="font-semibold text-ink text-[16px] mb-2">{item.titre}</h3>
+                    <p className="text-[16px] text-slate">{item.desc}</p>
                   </div>
                 ))}
               </div>
@@ -382,7 +382,7 @@ export default function FrontalierFrancePage() {
                 </table>
               </div>
               <p className="text-[13px] text-slate/60 mt-2 md:hidden">Tableau complet visible sur ordinateur.</p>
-              <div className="callout text-[14px]">
+              <div className="callout text-[16px]">
                 Les modèles alternatifs (médecin de famille, Telmed) réduisent la prime de 10 à 20 % par rapport au modèle standard.
                 Si vous êtes éligible aux subsides cantonaux, votre prime nette peut être significativement inférieure.
               </div>
@@ -454,7 +454,7 @@ export default function FrontalierFrancePage() {
                   { href: '/sante/guide',          label: 'Guide complet LAMal 2026'                    },
                 ].map(({ href, label }) => (
                   <Link key={href} href={href}
-                    className="flex items-center gap-2 text-[14px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                    className="flex items-center gap-2 text-[13px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
                     <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>

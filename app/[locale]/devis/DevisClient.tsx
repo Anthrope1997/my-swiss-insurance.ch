@@ -42,7 +42,7 @@ export default function DevisClient() {
       className="flex flex-col overflow-hidden bg-white"
     >
       <div className="shrink-0 px-4 pt-5 pb-3">
-        <p className="text-[14px] text-slate leading-snug text-center">
+        <p className="text-[16px] text-slate leading-snug text-center">
           Un conseiller spécialisé vous présente les offres les plus avantageuses sous 24 heures.
           C&apos;est gratuit et sans engagement.
         </p>

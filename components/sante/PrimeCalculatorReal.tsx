@@ -221,8 +221,8 @@ export default function PrimeCalculatorReal() {
             <div className="px-6 py-5 space-y-4">
               {(Object.keys(MODELE_LABELS) as Modele[]).map(k => (
                 <div key={k} className={`rounded-lg p-4 ${k === modele ? 'bg-blue-light2 border border-blue-200' : 'bg-cloud'}`}>
-                  <p className="font-semibold text-ink text-[15px] mb-1">{MODELE_LABELS[k]}</p>
-                  <p className="text-slate text-[14px] leading-relaxed">{MODELE_INFO[k]}</p>
+                  <p className="font-semibold text-ink text-[16px] mb-1">{MODELE_LABELS[k]}</p>
+                  <p className="text-slate text-[16px] leading-relaxed">{MODELE_INFO[k]}</p>
                 </div>
               ))}
             </div>
@@ -258,14 +258,14 @@ export default function PrimeCalculatorReal() {
             </div>
             <div className="px-6 py-5 space-y-4">
               <div className="bg-cloud rounded-lg p-4">
-                <p className="font-semibold text-ink text-[15px] mb-1">Sans couverture accident (recommandé pour la plupart)</p>
-                <p className="text-slate text-[14px] leading-relaxed">
+                <p className="font-semibold text-ink text-[16px] mb-1">Sans couverture accident (recommandé pour la plupart)</p>
+                <p className="text-slate text-[16px] leading-relaxed">
                   Si vous êtes salarié à <strong>8 heures ou plus par semaine</strong> chez un même employeur, votre assurance accident est obligatoirement couverte par votre employeur (LAA). Vous ne devez pas la payer via la LAMal — cochez cette option pour une prime moins élevée.
                 </p>
               </div>
               <div className="bg-cloud rounded-lg p-4">
-                <p className="font-semibold text-ink text-[15px] mb-1">Avec couverture accident</p>
-                <p className="text-slate text-[14px] leading-relaxed">
+                <p className="font-semibold text-ink text-[16px] mb-1">Avec couverture accident</p>
+                <p className="text-slate text-[16px] leading-relaxed">
                   Si vous êtes <strong>indépendant</strong>, <strong>sans emploi</strong>, ou salarié à <strong>moins de 8 heures par semaine</strong>, vous n'êtes pas couvert par la LAA. Vous devez inclure la couverture accident dans votre LAMal. La prime sera légèrement plus élevée.
                 </p>
               </div>
@@ -389,7 +389,7 @@ export default function PrimeCalculatorReal() {
                   onChange={e => setAccident(e.target.checked)}
                   className="w-4 h-4 rounded accent-brand cursor-pointer"
                 />
-                <span className="text-[14px] text-slate">Inclure la couverture accident</span>
+                <span className="text-[13px] text-slate">Inclure la couverture accident</span>
                 <button
                   type="button"
                   onClick={() => setShowAccidentInfo(v => !v)}
@@ -439,7 +439,7 @@ export default function PrimeCalculatorReal() {
                     <span className="font-semibold text-ink">
                       Économie potentielle&nbsp;: CHF&nbsp;{(saving * 12).toFixed(0)}/an
                     </span>
-                    <span className="text-slate text-[14px]">
+                    <span className="text-slate text-[13px]">
                       {' '}(CHF&nbsp;{saving.toFixed(2)}/mois) entre la caisse la moins chère et la plus chère pour ce profil.
                     </span>
                   </div>
@@ -550,7 +550,7 @@ export default function PrimeCalculatorReal() {
               )}
 
               {showAll && (
-                <div className="callout-success flex items-center gap-2 text-[14px]">
+                <div className="callout-success flex items-center gap-2 text-[16px]">
                   <svg className="w-4 h-4 shrink-0 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>

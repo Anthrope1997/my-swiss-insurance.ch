@@ -193,7 +193,7 @@ export default function LamalVsLcaPage() {
                       'Urgences 24 heures sur 24',
                       'Subsides cantonaux possibles',
                     ].map((item, i) => (
-                      <li key={i} className="flex gap-2.5 text-[14px] text-slate">
+                      <li key={i} className="flex gap-2.5 text-[16px] text-slate">
                         <svg className="w-4 h-4 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                         </svg>
@@ -215,7 +215,7 @@ export default function LamalVsLcaPage() {
                       'Soins dentaires et orthodontie',
                       'Lunettes et lentilles',
                     ].map((item, i) => (
-                      <li key={i} className="flex gap-2.5 text-[14px] text-slate">
+                      <li key={i} className="flex gap-2.5 text-[16px] text-slate">
                         <svg className="w-4 h-4 text-slate/40 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v14M5 12h14" />
                         </svg>
@@ -285,7 +285,7 @@ export default function LamalVsLcaPage() {
                   <div key={i} className="bg-white border border-edge rounded-[8px] p-5 flex flex-col sm:flex-row sm:items-start gap-4">
                     <div className="flex-1">
                       <h3 className="font-semibold text-ink text-[16px] mb-1">{item.title}</h3>
-                      <p className="text-[15px] text-slate">{item.desc}</p>
+                      <p className="text-[16px] text-slate">{item.desc}</p>
                     </div>
                     <span className="shrink-0 text-[13px] text-slate bg-cloud border border-edge px-3 py-1.5 rounded-md whitespace-nowrap self-start">
                       {item.cost}
@@ -308,7 +308,7 @@ export default function LamalVsLcaPage() {
                 </svg>
                 <div>
                   <p className="font-semibold text-ink mb-1">Le moment de souscription compte</p>
-                  <p className="text-[15px] leading-relaxed">
+                  <p className="text-[16px] leading-relaxed">
                     Plus vous souscrivez tôt et en bonne santé, moins vous risquez d&apos;être exclu ou de payer
                     une surprime. Si vous avez déjà une maladie au moment de la souscription, l&apos;assureur
                     peut refuser de vous couvrir pour cette condition, ou accepter à un tarif plus élevé.
@@ -322,7 +322,7 @@ export default function LamalVsLcaPage() {
                   'Voyageurs fréquents et expatriés : une complémentaire internationale est souvent indispensable.',
                   'Comparez les offres : les écarts pour des prestations similaires peuvent dépasser 50%.',
                 ].map((item, i) => (
-                  <li key={i} className="flex gap-3 text-[15px] text-slate">
+                  <li key={i} className="flex gap-3 text-[16px] text-slate">
                     <svg className="w-4 h-4 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
@@ -356,7 +356,7 @@ export default function LamalVsLcaPage() {
                 ].map((cas, i) => (
                   <div key={i} className="border border-edge rounded-[8px] p-5 bg-white">
                     <p className="font-semibold text-ink text-[16px] mb-2">{cas.profil}</p>
-                    <p className="text-[15px] text-slate">{cas.desc}</p>
+                    <p className="text-[16px] text-slate">{cas.desc}</p>
                   </div>
                 ))}
               </div>
@@ -381,7 +381,7 @@ export default function LamalVsLcaPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {guidesAssocies.map(({ href, label }) => (
                   <Link key={href} href={href}
-                    className="flex items-center gap-2 text-[14px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                    className="flex items-center gap-2 text-[13px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
                     <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>

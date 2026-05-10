@@ -157,7 +157,7 @@ export default function FrontalierSimulateur() {
           Résultat de votre simulation
         </p>
         <h3 className="text-[18px] font-semibold text-navy mb-3">{resultat.titre}</h3>
-        <p className="text-[14px] text-slate leading-relaxed mb-4">{resultat.description}</p>
+        <p className="text-[16px] text-slate leading-relaxed mb-4">{resultat.description}</p>
         <ul className="space-y-2 mb-5">
           {resultat.points.map((p, i) => (
             <li key={i} className="flex gap-2.5 text-[13px] text-slate">
@@ -204,7 +204,7 @@ export default function FrontalierSimulateur() {
             key={opt.value}
             onClick={() => choisir(opt.value)}
             className={[
-              'w-full text-left px-4 py-3 rounded-[8px] border text-[14px] transition-colors duration-150',
+              'w-full text-left px-4 py-3 rounded-[8px] border text-[16px] transition-colors duration-150',
               selection === opt.value
                 ? 'border-brand bg-blue-light2 text-navy font-medium'
                 : 'border-edge bg-white text-slate hover:border-brand/40',
@@ -219,7 +219,7 @@ export default function FrontalierSimulateur() {
         onClick={suivant}
         disabled={!selection}
         className={[
-          'w-full py-2.5 rounded-[8px] text-[14px] font-semibold transition-colors duration-150',
+          'w-full py-2.5 rounded-[8px] text-[16px] font-semibold transition-colors duration-150',
           selection
             ? 'bg-brand hover:bg-brand-dark text-white'
             : 'bg-edge text-muted cursor-not-allowed',

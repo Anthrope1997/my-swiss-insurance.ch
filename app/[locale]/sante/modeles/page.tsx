@@ -250,7 +250,7 @@ export default function ModelesPage() {
                 </svg>
                 <div>
                   <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">À retenir</p>
-                  <p className="text-[15px] leading-relaxed">Toutes les prestations médicales sont identiques quel que soit le modèle. Seule la porte d&apos;entrée dans le système de soins diffère. Les remboursements sont les mêmes.</p>
+                  <p className="text-[16px] leading-relaxed">Toutes les prestations médicales sont identiques quel que soit le modèle. Seule la porte d&apos;entrée dans le système de soins diffère. Les remboursements sont les mêmes.</p>
                 </div>
               </div>
             </section>
@@ -273,7 +273,7 @@ export default function ModelesPage() {
                         </span>
                       )}
                     </div>
-                    <p className="text-[15px] text-slate mb-4">{m.desc}</p>
+                    <p className="text-[16px] text-slate mb-4">{m.desc}</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                       <div>
                         <p className="text-[12px] font-semibold text-slate uppercase tracking-wide mb-2">Avantages</p>
@@ -330,14 +330,14 @@ export default function ModelesPage() {
                 </svg>
                 <div>
                   <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">À retenir</p>
-                  <p className="text-[15px] leading-relaxed">
+                  <p className="text-[16px] leading-relaxed">
                     Avis de changement à envoyer avant le 30 novembre pour une prise d&apos;effet au
                     1er janvier. Passé ce délai, votre modèle actuel est reconduit.
                   </p>
                 </div>
               </div>
               <div className="mt-5">
-                <Link href="/sante/changer-de-caisse" className="text-brand hover:underline text-[15px] font-medium">
+                <Link href="/sante/changer-de-caisse" className="text-brand hover:underline text-[16px] font-medium">
                   Guide complet : changer de caisse et de modèle →
                 </Link>
               </div>
@@ -362,7 +362,7 @@ export default function ModelesPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {guidesAssocies.map(({ href, label }) => (
                   <Link key={href} href={href}
-                    className="flex items-center gap-2 text-[14px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                    className="flex items-center gap-2 text-[13px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
                     <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>

@@ -14,9 +14,9 @@ export default function PolitiqueConfidentialitePage() {
       <Breadcrumb items={[{ label: 'Accueil', href: '/' }, { label: 'Politique de confidentialité' }]} className="mb-8" />
 
       <h1 className="text-4xl font-bold text-brand mb-2">Politique de confidentialité</h1>
-      <p className="text-slate text-[14px] mb-12">Dernière mise à jour : avril 2026</p>
+      <p className="text-slate text-[13px] mb-12">Dernière mise à jour : avril 2026</p>
 
-      <div className="prose-legal space-y-10 text-[15px] text-slate leading-relaxed">
+      <div className="prose-legal space-y-10 text-[16px] text-slate leading-relaxed">
 
         <section>
           <h2 className="text-xl font-semibold text-brand mb-3">Loi applicable</h2>

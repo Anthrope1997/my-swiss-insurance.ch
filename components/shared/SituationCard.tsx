@@ -25,7 +25,7 @@ export default function SituationCard({ icon, title, desc, href, cta = fr.shared
       <h3 className="font-semibold text-ink text-[17px] mb-2 group-hover:text-brand transition-colors">
         {title}
       </h3>
-      <p className="text-slate text-[15px] leading-relaxed flex-1">{desc}</p>
+      <p className="text-slate text-[16px] leading-relaxed flex-1">{desc}</p>
       <div className="flex items-center gap-1 mt-5 text-brand text-[13px] font-medium">
         {cta}
         <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200"

@@ -32,7 +32,7 @@ export default function AProposPage() {
 
         <h1 className="text-4xl font-bold text-brand mb-10">À propos de My Swiss Insurance</h1>
 
-        <div className="space-y-10 text-[15px] text-slate leading-relaxed">
+        <div className="space-y-10 text-[16px] text-slate leading-relaxed">
 
           <section>
             <h2 className="text-xl font-semibold text-brand mb-3">Notre mission</h2>

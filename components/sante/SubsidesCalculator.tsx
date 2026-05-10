@@ -155,7 +155,7 @@ export default function SubsidesCalculator({ fixedCanton, cantonInfos }: Props =
                 <select
                   value={form.situation}
                   onChange={e => set({ situation: e.target.value as Situation })}
-                  className="select-field text-[14px]"
+                  className="select-field text-[13px]"
                 >
                   <option value="seul">Personne seule</option>
                   <option value="couple">Couple</option>
@@ -166,7 +166,7 @@ export default function SubsidesCalculator({ fixedCanton, cantonInfos }: Props =
                 <select
                   value={form.nbEnfants}
                   onChange={e => set({ nbEnfants: parseInt(e.target.value) })}
-                  className="select-field text-[14px]"
+                  className="select-field text-[13px]"
                 >
                   {[0, 1, 2, 3, 4].map(n => (
                     <option key={n} value={n}>{n === 0 ? 'Aucun' : `${n} enfant${n > 1 ? 's' : ''}`}</option>
@@ -178,7 +178,7 @@ export default function SubsidesCalculator({ fixedCanton, cantonInfos }: Props =
                 <select
                   value={form.isJeune ? 'jeune' : 'adulte'}
                   onChange={e => set({ isJeune: e.target.value === 'jeune' })}
-                  className="select-field text-[14px]"
+                  className="select-field text-[13px]"
                 >
                   <option value="adulte">Adulte (26+)</option>
                   <option value="jeune">Jeune adulte (19–25)</option>
@@ -200,7 +200,7 @@ export default function SubsidesCalculator({ fixedCanton, cantonInfos }: Props =
                 placeholder="ex. 45 000"
                 value={form.revenu}
                 onChange={e => set({ revenu: e.target.value })}
-                className="input-field max-w-[200px] text-[14px]"
+                className="input-field max-w-[200px] text-[13px]"
               />
               <span className="text-[13px] text-slate/60">CHF / an</span>
             </div>
@@ -226,7 +226,7 @@ export default function SubsidesCalculator({ fixedCanton, cantonInfos }: Props =
                     </svg>
                   </div>
                   <div>
-                    <p className="font-semibold text-ink text-[15px]">Revenu hors barème</p>
+                    <p className="font-semibold text-ink text-[16px]">Revenu hors barème</p>
                     <p className="text-[13px] text-slate mt-0.5">Votre revenu dépasse le seuil d&apos;éligibilité pour ce canton.</p>
                   </div>
                 </div>
@@ -238,7 +238,7 @@ export default function SubsidesCalculator({ fixedCanton, cantonInfos }: Props =
                     </svg>
                   </div>
                   <div>
-                    <p className="font-semibold text-ink text-[15px]">Vous semblez éligible</p>
+                    <p className="font-semibold text-ink text-[16px]">Vous semblez éligible</p>
                     <p className="text-[13px] text-slate mt-0.5">Le montant exact est calculé par le canton sur dossier.</p>
                   </div>
                 </div>

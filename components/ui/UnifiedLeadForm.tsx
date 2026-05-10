@@ -389,7 +389,7 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
                   key={opt.id}
                   onClick={() => set({ intent: opt.id })}
                   className={[
-                    `flex items-center gap-3 text-left px-4 ${fullscreen ? 'py-3' : 'py-4'} rounded-lg border-2 transition-colors duration-150 !text-[14px] font-medium`,
+                    `flex items-center gap-3 text-left px-4 ${fullscreen ? 'py-3' : 'py-4'} rounded-lg border-2 transition-colors duration-150 !text-[16px] font-medium`,
                     form.intent === opt.id
                       ? 'border-brand bg-blue-light2 text-brand'
                       : 'border-edge bg-white text-ink hover:border-brand hover:bg-blue-hint',
@@ -543,7 +543,7 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
                   key={opt.id}
                   onClick={() => set({ situation: opt.id })}
                   className={[
-                    `text-left px-4 ${fullscreen ? 'py-3' : 'py-4'} rounded-lg border-2 transition-colors duration-150 text-[14px] font-medium`,
+                    `text-left px-4 ${fullscreen ? 'py-3' : 'py-4'} rounded-lg border-2 transition-colors duration-150 text-[16px] font-medium`,
                     form.situation === opt.id
                       ? 'border-brand bg-blue-light2 text-brand'
                       : 'border-edge bg-white text-ink hover:border-brand hover:bg-blue-hint',
@@ -677,7 +677,7 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
           <button
             onClick={() => setStep(2)}
             disabled={!form.intent}
-            className="btn-primary text-[14px] px-6 py-2.5 disabled:opacity-40 disabled:cursor-not-allowed"
+            className="btn-primary text-[16px] px-6 py-2.5 disabled:opacity-40 disabled:cursor-not-allowed"
           >
             {d.form.commencer}
           </button>
@@ -685,13 +685,13 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
 
         {step === 2 && (
           <div className="flex gap-3">
-            <button onClick={() => setStep(1)} className="btn-secondary text-[14px] px-5 py-2.5">
+            <button onClick={() => setStep(1)} className="btn-secondary text-[16px] px-5 py-2.5">
               {d.form.retour}
             </button>
             <button
               onClick={() => setStep(3)}
               disabled={!step2Valid}
-              className="btn-primary text-[14px] px-6 py-2.5 disabled:opacity-40 disabled:cursor-not-allowed"
+              className="btn-primary text-[16px] px-6 py-2.5 disabled:opacity-40 disabled:cursor-not-allowed"
             >
               {d.form.continuer}
             </button>
@@ -700,13 +700,13 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
 
         {step === 3 && (
           <div className="flex gap-3">
-            <button onClick={() => setStep(2)} className="btn-secondary text-[14px] px-5 py-2.5">
+            <button onClick={() => setStep(2)} className="btn-secondary text-[16px] px-5 py-2.5">
               {d.form.retour}
             </button>
             <button
               onClick={() => setStep(4)}
               disabled={!form.situation}
-              className="btn-primary text-[14px] px-6 py-2.5 disabled:opacity-40 disabled:cursor-not-allowed"
+              className="btn-primary text-[16px] px-6 py-2.5 disabled:opacity-40 disabled:cursor-not-allowed"
             >
               {d.form.continuer}
             </button>

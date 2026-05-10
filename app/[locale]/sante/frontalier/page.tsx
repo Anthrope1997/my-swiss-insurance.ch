@@ -111,7 +111,7 @@ export default function FrontalierPage() {
                   <h2 className="text-[18px] font-semibold text-ink mb-2 group-hover:text-brand transition-colors duration-150">
                     {card.titre}
                   </h2>
-                  <p className="text-[14px] text-slate leading-relaxed mb-3">{card.description}</p>
+                  <p className="text-[16px] text-slate leading-relaxed mb-3">{card.description}</p>
                   <ul className="space-y-1.5">
                     {card.highlights.map((h, i) => (
                       <li key={i} className="flex items-start gap-2 text-[13px] text-slate">

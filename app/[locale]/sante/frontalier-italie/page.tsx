@@ -169,7 +169,7 @@ export default function FrontalierItaliePage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
                 <div className="bg-cloud border border-edge rounded-[8px] p-5">
-                  <h3 className="font-semibold text-ink text-[15px] mb-3">Cantons suisses concernés</h3>
+                  <h3 className="font-semibold text-ink text-[16px] mb-3">Cantons suisses concernés</h3>
                   <ul className="space-y-1.5 text-[13px] text-slate">
                     {[
                       'Tessin (canton majoritairement italophone)',
@@ -183,7 +183,7 @@ export default function FrontalierItaliePage() {
                   </ul>
                 </div>
                 <div className="bg-cloud border border-edge rounded-[8px] p-5">
-                  <h3 className="font-semibold text-ink text-[15px] mb-3">Délai du droit d'option</h3>
+                  <h3 className="font-semibold text-ink text-[16px] mb-3">Délai du droit d'option</h3>
                   <p className="text-[13px] text-slate mb-2">
                     3 mois dès le premier jour de travail en Suisse. En l'absence de choix
                     explicite, la LAMal s'applique par défaut.
@@ -230,7 +230,7 @@ export default function FrontalierItaliePage() {
                 </table>
               </div>
 
-              <div className="callout text-[15px]">
+              <div className="callout text-[16px]">
                 <strong>Cas du Tessin :</strong> le Tessin est le seul canton officiellement italophone.
                 La plupart des médecins et hôpitaux tessinois travaillent en italien, ce qui facilite
                 le choix de la LAMal pour les frontaliers provenant de Lombardie ou du Piémont.
@@ -252,8 +252,8 @@ export default function FrontalierItaliePage() {
                   },
                 ].map((item, i) => (
                   <div key={i} className="border border-edge rounded-[8px] p-5 bg-white">
-                    <h3 className="font-semibold text-ink text-[15px] mb-2">{item.titre}</h3>
-                    <p className="text-[14px] text-slate">{item.desc}</p>
+                    <h3 className="font-semibold text-ink text-[16px] mb-2">{item.titre}</h3>
+                    <p className="text-[16px] text-slate">{item.desc}</p>
                   </div>
                 ))}
               </div>
@@ -277,8 +277,8 @@ export default function FrontalierItaliePage() {
                   <div key={step.n} className="flex gap-5">
                     <div className="text-[24px] font-bold text-brand leading-none shrink-0 w-10 text-right">{step.n}</div>
                     <div className="pt-0.5 border-b border-edge pb-3 flex-1">
-                      <h3 className="font-semibold text-ink text-[15px] mb-1">{step.t}</h3>
-                      <p className="text-[14px] text-slate">{step.d}</p>
+                      <h3 className="font-semibold text-ink text-[16px] mb-1">{step.t}</h3>
+                      <p className="text-[16px] text-slate">{step.d}</p>
                     </div>
                   </div>
                 ))}
@@ -319,7 +319,7 @@ export default function FrontalierItaliePage() {
                 </table>
               </div>
               <p className="text-[13px] text-slate/60 mt-2 md:hidden">Tableau complet visible sur ordinateur.</p>
-              <div className="callout text-[14px]">
+              <div className="callout text-[16px]">
                 Les modèles alternatifs (médecin de famille, Telmed) réduisent la prime de 10 à 20 % par rapport au modèle standard.
                 Si vous êtes éligible aux subsides cantonaux, votre prime nette peut être significativement inférieure.
               </div>
@@ -391,7 +391,7 @@ export default function FrontalierItaliePage() {
                   { href: '/sante/guide',          label: 'Guide complet LAMal 2026'                    },
                 ].map(({ href, label }) => (
                   <Link key={href} href={href}
-                    className="flex items-center gap-2 text-[14px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                    className="flex items-center gap-2 text-[13px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
                     <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>

@@ -185,14 +185,14 @@ export default function Header() {
                     <div className="bg-white/5 border-b border-white/10">
                       {section.links.map((link, i) => (
                         <Link key={link.href} href={link.href} onClick={close}
-                          className={`block pl-5 py-2.5 text-[14px] text-white hover:text-blue-300
+                          className={`block pl-5 py-2.5 text-[13px] text-white hover:text-blue-300
                             ${i < section.links.length - 1 ? 'border-b border-white/5' : ''}`}>
                           {link.label}
                         </Link>
                       ))}
                       {section.ctaLink && (
                         <Link href={section.ctaLink.href} onClick={close}
-                          className="block pl-5 py-2.5 text-[14px] text-white hover:text-blue-300 border-t border-white/5">
+                          className="block pl-5 py-2.5 text-[13px] text-white hover:text-blue-300 border-t border-white/5">
                           {section.ctaLink.label}
                         </Link>
                       )}

@@ -59,14 +59,14 @@ export default function PrimeCalculator({ canton }: { canton: Canton }) {
     } catch { setGateStatus('error') }
   }
 
-  const selectClass = "w-full border border-edge rounded-md px-3 py-2.5 text-[14px] text-navy bg-white focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent"
+  const selectClass = "w-full border border-edge rounded-md px-3 py-2.5 text-[13px] text-navy bg-white focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent"
 
   return (
     <section id="calculateur" className="scroll-mt-24">
       <h2 className="text-2xl font-semibold text-navy mb-2">
         Calculez votre prime personnalisée
       </h2>
-      <p className="text-[15px] text-slate mb-6">
+      <p className="text-[16px] text-slate mb-6">
         Estimez votre prime LAMal dans le {canton.cantonDe} selon votre profil exact.
       </p>
 
@@ -112,7 +112,7 @@ export default function PrimeCalculator({ canton }: { canton: Canton }) {
           </p>
           <button
             onClick={calculate}
-            className="bg-brand hover:bg-brand-dark text-white font-medium px-6 py-2.5 rounded-md text-[15px] transition-colors"
+            className="bg-brand hover:bg-brand-dark text-white font-medium px-6 py-2.5 rounded-md text-[16px] transition-colors"
           >
             Calculer ma prime →
           </button>
@@ -157,24 +157,24 @@ export default function PrimeCalculator({ canton }: { canton: Canton }) {
               <h3 className="text-[18px] font-semibold text-navy mb-1">
                 Débloquez votre comparaison complète
               </h3>
-              <p className="text-[14px] text-slate mb-5">
+              <p className="text-[13px] text-slate mb-5">
                 Top 3 complet + économie annuelle calculée · Gratuit · Sans engagement
               </p>
               <form onSubmit={handleGate} className="space-y-3">
                 <input
                   type="text" placeholder="Votre prénom" required
                   value={prenom} onChange={(e) => setPrenom(e.target.value)}
-                  className="w-full border border-edge rounded-md px-3 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand"
+                  className="w-full border border-edge rounded-md px-3 py-2.5 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand"
                 />
                 <input
                   type="email" placeholder="Votre email" required
                   value={email} onChange={(e) => setEmail(e.target.value)}
-                  className="w-full border border-edge rounded-md px-3 py-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-brand"
+                  className="w-full border border-edge rounded-md px-3 py-2.5 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand"
                 />
                 <button
                   type="submit"
                   disabled={gateStatus === 'loading'}
-                  className="w-full bg-brand hover:bg-brand-dark disabled:bg-slate text-white font-medium py-3 rounded-md text-[15px] transition-colors"
+                  className="w-full bg-brand hover:bg-brand-dark disabled:bg-slate text-white font-medium py-3 rounded-md text-[16px] transition-colors"
                 >
                   {gateStatus === 'loading' ? 'Envoi en cours…' : 'Recevoir ma comparaison gratuite →'}
                 </button>
@@ -193,7 +193,7 @@ export default function PrimeCalculator({ canton }: { canton: Canton }) {
               <svg className="w-5 h-5 text-brand shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              <p className="text-[14px] text-brand font-medium">
+              <p className="text-[13px] text-brand font-medium">
                 Votre comparaison a été envoyée à <strong>{email}</strong>. Vérifiez votre boîte mail.
               </p>
             </div>

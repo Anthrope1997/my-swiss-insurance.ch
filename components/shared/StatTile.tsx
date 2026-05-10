@@ -9,7 +9,7 @@ export default function StatTile({ label, desc }: StatTileProps) {
       <p className="text-[12px] font-semibold text-brand uppercase tracking-wide mb-2">
         {label}
       </p>
-      <p className="text-[15px] text-slate leading-relaxed">{desc}</p>
+      <p className="text-[16px] text-slate leading-relaxed">{desc}</p>
     </div>
   )
 }

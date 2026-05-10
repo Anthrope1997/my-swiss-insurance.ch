@@ -33,7 +33,7 @@ export default function EmailCTA({ subject }: Props) {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
         </svg>
         <p className="font-semibold text-brand">Envoyé !</p>
-        <p className="text-[14px] text-brand mt-0.5">Vérifiez votre boîte mail sous 5 minutes.</p>
+        <p className="text-[13px] text-brand mt-0.5">Vérifiez votre boîte mail sous 5 minutes.</p>
       </div>
     )
   }
@@ -43,7 +43,7 @@ export default function EmailCTA({ subject }: Props) {
       <h2 className="text-[18px] font-semibold text-navy mb-1">
         Recevez {subject} par email
       </h2>
-      <p className="text-[14px] text-slate mb-4">
+      <p className="text-[13px] text-slate mb-4">
         Gratuit · Sans engagement · Données OFSP 2026
       </p>
       <form onSubmit={handleSubmit} className="flex gap-2">

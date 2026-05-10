@@ -197,7 +197,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
           <h2 className="article-h2">
             Quelles caisses sont les moins chères dans le {canton.cantonDe} en 2026 ?
           </h2>
-          <p className="text-[15px] text-slate mb-6">
+          <p className="text-[16px] text-slate mb-6">
             Classement pour un adulte de 35 ans, franchise 300 CHF, modèle standard, sans couverture accident,
             en moyenne sur {canton.nbRegions > 1 ? `les ${canton.nbRegions} régions tarifaires` : `l'ensemble`} du canton.
             Les primes varient selon votre profil exact et votre commune.
@@ -256,7 +256,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
             </table>
           </div>
           <div className="mt-4">
-            <Link href="/sante/comparateur" className="text-brand hover:underline text-[15px] font-medium">
+            <Link href="/sante/comparateur" className="text-brand hover:underline text-[16px] font-medium">
               Comparer toutes les caisses pour votre profil exact →
             </Link>
           </div>
@@ -267,13 +267,13 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
           <h2 className="article-h2">
             Quelle franchise choisir dans le canton de {canton.name} ?
           </h2>
-          <p className="text-[15px] text-slate mb-6">
+          <p className="text-[16px] text-slate mb-6">
             Tableau établi pour <strong className="text-ink">{canton.caisseRef}</strong>, adulte de 35 ans,
             sans couverture accident. Le coût total inclut la prime annuelle, la franchise et la quote-part
             (10 %, maximum 700 CHF par an).
           </p>
           <div className="border border-edge rounded-[8px] overflow-hidden">
-            <table className="stripe-table w-full text-[14px]">
+            <table className="stripe-table w-full text-[13px]">
               <thead>
                 <tr>
                   <th className="text-left whitespace-nowrap">Franchise</th>
@@ -313,7 +313,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
             </div>
           </div>
           <div className="mt-4">
-            <Link href="/sante/franchise" className="text-brand hover:underline text-[15px] font-medium">
+            <Link href="/sante/franchise" className="text-brand hover:underline text-[16px] font-medium">
               Tout savoir sur le choix de la franchise →
             </Link>
           </div>
@@ -325,7 +325,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
             Quels subsides LAMal dans le {canton.cantonDe} ?
           </h2>
           <div className="border border-edge rounded-[8px] overflow-hidden mb-5">
-            <table className="w-full text-[14px]">
+            <table className="w-full text-[13px]">
               <tbody>
                 {[
                   ['Seuil de revenu déterminant', canton.subside.seuilRevenu],
@@ -369,7 +369,7 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
           )}
 
           <div className="mt-4">
-            <Link href="/sante/subsides" className="text-brand hover:underline text-[15px] font-medium">
+            <Link href="/sante/subsides" className="text-brand hover:underline text-[16px] font-medium">
               Calculer mes subsides LAMal →
             </Link>
           </div>

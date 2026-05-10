@@ -67,7 +67,7 @@ export default function CantonSearch() {
                 onClick={() => select(c)}
                 className="w-full flex items-center justify-between px-4 py-2.5 text-left hover:bg-cloud transition-colors duration-100"
               >
-                <span className="text-[15px] text-ink">{c.nom}</span>
+                <span className="text-[16px] text-ink">{c.nom}</span>
                 <span className="flex items-center gap-2">
                   <span className="text-[11px] font-semibold text-slate/60 uppercase tracking-wide">
                     {c.code}

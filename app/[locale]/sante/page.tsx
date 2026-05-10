@@ -244,7 +244,7 @@ export default function LamalPage() {
                                group-hover:text-brand transition-colors">
                   {g.title}
                 </h3>
-                <p className="text-slate text-[14px] leading-relaxed flex-1">{g.desc}</p>
+                <p className="text-slate text-[16px] leading-relaxed flex-1">{g.desc}</p>
                 <div className="flex items-center gap-1 mt-4 text-brand text-[13px] font-medium">
                   Lire le guide
                   <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200"
@@ -290,7 +290,7 @@ export default function LamalPage() {
                                group-hover:text-brand transition-colors">
                   {s.title}
                 </h3>
-                <p className="text-slate text-[15px] leading-relaxed flex-1">{s.desc}</p>
+                <p className="text-slate text-[16px] leading-relaxed flex-1">{s.desc}</p>
                 <div className="flex items-center gap-1 mt-5 text-brand text-[13px] font-medium">
                   Découvrir
                   <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200"
@@ -379,7 +379,7 @@ export default function LamalPage() {
                 <p className="text-[12px] font-semibold text-brand uppercase tracking-wide mb-2">
                   {f.label}
                 </p>
-                <p className="text-[15px] text-slate leading-relaxed">{f.desc}</p>
+                <p className="text-[16px] text-slate leading-relaxed">{f.desc}</p>
               </div>
             ))}
           </div>
