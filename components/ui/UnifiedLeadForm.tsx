@@ -345,7 +345,7 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
           <CheckIcon />
         </div>
         <h3 className="font-semibold text-ink text-[18px] mb-1">{d.form.succes.titre}</h3>
-        <p className="text-slate text-[15px]">{d.form.succes.message}</p>
+        <p className="text-slate text-[16px]">{d.form.succes.message}</p>
       </div>
     )
   }
@@ -378,7 +378,7 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
       </div>
 
       {/* ── Middle: step content ── */}
-      <div className={fullscreen ? 'flex-1 min-h-0 overflow-hidden pb-[120px]' : 'flex-1'}>
+      <div className={fullscreen ? 'flex-1 min-h-0 overflow-y-auto pb-[120px]' : 'flex-1'}>
 
         {/* Step 1 — Objectif */}
         {step === 1 && (
@@ -608,7 +608,7 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
                             selectedCountry.code === country.code ? 'bg-blue-light2 text-brand' : 'text-ink',
                           ].join(' ')}
                         >
-                          <span className="text-[15px] leading-none shrink-0">{country.flag}</span>
+                          <span className="text-[16px] leading-none shrink-0">{country.flag}</span>
                           <span className="flex-1">{country.name}</span>
                           <span className="text-slate tabular-nums">{country.dialCode}</span>
                         </button>
@@ -624,7 +624,7 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
                             selectedCountry.code === country.code ? 'bg-blue-light2 text-brand' : 'text-ink',
                           ].join(' ')}
                         >
-                          <span className="text-[15px] leading-none shrink-0">{country.flag}</span>
+                          <span className="text-[16px] leading-none shrink-0">{country.flag}</span>
                           <span className="flex-1">{country.name}</span>
                           <span className="text-slate tabular-nums">{country.dialCode}</span>
                         </button>
@@ -719,7 +719,7 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen }: { red
               type="submit"
               form="lead-form-step4"
               disabled={status === 'loading'}
-              className={`w-full btn-primary text-[15px] disabled:opacity-60 ${fullscreen ? 'h-11' : 'h-12'}`}
+              className={`w-full btn-primary text-[16px] disabled:opacity-60 ${fullscreen ? 'h-11' : 'h-12'}`}
             >
               {status === 'loading' ? d.form.loading : d.form.envoyer}
             </button>

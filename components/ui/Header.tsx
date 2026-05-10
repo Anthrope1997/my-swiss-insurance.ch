@@ -30,7 +30,7 @@ const menuSections: {
       { href: '/sante/lamal-vs-lca',      label: 'LAMal vs complémentaire' },
       { href: '/sante/changer-de-caisse', label: 'Changer de caisse'       },
       { href: '/sante/comparateur',       label: 'Comparateur de caisses'  },
-      { href: '/sante/subsides',           label: 'Calculateur de subsides' },
+      { href: '/sante/subsides',          label: 'Calculateur de subsides' },
     ],
   },
   {
@@ -119,16 +119,15 @@ export default function Header() {
             {/* Logo — flex-1 mobile, auto desktop */}
             <Link href="/sante" className="flex items-center gap-2.5 flex-1 md:flex-none">
               <ShieldIcon />
-              <span className="font-semibold text-white text-[15px] hidden md:inline">
+              <span className="font-semibold text-white text-[16px] hidden md:inline">
                 My Swiss Insurance
               </span>
             </Link>
 
-            {/* Spacer desktop uniquement — aligne CTA+hamburger à droite */}
+            {/* Spacer desktop uniquement */}
             <div className="hidden md:block flex-1" />
 
-            {/* CTA — centré mobile (flex-1 symétrique), aligné droite desktop */}
-            {/* Mobile → page dédiée ; Desktop → popup modale */}
+            {/* CTA — Mobile → page /devis ; Desktop → popup modale */}
             <Link
               href="/devis"
               className="md:hidden shrink-0 bg-brand hover:bg-brand-dark text-white font-medium
@@ -145,7 +144,7 @@ export default function Header() {
               {fr.header.ctaFull}
             </button>
 
-            {/* Hamburger — flex-1 mobile (ancre droite), ml-3 desktop */}
+            {/* Hamburger — flex-1 mobile, ml-3 desktop */}
             <div className="flex-1 flex justify-end md:flex-none md:ml-3">
               <button
                 onClick={() => setMobileOpen(o => !o)}
@@ -164,43 +163,43 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Dropdown menu — navigation only, no CTA */}
+        {/* Menu mobile déroulant */}
         {mobileOpen && (
           <div className="menu-slide bg-navy/95 backdrop-blur-sm border-t border-white/10 overflow-y-auto"
             style={{ maxHeight: '85vh' }}>
             <div className="container-xl py-2 pb-6">
 
-            {menuSections.map(section => (
-              <div key={section.id}>
-                <button
-                  onClick={() => toggleSection(section.id)}
-                  className="w-full flex items-center gap-3 py-3 text-[15px] text-white hover:text-blue-300 border-b border-white/10"
-                >
-                  <span className="w-7 h-7 rounded-md bg-white/10 flex items-center justify-center shrink-0">
-                    {section.icon}
-                  </span>
-                  <span className="flex-1 text-left">{section.label}</span>
-                  <ChevronDown rotated={expandedSection === section.id} />
-                </button>
-                {expandedSection === section.id && (
-                  <div className="bg-white/5 border-b border-white/10">
-                    {section.links.map((link, i) => (
-                      <Link key={link.href} href={link.href} onClick={close}
-                        className={`block pl-5 py-2.5 text-[14px] text-white hover:text-blue-300
-                          ${i < section.links.length - 1 ? 'border-b border-white/5' : ''}`}>
-                        {link.label}
-                      </Link>
-                    ))}
-                    {section.ctaLink && (
-                      <Link href={section.ctaLink.href} onClick={close}
-                        className="block pl-5 py-2.5 text-[14px] text-white hover:text-blue-300 border-t border-white/5">
-                        {section.ctaLink.label}
-                      </Link>
-                    )}
-                  </div>
-                )}
-              </div>
-            ))}
+              {menuSections.map(section => (
+                <div key={section.id}>
+                  <button
+                    onClick={() => toggleSection(section.id)}
+                    className="w-full flex items-center gap-3 py-3 text-[16px] text-white hover:text-blue-300 border-b border-white/10"
+                  >
+                    <span className="w-7 h-7 rounded-md bg-white/10 flex items-center justify-center shrink-0">
+                      {section.icon}
+                    </span>
+                    <span className="flex-1 text-left">{section.label}</span>
+                    <ChevronDown rotated={expandedSection === section.id} />
+                  </button>
+                  {expandedSection === section.id && (
+                    <div className="bg-white/5 border-b border-white/10">
+                      {section.links.map((link, i) => (
+                        <Link key={link.href} href={link.href} onClick={close}
+                          className={`block pl-5 py-2.5 text-[14px] text-white hover:text-blue-300
+                            ${i < section.links.length - 1 ? 'border-b border-white/5' : ''}`}>
+                          {link.label}
+                        </Link>
+                      ))}
+                      {section.ctaLink && (
+                        <Link href={section.ctaLink.href} onClick={close}
+                          className="block pl-5 py-2.5 text-[14px] text-white hover:text-blue-300 border-t border-white/5">
+                          {section.ctaLink.label}
+                        </Link>
+                      )}
+                    </div>
+                  )}
+                </div>
+              ))}
 
             </div>
           </div>
