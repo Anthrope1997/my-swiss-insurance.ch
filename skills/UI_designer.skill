@@ -632,7 +632,7 @@ const heroStats = [
 
 <HeroStats stats={heroStats} className="mb-8" />
 // stats: { value: string, label: string, sub: string }[]
-// className?: string  — espacement vertical uniquement (mb-*, pb-*, border-b)
+// className?: string  — espacement vertical uniquement (mb-*, pb-*) — jamais border-b
 ```
 
 ---
@@ -1050,7 +1050,7 @@ export default function PageHub() {
           </p>
 
           {/* StatsGrid — 3 métriques de crédibilité */}
-          <HeroStats stats={heroStats} className="mb-10 pb-10 border-b border-edge" />
+          <HeroStats stats={heroStats} className="mb-10" />
         </div>
       </section>
 

@@ -205,7 +205,7 @@ export default function LamalPage() {
           </p>
 
           {/* Stats */}
-          <HeroStats stats={stats} className="mb-10 pb-10 border-b border-edge" />
+          <HeroStats stats={stats} className="mb-10" />
 
         </div>
       </section>
