@@ -56,10 +56,10 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
   ]
 
   const toc = [
-    { id: 'top-caisses', label: 'Caisses les moins chères' },
-    { id: 'franchise',   label: 'Choisir sa franchise'    },
-    { id: 'subsides',    label: 'Subsides LAMal'          },
-    { id: 'faq',         label: 'Questions fréquentes'    },
+    { id: 'top-caisses', label: '1. Caisses les moins chères' },
+    { id: 'franchise',   label: '2. Choisir sa franchise'     },
+    { id: 'subsides',    label: '3. Subsides LAMal'           },
+    { id: 'faq',         label: '4. Questions fréquentes'     },
   ]
 
   const faqItems = [
@@ -204,7 +204,7 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
         {/* ── Top caisses ──────────────────────────────────────────────── */}
         <section id="top-caisses">
           <h2 className="article-h2">
-            Quelles caisses sont les moins chères dans le {canton.cantonDe} en 2026 ?
+            1. Quelles caisses sont les moins chères dans le {canton.cantonDe} en 2026 ?
           </h2>
           <p className="text-[16px] text-slate mb-6">
             Classement pour un adulte de 35 ans, franchise 300 CHF, modèle standard, sans couverture accident,
@@ -274,7 +274,7 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
         {/* ── Franchise ────────────────────────────────────────────────── */}
         <section id="franchise">
           <h2 className="article-h2">
-            Quelle franchise choisir dans le canton de {canton.name} ?
+            2. Quelle franchise choisir dans le {canton.cantonDe} ?
           </h2>
           <p className="text-[16px] text-slate mb-6">
             Tableau établi pour <strong className="text-ink">{canton.caisseRef}</strong>, adulte de 35 ans,
@@ -331,7 +331,7 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
         {/* ── Subsides ─────────────────────────────────────────────────── */}
         <section id="subsides">
           <h2 className="article-h2">
-            Quels subsides LAMal dans le {canton.cantonDe} ?
+            3. Quels subsides LAMal dans le {canton.cantonDe} ?
           </h2>
           <div className="border border-edge rounded-[8px] overflow-hidden mb-5">
             <table className="w-full text-[16px]">
@@ -386,7 +386,7 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
 
         {/* ── FAQ ──────────────────────────────────────────────────────── */}
         <section id="faq" className="border-t border-edge pt-8">
-          <FAQ items={faqItems} />
+          <FAQ items={faqItems} title="4. Questions fréquentes" />
         </section>
 
         {/* ── Formulaire multi-étapes ───────────────────────────────────── */}
