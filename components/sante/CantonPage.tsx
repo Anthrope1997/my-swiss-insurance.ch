@@ -8,6 +8,7 @@ import RelatedGuides from '@/components/shared/RelatedGuides'
 import InfoBox from '@/components/shared/InfoBox'
 import Link from 'next/link'
 import fr from '@/dictionaries/fr.json'
+import type { ReactNode } from 'react'
 import type { Canton } from '@/data/sante/cantons'
 import type { Canton as SubsideCanton } from '@/lib/sante/calcul-subside'
 
@@ -24,7 +25,13 @@ function formatChf(n: number): string {
   return n.toLocaleString('fr-CH')
 }
 
-export default function CantonPage({ canton, noFaqSchema = false }: { canton: Canton; noFaqSchema?: boolean }) {
+export default function CantonPage({ canton, noFaqSchema = false, heroIntro, overrideHeroStats, overrideEnBref }: {
+  canton: Canton
+  noFaqSchema?: boolean
+  heroIntro?: ReactNode
+  overrideHeroStats?: Array<{ value: string; label: string; sub: string }>
+  overrideEnBref?: string[]
+}) {
   const cheapest = canton.topCaisses[0]
   const subsideCanton = SLUG_TO_SUBSIDE[canton.slug]
 
@@ -158,24 +165,26 @@ export default function CantonPage({ canton, noFaqSchema = false }: { canton: Ca
         <div className="container-xl">
 
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-5">
-            Assurance maladie de base LAMal dans le canton de {canton.name}
+            Assurance maladie de base LAMal dans le {canton.cantonDe}
           </h1>
 
-          <p className="text-[18px] text-slate leading-relaxed mb-8">
-            Dans le canton de {canton.name} en 2026, les assurés peuvent économiser jusqu'à{' '}
-            <strong>CHF {formatChf(canton.economieAn)} par an</strong> en changeant de caisse,
-            à prestations identiques. Le canton se classe{' '}
-            <strong>{ordinal(canton.rang)} sur 26</strong> cantons suisses.
-          </p>
+          {heroIntro ?? (
+            <p className="text-[18px] text-slate leading-relaxed mb-8">
+              Dans le {canton.cantonDe} en 2026, les assurés peuvent économiser jusqu'à{' '}
+              <strong>CHF {formatChf(canton.economieAn)} par an</strong> en changeant de caisse,
+              à prestations identiques. Le canton se classe{' '}
+              <strong>{ordinal(canton.rang)} sur 26</strong> cantons suisses.
+            </p>
+          )}
 
-          <HeroStats stats={heroStats} className="mb-10" />
+          <HeroStats stats={overrideHeroStats ?? heroStats} className="mb-10" />
         </div>
       </section>
 
       {/* ── Zone 2 — En bref + Sommaire ──────────────────────────────────── */}
       <div className="bg-cloud border-b border-edge py-8">
         <div className="container-xl grid grid-cols-1 md:grid-cols-2 gap-5">
-          <InfoBox title="En bref" items={enBref} />
+          <InfoBox title="En bref" items={overrideEnBref ?? enBref} />
           <div className="bg-white border border-edge rounded-xl p-5">
             <p className="text-2xl font-semibold text-ink mb-3">Sommaire</p>
             <ul className="space-y-1">
