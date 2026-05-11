@@ -14,6 +14,8 @@ import LeadFormModal from '@/components/ui/LeadFormModal'
 
 const PRECISE_CANTONS = new Set<string>(['GE', 'VS', 'NE', 'VD', 'JU', 'FR'])
 
+const NON_DATE_DELAI = new Set(['Non requis (automatique)', 'Dépôt possible — rétroactif', 'Voir OVAM 2026'])
+
 const ALL_CODES = Object.keys(SUBSIDES_2026).sort((a, b) =>
   SUBSIDES_2026[a as keyof typeof SUBSIDES_2026].nom.localeCompare(
     SUBSIDES_2026[b as keyof typeof SUBSIDES_2026].nom, 'fr'
@@ -291,7 +293,15 @@ export default function SubsidesSimulatorFull() {
                           <svg className="w-3.5 h-3.5 text-brand shrink-0" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                             <path d="M5 13l4 4L19 7" />
                           </svg>
-                          Attribution automatique — aucune démarche requise
+                          Subsides versés automatiquement
+                        </>
+                      ) : !NON_DATE_DELAI.has(cantonData.delai) ? (
+                        <>
+                          <svg className="w-3.5 h-3.5 text-slate shrink-0" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="9" />
+                            <path d="M12 7v5l3 3" />
+                          </svg>
+                          Subsides versés sur demande, démarche à effectuer avant le {cantonData.delai}
                         </>
                       ) : (
                         <>
@@ -299,7 +309,7 @@ export default function SubsidesSimulatorFull() {
                             <circle cx="12" cy="12" r="9" />
                             <path d="M12 7v5l3 3" />
                           </svg>
-                          Sur demande — à déposer avant le {cantonData.delai}
+                          Subsides versés sur demande
                         </>
                       )}
                     </span>
