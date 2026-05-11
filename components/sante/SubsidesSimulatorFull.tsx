@@ -289,7 +289,7 @@ export default function SubsidesSimulatorFull() {
                   </div>
                   <div className="text-right shrink-0">
                     <p className="text-[16px] font-semibold text-ink">{cantonData.nom}</p>
-                    <p className="text-[13px] text-slate">Barème 2026</p>
+                    <p className="text-[16px] text-slate">Barème 2026</p>
                   </div>
                 </div>
 
@@ -299,29 +299,29 @@ export default function SubsidesSimulatorFull() {
                     form.nbEnfants > 0 && form.situation === 'couple' ? 'grid-cols-3' : 'grid-cols-2'
                   }`}>
                     <div className="bg-white/60 px-5 py-4">
-                      <p className="text-[13px] text-slate mb-0.5">
+                      <p className="text-[16px] text-slate mb-0.5">
                         {form.situation === 'couple' ? 'Par adulte' : 'Adulte'}
                       </p>
                       <p className="text-[16px] font-bold text-ink">
                         CHF {fmt(result.adulte)}
-                        <span className="text-[13px] font-normal text-slate">/mois</span>
+                        <span className="text-[16px] font-normal text-slate">/mois</span>
                       </p>
                     </div>
                     {form.nbEnfants > 0 && (
                       <div className="bg-white/60 px-5 py-4">
-                        <p className="text-[13px] text-slate mb-0.5">Par enfant</p>
+                        <p className="text-[16px] text-slate mb-0.5">Par enfant</p>
                         <p className="text-[16px] font-bold text-ink">
                           CHF {fmt(result.enfant)}
-                          <span className="text-[13px] font-normal text-slate">/mois</span>
+                          <span className="text-[16px] font-normal text-slate">/mois</span>
                         </p>
                       </div>
                     )}
                     {form.situation === 'couple' && (
                       <div className="bg-white/60 px-5 py-4">
-                        <p className="text-[13px] text-slate mb-0.5">Total ménage</p>
+                        <p className="text-[16px] text-slate mb-0.5">Total ménage</p>
                         <p className="text-[16px] font-bold text-ink">
                           CHF {fmt(result.total)}
-                          <span className="text-[13px] font-normal text-slate">/mois</span>
+                          <span className="text-[16px] font-normal text-slate">/mois</span>
                         </p>
                       </div>
                     )}
@@ -334,10 +334,8 @@ export default function SubsidesSimulatorFull() {
                     <p className="text-[13px] text-brand/70 uppercase tracking-wide mb-1">
                       Estimation indicative
                     </p>
-                    <p className="text-[13px] text-slate leading-relaxed">
-                      {PRECISE_CANTONS.has(form.canton)
-                        ? 'Calcul basé sur le barème officiel 2026. Le montant réel est confirmé par le service cantonal sur la base de votre dossier fiscal.'
-                        : 'Barème cantonal appliqué de manière linéaire. Le montant réel est déterminé par le service cantonal sur la base de votre dossier fiscal.'}
+                    <p className="text-[16px] text-slate leading-relaxed">
+                      Les conditions varient selon votre canton et votre situation fiscale. Comme chaque situation est unique, un expert peut vérifier votre éligibilité et vous accompagner dans vos démarches, gratuitement et sans engagement.
                     </p>
                   </div>
                   <button
