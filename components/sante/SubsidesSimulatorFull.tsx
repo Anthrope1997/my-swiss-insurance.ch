@@ -285,7 +285,7 @@ export default function SubsidesSimulatorFull() {
                     <p className="text-[16px] text-slate mt-1.5">
                       soit environ CHF {fmt(result.total * 12)} par an déduits de votre prime
                     </p>
-                    <span className="inline-flex items-center gap-1.5 mt-2 text-[12px] text-slate">
+                    <span className="inline-flex items-center gap-1.5 mt-2 text-[16px] text-slate">
                       {cantonData.auto ? (
                         <>
                           <svg className="w-3.5 h-3.5 text-brand shrink-0" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
