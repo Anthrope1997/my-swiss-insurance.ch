@@ -275,9 +275,8 @@ export default function SubsidesSimulatorFull() {
                 {/* En-tête : montant à gauche, canton à droite */}
                 <div className="px-6 py-5 flex items-start justify-between gap-4">
                   <div>
-                    <p className="text-[13px] text-brand/70 uppercase tracking-wide mb-1">
+                    <p className="text-[13px] font-bold text-brand/70 uppercase tracking-wide mb-1">
                       Estimation subside mensuel
-                      {result.label && result.label !== 'Ordinaire' ? ` — ${result.label}` : ''}
                     </p>
                     <p className="text-4xl font-bold text-ink">
                       CHF {fmt(result.total)}
@@ -331,7 +330,7 @@ export default function SubsidesSimulatorFull() {
                 {/* Disclaimer + CTA */}
                 <div className="border-t border-brand/10 px-6 py-5 space-y-4">
                   <div>
-                    <p className="text-[13px] text-brand/70 uppercase tracking-wide mb-1">
+                    <p className="text-[13px] font-bold text-brand/70 uppercase tracking-wide mb-1">
                       Estimation indicative
                     </p>
                     <p className="text-[16px] text-slate leading-relaxed">
@@ -340,7 +339,7 @@ export default function SubsidesSimulatorFull() {
                   </div>
                   <button
                     onClick={() => setOfferOpen(true)}
-                    className="hidden md:flex w-full bg-white border border-edge rounded-lg px-5 py-3 items-center justify-center gap-2 text-[16px] font-semibold text-ink hover:bg-cloud transition-colors"
+                    className="hidden md:flex w-full bg-white border border-edge rounded-lg px-5 py-3 items-center justify-center gap-2 text-[16px] font-semibold text-brand hover:bg-cloud transition-colors"
                   >
                     <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                       <path d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" />
@@ -351,7 +350,7 @@ export default function SubsidesSimulatorFull() {
                   </button>
                   <Link
                     href="/devis"
-                    className="md:hidden flex w-full bg-white border border-edge rounded-lg px-5 py-3 items-center justify-center gap-2 text-[16px] font-semibold text-ink"
+                    className="md:hidden flex w-full bg-white border border-edge rounded-lg px-5 py-3 items-center justify-center gap-2 text-[16px] font-semibold text-brand"
                   >
                     <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                       <path d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" />
