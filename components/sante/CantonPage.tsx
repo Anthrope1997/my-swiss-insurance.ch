@@ -55,12 +55,14 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
     `28 % des résidents en Suisse bénéficient d'un subside LAMal : vérifiez votre droit dans le simulateur ci-dessous.`,
   ]
 
-  const toc = [
-    { id: 'top-caisses', label: '1. Caisses les moins chères' },
-    { id: 'franchise',   label: '2. Choisir sa franchise'     },
-    { id: 'subsides',    label: '3. Subsides LAMal'           },
-    { id: 'faq',         label: '4. Questions fréquentes'     },
+  const tocBase = [
+    { id: 'top-caisses', label: 'Caisses les moins chères'                                 },
+    ...(canton.modelesAlternatifs ? [{ id: 'modeles', label: 'Modèles alternatifs' }] : []),
+    { id: 'franchise',   label: 'Choisir sa franchise'                                     },
+    { id: 'subsides',    label: 'Subsides LAMal'                                           },
+    { id: 'faq',         label: 'Questions fréquentes'                                     },
   ]
+  const toc = tocBase.map((s, i) => ({ ...s, label: `${i + 1}. ${s.label}` }))
 
   const faqItems = [
     {
@@ -204,7 +206,7 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
         {/* ── Top caisses ──────────────────────────────────────────────── */}
         <section id="top-caisses">
           <h2 className="article-h2">
-            1. Quelles caisses sont les moins chères dans le {canton.cantonDe} en 2026 ?
+            Quelles caisses sont les moins chères dans le {canton.cantonDe} en 2026 ?
           </h2>
           <p className="text-[16px] text-slate mb-6">
             Classement pour un adulte de 35 ans, franchise 300 CHF, modèle standard, sans couverture accident,
@@ -269,12 +271,76 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
               Comparer toutes les caisses pour votre profil exact →
             </Link>
           </div>
+
+          {canton.caisseJA && (
+            <p className="text-[16px] text-slate mt-5">
+              Pour un jeune adulte de 19 à 25 ans, la meilleure prime dans le {canton.cantonDe} est de{' '}
+              <strong className="text-ink">{canton.caisseJA.prime} CHF par mois</strong>{' '}
+              ({canton.caisseJA.name}, franchise 300 CHF, modèle standard).
+            </p>
+          )}
         </section>
+
+        {/* ── Modèles alternatifs ───────────────────────────────────────── */}
+        {canton.modelesAlternatifs && (
+          <section id="modeles">
+            <h2 className="article-h2">
+              Économiser avec un modèle alternatif dans le {canton.cantonDe}
+            </h2>
+            <p className="text-[16px] text-slate mb-6">
+              Le modèle standard offre la liberté de consulter n&apos;importe quel médecin sans restriction. En optant pour un modèle alternatif (médecin de famille, HMO ou télémédecine), vous réduisez votre prime tout en conservant les mêmes remboursements LAMal.
+            </p>
+            <div className="border border-edge rounded-[8px] overflow-hidden">
+              <table className="stripe-table w-full text-[16px]">
+                <thead>
+                  <tr>
+                    <th className="text-left whitespace-nowrap">Modèle</th>
+                    <th className="text-left whitespace-nowrap">Caisse</th>
+                    <th className="text-left whitespace-nowrap">Prime / mois</th>
+                    <th className="text-left whitespace-nowrap hidden sm:table-cell">Économie annuelle</th>
+                    <th className="text-left whitespace-nowrap hidden sm:table-cell">Économie %</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {canton.modelesAlternatifs.map((m, i) => {
+                    const ref = canton.modelesAlternatifs![0].prime
+                    const econAn = i === 0 ? 0 : Math.round((ref - m.prime) * 12)
+                    const econPct = i === 0 ? 0 : Math.round(((ref - m.prime) / ref) * 100)
+                    return (
+                      <tr key={m.modele} className={i === 0 ? 'bg-cloud/70' : ''}>
+                        <td className="font-medium text-ink whitespace-nowrap">{m.modele}</td>
+                        <td className="whitespace-nowrap text-slate">{m.caisse}</td>
+                        <td className={`text-left whitespace-nowrap font-semibold ${i === 0 ? 'text-slate' : 'text-brand'}`}>
+                          {m.prime.toFixed(2)} CHF
+                        </td>
+                        <td className="text-left whitespace-nowrap hidden sm:table-cell">
+                          {i === 0 ? (
+                            <span className="text-slate/50 text-[13px] italic">Référence</span>
+                          ) : (
+                            <span className="text-brand font-semibold">{formatChf(econAn)} CHF</span>
+                          )}
+                        </td>
+                        <td className="text-left whitespace-nowrap hidden sm:table-cell text-slate">
+                          {i === 0 ? '—' : `−${econPct} %`}
+                        </td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
+            <div className="mt-4">
+              <Link href="/sante/comparateur" className="text-brand hover:underline text-[16px] font-medium">
+                Comparer tous les modèles pour votre profil →
+              </Link>
+            </div>
+          </section>
+        )}
 
         {/* ── Franchise ────────────────────────────────────────────────── */}
         <section id="franchise">
           <h2 className="article-h2">
-            2. Quelle franchise choisir dans le {canton.cantonDe} ?
+            Quelle franchise choisir dans le {canton.cantonDe} ?
           </h2>
           <p className="text-[16px] text-slate mb-6">
             Tableau établi pour <strong className="text-ink">{canton.caisseRef}</strong>, adulte de 35 ans,
@@ -331,28 +397,65 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
         {/* ── Subsides ─────────────────────────────────────────────────── */}
         <section id="subsides">
           <h2 className="article-h2">
-            3. Quels subsides LAMal dans le {canton.cantonDe} ?
+            Quels subsides LAMal dans le {canton.cantonDe} ?
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
-            <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
-              <p className="text-[13px] text-slate/60 uppercase tracking-wide mb-1">Seuil de revenu</p>
-              <p className="text-[16px] font-medium text-ink">{canton.subside.seuilRevenu}</p>
+          {canton.subside.bareme ? (
+            <>
+              <div className="border border-edge rounded-[8px] overflow-hidden mb-5">
+                <table className="stripe-table w-full text-[16px]">
+                  <thead>
+                    <tr>
+                      <th className="text-left whitespace-nowrap">Revenu annuel</th>
+                      <th className="text-left whitespace-nowrap">Subside mensuel estimé</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {canton.subside.bareme.map((row) => (
+                      <tr key={row.revenu}>
+                        <td className="text-ink font-medium whitespace-nowrap">{row.revenu}</td>
+                        <td className={`text-left font-semibold whitespace-nowrap ${row.montant === 'Non éligible' ? 'text-slate' : 'text-brand'}`}>
+                          {row.montant}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="grid grid-cols-2 gap-3 mb-5">
+                <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
+                  <p className="text-[13px] text-slate/60 uppercase tracking-wide mb-1">Attribution</p>
+                  <p className="text-[16px] font-medium text-ink">
+                    {canton.subside.automatique ? 'Automatique' : 'Sur demande'}
+                  </p>
+                </div>
+                <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
+                  <p className="text-[13px] text-slate/60 uppercase tracking-wide mb-1">Délai 2026</p>
+                  <p className="text-[16px] font-medium text-ink">{canton.subside.delai ?? '—'}</p>
+                </div>
+              </div>
+            </>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
+              <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
+                <p className="text-[13px] text-slate/60 uppercase tracking-wide mb-1">Seuil de revenu</p>
+                <p className="text-[16px] font-medium text-ink">{canton.subside.seuilRevenu}</p>
+              </div>
+              <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
+                <p className="text-[13px] text-slate/60 uppercase tracking-wide mb-1">Subside indicatif</p>
+                <p className="text-[16px] font-medium text-brand">{canton.subside.subsideMensuel}</p>
+              </div>
+              <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
+                <p className="text-[13px] text-slate/60 uppercase tracking-wide mb-1">Attribution</p>
+                <p className="text-[16px] font-medium text-ink">
+                  {canton.subside.automatique ? 'Automatique' : 'Sur demande'}
+                </p>
+              </div>
+              <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
+                <p className="text-[13px] text-slate/60 uppercase tracking-wide mb-1">Délai 2026</p>
+                <p className="text-[16px] font-medium text-ink">{canton.subside.delai ?? '—'}</p>
+              </div>
             </div>
-            <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
-              <p className="text-[13px] text-slate/60 uppercase tracking-wide mb-1">Subside indicatif</p>
-              <p className="text-[16px] font-medium text-brand">{canton.subside.subsideMensuel}</p>
-            </div>
-            <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
-              <p className="text-[13px] text-slate/60 uppercase tracking-wide mb-1">Attribution</p>
-              <p className="text-[16px] font-medium text-ink">
-                {canton.subside.automatique ? 'Automatique' : 'Sur demande'}
-              </p>
-            </div>
-            <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
-              <p className="text-[13px] text-slate/60 uppercase tracking-wide mb-1">Délai 2026</p>
-              <p className="text-[16px] font-medium text-ink">{canton.subside.delai ?? '—'}</p>
-            </div>
-          </div>
+          )}
           <p className="text-[13px] text-slate mb-2">
             {canton.subside.automatique
               ? `Dans le ${canton.cantonDe}, les subsides sont attribués automatiquement après la taxation fiscale. Assurez-vous que votre déclaration est à jour.`
@@ -381,7 +484,7 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
 
         {/* ── FAQ ──────────────────────────────────────────────────────── */}
         <section id="faq" className="border-t border-edge pt-8">
-          <FAQ items={faqItems} title="4. Questions fréquentes" />
+          <FAQ items={faqItems} title="Questions fréquentes" />
         </section>
 
         {/* ── Formulaire multi-étapes ───────────────────────────────────── */}

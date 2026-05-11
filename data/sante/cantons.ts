@@ -25,6 +25,7 @@ export interface SubsideInfo {
   automatique: boolean
   delai?: string
   lienOfficiel: string
+  bareme?: Array<{ revenu: string; montant: string }>
 }
 
 export interface CapitaleData {
@@ -53,6 +54,8 @@ export interface Canton {
   caisseRef: string            // caisse utilisée pour le tableau des franchises
   regions: RegionPrime[]
   franchiseTable: FranchiseRow[]
+  caisseJA?: { name: string; prime: number }
+  modelesAlternatifs?: Array<{ modele: string; caisse: string; prime: number }>
   subside: SubsideInfo
   capitale?: CapitaleData      // données spécifiques à la ville principale
 }
@@ -897,12 +900,26 @@ const cantons: Canton[] = [
       { franchise: 2000, primeMois: 389.75 , primeAn: 4677, cout0: 4677, cout3000: 6777, cout8000: 7277 },
       { franchise: 2500, primeMois: 362.3  , primeAn: 4348, cout0: 4348, cout3000: 6898, cout8000: 7398 },
     ],
+    caisseJA: { name: 'Sanitas', prime: 341.75 },
+    modelesAlternatifs: [
+      { modele: 'Standard',           caisse: 'KKLH',     prime: 482.95 },
+      { modele: 'Médecin de famille', caisse: 'Sanitas',  prime: 440.55 },
+      { modele: 'HMO',                caisse: 'Avenir',   prime: 442.25 },
+      { modele: 'Télémédecine',       caisse: 'Agrisano', prime: 425.95 },
+    ],
     subside: {
       seuilRevenu: '≈ 56 000 CHF/an (seul)',
       subsideMensuel: 'Variable selon le revenu',
+      subsideMensuelMax: 486,
       automatique: false,
       delai: '31 oct. 2026',
       lienOfficiel: 'https://www.ag.ch',
+      bareme: [
+        { revenu: 'Moins de 30 000 CHF', montant: 'de 226 à 486 CHF / mois' },
+        { revenu: '30 000 – 42 000 CHF', montant: 'de 122 à 226 CHF / mois' },
+        { revenu: '42 000 – 56 000 CHF', montant: "jusqu'à 122 CHF / mois"  },
+        { revenu: 'Plus de 56 000 CHF',  montant: 'Non éligible'            },
+      ],
     },
   },
 

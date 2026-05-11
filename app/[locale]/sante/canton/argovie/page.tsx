@@ -38,8 +38,8 @@ const argovieHeroStats = [
 
 const argovieEnBref = [
   `Avec une franchise de 300 CHF, la prime la moins chère est de ${Math.round(f300.primeMois)} CHF par mois (${fmt(f300.primeAn)} CHF par an).`,
-  `Avec une franchise de 2 500 CHF, la prime la moins chère en Argovie est de ${Math.round(f2500.primeMois)} CHF par mois (${fmt(f2500.primeAn)} CHF par an).`,
-  `Point de bascule : la franchise 300 CHF devient plus avantageuse si vos frais médicaux dépassent CHF ${fmt(breakEven)} par an.`,
+  `Avec une franchise de 2 500 CHF, la prime la moins chère est de ${Math.round(f2500.primeMois)} CHF par mois (${fmt(f2500.primeAn)} CHF par an).`,
+  `La franchise 300 CHF devient plus avantageuse si vos frais médicaux dépassent CHF ${fmt(breakEven)} par an.`,
 ]
 
 export const metadata: Metadata = {
