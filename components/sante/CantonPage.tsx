@@ -38,10 +38,21 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
   const rowMin = canton.franchiseTable.find((r) => r.franchise === 300)!
   const rowMax = canton.franchiseTable.find((r) => r.franchise === 2500)!
   const economieFranchise = rowMin.cout0 - rowMax.cout0
+  const savingF    = rowMin.cout0    - rowMax.cout0
+  const crossoverF = rowMax.cout3000 - rowMin.cout3000
+  const breakEven  = Math.round(3000 * savingF / (savingF + crossoverF))
 
-  const heroStats = [
-    { value: `${cheapest.prime} CHF`, label: 'Meilleure prime', sub: `par mois, adulte 35 ans, ${canton.villePrincipale}` },
-    { value: `${formatChf(canton.economieAn)} CHF`, label: 'Économie annuelle max.', sub: 'en changeant de caisse' },
+  const heroStats = overrideHeroStats ?? [
+    {
+      value: `${cheapest.prime} CHF`,
+      label: 'Prime adulte la moins chère',
+      sub: 'adulte 35 ans, modèle standard, franchise 300 CHF',
+    },
+    {
+      value: `${canton.primeMoyenneEnfant} CHF`,
+      label: 'Prime enfant la moins chère',
+      sub: 'enfant 0–18 ans, modèle standard, franchise 300 CHF',
+    },
     {
       value: canton.subside.subsideMensuelMax ? `${canton.subside.subsideMensuelMax} CHF` : '–',
       label: 'Subside mensuel max.',
@@ -49,10 +60,10 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
     },
   ]
 
-  const enBref = [
-    `${cheapest.name} est la caisse la moins chère dans le ${canton.cantonDe} dès ${cheapest.prime} CHF par mois (adulte 35 ans, franchise 300 CHF, modèle standard).`,
-    `En changeant de caisse, un assuré économise jusqu'à ${formatChf(canton.economieAn)} CHF par an pour des prestations identiques.`,
-    `28 % des résidents en Suisse bénéficient d'un subside LAMal : vérifiez votre droit dans le simulateur ci-dessous.`,
+  const enBref = overrideEnBref ?? [
+    `Avec une franchise de 300 CHF, la prime la moins chère est de ${Math.round(rowMin.primeMois)} CHF par mois (${formatChf(rowMin.primeAn)} CHF par an).`,
+    `Avec une franchise de 2 500 CHF, la prime la moins chère est de ${Math.round(rowMax.primeMois)} CHF par mois (${formatChf(rowMax.primeAn)} CHF par an).`,
+    `La franchise 300 CHF devient plus avantageuse si vos frais médicaux dépassent CHF ${formatChf(breakEven)} par an.`,
   ]
 
   const tocBase = [
@@ -179,14 +190,14 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
             </p>
           )}
 
-          <HeroStats stats={overrideHeroStats ?? heroStats} className="mb-10" />
+          <HeroStats stats={heroStats} className="mb-10" />
         </div>
       </section>
 
       {/* ── Zone 2 — En bref + Sommaire ──────────────────────────────────── */}
       <div className="bg-cloud border-b border-edge py-8">
         <div className="container-xl grid grid-cols-1 md:grid-cols-2 gap-5">
-          <InfoBox title="En bref" items={overrideEnBref ?? enBref} />
+          <InfoBox title="En bref" items={enBref} />
           <div className="bg-white border border-edge rounded-xl p-5">
             <p className="text-2xl font-semibold text-ink mb-3">Sommaire</p>
             <ul className="space-y-1">
