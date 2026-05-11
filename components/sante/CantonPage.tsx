@@ -7,7 +7,6 @@ import SubsidesCalculator from '@/components/sante/SubsidesCalculator'
 import RelatedGuides from '@/components/shared/RelatedGuides'
 import InfoBox from '@/components/shared/InfoBox'
 import Link from 'next/link'
-import fr from '@/dictionaries/fr.json'
 import type { ReactNode } from 'react'
 import type { Canton } from '@/data/sante/cantons'
 import type { Canton as SubsideCanton } from '@/lib/sante/calcul-subside'
@@ -384,17 +383,23 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
               </tbody>
             </table>
           </div>
-          <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div className="bg-blue-tint rounded-[8px] px-4 py-3">
-              <p className="text-[13px] font-semibold text-brand mb-0.5">{fr.shared.rarementMalade}</p>
-              <p className="text-[13px] text-brand">
-                Franchise 2 500 CHF : économie de CHF {formatChf(economieFranchise)} par an sur la prime.
+          <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="bg-blue-tint rounded-[8px] px-5 py-4">
+              <p className="text-[12px] font-bold text-brand/70 uppercase tracking-wide mb-3">
+                Si vous êtes rarement malade
+              </p>
+              <p className="text-xl font-bold text-brand mb-1">Franchise 2 500 CHF</p>
+              <p className="text-[14px] text-brand">
+                Économie de {formatChf(economieFranchise)} CHF par an sur la prime
               </p>
             </div>
-            <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
-              <p className="text-[13px] font-semibold text-slate mb-0.5">Si vous avez des soins réguliers</p>
-              <p className="text-[13px] text-slate">
-                Franchise 300 CHF : reste à charge plafonné à CHF 1 000 par an.
+            <div className="bg-cloud border border-edge rounded-[8px] px-5 py-4">
+              <p className="text-[12px] font-bold text-slate/60 uppercase tracking-wide mb-3">
+                Si vous avez des soins réguliers
+              </p>
+              <p className="text-xl font-bold text-ink mb-1">Franchise 300 CHF</p>
+              <p className="text-[14px] text-slate">
+                Reste à charge plafonné à CHF 1 000 par an
               </p>
             </div>
           </div>
