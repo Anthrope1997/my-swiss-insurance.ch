@@ -175,8 +175,25 @@ export default function SubsidesSimulatorFull() {
           </div>
         </div>
 
-        {/* Row 2 : situation + enfants + âge */}
+        {/* Row 2 : âge + situation + enfants */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div>
+            <label className="block text-[16px] font-medium text-ink mb-2">
+              Âge
+            </label>
+            <div className="relative">
+              <select
+                value={form.isJeune ? 'jeune' : 'adulte'}
+                onChange={e => set({ isJeune: e.target.value === 'jeune' })}
+                className="select-field pr-9"
+              >
+                <option value="adulte">Adulte (26 ans et plus)</option>
+                <option value="jeune">Jeune adulte (19 à 25 ans)</option>
+              </select>
+              <Chevron />
+            </div>
+          </div>
+
           <div>
             <label className="block text-[16px] font-medium text-ink mb-2">
               Situation familiale
@@ -207,23 +224,6 @@ export default function SubsidesSimulatorFull() {
                 {[0, 1, 2, 3, 4].map(n => (
                   <option key={n} value={n}>{n === 0 ? 'Aucun' : `${n} enfant${n > 1 ? 's' : ''}`}</option>
                 ))}
-              </select>
-              <Chevron />
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-[16px] font-medium text-ink mb-2">
-              Âge
-            </label>
-            <div className="relative">
-              <select
-                value={form.isJeune ? 'jeune' : 'adulte'}
-                onChange={e => set({ isJeune: e.target.value === 'jeune' })}
-                className="select-field pr-9"
-              >
-                <option value="adulte">Adulte (26 ans et plus)</option>
-                <option value="jeune">Jeune adulte (19 à 25 ans)</option>
               </select>
               <Chevron />
             </div>
@@ -320,40 +320,6 @@ export default function SubsidesSimulatorFull() {
                   </div>
                 </div>
 
-                {/* Ventilation (si couple ou enfants) */}
-                {(form.nbEnfants > 0 || form.situation === 'couple') && (
-                  <div className={`grid gap-px border-t border-brand/10 ${
-                    form.nbEnfants > 0 && form.situation === 'couple' ? 'grid-cols-3' : 'grid-cols-2'
-                  }`}>
-                    <div className="bg-white/60 px-5 py-4">
-                      <p className="text-[16px] text-slate mb-0.5">
-                        {form.situation === 'couple' ? 'Par adulte' : 'Adulte'}
-                      </p>
-                      <p className="text-[16px] font-bold text-ink">
-                        CHF {fmt(result.adulte)}
-                        <span className="text-[16px] font-normal text-slate">/mois</span>
-                      </p>
-                    </div>
-                    {form.nbEnfants > 0 && (
-                      <div className="bg-white/60 px-5 py-4">
-                        <p className="text-[16px] text-slate mb-0.5">Par enfant</p>
-                        <p className="text-[16px] font-bold text-ink">
-                          CHF {fmt(result.enfant)}
-                          <span className="text-[16px] font-normal text-slate">/mois</span>
-                        </p>
-                      </div>
-                    )}
-                    {form.situation === 'couple' && (
-                      <div className="bg-white/60 px-5 py-4">
-                        <p className="text-[16px] text-slate mb-0.5">Total ménage</p>
-                        <p className="text-[16px] font-bold text-ink">
-                          CHF {fmt(result.total)}
-                          <span className="text-[16px] font-normal text-slate">/mois</span>
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                )}
 
                 {/* Disclaimer + CTA */}
                 <div className="border-t border-brand/10 px-6 py-5 space-y-4">
