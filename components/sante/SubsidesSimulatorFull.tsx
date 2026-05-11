@@ -244,7 +244,7 @@ export default function SubsidesSimulatorFull() {
       {/* ── Résultats ── */}
       {submitted && cantonData && (
         <div style={{ borderTop: '0.5px solid var(--border)' }}>
-          <div className="px-6 py-6 space-y-4">
+          <div className="px-3 sm:px-6 py-6 space-y-4">
 
             {/* Revenu manquant */}
             {showResult && !hasRevenu && (
@@ -274,9 +274,9 @@ export default function SubsidesSimulatorFull() {
             {showResult && hasRevenu && result && hasAmount && (
               <div className="rounded-[8px] bg-[var(--blue-tint)] border border-brand/20 overflow-hidden">
 
-                {/* En-tête : montant à gauche, canton à droite */}
-                <div className="px-6 py-5 flex items-start justify-between gap-4">
-                  <div>
+                {/* En-tête : montant à gauche, canton à droite (desktop) */}
+                <div className="px-4 sm:px-6 py-5 flex items-start justify-between gap-4">
+                  <div className="min-w-0">
                     <p className="text-[13px] font-bold text-brand/70 uppercase tracking-wide mb-1">
                       Estimation subside mensuel
                     </p>
@@ -287,7 +287,7 @@ export default function SubsidesSimulatorFull() {
                     <p className="text-[16px] text-slate mt-1.5">
                       soit environ CHF {fmt(result.total * 12)} par an déduits de votre prime
                     </p>
-                    <span className="inline-flex items-center gap-1.5 mt-2 text-[16px] text-slate">
+                    <span className="flex flex-wrap items-center gap-1.5 mt-2 text-[16px] text-slate">
                       {cantonData.auto ? (
                         <>
                           <svg className="w-3.5 h-3.5 text-brand shrink-0" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
@@ -314,7 +314,7 @@ export default function SubsidesSimulatorFull() {
                       )}
                     </span>
                   </div>
-                  <div className="text-right shrink-0">
+                  <div className="hidden sm:block text-right shrink-0">
                     <p className="text-[16px] font-semibold text-ink">{cantonData.nom}</p>
                     <p className="text-[16px] text-slate">Barème 2026</p>
                   </div>
@@ -322,7 +322,7 @@ export default function SubsidesSimulatorFull() {
 
 
                 {/* Disclaimer + CTA */}
-                <div className="border-t border-brand/10 px-6 py-5 space-y-4">
+                <div className="border-t border-brand/10 px-4 sm:px-6 py-5 space-y-4">
                   <div>
                     <p className="text-[13px] font-bold text-brand/70 uppercase tracking-wide mb-1">
                       Estimation indicative
