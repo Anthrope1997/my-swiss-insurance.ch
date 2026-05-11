@@ -248,7 +248,7 @@ export default function SubsidesSimulatorFull() {
 
             {/* Revenu manquant */}
             {showResult && !hasRevenu && (
-              <p className="text-[16px] text-slate">
+              <p className="text-[16px] text-red-600">
                 Entrez votre revenu déterminant pour obtenir une estimation chiffrée.
               </p>
             )}
@@ -287,13 +287,13 @@ export default function SubsidesSimulatorFull() {
                     <p className="text-[16px] text-slate mt-1.5">
                       soit environ CHF {fmt(result.total * 12)} par an déduits de votre prime
                     </p>
-                    <span className="flex flex-wrap items-center gap-1.5 mt-2 text-[16px] text-slate">
+                    <span className="flex items-center gap-1.5 mt-2 text-[16px] text-slate">
                       {cantonData.auto ? (
                         <>
                           <svg className="w-3.5 h-3.5 text-brand shrink-0" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                             <path d="M5 13l4 4L19 7" />
                           </svg>
-                          Subsides versés automatiquement
+                          <span>Subsides versés automatiquement</span>
                         </>
                       ) : !NON_DATE_DELAI.has(cantonData.delai) ? (
                         <>
@@ -301,7 +301,7 @@ export default function SubsidesSimulatorFull() {
                             <circle cx="12" cy="12" r="9" />
                             <path d="M12 7v5l3 3" />
                           </svg>
-                          Subsides versés sur demande, démarche à effectuer avant le {cantonData.delai}
+                          <span>Subsides versés sur demande, démarche à effectuer avant le {cantonData.delai}</span>
                         </>
                       ) : (
                         <>
@@ -309,7 +309,7 @@ export default function SubsidesSimulatorFull() {
                             <circle cx="12" cy="12" r="9" />
                             <path d="M12 7v5l3 3" />
                           </svg>
-                          Subsides versés sur demande
+                          <span>Subsides versés sur demande</span>
                         </>
                       )}
                     </span>
