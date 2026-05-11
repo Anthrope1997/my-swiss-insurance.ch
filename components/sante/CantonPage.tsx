@@ -268,7 +268,7 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
           </div>
           <div className="mt-4">
             <Link href="/sante/comparateur" className="text-brand hover:underline text-[16px] font-medium">
-              Comparer toutes les caisses pour votre profil exact →
+              Comparer les primes pour votre profil →
             </Link>
           </div>
 
@@ -331,7 +331,7 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
             </div>
             <div className="mt-4">
               <Link href="/sante/comparateur" className="text-brand hover:underline text-[16px] font-medium">
-                Comparer tous les modèles pour votre profil →
+                Comparer les modèles alternatifs →
               </Link>
             </div>
           </section>
@@ -388,8 +388,8 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
             </div>
           </div>
           <div className="mt-4">
-            <Link href="/sante/franchise" className="text-brand hover:underline text-[16px] font-medium">
-              Tout savoir sur le choix de la franchise →
+            <Link href="/sante/comparateur" className="text-brand hover:underline text-[16px] font-medium">
+              Comparer les franchises →
             </Link>
           </div>
         </section>
