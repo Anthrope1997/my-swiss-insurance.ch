@@ -344,14 +344,9 @@ export default function SubsidesSimulatorFull() {
                   </button>
                   <Link
                     href="/devis"
-                    className="md:hidden flex w-full bg-white border border-edge rounded-lg px-5 py-3 items-center justify-center gap-2 text-[16px] font-semibold text-brand"
+                    className="md:hidden flex w-full bg-white border border-edge rounded-lg px-5 py-3 items-center justify-center text-[16px] font-semibold text-brand"
                   >
-                    <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                      <path d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" />
-                      <path d="M3 21v-2a4 4 0 0 1 4-4h4" />
-                      <path d="m16 19 2 2 4-4" />
-                    </svg>
-                    Faire vérifier mon dossier par un expert →
+                    Vérifier mes droits →
                   </Link>
                 </div>
               </div>
