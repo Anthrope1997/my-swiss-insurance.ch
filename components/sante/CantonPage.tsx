@@ -333,30 +333,25 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
           <h2 className="article-h2">
             3. Quels subsides LAMal dans le {canton.cantonDe} ?
           </h2>
-          <div className="border border-edge rounded-[8px] overflow-hidden mb-5">
-            <table className="w-full text-[16px]">
-              <tbody>
-                {[
-                  ['Seuil de revenu déterminant', canton.subside.seuilRevenu],
-                  ['Subside indicatif',            canton.subside.subsideMensuel],
-                  ['Attribution',                  canton.subside.automatique
-                    ? 'Automatique : aucune démarche requise'
-                    : 'Sur demande auprès du canton'],
-                  ...(canton.subside.delai ? [['Délai de demande', canton.subside.delai]] : []),
-                ].map(([label, value], i) => (
-                  <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-cloud'}>
-                    <td className="px-5 py-3 text-slate w-56 shrink-0">{label}</td>
-                    <td
-                      className={`px-5 py-3 font-semibold ${
-                        label === 'Subside indicatif' ? 'text-brand' : 'text-ink'
-                      }`}
-                    >
-                      {value}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
+            <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
+              <p className="text-[13px] text-slate/60 uppercase tracking-wide mb-1">Seuil de revenu</p>
+              <p className="text-[16px] font-medium text-ink">{canton.subside.seuilRevenu}</p>
+            </div>
+            <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
+              <p className="text-[13px] text-slate/60 uppercase tracking-wide mb-1">Subside indicatif</p>
+              <p className="text-[16px] font-medium text-brand">{canton.subside.subsideMensuel}</p>
+            </div>
+            <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
+              <p className="text-[13px] text-slate/60 uppercase tracking-wide mb-1">Attribution</p>
+              <p className="text-[16px] font-medium text-ink">
+                {canton.subside.automatique ? 'Automatique' : 'Sur demande'}
+              </p>
+            </div>
+            <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
+              <p className="text-[13px] text-slate/60 uppercase tracking-wide mb-1">Délai 2026</p>
+              <p className="text-[16px] font-medium text-ink">{canton.subside.delai ?? '—'}</p>
+            </div>
           </div>
           <p className="text-[13px] text-slate mb-2">
             {canton.subside.automatique
