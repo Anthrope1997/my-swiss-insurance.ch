@@ -384,21 +384,21 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
             </table>
           </div>
           <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="bg-blue-tint rounded-[8px] px-5 py-4">
-              <p className="text-[12px] font-bold text-brand/70 uppercase tracking-wide mb-3">
+            <div className="bg-cloud border border-edge rounded-[8px] px-5 py-4">
+              <p className="text-[12px] font-bold text-ink/50 uppercase tracking-wide mb-3">
                 Si vous êtes rarement malade
               </p>
               <p className="text-xl font-bold text-brand mb-1">Franchise 2 500 CHF</p>
-              <p className="text-[14px] text-brand">
+              <p className="text-[14px] text-ink">
                 Économie de {formatChf(economieFranchise)} CHF par an sur la prime
               </p>
             </div>
             <div className="bg-cloud border border-edge rounded-[8px] px-5 py-4">
-              <p className="text-[12px] font-bold text-slate/60 uppercase tracking-wide mb-3">
+              <p className="text-[12px] font-bold text-ink/50 uppercase tracking-wide mb-3">
                 Si vous avez des soins réguliers
               </p>
-              <p className="text-xl font-bold text-ink mb-1">Franchise 300 CHF</p>
-              <p className="text-[14px] text-slate">
+              <p className="text-xl font-bold text-brand mb-1">Franchise 300 CHF</p>
+              <p className="text-[14px] text-ink">
                 Reste à charge plafonné à CHF 1 000 par an
               </p>
             </div>
