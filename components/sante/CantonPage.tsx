@@ -28,10 +28,11 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
 
   const rowMin = canton.franchiseTable.find((r) => r.franchise === 300)!
   const rowMax = canton.franchiseTable.find((r) => r.franchise === 2500)!
-  const economieFranchise = rowMin.cout0 - rowMax.cout0
-  const savingF    = rowMin.cout0    - rowMax.cout0
-  const crossoverF = rowMax.cout3000 - rowMin.cout3000
-  const breakEven  = Math.round(3000 * savingF / (savingF + crossoverF))
+  const savingF         = rowMin.cout0 - rowMax.cout0
+  const economieFranchise = savingF
+  // Exact break-even: Total F300 = Total F2500 → savingF + 270 = 0.9×M
+  // Valid for M ∈ [300, 2500] since all canton savingF < 1980
+  const breakEven = Math.round((savingF + 270) / 0.9)
 
   const heroStats = overrideHeroStats ?? [
     {
