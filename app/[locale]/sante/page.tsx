@@ -245,7 +245,7 @@ export default function LamalPage() {
                   {g.title}
                 </h3>
                 <p className="text-slate text-[16px] leading-relaxed flex-1">{g.desc}</p>
-                <div className="flex items-center gap-1 mt-4 text-brand text-[13px] font-medium">
+                <div className="flex items-center gap-1 mt-4 text-brand text-[16px] font-medium">
                   Lire le guide
                   <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200"
                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -291,7 +291,7 @@ export default function LamalPage() {
                   {s.title}
                 </h3>
                 <p className="text-slate text-[16px] leading-relaxed flex-1">{s.desc}</p>
-                <div className="flex items-center gap-1 mt-5 text-brand text-[13px] font-medium">
+                <div className="flex items-center gap-1 mt-5 text-brand text-[16px] font-medium">
                   Découvrir
                   <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200"
                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -339,7 +339,7 @@ export default function LamalPage() {
                     {c.economieAn} CHF par an
                   </p>
                 </div>
-                <div className="mt-auto flex items-center gap-1 text-[13px] font-medium text-brand">
+                <div className="mt-auto flex items-center gap-1 text-[16px] font-medium text-brand">
                   Consulter la page canton
                   <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200"
                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -387,8 +387,12 @@ export default function LamalPage() {
               </p>
               <p className="text-2xl font-bold text-brand leading-none mb-0.5">3 548 CHF</p>
               <p className="text-[16px] text-slate mb-6">d&apos;économie possible par an</p>
-              <Link href="/fr/sante/comparateur" className="btn-primary mt-auto text-center">
-                Comparer les primes →
+              <Link href="/fr/sante/comparateur" className="group flex items-center gap-1 mt-auto text-brand text-[16px] font-medium">
+                Comparer les primes
+                <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200"
+                  fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                </svg>
               </Link>
             </div>
 
@@ -412,8 +416,12 @@ export default function LamalPage() {
               </p>
               <p className="text-2xl font-bold text-brand leading-none mb-0.5">28 %</p>
               <p className="text-[16px] text-slate mb-6">des assurés bénéficient d&apos;un subside</p>
-              <Link href="/fr/sante/subsides" className="btn-primary mt-auto text-center">
-                Calculer mon subside →
+              <Link href="/fr/sante/subsides" className="group flex items-center gap-1 mt-auto text-brand text-[16px] font-medium">
+                Calculer mon subside
+                <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200"
+                  fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                </svg>
               </Link>
             </div>
 
