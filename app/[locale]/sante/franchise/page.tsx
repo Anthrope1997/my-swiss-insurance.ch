@@ -88,9 +88,9 @@ const enBref = [
 ]
 
 const heroStats = [
-  { value: '6',         label: 'Niveaux de franchise',       sub: 'de 300 à 2 500 CHF par an'         },
-  { value: 'CHF 1 440', label: "Seuil d'équilibre maximum",  sub: 'franchise 300 vs 2 500 CHF par an' },
-  { value: 'CHF 120',   label: 'Économie maximum par mois',  sub: 'sur la prime à Zurich, adulte'     },
+  { value: '6',           label: 'Niveaux de franchise',        sub: 'de 300 à 2 500 CHF par an'                         },
+  { value: '2 182 CHF',   label: "Seuil d'équilibre moyen",     sub: 'F300 vs F2500 · 26 cantons · adulte 35 ans'        },
+  { value: '1 463 CHF',   label: 'Économie max. sur la prime',  sub: 'en passant à F2500 · adulte 35 ans · OFSP 2026'    },
 ]
 
 const toc = [
