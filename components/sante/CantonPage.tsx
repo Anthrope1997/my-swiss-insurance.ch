@@ -451,7 +451,7 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
                 </div>
                 {!canton.subside.automatique && (
                   <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
-                    <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Démarche à effectuer avant le</p>
+                    <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Démarche à effectuer avant</p>
                     <p className="text-[16px] font-medium text-ink">{canton.subside.delai ?? '—'}</p>
                   </div>
                 )}
@@ -475,7 +475,7 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
               </div>
               {!canton.subside.automatique && (
                 <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
-                  <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Démarche à effectuer avant le</p>
+                  <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Démarche à effectuer avant</p>
                   <p className="text-[16px] font-medium text-ink">{canton.subside.delai ?? '—'}</p>
                 </div>
               )}
