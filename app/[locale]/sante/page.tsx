@@ -198,7 +198,7 @@ export default function LamalPage() {
             Économisez sur votre prime LAMal en 2026
           </h1>
 
-          <p className="text-[18px] text-slate leading-relaxed mb-8">
+          <p className="text-[16px] text-slate leading-relaxed mb-8">
             En Suisse, toutes les caisses couvrent les mêmes prestations de base. Seul le prix
             diffère — jusqu'à 5 653 CHF par an d'écart pour un même profil.
             Comparez gratuitement et trouvez la caisse la moins chère pour votre situation.
@@ -373,8 +373,8 @@ export default function LamalPage() {
 
             {/* Card 1 — Comparateur (ti-chart-bar) */}
             <div className="bg-white border border-edge rounded-xl px-6 py-6 flex flex-col">
-              <div className="w-10 h-10 rounded-lg bg-brand/10 flex items-center justify-center mb-4">
-                <svg className="w-5 h-5 text-brand" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+              <div className="w-9 h-9 bg-blue-tint border border-brand/20 rounded-lg flex items-center justify-center text-brand mb-4">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M3 13a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v6h-6z" />
                   <path d="M9 9a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v10h-6z" />
@@ -394,8 +394,8 @@ export default function LamalPage() {
 
             {/* Card 2 — Simulateur de subsides (ti-calculator) */}
             <div className="bg-white border border-edge rounded-xl px-6 py-6 flex flex-col">
-              <div className="w-10 h-10 rounded-lg bg-brand/10 flex items-center justify-center mb-4">
-                <svg className="w-5 h-5 text-brand" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+              <div className="w-9 h-9 bg-blue-tint border border-brand/20 rounded-lg flex items-center justify-center text-brand mb-4">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M4 3m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
                   <path d="M8 7m0 1a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-6a1 1 0 0 1 -1 -1z" />
