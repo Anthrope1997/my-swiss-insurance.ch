@@ -385,8 +385,8 @@ export default function LamalPage() {
               <p className="text-[13px] font-bold text-slate/60 uppercase tracking-wide mb-2">
                 Comparateur de primes
               </p>
-              <p className="text-2xl font-bold text-brand leading-none mb-0.5">3 548 CHF</p>
-              <p className="text-[16px] text-slate mb-6">d&apos;économie possible par an</p>
+              <p className="text-2xl font-bold text-brand leading-none mb-0.5">5 653 CHF</p>
+              <p className="text-[16px] text-slate mb-6">d&apos;économie maximale en Suisse par an</p>
               <Link href="/fr/sante/comparateur" className="group flex items-center gap-1 mt-auto text-brand text-[16px] font-medium">
                 Comparer les primes
                 <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200"
