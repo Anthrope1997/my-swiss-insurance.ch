@@ -370,26 +370,43 @@ export default function LamalPage() {
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="bg-[var(--blue-tint)] rounded-xl p-8 flex flex-col">
-              <p className="text-[13px] font-bold text-brand/70 uppercase tracking-wide mb-3">
+
+            {/* Card 1 — Comparateur */}
+            <div className="bg-cloud border border-edge rounded-xl px-6 py-6 flex flex-col">
+              <div className="w-10 h-10 rounded-lg bg-brand/10 flex items-center justify-center mb-4">
+                <svg className="w-5 h-5 text-brand" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                  <path d="M7 16V4m0 0L3 8m4-4 4 4M17 8v12m0 0 4-4m-4 4-4-4" />
+                </svg>
+              </div>
+              <p className="text-[13px] font-bold text-slate/60 uppercase tracking-wide mb-2">
                 Comparateur de primes
               </p>
-              <p className="text-4xl font-bold text-brand mb-1">3 548 CHF</p>
-              <p className="text-[16px] text-brand mb-6">d&apos;économie possible par an</p>
+              <p className="text-2xl font-bold text-brand leading-none mb-0.5">3 548 CHF</p>
+              <p className="text-[13px] text-slate/60 mb-6">d&apos;économie possible par an</p>
               <Link href="/fr/sante/comparateur" className="btn-primary mt-auto text-center">
                 Comparer les primes →
               </Link>
             </div>
-            <div className="bg-cloud border border-edge rounded-xl p-8 flex flex-col">
-              <p className="text-[13px] font-bold text-ink/50 uppercase tracking-wide mb-3">
+
+            {/* Card 2 — Simulateur de subsides */}
+            <div className="bg-cloud border border-edge rounded-xl px-6 py-6 flex flex-col">
+              <div className="w-10 h-10 rounded-lg bg-brand/10 flex items-center justify-center mb-4">
+                <svg className="w-5 h-5 text-brand" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                  <path d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" />
+                  <path d="M3 21v-2a4 4 0 0 1 4-4h4" />
+                  <path d="m16 19 2 2 4-4" />
+                </svg>
+              </div>
+              <p className="text-[13px] font-bold text-slate/60 uppercase tracking-wide mb-2">
                 Simulateur de subsides
               </p>
-              <p className="text-4xl font-bold text-ink mb-1">28 %</p>
-              <p className="text-[16px] text-slate mb-6">des assurés bénéficient d&apos;un subside</p>
+              <p className="text-2xl font-bold text-brand leading-none mb-0.5">28 %</p>
+              <p className="text-[13px] text-slate/60 mb-6">des assurés bénéficient d&apos;un subside</p>
               <Link href="/fr/sante/subsides" className="btn-secondary mt-auto text-center">
                 Calculer mon subside →
               </Link>
             </div>
+
           </div>
         </div>
       </section>
