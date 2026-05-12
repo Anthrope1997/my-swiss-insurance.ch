@@ -289,6 +289,11 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
               ({canton.caisseJA.name}, franchise 300 CHF, modèle standard).
             </p>
           )}
+          <p className="text-[16px] text-slate mt-3">
+            Pour un enfant de 0 à 18 ans, la meilleure prime dans le {canton.cantonDe} est de{' '}
+            <strong className="text-ink">{canton.primeMoyenneEnfant} CHF par mois</strong>{' '}
+            (franchise 300 CHF, modèle standard).
+          </p>
         </section>
 
         {/* ── Modèles alternatifs ───────────────────────────────────────── */}
@@ -439,13 +444,13 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
               </div>
               <div className="grid grid-cols-2 gap-3 mb-5">
                 <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
-                  <p className="text-[13px] text-slate/60 uppercase tracking-wide mb-1">Attribution</p>
+                  <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Attribution</p>
                   <p className="text-[16px] font-medium text-ink">
                     {canton.subside.automatique ? 'Automatique' : 'Sur demande'}
                   </p>
                 </div>
                 <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
-                  <p className="text-[13px] text-slate/60 uppercase tracking-wide mb-1">Délai 2026</p>
+                  <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Démarche à effectuer avant le</p>
                   <p className="text-[16px] font-medium text-ink">{canton.subside.delai ?? '—'}</p>
                 </div>
               </div>
@@ -453,31 +458,31 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
               <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
-                <p className="text-[13px] text-slate/60 uppercase tracking-wide mb-1">Seuil de revenu</p>
+                <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Seuil de revenu</p>
                 <p className="text-[16px] font-medium text-ink">{canton.subside.seuilRevenu}</p>
               </div>
               <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
-                <p className="text-[13px] text-slate/60 uppercase tracking-wide mb-1">Subside indicatif</p>
+                <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Subside indicatif</p>
                 <p className="text-[16px] font-medium text-brand">{canton.subside.subsideMensuel}</p>
               </div>
               <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
-                <p className="text-[13px] text-slate/60 uppercase tracking-wide mb-1">Attribution</p>
+                <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Attribution</p>
                 <p className="text-[16px] font-medium text-ink">
                   {canton.subside.automatique ? 'Automatique' : 'Sur demande'}
                 </p>
               </div>
               <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
-                <p className="text-[13px] text-slate/60 uppercase tracking-wide mb-1">Délai 2026</p>
+                <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Démarche à effectuer avant le</p>
                 <p className="text-[16px] font-medium text-ink">{canton.subside.delai ?? '—'}</p>
               </div>
             </div>
           )}
-          <p className="text-[13px] text-slate mb-2">
+          <p className="text-[16px] text-slate mb-2">
             {canton.subside.automatique
               ? `Dans le ${canton.cantonDe}, les subsides sont attribués automatiquement après la taxation fiscale. Assurez-vous que votre déclaration est à jour.`
               : `Dans le ${canton.cantonDe}, une demande est nécessaire auprès de la caisse de compensation cantonale.`}
           </p>
-          <p className="text-[12px] text-slate/60 mb-7">
+          <p className="text-[16px] text-slate/60 mb-7">
             Données indicatives. Le montant exact est déterminé par le canton sur la base de votre dossier fiscal.
           </p>
 
