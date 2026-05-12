@@ -281,6 +281,8 @@ Pour afficher plusieurs options sur des lignes distinctes dans un tooltip `<Info
 
 Les tailles supérieures à 16px (`text-[17px]`, `text-[18px]`, `text-2xl`, `text-4xl`, etc.) restent inchangées pour les titres et introductions.
 
+**Règle supplémentaire — tuiles de la section héro (Zone 1) :** tout le contenu textuel à l'intérieur d'une tuile héro (`<HeroStats>` ou toute carte/tuile placée en Zone 1) utilise **`text-[16px]` au minimum**, sur toutes les pages du site. Les classes `text-[13px]` et `text-[12px]` sont interdites dans ce contexte, même si `globals.css` les remonte déjà à 16px visuellement. Écrire `text-[16px]` explicitement dans le JSX pour garder le code lisible et cohérent.
+
 ```tsx
 {/* ✓ Correct */}
 <span className="text-[16px] text-ink">{row.assureur}</span>
@@ -642,6 +644,8 @@ import CantonCard from '@/components/shared/CantonCard'
 
 Server Component. Grille 3 tuiles sur fond gris clair `bg-cloud` (identique à la zone "En bref"), chiffre en bleu brand `text-brand`, label en **`text-ink`** (noir — jamais `text-slate`).
 Obligatoire dans Zone 1 de toutes les pages. Aucune page ne définit son propre style de tuile.
+
+**Tailles de police dans les tuiles :** conformément à §0.15, tout le texte à l'intérieur d'une tuile héro est écrit avec `text-[16px]` au minimum — y compris le `label` et le `sub`. Pas de `text-[13px]` ni `text-[12px]` dans ce contexte.
 
 ```tsx
 import HeroStats from '@/components/ui/HeroStats'
