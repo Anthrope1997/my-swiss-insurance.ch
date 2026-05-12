@@ -366,7 +366,7 @@ export default function LamalPage() {
             </h2>
             <p className="text-[16px] text-slate leading-relaxed">
               Nos outils utilisent les données officielles de l&apos;OFSP, des 26 cantons et des
-              34 caisses agréées pour vous fournir des résultats personnalisés selon votre profil.
+              34 caisses agréées pour vous fournir des résultats personnalisés.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
