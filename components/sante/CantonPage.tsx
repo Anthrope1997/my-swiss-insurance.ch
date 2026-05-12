@@ -3,18 +3,11 @@ import FAQ from '@/components/ui/FAQ'
 import HeroStats from '@/components/ui/HeroStats'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import CantonSearch from '@/components/ui/CantonSearch'
-import SubsidesCalculator from '@/components/sante/SubsidesCalculator'
 import RelatedGuides from '@/components/shared/RelatedGuides'
 import InfoBox from '@/components/shared/InfoBox'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 import type { Canton } from '@/data/sante/cantons'
-import type { Canton as SubsideCanton } from '@/lib/sante/calcul-subside'
-
-const SLUG_TO_SUBSIDE: Record<string, SubsideCanton> = {
-  vaud: 'VD', geneve: 'GE', fribourg: 'FR',
-  valais: 'VS', neuchatel: 'NE', jura: 'JU',
-}
 
 function ordinal(n: number): string {
   return n === 1 ? '1er' : `${n}e`
@@ -32,7 +25,6 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
   overrideEnBref?: string[]
 }) {
   const cheapest = canton.topCaisses[0]
-  const subsideCanton = SLUG_TO_SUBSIDE[canton.slug]
 
   const rowMin = canton.franchiseTable.find((r) => r.franchise === 300)!
   const rowMax = canton.franchiseTable.find((r) => r.franchise === 2500)!
@@ -420,67 +412,51 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
           <h2 className="article-h2">
             Quels subsides LAMal dans le {canton.cantonDe} ?
           </h2>
-          {canton.subside.bareme ? (
-            <>
-              <div className="border border-edge rounded-[8px] overflow-hidden mb-5">
-                <table className="stripe-table w-full text-[16px]">
-                  <thead>
-                    <tr>
-                      <th className="text-left whitespace-nowrap">Revenu annuel</th>
-                      <th className="text-left whitespace-nowrap">Subside mensuel estimé</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {canton.subside.bareme.map((row) => (
-                      <tr key={row.revenu}>
-                        <td className="text-ink font-medium whitespace-nowrap">{row.revenu}</td>
-                        <td className={`text-left font-semibold whitespace-nowrap ${row.montant === 'Non éligible' ? 'text-slate' : 'text-brand'}`}>
-                          {row.montant}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              <div className={`grid gap-3 mb-5 ${canton.subside.automatique ? 'grid-cols-1' : 'grid-cols-2'}`}>
-                <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
-                  <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Attribution</p>
-                  <p className="text-[16px] font-medium text-ink">
-                    {canton.subside.automatique ? 'Automatique' : 'Sur demande'}
-                  </p>
-                </div>
-                {!canton.subside.automatique && (
-                  <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
-                    <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Démarche à effectuer avant</p>
-                    <p className="text-[16px] font-medium text-ink">{canton.subside.delai ?? '—'}</p>
-                  </div>
-                )}
-              </div>
-            </>
-          ) : (
-            <div className={`grid gap-3 mb-5 ${canton.subside.automatique ? 'grid-cols-2 sm:grid-cols-3' : 'grid-cols-2 sm:grid-cols-4'}`}>
-              <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
-                <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Seuil de revenu</p>
-                <p className="text-[16px] font-medium text-ink">{canton.subside.seuilRevenu}</p>
-              </div>
-              <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
-                <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Subside indicatif</p>
-                <p className="text-[16px] font-medium text-brand">{canton.subside.subsideMensuel}</p>
-              </div>
-              <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
-                <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Attribution</p>
-                <p className="text-[16px] font-medium text-ink">
-                  {canton.subside.automatique ? 'Automatique' : 'Sur demande'}
-                </p>
-              </div>
-              {!canton.subside.automatique && (
-                <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
-                  <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Démarche à effectuer avant</p>
-                  <p className="text-[16px] font-medium text-ink">{canton.subside.delai ?? '—'}</p>
-                </div>
-              )}
+          {/* Tuiles Attribution + Démarche */}
+          <div className={`grid gap-3 mb-5 ${canton.subside.automatique ? 'grid-cols-1' : 'grid-cols-2'}`}>
+            <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
+              <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Attribution</p>
+              <p className="text-[16px] font-medium text-ink">
+                {canton.subside.automatique ? 'Automatique' : 'Sur demande'}
+              </p>
             </div>
-          )}
+            {!canton.subside.automatique && (
+              <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
+                <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Démarche à effectuer avant</p>
+                <p className="text-[16px] font-medium text-ink">{canton.subside.delai ?? '—'}</p>
+              </div>
+            )}
+          </div>
+
+          {/* Tableau barème ou mini-table indicative */}
+          <div className="border border-edge rounded-[8px] overflow-hidden mb-5">
+            <table className="stripe-table w-full text-[16px]">
+              <thead>
+                <tr>
+                  <th className="text-left whitespace-nowrap">Revenu annuel</th>
+                  <th className="text-left whitespace-nowrap">Subside mensuel estimé</th>
+                </tr>
+              </thead>
+              <tbody>
+                {canton.subside.bareme ? (
+                  canton.subside.bareme.map((row) => (
+                    <tr key={row.revenu}>
+                      <td className="text-ink font-medium whitespace-nowrap">{row.revenu}</td>
+                      <td className={`text-left font-semibold whitespace-nowrap ${row.montant === 'Non éligible' ? 'text-slate' : 'text-brand'}`}>
+                        {row.montant}
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td className="text-ink font-medium whitespace-nowrap">{canton.subside.seuilRevenu}</td>
+                    <td className="text-left font-semibold text-brand whitespace-nowrap">{canton.subside.subsideMensuel}</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+
           <p className="text-[16px] text-slate mb-2">
             {canton.subside.automatique
               ? `Dans le ${canton.cantonDe}, les subsides sont attribués automatiquement après la taxation fiscale. Assurez-vous que votre déclaration est à jour.`
@@ -489,16 +465,6 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
           <p className="text-[16px] text-slate/60 mb-7">
             Données indicatives. Le montant exact est déterminé par le canton sur la base de votre dossier fiscal.
           </p>
-
-          {/* Simulateur */}
-          {subsideCanton && (
-            <div className="mb-7">
-              <h3 className="text-[18px] font-semibold text-ink mb-4">
-                Simuler votre subside dans le {canton.cantonDe}
-              </h3>
-              <SubsidesCalculator fixedCanton={subsideCanton} />
-            </div>
-          )}
 
           <div className="mt-4">
             <Link href="/sante/subsides" className="text-brand hover:underline text-[16px] font-medium">
