@@ -224,7 +224,7 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
             Les primes varient selon votre profil exact et votre commune.
           </p>
           <div className="border border-edge rounded-[8px] overflow-hidden">
-            <table className="stripe-table w-full">
+            <table className="stripe-table w-full text-[16px]">
               <thead>
                 <tr>
                   <th className="w-12 text-left whitespace-nowrap">Rang</th>
@@ -278,7 +278,7 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
           </div>
           <div className="mt-4">
             <Link href="/sante/comparateur" className="text-brand hover:underline text-[16px] font-medium">
-              Comparer les primes pour votre profil →
+              Comparer les primes →
             </Link>
           </div>
 
@@ -399,7 +399,7 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
               </p>
               <p className="text-xl font-bold text-brand mb-1">Franchise 300 CHF</p>
               <p className="text-[14px] text-ink">
-                Reste à charge plafonné à CHF 1 000 par an
+                Franchise plus avantageuse à partir de CHF {formatChf(breakEven)} de frais médicaux
               </p>
             </div>
           </div>
