@@ -357,6 +357,43 @@ export default function LamalPage() {
         </div>
       </section>
 
+      {/* ── 4b. OUTILS ─────────────────────────────────────────────────────── */}
+      <section className="bg-white border-t border-edge py-12">
+        <div className="container-xl">
+          <div className="mb-8">
+            <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
+              Comparer les primes et simuler vos subsides en 2026
+            </h2>
+            <p className="text-[17px] text-slate leading-relaxed">
+              Nos outils utilisent les données officielles de l&apos;OFSP, des 26 cantons et des
+              34 caisses agréées pour vous fournir des résultats personnalisés selon votre profil.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="bg-[var(--blue-tint)] rounded-xl p-8 flex flex-col">
+              <p className="text-[13px] font-bold text-brand/70 uppercase tracking-wide mb-3">
+                Comparateur de primes
+              </p>
+              <p className="text-4xl font-bold text-brand mb-1">3 548 CHF</p>
+              <p className="text-[16px] text-brand mb-6">d&apos;économie possible par an</p>
+              <Link href="/fr/sante/comparateur" className="btn-primary mt-auto text-center">
+                Comparer les primes →
+              </Link>
+            </div>
+            <div className="bg-cloud border border-edge rounded-xl p-8 flex flex-col">
+              <p className="text-[13px] font-bold text-ink/50 uppercase tracking-wide mb-3">
+                Simulateur de subsides
+              </p>
+              <p className="text-4xl font-bold text-ink mb-1">28 %</p>
+              <p className="text-[16px] text-slate mb-6">des assurés bénéficient d&apos;un subside</p>
+              <Link href="/fr/sante/subsides" className="btn-secondary mt-auto text-center">
+                Calculer mon subside →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── 5. À PROPOS ─────────────────────────────────────────────────────── */}
       <section className="bg-white border-t border-edge py-12">
         <div className="container-xl">

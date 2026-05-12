@@ -277,9 +277,9 @@ export default function SubsidesSimulatorFull() {
                 {/* En-tête : montant à gauche, canton à droite (desktop) */}
                 <div className="px-4 sm:px-6 py-5 flex items-start justify-between gap-4">
                   <div className="min-w-0">
-                    <p className="text-[13px] font-bold text-brand/70 uppercase tracking-wide mb-1">
+                    <span className="inline-flex items-center bg-brand text-white text-[11px] font-bold uppercase tracking-wide px-2.5 py-0.5 rounded-full mb-2">
                       Estimation subside mensuel
-                    </p>
+                    </span>
                     <p className="text-4xl font-bold text-ink">
                       CHF {fmt(result.total)}
                       <span className="text-[16px] font-normal text-slate ml-2">/mois</span>
@@ -324,9 +324,9 @@ export default function SubsidesSimulatorFull() {
                 {/* Disclaimer + CTA */}
                 <div className="border-t border-brand/10 px-4 sm:px-6 py-5 space-y-4">
                   <div>
-                    <p className="text-[13px] font-bold text-brand/70 uppercase tracking-wide mb-1">
+                    <span className="inline-flex items-center bg-brand text-white text-[11px] font-bold uppercase tracking-wide px-2.5 py-0.5 rounded-full mb-2">
                       Estimation indicative
-                    </p>
+                    </span>
                     <p className="text-[16px] text-slate leading-relaxed">
                       Les conditions varient selon votre canton et votre situation fiscale. Comme chaque situation est unique, un expert peut vérifier votre éligibilité et vous accompagner dans vos démarches, gratuitement et sans engagement.
                     </p>
