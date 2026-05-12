@@ -218,7 +218,7 @@ export default function LamalPage() {
             <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
               Tout comprendre sur l'assurance maladie suisse
             </h2>
-            <p className="text-[17px] text-slate leading-relaxed">
+            <p className="text-[16px] text-slate leading-relaxed">
               L'assurance maladie de base LAMal est obligatoire pour tous les résidents en Suisse depuis
               1996. Nos guides couvrent chaque aspect pour vous aider à faire le bon choix :
               franchises, modèles alternatifs et subsides cantonaux.
@@ -267,7 +267,7 @@ export default function LamalPage() {
             <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
               Votre assurance LAMal selon votre situation
             </h2>
-            <p className="text-[17px] text-slate leading-relaxed">
+            <p className="text-[16px] text-slate leading-relaxed">
               Votre situation personnelle détermine le contrat LAMal le plus avantageux pour vous.
               Franchise, modèle et éligibilité aux subsides varient selon votre profil.
             </p>
@@ -286,7 +286,7 @@ export default function LamalPage() {
                                 transition-colors duration-200">
                   {s.icon}
                 </div>
-                <h3 className="font-semibold text-ink text-[17px] mb-2
+                <h3 className="font-semibold text-ink text-[16px] mb-2
                                group-hover:text-brand transition-colors">
                   {s.title}
                 </h3>
@@ -313,7 +313,7 @@ export default function LamalPage() {
             <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
               Primes et économies par canton en 2026
             </h2>
-            <p className="text-[17px] text-slate leading-relaxed">
+            <p className="text-[16px] text-slate leading-relaxed">
               Sélectionnez votre canton pour accéder aux données détaillées : primes, classement
               des caisses et simulateur de subsides.
             </p>
@@ -364,45 +364,55 @@ export default function LamalPage() {
             <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
               Comparer les primes et simuler vos subsides en 2026
             </h2>
-            <p className="text-[17px] text-slate leading-relaxed">
+            <p className="text-[16px] text-slate leading-relaxed">
               Nos outils utilisent les données officielles de l&apos;OFSP, des 26 cantons et des
               34 caisses agréées pour vous fournir des résultats personnalisés selon votre profil.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
 
-            {/* Card 1 — Comparateur */}
-            <div className="bg-cloud border border-edge rounded-xl px-6 py-6 flex flex-col">
+            {/* Card 1 — Comparateur (ti-chart-bar) */}
+            <div className="bg-white border border-edge rounded-xl px-6 py-6 flex flex-col">
               <div className="w-10 h-10 rounded-lg bg-brand/10 flex items-center justify-center mb-4">
                 <svg className="w-5 h-5 text-brand" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                  <path d="M7 16V4m0 0L3 8m4-4 4 4M17 8v12m0 0 4-4m-4 4-4-4" />
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M3 13a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v6h-6z" />
+                  <path d="M9 9a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v10h-6z" />
+                  <path d="M15 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v14h-6z" />
+                  <path d="M4 20h14" />
                 </svg>
               </div>
               <p className="text-[13px] font-bold text-slate/60 uppercase tracking-wide mb-2">
                 Comparateur de primes
               </p>
               <p className="text-2xl font-bold text-brand leading-none mb-0.5">3 548 CHF</p>
-              <p className="text-[13px] text-slate/60 mb-6">d&apos;économie possible par an</p>
+              <p className="text-[16px] text-slate mb-6">d&apos;économie possible par an</p>
               <Link href="/fr/sante/comparateur" className="btn-primary mt-auto text-center">
                 Comparer les primes →
               </Link>
             </div>
 
-            {/* Card 2 — Simulateur de subsides */}
-            <div className="bg-cloud border border-edge rounded-xl px-6 py-6 flex flex-col">
+            {/* Card 2 — Simulateur de subsides (ti-calculator) */}
+            <div className="bg-white border border-edge rounded-xl px-6 py-6 flex flex-col">
               <div className="w-10 h-10 rounded-lg bg-brand/10 flex items-center justify-center mb-4">
                 <svg className="w-5 h-5 text-brand" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                  <path d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" />
-                  <path d="M3 21v-2a4 4 0 0 1 4-4h4" />
-                  <path d="m16 19 2 2 4-4" />
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M4 3m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
+                  <path d="M8 7m0 1a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-6a1 1 0 0 1 -1 -1z" />
+                  <path d="M8 14l0 .01" />
+                  <path d="M12 14l0 .01" />
+                  <path d="M16 14l0 .01" />
+                  <path d="M8 17l0 .01" />
+                  <path d="M12 17l0 .01" />
+                  <path d="M16 17l0 .01" />
                 </svg>
               </div>
               <p className="text-[13px] font-bold text-slate/60 uppercase tracking-wide mb-2">
                 Simulateur de subsides
               </p>
               <p className="text-2xl font-bold text-brand leading-none mb-0.5">28 %</p>
-              <p className="text-[13px] text-slate/60 mb-6">des assurés bénéficient d&apos;un subside</p>
-              <Link href="/fr/sante/subsides" className="btn-secondary mt-auto text-center">
+              <p className="text-[16px] text-slate mb-6">des assurés bénéficient d&apos;un subside</p>
+              <Link href="/fr/sante/subsides" className="btn-primary mt-auto text-center">
                 Calculer mon subside →
               </Link>
             </div>
@@ -419,7 +429,7 @@ export default function LamalPage() {
             <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
               Une source de référence sur la LAMal en Suisse
             </h2>
-            <p className="text-[17px] text-slate leading-relaxed">
+            <p className="text-[16px] text-slate leading-relaxed">
               My Swiss Insurance s'appuie sur les données officielles de l'Office fédéral de la
               santé publique (OFSP), des cantons et des caisses maladie. Chaque résident, expatrié
               ou frontalier peut ainsi identifier la couverture la plus adaptée à sa situation.
