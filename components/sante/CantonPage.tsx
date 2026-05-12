@@ -269,7 +269,7 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
                   <td className="text-left whitespace-nowrap hidden sm:table-cell text-slate/60">
                     {formatChf(canton.caissePlusChere.prime * 12)} CHF
                   </td>
-                  <td className="text-left whitespace-nowrap hidden md:table-cell text-[12px] text-slate/50 italic">
+                  <td className="text-left whitespace-nowrap hidden md:table-cell text-[16px] text-slate/50 italic">
                     Caisse la plus chère
                   </td>
                 </tr>
@@ -330,7 +330,7 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
                         </td>
                         <td className="text-left whitespace-nowrap hidden sm:table-cell">
                           {i === 0 ? (
-                            <span className="text-slate/50 text-[13px] italic">Référence</span>
+                            <span className="text-slate/50 text-[16px] italic">Référence</span>
                           ) : (
                             <span className="text-brand font-semibold">{formatChf(econAn)} CHF</span>
                           )}
@@ -390,20 +390,20 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
           </div>
           <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="bg-cloud border border-edge rounded-[8px] px-5 py-4">
-              <p className="text-[12px] font-bold text-ink/50 uppercase tracking-wide mb-3">
+              <p className="text-[16px] font-bold text-ink/50 uppercase tracking-wide mb-3">
                 Si vous êtes rarement malade
               </p>
               <p className="text-xl font-bold text-brand mb-1">Franchise 2 500 CHF</p>
-              <p className="text-[14px] text-ink">
+              <p className="text-[16px] text-ink">
                 Économie de {formatChf(economieFranchise)} CHF par an sur la prime
               </p>
             </div>
             <div className="bg-cloud border border-edge rounded-[8px] px-5 py-4">
-              <p className="text-[12px] font-bold text-ink/50 uppercase tracking-wide mb-3">
+              <p className="text-[16px] font-bold text-ink/50 uppercase tracking-wide mb-3">
                 Si vous avez des soins réguliers
               </p>
               <p className="text-xl font-bold text-brand mb-1">Franchise 300 CHF</p>
-              <p className="text-[14px] text-ink">
+              <p className="text-[16px] text-ink">
                 Franchise plus avantageuse à partir de CHF {formatChf(breakEven)} de frais médicaux
               </p>
             </div>
