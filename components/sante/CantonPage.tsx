@@ -427,12 +427,12 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
             </div>
             <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
               <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Subside max</p>
-              <p className="text-[16px] font-medium text-brand">
+              <p className="text-[16px] font-medium text-ink">
                 {canton.subside.subsideMensuelMax ? `${canton.subside.subsideMensuelMax} CHF / mois` : '—'}
               </p>
             </div>
             <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
-              <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Revenu max (seul)</p>
+              <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Revenu max</p>
               <p className="text-[16px] font-medium text-ink">{canton.subside.seuilRevenu}</p>
             </div>
           </div>
