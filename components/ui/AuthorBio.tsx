@@ -16,9 +16,9 @@ export default function AuthorBio({ publishedDate, updatedDate }: AuthorBioProps
         </div>
 
         <div className="space-y-0.5">
-          <p className="text-sm font-semibold text-navy">{fr.authorBio.organisation}</p>
-          <p className="text-sm text-slate">{fr.authorBio.service}</p>
-          <p className="text-sm text-slate">{fr.authorBio.publie} {publishedDate}, {fr.authorBio.miseAJour} {updatedDate}</p>
+          <p className="text-[16px] font-semibold text-navy">{fr.authorBio.organisation}</p>
+          <p className="text-[16px] text-slate">{fr.authorBio.service}</p>
+          <p className="text-[16px] text-slate">{fr.authorBio.publie} {publishedDate}, {fr.authorBio.miseAJour} {updatedDate}</p>
         </div>
 
       </div>
