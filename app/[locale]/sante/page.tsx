@@ -372,8 +372,8 @@ export default function LamalPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
 
             {/* Card 1 — Comparateur (ti-chart-bar) */}
-            <div className="bg-white border border-edge rounded-xl px-6 py-6 flex flex-col">
-              <div className="w-9 h-9 bg-blue-tint border border-brand/20 rounded-lg flex items-center justify-center text-brand mb-4">
+            <div className="group bg-white border border-edge rounded-xl px-6 py-6 flex flex-col hover:border-brand hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
+              <div className="w-9 h-9 bg-blue-tint border border-brand/20 rounded-lg flex items-center justify-center text-brand mb-4 group-hover:bg-brand group-hover:text-white group-hover:border-brand transition-colors duration-200">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M3 13a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v6h-6z" />
@@ -387,7 +387,7 @@ export default function LamalPage() {
               </p>
               <p className="text-2xl font-bold text-brand leading-none mb-0.5">5 653 CHF</p>
               <p className="text-[16px] text-slate mb-6">d&apos;économie maximale en Suisse par an</p>
-              <Link href="/fr/sante/comparateur" className="group flex items-center gap-1 mt-auto text-brand text-[16px] font-medium">
+              <Link href="/fr/sante/comparateur" className="flex items-center gap-1 mt-auto text-brand text-[16px] font-medium">
                 Comparer les primes
                 <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200"
                   fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -397,8 +397,8 @@ export default function LamalPage() {
             </div>
 
             {/* Card 2 — Simulateur de subsides (ti-calculator) */}
-            <div className="bg-white border border-edge rounded-xl px-6 py-6 flex flex-col">
-              <div className="w-9 h-9 bg-blue-tint border border-brand/20 rounded-lg flex items-center justify-center text-brand mb-4">
+            <div className="group bg-white border border-edge rounded-xl px-6 py-6 flex flex-col hover:border-brand hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
+              <div className="w-9 h-9 bg-blue-tint border border-brand/20 rounded-lg flex items-center justify-center text-brand mb-4 group-hover:bg-brand group-hover:text-white group-hover:border-brand transition-colors duration-200">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M4 3m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
@@ -416,7 +416,7 @@ export default function LamalPage() {
               </p>
               <p className="text-2xl font-bold text-brand leading-none mb-0.5">28 %</p>
               <p className="text-[16px] text-slate mb-6">des assurés bénéficient d&apos;un subside</p>
-              <Link href="/fr/sante/subsides" className="group flex items-center gap-1 mt-auto text-brand text-[16px] font-medium">
+              <Link href="/fr/sante/subsides" className="flex items-center gap-1 mt-auto text-brand text-[16px] font-medium">
                 Calculer mon subside
                 <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200"
                   fill="none" stroke="currentColor" viewBox="0 0 24 24">
