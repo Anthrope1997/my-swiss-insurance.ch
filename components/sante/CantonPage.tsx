@@ -412,65 +412,38 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
           <h2 className="article-h2">
             Quels subsides LAMal dans le {canton.cantonDe} ?
           </h2>
-          {/* Tuiles Attribution + Démarche */}
-          <div className={`grid gap-3 mb-5 ${canton.subside.automatique ? 'grid-cols-1' : 'grid-cols-2'}`}>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
             <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
               <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Attribution</p>
               <p className="text-[16px] font-medium text-ink">
                 {canton.subside.automatique ? 'Automatique' : 'Sur demande'}
               </p>
             </div>
-            {!canton.subside.automatique && (
-              <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
-                <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Démarche à effectuer avant</p>
-                <p className="text-[16px] font-medium text-ink">{canton.subside.delai ?? '—'}</p>
-              </div>
-            )}
+            <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
+              <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Date butoir</p>
+              <p className="text-[16px] font-medium text-ink">
+                {canton.subside.automatique ? 'Non requis' : (canton.subside.delai ?? '—')}
+              </p>
+            </div>
+            <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
+              <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Subside max</p>
+              <p className="text-[16px] font-medium text-brand">
+                {canton.subside.subsideMensuelMax ? `${canton.subside.subsideMensuelMax} CHF / mois` : '—'}
+              </p>
+            </div>
+            <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
+              <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Revenu max (seul)</p>
+              <p className="text-[16px] font-medium text-ink">{canton.subside.seuilRevenu}</p>
+            </div>
           </div>
 
-          {/* Tableau barème ou mini-table indicative */}
-          <div className="border border-edge rounded-[8px] overflow-hidden mb-5">
-            <table className="stripe-table w-full text-[16px]">
-              <thead>
-                <tr>
-                  <th className="text-left whitespace-nowrap">Revenu annuel</th>
-                  <th className="text-left whitespace-nowrap">Subside mensuel estimé</th>
-                </tr>
-              </thead>
-              <tbody>
-                {canton.subside.bareme ? (
-                  canton.subside.bareme.map((row) => (
-                    <tr key={row.revenu}>
-                      <td className="text-ink font-medium whitespace-nowrap">{row.revenu}</td>
-                      <td className={`text-left font-semibold whitespace-nowrap ${row.montant === 'Non éligible' ? 'text-slate' : 'text-brand'}`}>
-                        {row.montant}
-                      </td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td className="text-ink font-medium whitespace-nowrap">{canton.subside.seuilRevenu}</td>
-                    <td className="text-left font-semibold text-brand whitespace-nowrap">{canton.subside.subsideMensuel}</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-
-          <p className="text-[16px] text-slate mb-2">
-            {canton.subside.automatique
-              ? `Dans le ${canton.cantonDe}, les subsides sont attribués automatiquement après la taxation fiscale. Assurez-vous que votre déclaration est à jour.`
-              : `Dans le ${canton.cantonDe}, une demande est nécessaire auprès de la caisse de compensation cantonale.`}
-          </p>
-          <p className="text-[16px] text-slate/60 mb-7">
-            Données indicatives. Le montant exact est déterminé par le canton sur la base de votre dossier fiscal.
+          <p className="text-[16px] text-slate/60 mb-5">
+            Les règles de calcul sont complexes, spécifiques à chaque canton et dépendent de votre profil. Le montant exact est déterminé par le canton sur la base de votre dossier fiscal.
           </p>
 
-          <div className="mt-4">
-            <Link href="/sante/subsides" className="text-brand hover:underline text-[16px] font-medium">
-              Calculer mes subsides LAMal →
-            </Link>
-          </div>
+          <Link href="/sante/subsides" className="text-brand hover:underline text-[16px] font-medium">
+            Calculer mes subsides LAMal →
+          </Link>
         </section>
 
         {/* ── FAQ ──────────────────────────────────────────────────────── */}
