@@ -442,21 +442,23 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
                   </tbody>
                 </table>
               </div>
-              <div className="grid grid-cols-2 gap-3 mb-5">
+              <div className={`grid gap-3 mb-5 ${canton.subside.automatique ? 'grid-cols-1' : 'grid-cols-2'}`}>
                 <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
                   <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Attribution</p>
                   <p className="text-[16px] font-medium text-ink">
                     {canton.subside.automatique ? 'Automatique' : 'Sur demande'}
                   </p>
                 </div>
-                <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
-                  <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Démarche à effectuer avant le</p>
-                  <p className="text-[16px] font-medium text-ink">{canton.subside.delai ?? '—'}</p>
-                </div>
+                {!canton.subside.automatique && (
+                  <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
+                    <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Démarche à effectuer avant le</p>
+                    <p className="text-[16px] font-medium text-ink">{canton.subside.delai ?? '—'}</p>
+                  </div>
+                )}
               </div>
             </>
           ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
+            <div className={`grid gap-3 mb-5 ${canton.subside.automatique ? 'grid-cols-2 sm:grid-cols-3' : 'grid-cols-2 sm:grid-cols-4'}`}>
               <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
                 <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Seuil de revenu</p>
                 <p className="text-[16px] font-medium text-ink">{canton.subside.seuilRevenu}</p>
@@ -471,10 +473,12 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
                   {canton.subside.automatique ? 'Automatique' : 'Sur demande'}
                 </p>
               </div>
-              <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
-                <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Démarche à effectuer avant le</p>
-                <p className="text-[16px] font-medium text-ink">{canton.subside.delai ?? '—'}</p>
-              </div>
+              {!canton.subside.automatique && (
+                <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
+                  <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Démarche à effectuer avant le</p>
+                  <p className="text-[16px] font-medium text-ink">{canton.subside.delai ?? '—'}</p>
+                </div>
+              )}
             </div>
           )}
           <p className="text-[16px] text-slate mb-2">
