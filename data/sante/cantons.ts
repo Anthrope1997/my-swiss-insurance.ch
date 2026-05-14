@@ -114,12 +114,17 @@ const cantons: Canton[] = [
       { modele: 'Télémédecine', caisse: 'Vivao Sympany', prime: 526.9 },
     ],
     subside: {
-      seuilRevenu: '≈ 50 000 CHF/an (seul)',
-      subsideMensuel: 'de 30 à 331 CHF/mois',
-      subsideMensuelMax: 331,
+      seuilRevenu: '≈ 69 000 CHF/an (seul)',
+      subsideMensuel: 'de 20 à 336 CHF/mois',
+      subsideMensuelMax: 336,
       automatique: false,
       delai: 'Voir OVAM 2026',
       lienOfficiel: 'https://www.vd.ch',
+      tableauProfils: [
+        { profil: 'Adulte seul (≥ 26 ans)',          subsideMax: '336 CHF/mois', revenuMax: '69 000 CHF/an' },
+        { profil: 'Jeune adulte (19–25 ans)',         subsideMax: '331 CHF/mois', revenuMax: '50 000 CHF/an' },
+        { profil: 'Enfant (0–18 ans)',                subsideMax: '255 CHF/mois', revenuMax: '39 000 CHF/an' },
+      ],
     },
     capitale: {
       name: 'Lausanne',
@@ -179,6 +184,11 @@ const cantons: Canton[] = [
       automatique: true,
       delai: '—',
       lienOfficiel: 'https://www.ge.ch',
+      tableauProfils: [
+        { profil: 'Adulte seul (≥ 26 ans)',  subsideMax: '348 CHF/mois', revenuMax: '50 000 CHF/an' },
+        { profil: 'Jeune adulte (19–25 ans)', subsideMax: '231 CHF/mois', revenuMax: '50 000 CHF/an' },
+        { profil: 'Enfant (0–18 ans)',        subsideMax: '132 CHF/mois', revenuMax: '50 000 CHF/an' },
+      ],
     },
   },
 
@@ -233,6 +243,11 @@ const cantons: Canton[] = [
       automatique: false,
       delai: '31 août 2026',
       lienOfficiel: 'https://www.fr.ch',
+      tableauProfils: [
+        { profil: 'Adulte seul (≥ 26 ans)',          subsideMax: '370 CHF/mois', revenuMax: '37 000 CHF/an' },
+        { profil: 'Jeune adulte (19–25 ans, formation)', subsideMax: '270 CHF/mois', revenuMax: '37 000 CHF/an' },
+        { profil: 'Enfant (0–18 ans)',                subsideMax: '109 CHF/mois', revenuMax: '57 000 CHF/an' },
+      ],
     },
   },
 
@@ -287,6 +302,11 @@ const cantons: Canton[] = [
       automatique: true,
       delai: '—',
       lienOfficiel: 'https://www.vs.ch',
+      tableauProfils: [
+        { profil: 'Adulte seul (≥ 26 ans)',  subsideMax: '521 CHF/mois', revenuMax: '38 500 CHF/an' },
+        { profil: 'Jeune adulte (19–25 ans)', subsideMax: '380 CHF/mois', revenuMax: '38 500 CHF/an' },
+        { profil: 'Enfant (0–18 ans)',        subsideMax: '98 CHF/mois',  revenuMax: '63 000 CHF/an' },
+      ],
     },
   },
 
@@ -340,6 +360,11 @@ const cantons: Canton[] = [
       automatique: true,
       delai: '—',
       lienOfficiel: 'https://www.ne.ch',
+      tableauProfils: [
+        { profil: 'Adulte (≥ 26 ans)',        subsideMax: '643 CHF/mois', revenuMax: '65 000 CHF/an' },
+        { profil: 'Jeune adulte (19–25 ans)', subsideMax: '484 CHF/mois', revenuMax: '65 000 CHF/an' },
+        { profil: 'Enfant (0–18 ans)',         subsideMax: '160 CHF/mois', revenuMax: '65 000 CHF/an' },
+      ],
     },
   },
 
@@ -393,6 +418,11 @@ const cantons: Canton[] = [
       automatique: false,
       delai: '31 déc. 2026',
       lienOfficiel: 'https://www.jura.ch',
+      tableauProfils: [
+        { profil: 'Adulte seul (≥ 26 ans)',             subsideMax: '225 CHF/mois', revenuMax: '27 000 CHF/an' },
+        { profil: 'Jeune adulte (< 25 ans, formation)', subsideMax: '196 CHF/mois', revenuMax: '53 000 CHF/an' },
+        { profil: 'Enfant (0–18 ans)',                  subsideMax: '100 CHF/mois', revenuMax: '53 000 CHF/an' },
+      ],
     },
   },
 
