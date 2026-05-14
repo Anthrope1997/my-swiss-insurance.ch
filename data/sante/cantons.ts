@@ -1953,6 +1953,8 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: true, delai: 'Non requis (automatique)',
     lien: 'https://www.ge.ch/informations-generales-subside-assurance-maladie',
     primeMoyenne: 710,
+    retroactivite: 'Attribution automatique selon le revenu — pas de démarche active pour la majorité. Demande possible à tout moment via courrier ou e-démarches.',
+    arrivants: 'Demande à soumettre dès l\'arrivée via e-démarches ge.ch ou par courrier au Service de l\'assurance-maladie (SAM). Règle de délai spécifique non publiée — contacter le SAM.',
     note: 'Attribution automatique pour la majorité selon le revenu. Demande possible via courrier ou portail e-démarches (ge.ch). Calculateur en ligne disponible.',
     ge: {
       bonusEnfantSeul:   13_000,
@@ -2032,6 +2034,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     lien: 'https://www.ecasfr.ch/fr/Assurances/Reduction-des-primes-d-assurance-maladie/Reduction-des-primes-d-assurance-maladie.html',
     primeMoyenne: 569,
     retroactivite: 'Non rétroactive — renouvellement automatique annuel sur examen d\'office.',
+    arrivants: 'Arrivants non encore dans le système fiscal fribourgeois : contacter directement l\'ECAS FR (026 426 77 00). Documents requis : certificat(s) d\'assurance-maladie + attestation d\'études si jeune 19–25 ans.',
     note: 'Base de calcul : taxation fiscale de l\'année N-2. Renouvellement automatique si situation inchangée.',
     fr: {
       seuilsEligibilite: [
