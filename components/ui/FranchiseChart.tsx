@@ -137,12 +137,6 @@ function draw(ctx: CanvasRenderingContext2D, frais: number): void {
   ctx.fillStyle = C_SEUIL
   ctx.fillText(`Seuil : ${fmtCHF(SEUIL)}`, seuilX, cT - 8)
 
-  // 10 ─ Titre axe Y — à l'intérieur du graphique en haut à gauche, 16px, sous le seuil
-  ctx.textAlign = 'left'
-  ctx.font      = `16px ${FONT}`
-  ctx.fillStyle = C_MUTED
-  ctx.fillText('Coût annuel de votre assurance LAMal', cL, cT + 22)
-
   // 11 ─ Labels courbes à droite (x = X_MAX) — F2500 au-dessus, F300 en dessous
   const endY2500 = mapY(totalAnnuel(PRIME_2500, 2500, X_MAX))
   const endY300  = mapY(totalAnnuel(PRIME_300,  300,  X_MAX))
@@ -290,6 +284,11 @@ export default function FranchiseChart() {
       <div className={`${bannerBg} rounded-[8px] px-4 py-3 mb-3 text-center`}>
         <p>{bannerContent}</p>
       </div>
+
+      {/* Label axe Y — hors du canvas, aligné à gauche au niveau de CHF 10 000 */}
+      <p className="text-[16px] text-muted mb-1">
+        Coût annuel de votre assurance LAMal
+      </p>
 
       {/* Tuile — graphique + slider + source */}
       <div className="border border-edge rounded-[8px] bg-white overflow-hidden">
