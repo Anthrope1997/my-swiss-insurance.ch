@@ -128,53 +128,53 @@ function draw(ctx: CanvasRenderingContext2D, frais: number): void {
     }
   }
 
-  // 8 ─ Titre axe Y — dans PAD.top, à gauche, au-dessus du label seuil (cT-8)
+  // 8 ─ Titre axe Y — 16px, dans PAD.top, à gauche
   ctx.textAlign = 'left'
-  ctx.font      = `13px ${FONT}`
+  ctx.font      = `16px ${FONT}`
   ctx.fillStyle = C_LABEL
   ctx.fillText('Coût annuel de votre assurance LAMal', cL, cT - 32)
 
-  // 9 ─ Label seuil — montant seul, weight 500, text-primary
+  // 9 ─ Label seuil — 16px, weight 500, text-primary
   ctx.textAlign = 'center'
-  ctx.font      = `500 12px ${FONT}`
+  ctx.font      = `500 16px ${FONT}`
   ctx.fillStyle = C_INK
   ctx.fillText(fmtCHF(SEUIL), seuilX, cT - 8)
 
-  // 10 ─ Labels de zone — texte seul (pas de fond coloré), halo blanc pour lisibilité
+  // 10 ─ Labels de zone — 16px, halo blanc pour lisibilité sur les courbes
   const leftCx  = (cL + seuilX) / 2
   const rightCx = (seuilX + cR) / 2
-  const zY1     = cB - 26
+  const zY1     = cB - 28
   const zY2     = cB - 10
 
-  ctx.shadowColor  = 'white'
-  ctx.shadowBlur   = 5
+  ctx.shadowColor = 'white'
+  ctx.shadowBlur  = 6
 
   ctx.textAlign = 'center'
-  ctx.font      = `600 11px ${FONT}`
+  ctx.font      = `600 16px ${FONT}`
   ctx.fillStyle = C_F2500
-  ctx.fillText('Franchise de CHF 2 500', leftCx, zY1)
-  ctx.font      = `11px ${FONT}`
+  ctx.fillText('Franchise CHF 2 500', leftCx, zY1)
+  ctx.font      = `16px ${FONT}`
   ctx.fillText('plus avantageuse', leftCx, zY2)
 
-  ctx.font      = `600 11px ${FONT}`
+  ctx.font      = `600 16px ${FONT}`
   ctx.fillStyle = C_F300
-  ctx.fillText('Franchise de CHF 300', rightCx, zY1)
-  ctx.font      = `11px ${FONT}`
+  ctx.fillText('Franchise CHF 300', rightCx, zY1)
+  ctx.font      = `16px ${FONT}`
   ctx.fillText('plus avantageuse', rightCx, zY2)
 
   ctx.shadowBlur = 0
 
-  // 11 ─ Labels courbes à x = 3 500 — weight 500, couleur courbe, sans fond
+  // 11 ─ Labels courbes à x = 3 500 — 16px, weight 500, couleur courbe
   const labelX     = mapX(3500)
   const labelY2500 = mapY(totalAnnuel(PRIME_2500, 2500, 3500))
   const labelY300  = mapY(totalAnnuel(PRIME_300,  300,  3500))
 
   ctx.textAlign = 'center'
-  ctx.font      = `500 12px ${FONT}`
+  ctx.font      = `500 16px ${FONT}`
   ctx.fillStyle = C_F2500
-  ctx.fillText('Franchise CHF 2 500', labelX, labelY2500 - 10)
+  ctx.fillText('Franchise CHF 2 500', labelX, labelY2500 - 12)
   ctx.fillStyle = C_F300
-  ctx.fillText('Franchise CHF 300', labelX, labelY300 + 16)
+  ctx.fillText('Franchise CHF 300', labelX, labelY300 + 20)
 
   // 12 ─ Interaction slider — ligne + points sur les courbes
   if (frais > 0) {
@@ -316,7 +316,7 @@ export default function FranchiseChart() {
               className="franchise-slider"
             />
           </div>
-          <p className="text-[13px] text-muted text-center mt-3 px-4">
+          <p className="text-[16px] text-slate/60 text-center mt-3">
             Calculée avec la caisse la moins chère pour chaque franchise à Genève, modèle standard
           </p>
         </div>
