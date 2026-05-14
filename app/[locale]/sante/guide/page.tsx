@@ -399,36 +399,34 @@ export default function GuideLamalPage() {
                 Une franchise élevée réduit la prime mensuelle mais augmente le risque financier en cas de maladie.
               </p>
 
-              <h3 className="article-h3">Quand la franchise 300 CHF devient-elle plus intéressante malgré des primes plus élevées ?</h3>
+              <h3 className="article-h3">Quelle est la franchise la plus économique selon vos frais médicaux annuels ?</h3>
 
               <FranchiseChart />
 
-              <p className="text-[16px] text-slate/60 mb-3">Calculé avec la caisse la moins chère par franchise, modèle standard.</p>
-              <div className="overflow-x-auto border border-edge rounded-[8px] mb-4">
-                <table className="stripe-table w-full">
-                  <thead>
-                    <tr>
-                      <th className="text-left whitespace-nowrap">Franchise</th>
-                      <th className="text-left whitespace-nowrap">Prime par mois</th>
-                      <th className="text-left whitespace-nowrap">Économie annuelle</th>
-                      <th className="text-left">
-                        La franchise de CHF 300 est plus avantageuse si vos frais médicaux annuels dépassent
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {franchises.map((f) => (
-                      <tr key={f.montant}>
-                        <td className="font-bold text-brand whitespace-nowrap">CHF {f.montant.toLocaleString('fr-CH')}</td>
-                        <td className="text-ink whitespace-nowrap">CHF {f.prime.toFixed(2)}</td>
-                        <td className="text-brand font-medium whitespace-nowrap">
-                          {f.ecAnn > 0 ? `−CHF ${f.ecAnn}` : '—'}
-                        </td>
-                        <td className="font-medium whitespace-nowrap">{f.breakEven}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+              <ul className="space-y-2 mb-5">
+                {[
+                  'La franchise de CHF 2 500 est plus avantageuse si vos frais médicaux annuels restent inférieurs à CHF 1 891 (Genève, modèle standard).',
+                  'La franchise de CHF 300 devient plus économique au total dès que vos frais dépassent ce seuil.',
+                  'En Suisse, ce point de bascule est estimé en moyenne à CHF 1 897 de frais médicaux annuels.',
+                  'Pour les personnes en bonne santé avec peu de consultations, la franchise maximale est généralement le choix le plus rentable.',
+                ].map((item, i) => (
+                  <li key={i} className="flex gap-3 items-start text-[16px] text-slate">
+                    <svg className="shrink-0 mt-0.5 text-brand" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="callout mb-6">
+                <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">À retenir</p>
+                <p className="text-[16px]">
+                  La franchise maximale de CHF 2 500 est rentable pour la majorité des assurés suisses.
+                  Le seuil de bascule est de <strong>CHF 1 897 de frais médicaux annuels en moyenne nationale</strong> —
+                  soit environ 3 à 4 consultations chez un généraliste et quelques médicaments.
+                  Si vos frais dépassent ce montant, la franchise de CHF 300 devient plus économique au total.
+                </p>
               </div>
 
               <div className="callout flex gap-3 mb-6">
