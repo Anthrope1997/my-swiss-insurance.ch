@@ -25,10 +25,10 @@ const Y_RANGE = Y_MAX - Y_MIN
 
 // ─── Dimensions canvas ────────────────────────────────────────────────────────
 const CW  = 700
-const CH  = 400
-const PAD = { t: 75, r: 40, b: 55, l: 96 } as const
-const CHART_W = CW - PAD.l - PAD.r   // 564
-const CHART_H = CH - PAD.t - PAD.b   // 270
+const CH  = 266   // 38 % de CW → graphique + slider visible sans scroll sur 1280 px
+const PAD = { t: 52, r: 40, b: 42, l: 120 } as const
+const CHART_W = CW - PAD.l - PAD.r   // 540
+const CHART_H = CH - PAD.t - PAD.b   // 172
 
 // ─── Tokens design system ─────────────────────────────────────────────────────
 const C_F300      = '#1d4ed8'
@@ -131,17 +131,17 @@ function draw(ctx: CanvasRenderingContext2D, frais: number): void {
     )
   }
 
-  // 9 ─ Titre axe Y
-  ctx.textAlign = 'left'
-  ctx.font      = `13px ${FONT}`
-  ctx.fillStyle = C_MUTED
-  ctx.fillText('Coût annuel de votre assurance LAMal', cL, cT - 14)
-
-  // 10 ─ Label seuil (au-dessus de la ligne pointillée)
+  // 9 ─ Label seuil (au-dessus de la ligne pointillée)
   ctx.textAlign = 'center'
   ctx.font      = `bold 12px ${FONT}`
   ctx.fillStyle = C_SEUIL
-  ctx.fillText(`Seuil : ${fmtCHF(SEUIL)}`, seuilX, cT - 6)
+  ctx.fillText(`Seuil : ${fmtCHF(SEUIL)}`, seuilX, cT - 8)
+
+  // 10 ─ Titre axe Y — à l'intérieur du graphique en haut à gauche, 16px, sous le seuil
+  ctx.textAlign = 'left'
+  ctx.font      = `16px ${FONT}`
+  ctx.fillStyle = C_MUTED
+  ctx.fillText('Coût annuel de votre assurance LAMal', cL, cT + 22)
 
   // 11 ─ Labels courbes à droite (x = X_MAX) — F2500 au-dessus, F300 en dessous
   const endY2500 = mapY(totalAnnuel(PRIME_2500, 2500, X_MAX))
