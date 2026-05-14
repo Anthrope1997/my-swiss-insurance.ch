@@ -34,7 +34,7 @@ const CHART_H = CH - PAD.t - PAD.b   // 270
 // ─── Tokens design system ─────────────────────────────────────────────────────
 const C_F300      = '#1d4ed8'
 const C_F2500     = '#3b82f6'
-const C_SEUIL     = '#1a1a1a'  // ink
+const C_SEUIL     = '#1a1a1a'
 const C_INFLEXION = '#cbd5e1'
 const C_EDGE      = '#e2e8f0'
 const C_MUTED     = '#94a3b8'
@@ -219,18 +219,19 @@ export default function FranchiseChart() {
     draw(ctx, frais)
   }, [frais])
 
-  // ─── Bannière — trois états
-  const isBelowSeuil = frais > 0 && frais < SEUIL
-  const isAboveSeuil = frais >= SEUIL && frais > 0
-
-  const bannerBg  = frais === 0 ? 'bg-cloud' : isBelowSeuil ? 'bg-blue-tint' : 'bg-[#dcfce7]'
-  const bannerCls = frais === 0 ? 'text-muted' : 'text-ink'
+  // ─── Bannière — trois états (pas de vert : bg-blue-tint pour les deux états actifs)
+  const bannerBg =
+    frais === 0
+      ? 'bg-cloud'
+      : 'bg-blue-tint'
 
   const bannerContent =
     frais === 0 ? (
-      <span className="text-[16px]">Déplacez le curseur pour voir quelle franchise est la plus avantageuse</span>
-    ) : isBelowSeuil ? (
-      <span className="text-[16px]">
+      <span className="text-[16px] text-muted">
+        Déplacez le curseur pour voir quelle franchise est la plus avantageuse
+      </span>
+    ) : frais < SEUIL ? (
+      <span className="text-[16px] text-ink">
         La franchise de{' '}
         <span className="text-[22px] font-bold text-brand">CHF 2 500</span>
         {' '}est plus avantageuse pour{' '}
@@ -238,7 +239,7 @@ export default function FranchiseChart() {
         {' '}de frais médicaux annuels
       </span>
     ) : (
-      <span className="text-[16px]">
+      <span className="text-[16px] text-ink">
         La franchise de{' '}
         <span className="text-[22px] font-bold text-brand">CHF 300</span>
         {' '}est plus avantageuse pour{' '}
@@ -247,7 +248,7 @@ export default function FranchiseChart() {
       </span>
     )
 
-  // Alignement slider ↔ axes canvas
+  // Le slider s'aligne sur les axes du canvas via des % de la largeur totale
   const leftPct  = `${((PAD.l / CW) * 100).toFixed(2)}%`
   const rightPct = `${((PAD.r / CW) * 100).toFixed(2)}%`
 
@@ -283,10 +284,7 @@ export default function FranchiseChart() {
           cursor: pointer;
           box-shadow: 0 1px 4px rgba(29,78,216,0.35);
           border: 2px solid white;
-        }
-        .franchise-slider::-webkit-slider-runnable-track {
-          height: 6px;
-          border-radius: 6px;
+          box-sizing: border-box;
         }
         .franchise-slider::-moz-range-track {
           height: 6px;
@@ -297,41 +295,42 @@ export default function FranchiseChart() {
 
       {/* Bannière dynamique */}
       <div className={`${bannerBg} rounded-[8px] px-4 py-3 mb-3 text-center`}>
-        <p className={bannerCls}>{bannerContent}</p>
+        <p>{bannerContent}</p>
       </div>
 
-      {/* Graphique Canvas */}
+      {/* Tuile — graphique + slider + source */}
       <div className="border border-edge rounded-[8px] bg-white overflow-hidden">
+
+        {/* Canvas */}
         <canvas
           ref={canvasRef}
           width={CW}
           height={CH}
           style={{ width: '100%', height: 'auto', display: 'block' }}
         />
-      </div>
 
-      {/* Label + slider aligné sur les axes */}
-      <div className="mt-4">
-        <p className="text-[16px] font-medium text-ink text-center mb-2">
-          Frais médicaux annuels : {fmtCHF(frais)}
-        </p>
-        <div style={{ paddingLeft: leftPct, paddingRight: rightPct }}>
-          <input
-            type="range"
-            min={0}
-            max={4000}
-            step={50}
-            value={frais}
-            onChange={e => setFrais(Number(e.target.value))}
-            className="franchise-slider"
-          />
+        {/* Zone slider — fond cloud légèrement distinct */}
+        <div className="border-t border-edge bg-cloud py-4">
+          <p className="text-[16px] font-medium text-ink text-center mb-3">
+            Frais médicaux annuels : {fmtCHF(frais)}
+          </p>
+          {/* padding aligné sur les axes du canvas */}
+          <div style={{ paddingLeft: leftPct, paddingRight: rightPct }}>
+            <input
+              type="range"
+              min={0}
+              max={4000}
+              step={50}
+              value={frais}
+              onChange={e => setFrais(Number(e.target.value))}
+              className="franchise-slider"
+            />
+          </div>
+          <p className="text-[13px] text-muted text-center mt-3 px-4">
+            Calculée avec la caisse la moins chère pour chaque franchise à Genève, modèle standard
+          </p>
         </div>
       </div>
-
-      {/* Source */}
-      <p className="text-[13px] text-muted text-center mt-2">
-        Calculée avec la caisse la moins chère pour chaque franchise à Genève, modèle standard
-      </p>
     </div>
   )
 }
