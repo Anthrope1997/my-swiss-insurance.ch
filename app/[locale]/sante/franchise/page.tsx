@@ -89,7 +89,7 @@ const enBref = [
 
 const heroStats = [
   { value: '6',           label: 'Niveaux de franchise',        sub: 'de 300 à 2 500 CHF par an'                         },
-  { value: '1 900 CHF',   label: "Seuil d\'équilibre moyen",     sub: 'F300 vs F2500 · 26 cantons · adulte 35 ans'        },
+  { value: '1 897 CHF',   label: "Seuil d'équilibre moyen",      sub: 'F300 vs F2500 · 42 régions · adulte 35 ans'        },
   { value: '1 463 CHF',   label: 'Économie max. sur la prime',  sub: 'en passant à F2500 · adulte 35 ans · OFSP 2026'    },
 ]
 
