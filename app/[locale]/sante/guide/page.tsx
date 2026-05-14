@@ -5,6 +5,7 @@ import Link from 'next/link'
 import AuthorBio from '@/components/ui/AuthorBio'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import HeroStats from '@/components/ui/HeroStats'
+import FranchiseChart from '@/components/ui/FranchiseChart'
 
 export const metadata: Metadata = {
   title: 'Guide complet LAMal 2026 — Primes, franchises, modèles et subsides',
@@ -399,6 +400,8 @@ export default function GuideLamalPage() {
               </p>
 
               <h3 className="article-h3">Quand la franchise 300 CHF devient-elle plus intéressante malgré des primes plus élevées ?</h3>
+
+              <FranchiseChart />
 
               <p className="text-[16px] text-slate/60 mb-3">Calculé avec la caisse la moins chère par franchise, modèle standard.</p>
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-4">
