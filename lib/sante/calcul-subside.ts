@@ -9,10 +9,10 @@ import {
   type Situation,
   type SubsideResult,
   type TauxVS,
-} from '@/lib/data/subsides-2026'
+} from '@/data/sante/cantons'
 
 // Re-export des types utilisés par les composants
-export type { Situation, SubsideResult } from '@/lib/data/subsides-2026'
+export type { Situation, SubsideResult } from '@/data/sante/cantons'
 
 // Cantons avec formule officielle précise
 export type Canton = 'GE' | 'VD' | 'NE' | 'FR' | 'JU' | 'VS'

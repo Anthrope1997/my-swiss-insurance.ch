@@ -7,7 +7,7 @@ import {
   calculerSubsideGE, calculerSubsideVS, calculerSubsideNE,
   calculerSubsideVD, calculerSubsideJU, calculerSubsideFR,
 } from '@/lib/sante/calcul-subside'
-import { SUBSIDES_2026, type CantonSubside2026 } from '@/lib/data/subsides-2026'
+import { SUBSIDES_2026, type CantonSubside2026 } from '@/data/sante/cantons'
 import LeadFormModal from '@/components/ui/LeadFormModal'
 
 // ─── Data ────────────────────────────────────────────────────────────────────
