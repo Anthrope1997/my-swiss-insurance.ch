@@ -23,7 +23,7 @@ const Y_MIN   = 5500
 const Y_MAX   = 10000
 const Y_RANGE = Y_MAX - Y_MIN
 
-// ─── Dimensions canvas ────────────────────────────────────────────────────────
+// ─── Dimensions canvas (espace logique) ───────────────────────────────────────
 const CW  = 700
 const CH  = 266   // 38 % de CW
 const PAD = { t: 52, r: 40, b: 42, l: 120 } as const
@@ -45,8 +45,13 @@ const fmtCHF = (n: number): string =>
 const mapX = (x: number): number => PAD.l + (x / X_MAX) * CHART_W
 const mapY = (y: number): number => PAD.t + CHART_H * (1 - (y - Y_MIN) / Y_RANGE)
 
-// ─── Dessin canvas ────────────────────────────────────────────────────────────
-function draw(ctx: CanvasRenderingContext2D, frais: number): void {
+// ─── Dessin canvas ─────────────────────────────────────────────────────────────
+// scale = CW / displayWidth : ramène les tailles de police de pixels canvas
+// vers des pixels CSS réels, quelle que soit la largeur d'affichage du canvas.
+function draw(ctx: CanvasRenderingContext2D, frais: number, scale: number): void {
+  // px() convertit une cible CSS px en px logiques canvas
+  const px = (n: number) => Math.round(n * scale)
+
   ctx.clearRect(0, 0, CW, CH)
 
   const seuilX = mapX(SEUIL)
@@ -55,7 +60,7 @@ function draw(ctx: CanvasRenderingContext2D, frais: number): void {
   const cT     = PAD.t
   const cB     = PAD.t + CHART_H
 
-  // 1 ─ Grille Y horizontale — 0.5 px, edge, en premier pour passer derrière tout
+  // 1 ─ Grille Y horizontale — 0.5 px logique, en premier
   const yStep  = 1000
   const yStart = Math.ceil(Y_MIN / yStep) * yStep
   ctx.strokeStyle = C_EDGE
@@ -74,7 +79,7 @@ function draw(ctx: CanvasRenderingContext2D, frais: number): void {
   ctx.moveTo(cL, cT); ctx.lineTo(cL, cB); ctx.lineTo(cR, cB)
   ctx.stroke()
 
-  // 3 ─ Ligne de seuil — 1 px pointillé, edge (border-secondary)
+  // 3 ─ Ligne de seuil — 1 px pointillé, edge
   ctx.strokeStyle = C_EDGE
   ctx.lineWidth   = 1
   ctx.setLineDash([5, 4])
@@ -86,9 +91,8 @@ function draw(ctx: CanvasRenderingContext2D, frais: number): void {
   ctx.lineWidth   = 2
   ctx.beginPath()
   for (let x = 0; x <= X_MAX; x += 5) {
-    const px = mapX(x)
-    const py = mapY(totalAnnuel(PRIME_2500, 2500, x))
-    x === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py)
+    const p = mapX(x), q = mapY(totalAnnuel(PRIME_2500, 2500, x))
+    x === 0 ? ctx.moveTo(p, q) : ctx.lineTo(p, q)
   }
   ctx.stroke()
 
@@ -97,86 +101,85 @@ function draw(ctx: CanvasRenderingContext2D, frais: number): void {
   ctx.lineWidth   = 2
   ctx.beginPath()
   for (let x = 0; x <= X_MAX; x += 5) {
-    const px = mapX(x)
-    const py = mapY(totalAnnuel(PRIME_300, 300, x))
-    x === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py)
+    const p = mapX(x), q = mapY(totalAnnuel(PRIME_300, 300, x))
+    x === 0 ? ctx.moveTo(p, q) : ctx.lineTo(p, q)
   }
   ctx.stroke()
 
-  // 6 ─ Labels axe Y (valeurs CHF) — 16px
+  // 6 ─ Labels axe Y — 16 CSS px
   for (let y = yStart; y <= Y_MAX; y += yStep) {
     const py = mapY(y)
     if (py < cT - 1 || py > cB + 1) continue
     ctx.textAlign = 'right'
-    ctx.font      = `16px ${FONT}`
+    ctx.font      = `${px(16)}px ${FONT}`
     ctx.fillStyle = C_LABEL
-    ctx.fillText(fmtCHF(y), cL - 8, py + 5)
+    ctx.fillText(fmtCHF(y), cL - 8, py + px(5))
   }
 
-  // 7 ─ Labels axe X — 16px ; dernier tick right-aligné pour éviter le débord
+  // 7 ─ Labels axe X — 16 CSS px ; dernier tick right-aligné (évite le débord)
   const xTicks = [0, 1000, 2000, 3000, 4000]
-  ctx.font      = `16px ${FONT}`
+  ctx.font      = `${px(16)}px ${FONT}`
   ctx.fillStyle = C_LABEL
   for (const x of xTicks) {
     const label = x === 0 ? 'CHF 0' : `CHF ${x.toLocaleString('fr-CH')}`
     if (x === X_MAX) {
       ctx.textAlign = 'right'
-      ctx.fillText(label, cR, cB + 18)
+      ctx.fillText(label, cR, cB + px(18))
     } else {
       ctx.textAlign = 'center'
-      ctx.fillText(label, mapX(x), cB + 18)
+      ctx.fillText(label, mapX(x), cB + px(18))
     }
   }
 
-  // 8 ─ Titre axe Y — 16px, dans PAD.top, à gauche
+  // 8 ─ Titre axe Y — 16 CSS px, dans PAD.top, à gauche
   ctx.textAlign = 'left'
-  ctx.font      = `16px ${FONT}`
+  ctx.font      = `${px(16)}px ${FONT}`
   ctx.fillStyle = C_LABEL
-  ctx.fillText('Coût annuel de votre assurance LAMal', cL, cT - 32)
+  ctx.fillText('Coût annuel de votre assurance LAMal', cL, cT - px(32))
 
-  // 9 ─ Label seuil — 16px, weight 500, text-primary
+  // 9 ─ Label seuil — 16 CSS px, weight 500, text-primary
   ctx.textAlign = 'center'
-  ctx.font      = `500 16px ${FONT}`
+  ctx.font      = `500 ${px(16)}px ${FONT}`
   ctx.fillStyle = C_INK
-  ctx.fillText(fmtCHF(SEUIL), seuilX, cT - 8)
+  ctx.fillText(fmtCHF(SEUIL), seuilX, cT - px(8))
 
-  // 10 ─ Labels de zone — 16px, halo blanc pour lisibilité sur les courbes
+  // 10 ─ Labels de zone — 16 CSS px, halo blanc
   const leftCx  = (cL + seuilX) / 2
   const rightCx = (seuilX + cR) / 2
-  const zY1     = cB - 28
-  const zY2     = cB - 10
+  const zY1     = cB - px(28)
+  const zY2     = cB - px(10)
 
   ctx.shadowColor = 'white'
   ctx.shadowBlur  = 6
 
   ctx.textAlign = 'center'
-  ctx.font      = `600 16px ${FONT}`
+  ctx.font      = `600 ${px(16)}px ${FONT}`
   ctx.fillStyle = C_F2500
   ctx.fillText('Franchise CHF 2 500', leftCx, zY1)
-  ctx.font      = `16px ${FONT}`
+  ctx.font      = `${px(16)}px ${FONT}`
   ctx.fillText('plus avantageuse', leftCx, zY2)
 
-  ctx.font      = `600 16px ${FONT}`
+  ctx.font      = `600 ${px(16)}px ${FONT}`
   ctx.fillStyle = C_F300
   ctx.fillText('Franchise CHF 300', rightCx, zY1)
-  ctx.font      = `16px ${FONT}`
+  ctx.font      = `${px(16)}px ${FONT}`
   ctx.fillText('plus avantageuse', rightCx, zY2)
 
   ctx.shadowBlur = 0
 
-  // 11 ─ Labels courbes à x = 3 500 — 16px, weight 500, couleur courbe
+  // 11 ─ Labels courbes à x = 3 500 — 16 CSS px, weight 500, couleur courbe
   const labelX     = mapX(3500)
   const labelY2500 = mapY(totalAnnuel(PRIME_2500, 2500, 3500))
   const labelY300  = mapY(totalAnnuel(PRIME_300,  300,  3500))
 
   ctx.textAlign = 'center'
-  ctx.font      = `500 16px ${FONT}`
+  ctx.font      = `500 ${px(16)}px ${FONT}`
   ctx.fillStyle = C_F2500
-  ctx.fillText('Franchise CHF 2 500', labelX, labelY2500 - 12)
+  ctx.fillText('Franchise CHF 2 500', labelX, labelY2500 - px(12))
   ctx.fillStyle = C_F300
-  ctx.fillText('Franchise CHF 300', labelX, labelY300 + 20)
+  ctx.fillText('Franchise CHF 300', labelX, labelY300 + px(20))
 
-  // 12 ─ Interaction slider — ligne + points sur les courbes
+  // 12 ─ Interaction slider
   if (frais > 0) {
     const sliderX = mapX(frais)
 
@@ -190,36 +193,51 @@ function draw(ctx: CanvasRenderingContext2D, frais: number): void {
     ctx.fillStyle   = C_F2500
     ctx.strokeStyle = 'white'
     ctx.lineWidth   = 2
-    ctx.beginPath(); ctx.arc(sliderX, dotY2500, 4, 0, Math.PI * 2); ctx.fill(); ctx.stroke()
+    ctx.beginPath(); ctx.arc(sliderX, dotY2500, px(4), 0, Math.PI * 2); ctx.fill(); ctx.stroke()
 
     const dotY300 = mapY(totalAnnuel(PRIME_300, 300, frais))
     ctx.fillStyle   = C_F300
-    ctx.beginPath(); ctx.arc(sliderX, dotY300, 4, 0, Math.PI * 2); ctx.fill(); ctx.stroke()
+    ctx.beginPath(); ctx.arc(sliderX, dotY300, px(4), 0, Math.PI * 2); ctx.fill(); ctx.stroke()
   }
 }
 
 // ─── Composant React ──────────────────────────────────────────────────────────
 export default function FranchiseChart() {
-  const [frais, setFrais] = useState(0)
+  const [frais, setFrais]             = useState(0)
+  const [displayWidth, setDisplayWidth] = useState(CW)
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
+  // Redessine quand frais ou displayWidth changent
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
     const ctx = canvas.getContext('2d')
     if (!ctx) return
-    const dpr    = window.devicePixelRatio || 1
+    const dpr = window.devicePixelRatio || 1
     canvas.width  = CW * dpr
     canvas.height = CH * dpr
     ctx.scale(dpr, dpr)
-    draw(ctx, frais)
-  }, [frais])
+    // scale = ratio logique/affiché → convertit px CSS en px canvas
+    draw(ctx, frais, CW / displayWidth)
+  }, [frais, displayWidth])
+
+  // Mesure la largeur d'affichage réelle pour calibrer les polices
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ro = new ResizeObserver(entries => {
+      const w = entries[0].contentRect.width
+      if (w > 0) setDisplayWidth(w)
+    })
+    ro.observe(canvas)
+    return () => ro.disconnect()
+  }, [])
 
   // Alignement slider ↔ axes canvas
   const leftPct  = `${((PAD.l / CW) * 100).toFixed(2)}%`
   const rightPct = `${((PAD.r / CW) * 100).toFixed(2)}%`
 
-  // ─── Bannière — texte seul, sans fond, montants en font-semibold text-brand ─
+  // ─── Bannière ────────────────────────────────────────────────────────────────
   const bannerText =
     frais === 0 ? (
       <span className="text-slate">
@@ -290,8 +308,6 @@ export default function FranchiseChart() {
 
       {/* Tuile — fond blanc, bordure edge, border-radius card, padding 24px */}
       <div className="border border-edge rounded-lg bg-white p-6">
-
-        {/* Canvas */}
         <canvas
           ref={canvasRef}
           width={CW}
@@ -299,12 +315,11 @@ export default function FranchiseChart() {
           style={{ width: '100%', height: 'auto', display: 'block' }}
         />
 
-        {/* Zone slider — séparée par border-t, sans fond coloré */}
+        {/* Zone slider */}
         <div className="border-t border-edge mt-4 pt-4">
           <p className="text-[16px] font-medium text-ink text-center mb-3">
             Frais médicaux annuels : {fmtCHF(frais)}
           </p>
-          {/* padding aligné sur les axes du canvas */}
           <div style={{ paddingLeft: leftPct, paddingRight: rightPct }}>
             <input
               type="range"
