@@ -18,6 +18,12 @@ export interface RegionPrime {
   prime: number
 }
 
+export interface SubsideProfilRow {
+  profil: string
+  subsideMax: string   // ex. "486 CHF/mois" ou "—"
+  revenuMax: string    // ex. "56 000 CHF/an" ou "—"
+}
+
 export interface SubsideInfo {
   seuilRevenu: string
   subsideMensuel: string
@@ -26,6 +32,7 @@ export interface SubsideInfo {
   delai?: string
   lienOfficiel: string
   bareme?: Array<{ revenu: string; montant: string }>
+  tableauProfils?: SubsideProfilRow[]
 }
 
 export interface CapitaleData {

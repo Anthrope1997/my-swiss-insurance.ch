@@ -438,6 +438,31 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
             </div>
           </div>
 
+          {canton.subside.tableauProfils && (
+            <div className="border border-edge rounded-[8px] overflow-hidden mb-5">
+              <table className="stripe-table w-full text-[16px]">
+                <thead>
+                  <tr>
+                    <th className="text-left whitespace-nowrap">Profil</th>
+                    <th className="text-left whitespace-nowrap">Subside max / mois</th>
+                    <th className="text-left whitespace-nowrap">Revenu max / an</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {canton.subside.tableauProfils.map((row) => (
+                    <tr key={row.profil}>
+                      <td className="text-ink font-medium whitespace-nowrap">{row.profil}</td>
+                      <td className={`text-left font-semibold whitespace-nowrap ${row.subsideMax === '—' ? 'text-slate' : 'text-brand'}`}>
+                        {row.subsideMax}
+                      </td>
+                      <td className="text-left text-ink whitespace-nowrap">{row.revenuMax}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
           <p className="text-[16px] text-slate/60 mb-5">
             Les règles de calcul sont complexes, spécifiques à chaque canton et dépendent de votre profil. Le montant exact est déterminé par le canton sur la base de votre dossier fiscal.
           </p>
