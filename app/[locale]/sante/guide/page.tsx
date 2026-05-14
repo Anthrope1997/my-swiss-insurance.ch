@@ -104,12 +104,12 @@ const premiums = [
 ]
 
 const franchises = [
-  { montant: 300,  prime: 638.70, economie: 0,      ecAnn: 0,    breakEven: 'Réf.',            conseil: 'Recommandé si frais médicaux dépassent CHF 1 891 par an' },
-  { montant: 500,  prime: 627.90, economie: 10.80,  ecAnn: 130,  breakEven: 'env. CHF 444',   conseil: 'Avantage limité' },
-  { montant: 1000, prime: 600.70, economie: 38.00,  ecAnn: 456,  breakEven: 'env. CHF 807',   conseil: "Bon si moins d'une consultation majeure par an" },
-  { montant: 1500, prime: 573.60, economie: 65.10,  ecAnn: 781,  breakEven: 'env. CHF 1 168', conseil: 'Bon équilibre pour personnes saines' },
-  { montant: 2000, prime: 546.50, economie: 92.20,  ecAnn: 1106, breakEven: 'env. CHF 1 529', conseil: 'Recommandé sans maladie chronique' },
-  { montant: 2500, prime: 519.40, economie: 119.30, ecAnn: 1432, breakEven: 'env. CHF 1 891', conseil: 'Optimal pour adultes très sains' },
+  { montant: 300,  prime: 638.70, economie: 0,      ecAnn: 0,    breakEven: '—',          conseil: 'Recommandé si frais médicaux dépassent CHF 1 891 par an' },
+  { montant: 500,  prime: 627.90, economie: 10.80,  ecAnn: 130,  breakEven: 'CHF 444',    conseil: 'Avantage limité' },
+  { montant: 1000, prime: 600.70, economie: 38.00,  ecAnn: 456,  breakEven: 'CHF 807',    conseil: "Bon si moins d'une consultation majeure par an" },
+  { montant: 1500, prime: 573.60, economie: 65.10,  ecAnn: 781,  breakEven: 'CHF 1 168',  conseil: 'Bon équilibre pour personnes saines' },
+  { montant: 2000, prime: 546.50, economie: 92.20,  ecAnn: 1106, breakEven: 'CHF 1 529',  conseil: 'Recommandé sans maladie chronique' },
+  { montant: 2500, prime: 519.40, economie: 119.30, ecAnn: 1432, breakEven: 'CHF 1 891',  conseil: 'Optimal pour adultes très sains' },
 ]
 
 const assureurs = [
@@ -398,15 +398,20 @@ export default function GuideLamalPage() {
                 Une franchise élevée réduit la prime mensuelle mais augmente le risque financier en cas de maladie.
               </p>
 
-              <h3 className="article-h3">Tableau comparatif (exemple Genève, adulte 35 ans, Assura BASE)</h3>
-              <div className="overflow-x-auto border border-edge rounded-[8px] mb-6">
+              <h3 className="article-h3">Quand la franchise 300 CHF devient-elle plus intéressante malgré des primes plus élevées ?</h3>
+
+              <p className="text-[13px] text-slate/60 mb-3">Calculé avec la caisse la moins chère par franchise, modèle standard.</p>
+              <div className="overflow-x-auto border border-edge rounded-[8px] mb-4">
                 <table className="stripe-table w-full">
                   <thead>
                     <tr>
                       <th className="text-left whitespace-nowrap">Franchise</th>
                       <th className="text-left whitespace-nowrap">Prime par mois</th>
-                      <th className="text-left whitespace-nowrap">Économie par an</th>
-                      <th className="text-left whitespace-nowrap">Seuil d'équilibre</th>
+                      <th className="text-left whitespace-nowrap">Économie annuelle</th>
+                      <th className="text-left">
+                        Choisir la franchise 300 CHF<br />
+                        <span className="text-[13px] font-normal text-slate/60">si vos frais annuels dépassent</span>
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -415,7 +420,7 @@ export default function GuideLamalPage() {
                         <td className="font-bold text-brand whitespace-nowrap">CHF {f.montant.toLocaleString('fr-CH')}</td>
                         <td className="text-ink whitespace-nowrap">CHF {f.prime.toFixed(2)}</td>
                         <td className="text-brand font-medium whitespace-nowrap">
-                          {f.ecAnn > 0 ? `−CHF ${f.ecAnn}` : '-'}
+                          {f.ecAnn > 0 ? `−CHF ${f.ecAnn}` : '—'}
                         </td>
                         <td className="font-medium whitespace-nowrap">{f.breakEven}</td>
                       </tr>
@@ -424,23 +429,12 @@ export default function GuideLamalPage() {
                 </table>
               </div>
 
-              <div className="callout flex gap-3">
-                <svg className="text-callout-icon shrink-0 mt-0.5" width="20" height="20"
-                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
-                     strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
-                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
-                  <line x1="10" y1="21" x2="14" y2="21" />
-                </svg>
-                <div>
-                  <p className="font-semibold text-ink mb-2">Comment lire le tableau ?</p>
-                  <p className="text-[16px]">
-                    <strong>Exemple Genève, 300 vs 2 500 CHF par an :</strong> l'économie annuelle sur la prime est de CHF 1 432.
-                    Si vos frais médicaux annuels dépassent <strong>CHF 1 891</strong>, la franchise 300 CHF est plus avantageuse au total.
-                    En dessous, la franchise 2 500 CHF vous fait économiser davantage. Seuil moyen suisse : 1 897 CHF.
-                  </p>
-                </div>
-              </div>
+              <p className="text-[16px] text-slate leading-relaxed mb-6">
+                Dans le canton de Genève, la franchise 2 500 CHF permet d&apos;économiser CHF 1 432 par an sur la prime.
+                Elle reste avantageuse tant que vos frais médicaux annuels ne dépassent pas CHF 1 891.
+                Au-delà, la franchise 300 CHF devient plus économique au total.
+                En Suisse, ce point de bascule est estimé autour de CHF 1 900 de frais médicaux annuels.
+              </p>
 
               <div className="mt-6">
                 <Link href="/sante/franchise" className="text-brand hover:underline text-[16px] font-medium">
