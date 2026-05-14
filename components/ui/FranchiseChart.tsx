@@ -15,9 +15,8 @@ function totalAnnuel(prime: number, franchise: number, frais: number): number {
 }
 
 // Seuil analytique : 12*(p300−p2500) + 270 = 0.9x  →  x ≈ 1 891
-const SEUIL     = Math.round((12 * (PRIME_300 - PRIME_2500) + 270) / 0.9)
-const X_MAX     = 4000
-const CURVE_END = 3500
+const SEUIL = Math.round((12 * (PRIME_300 - PRIME_2500) + 270) / 0.9)
+const X_MAX = 4000
 
 // ─── Plage Y — fixe ───────────────────────────────────────────────────────────
 const Y_MIN   = 5500
@@ -34,8 +33,7 @@ const CHART_H = CH - PAD.t - PAD.b   // 270
 // ─── Tokens design system ─────────────────────────────────────────────────────
 const C_F300      = '#1d4ed8'
 const C_F2500     = '#3b82f6'
-const C_SEUIL     = '#1a1a1a'
-const C_INFLEXION = '#cbd5e1'
+const C_SEUIL = '#64748b'  // slate-500 — moins agressif que l'ink
 const C_EDGE      = '#e2e8f0'
 const C_MUTED     = '#94a3b8'
 const FONT        = '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
@@ -51,13 +49,11 @@ const mapY = (y: number): number => PAD.t + CHART_H * (1 - (y - Y_MIN) / Y_RANGE
 function draw(ctx: CanvasRenderingContext2D, frais: number): void {
   ctx.clearRect(0, 0, CW, CH)
 
-  const seuilX  = mapX(SEUIL)
-  const inflexX = mapX(2500)
-  const endX    = mapX(CURVE_END)
-  const cL      = PAD.l
-  const cR      = PAD.l + CHART_W
-  const cT      = PAD.t
-  const cB      = PAD.t + CHART_H
+  const seuilX = mapX(SEUIL)
+  const cL     = PAD.l
+  const cR     = PAD.l + CHART_W
+  const cT     = PAD.t
+  const cB     = PAD.t + CHART_H
 
   // 1 ─ Zones colorées
   ctx.fillStyle = 'rgba(59, 130, 246, 0.07)'
@@ -65,7 +61,100 @@ function draw(ctx: CanvasRenderingContext2D, frais: number): void {
   ctx.fillStyle = 'rgba(29, 78, 216, 0.07)'
   ctx.fillRect(seuilX, cT, cR - seuilX, CHART_H)
 
-  // 2 ─ Labels de zone (centrés en bas, deux lignes)
+  // 2 ─ Grille Y — dessinée en premier pour passer derrière tout le texte
+  const yStep  = 1000
+  const yStart = Math.ceil(Y_MIN / yStep) * yStep
+  ctx.strokeStyle = C_EDGE
+  ctx.lineWidth   = 1
+  ctx.setLineDash([])
+  for (let y = yStart; y <= Y_MAX; y += yStep) {
+    const py = mapY(y)
+    if (py < cT - 1 || py > cB + 1) continue
+    ctx.beginPath(); ctx.moveTo(cL, py); ctx.lineTo(cR, py); ctx.stroke()
+  }
+
+  // 3 ─ Lignes d'axes
+  ctx.strokeStyle = C_EDGE
+  ctx.lineWidth   = 1
+  ctx.beginPath()
+  ctx.moveTo(cL, cT); ctx.lineTo(cL, cB); ctx.lineTo(cR, cB)
+  ctx.stroke()
+
+  // 4 ─ Seuil d'équilibre (slate, pointillé)
+  ctx.strokeStyle = C_SEUIL
+  ctx.lineWidth   = 1.5
+  ctx.setLineDash([5, 4])
+  ctx.beginPath(); ctx.moveTo(seuilX, cT); ctx.lineTo(seuilX, cB); ctx.stroke()
+  ctx.setLineDash([])
+
+  // 5 ─ Courbe F2500 — jusqu'à X_MAX
+  ctx.strokeStyle = C_F2500
+  ctx.lineWidth   = 2.5
+  ctx.beginPath()
+  for (let x = 0; x <= X_MAX; x += 5) {
+    const px = mapX(x)
+    const py = mapY(totalAnnuel(PRIME_2500, 2500, x))
+    x === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py)
+  }
+  ctx.stroke()
+
+  // 6 ─ Courbe F300 — jusqu'à X_MAX
+  ctx.strokeStyle = C_F300
+  ctx.lineWidth   = 2.5
+  ctx.beginPath()
+  for (let x = 0; x <= X_MAX; x += 5) {
+    const px = mapX(x)
+    const py = mapY(totalAnnuel(PRIME_300, 300, x))
+    x === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py)
+  }
+  ctx.stroke()
+
+  // 7 ─ Labels axe Y — par-dessus les lignes de grille
+  for (let y = yStart; y <= Y_MAX; y += yStep) {
+    const py = mapY(y)
+    if (py < cT - 1 || py > cB + 1) continue
+    ctx.textAlign = 'right'
+    ctx.font      = `13px ${FONT}`
+    ctx.fillStyle = C_MUTED
+    ctx.fillText(fmtCHF(y), cL - 8, py + 4)
+  }
+
+  // 8 ─ Labels axe X
+  const xTicks = [0, 1000, 2000, 3000, 4000]
+  ctx.textAlign = 'center'
+  ctx.font      = `13px ${FONT}`
+  ctx.fillStyle = C_MUTED
+  for (const x of xTicks) {
+    ctx.fillText(
+      x === 0 ? 'CHF 0' : `CHF ${x.toLocaleString('fr-CH')}`,
+      mapX(x), cB + 20
+    )
+  }
+
+  // 9 ─ Titre axe Y
+  ctx.textAlign = 'left'
+  ctx.font      = `13px ${FONT}`
+  ctx.fillStyle = C_MUTED
+  ctx.fillText('Coût annuel de votre assurance LAMal', cL, cT - 14)
+
+  // 10 ─ Label seuil (au-dessus de la ligne pointillée)
+  ctx.textAlign = 'center'
+  ctx.font      = `bold 12px ${FONT}`
+  ctx.fillStyle = C_SEUIL
+  ctx.fillText(`Seuil : ${fmtCHF(SEUIL)}`, seuilX, cT - 6)
+
+  // 11 ─ Labels courbes à droite (x = X_MAX) — F2500 au-dessus, F300 en dessous
+  const endY2500 = mapY(totalAnnuel(PRIME_2500, 2500, X_MAX))
+  const endY300  = mapY(totalAnnuel(PRIME_300,  300,  X_MAX))
+
+  ctx.textAlign = 'right'
+  ctx.font      = `bold 12px ${FONT}`
+  ctx.fillStyle = C_F2500
+  ctx.fillText('Franchise CHF 2 500', cR - 4, endY2500 - 10)
+  ctx.fillStyle = C_F300
+  ctx.fillText('Franchise CHF 300', cR - 4, endY300 + 17)
+
+  // 12 ─ Labels de zone (bas du graphique) — en dernier pour rester lisibles
   const leftCx  = (cL + seuilX) / 2
   const rightCx = (seuilX + cR) / 2
   const zY1     = cB - 26
@@ -84,101 +173,7 @@ function draw(ctx: CanvasRenderingContext2D, frais: number): void {
   ctx.font      = `11px ${FONT}`
   ctx.fillText('plus avantageuse', rightCx, zY2)
 
-  // 3 ─ Grille Y + labels axe Y
-  const yStep  = 1000
-  const yStart = Math.ceil(Y_MIN / yStep) * yStep
-  for (let y = yStart; y <= Y_MAX; y += yStep) {
-    const py = mapY(y)
-    if (py < cT - 1 || py > cB + 1) continue
-    ctx.strokeStyle = C_EDGE
-    ctx.lineWidth   = 1
-    ctx.setLineDash([])
-    ctx.beginPath(); ctx.moveTo(cL, py); ctx.lineTo(cR, py); ctx.stroke()
-    ctx.textAlign  = 'right'
-    ctx.font       = `13px ${FONT}`
-    ctx.fillStyle  = C_MUTED
-    ctx.fillText(fmtCHF(y), cL - 8, py + 4)
-  }
-
-  // 4 ─ Labels axe X
-  const xTicks = [0, 1000, 2000, 3000, 4000]
-  ctx.textAlign = 'center'
-  ctx.font      = `13px ${FONT}`
-  ctx.fillStyle = C_MUTED
-  for (const x of xTicks) {
-    ctx.fillText(
-      x === 0 ? 'CHF 0' : `CHF ${x.toLocaleString('fr-CH')}`,
-      mapX(x), cB + 20
-    )
-  }
-
-  // 5 ─ Label axe Y (au-dessus)
-  ctx.textAlign = 'left'
-  ctx.font      = `13px ${FONT}`
-  ctx.fillStyle = C_MUTED
-  ctx.fillText('Coût annuel total (CHF)', cL, cT - 14)
-
-  // 6 ─ Lignes d'axes
-  ctx.strokeStyle = C_EDGE
-  ctx.lineWidth   = 1
-  ctx.setLineDash([])
-  ctx.beginPath()
-  ctx.moveTo(cL, cT); ctx.lineTo(cL, cB); ctx.lineTo(cR, cB)
-  ctx.stroke()
-
-  // 7 ─ Ligne d'inflexion CHF 2 500 (gris clair, pointillé)
-  ctx.strokeStyle = C_INFLEXION
-  ctx.lineWidth   = 1
-  ctx.setLineDash([4, 4])
-  ctx.beginPath(); ctx.moveTo(inflexX, cT); ctx.lineTo(inflexX, cB); ctx.stroke()
-
-  // 8 ─ Seuil d'équilibre (ink, pointillé)
-  ctx.strokeStyle = C_SEUIL
-  ctx.lineWidth   = 1.5
-  ctx.setLineDash([5, 4])
-  ctx.beginPath(); ctx.moveTo(seuilX, cT); ctx.lineTo(seuilX, cB); ctx.stroke()
-  ctx.setLineDash([])
-
-  ctx.textAlign = 'center'
-  ctx.font      = `bold 12px ${FONT}`
-  ctx.fillStyle = C_SEUIL
-  ctx.fillText(`Seuil : ${fmtCHF(SEUIL)}`, seuilX, cT - 6)
-
-  // 9 ─ Courbe F2500
-  ctx.strokeStyle = C_F2500
-  ctx.lineWidth   = 2.5
-  ctx.setLineDash([])
-  ctx.beginPath()
-  for (let x = 0; x <= CURVE_END; x += 5) {
-    const px = mapX(x)
-    const py = mapY(totalAnnuel(PRIME_2500, 2500, x))
-    x === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py)
-  }
-  ctx.stroke()
-
-  // 10 ─ Courbe F300
-  ctx.strokeStyle = C_F300
-  ctx.lineWidth   = 2.5
-  ctx.beginPath()
-  for (let x = 0; x <= CURVE_END; x += 5) {
-    const px = mapX(x)
-    const py = mapY(totalAnnuel(PRIME_300, 300, x))
-    x === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py)
-  }
-  ctx.stroke()
-
-  // 11 ─ Labels courbes à x = CURVE_END
-  const endY2500 = mapY(totalAnnuel(PRIME_2500, 2500, CURVE_END))
-  const endY300  = mapY(totalAnnuel(PRIME_300,  300,  CURVE_END))
-
-  ctx.textAlign = 'center'
-  ctx.font      = `bold 12px ${FONT}`
-  ctx.fillStyle = C_F2500
-  ctx.fillText('Franchise CHF 2 500', endX, endY2500 - 10)
-  ctx.fillStyle = C_F300
-  ctx.fillText('Franchise CHF 300', endX, endY300 - 10)
-
-  // 12 ─ Interaction slider
+  // 13 ─ Interaction slider
   if (frais > 0) {
     const sliderX = mapX(frais)
 
@@ -188,17 +183,15 @@ function draw(ctx: CanvasRenderingContext2D, frais: number): void {
     ctx.beginPath(); ctx.moveTo(sliderX, cT); ctx.lineTo(sliderX, cB); ctx.stroke()
     ctx.setLineDash([])
 
-    if (frais <= CURVE_END) {
-      const dotY2500 = mapY(totalAnnuel(PRIME_2500, 2500, frais))
-      ctx.fillStyle   = C_F2500
-      ctx.strokeStyle = 'white'
-      ctx.lineWidth   = 2
-      ctx.beginPath(); ctx.arc(sliderX, dotY2500, 5, 0, Math.PI * 2); ctx.fill(); ctx.stroke()
+    const dotY2500 = mapY(totalAnnuel(PRIME_2500, 2500, frais))
+    ctx.fillStyle   = C_F2500
+    ctx.strokeStyle = 'white'
+    ctx.lineWidth   = 2
+    ctx.beginPath(); ctx.arc(sliderX, dotY2500, 5, 0, Math.PI * 2); ctx.fill(); ctx.stroke()
 
-      const dotY300 = mapY(totalAnnuel(PRIME_300, 300, frais))
-      ctx.fillStyle   = C_F300
-      ctx.beginPath(); ctx.arc(sliderX, dotY300, 5, 0, Math.PI * 2); ctx.fill(); ctx.stroke()
-    }
+    const dotY300 = mapY(totalAnnuel(PRIME_300, 300, frais))
+    ctx.fillStyle   = C_F300
+    ctx.beginPath(); ctx.arc(sliderX, dotY300, 5, 0, Math.PI * 2); ctx.fill(); ctx.stroke()
   }
 }
 
