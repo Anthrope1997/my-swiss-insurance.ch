@@ -33,7 +33,7 @@ const faqItems = [
   {
     question: 'Quelle franchise LAMal choisir en 2026 ?',
     answer:
-      "Choisissez la franchise 2 500 CHF si vous êtes en bonne santé et avez peu de frais médicaux : vous économisez environ CHF 120 par mois sur la prime. Optez pour la franchise 300 CHF si vos dépenses médicales dépassent CHF 1 440 par an.",
+      "Choisissez la franchise 2 500 CHF si vous êtes en bonne santé et avez peu de frais médicaux : vous économisez environ CHF 120 par mois sur la prime. Optez pour la franchise 300 CHF si vos dépenses médicales dépassent CHF 1 899 par an (seuil moyen suisse : 1 897 CHF).",
   },
   {
     question: "Peut-on changer de franchise en cours d'année ?",
@@ -73,17 +73,17 @@ const faqSchema = {
 }
 
 const franchises = [
-  { montant: 2500, prime: 444.65, seuil: 'CHF 1 440', conseil: "Aucune consultation prévue dans l'année" },
-  { montant: 2000, prime: 471.80, seuil: 'CHF 1 114', conseil: '1 à 2 consultations par an maximum' },
-  { montant: 1500, prime: 499.20, seuil: 'CHF 785',   conseil: 'Quelques consultations, pas de traitement régulier' },
-  { montant: 1000, prime: 526.55, seuil: 'CHF 456',   conseil: 'Consultations occasionnelles' },
-  { montant: 500,  prime: 554.05, seuil: 'CHF 127',   conseil: 'Suivi médical régulier' },
-  { montant: 300,  prime: 564.60, seuil: 'Référence',  conseil: 'Traitement chronique, médicaments réguliers, grossesse' },
+  { montant: 2500, prime: 444.65, seuil: 'CHF 1 899', conseil: "Aucune consultation prévue dans l'année" },
+  { montant: 2000, prime: 471.80, seuil: 'CHF 1 537', conseil: '1 à 2 consultations par an maximum' },
+  { montant: 1500, prime: 499.20, seuil: 'CHF 1 172', conseil: 'Quelques consultations, pas de traitement régulier' },
+  { montant: 1000, prime: 526.55, seuil: 'CHF 807',   conseil: 'Consultations occasionnelles' },
+  { montant: 500,  prime: 554.05, seuil: 'CHF 441',   conseil: 'Suivi médical régulier' },
+  { montant: 300,  prime: 564.60, seuil: 'Référence', conseil: 'Traitement chronique, médicaments réguliers, grossesse' },
 ]
 
 const enBref = [
-  "La franchise 2 500 CHF économise 120 CHF par mois sur votre prime et vous expose à 3 200 CHF de reste à charge maximum par an.",
-  "Le seuil d'équilibre entre franchise 300 CHF et 2 500 CHF est de 1 440 CHF de frais médicaux annuels.",
+  "La franchise 2 500 CHF économise environ 120 CHF par mois sur votre prime et vous expose à 3 200 CHF de reste à charge maximum par an.",
+  "Le seuil d'équilibre entre franchise 300 CHF et 2 500 CHF est de 1 899 CHF de frais médicaux annuels à Zurich (1 897 CHF en moyenne suisse).",
   "Les enfants bénéficient de franchises de 0 à 600 CHF par an, avec une quote-part plafonnée à 350 CHF par an.",
 ]
 
@@ -127,7 +127,7 @@ export default function FranchisePage() {
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
             Franchise LAMal : quel montant choisir en 2026 ?
           </h1>
-          <p className="text-[18px] text-slate leading-relaxed mb-10">
+          <p className="text-[16px] text-slate leading-relaxed mb-10">
             La franchise est le montant annuel que vous payez avant que votre assurance maladie de base LAMal intervienne.
             Choisir le bon niveau, entre 300 et 2 500 CHF par an, peut économiser jusqu&apos;à 120 CHF par mois sur votre prime.
           </p>
@@ -147,7 +147,7 @@ export default function FranchisePage() {
             </p>
             <ul className="space-y-3">
               {enBref.map((phrase, i) => (
-                <li key={i} className="flex gap-2.5 text-[17px] text-slate leading-relaxed">
+                <li key={i} className="flex gap-2.5 text-[16px] text-slate leading-relaxed">
                   <span className="text-brand font-bold shrink-0 mt-0.5" aria-hidden="true">•</span>
                   <span>{phrase}</span>
                 </li>
@@ -162,7 +162,7 @@ export default function FranchisePage() {
             <ul className="space-y-1">
               {toc.map((item) => (
                 <li key={item.id}>
-                  <a href={`#${item.id}`} className="block text-[17px] text-slate leading-relaxed hover:text-brand hover:bg-cloud px-2 py-1 rounded transition-colors">{item.label}</a>
+                  <a href={`#${item.id}`} className="block text-[16px] text-slate leading-relaxed hover:text-brand hover:bg-cloud px-2 py-1 rounded transition-colors">{item.label}</a>
                 </li>
               ))}
             </ul>
@@ -252,7 +252,7 @@ export default function FranchisePage() {
             <h2 className="article-h2">2. Quelle franchise choisir selon vos frais médicaux annuels ?</h2>
 
             <p className="article-p mb-6">
-              La franchise 2 500 CHF est avantageuse si vos frais médicaux annuels restent sous 1 440 CHF.
+              La franchise 2 500 CHF est avantageuse si vos frais médicaux annuels restent sous 1 899 CHF à Zurich (1 897 CHF en moyenne suisse).
               Au-delà, la franchise 300 CHF devient moins coûteuse au total, prime et reste à charge confondus.
             </p>
 
@@ -298,9 +298,9 @@ export default function FranchisePage() {
               <div>
                 <p className="font-semibold text-ink mb-1">Vous hésitez entre CHF 2 500 et CHF 300 ?</p>
                 <p className="text-[16px]">
-                  Avec la franchise CHF 2 500, vous économisez CHF 1 440 par an sur votre prime (CHF 120 par mois).
+                  Avec la franchise CHF 2 500, vous économisez CHF 1 440 par an sur votre prime à Zurich (CHF 120 par mois).
                   En contrepartie, vous payez jusqu&apos;à CHF 2 500 de votre poche en cas de maladie.
-                  Le point de bascule se situe à CHF 1 440 de frais médicaux annuels : en dessous, la franchise CHF 2 500
+                  Le point de bascule se situe à CHF 1 899 de frais médicaux annuels : en dessous, la franchise CHF 2 500
                   est gagnante. Au-dessus, c&apos;est la franchise CHF 300.
                 </p>
               </div>

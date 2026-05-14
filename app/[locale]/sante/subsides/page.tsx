@@ -97,7 +97,7 @@ export default function SubsidesPage() {
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
             Calculateur de subsides LAMal 2026
           </h1>
-          <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
+          <p className="text-[16px] text-slate max-w-2xl leading-relaxed mb-10">
             Estimez en 30 secondes le subside sur votre assurance maladie de base LAMal selon votre canton,
             votre revenu et votre situation familiale. Données officielles 2026 pour les 26 cantons.
           </p>

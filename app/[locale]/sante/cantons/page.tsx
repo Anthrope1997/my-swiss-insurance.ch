@@ -53,7 +53,7 @@ export default function CantonHubPage() {
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
             Primes LAMal par canton
           </h1>
-          <p className="text-[18px] text-slate leading-relaxed">
+          <p className="text-[16px] text-slate leading-relaxed">
             En Suisse, les primes de l&apos;assurance maladie de base LAMal varient selon le canton de résidence.
             Sélectionnez votre canton pour consulter les primes 2026 et trouver la caisse la moins chère.
           </p>

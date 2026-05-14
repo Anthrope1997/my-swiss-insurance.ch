@@ -197,7 +197,7 @@ export default function HomePage() {
             Économisez sur votre assurance maladie suisse en 2026
           </h1>
 
-          <p className="text-[18px] text-slate leading-relaxed mb-8 max-w-2xl">
+          <p className="text-[16px] text-slate leading-relaxed mb-8 max-w-2xl">
             En Suisse, toutes les caisses couvrent les mêmes prestations de base. Seul le prix
             diffère, jusqu'à 5 653 CHF par an d'écart pour un même profil à Genève.
             Comparez gratuitement et trouvez la caisse la moins chère pour votre situation.
@@ -236,7 +236,7 @@ export default function HomePage() {
             <h2 className="text-3xl font-bold text-brand leading-tight mb-4">
               Tout comprendre sur l'assurance maladie suisse
             </h2>
-            <p className="text-[17px] text-slate leading-relaxed">
+            <p className="text-[16px] text-slate leading-relaxed">
               La LAMal est obligatoire pour tous les résidents en Suisse depuis 1996. Franchises,
               modèles alternatifs, subsides cantonaux : nos guides couvrent chaque aspect avec
               des données officielles OFSP.
@@ -299,7 +299,7 @@ export default function HomePage() {
             <h2 className="text-3xl font-bold text-brand leading-tight mb-4">
               Des conseils adaptés à votre profil
             </h2>
-            <p className="text-[17px] text-slate leading-relaxed">
+            <p className="text-[16px] text-slate leading-relaxed">
               Votre situation personnelle détermine la stratégie LAMal optimale. Franchise, modèle
               et éligibilité aux subsides varient selon votre profil.
             </p>
@@ -345,7 +345,7 @@ export default function HomePage() {
             <h2 className="text-3xl font-bold text-brand leading-tight mb-4">
               Primes et économies par canton en 2026
             </h2>
-            <p className="text-[17px] text-slate leading-relaxed">
+            <p className="text-[16px] text-slate leading-relaxed">
               Sélectionnez votre canton pour accéder aux données détaillées : primes, classement
               des caisses et simulateur de subsides. Adulte 35 ans, modèle standard,
               franchise 300 CHF. Source OFSP 2026.
@@ -404,7 +404,7 @@ export default function HomePage() {
             <h2 className="text-3xl font-bold text-brand leading-tight mb-4">
               Une source de référence sur la LAMal en Suisse
             </h2>
-            <p className="text-[17px] text-slate leading-relaxed">
+            <p className="text-[16px] text-slate leading-relaxed">
               My Swiss Insurance publie des données officielles OFSP pour aider les résidents,
               expatriés et frontaliers à prendre des décisions éclairées. Toutes les données
               sont sourcées et mises à jour chaque année.
@@ -433,7 +433,7 @@ export default function HomePage() {
             <h2 className="text-2xl sm:text-3xl font-bold text-brand leading-tight mb-3">
               Vous préférez qu'on s'occupe de tout ?
             </h2>
-            <p className="text-[16px] sm:text-[17px] text-slate leading-relaxed">
+            <p className="text-[16px] text-slate leading-relaxed">
               Un expert analyse votre profil, trouve la meilleure caisse pour votre situation
               et gère le changement de votre côté. Gratuit, sans engagement, réponse sous
               24 heures.

@@ -36,7 +36,7 @@ const faqItems = [
   },
   {
     question: 'Quelle franchise LAMal choisir ?',
-    answer: "Choisissez la franchise 2 500 CHF si vous êtes en bonne santé et consultez peu : vous économisez environ CHF 120 par mois sur la prime. Optez pour la franchise 300 CHF si vos dépenses annuelles dépassent CHF 1 440.",
+    answer: "Choisissez la franchise 2 500 CHF si vous êtes en bonne santé et consultez peu : vous économisez environ CHF 119 par mois sur la prime à Genève. Optez pour la franchise 300 CHF si vos dépenses annuelles dépassent CHF 1 891 à Genève (1 897 CHF en moyenne suisse).",
   },
   {
     question: "Peut-on changer de caisse maladie en cours d'année ?",
@@ -104,12 +104,12 @@ const premiums = [
 ]
 
 const franchises = [
-  { montant: 300,  prime: 564.61, economie: 0,      ecAnn: 0,    breakEven: 'Réf.',          conseil: 'Recommandé si frais médicaux dépassent CHF 1 300 par an' },
-  { montant: 500,  prime: 554.03, economie: 10.58,  ecAnn: 127,  breakEven: 'env. CHF 200',  conseil: 'Avantage limité' },
-  { montant: 1000, prime: 526.57, economie: 38.04,  ecAnn: 456,  breakEven: 'env. CHF 700',  conseil: "Bon si moins d'une consultation majeure par an" },
-  { montant: 1500, prime: 499.20, economie: 65.41,  ecAnn: 785,  breakEven: 'env. CHF 1 000', conseil: 'Bon équilibre pour personnes saines' },
-  { montant: 2000, prime: 471.82, economie: 92.79,  ecAnn: 1113, breakEven: 'env. CHF 1 200', conseil: 'Recommandé sans maladie chronique' },
-  { montant: 2500, prime: 444.63, economie: 119.98, ecAnn: 1440, breakEven: 'env. CHF 1 440', conseil: 'Optimal pour adultes très sains' },
+  { montant: 300,  prime: 638.70, economie: 0,      ecAnn: 0,    breakEven: 'Réf.',            conseil: 'Recommandé si frais médicaux dépassent CHF 1 891 par an' },
+  { montant: 500,  prime: 627.90, economie: 10.80,  ecAnn: 130,  breakEven: 'env. CHF 444',   conseil: 'Avantage limité' },
+  { montant: 1000, prime: 600.70, economie: 38.00,  ecAnn: 456,  breakEven: 'env. CHF 807',   conseil: "Bon si moins d'une consultation majeure par an" },
+  { montant: 1500, prime: 573.60, economie: 65.10,  ecAnn: 781,  breakEven: 'env. CHF 1 168', conseil: 'Bon équilibre pour personnes saines' },
+  { montant: 2000, prime: 546.50, economie: 92.20,  ecAnn: 1106, breakEven: 'env. CHF 1 529', conseil: 'Recommandé sans maladie chronique' },
+  { montant: 2500, prime: 519.40, economie: 119.30, ecAnn: 1432, breakEven: 'env. CHF 1 891', conseil: 'Optimal pour adultes très sains' },
 ]
 
 const assureurs = [
@@ -152,7 +152,7 @@ const heroStats = [
 const enBref = [
   "La LAMal rend l'assurance maladie obligatoire pour toute personne résidant en Suisse depuis 1996 : les prestations de base sont identiques chez les 34 caisses agréées.",
   "Les primes varient fortement selon le canton : de CHF 403 par mois dans le canton le moins cher à CHF 710 par mois pour le plus cher, adulte avec franchise 300 CHF.",
-  "En combinant la bonne franchise et un modèle alternatif, un adulte peut économiser jusqu'à CHF 1 440 par an sur sa prime mensuelle.",
+  "En combinant la bonne franchise et un modèle alternatif, un adulte peut économiser jusqu'à CHF 1 463 par an sur sa prime mensuelle (données OFSP 2026).",
 ]
 
 export default function GuideLamalPage() {
@@ -169,7 +169,7 @@ export default function GuideLamalPage() {
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
             Guide complet LAMal 2026
           </h1>
-          <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
+          <p className="text-[16px] text-slate max-w-2xl leading-relaxed mb-10">
             Choisissez la bonne franchise et le bon modèle, vérifiez vos droits aux subsides,
             et économisez sur votre assurance maladie de base LAMal.
           </p>
@@ -185,7 +185,7 @@ export default function GuideLamalPage() {
             <p className="text-2xl font-semibold text-ink mb-3">En bref</p>
             <ul className="space-y-3">
               {enBref.map((phrase, i) => (
-                <li key={i} className="flex gap-2.5 text-[17px] text-slate leading-relaxed">
+                <li key={i} className="flex gap-2.5 text-[16px] text-slate leading-relaxed">
                   <span className="text-brand font-bold shrink-0 mt-0.5" aria-hidden="true">•</span>
                   <span>{phrase}</span>
                 </li>
@@ -197,7 +197,7 @@ export default function GuideLamalPage() {
             <ul className="space-y-1">
               {toc.map((item) => (
                 <li key={item.id}>
-                  <a href={`#${item.id}`} className="block text-[17px] text-slate leading-relaxed hover:text-brand hover:bg-cloud px-2 py-1 rounded transition-colors">{item.label}</a>
+                  <a href={`#${item.id}`} className="block text-[16px] text-slate leading-relaxed hover:text-brand hover:bg-cloud px-2 py-1 rounded transition-colors">{item.label}</a>
                 </li>
               ))}
             </ul>
@@ -398,7 +398,7 @@ export default function GuideLamalPage() {
                 Une franchise élevée réduit la prime mensuelle mais augmente le risque financier en cas de maladie.
               </p>
 
-              <h3 className="article-h3">Tableau comparatif (exemple Zurich, adulte)</h3>
+              <h3 className="article-h3">Tableau comparatif (exemple Genève, adulte 35 ans, Assura BASE)</h3>
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-6">
                 <table className="stripe-table w-full">
                   <thead>
@@ -435,9 +435,9 @@ export default function GuideLamalPage() {
                 <div>
                   <p className="font-semibold text-ink mb-2">Comment lire le tableau ?</p>
                   <p className="text-[16px]">
-                    <strong>Exemple 300 vs 2 500 CHF par an :</strong> l'économie annuelle sur la prime est de CHF 1 440.
-                    Si vos frais médicaux annuels dépassent <strong>CHF 1 440</strong>, la franchise 300 CHF est plus avantageuse.
-                    En dessous, la franchise 2 500 CHF vous fait économiser davantage au total.
+                    <strong>Exemple Genève, 300 vs 2 500 CHF par an :</strong> l'économie annuelle sur la prime est de CHF 1 432.
+                    Si vos frais médicaux annuels dépassent <strong>CHF 1 891</strong>, la franchise 300 CHF est plus avantageuse au total.
+                    En dessous, la franchise 2 500 CHF vous fait économiser davantage. Seuil moyen suisse : 1 897 CHF.
                   </p>
                 </div>
               </div>

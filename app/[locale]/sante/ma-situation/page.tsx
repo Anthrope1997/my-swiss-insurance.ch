@@ -120,7 +120,7 @@ export default function MaSituationPage() {
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
             LAMal selon votre situation professionnelle en 2026
           </h1>
-          <p className="text-[18px] text-slate max-w-2xl leading-relaxed mb-10">
+          <p className="text-[16px] text-slate max-w-2xl leading-relaxed mb-10">
             Salarié, indépendant, en situation de chômage ou nouvel arrivant en Suisse :
             votre statut professionnel détermine directement la gestion de votre assurance maladie de base LAMal,
             votre couverture accidents et vos droits aux subsides cantonaux.
@@ -137,7 +137,7 @@ export default function MaSituationPage() {
             <p className="text-2xl font-semibold text-ink mb-3">En bref</p>
             <ul className="space-y-3">
               {enBref.map((phrase, i) => (
-                <li key={i} className="flex gap-2.5 text-[17px] text-slate leading-relaxed">
+                <li key={i} className="flex gap-2.5 text-[16px] text-slate leading-relaxed">
                   <span className="text-brand font-bold shrink-0 mt-0.5" aria-hidden="true">•</span>
                   <span>{phrase}</span>
                 </li>
@@ -149,7 +149,7 @@ export default function MaSituationPage() {
             <ul className="space-y-1">
               {toc.map((item, i) => (
                 <li key={item.id}>
-                  <a href={`#${item.id}`} className="block text-[17px] text-slate leading-relaxed hover:text-brand hover:bg-cloud px-2 py-1 rounded transition-colors">{i + 1}. {item.label}</a>
+                  <a href={`#${item.id}`} className="block text-[16px] text-slate leading-relaxed hover:text-brand hover:bg-cloud px-2 py-1 rounded transition-colors">{i + 1}. {item.label}</a>
                 </li>
               ))}
             </ul>

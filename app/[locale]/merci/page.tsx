@@ -17,7 +17,7 @@ export default function MerciPage() {
           </svg>
         </div>
         <h1 className="text-3xl font-bold text-brand mb-3">Demande bien reçue</h1>
-        <p className="text-[17px] text-slate leading-relaxed mb-8">
+        <p className="text-[16px] text-slate leading-relaxed mb-8">
           Un expert vous contacte sous 24 heures ouvrables.
         </p>
         <Link href="/fr" className="btn-secondary">

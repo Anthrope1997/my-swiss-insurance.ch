@@ -85,7 +85,7 @@ export default function ParProfilPage() {
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
             LAMal par situation de vie
           </h1>
-          <p className="text-[18px] text-slate leading-relaxed">
+          <p className="text-[16px] text-slate leading-relaxed">
             Choisissez votre profil pour des conseils personnalisés sur votre assurance maladie de base LAMal :
             franchise optimale, modèle recommandé et points d&apos;attention spécifiques.
           </p>
