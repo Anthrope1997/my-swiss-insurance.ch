@@ -934,7 +934,7 @@ const cantons: Canton[] = [
       subsideMensuel: 'Variable selon le revenu',
       subsideMensuelMax: 469,
       automatique: false,
-      delai: '31 mars 2026',
+      delai: '31 oct. 2025',
       lienOfficiel: 'https://www.lu.ch',
       tableauProfils: [
         { profil: 'Adulte seul (≥ 26 ans)',   subsideMax: '469 CHF/mois', revenuMax: '58 000 CHF/an' },
@@ -1167,7 +1167,7 @@ const cantons: Canton[] = [
       subsideMensuel: 'Variable selon le revenu',
       subsideMensuelMax: 486,
       automatique: false,
-      delai: '31 oct. 2026',
+      delai: '31 déc. 2025',
       lienOfficiel: 'https://www.ag.ch',
       bareme: [
         { revenu: 'Moins de 30 000 CHF', montant: 'de 172 à 486 CHF / mois' },
@@ -1688,6 +1688,9 @@ export interface CantonSubside2026 {
   delai:         string
   lien:          string
   primeMoyenne:  number
+  retroactivite?: string
+  arrivants?:    string
+  note?:         string
   ge?: {
     groupes:           GroupeGE[]
     bonusEnfantSeul:   number
@@ -1727,9 +1730,11 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     nom: 'Argovie',
     seuilRevenu: '≈ 44 000 CHF/an', seuilNum: 44000,
     montantMaxNum: 486, montantMax: '≤ 486 CHF/mois',
-    auto: false, delai: '31 déc. 2026',
+    auto: false, delai: '31 déc. 2025',
     lien: 'https://www.sva-aargau.ch/private/ihre-private-situation/finanzielle-unterstuetzung/praemienverbilligung/allgemeine',
     primeMoyenne: 419,
+    retroactivite: 'Rétroactif au 1er janvier si demande déposée avant le 31 déc. (délai impératif). Si dépassé : inscription impossible pour l\'année.',
+    arrivants: 'Déposer un «Änderungsantrag» via sva-aargau.ch. Rétroactivité max 12 mois pour bénéficiaires Sozialhilfe ; sinon droit dès la date de la demande.',
   },
 
   AI: {
@@ -1739,6 +1744,8 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: true, delai: 'Non requis (automatique)',
     lien: 'https://www.ai.ch/themen/gesundheit/krankenversicherung/praemienverbilligung',
     primeMoyenne: 382,
+    retroactivite: 'Attribution automatique par le Gesundheitsamt sur la base des données fiscales — aucun formulaire requis.',
+    arrivants: 'Règles pour arrivants étrangers non publiées en ligne — contacter directement le Gesundheitsamt AI (+41 71 788 92 50).',
   },
 
   AR: {
@@ -1748,6 +1755,8 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 mars 2026',
     lien: 'https://www.sovar.ch/dienstleistungen/pr%C3%A4mienverbilligung-ipv',
     primeMoyenne: 432,
+    retroactivite: 'Pas de rétroactivité — délai strict 31 mars. Si dépassé : droit uniquement à partir du mois de la demande.',
+    arrivants: 'Droit dès le mois de la demande. Formulaire spécifique «Zuzug aus dem Ausland 2026» disponible sur sovar.ch.',
   },
 
   BE: {
@@ -1757,6 +1766,8 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: true, delai: '31 mars 2027',
     lien: 'https://www.gef.be.ch/gef/fr/index/gesundheit/gesundheit/krankenversicherung/praemienverbilligung.html',
     primeMoyenne: 397,
+    retroactivite: 'Attribution automatique (données fiscales N-2). Si situation changée : demande manuelle avant le 31 déc. Pas de rétroactivité en cours d\'année hors cas automatiques.',
+    arrivants: 'Demande manuelle requise si non encore dans le système fiscal bernois. Contacter directement l\'ASV Berne (asv.dij.be.ch).',
   },
 
   BL: {
@@ -1766,6 +1777,8 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 déc. 2026',
     lien: 'https://www.sva-bl.ch/de/ausgleichskasse/individuelle-praemienverbilligung-ipv',
     primeMoyenne: 466,
+    retroactivite: 'Semi-automatique : formulaire envoyé fin déc. aux éligibles identifiés. Retour dans les 12 mois → rétroactivité au 1er jan. Quellenbesteuerte : jusqu\'au 31 déc.',
+    arrivants: 'Dépôt possible jusqu\'au 31 déc. de l\'année N+1 suivant l\'arrivée. Calcul basé sur la 1re décision fiscale BL.',
   },
 
   BS: {
@@ -1775,6 +1788,8 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 déc. 2026',
     lien: 'https://www.bs.ch/themen/finanzielle-hilfe/leistungen/praemienverbilligung',
     primeMoyenne: 500,
+    retroactivite: 'Sur demande — pas de délai annuel strict pour les résidents ordinaires. Traitement en 2–3 mois.',
+    arrivants: 'Droit dès le début de l\'assurance si demande déposée dans les 3 mois suivant l\'arrivée. Au-delà : droit dès le mois suivant le dépôt.',
   },
 
   GL: {
@@ -1784,6 +1799,8 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 janv. 2026',
     lien: 'https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/individuelle-praemienverbilligung-ipv.html/502',
     primeMoyenne: 345,
+    retroactivite: 'Règle de rétroactivité non publiée — contacter directement le Departement Finanzen und Gesundheit GL.',
+    arrivants: 'Règle pour arrivants étrangers non publiée — contacter directement l\'office cantonal (gl.ch).',
   },
 
   GR: {
@@ -1793,15 +1810,19 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 déc. 2026',
     lien: 'https://www.sva.gr.ch/dienstleistungen/individuelle-praemienverbilligung.html',
     primeMoyenne: 390,
+    retroactivite: 'Potentiellement rétroactif au 1er jan. (non garanti). Délai : 31 déc. de l\'année courante.',
+    arrivants: 'Domicile au 1er jan. requis. Provisions de 65 % versées provisoirement. Règle spécifique arrivants étrangers non publiée — contacter SVA Graubünden.',
   },
 
   LU: {
     nom: 'Lucerne',
     seuilRevenu: '≈ 44 000 CHF/an', seuilNum: 44000,
     montantMaxNum: 469, montantMax: '≤ 469 CHF/mois',
-    auto: false, delai: '31 oct. 2026',
+    auto: false, delai: '31 oct. 2025',
     lien: 'https://www.was-luzern.ch/praemienverbilligung',
     primeMoyenne: 395,
+    retroactivite: 'Règle de rétroactivité non publiée — contacter directement WAS Luzern (was-luzern.ch).',
+    arrivants: 'Règle pour arrivants étrangers non publiée — contacter directement WAS Luzern (+41 41 209 00 00).',
   },
 
   NW: {
@@ -1811,6 +1832,8 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '30 avr. 2026',
     lien: 'https://www.aknw.ch/dienstleistungen/praemienverbilligung-ipv',
     primeMoyenne: 288,
+    retroactivite: 'Pas de rétroactivité — délai strict 30 avril. Les demandes déposées après cette date ne sont plus prises en compte.',
+    arrivants: 'Demande dans les 3 mois après l\'arrivée — délai absolu : 30 avril de l\'année.',
   },
 
   OW: {
@@ -1820,6 +1843,8 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 mai 2026',
     lien: 'https://www.akow.ch/dienstleistungen/praemienverbilligung',
     primeMoyenne: 303,
+    retroactivite: 'Pas de rétroactivité — délai strict 31 mai. Modifications en cours d\'année ne comptent que pour l\'année suivante. Stichtag : 1er jan.',
+    arrivants: 'Règle pour arrivants étrangers non publiée — contacter directement l\'Ausgleichskasse Obwalden (akow.ch).',
   },
 
   SG: {
@@ -1829,6 +1854,8 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 mars 2026',
     lien: 'https://www.svasg.ch/produkte/ipv/',
     primeMoyenne: 430,
+    retroactivite: 'Pas de rétroactivité si délai dépassé — droit uniquement dès le mois de la demande. Délai : 31 mars.',
+    arrivants: 'Droit dès le mois de la demande (délai jusqu\'au 31 déc.). Arrivant inter-cantonal : pas de droit l\'année du déménagement.',
   },
 
   SH: {
@@ -1838,6 +1865,8 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '30 avr. 2026',
     lien: 'https://www.svash.ch',
     primeMoyenne: 431,
+    retroactivite: 'Délai strict 30 avril. Règle de rétroactivité après dépassement : à vérifier via Merkblatt sur svash.ch.',
+    arrivants: 'Règle pour arrivants non publiée en ligne — vérifier Merkblatt «Prämienverbilligung für Grenzgänger» sur svash.ch.',
   },
 
   SO: {
@@ -1847,6 +1876,8 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 juil. 2026',
     lien: 'https://www.akso.ch/dienstleistungen/praemienverbilligung-ipv',
     primeMoyenne: 387,
+    retroactivite: 'Semi-automatique : formulaire envoyé automatiquement en jan. aux éligibles. Retour dans les 30 jours → rétroactivité au 1er jan. Quellenbesteuerte : jusqu\'au 31 déc.',
+    arrivants: 'Règle pour arrivants étrangers non publiée — contacter directement l\'Ausgleichskasse Solothurn (akso.ch).',
   },
 
   SZ: {
@@ -1856,6 +1887,8 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 déc. 2026',
     lien: 'https://www.sva-sz.ch/dienstleistungen/pr%C3%A4mienverbilligung-ipv',
     primeMoyenne: 347,
+    retroactivite: 'Potentiellement rétroactif au 1er jan. (non garanti). Délai : 31 déc. de l\'année courante.',
+    arrivants: 'Formulaire digital disponible sur sva-sz.ch. Règles spécifiques pour arrivants étrangers non publiées — contacter SVA Schwyz.',
   },
 
   TG: {
@@ -1865,6 +1898,8 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 déc. 2026',
     lien: 'https://gesundheit.tg.ch/bevoelkerung/krankenversicherung/praemienverbilligung.html/5578',
     primeMoyenne: 360,
+    retroactivite: 'Pas de rétroactivité si délai dépassé — «le droit s\'éteint définitivement, sans possibilité de nouveau calcul». Délai : 31 déc. Stichtag : 1er jan.',
+    arrivants: 'Droit dès la soumission à l\'assurance suisse obligatoire. Délai de dépôt : au plus tard le 31 déc. Ajustement parité de pouvoir d\'achat appliqué.',
   },
 
   TI: {
@@ -1874,6 +1909,8 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: 'Dépôt possible — rétroactif',
     lien: 'https://www4.ti.ch/dss/ias/prestazioni-e-contributi/scheda/p/s/dettaglio/riduzione-dei-premi-dellassicurazione-malattia-ripam/richiesta-del-formulario-ripam/',
     primeMoyenne: 531,
+    retroactivite: 'Rétroactif au 1er jan. si formulaire déposé avant le 31 déc. de l\'année précédente. Sinon : droit dès le mois suivant le dépôt.',
+    arrivants: 'Arrivant de l\'étranger : droit dès jan. si formulaire RIPAM déposé avant le 31 déc. N-1 ; sinon droit dès le mois suivant le dépôt.',
   },
 
   UR: {
@@ -1883,6 +1920,8 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 déc. 2026',
     lien: 'https://www.svsuri.ch/dienstleistungen/pr%C3%A4mienverbilligung-ipv',
     primeMoyenne: 310,
+    retroactivite: 'Attribution automatique pour les taxés (décisions envoyées mi-jan.). Quellenbesteuerte et arrivants : demande obligatoire. Règle exacte de rétroactivité pour demandes tardives : à vérifier sur svsuri.ch.',
+    arrivants: 'Formulaire «Zuzug im 2026 aus Ausland» disponible sur svsuri.ch. Demande obligatoire pour toute personne arrivée en 2026 ou imposée à la source.',
   },
 
   ZG: {
@@ -1892,6 +1931,8 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '30 avr. 2026',
     lien: 'https://www.akzug.ch/dienstleistungen/praemienverbilligung',
     primeMoyenne: 360,
+    retroactivite: 'Pas de rétroactivité — délai strict 30 avril. «Es können keine Anträge mehr eingereicht werden.» EL-Bezüger : attribution automatique.',
+    arrivants: 'Règles pour arrivants étrangers non publiées — contacter directement l\'Ausgleichskasse Zug (akzug.ch).',
   },
 
   ZH: {
@@ -1901,6 +1942,8 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 mars 2027',
     lien: 'https://svazurich.ch/ihr-anliegen/privatpersonen/praemienverbilligung/praemienverbilligung_2026/einkommensgrenzen-2026.html',
     primeMoyenne: 442,
+    retroactivite: 'Règle de rétroactivité non publiée — contacter directement la SVA Zürich (svazurich.ch).',
+    arrivants: 'Règle pour arrivants étrangers non publiée — contacter directement la SVA Zürich (svazurich.ch).',
   },
 
   GE: {
@@ -1910,6 +1953,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: true, delai: 'Non requis (automatique)',
     lien: 'https://www.ge.ch/informations-generales-subside-assurance-maladie',
     primeMoyenne: 710,
+    note: 'Attribution automatique pour la majorité selon le revenu. Demande possible via courrier ou portail e-démarches (ge.ch). Calculateur en ligne disponible.',
     ge: {
       bonusEnfantSeul:   13_000,
       bonusEnfantCouple: 17_000,
@@ -1934,6 +1978,9 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: 'Voir OVAM 2026',
     lien: 'https://www.vd.ch/sante-soins-et-handicap/assurance-maladie/subside-a-lassurance-maladie',
     primeMoyenne: 638,
+    retroactivite: 'Le droit prend naissance le 1er jour du 2ème mois suivant le dépôt de la demande. Exception : bénéficiaires RI ou PC AVS/AI (dès le début des prestations).',
+    arrivants: 'Changement de canton : nouvelle demande obligatoire auprès de l\'OVAM dans le canton de destination.',
+    note: 'Demande en ligne (vd.ch/ovam) ou en agence d\'assurances sociales. Renouvellement annuel fin octobre basé sur taxation définitive au 17 octobre.',
     vd: {
       segments: [
         { profil: 'adulte26_seul', revenuMin:      0, revenuMax:  17_000, montantMin: 331, montantMax: 331 },
@@ -1961,6 +2008,9 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: true, delai: 'Non requis (automatique)',
     lien: 'https://www.ne.ch/themes/social/assurance-maladie/subsides-assurance-maladie-lamal',
     primeMoyenne: 663,
+    retroactivite: 'Mixte : bénéficiaires 2025 reconduits automatiquement. Nouveaux dans le système → droit à compter de la date de la demande (pas rétroactif au 1er jan.).',
+    arrivants: 'Demande au GSR immédiatement à l\'arrivée. Droit à compter de la date de la demande. Inter-cantonal : ancien canton compétent jusqu\'au 31 déc., puis NE dès le 1er jan. suivant.',
+    note: 'Renouvellement automatique si situation inchangée. Signaler sans délai au GSR : hausse/baisse revenus, naissance, mariage, divorce, décès.',
     ne: {
       facteurCouple: 0.60,
       facteurEnfant: 0.28,
@@ -1981,6 +2031,8 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: true, delai: '31 août 2026',
     lien: 'https://www.ecasfr.ch/fr/Assurances/Reduction-des-primes-d-assurance-maladie/Reduction-des-primes-d-assurance-maladie.html',
     primeMoyenne: 569,
+    retroactivite: 'Non rétroactive — renouvellement automatique annuel sur examen d\'office.',
+    note: 'Base de calcul : taxation fiscale de l\'année N-2. Renouvellement automatique si situation inchangée.',
     fr: {
       seuilsEligibilite: [
         { statut: 'seul',   nbEnfants: 0, revenuMax:  37_000 },
@@ -2076,6 +2128,9 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 déc. 2026',
     lien: 'https://www.ecasjura.ch/fr/Assurances/Assurance-maladie',
     primeMoyenne: 633,
+    retroactivite: 'Rétroactivité au 1er jan. garantie si taxation tardive. Délai ultime : 31 déc. de l\'année courante.',
+    arrivants: 'Demande à l\'ECAS. Droit rétroactif au 1er jan. garanti si demande dans les délais. Arrivant de l\'étranger : demande formelle, rétroactivité au 1er jan. garantie.',
+    note: 'Examen d\'office si taxation 2024 reçue avant déc. 2026. Demande requise sinon ou sans courrier dans les 30 jours. Situation déterminante : 1er jan. de l\'année.',
     ju: {
       adulteMax:  225,
       enfant:     100,
@@ -2100,6 +2155,9 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: true, delai: 'Non requis (automatique)',
     lien: 'https://www.avsvalais.ch/fr/Assurances/RIP-Reduction-individuelle-des-primes-d-assurance-maladie',
     primeMoyenne: 528,
+    retroactivite: 'Pas de rétroactivité en règle générale. Exception légale : arrivants bénéficiant déjà d\'une PC AVS/AI ou aide sociale → droit depuis l\'établissement en Valais.',
+    arrivants: 'Règle générale : domicile au 1er jan. requis → droit ouvert à partir du 1er jan. de l\'année suivante. Exception : bénéficiaires PC AVS/AI ou aide sociale → droit dès l\'arrivée.',
+    note: 'Bénéficiaires 2025 reconnus : notification automatique, aucune démarche. Nouveaux bénéficiaires : notification fin février, transmettre copie police d\'assurance. Imposés à la source : demande avant le 31 déc.',
     vs: {
       primeReference: { adulte: 521, jeune: 380, enfant: 122 },
       taux: [

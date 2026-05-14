@@ -409,8 +409,7 @@ export default function GuideLamalPage() {
                       <th className="text-left whitespace-nowrap">Prime par mois</th>
                       <th className="text-left whitespace-nowrap">Économie annuelle</th>
                       <th className="text-left">
-                        Choisir la franchise 300 CHF<br />
-                        <span className="text-[13px] font-normal text-slate/60">si vos frais annuels dépassent</span>
+                        La franchise de CHF 300 est plus avantageuse si vos frais médicaux annuels dépassent
                       </th>
                     </tr>
                   </thead>
