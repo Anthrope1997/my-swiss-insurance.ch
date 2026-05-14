@@ -103,26 +103,29 @@ function draw(ctx: CanvasRenderingContext2D, frais: number): void {
   }
   ctx.stroke()
 
-  // 6 ─ Labels axe Y (valeurs CHF) — dessinés sur la grille
+  // 6 ─ Labels axe Y (valeurs CHF) — 16px
   for (let y = yStart; y <= Y_MAX; y += yStep) {
     const py = mapY(y)
     if (py < cT - 1 || py > cB + 1) continue
     ctx.textAlign = 'right'
-    ctx.font      = `13px ${FONT}`
+    ctx.font      = `16px ${FONT}`
     ctx.fillStyle = C_LABEL
-    ctx.fillText(fmtCHF(y), cL - 8, py + 4)
+    ctx.fillText(fmtCHF(y), cL - 8, py + 5)
   }
 
-  // 7 ─ Labels axe X
+  // 7 ─ Labels axe X — 16px ; dernier tick right-aligné pour éviter le débord
   const xTicks = [0, 1000, 2000, 3000, 4000]
-  ctx.textAlign = 'center'
-  ctx.font      = `13px ${FONT}`
+  ctx.font      = `16px ${FONT}`
   ctx.fillStyle = C_LABEL
   for (const x of xTicks) {
-    ctx.fillText(
-      x === 0 ? 'CHF 0' : `CHF ${x.toLocaleString('fr-CH')}`,
-      mapX(x), cB + 18
-    )
+    const label = x === 0 ? 'CHF 0' : `CHF ${x.toLocaleString('fr-CH')}`
+    if (x === X_MAX) {
+      ctx.textAlign = 'right'
+      ctx.fillText(label, cR, cB + 18)
+    } else {
+      ctx.textAlign = 'center'
+      ctx.fillText(label, mapX(x), cB + 18)
+    }
   }
 
   // 8 ─ Titre axe Y — dans PAD.top, à gauche, au-dessus du label seuil (cT-8)
