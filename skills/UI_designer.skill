@@ -275,7 +275,8 @@ Pour afficher plusieurs options sur des lignes distinctes dans un tooltip `<Info
 | Taille | Classe | Usage |
 |---|---|---|
 | **16px** | `text-[16px]` ou `text-base` | Police standard — tout le contenu courant : noms, primes, descriptions, labels, boutons CTA |
-| **13px** | `text-[13px]` | Police réduite — métadonnées, sources, compteurs, labels de formulaire, badges, placeholders |
+| **16px** | `text-[16px] text-slate/60` | Notes de source/filtre sous les tableaux et graphiques (voir règle ci-dessous) |
+| **13px** | `text-[13px]` | Police réduite — badges, placeholders, labels de formulaire, compteurs, indication responsive ("Tableau complet visible sur ordinateur.") |
 
 **Interdits dans le contenu :** `text-[14px]`, `text-[15px]`, `text-[13.5px]`. Ces valeurs intermédiaires sont bannies.
 
@@ -283,14 +284,23 @@ Les tailles supérieures à 16px (`text-[17px]`, `text-[18px]`, `text-2xl`, `tex
 
 **Règle supplémentaire — tuiles de la section héro (Zone 1) :** tout le contenu textuel à l'intérieur d'une tuile héro (`<HeroStats>` ou toute carte/tuile placée en Zone 1) utilise **`text-[16px]` au minimum**, sur toutes les pages du site. Les classes `text-[13px]` et `text-[12px]` sont interdites dans ce contexte, même si `globals.css` les remonte déjà à 16px visuellement. Écrire `text-[16px]` explicitement dans le JSX pour garder le code lisible et cohérent.
 
-```tsx
-{/* ✓ Correct */}
-<span className="text-[16px] text-ink">{row.assureur}</span>
-<p className="text-[13px] text-slate/60">Source : OFSP 2026</p>
+**Règle supplémentaire — notes de source et de filtre sous les tableaux/graphiques :** toute note de méthodologie, de périmètre ou de source rattachée à un tableau ou un graphique s'affiche en **`text-[16px] text-slate/60`**, placée immédiatement en dessous du tableau, jamais au-dessus.
 
-{/* ✗ Interdit */}
-<span className="text-[14px]">...</span>
-<p className="text-[15px]">...</p>
+Exemples de notes concernées : "Calculé avec la caisse la moins chère par franchise, modèle standard." — "Adultes 26 ans et +, modèle standard, franchise 300 CHF. Source : OFSP 2026." — "Primes pour un adulte à Zurich, OFSP 2026."
+
+Exception : les indications d'interface purement techniques ("Tableau complet visible sur ordinateur.") restent en `text-[13px] text-slate/60 mt-2 md:hidden`.
+
+```tsx
+{/* ✓ Correct — note de source sous un tableau */}
+<p className="text-[16px] text-slate/60 mt-3">
+  Calculé avec la caisse la moins chère par franchise, modèle standard.
+</p>
+
+{/* ✓ Correct — indication responsive (UI uniquement) */}
+<p className="text-[13px] text-slate/60 mt-2 md:hidden">Tableau complet visible sur ordinateur.</p>
+
+{/* ✗ Interdit — source sous tableau en 13px */}
+<p className="text-[13px] text-slate/60">Source : OFSP 2026</p>
 ```
 
 ---

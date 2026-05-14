@@ -223,7 +223,7 @@ export default function GuideLamalPage() {
                 être ni refusées ni exclues pour des raisons de santé : tout résident en Suisse a le droit
                 d'être assuré, sans sélection médicale.
               </p>
-              <p className="text-[13px] text-slate/60 mt-3">
+              <p className="text-[16px] text-slate/60 mt-3">
                 Source : OFSP (bag.admin.ch), art. 3 LAMal (RS 832.10)
               </p>
             </section>
@@ -334,7 +334,7 @@ export default function GuideLamalPage() {
                   </tbody>
                 </table>
               </div>
-              <p className="text-[13px] text-slate/60 mt-3">
+              <p className="text-[16px] text-slate/60 mt-3">
                 Adultes 26 ans et +, modèle standard, franchise 300 CHF. Source : OFSP, primes moyennes cantonales 2026.
               </p>
 
@@ -400,7 +400,7 @@ export default function GuideLamalPage() {
 
               <h3 className="article-h3">Quand la franchise 300 CHF devient-elle plus intéressante malgré des primes plus élevées ?</h3>
 
-              <p className="text-[13px] text-slate/60 mb-3">Calculé avec la caisse la moins chère par franchise, modèle standard.</p>
+              <p className="text-[16px] text-slate/60 mb-3">Calculé avec la caisse la moins chère par franchise, modèle standard.</p>
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-4">
                 <table className="stripe-table w-full">
                   <thead>
@@ -429,12 +429,21 @@ export default function GuideLamalPage() {
                 </table>
               </div>
 
-              <p className="text-[16px] text-slate leading-relaxed mb-6">
-                Dans le canton de Genève, la franchise 2 500 CHF permet d&apos;économiser CHF 1 432 par an sur la prime.
-                Elle reste avantageuse tant que vos frais médicaux annuels ne dépassent pas CHF 1 891.
-                Au-delà, la franchise 300 CHF devient plus économique au total.
-                En Suisse, ce point de bascule est estimé autour de CHF 1 900 de frais médicaux annuels.
-              </p>
+              <div className="callout flex gap-3 mb-6">
+                <svg className="text-callout-icon shrink-0 mt-0.5" width="20" height="20"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
+                     strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
+                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
+                  <line x1="10" y1="21" x2="14" y2="21" />
+                </svg>
+                <p className="text-[16px]">
+                  Dans le canton de Genève, la franchise 2 500 CHF permet d&apos;économiser CHF 1 432 par an sur la prime.
+                  Elle reste avantageuse tant que vos frais médicaux annuels ne dépassent pas CHF 1 891.
+                  Au-delà, la franchise 300 CHF devient plus économique au total.
+                  En Suisse, ce point de bascule est estimé autour de CHF 1 900 de frais médicaux annuels.
+                </p>
+              </div>
 
               <div className="mt-6">
                 <Link href="/sante/franchise" className="text-brand hover:underline text-[16px] font-medium">
