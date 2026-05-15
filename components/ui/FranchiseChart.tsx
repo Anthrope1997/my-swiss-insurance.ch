@@ -96,6 +96,8 @@ export default function FranchiseChart() {
   const scaled = (n: number) => displayWidth ? n * VW / displayWidth : n
 
   const annotY   = cB - scaled(32)
+  // Bord gauche de la colonne Y : "CHF 10 000" (≈84px) se termine juste avant l'axe
+  const yColX    = cL - scaled(90)
   const sliderX  = mapX(frais)
   const dotY2500 = mapY(totalAnnuel(PRIME_2500, 2500, frais))
   const dotY300  = mapY(totalAnnuel(PRIME_300, 300, frais))
@@ -227,11 +229,11 @@ export default function FranchiseChart() {
           {/* Texte masqué tant que displayWidth n'est pas mesuré (avant premier paint) */}
           <g visibility={displayWidth === null ? 'hidden' : 'visible'}>
 
-            {/* 6 — Labels axe Y — left-alignés, bord gauche de "CHF 10 000" comme référence */}
+            {/* 6 — Labels axe Y — left-alignés, colonne calée sur "CHF 10 000" */}
             {Y_TICKS.map(y => (
               <text
                 key={y}
-                x={4}
+                x={yColX}
                 y={mapY(y)}
                 textAnchor="start"
                 dominantBaseline="middle"
@@ -260,9 +262,9 @@ export default function FranchiseChart() {
               )
             })}
 
-            {/* 8 — Titre axe Y — aligné avec le bord gauche de "CHF 10 000" */}
+            {/* 8 — Titre axe Y — même bord gauche que les graduations */}
             <text
-              x={4}
+              x={yColX}
               y={scaled(14)}
               textAnchor="start"
               fontSize={scaled(16)}
