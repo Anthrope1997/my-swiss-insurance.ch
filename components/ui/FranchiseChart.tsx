@@ -26,17 +26,19 @@ const Y_RANGE = Y_MAX - Y_MIN
 // ─── Dimensions canvas (espace logique) ───────────────────────────────────────
 const CW  = 700
 const CH  = 266   // 38 % de CW
-const PAD = { t: 52, r: 40, b: 42, l: 120 } as const
-const CHART_W = CW - PAD.l - PAD.r   // 540
+const PAD = { t: 52, r: 40, b: 42, l: 90 } as const
+const CHART_W = CW - PAD.l - PAD.r   // 570
 const CHART_H = CH - PAD.t - PAD.b   // 172
 
-// ─── Tokens canvas — mappés sur le design system ──────────────────────────────
-const C_F300  = '#1d4ed8'  // brand (#1d4ed8) — franchise CHF 300
-const C_F2500 = '#3b82f6'  // brand-light (#3b82f6) — franchise CHF 2 500
-const C_LABEL = '#475569'  // slate (#475569) — text-secondary
-const C_INK   = '#1a1a1a'  // ink (#1a1a1a) — text-primary
-const C_EDGE  = '#e2e8f0'  // edge (#e2e8f0) — bordures + lignes pointillées
-const C_GRID  = '#f1f5f9'  // cloud (#f1f5f9) — lignes de grille
+// ─── Tokens canvas ────────────────────────────────────────────────────────────
+const C_F300     = '#1d4ed8'  // brand — courbe franchise CHF 300
+const C_F2500    = '#3b82f6'  // brand-light — courbe franchise CHF 2 500
+const C_LABEL    = '#6B7280'  // gris — titres d'axe et graduations
+const C_SEUIL    = '#374151'  // slate-700 — ligne + valeur du seuil
+const C_EDGE     = '#e2e8f0'  // edge — axes + ligne curseur
+const C_GRID     = '#f1f5f9'  // cloud — grille horizontale
+const C_ANN_2500 = '#378ADD'  // annotation zone CHF 2 500
+const C_ANN_300  = '#0F4C8A'  // annotation zone CHF 300
 const FONT    = '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -80,8 +82,8 @@ function draw(ctx: CanvasRenderingContext2D, frais: number, scale: number): void
   ctx.moveTo(cL, cT); ctx.lineTo(cL, cB); ctx.lineTo(cR, cB)
   ctx.stroke()
 
-  // 3 ─ Ligne de seuil — 1 px pointillé, edge
-  ctx.strokeStyle = C_EDGE
+  // 3 ─ Ligne de seuil — 1 px pointillé, slate-700
+  ctx.strokeStyle = C_SEUIL
   ctx.lineWidth   = 1
   ctx.setLineDash([5, 4])
   ctx.beginPath(); ctx.moveTo(seuilX, cT); ctx.lineTo(seuilX, cB); ctx.stroke()
@@ -107,19 +109,19 @@ function draw(ctx: CanvasRenderingContext2D, frais: number, scale: number): void
   }
   ctx.stroke()
 
-  // 6 ─ Labels axe Y — 16 CSS px
+  // 6 ─ Labels axe Y — 13 CSS px, left-alignés à x=cL (flottants dans le graphique)
   for (let y = yStart; y <= Y_MAX; y += yStep) {
     const py = mapY(y)
     if (py < cT - 1 || py > cB + 1) continue
-    ctx.textAlign = 'right'
-    ctx.font      = `${px(16)}px ${FONT}`
+    ctx.textAlign = 'left'
+    ctx.font      = `${px(13)}px ${FONT}`
     ctx.fillStyle = C_LABEL
-    ctx.fillText(fmtCHF(y), cL - 8, py + px(5))
+    ctx.fillText(fmtCHF(y), cL, py + px(5))
   }
 
-  // 7 ─ Labels axe X — 16 CSS px ; dernier tick right-aligné (évite le débord)
+  // 7 ─ Labels axe X — 13 CSS px ; dernier tick right-aligné (évite le débord)
   const xTicks = [0, 1000, 2000, 3000, 4000]
-  ctx.font      = `${px(16)}px ${FONT}`
+  ctx.font      = `${px(13)}px ${FONT}`
   ctx.fillStyle = C_LABEL
   for (const x of xTicks) {
     const label = x === 0 ? 'CHF 0' : `CHF ${x.toLocaleString('fr-CH')}`
@@ -132,38 +134,38 @@ function draw(ctx: CanvasRenderingContext2D, frais: number, scale: number): void
     }
   }
 
-  // 8 ─ Titre axe Y — 12 CSS px, dans PAD.top, aligné sur le bord gauche du graphique
+  // 8 ─ Titre axe Y — 16 CSS px, dans PAD.top, left-aligné à x=cL
   ctx.textAlign = 'left'
-  ctx.font      = `${px(12)}px ${FONT}`
+  ctx.font      = `${px(16)}px ${FONT}`
   ctx.fillStyle = C_LABEL
-  ctx.fillText('Coût annuel de votre assurance LAMal', cL, cT - px(32))
+  ctx.fillText('Coût annuel de votre assurance LAMal', cL, cT - px(30))
 
-  // 9 ─ Label seuil — 22 CSS px, weight 600, text-primary
-  ctx.textAlign = 'center'
-  ctx.font      = `600 ${px(22)}px ${FONT}`
-  ctx.fillStyle = C_INK
-  ctx.fillText(fmtCHF(SEUIL), seuilX, cT - px(6))
+  // 9 ─ Valeur seuil — 20 CSS px, weight 600, slate-700, left-alignée à x=cL
+  ctx.textAlign = 'left'
+  ctx.font      = `600 ${px(20)}px ${FONT}`
+  ctx.fillStyle = C_SEUIL
+  ctx.fillText(fmtCHF(SEUIL), cL, cT - px(8))
 
-  // 10 ─ Labels de zone — dans la moitié basse du graphique, Y partagé
-  const leftCx  = (cL + seuilX) / 2
-  const rightCx = (seuilX + cR) / 2
-  const labelY  = cT + Math.round(CHART_H * 0.68)
+  // 10 ─ Annotations de zone — coin supérieur de chaque zone, au-dessus des courbes
+  const leftCx  = mapX(SEUIL / 2)
+  const rightCx = mapX((SEUIL + X_MAX) / 2)
+  const labelY  = mapY(9700)  // y=9700 : toujours au-dessus des deux courbes
 
   ctx.shadowColor = 'white'
   ctx.shadowBlur  = 6
 
   ctx.textAlign = 'center'
-  ctx.font      = `600 ${px(16)}px ${FONT}`
-  ctx.fillStyle = C_F2500
+  ctx.font      = `600 ${px(14)}px ${FONT}`
+  ctx.fillStyle = C_ANN_2500
   ctx.fillText('Franchise CHF 2 500', leftCx, labelY)
-  ctx.font      = `${px(16)}px ${FONT}`
-  ctx.fillText('plus avantageuse', leftCx, labelY + px(18))
+  ctx.font      = `${px(14)}px ${FONT}`
+  ctx.fillText('plus avantageuse', leftCx, labelY + px(16))
 
-  ctx.font      = `600 ${px(16)}px ${FONT}`
-  ctx.fillStyle = C_F300
+  ctx.font      = `600 ${px(14)}px ${FONT}`
+  ctx.fillStyle = C_ANN_300
   ctx.fillText('Franchise CHF 300', rightCx, labelY)
-  ctx.font      = `${px(16)}px ${FONT}`
-  ctx.fillText('plus avantageuse', rightCx, labelY + px(18))
+  ctx.font      = `${px(14)}px ${FONT}`
+  ctx.fillText('plus avantageuse', rightCx, labelY + px(16))
 
   ctx.shadowBlur = 0
 
