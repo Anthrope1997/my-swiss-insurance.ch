@@ -31,11 +31,12 @@ const CHART_W = CW - PAD.l - PAD.r   // 540
 const CHART_H = CH - PAD.t - PAD.b   // 172
 
 // ─── Tokens canvas — mappés sur le design system ──────────────────────────────
-const C_F300  = '#1d4ed8'  // brand
-const C_F2500 = '#3b82f6'  // brand-light
-const C_LABEL = '#475569'  // slate — text-secondary
-const C_INK   = '#1a1a1a'  // ink — text-primary
-const C_EDGE  = '#e2e8f0'  // edge — border
+const C_F300  = '#1d4ed8'  // brand (#1d4ed8) — franchise CHF 300
+const C_F2500 = '#3b82f6'  // brand-light (#3b82f6) — franchise CHF 2 500
+const C_LABEL = '#475569'  // slate (#475569) — text-secondary
+const C_INK   = '#1a1a1a'  // ink (#1a1a1a) — text-primary
+const C_EDGE  = '#e2e8f0'  // edge (#e2e8f0) — bordures + lignes pointillées
+const C_GRID  = '#f1f5f9'  // cloud (#f1f5f9) — lignes de grille
 const FONT    = '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -63,7 +64,7 @@ function draw(ctx: CanvasRenderingContext2D, frais: number, scale: number): void
   // 1 ─ Grille Y horizontale — 0.5 px logique, en premier
   const yStep  = 1000
   const yStart = Math.ceil(Y_MIN / yStep) * yStep
-  ctx.strokeStyle = C_EDGE
+  ctx.strokeStyle = C_GRID
   ctx.lineWidth   = 0.5
   ctx.setLineDash([])
   for (let y = yStart; y <= Y_MAX; y += yStep) {
@@ -131,23 +132,22 @@ function draw(ctx: CanvasRenderingContext2D, frais: number, scale: number): void
     }
   }
 
-  // 8 ─ Titre axe Y — 16 CSS px, dans PAD.top, à gauche
+  // 8 ─ Titre axe Y — 12 CSS px, dans PAD.top, aligné sur le bord gauche du graphique
   ctx.textAlign = 'left'
-  ctx.font      = `${px(16)}px ${FONT}`
+  ctx.font      = `${px(12)}px ${FONT}`
   ctx.fillStyle = C_LABEL
   ctx.fillText('Coût annuel de votre assurance LAMal', cL, cT - px(32))
 
-  // 9 ─ Label seuil — 16 CSS px, weight 500, text-primary
+  // 9 ─ Label seuil — 22 CSS px, weight 600, text-primary
   ctx.textAlign = 'center'
-  ctx.font      = `500 ${px(16)}px ${FONT}`
+  ctx.font      = `600 ${px(22)}px ${FONT}`
   ctx.fillStyle = C_INK
-  ctx.fillText(fmtCHF(SEUIL), seuilX, cT - px(8))
+  ctx.fillText(fmtCHF(SEUIL), seuilX, cT - px(6))
 
-  // 10 ─ Labels de zone — 16 CSS px, halo blanc
+  // 10 ─ Labels de zone — dans la moitié basse du graphique, Y partagé
   const leftCx  = (cL + seuilX) / 2
   const rightCx = (seuilX + cR) / 2
-  const zY1     = cB - px(28)
-  const zY2     = cB - px(10)
+  const labelY  = cT + Math.round(CHART_H * 0.68)
 
   ctx.shadowColor = 'white'
   ctx.shadowBlur  = 6
@@ -155,29 +155,17 @@ function draw(ctx: CanvasRenderingContext2D, frais: number, scale: number): void
   ctx.textAlign = 'center'
   ctx.font      = `600 ${px(16)}px ${FONT}`
   ctx.fillStyle = C_F2500
-  ctx.fillText('Franchise CHF 2 500', leftCx, zY1)
+  ctx.fillText('Franchise CHF 2 500', leftCx, labelY)
   ctx.font      = `${px(16)}px ${FONT}`
-  ctx.fillText('plus avantageuse', leftCx, zY2)
+  ctx.fillText('plus avantageuse', leftCx, labelY + px(18))
 
   ctx.font      = `600 ${px(16)}px ${FONT}`
   ctx.fillStyle = C_F300
-  ctx.fillText('Franchise CHF 300', rightCx, zY1)
+  ctx.fillText('Franchise CHF 300', rightCx, labelY)
   ctx.font      = `${px(16)}px ${FONT}`
-  ctx.fillText('plus avantageuse', rightCx, zY2)
+  ctx.fillText('plus avantageuse', rightCx, labelY + px(18))
 
   ctx.shadowBlur = 0
-
-  // 11 ─ Labels courbes à x = 3 500 — 16 CSS px, weight 500, couleur courbe
-  const labelX     = mapX(3500)
-  const labelY2500 = mapY(totalAnnuel(PRIME_2500, 2500, 3500))
-  const labelY300  = mapY(totalAnnuel(PRIME_300,  300,  3500))
-
-  ctx.textAlign = 'center'
-  ctx.font      = `500 ${px(16)}px ${FONT}`
-  ctx.fillStyle = C_F2500
-  ctx.fillText('Franchise CHF 2 500', labelX, labelY2500 - px(12))
-  ctx.fillStyle = C_F300
-  ctx.fillText('Franchise CHF 300', labelX, labelY300 + px(20))
 
   // 12 ─ Interaction slider
   if (frais > 0) {
@@ -301,13 +289,12 @@ export default function FranchiseChart() {
         }
       `}</style>
 
-      {/* Bannière — ligne de texte centrée, sans fond coloré */}
-      <p className="text-[16px] text-center text-ink mb-3">
-        {bannerText}
-      </p>
+      {/* Encadré unique — phrase + graphique + slider + légende */}
+      <div className="card-sm">
+        <p className="text-[16px] text-center text-ink mb-3">
+          {bannerText}
+        </p>
 
-      {/* Tuile — fond blanc, bordure edge, border-radius card, padding 24px */}
-      <div className="border border-edge rounded-lg bg-white p-6">
         <canvas
           ref={canvasRef}
           width={CW}
@@ -316,7 +303,7 @@ export default function FranchiseChart() {
         />
 
         {/* Zone slider */}
-        <div className="border-t border-edge mt-4 pt-4">
+        <div className="mt-3">
           <p className="text-[16px] font-medium text-ink text-center mb-3">
             Frais médicaux annuels : {fmtCHF(frais)}
           </p>
@@ -331,10 +318,11 @@ export default function FranchiseChart() {
               className="franchise-slider"
             />
           </div>
-          <p className="text-[16px] text-slate/60 text-center mt-3">
-            Calculée avec la caisse la moins chère pour chaque franchise à Genève, modèle standard
-          </p>
         </div>
+
+        <p className="text-[16px] text-slate/60 text-center mt-3">
+          Calculée avec la caisse la moins chère pour chaque franchise dans le canton de Genève, modèle standard
+        </p>
       </div>
     </div>
   )
