@@ -227,13 +227,13 @@ export default function FranchiseChart() {
           {/* Texte masqué tant que displayWidth n'est pas mesuré (avant premier paint) */}
           <g visibility={displayWidth === null ? 'hidden' : 'visible'}>
 
-            {/* 6 — Labels axe Y — right-alignés contre l'axe */}
+            {/* 6 — Labels axe Y — left-alignés, bord gauche de "CHF 10 000" comme référence */}
             {Y_TICKS.map(y => (
               <text
                 key={y}
-                x={cL - scaled(6)}
+                x={4}
                 y={mapY(y)}
-                textAnchor="end"
+                textAnchor="start"
                 dominantBaseline="middle"
                 fontSize={scaled(16)}
                 fill={C_LABEL}
@@ -260,11 +260,11 @@ export default function FranchiseChart() {
               )
             })}
 
-            {/* 8 — Titre axe Y — right-aligné contre l'axe */}
+            {/* 8 — Titre axe Y — aligné avec le bord gauche de "CHF 10 000" */}
             <text
-              x={cL - scaled(6)}
+              x={4}
               y={scaled(14)}
-              textAnchor="end"
+              textAnchor="start"
               fontSize={scaled(16)}
               fill={C_LABEL}
             >
