@@ -213,16 +213,27 @@ export default function FranchiseChart() {
           {/* 5 — Courbe F300 */}
           <path d={PATH_F300} stroke={C_F300} strokeWidth={2} fill="none" />
 
+          {/* 12a — Ligne slider : dessinée AVANT le texte pour passer derrière */}
+          {frais > 0 && (
+            <line
+              x1={sliderX} y1={cT}
+              x2={sliderX} y2={cB}
+              stroke={C_EDGE}
+              strokeWidth={1}
+              strokeDasharray="4,3"
+            />
+          )}
+
           {/* Texte masqué tant que displayWidth n'est pas mesuré (avant premier paint) */}
           <g visibility={displayWidth === null ? 'hidden' : 'visible'}>
 
-            {/* 6 — Labels axe Y */}
+            {/* 6 — Labels axe Y — right-alignés contre l'axe */}
             {Y_TICKS.map(y => (
               <text
                 key={y}
-                x={4}
+                x={cL - scaled(6)}
                 y={mapY(y)}
-                textAnchor="start"
+                textAnchor="end"
                 dominantBaseline="middle"
                 fontSize={scaled(16)}
                 fill={C_LABEL}
@@ -231,7 +242,7 @@ export default function FranchiseChart() {
               </text>
             ))}
 
-            {/* 7 — Labels axe X ; dernier tick right-aligné */}
+            {/* 7 — Labels axe X ; décalés vers le bas */}
             {X_TICKS.map(x => {
               const label = x === 0 ? 'CHF 0' : `CHF ${x.toLocaleString('fr-CH')}`
               const isLast = x === X_MAX
@@ -239,7 +250,7 @@ export default function FranchiseChart() {
                 <text
                   key={x}
                   x={isLast ? cR : mapX(x)}
-                  y={cB + scaled(18)}
+                  y={cB + scaled(24)}
                   textAnchor={isLast ? 'end' : 'middle'}
                   fontSize={scaled(16)}
                   fill={C_LABEL}
@@ -249,21 +260,21 @@ export default function FranchiseChart() {
               )
             })}
 
-            {/* 8 — Titre axe Y */}
+            {/* 8 — Titre axe Y — right-aligné contre l'axe */}
             <text
-              x={4}
+              x={cL - scaled(6)}
               y={scaled(14)}
-              textAnchor="start"
+              textAnchor="end"
               fontSize={scaled(16)}
               fill={C_LABEL}
             >
               Coût annuel de votre assurance LAMal
             </text>
 
-            {/* 9 — Valeur seuil — 18px, weight 600 */}
+            {/* 9 — Valeur seuil — plus d'espace avec le graphique */}
             <text
               x={seuilX}
-              y={cT - scaled(6)}
+              y={cT - scaled(12)}
               textAnchor="middle"
               fontSize={scaled(16)}
               fontWeight={600}
@@ -272,33 +283,26 @@ export default function FranchiseChart() {
               {fmtCHF(SEUIL)}
             </text>
 
-            {/* 10 — Annotations de zone */}
+            {/* 10 — Annotations de zone — tout en gras */}
             <text x={leftCx} y={annotY} textAnchor="middle" fontSize={scaled(16)} fontWeight={600} fill={C_F2500}>
               Franchise CHF 2 500
             </text>
-            <text x={leftCx} y={annotY + scaled(20)} textAnchor="middle" fontSize={scaled(16)} fill={C_F2500}>
+            <text x={leftCx} y={annotY + scaled(20)} textAnchor="middle" fontSize={scaled(16)} fontWeight={600} fill={C_F2500}>
               plus avantageuse
             </text>
 
             <text x={rightCx} y={annotY} textAnchor="middle" fontSize={scaled(16)} fontWeight={600} fill={C_F300}>
               Franchise CHF 300
             </text>
-            <text x={rightCx} y={annotY + scaled(20)} textAnchor="middle" fontSize={scaled(16)} fill={C_F300}>
+            <text x={rightCx} y={annotY + scaled(20)} textAnchor="middle" fontSize={scaled(16)} fontWeight={600} fill={C_F300}>
               plus avantageuse
             </text>
 
           </g>
 
-          {/* 12 — Interaction slider */}
+          {/* 12b — Dots slider : dessinés APRÈS le texte pour passer devant */}
           {frais > 0 && (
             <>
-              <line
-                x1={sliderX} y1={cT}
-                x2={sliderX} y2={cB}
-                stroke={C_EDGE}
-                strokeWidth={1}
-                strokeDasharray="4,3"
-              />
               <circle cx={sliderX} cy={dotY2500} r={4} fill={C_F2500} stroke="white" strokeWidth={2} />
               <circle cx={sliderX} cy={dotY300}  r={4} fill={C_F300}  stroke="white" strokeWidth={2} />
             </>
