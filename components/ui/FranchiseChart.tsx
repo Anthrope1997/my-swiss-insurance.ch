@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useEffect, useState } from 'react'
+import { useState } from 'react'
 
 // ─── Données réelles — caisse la moins chère, modèle standard, Genève ─────────
 const PRIME_300  = 638.70
@@ -23,21 +23,20 @@ const Y_MIN   = 5500
 const Y_MAX   = 10000
 const Y_RANGE = Y_MAX - Y_MIN
 
-// ─── Dimensions canvas (espace logique) ───────────────────────────────────────
-const CW  = 700
-const CH  = 266   // 38 % de CW
+// ─── Dimensions SVG (viewBox logique) ─────────────────────────────────────────
+const VW  = 700
+const VH  = 266
 const PAD = { t: 52, r: 40, b: 42, l: 100 } as const
-const CHART_W = CW - PAD.l - PAD.r   // 560
-const CHART_H = CH - PAD.t - PAD.b   // 172
+const CHART_W = VW - PAD.l - PAD.r   // 560
+const CHART_H = VH - PAD.t - PAD.b   // 172
 
-// ─── Tokens canvas ────────────────────────────────────────────────────────────
-const C_F300     = '#1d4ed8'  // brand — courbe franchise CHF 300
-const C_F2500    = '#3b82f6'  // brand-light — courbe franchise CHF 2 500
+// ─── Tokens de couleur ────────────────────────────────────────────────────────
+const C_F300  = '#1d4ed8'  // brand — courbe franchise CHF 300
+const C_F2500 = '#3b82f6'  // brand-light — courbe franchise CHF 2 500
 const C_LABEL = '#1a1a1a'  // noir — titres d'axe et graduations
 const C_SEUIL = '#374151'  // slate-700 — ligne + valeur du seuil
 const C_EDGE  = '#e2e8f0'  // edge — axes + ligne curseur
 const C_GRID  = '#f1f5f9'  // cloud — grille horizontale
-const FONT    = '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 const fmtCHF = (n: number): string =>
@@ -46,187 +45,44 @@ const fmtCHF = (n: number): string =>
 const mapX = (x: number): number => PAD.l + (x / X_MAX) * CHART_W
 const mapY = (y: number): number => PAD.t + CHART_H * (1 - (y - Y_MIN) / Y_RANGE)
 
-// ─── Dessin canvas ─────────────────────────────────────────────────────────────
-// scale = CW / displayWidth : ramène les tailles de police de pixels canvas
-// vers des pixels CSS réels, quelle que soit la largeur d'affichage du canvas.
-function draw(ctx: CanvasRenderingContext2D, frais: number, scale: number): void {
-  // px() convertit une cible CSS px en px logiques canvas
-  const px = (n: number) => Math.round(n * scale)
-
-  ctx.clearRect(0, 0, CW, CH)
-
-  const seuilX = mapX(SEUIL)
-  const cL     = PAD.l
-  const cR     = PAD.l + CHART_W
-  const cT     = PAD.t
-  const cB     = PAD.t + CHART_H
-
-  // 1 ─ Grille Y horizontale — 0.5 px logique, en premier
-  const yStep  = 1000
-  const yStart = Math.ceil(Y_MIN / yStep) * yStep
-  ctx.strokeStyle = C_GRID
-  ctx.lineWidth   = 0.5
-  ctx.setLineDash([])
-  for (let y = yStart; y <= Y_MAX; y += yStep) {
-    const py = mapY(y)
-    if (py < cT - 1 || py > cB + 1) continue
-    ctx.beginPath(); ctx.moveTo(cL, py); ctx.lineTo(cR, py); ctx.stroke()
-  }
-
-  // 2 ─ Lignes d'axes (L + bottom)
-  ctx.strokeStyle = C_EDGE
-  ctx.lineWidth   = 1
-  ctx.beginPath()
-  ctx.moveTo(cL, cT); ctx.lineTo(cL, cB); ctx.lineTo(cR, cB)
-  ctx.stroke()
-
-  // 3 ─ Ligne de seuil — 1 px pointillé, slate-700
-  ctx.strokeStyle = C_SEUIL
-  ctx.lineWidth   = 1
-  ctx.setLineDash([5, 4])
-  ctx.beginPath(); ctx.moveTo(seuilX, cT); ctx.lineTo(seuilX, cB); ctx.stroke()
-  ctx.setLineDash([])
-
-  // 4 ─ Courbe F2500
-  ctx.strokeStyle = C_F2500
-  ctx.lineWidth   = 2
-  ctx.beginPath()
+// ─── Paths de courbe pré-calculés ─────────────────────────────────────────────
+function curvePath(prime: number, franchise: number): string {
+  const pts: string[] = []
   for (let x = 0; x <= X_MAX; x += 5) {
-    const p = mapX(x), q = mapY(totalAnnuel(PRIME_2500, 2500, x))
-    x === 0 ? ctx.moveTo(p, q) : ctx.lineTo(p, q)
+    const cx = mapX(x)
+    const cy = mapY(totalAnnuel(prime, franchise, x))
+    pts.push(x === 0 ? `M${cx},${cy}` : `L${cx},${cy}`)
   }
-  ctx.stroke()
-
-  // 5 ─ Courbe F300
-  ctx.strokeStyle = C_F300
-  ctx.lineWidth   = 2
-  ctx.beginPath()
-  for (let x = 0; x <= X_MAX; x += 5) {
-    const p = mapX(x), q = mapY(totalAnnuel(PRIME_300, 300, x))
-    x === 0 ? ctx.moveTo(p, q) : ctx.lineTo(p, q)
-  }
-  ctx.stroke()
-
-  // 6 ─ Labels axe Y — 16 CSS px, left-alignés à x=4
-  for (let y = yStart; y <= Y_MAX; y += yStep) {
-    const py = mapY(y)
-    if (py < cT - 1 || py > cB + 1) continue
-    ctx.textAlign = 'left'
-    ctx.font      = `${px(16)}px ${FONT}`
-    ctx.fillStyle = C_LABEL
-    ctx.fillText(fmtCHF(y), 4, py + px(5))
-  }
-
-  // 7 ─ Labels axe X — 16 CSS px ; dernier tick right-aligné (évite le débord)
-  const xTicks = [0, 1000, 2000, 3000, 4000]
-  ctx.font      = `${px(16)}px ${FONT}`
-  ctx.fillStyle = C_LABEL
-  for (const x of xTicks) {
-    const label = x === 0 ? 'CHF 0' : `CHF ${x.toLocaleString('fr-CH')}`
-    if (x === X_MAX) {
-      ctx.textAlign = 'right'
-      ctx.fillText(label, cR, cB + px(18))
-    } else {
-      ctx.textAlign = 'center'
-      ctx.fillText(label, mapX(x), cB + px(18))
-    }
-  }
-
-  // 8 ─ Titre axe Y — 16 CSS px, left-aligné à x=4 (même départ que les graduations)
-  ctx.textAlign = 'left'
-  ctx.font      = `${px(16)}px ${FONT}`
-  ctx.fillStyle = C_LABEL
-  ctx.fillText('Coût annuel de votre assurance LAMal', 4, 14)
-
-  // 9 ─ Valeur seuil — 20 CSS px, weight 600, slate-700, centrée sur la ligne pointillée
-  ctx.textAlign = 'center'
-  ctx.font      = `600 ${px(20)}px ${FONT}`
-  ctx.fillStyle = C_SEUIL
-  ctx.fillText(fmtCHF(SEUIL), seuilX, cT - px(6))
-
-  // 10 ─ Annotations de zone — même hauteur, au-dessus de l'axe X, sans overlap courbes
-  const leftCx  = mapX(SEUIL / 2)
-  const rightCx = mapX((SEUIL + X_MAX) / 2)
-  // annotY fixé pour être sous les deux courbes et au-dessus de l'axe X
-  const annotY  = cB - px(32)
-
-  ctx.shadowColor = 'white'
-  ctx.shadowBlur  = 6
-
-  ctx.textAlign = 'center'
-  ctx.font      = `600 ${px(16)}px ${FONT}`
-  ctx.fillStyle = C_F2500
-  ctx.fillText('Franchise CHF 2 500', leftCx, annotY)
-  ctx.font      = `${px(16)}px ${FONT}`
-  ctx.fillText('plus avantageuse', leftCx, annotY + px(20))
-
-  ctx.font      = `600 ${px(16)}px ${FONT}`
-  ctx.fillStyle = C_F300
-  ctx.fillText('Franchise CHF 300', rightCx, annotY)
-  ctx.font      = `${px(16)}px ${FONT}`
-  ctx.fillText('plus avantageuse', rightCx, annotY + px(20))
-
-  ctx.shadowBlur = 0
-
-  // 12 ─ Interaction slider
-  if (frais > 0) {
-    const sliderX = mapX(frais)
-
-    ctx.strokeStyle = C_EDGE
-    ctx.lineWidth   = 1
-    ctx.setLineDash([4, 3])
-    ctx.beginPath(); ctx.moveTo(sliderX, cT); ctx.lineTo(sliderX, cB); ctx.stroke()
-    ctx.setLineDash([])
-
-    const dotY2500 = mapY(totalAnnuel(PRIME_2500, 2500, frais))
-    ctx.fillStyle   = C_F2500
-    ctx.strokeStyle = 'white'
-    ctx.lineWidth   = 2
-    ctx.beginPath(); ctx.arc(sliderX, dotY2500, px(4), 0, Math.PI * 2); ctx.fill(); ctx.stroke()
-
-    const dotY300 = mapY(totalAnnuel(PRIME_300, 300, frais))
-    ctx.fillStyle   = C_F300
-    ctx.beginPath(); ctx.arc(sliderX, dotY300, px(4), 0, Math.PI * 2); ctx.fill(); ctx.stroke()
-  }
+  return pts.join(' ')
 }
+
+const PATH_F2500 = curvePath(PRIME_2500, 2500)
+const PATH_F300  = curvePath(PRIME_300, 300)
+
+// ─── Coordonnées fixes ────────────────────────────────────────────────────────
+const Y_TICKS = [6000, 7000, 8000, 9000, 10000]
+const X_TICKS = [0, 1000, 2000, 3000, 4000]
+
+const cL      = PAD.l
+const cR      = PAD.l + CHART_W
+const cT      = PAD.t
+const cB      = PAD.t + CHART_H
+const seuilX  = mapX(SEUIL)
+const leftCx  = mapX(SEUIL / 2)
+const rightCx = mapX((SEUIL + X_MAX) / 2)
+const annotY  = cB - 32
 
 // ─── Composant React ──────────────────────────────────────────────────────────
 export default function FranchiseChart() {
-  const [frais, setFrais]             = useState(0)
-  const [displayWidth, setDisplayWidth] = useState(CW)
-  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [frais, setFrais] = useState(0)
 
-  // Redessine quand frais ou displayWidth changent
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-    const dpr = window.devicePixelRatio || 1
-    canvas.width  = CW * dpr
-    canvas.height = CH * dpr
-    ctx.scale(dpr, dpr)
-    // scale = ratio logique/affiché → convertit px CSS en px canvas
-    draw(ctx, frais, CW / displayWidth)
-  }, [frais, displayWidth])
+  const sliderX  = mapX(frais)
+  const dotY2500 = mapY(totalAnnuel(PRIME_2500, 2500, frais))
+  const dotY300  = mapY(totalAnnuel(PRIME_300, 300, frais))
 
-  // Mesure la largeur d'affichage réelle pour calibrer les polices
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ro = new ResizeObserver(entries => {
-      const w = entries[0].contentRect.width
-      if (w > 0) setDisplayWidth(w)
-    })
-    ro.observe(canvas)
-    return () => ro.disconnect()
-  }, [])
+  const leftPct  = `${((PAD.l / VW) * 100).toFixed(2)}%`
+  const rightPct = `${((PAD.r / VW) * 100).toFixed(2)}%`
 
-  // Alignement slider ↔ axes canvas
-  const leftPct  = `${((PAD.l / CW) * 100).toFixed(2)}%`
-  const rightPct = `${((PAD.r / CW) * 100).toFixed(2)}%`
-
-  // ─── Bannière ────────────────────────────────────────────────────────────────
   const bannerText =
     frais === 0 ? (
       <span className="text-slate">
@@ -296,12 +152,132 @@ export default function FranchiseChart() {
           {bannerText}
         </p>
 
-        <canvas
-          ref={canvasRef}
-          width={CW}
-          height={CH}
-          style={{ width: '100%', height: 'auto', display: 'block' }}
-        />
+        <svg
+          viewBox={`0 0 ${VW} ${VH}`}
+          width="100%"
+          style={{ display: 'block' }}
+          aria-hidden="true"
+        >
+          {/* 1 — Grille Y horizontale */}
+          {Y_TICKS.map(y => (
+            <line
+              key={y}
+              x1={cL} y1={mapY(y)}
+              x2={cR} y2={mapY(y)}
+              stroke={C_GRID}
+              strokeWidth={0.5}
+            />
+          ))}
+
+          {/* 2 — Axes L + bottom */}
+          <path
+            d={`M${cL},${cT} L${cL},${cB} L${cR},${cB}`}
+            stroke={C_EDGE}
+            strokeWidth={1}
+            fill="none"
+          />
+
+          {/* 3 — Ligne de seuil pointillée */}
+          <line
+            x1={seuilX} y1={cT}
+            x2={seuilX} y2={cB}
+            stroke={C_SEUIL}
+            strokeWidth={1}
+            strokeDasharray="5,4"
+          />
+
+          {/* 4 — Courbe F2500 */}
+          <path d={PATH_F2500} stroke={C_F2500} strokeWidth={2} fill="none" />
+
+          {/* 5 — Courbe F300 */}
+          <path d={PATH_F300} stroke={C_F300} strokeWidth={2} fill="none" />
+
+          {/* 6 — Labels axe Y — left-alignés à x=4, centrés verticalement sur la grille */}
+          {Y_TICKS.map(y => (
+            <text
+              key={y}
+              x={4}
+              y={mapY(y)}
+              textAnchor="start"
+              dominantBaseline="middle"
+              fontSize={16}
+              fill={C_LABEL}
+            >
+              {fmtCHF(y)}
+            </text>
+          ))}
+
+          {/* 7 — Labels axe X ; dernier tick right-aligné */}
+          {X_TICKS.map(x => {
+            const label = x === 0 ? 'CHF 0' : `CHF ${x.toLocaleString('fr-CH')}`
+            const isLast = x === X_MAX
+            return (
+              <text
+                key={x}
+                x={isLast ? cR : mapX(x)}
+                y={cB + 18}
+                textAnchor={isLast ? 'end' : 'middle'}
+                fontSize={16}
+                fill={C_LABEL}
+              >
+                {label}
+              </text>
+            )
+          })}
+
+          {/* 8 — Titre axe Y — left-aligné à x=4 */}
+          <text
+            x={4}
+            y={14}
+            textAnchor="start"
+            fontSize={16}
+            fill={C_LABEL}
+          >
+            Coût annuel de votre assurance LAMal
+          </text>
+
+          {/* 9 — Valeur seuil — 20px, weight 600, centrée sur la ligne pointillée */}
+          <text
+            x={seuilX}
+            y={cT - 6}
+            textAnchor="middle"
+            fontSize={20}
+            fontWeight={600}
+            fill={C_SEUIL}
+          >
+            {fmtCHF(SEUIL)}
+          </text>
+
+          {/* 10 — Annotations de zone — même hauteur, couleur de leur courbe */}
+          <text x={leftCx} y={annotY} textAnchor="middle" fontSize={16} fontWeight={600} fill={C_F2500}>
+            Franchise CHF 2 500
+          </text>
+          <text x={leftCx} y={annotY + 20} textAnchor="middle" fontSize={16} fill={C_F2500}>
+            plus avantageuse
+          </text>
+
+          <text x={rightCx} y={annotY} textAnchor="middle" fontSize={16} fontWeight={600} fill={C_F300}>
+            Franchise CHF 300
+          </text>
+          <text x={rightCx} y={annotY + 20} textAnchor="middle" fontSize={16} fill={C_F300}>
+            plus avantageuse
+          </text>
+
+          {/* 12 — Interaction slider */}
+          {frais > 0 && (
+            <>
+              <line
+                x1={sliderX} y1={cT}
+                x2={sliderX} y2={cB}
+                stroke={C_EDGE}
+                strokeWidth={1}
+                strokeDasharray="4,3"
+              />
+              <circle cx={sliderX} cy={dotY2500} r={4} fill={C_F2500} stroke="white" strokeWidth={2} />
+              <circle cx={sliderX} cy={dotY300}  r={4} fill={C_F300}  stroke="white" strokeWidth={2} />
+            </>
+          )}
+        </svg>
 
         {/* Zone slider */}
         <div className="mt-3">
