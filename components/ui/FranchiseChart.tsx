@@ -172,7 +172,24 @@ export default function FranchiseChart() {
           {bannerText}
         </p>
 
-        <div ref={containerRef}>
+        <div ref={containerRef} style={{ position: 'relative' }}>
+
+          {/* CHF 1 891 — HTML pur : taille exactement 20px CSS, jamais scalée par le viewBox */}
+          <span style={{
+            position:   'absolute',
+            left:       `${(seuilX / VW * 100).toFixed(2)}%`,
+            top:        `${((cT - 8) / VH * 100).toFixed(2)}%`,
+            transform:  'translate(-50%, -100%)',
+            fontSize:   '20px',
+            fontWeight: 600,
+            color:      C_SEUIL,
+            whiteSpace: 'nowrap',
+            lineHeight: 1,
+            pointerEvents: 'none',
+          }}>
+            {fmtCHF(SEUIL)}
+          </span>
+
         <svg
           viewBox={`0 0 ${VW} ${VH}`}
           width="100%"
@@ -258,18 +275,6 @@ export default function FranchiseChart() {
               fill={C_LABEL}
             >
               Coût annuel de votre assurance LAMal
-            </text>
-
-            {/* 9 — Valeur seuil — 20px, weight 600 */}
-            <text
-              x={seuilX}
-              y={cT - scaled(6)}
-              textAnchor="middle"
-              fontSize={scaled(20)}
-              fontWeight={600}
-              fill={C_SEUIL}
-            >
-              {fmtCHF(SEUIL)}
             </text>
 
             {/* 10 — Annotations de zone */}
