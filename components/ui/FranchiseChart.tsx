@@ -26,8 +26,8 @@ const Y_RANGE = Y_MAX - Y_MIN
 // ─── Dimensions canvas (espace logique) ───────────────────────────────────────
 const CW  = 700
 const CH  = 266   // 38 % de CW
-const PAD = { t: 52, r: 40, b: 42, l: 90 } as const
-const CHART_W = CW - PAD.l - PAD.r   // 570
+const PAD = { t: 52, r: 40, b: 42, l: 100 } as const
+const CHART_W = CW - PAD.l - PAD.r   // 560
 const CHART_H = CH - PAD.t - PAD.b   // 172
 
 // ─── Tokens canvas ────────────────────────────────────────────────────────────
@@ -109,14 +109,14 @@ function draw(ctx: CanvasRenderingContext2D, frais: number, scale: number): void
   }
   ctx.stroke()
 
-  // 6 ─ Labels axe Y — 13 CSS px, left-alignés à x=cL (flottants dans le graphique)
+  // 6 ─ Labels axe Y — 13 CSS px, à x=12 (hors zone graphique, à gauche de l'axe)
   for (let y = yStart; y <= Y_MAX; y += yStep) {
     const py = mapY(y)
     if (py < cT - 1 || py > cB + 1) continue
     ctx.textAlign = 'left'
     ctx.font      = `${px(13)}px ${FONT}`
     ctx.fillStyle = C_LABEL
-    ctx.fillText(fmtCHF(y), cL, py + px(5))
+    ctx.fillText(fmtCHF(y), 12, py + px(5))
   }
 
   // 7 ─ Labels axe X — 13 CSS px ; dernier tick right-aligné (évite le débord)
@@ -134,38 +134,41 @@ function draw(ctx: CanvasRenderingContext2D, frais: number, scale: number): void
     }
   }
 
-  // 8 ─ Titre axe Y — 16 CSS px, dans PAD.top, left-aligné à x=cL
+  // 8 ─ Titre axe Y — 12 CSS px, à x=12 y=20 (aligné avec les graduations)
   ctx.textAlign = 'left'
-  ctx.font      = `${px(16)}px ${FONT}`
+  ctx.font      = `${px(12)}px ${FONT}`
   ctx.fillStyle = C_LABEL
-  ctx.fillText('Coût annuel de votre assurance LAMal', cL, cT - px(30))
+  ctx.fillText('Coût annuel de votre assurance LAMal', 12, 20)
 
-  // 9 ─ Valeur seuil — 20 CSS px, weight 600, slate-700, left-alignée à x=cL
-  ctx.textAlign = 'left'
-  ctx.font      = `600 ${px(20)}px ${FONT}`
+  // 9 ─ Valeur seuil — 14 CSS px, weight 600, slate-700, centrée sur la ligne pointillée
+  ctx.textAlign = 'center'
+  ctx.font      = `600 ${px(14)}px ${FONT}`
   ctx.fillStyle = C_SEUIL
-  ctx.fillText(fmtCHF(SEUIL), cL, cT - px(8))
+  ctx.fillText(fmtCHF(SEUIL), seuilX, cT - px(8))
 
-  // 10 ─ Annotations de zone — coin supérieur de chaque zone, au-dessus des courbes
-  const leftCx  = mapX(SEUIL / 2)
-  const rightCx = mapX((SEUIL + X_MAX) / 2)
-  const labelY  = mapY(9700)  // y=9700 : toujours au-dessus des deux courbes
+  // 10 ─ Annotations de zone — 22 px sous la courbe la moins chère de chaque zone
+  const leftCx   = mapX(SEUIL / 2)
+  const rightCx  = mapX((SEUIL + X_MAX) / 2)
+  // Zone gauche : CHF 2 500 est la moins chère (frais < seuil)
+  const leftY    = mapY(totalAnnuel(PRIME_2500, 2500, SEUIL / 2)) + px(22)
+  // Zone droite : CHF 300 est la moins chère (frais > seuil)
+  const rightY   = mapY(totalAnnuel(PRIME_300, 300, (SEUIL + X_MAX) / 2)) + px(22)
 
   ctx.shadowColor = 'white'
   ctx.shadowBlur  = 6
 
   ctx.textAlign = 'center'
-  ctx.font      = `600 ${px(14)}px ${FONT}`
+  ctx.font      = `600 ${px(13)}px ${FONT}`
   ctx.fillStyle = C_ANN_2500
-  ctx.fillText('Franchise CHF 2 500', leftCx, labelY)
-  ctx.font      = `${px(14)}px ${FONT}`
-  ctx.fillText('plus avantageuse', leftCx, labelY + px(16))
+  ctx.fillText('Franchise CHF 2 500', leftCx, leftY)
+  ctx.font      = `${px(13)}px ${FONT}`
+  ctx.fillText('plus avantageuse', leftCx, leftY + px(15))
 
-  ctx.font      = `600 ${px(14)}px ${FONT}`
+  ctx.font      = `600 ${px(13)}px ${FONT}`
   ctx.fillStyle = C_ANN_300
-  ctx.fillText('Franchise CHF 300', rightCx, labelY)
-  ctx.font      = `${px(14)}px ${FONT}`
-  ctx.fillText('plus avantageuse', rightCx, labelY + px(16))
+  ctx.fillText('Franchise CHF 300', rightCx, rightY)
+  ctx.font      = `${px(13)}px ${FONT}`
+  ctx.fillText('plus avantageuse', rightCx, rightY + px(15))
 
   ctx.shadowBlur = 0
 
