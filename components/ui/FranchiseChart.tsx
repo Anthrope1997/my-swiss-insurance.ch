@@ -113,17 +113,17 @@ export default function FranchiseChart() {
     ) : frais < SEUIL ? (
       <>
         La franchise de{' '}
-        <span className="font-semibold text-brand">CHF 2 500</span>
+        <span className="font-semibold text-brand text-[24px]">CHF 2 500</span>
         {' '}est plus avantageuse pour{' '}
-        <span className="font-semibold text-brand">{fmtCHF(frais)}</span>
+        <span className="font-semibold text-brand text-[24px]">{fmtCHF(frais)}</span>
         {' '}de frais médicaux annuels
       </>
     ) : (
       <>
         La franchise de{' '}
-        <span className="font-semibold text-brand">CHF 300</span>
+        <span className="font-semibold text-brand text-[24px]">CHF 300</span>
         {' '}est plus avantageuse pour{' '}
-        <span className="font-semibold text-brand">{fmtCHF(frais)}</span>
+        <span className="font-semibold text-brand text-[24px]">{fmtCHF(frais)}</span>
         {' '}de frais médicaux annuels
       </>
     )
@@ -170,7 +170,7 @@ export default function FranchiseChart() {
 
       {/* Encadré unique — phrase + graphique + slider + légende */}
       <div className="card-sm">
-        <p className="text-[16px] text-center text-ink mb-3">
+        <p className="text-[16px] font-semibold text-center text-ink mb-3">
           {bannerText}
         </p>
 
@@ -265,7 +265,7 @@ export default function FranchiseChart() {
             {/* 8 — Titre axe Y — même bord gauche que les graduations */}
             <text
               x={yColX}
-              y={cT - scaled(8)}
+              y={cT - scaled(16)}
               textAnchor="start"
               fontSize={scaled(16)}
               fill={C_LABEL}
@@ -314,7 +314,7 @@ export default function FranchiseChart() {
 
         {/* Zone slider */}
         <div className="mt-3">
-          <p className="text-[16px] font-medium text-ink text-center mb-3">
+          <p className="text-[16px] text-ink text-center mb-3">
             Frais médicaux annuels : {fmtCHF(frais)}
           </p>
           <div style={{ paddingLeft: leftPct, paddingRight: rightPct }}>
