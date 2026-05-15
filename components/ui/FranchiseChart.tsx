@@ -265,7 +265,7 @@ export default function FranchiseChart() {
               x={seuilX}
               y={cT - scaled(6)}
               textAnchor="middle"
-              fontSize={scaled(18)}
+              fontSize={scaled(16)}
               fontWeight={600}
               fill={C_SEUIL}
             >
