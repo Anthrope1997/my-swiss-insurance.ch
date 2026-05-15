@@ -113,17 +113,17 @@ export default function FranchiseChart() {
     ) : frais < SEUIL ? (
       <>
         La franchise de{' '}
-        <span className="font-semibold text-brand text-[20px]">CHF 2 500</span>
+        <span className="font-semibold text-brand text-[18px]">CHF 2 500</span>
         {' '}est plus avantageuse pour{' '}
-        <span className="font-semibold text-brand text-[20px]">{fmtCHF(frais)}</span>
+        <span className="font-semibold text-brand text-[18px]">{fmtCHF(frais)}</span>
         {' '}de frais médicaux annuels
       </>
     ) : (
       <>
         La franchise de{' '}
-        <span className="font-semibold text-brand text-[20px]">CHF 300</span>
+        <span className="font-semibold text-brand text-[18px]">CHF 300</span>
         {' '}est plus avantageuse pour{' '}
-        <span className="font-semibold text-brand text-[20px]">{fmtCHF(frais)}</span>
+        <span className="font-semibold text-brand text-[18px]">{fmtCHF(frais)}</span>
         {' '}de frais médicaux annuels
       </>
     )
