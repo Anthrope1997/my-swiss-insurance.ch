@@ -113,17 +113,17 @@ export default function FranchiseChart() {
     ) : frais < SEUIL ? (
       <>
         La franchise de{' '}
-        <span className="font-semibold text-brand text-[24px]">CHF 2 500</span>
+        <span className="font-semibold text-brand text-[20px]">CHF 2 500</span>
         {' '}est plus avantageuse pour{' '}
-        <span className="font-semibold text-brand text-[24px]">{fmtCHF(frais)}</span>
+        <span className="font-semibold text-brand text-[20px]">{fmtCHF(frais)}</span>
         {' '}de frais médicaux annuels
       </>
     ) : (
       <>
         La franchise de{' '}
-        <span className="font-semibold text-brand text-[24px]">CHF 300</span>
+        <span className="font-semibold text-brand text-[20px]">CHF 300</span>
         {' '}est plus avantageuse pour{' '}
-        <span className="font-semibold text-brand text-[24px]">{fmtCHF(frais)}</span>
+        <span className="font-semibold text-brand text-[20px]">{fmtCHF(frais)}</span>
         {' '}de frais médicaux annuels
       </>
     )
@@ -265,7 +265,7 @@ export default function FranchiseChart() {
             {/* 8 — Titre axe Y — même bord gauche que les graduations */}
             <text
               x={yColX}
-              y={cT - scaled(16)}
+              y={cT - scaled(48)}
               textAnchor="start"
               fontSize={scaled(16)}
               fill={C_LABEL}
