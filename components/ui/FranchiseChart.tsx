@@ -74,12 +74,11 @@ const rightCx = mapX((SEUIL + X_MAX) / 2)
 
 // ─── Composant React ──────────────────────────────────────────────────────────
 export default function FranchiseChart() {
-  const [frais, setFrais]             = useState(0)
-  const [displayWidth, setDisplayWidth] = useState(VW)
+  const [frais, setFrais]               = useState(0)
+  const [displayWidth, setDisplayWidth] = useState<number | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
 
-  // useLayoutEffect : s'exécute après commit DOM mais avant paint
-  // → displayWidth correct dès le premier rendu visible, jamais de flash
+  // Mesure avant le premier paint — displayWidth null jusqu'ici, texte SVG masqué
   useLayoutEffect(() => {
     const el = containerRef.current
     if (!el) return
@@ -93,8 +92,8 @@ export default function FranchiseChart() {
     return () => ro.disconnect()
   }, [])
 
-  // scaled() : convertit une cible CSS px en unités SVG viewBox
-  const scaled = (n: number) => n * VW / displayWidth
+  // scaled() : cible CSS px → unités SVG viewBox (identité si pas encore mesuré)
+  const scaled = (n: number) => displayWidth ? n * VW / displayWidth : n
 
   const annotY   = cB - scaled(32)
   const sliderX  = mapX(frais)
@@ -214,76 +213,81 @@ export default function FranchiseChart() {
           {/* 5 — Courbe F300 */}
           <path d={PATH_F300} stroke={C_F300} strokeWidth={2} fill="none" />
 
-          {/* 6 — Labels axe Y — left-alignés à x=4, centrés verticalement sur la grille */}
-          {Y_TICKS.map(y => (
-            <text
-              key={y}
-              x={4}
-              y={mapY(y)}
-              textAnchor="start"
-              dominantBaseline="middle"
-              fontSize={scaled(16)}
-              fill={C_LABEL}
-            >
-              {fmtCHF(y)}
-            </text>
-          ))}
+          {/* Texte masqué tant que displayWidth n'est pas mesuré (avant premier paint) */}
+          <g visibility={displayWidth === null ? 'hidden' : 'visible'}>
 
-          {/* 7 — Labels axe X ; dernier tick right-aligné */}
-          {X_TICKS.map(x => {
-            const label = x === 0 ? 'CHF 0' : `CHF ${x.toLocaleString('fr-CH')}`
-            const isLast = x === X_MAX
-            return (
+            {/* 6 — Labels axe Y */}
+            {Y_TICKS.map(y => (
               <text
-                key={x}
-                x={isLast ? cR : mapX(x)}
-                y={cB + scaled(18)}
-                textAnchor={isLast ? 'end' : 'middle'}
+                key={y}
+                x={4}
+                y={mapY(y)}
+                textAnchor="start"
+                dominantBaseline="middle"
                 fontSize={scaled(16)}
                 fill={C_LABEL}
               >
-                {label}
+                {fmtCHF(y)}
               </text>
-            )
-          })}
+            ))}
 
-          {/* 8 — Titre axe Y — left-aligné à x=4 */}
-          <text
-            x={4}
-            y={scaled(14)}
-            textAnchor="start"
-            fontSize={scaled(16)}
-            fill={C_LABEL}
-          >
-            Coût annuel de votre assurance LAMal
-          </text>
+            {/* 7 — Labels axe X ; dernier tick right-aligné */}
+            {X_TICKS.map(x => {
+              const label = x === 0 ? 'CHF 0' : `CHF ${x.toLocaleString('fr-CH')}`
+              const isLast = x === X_MAX
+              return (
+                <text
+                  key={x}
+                  x={isLast ? cR : mapX(x)}
+                  y={cB + scaled(18)}
+                  textAnchor={isLast ? 'end' : 'middle'}
+                  fontSize={scaled(16)}
+                  fill={C_LABEL}
+                >
+                  {label}
+                </text>
+              )
+            })}
 
-          {/* 9 — Valeur seuil — 20px, weight 600, centrée sur la ligne pointillée */}
-          <text
-            x={seuilX}
-            y={cT - scaled(6)}
-            textAnchor="middle"
-            fontSize={scaled(20)}
-            fontWeight={600}
-            fill={C_SEUIL}
-          >
-            {fmtCHF(SEUIL)}
-          </text>
+            {/* 8 — Titre axe Y */}
+            <text
+              x={4}
+              y={scaled(14)}
+              textAnchor="start"
+              fontSize={scaled(16)}
+              fill={C_LABEL}
+            >
+              Coût annuel de votre assurance LAMal
+            </text>
 
-          {/* 10 — Annotations de zone — même hauteur, couleur de leur courbe */}
-          <text x={leftCx} y={annotY} textAnchor="middle" fontSize={scaled(16)} fontWeight={600} fill={C_F2500}>
-            Franchise CHF 2 500
-          </text>
-          <text x={leftCx} y={annotY + scaled(20)} textAnchor="middle" fontSize={scaled(16)} fill={C_F2500}>
-            plus avantageuse
-          </text>
+            {/* 9 — Valeur seuil — 20px, weight 600 */}
+            <text
+              x={seuilX}
+              y={cT - scaled(6)}
+              textAnchor="middle"
+              fontSize={scaled(20)}
+              fontWeight={600}
+              fill={C_SEUIL}
+            >
+              {fmtCHF(SEUIL)}
+            </text>
 
-          <text x={rightCx} y={annotY} textAnchor="middle" fontSize={scaled(16)} fontWeight={600} fill={C_F300}>
-            Franchise CHF 300
-          </text>
-          <text x={rightCx} y={annotY + scaled(20)} textAnchor="middle" fontSize={scaled(16)} fill={C_F300}>
-            plus avantageuse
-          </text>
+            {/* 10 — Annotations de zone */}
+            <text x={leftCx} y={annotY} textAnchor="middle" fontSize={scaled(16)} fontWeight={600} fill={C_F2500}>
+              Franchise CHF 2 500
+            </text>
+            <text x={leftCx} y={annotY + scaled(20)} textAnchor="middle" fontSize={scaled(16)} fill={C_F2500}>
+              plus avantageuse
+            </text>
+
+            <text x={rightCx} y={annotY} textAnchor="middle" fontSize={scaled(16)} fontWeight={600} fill={C_F300}>
+              Franchise CHF 300
+            </text>
+            <text x={rightCx} y={annotY + scaled(20)} textAnchor="middle" fontSize={scaled(16)} fill={C_F300}>
+              plus avantageuse
+            </text>
+
+          </g>
 
           {/* 12 — Interaction slider */}
           {frais > 0 && (
