@@ -134,9 +134,9 @@ function draw(ctx: CanvasRenderingContext2D, frais: number, scale: number): void
     }
   }
 
-  // 8 ─ Titre axe Y — 12 CSS px, left-aligné à x=4 (même départ que les graduations)
+  // 8 ─ Titre axe Y — 16 CSS px, left-aligné à x=4 (même départ que les graduations)
   ctx.textAlign = 'left'
-  ctx.font      = `${px(12)}px ${FONT}`
+  ctx.font      = `${px(16)}px ${FONT}`
   ctx.fillStyle = C_LABEL
   ctx.fillText('Coût annuel de votre assurance LAMal', 4, 14)
 
