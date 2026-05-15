@@ -76,16 +76,20 @@ const rightCx = mapX((SEUIL + X_MAX) / 2)
 export default function FranchiseChart() {
   const [frais, setFrais]             = useState(0)
   const [displayWidth, setDisplayWidth] = useState(VW)
-  const svgRef = useRef<SVGSVGElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const svg = svgRef.current
-    if (!svg) return
+    const el = containerRef.current
+    if (!el) return
+    // Mesure immédiate pour le premier rendu
+    const initial = el.getBoundingClientRect().width
+    if (initial > 0) setDisplayWidth(initial)
+    // Mises à jour sur redimensionnement
     const ro = new ResizeObserver(entries => {
       const w = entries[0].contentRect.width
       if (w > 0) setDisplayWidth(w)
     })
-    ro.observe(svg)
+    ro.observe(el)
     return () => ro.disconnect()
   }, [])
 
@@ -169,8 +173,8 @@ export default function FranchiseChart() {
           {bannerText}
         </p>
 
+        <div ref={containerRef}>
         <svg
-          ref={svgRef}
           viewBox={`0 0 ${VW} ${VH}`}
           width="100%"
           style={{ display: 'block' }}
@@ -296,6 +300,7 @@ export default function FranchiseChart() {
             </>
           )}
         </svg>
+        </div>
 
         {/* Zone slider */}
         <div className="mt-3">
