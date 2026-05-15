@@ -265,7 +265,7 @@ export default function FranchiseChart() {
             {/* 8 — Titre axe Y — même bord gauche que les graduations */}
             <text
               x={yColX}
-              y={scaled(14)}
+              y={cT - scaled(8)}
               textAnchor="start"
               fontSize={scaled(16)}
               fill={C_LABEL}
