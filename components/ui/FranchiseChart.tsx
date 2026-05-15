@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useEffect, useState } from 'react'
 
 // ─── Données réelles — caisse la moins chère, modèle standard, Genève ─────────
 const PRIME_300  = 638.70
@@ -70,12 +70,29 @@ const cB      = PAD.t + CHART_H
 const seuilX  = mapX(SEUIL)
 const leftCx  = mapX(SEUIL / 2)
 const rightCx = mapX((SEUIL + X_MAX) / 2)
-const annotY  = cB - 32
+// annotY calculé dynamiquement dans le composant (dépend de scaled)
 
 // ─── Composant React ──────────────────────────────────────────────────────────
 export default function FranchiseChart() {
-  const [frais, setFrais] = useState(0)
+  const [frais, setFrais]             = useState(0)
+  const [displayWidth, setDisplayWidth] = useState(VW)
+  const svgRef = useRef<SVGSVGElement>(null)
 
+  useEffect(() => {
+    const svg = svgRef.current
+    if (!svg) return
+    const ro = new ResizeObserver(entries => {
+      const w = entries[0].contentRect.width
+      if (w > 0) setDisplayWidth(w)
+    })
+    ro.observe(svg)
+    return () => ro.disconnect()
+  }, [])
+
+  // scaled() : convertit une cible CSS px en unités SVG viewBox
+  const scaled = (n: number) => n * VW / displayWidth
+
+  const annotY   = cB - scaled(32)
   const sliderX  = mapX(frais)
   const dotY2500 = mapY(totalAnnuel(PRIME_2500, 2500, frais))
   const dotY300  = mapY(totalAnnuel(PRIME_300, 300, frais))
@@ -153,6 +170,7 @@ export default function FranchiseChart() {
         </p>
 
         <svg
+          ref={svgRef}
           viewBox={`0 0 ${VW} ${VH}`}
           width="100%"
           style={{ display: 'block' }}
@@ -200,7 +218,7 @@ export default function FranchiseChart() {
               y={mapY(y)}
               textAnchor="start"
               dominantBaseline="middle"
-              fontSize={16}
+              fontSize={scaled(16)}
               fill={C_LABEL}
             >
               {fmtCHF(y)}
@@ -215,9 +233,9 @@ export default function FranchiseChart() {
               <text
                 key={x}
                 x={isLast ? cR : mapX(x)}
-                y={cB + 18}
+                y={cB + scaled(18)}
                 textAnchor={isLast ? 'end' : 'middle'}
-                fontSize={16}
+                fontSize={scaled(16)}
                 fill={C_LABEL}
               >
                 {label}
@@ -228,9 +246,9 @@ export default function FranchiseChart() {
           {/* 8 — Titre axe Y — left-aligné à x=4 */}
           <text
             x={4}
-            y={14}
+            y={scaled(14)}
             textAnchor="start"
-            fontSize={16}
+            fontSize={scaled(16)}
             fill={C_LABEL}
           >
             Coût annuel de votre assurance LAMal
@@ -239,9 +257,9 @@ export default function FranchiseChart() {
           {/* 9 — Valeur seuil — 20px, weight 600, centrée sur la ligne pointillée */}
           <text
             x={seuilX}
-            y={cT - 6}
+            y={cT - scaled(6)}
             textAnchor="middle"
-            fontSize={20}
+            fontSize={scaled(20)}
             fontWeight={600}
             fill={C_SEUIL}
           >
@@ -249,17 +267,17 @@ export default function FranchiseChart() {
           </text>
 
           {/* 10 — Annotations de zone — même hauteur, couleur de leur courbe */}
-          <text x={leftCx} y={annotY} textAnchor="middle" fontSize={16} fontWeight={600} fill={C_F2500}>
+          <text x={leftCx} y={annotY} textAnchor="middle" fontSize={scaled(16)} fontWeight={600} fill={C_F2500}>
             Franchise CHF 2 500
           </text>
-          <text x={leftCx} y={annotY + 20} textAnchor="middle" fontSize={16} fill={C_F2500}>
+          <text x={leftCx} y={annotY + scaled(20)} textAnchor="middle" fontSize={scaled(16)} fill={C_F2500}>
             plus avantageuse
           </text>
 
-          <text x={rightCx} y={annotY} textAnchor="middle" fontSize={16} fontWeight={600} fill={C_F300}>
+          <text x={rightCx} y={annotY} textAnchor="middle" fontSize={scaled(16)} fontWeight={600} fill={C_F300}>
             Franchise CHF 300
           </text>
-          <text x={rightCx} y={annotY + 20} textAnchor="middle" fontSize={16} fill={C_F300}>
+          <text x={rightCx} y={annotY + scaled(20)} textAnchor="middle" fontSize={scaled(16)} fill={C_F300}>
             plus avantageuse
           </text>
 
