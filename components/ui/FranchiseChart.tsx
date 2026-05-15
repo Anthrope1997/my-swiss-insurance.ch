@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useLayoutEffect, useState } from 'react'
 
 // ─── Données réelles — caisse la moins chère, modèle standard, Genève ─────────
 const PRIME_300  = 638.70
@@ -78,13 +78,13 @@ export default function FranchiseChart() {
   const [displayWidth, setDisplayWidth] = useState(VW)
   const containerRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
+  // useLayoutEffect : s'exécute après commit DOM mais avant paint
+  // → displayWidth correct dès le premier rendu visible, jamais de flash
+  useLayoutEffect(() => {
     const el = containerRef.current
     if (!el) return
-    // Mesure immédiate pour le premier rendu
     const initial = el.getBoundingClientRect().width
     if (initial > 0) setDisplayWidth(initial)
-    // Mises à jour sur redimensionnement
     const ro = new ResizeObserver(entries => {
       const w = entries[0].contentRect.width
       if (w > 0) setDisplayWidth(w)
