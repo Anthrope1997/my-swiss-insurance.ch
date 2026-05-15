@@ -109,14 +109,14 @@ function draw(ctx: CanvasRenderingContext2D, frais: number, scale: number): void
   }
   ctx.stroke()
 
-  // 6 ─ Labels axe Y — 16 CSS px, right-alignés à x=cL-6 (collés à gauche de l'axe)
+  // 6 ─ Labels axe Y — 16 CSS px, left-alignés à x=4
   for (let y = yStart; y <= Y_MAX; y += yStep) {
     const py = mapY(y)
     if (py < cT - 1 || py > cB + 1) continue
-    ctx.textAlign = 'right'
+    ctx.textAlign = 'left'
     ctx.font      = `${px(16)}px ${FONT}`
     ctx.fillStyle = C_LABEL
-    ctx.fillText(fmtCHF(y), cL - 6, py + px(5))
+    ctx.fillText(fmtCHF(y), 4, py + px(5))
   }
 
   // 7 ─ Labels axe X — 16 CSS px ; dernier tick right-aligné (évite le débord)
@@ -134,17 +134,17 @@ function draw(ctx: CanvasRenderingContext2D, frais: number, scale: number): void
     }
   }
 
-  // 8 ─ Titre axe Y — 12 CSS px, à x=8 y=14 (petit label discret hors zone)
+  // 8 ─ Titre axe Y — 12 CSS px, left-aligné à x=4 (même départ que les graduations)
   ctx.textAlign = 'left'
   ctx.font      = `${px(12)}px ${FONT}`
   ctx.fillStyle = C_LABEL
-  ctx.fillText('Coût annuel de votre assurance LAMal', 8, 14)
+  ctx.fillText('Coût annuel de votre assurance LAMal', 4, 14)
 
-  // 9 ─ Valeur seuil — 20 CSS px, weight 600, slate-700, right-alignée à x=cL-6
-  ctx.textAlign = 'right'
+  // 9 ─ Valeur seuil — 20 CSS px, weight 600, slate-700, centrée sur la ligne pointillée
+  ctx.textAlign = 'center'
   ctx.font      = `600 ${px(20)}px ${FONT}`
   ctx.fillStyle = C_SEUIL
-  ctx.fillText(fmtCHF(SEUIL), cL - 6, cT - px(6))
+  ctx.fillText(fmtCHF(SEUIL), seuilX, cT - px(6))
 
   // 10 ─ Annotations de zone — même hauteur, au-dessus de l'axe X, sans overlap courbes
   const leftCx  = mapX(SEUIL / 2)
