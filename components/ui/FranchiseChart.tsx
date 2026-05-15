@@ -313,7 +313,7 @@ export default function FranchiseChart() {
         </div>
 
         {/* Zone slider */}
-        <div className="mt-3">
+        <div className="mt-5">
           <p className="text-[16px] text-ink text-center mb-3">
             Frais médicaux annuels : {fmtCHF(frais)}
           </p>
