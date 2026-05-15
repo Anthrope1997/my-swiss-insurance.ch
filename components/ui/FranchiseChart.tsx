@@ -33,12 +33,10 @@ const CHART_H = CH - PAD.t - PAD.b   // 172
 // ─── Tokens canvas ────────────────────────────────────────────────────────────
 const C_F300     = '#1d4ed8'  // brand — courbe franchise CHF 300
 const C_F2500    = '#3b82f6'  // brand-light — courbe franchise CHF 2 500
-const C_LABEL    = '#6B7280'  // gris — titres d'axe et graduations
-const C_SEUIL    = '#374151'  // slate-700 — ligne + valeur du seuil
-const C_EDGE     = '#e2e8f0'  // edge — axes + ligne curseur
-const C_GRID     = '#f1f5f9'  // cloud — grille horizontale
-const C_ANN_2500 = '#378ADD'  // annotation zone CHF 2 500
-const C_ANN_300  = '#0F4C8A'  // annotation zone CHF 300
+const C_LABEL = '#1a1a1a'  // noir — titres d'axe et graduations
+const C_SEUIL = '#374151'  // slate-700 — ligne + valeur du seuil
+const C_EDGE  = '#e2e8f0'  // edge — axes + ligne curseur
+const C_GRID  = '#f1f5f9'  // cloud — grille horizontale
 const FONT    = '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -157,13 +155,13 @@ function draw(ctx: CanvasRenderingContext2D, frais: number, scale: number): void
 
   ctx.textAlign = 'center'
   ctx.font      = `600 ${px(16)}px ${FONT}`
-  ctx.fillStyle = C_ANN_2500
+  ctx.fillStyle = C_F2500
   ctx.fillText('Franchise CHF 2 500', leftCx, annotY)
   ctx.font      = `${px(16)}px ${FONT}`
   ctx.fillText('plus avantageuse', leftCx, annotY + px(20))
 
   ctx.font      = `600 ${px(16)}px ${FONT}`
-  ctx.fillStyle = C_ANN_300
+  ctx.fillStyle = C_F300
   ctx.fillText('Franchise CHF 300', rightCx, annotY)
   ctx.font      = `${px(16)}px ${FONT}`
   ctx.fillText('plus avantageuse', rightCx, annotY + px(20))
