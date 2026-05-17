@@ -18,7 +18,7 @@ function totalAnnuel(prime: number, franchise: number, frais: number): number {
 const X_MAX = 4000
 
 // ─── Plage Y — fixe ───────────────────────────────────────────────────────────
-const Y_MIN   = 4500
+const Y_MIN   = 3000
 const Y_MAX   = 8500
 const Y_RANGE = Y_MAX - Y_MIN
 
@@ -34,9 +34,9 @@ const fmtCHF = (n: number): string =>
   `CHF ${Math.round(n).toLocaleString('fr-CH', { maximumFractionDigits: 0 })}`
 
 // ─── Layout desktop ───────────────────────────────────────────────────────────
-// viewBox 700×266 → ratio 2.63:1 → OK sur desktop (> 520 px)
+// viewBox 700×320 → ratio 2.19:1 → OK sur desktop (> 520 px)
 const VW  = 700
-const VH  = 266
+const VH  = 320
 const PAD = { t: 52, r: 40, b: 42, l: 100 } as const
 const CHART_W = VW - PAD.l - PAD.r   // 560
 const CHART_H = VH - PAD.t - PAD.b   // 172
@@ -98,7 +98,7 @@ const mLeftCx  = mmapX(SEUIL / 2)
 const mRightCx = mmapX((SEUIL + X_MAX) / 2)
 
 // ─── Ticks ────────────────────────────────────────────────────────────────────
-const Y_TICKS = [5000, 6000, 7000, 8000]
+const Y_TICKS = [4000, 5000, 6000, 7000, 8000]
 const X_TICKS = [0, 1000, 2000, 3000, 4000]
 
 // ─── Composant React ──────────────────────────────────────────────────────────
@@ -141,7 +141,7 @@ export default function FranchiseChart() {
   const aLeftPad   = isMobile ? MPAD.l : PAD.l
   const aRightPad  = isMobile ? MPAD.r : PAD.r
 
-  const annotY    = aCB - scaled(32)
+  const annotY    = aMapY(3700)
   const sliderX   = aMapX(frais)
   const dotY2500  = aMapY(totalAnnuel(PRIME_2500, 2500, frais))
   const dotY300   = aMapY(totalAnnuel(PRIME_300, 300, frais))
