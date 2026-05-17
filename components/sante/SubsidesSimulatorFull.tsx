@@ -14,7 +14,14 @@ import LeadFormModal from '@/components/ui/LeadFormModal'
 
 const PRECISE_CANTONS = new Set<string>(['GE', 'VS', 'NE', 'VD', 'JU', 'FR'])
 
-const NON_DATE_DELAI = new Set(['Non requis (automatique)', 'Dépôt possible — rétroactif', 'Voir OVAM 2026'])
+const NON_DATE_DELAI = new Set([
+  'Non requis (automatique)',
+  'Pas de délai annuel fixe (droit dès le 1er jour du 2e mois suivant le dépôt)', // VD
+  'Pas de délai fixe (droit dès le mois suivant le dépôt)',                        // BS
+  '31 oct. 2025 (ordonnaire) ; arrivants de l\'étranger et revenus en baisse –25% : jusqu\'au 31 déc. 2026', // LU — délai ordinaire dépassé
+  '31 déc. 2025 (droit dès janv. 2026) ; hors délai : droit dès M+2',             // TI — dépassé
+  '31 déc. 2025',                                                                   // AG — dépassé
+])
 
 const ALL_CODES = Object.keys(SUBSIDES_2026).sort((a, b) =>
   SUBSIDES_2026[a as keyof typeof SUBSIDES_2026].nom.localeCompare(

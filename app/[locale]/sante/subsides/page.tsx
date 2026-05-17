@@ -25,7 +25,7 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'Calculateur de subsides LAMal 2026 — Estimez votre aide cantonale',
   datePublished: '2026-01-01',
-  dateModified: '2026-04-30',
+  dateModified: '2026-05-17',
   author: { '@type': 'Organization', name: 'My Swiss Insurance', url: 'https://my-swiss-insurance.ch' },
   publisher: { '@type': 'Organization', name: 'My Swiss Insurance' },
   mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://my-swiss-insurance.ch/sante/subsides' },
@@ -45,7 +45,7 @@ const faqItems = [
   {
     question: 'Dois-je faire une demande ou le subside est-il attribué automatiquement ?',
     answer:
-      "Cela dépend de votre canton. Dans les cantons de Genève, Neuchâtel et Valais, le subside est attribué automatiquement après la taxation fiscale — aucune démarche n'est requise. Dans les autres cantons (Vaud, Fribourg, Jura et l'ensemble des cantons alémaniques et tessinois), une demande doit être déposée auprès du service cantonal compétent, généralement avant une date limite annuelle.",
+      "Cela dépend de votre canton. Dans sept cantons (Genève, Valais, Neuchâtel, Berne, Fribourg, Uri et Appenzell Rhodes-Intérieures), le subside est attribué automatiquement sur la base des données fiscales — aucun formulaire n'est requis. Dans les 19 autres cantons, une demande doit être déposée auprès du service cantonal compétent, généralement avant une date limite annuelle.",
   },
   {
     question: 'Le subside est-il versé directement sur mon compte ou à ma caisse maladie ?',
@@ -135,13 +135,13 @@ export default function SubsidesPage() {
 
               <h3 className="article-h3">Automatique ou sur demande</h3>
               <p className="article-p">
-                Dans les cantons de Genève, Neuchâtel et Valais, le subside est attribué{' '}
-                <strong>automatiquement</strong> après la taxation fiscale. Aucune démarche n'est
-                nécessaire : la caisse maladie reçoit directement le montant et le déduit de votre
-                prime mensuelle.
+                Dans sept cantons — <strong>Genève, Valais, Neuchâtel, Berne, Fribourg, Uri et Appenzell
+                Rhodes-Intérieures</strong> — le subside est attribué <strong>automatiquement</strong>{' '}
+                sur la base des données fiscales. Aucun formulaire n'est nécessaire : la caisse maladie
+                reçoit directement le montant et le déduit de votre prime mensuelle.
               </p>
               <p className="article-p">
-                Dans les autres cantons, vous devez déposer une <strong>demande explicite</strong> auprès
+                Dans les 19 autres cantons, vous devez déposer une <strong>demande explicite</strong> auprès
                 du service cantonal compétent, généralement avant la date limite annuelle indiquée dans
                 le simulateur. Un subside non réclamé n'est pas versé rétroactivement.
               </p>
@@ -205,7 +205,7 @@ export default function SubsidesPage() {
             <NeedHelpSection />
 
             {/* §6 — Bandeau MSI */}
-            <AuthorBio publishedDate="1er janvier 2026" updatedDate="30 avril 2026" />
+            <AuthorBio publishedDate="1er janvier 2026" updatedDate="17 mai 2026" />
 
             {/* §7 — Guides associés */}
             <section>
