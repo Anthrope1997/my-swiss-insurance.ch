@@ -146,15 +146,15 @@ const toc = [
 ]
 
 const heroStats = [
-  { value: '34',        label: 'Caisses agréées',        sub: 'données OFSP 2026'       },
-  { value: 'CHF 5 653', label: 'Économie maximale possible',  sub: 'à Genève, adulte 35 ans' },
-  { value: '26',        label: 'Cantons couverts',        sub: 'primes officielles OFSP' },
+  { value: 'CHF 5 653', label: 'Économie maximale par an',      sub: 'Adulte 35 ans, toutes caisses et franchises' },
+  { value: 'CHF 4 154', label: 'Économie moyenne par an',       sub: 'Adulte 35 ans, toutes caisses et franchises' },
+  { value: 'CHF 5 040', label: 'Subside annuel maximal moyen',  sub: 'Barèmes 2026, 26 cantons'                    },
 ]
 
 const enBref = [
   "L'assurance LAMal est obligatoire pour toute personne résidant en Suisse. Les 34 caisses agréées couvrent toutes les mêmes soins de base, seul le prix de la prime change d'une caisse à l'autre.",
   "Pour un même profil, l'écart de prime entre la caisse la moins chère et la plus chère peut atteindre CHF 5 653 par an.",
-  "Selon votre canton et votre revenu, vous pouvez aussi avoir droit à un subside cantonal qui réduit votre prime de CHF X XXX par an en moyenne.",
+  "Selon votre canton et votre revenu, vous pouvez aussi avoir droit à un subside cantonal qui réduit votre prime de CHF 5 040 par an en moyenne.",
 ]
 
 export default function GuideLamalPage() {
