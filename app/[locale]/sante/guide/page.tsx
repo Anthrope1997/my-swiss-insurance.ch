@@ -407,40 +407,6 @@ export default function GuideLamalPage() {
                 Au-delà, la franchise CHF 300 devient plus avantageuse.
               </KeyFact>
 
-              <h3 className="article-h3">Quelle est la franchise la plus économique selon vos frais médicaux annuels ?</h3>
-
-              <ul className="space-y-2 mb-5">
-                {[
-                  'La franchise de CHF 2 500 est plus avantageuse si vos frais médicaux annuels restent inférieurs à CHF 1 891 (Genève, modèle standard).',
-                  'La franchise de CHF 300 devient plus économique au total dès que vos frais dépassent ce seuil.',
-                  'En Suisse, ce point de bascule est estimé en moyenne à CHF 1 897 de frais médicaux annuels.',
-                  'Pour les personnes en bonne santé avec peu de consultations, la franchise maximale est généralement le choix le plus rentable.',
-                ].map((item, i) => (
-                  <li key={i} className="flex gap-3 items-start text-[16px] text-slate">
-                    <svg className="shrink-0 mt-0.5 text-brand" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-
-              <div className="callout flex gap-3 mb-6">
-                <svg className="text-callout-icon shrink-0 mt-0.5" width="20" height="20"
-                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
-                     strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
-                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
-                  <line x1="10" y1="21" x2="14" y2="21" />
-                </svg>
-                <p className="text-[16px]">
-                  Dans le canton de Genève, la franchise 2 500 CHF permet d&apos;économiser CHF 1 432 par an sur la prime.
-                  Elle reste avantageuse tant que vos frais médicaux annuels ne dépassent pas CHF 1 891.
-                  Au-delà, la franchise 300 CHF devient plus économique au total.
-                  En Suisse, ce point de bascule est estimé autour de CHF 1 900 de frais médicaux annuels.
-                </p>
-              </div>
-
               <div className="mt-6">
                 <Link href="/sante/franchise" className="text-brand hover:underline text-[16px] font-medium">
                   Guide complet : choisir sa franchise LAMal →
