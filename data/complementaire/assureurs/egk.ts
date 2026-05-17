@@ -87,9 +87,13 @@ export const produits: ProduitComplementaire[] = [
     },
     delaiAttente: { mois: 36, detail: 'Délai de carence 3 ans pour l\'orthodontie enfants.' },
     conditionsSouscription: ['Rabais famille 10% (même ménage, même encaissement)', 'Adhésion prénatale possible dans toutes les variantes', 'Franchise ambulatoire au choix : CHF 0, 300, 600 ou 1\'000/an'],
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 58.20,  source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'famille',      montantCHF: 102.60, source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'senior',       montantCHF: 87.20,  source: 'site-web', dateReleve: '2026-05-17' },
+    ],
     urlProduit: 'https://www.egk.ch/fr/assurances/assurances-complementaires',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-17',
     scoreComplet: 88,
   },
 
@@ -145,9 +149,13 @@ export const produits: ProduitComplementaire[] = [
     },
     delaiAttente: { mois: 36, detail: 'Délai de carence 3 ans pour l\'orthodontie enfants.' },
     conditionsSouscription: ['Quote-part hospit au choix : CHF 0, 1\'000, 2\'000 ou 5\'000/an', 'Rabais famille 10%'],
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 119.20, source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'famille',      montantCHF: 170.80, source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'senior',       montantCHF: 206.10, source: 'site-web', dateReleve: '2026-05-17' },
+    ],
     urlProduit: 'https://www.egk.ch/fr/assurances/assurances-complementaires',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-17',
     scoreComplet: 88,
   },
 
@@ -202,9 +210,13 @@ export const produits: ProduitComplementaire[] = [
     },
     delaiAttente: { mois: 36, detail: 'Délai de carence 3 ans pour l\'orthodontie enfants.' },
     conditionsSouscription: ['Rabais famille 10%', 'Adhésion prénatale possible'],
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 85.20,  source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'famille',      montantCHF: 134.10, source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'senior',       montantCHF: 159.50, source: 'site-web', dateReleve: '2026-05-17' },
+    ],
     urlProduit: 'https://www.egk.ch/fr/assurances/assurances-complementaires',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-17',
     scoreComplet: 88,
   },
 
@@ -259,9 +271,13 @@ export const produits: ProduitComplementaire[] = [
     },
     delaiAttente: { mois: 36, detail: 'Délai de carence 3 ans pour l\'orthodontie enfants.' },
     conditionsSouscription: ['Quote-part hospit au choix : CHF 0, 1\'000, 2\'000 ou 5\'000/an', 'Rabais famille 10%'],
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 158.50, source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'famille',      montantCHF: 289.40, source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'senior',       montantCHF: 334.40, source: 'site-web', dateReleve: '2026-05-17' },
+    ],
     urlProduit: 'https://www.egk.ch/fr/assurances/assurances-complementaires',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-17',
     scoreComplet: 90,
   },
 

@@ -46,9 +46,14 @@ export const produits: ProduitComplementaire[] = [
       bebe: false,
       noteDetails: 'Contrôles maternité et cours inclus.',
     },
-    tarifs: [],
+    tarifs: [
+      // Prix niveau II (intermédiaire), via API dap.visana.ch
+      { profilId: 'jeune-adulte', montantCHF: 20.80,  source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'famille',      montantCHF: 29.40,  source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'senior',       montantCHF: 40.45,  source: 'site-web', dateReleve: '2026-05-17' },
+    ],
     urlProduit: 'https://www.visana.ch/fr/clientele-privee/assurances/maladie-et-accidents/assurances-complementaires/en-bref',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-17',
     scoreComplet: 62,
   },
 
@@ -66,9 +71,14 @@ export const produits: ProduitComplementaire[] = [
       montantMaxAnnuel: 10000,
       noteDetails: 'Niveaux I, II, III. Niveau I : prescription médicale requise, thérapeutes reconnus. Niveaux II/III : sans prescription. Niveau III : sans exigence de reconnaissance du thérapeute. Aussi : kinésiologie. Zone Suisse + 100 km transfrontalier.',
     },
-    tarifs: [],
+    tarifs: [
+      // Prix niveau II, via API dap.visana.ch
+      { profilId: 'jeune-adulte', montantCHF: 20.80,  source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'famille',      montantCHF: 41.65,  source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'senior',       montantCHF: 31.15,  source: 'site-web', dateReleve: '2026-05-17' },
+    ],
     urlProduit: 'https://www.visana.ch/fr/clientele-privee/assurances/maladie-et-accidents/assurances-complementaires/medecine-complementaire',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-17',
     scoreComplet: 65,
   },
 
@@ -87,9 +97,14 @@ export const produits: ProduitComplementaire[] = [
       zoneGeographique: 'suisse',
       noteDetails: 'Libre accès tous hôpitaux Suisse reconnus. Traitement par médecin-chef. Chambre 1 lit (privée) ou 2 lits (demi-privée) selon variante. Assurance voyage Vacanza incluse : 8 semaines ou 11 mois (privée mondiale). Remise 20% prime N+1 si aucun sinistre.',
     },
-    tarifs: [],
+    tarifs: [
+      // Prix chambre demi-privée (hospital_semi_private), sans franchise hospitalière
+      { profilId: 'jeune-adulte', montantCHF: 107.95, source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'famille',      montantCHF: 164.00, source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'senior',       montantCHF: 217.70, source: 'site-web', dateReleve: '2026-05-17' },
+    ],
     urlProduit: 'https://www.visana.ch/fr/clientele-privee/assurances/maladie-et-accidents/assurances-complementaires/en-bref',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-17',
     scoreComplet: 62,
   },
 
@@ -109,9 +124,14 @@ export const produits: ProduitComplementaire[] = [
       implants: false,
       noteDetails: '8 niveaux disponibles : de 50%/CHF 600 à 75%/CHF 5\'000/an. Orthodontie (appareils amovibles et fixes, corrections malpositions). Enfants assurés avant 4 ans : sans examen de santé. Adultes : denture assainie requise, aucun traitement prévu. Exclusions : traitements esthétiques, accidents.',
     },
-    tarifs: [],
+    tarifs: [
+      // Prix niveau 3 (entrée de gamme), via API dap.visana.ch
+      { profilId: 'jeune-adulte', montantCHF: 16.40, source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'famille',      montantCHF: 28.70, source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'senior',       montantCHF: 40.20, source: 'site-web', dateReleve: '2026-05-17' },
+    ],
     urlProduit: 'https://www.visana.ch/fr/clientele-privee/assurances/maladie-et-accidents/assurances-complementaires/assurance-soins-dentaires',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-17',
     scoreComplet: 72,
   },
 
@@ -153,9 +173,14 @@ export const produits: ProduitComplementaire[] = [
       coachingSante: false,
     },
     conditionsSouscription: ['Âge 19-65 ans', '2ème enfant et + : prime réduite de 50% jusqu\'à 18 ans', 'Remise 20% prime N+1 sans sinistre', 'Remise 2-3% contrat 3-5 ans'],
-    tarifs: [],
+    tarifs: [
+      // Prix paquet Basic avec hospitalisation demi-privée (basic_semi_private), sans franchise
+      { profilId: 'jeune-adulte', montantCHF: 146.30, source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'famille',      montantCHF: 218.65, source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'senior',       montantCHF: 263.80, source: 'site-web', dateReleve: '2026-05-17' },
+    ],
     urlProduit: 'https://www.visana.ch/fr/clientele-privee/assurances/maladie-et-accidents/assurances-complementaires/assurances-complementaires-combinees',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-17',
     scoreComplet: 68,
   },
 ]

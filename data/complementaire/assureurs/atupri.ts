@@ -58,7 +58,11 @@ export const produits: ProduitComplementaire[] = [
       noteDetails: 'Cours de maternité et soins post-nataux : 75%/CHF 1\'000. Stérilisation et contraception incluses.',
     },
     conditionsSouscription: ['Âge maximum 70 ans', 'Prime constante dès 30 ans', 'Contrat minimum 1 an, résiliable mensuellement avec préavis 3 mois', 'Souscription possible sans LAMal Atupri'],
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 48.00, source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'famille',      montantCHF: 73.00, source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'senior',       montantCHF: 64.00, source: 'site-web', dateReleve: '2026-05-17' },
+    ],
     urlProduit: 'https://atupri.ch/fr/assurances/assurances-complementaires/intense',
     dateMAJ: '2026-05-15',
     scoreComplet: 82,
@@ -93,7 +97,11 @@ export const produits: ProduitComplementaire[] = [
       noteDetails: 'Fitness (abonnement salle, yoga, Pilates, associations sportives, courses) : 75%/CHF 200/an.',
     },
     conditionsSouscription: ['Âge maximum 70 ans', 'Prime constante dès 30 ans', 'Souscription possible sans LAMal Atupri', 'Combinable avec Comforta et Denta'],
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 14.20, source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'famille',      montantCHF: 16.80, source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'senior',       montantCHF: 16.80, source: 'site-web', dateReleve: '2026-05-17' },
+    ],
     urlProduit: 'https://atupri.ch/fr/assurances/assurances-complementaires/basic',
     dateMAJ: '2026-05-15',
     scoreComplet: 72,
@@ -115,7 +123,12 @@ export const produits: ProduitComplementaire[] = [
       noteDetails: '4 variantes : du libre choix de médecin à la chambre individuelle (1 lit). Variantes Opti 1 et Opti 2 : choix demi-privée ou privée à chaque séjour. Remise 5% combiné avec SmartCare, TelFirst, CareMed, FlexCare ou HMO Atupri.',
     },
     conditionsSouscription: ['Recommandé en combinaison avec Intense ou Basic', 'Remise 5% avec modèles LAMal Atupri sélectionnés'],
-    tarifs: [],
+    tarifs: [
+      // Prix variante Com-HP (demi-privée fixe), avec couverture accident incluse
+      { profilId: 'jeune-adulte', montantCHF: 42.40,  source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'famille',      montantCHF: 100.50, source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'senior',       montantCHF: 127.90, source: 'site-web', dateReleve: '2026-05-17' },
+    ],
     urlProduit: 'https://atupri.ch/fr/assurances/assurances-complementaires/comforta',
     dateMAJ: '2026-05-15',
     scoreComplet: 60,
@@ -137,7 +150,12 @@ export const produits: ProduitComplementaire[] = [
       noteDetails: '2 niveaux de prestations : 60% (niveau 1) ou 80% (niveau 2). Traitements couverts : nettoyages, obturations, parodontologie, prothèses, dents de sagesse. Orthodontie (appareils, aligners) jusqu\'à 30 ans. Exclusions : blanchiment, esthétique pure.',
     },
     conditionsSouscription: ['Âge minimum 26 ans', 'Souscription conditionnée à Intense, Basic ou Mivita Reala Atupri'],
-    tarifs: [],
+    tarifs: [
+      // Prix Denta Stufe 1 (niveau 1 = 60% des frais)
+      { profilId: 'jeune-adulte', montantCHF: 17.70, source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'famille',      montantCHF: 17.70, source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'senior',       montantCHF: 22.90, source: 'site-web', dateReleve: '2026-05-17' },
+    ],
     urlProduit: 'https://atupri.ch/fr/assurances/assurances-complementaires/denta',
     dateMAJ: '2026-05-15',
     scoreComplet: 68,
