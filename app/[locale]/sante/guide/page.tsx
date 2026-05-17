@@ -400,7 +400,7 @@ export default function GuideLamalPage() {
                 réduit votre prime mensuelle mais augmente votre risque financier en cas de maladie.
               </p>
 
-              <KeyFact label="Point clé">
+              <KeyFact>
                 Le point de bascule entre la franchise CHF 2 500 et la franchise CHF 300 se situe autour de
                 <strong> CHF 1 897 de frais médicaux annuels</strong> en moyenne en Suisse. Si vos frais médicaux
                 annuels sont inférieurs à ce seuil, il est plus économique d&apos;opter pour la franchise CHF 2 500.
