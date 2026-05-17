@@ -75,14 +75,6 @@ const faqSchema = {
   })),
 }
 
-const franchises = [
-  { montant: 2500, prime: 444.65, seuil: 'CHF 1 899', conseil: "Aucune consultation prévue dans l'année" },
-  { montant: 2000, prime: 471.80, seuil: 'CHF 1 537', conseil: '1 à 2 consultations par an maximum' },
-  { montant: 1500, prime: 499.20, seuil: 'CHF 1 172', conseil: 'Quelques consultations, pas de traitement régulier' },
-  { montant: 1000, prime: 526.55, seuil: 'CHF 807',   conseil: 'Consultations occasionnelles' },
-  { montant: 500,  prime: 554.05, seuil: 'CHF 441',   conseil: 'Suivi médical régulier' },
-  { montant: 300,  prime: 564.60, seuil: 'Référence', conseil: 'Traitement chronique, médicaments réguliers, grossesse' },
-]
 
 const enBref = [
   "La franchise 2 500 CHF économise environ 120 CHF par mois sur votre prime et vous expose à 3 200 CHF de reste à charge maximum par an.",
@@ -100,7 +92,6 @@ const toc = [
   { id: 'simulateur', label: 'Quelle franchise pour votre profil ?' },
   { id: 'definition', label: 'Franchise et quote-part'               },
   { id: 'choisir',    label: 'Quelle franchise choisir ?'            },
-  { id: 'enfants',    label: 'Franchise enfant'                      },
   { id: 'changement', label: 'Changer de franchise'                  },
   { id: 'faq',        label: 'Questions fréquentes'                  },
 ]
@@ -147,21 +138,7 @@ export default function FranchisePage() {
         </div>
       </section>
 
-      {/* ── ZONE 2 — Simulateur ── */}
-      <div className="border-b border-edge bg-white py-10">
-        <div className="container-xl">
-          <section id="simulateur">
-            <h2 className="article-h2">1. Quelle franchise pour votre profil ?</h2>
-            <p className="article-p mb-2">
-              Indiquez votre canton, votre âge et vos frais médicaux annuels estimés.
-              Le simulateur calcule la franchise qui minimise votre coût total annuel.
-            </p>
-            <FranchiseSimulator />
-          </section>
-        </div>
-      </div>
-
-      {/* ── ZONE 3 — En bref / Sommaire ── */}
+      {/* ── ZONE 2 — En bref / Sommaire ── */}
       <div className="bg-cloud border-b border-edge py-8">
         <div className="container-xl grid grid-cols-1 md:grid-cols-2 gap-5">
 
@@ -190,6 +167,20 @@ export default function FranchisePage() {
             </ul>
           </div>
 
+        </div>
+      </div>
+
+      {/* ── ZONE 3 — Simulateur ── */}
+      <div className="border-b border-edge bg-white py-10">
+        <div className="container-xl">
+          <section id="simulateur">
+            <h2 className="article-h2">1. Quelle franchise pour votre profil ?</h2>
+            <p className="article-p mb-2">
+              Indiquez votre code postal, votre profil et vos frais médicaux annuels estimés.
+              Le simulateur calcule la franchise qui minimise votre coût total annuel.
+            </p>
+            <FranchiseSimulator />
+          </section>
         </div>
       </div>
 
@@ -262,130 +253,50 @@ export default function FranchisePage() {
             {/* Deux cartes : adulte / enfant */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
               <div className="bg-white border border-edge rounded-lg p-5">
-                <h3 className="article-h3">Adulte — CHF 300 à 2 500</h3>
-                <ul className="space-y-2">
-                  {[
-                    '6 niveaux : 300, 500, 1 000, 1 500, 2 000, 2 500 CHF par an',
-                    'Quote-part : 10 % des frais, plafonnée à CHF 700 par an',
-                    'Choisie une fois par an, avant le 30 novembre',
-                  ].map((item, i) => (
-                    <li key={i} className="flex gap-3 text-[16px] text-slate">{checkIcon}{item}</li>
-                  ))}
-                </ul>
+                <h3 className="article-h3">Adulte — 19 ans et plus</h3>
+                <p className="text-[16px] text-slate mb-2">6 niveaux de franchise</p>
+                <p className="text-[16px] font-semibold text-ink">
+                  CHF 300, 500, 1 000, 1 500, 2 000 et 2 500 par an
+                </p>
               </div>
               <div className="bg-white border border-edge rounded-lg p-5">
-                <h3 className="article-h3">Enfant — CHF 0 à 600</h3>
-                <ul className="space-y-2">
-                  {[
-                    '6 niveaux : 0, 100, 200, 300, 400, 600 CHF par an',
-                    'Quote-part : 10 % des frais, plafonnée à CHF 350 par an',
-                    'Franchise 0 CHF conseillée pour les jeunes enfants',
-                  ].map((item, i) => (
-                    <li key={i} className="flex gap-3 text-[16px] text-slate">{checkIcon}{item}</li>
-                  ))}
-                </ul>
+                <h3 className="article-h3">Enfant — 0 à 18 ans</h3>
+                <p className="text-[16px] text-slate mb-2">6 niveaux de franchise</p>
+                <p className="text-[16px] font-semibold text-ink">
+                  CHF 0, 100, 200, 300, 400 et 600 par an
+                </p>
               </div>
             </div>
 
-            {/* Tableau adulte */}
-            <h3 className="article-h3">Franchises adulte : seuil d&apos;équilibre par franchise</h3>
-            <p className="article-p mb-4">
-              La franchise 2 500 CHF est avantageuse si vos frais médicaux annuels restent sous le seuil d&apos;équilibre.
-              Au-delà, la franchise 300 CHF devient moins coûteuse au total, prime et reste à charge confondus.
-            </p>
-
-            <div className="overflow-x-auto border border-edge rounded-[8px] mb-2">
-              <table className="stripe-table w-full">
-                <thead>
-                  <tr>
-                    <th className="text-left whitespace-nowrap">Franchise</th>
-                    <th className="text-left whitespace-nowrap">Prime par mois</th>
-                    <th className="text-left whitespace-nowrap hidden md:table-cell">Avantageuse si frais annuels inférieurs à</th>
-                    <th className="text-left whitespace-nowrap">Profil concerné</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {franchises.map((f) => (
-                    <tr key={f.montant} className={f.montant === 300 ? 'bg-blue-light2' : ''}>
-                      <td className="font-semibold text-ink whitespace-nowrap">
-                        CHF {f.montant.toLocaleString('fr-CH')} par an
-                      </td>
-                      <td className="font-medium text-ink whitespace-nowrap">
-                        CHF {f.prime.toFixed(2)}
-                      </td>
-                      <td className="text-ink whitespace-nowrap hidden md:table-cell">{f.seuil}</td>
-                      <td className="text-slate whitespace-nowrap">{f.conseil}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <p className="text-[13px] text-slate/60 mt-2 md:hidden">Tableau complet visible sur ordinateur.</p>
-            <p className="text-[16px] text-slate/60 mt-3 mb-4">
-              Primes pour un adulte (26 ans et plus) à Zurich, modèle standard, OFSP 2026.
-            </p>
-
             {/* Graphique — desktop uniquement */}
+            <p className="text-[16px] font-semibold text-ink mb-3">
+              Illustration de l&apos;évolution du coût annuel de l&apos;assurance LAMal d&apos;un adulte ayant choisi la prime la moins chère par franchise en Suisse
+            </p>
             <div className="hidden md:block">
               <FranchiseChart />
             </div>
 
             <KeyFact>
-              En moyenne en Suisse, pour les primes adultes les moins chères, le point de bascule se situe
-              vers <strong>CHF 1 897 de frais médicaux annuels</strong>.
-              En dessous de ce seuil, la franchise CHF 2 500 est plus avantageuse.
-              Au-dessus, la franchise CHF 300 limite mieux le reste à charge total.
+              <p className="mb-2">
+                En moyenne en Suisse, pour les primes adultes les moins chères, le point de bascule se situe
+                vers <strong>CHF 1 897 de frais médicaux annuels</strong> (franchise 300 vs 2 500 CHF).
+                En dessous de ce seuil, la franchise CHF 2 500 est plus avantageuse.
+                Au-dessus, la franchise CHF 300 limite mieux le reste à charge total.
+              </p>
+              <p className="mb-2">
+                <strong>Jeune adulte (19–25 ans) :</strong> seuil d&apos;équilibre franchise 300 vs 2 500 CHF à environ{' '}
+                <strong>CHF 1 722</strong> en moyenne suisse — les primes JA étant plus basses, l&apos;économie sur la prime est moindre.
+              </p>
+              <p>
+                <strong>Enfant (0–18 ans) :</strong> seuil d&apos;équilibre franchise 0 vs 600 CHF à environ{' '}
+                <strong>CHF 200</strong> en moyenne suisse — dès le premier médecin, la franchise 0 CHF devient avantageuse.
+              </p>
             </KeyFact>
           </section>
 
-          {/* 04 — Franchise enfant */}
-          <section id="enfants">
-            <h2 className="article-h2">4. Franchise enfant</h2>
-
-            <p className="article-p mb-4">
-              Les franchises enfant sont distinctes des franchises adultes, de 0 à 600 CHF par an.
-              La quote-part est plafonnée à 350 CHF par an, contre 700 CHF pour un adulte.
-            </p>
-
-            <KeyFact label="Recommandation">
-              La franchise 0 CHF par an est conseillée pour les jeunes enfants qui consultent fréquemment.
-              À partir de l&apos;adolescence (15 à 18 ans), une franchise plus élevée peut être envisagée si l&apos;enfant est en bonne santé.
-            </KeyFact>
-
-            <div className="overflow-x-auto border border-edge rounded-[8px] mb-6">
-              <table className="stripe-table w-full">
-                <thead>
-                  <tr>
-                    <th className="text-left whitespace-nowrap">Franchise par an</th>
-                    <th className="text-left whitespace-nowrap">Profil adapté</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[
-                    ['CHF 400 à 600', 'Adolescents en bonne santé, rarement malades'],
-                    ['CHF 200 à 300', 'Enfants en bonne santé, quelques visites annuelles'],
-                    ['CHF 100',       'Enfants avec des consultations régulières'],
-                    ['CHF 0',         'Nourrissons et enfants en bas âge, consultations fréquentes'],
-                  ].map(([fr, profil], i) => (
-                    <tr key={i}>
-                      <td className="font-semibold text-ink whitespace-nowrap">{fr}</td>
-                      <td className="whitespace-nowrap">{profil}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            <p className="article-p mt-6">
-              <Link href="/sante/ma-famille" className="text-brand hover:underline">
-                Assurance maladie famille et maternité : ce qu&apos;il faut savoir →
-              </Link>
-            </p>
-          </section>
-
-          {/* 05 — Changement */}
+          {/* 04 — Changement */}
           <section id="changement">
-            <h2 className="article-h2">5. Comment changer de franchise ?</h2>
+            <h2 className="article-h2">4. Comment changer de franchise ?</h2>
 
             <p className="article-p mb-6">
               Le changement de franchise suit un calendrier strict et n&apos;est possible qu&apos;une fois par an.
@@ -436,7 +347,7 @@ export default function FranchisePage() {
 
           {/* 4 — FAQ */}
           <section id="faq" className="border-t border-edge pt-8">
-            <FAQ items={faqItems} title="6. Questions fréquentes sur la franchise LAMal" />
+            <FAQ items={faqItems} title="5. Questions fréquentes sur la franchise LAMal" />
           </section>
 
           {/* Formulaire */}

@@ -6,36 +6,48 @@ import { cantonBySlug } from '@/data/sante/cantons'
 
 type AgeGroup = 'adulte' | 'jeuneAdulte' | 'enfant'
 
-const CANTONS: { slug: string; name: string }[] = [
-  { slug: 'argovie',                       name: 'Argovie'                        },
-  { slug: 'appenzell-rhodes-exterieures',  name: 'Appenzell Rhodes-Extérieures'   },
-  { slug: 'appenzell-rhodes-interieures',  name: 'Appenzell Rhodes-Intérieures'   },
-  { slug: 'bale-campagne',                 name: 'Bâle-Campagne'                  },
-  { slug: 'bale-ville',                    name: 'Bâle-Ville'                     },
-  { slug: 'berne',                         name: 'Berne'                          },
-  { slug: 'fribourg',                      name: 'Fribourg'                       },
-  { slug: 'geneve',                        name: 'Genève'                         },
-  { slug: 'glaris',                        name: 'Glaris'                         },
-  { slug: 'grisons',                       name: 'Grisons'                        },
-  { slug: 'jura',                          name: 'Jura'                           },
-  { slug: 'lucerne',                       name: 'Lucerne'                        },
-  { slug: 'neuchatel',                     name: 'Neuchâtel'                      },
-  { slug: 'nidwald',                       name: 'Nidwald'                        },
-  { slug: 'obwald',                        name: 'Obwald'                         },
-  { slug: 'saint-gall',                    name: 'Saint-Gall'                     },
-  { slug: 'schaffhouse',                   name: 'Schaffhouse'                    },
-  { slug: 'schwyz',                        name: 'Schwyz'                         },
-  { slug: 'soleure',                       name: 'Soleure'                        },
-  { slug: 'tessin',                        name: 'Tessin'                         },
-  { slug: 'thurgovie',                     name: 'Thurgovie'                      },
-  { slug: 'uri',                           name: 'Uri'                            },
-  { slug: 'valais',                        name: 'Valais'                         },
-  { slug: 'vaud',                          name: 'Vaud'                           },
-  { slug: 'zoug',                          name: 'Zoug'                           },
-  { slug: 'zurich',                        name: 'Zurich'                         },
+// Sorted from most specific to least specific — first match wins
+const POSTAL_RANGES: Array<[number, number, string]> = [
+  [1200, 1299, 'geneve'],
+  [1700, 1799, 'fribourg'],
+  [1900, 1999, 'valais'],
+  [1000, 1999, 'vaud'],
+  [2000, 2399, 'neuchatel'],
+  [2800, 2999, 'jura'],
+  [2400, 2799, 'berne'],
+  [3000, 3899, 'berne'],
+  [3900, 3999, 'valais'],
+  [4000, 4059, 'bale-ville'],
+  [4100, 4499, 'bale-campagne'],
+  [4500, 4999, 'soleure'],
+  [5000, 5999, 'argovie'],
+  [6060, 6079, 'obwald'],
+  [6390, 6399, 'obwald'],
+  [6300, 6369, 'zoug'],
+  [6370, 6389, 'nidwald'],
+  [6400, 6459, 'schwyz'],
+  [6460, 6499, 'uri'],
+  [6500, 6999, 'tessin'],
+  [6000, 6299, 'lucerne'],
+  [7000, 7999, 'grisons'],
+  [8200, 8299, 'schaffhouse'],
+  [8500, 8599, 'thurgovie'],
+  [8750, 8779, 'glaris'],
+  [9040, 9049, 'appenzell-rhodes-exterieures'],
+  [9050, 9059, 'appenzell-rhodes-interieures'],
+  [8000, 8999, 'zurich'],
+  [9000, 9699, 'saint-gall'],
 ]
 
-// Factors relative to primeMoyenneEnfant (measured at franchise 300 CHF)
+function slugFromPostal(code: string): string | null {
+  if (!/^\d{4}$/.test(code)) return null
+  const n = parseInt(code, 10)
+  for (const [from, to, slug] of POSTAL_RANGES) {
+    if (n >= from && n <= to) return slug
+  }
+  return null
+}
+
 const CHILD_FACTORS: { franchise: number; factor: number }[] = [
   { franchise: 0,   factor: 1.08 },
   { franchise: 100, factor: 1.04 },
@@ -43,12 +55,6 @@ const CHILD_FACTORS: { franchise: number; factor: number }[] = [
   { franchise: 300, factor: 1.00 },
   { franchise: 400, factor: 0.97 },
   { franchise: 600, factor: 0.93 },
-]
-
-const AGE_OPTIONS: { value: AgeGroup; label: string; sub: string }[] = [
-  { value: 'adulte',      label: 'Adulte',       sub: '26 ans et plus' },
-  { value: 'jeuneAdulte', label: 'Jeune adulte', sub: '19 à 25 ans'    },
-  { value: 'enfant',      label: 'Enfant',       sub: '0 à 18 ans'     },
 ]
 
 interface Option { franchise: number; primeMois: number; total: number }
@@ -63,9 +69,15 @@ function fmtN(n: number): string {
 }
 
 export default function FranchiseSimulator() {
-  const [canton, setCanton]     = useState('zurich')
-  const [ageGroup, setAgeGroup] = useState<AgeGroup>('adulte')
-  const [frais, setFrais]       = useState(1000)
+  const [postalCode, setPostalCode] = useState('')
+  const [ageGroup, setAgeGroup]     = useState<AgeGroup>('adulte')
+  const [fraisRaw, setFraisRaw]     = useState('')
+
+  const detectedSlug = slugFromPostal(postalCode)
+  const canton       = detectedSlug ?? 'zurich'
+  const cantonName   = cantonBySlug[canton]?.name ?? 'Zurich'
+
+  const frais = Math.max(0, parseInt(fraisRaw.replace(/\s/g, ''), 10) || 0)
 
   const result = useMemo<{ best: Option; worst: Option; economy: number } | null>(() => {
     const data = cantonBySlug[canton]
@@ -96,8 +108,6 @@ export default function FranchiseSimulator() {
     return { best, worst, economy: worst.total - best.total }
   }, [canton, ageGroup, frais])
 
-  const breakEven = cantonBySlug[canton]?.breakEvenFranchise ?? 1897
-
   const phrase = result
     ? ageGroup === 'enfant'
       ? `Avec CHF ${fmtN(frais)} de frais estimés, la franchise CHF ${fmtN(result.best.franchise)} est la plus avantageuse pour votre enfant.`
@@ -111,78 +121,74 @@ export default function FranchiseSimulator() {
   const comparateurUrl =
     `/sante/comparateur?canton=${canton}&franchise=${result?.best.franchise ?? 300}&profil=${ageGroup}`
 
+  const showResult = fraisRaw !== '' && result !== null && phrase !== null
+
   return (
     <div className="bg-white border border-edge rounded-xl p-6 mt-8">
 
-      {/* Tranche d'âge */}
-      <div className="mb-5">
-        <p className="text-[16px] font-medium text-ink mb-3">Tranche d&apos;âge</p>
-        <div className="flex flex-wrap gap-2">
-          {AGE_OPTIONS.map(opt => (
-            <button
-              key={opt.value}
-              onClick={() => setAgeGroup(opt.value)}
-              className={`px-4 py-2 rounded-md border text-left transition-colors ${
-                ageGroup === opt.value
-                  ? 'bg-brand text-white border-brand'
-                  : 'bg-white text-slate border-edge hover:border-brand hover:text-brand'
-              }`}
-            >
-              <span className="block text-[16px] font-medium">{opt.label}</span>
-              <span className={`block text-[13px] font-normal ${ageGroup === opt.value ? 'text-white/80' : 'text-slate/60'}`}>
-                {opt.sub}
-              </span>
-            </button>
-          ))}
-        </div>
-      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
 
-      {/* Canton */}
-      <div className="mb-5">
-        <label htmlFor="sim-canton" className="text-[16px] font-medium text-ink mb-2 block">
-          Canton de résidence
-        </label>
-        <div className="sm:max-w-xs">
+        {/* Profil */}
+        <div>
+          <label htmlFor="sim-profil" className="text-[16px] font-medium text-ink mb-2 block">
+            Profil
+          </label>
           <select
-            id="sim-canton"
-            value={canton}
-            onChange={e => setCanton(e.target.value)}
+            id="sim-profil"
+            value={ageGroup}
+            onChange={e => setAgeGroup(e.target.value as AgeGroup)}
             className="select-field"
           >
-            {CANTONS.map(c => (
-              <option key={c.slug} value={c.slug}>{c.name}</option>
-            ))}
+            <option value="adulte">Adulte — 26 ans et plus</option>
+            <option value="jeuneAdulte">Jeune adulte — 19 à 25 ans</option>
+            <option value="enfant">Enfant — 0 à 18 ans</option>
           </select>
         </div>
-      </div>
 
-      {/* Frais médicaux */}
-      <div className="mb-6">
-        <div className="flex justify-between items-baseline mb-2">
-          <label htmlFor="sim-frais" className="text-[16px] font-medium text-ink">
-            Frais médicaux estimés
+        {/* Code postal */}
+        <div>
+          <label htmlFor="sim-postal" className="text-[16px] font-medium text-ink mb-2 block">
+            Code postal
           </label>
-          <span className="text-[16px] font-semibold text-brand">CHF {fmtN(frais)} / an</span>
+          <input
+            id="sim-postal"
+            type="text"
+            inputMode="numeric"
+            maxLength={4}
+            placeholder="ex. 1201"
+            value={postalCode}
+            onChange={e => setPostalCode(e.target.value.replace(/\D/g, ''))}
+            className="input-field"
+          />
+          {postalCode.length === 4 && (
+            <p className={`text-[13px] mt-1 ${detectedSlug ? 'text-slate/60' : 'text-red-500'}`}>
+              {detectedSlug
+                ? `→ ${cantonName}`
+                : 'Code non reconnu — Zurich par défaut'}
+            </p>
+          )}
         </div>
-        <input
-          id="sim-frais"
-          type="range"
-          min={0}
-          max={6000}
-          step={100}
-          value={frais}
-          onChange={e => setFrais(Number(e.target.value))}
-          className="w-full accent-brand"
-        />
-        <div className="flex justify-between text-[13px] text-slate/60 mt-1">
-          <span>CHF 0</span>
-          <span>Seuil équilibre ≈ CHF {fmtN(breakEven)}</span>
-          <span>CHF 6 000</span>
+
+        {/* Frais médicaux */}
+        <div>
+          <label htmlFor="sim-frais" className="text-[16px] font-medium text-ink mb-2 block">
+            Frais médicaux (CHF / an)
+          </label>
+          <input
+            id="sim-frais"
+            type="text"
+            inputMode="numeric"
+            placeholder="ex. 1500"
+            value={fraisRaw}
+            onChange={e => setFraisRaw(e.target.value.replace(/\D/g, ''))}
+            className="input-field"
+          />
         </div>
+
       </div>
 
       {/* Résultat */}
-      {result && phrase && (
+      {showResult && (
         <div className="bg-blue-tint rounded-lg px-5 py-4">
           <div className="flex items-center gap-2 mb-2">
             <svg
@@ -192,7 +198,7 @@ export default function FranchiseSimulator() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
             <span className="text-[16px] font-semibold text-ink">
-              Franchise recommandée : CHF {fmtN(result.best.franchise)}
+              Franchise recommandée : CHF {fmtN(result!.best.franchise)}
             </span>
           </div>
           <p className="text-[16px] text-ink leading-relaxed mb-1">{phrase}</p>
