@@ -155,7 +155,7 @@
       "noFormula": "Ce canton n'a pas publié de barème standard. Consultez directement le service cantonal."
     },
     "result": {
-      "badge": "VOTRE ESTIMATION 2026",
+      "badge": "Votre subside 2026",
       "perMois": "par mois",
       "noRevenu": "Entrez votre revenu pour obtenir une estimation chiffrée.",
       "ineligible": "Revenu hors barème",
@@ -175,8 +175,10 @@
       "retroactifOui": "Rétroactif",
       "retroactifNon": "Non rétroactif",
       "retroactifInconnu": "Rétroactivité à vérifier",
-      "arrivantsTitre": "Nouveaux arrivants"
+      "arrivantsTitre": "Nouveaux arrivants",
+      "arrivantsSub": "Délai depuis votre arrivée :"
     },
+    "estimationBadge": "Estimation",
     "estimationNote": "Estimation indicative. Le montant réel est fixé par le service cantonal sur votre dossier fiscal.",
     "ctaExpert": "Faire vérifier mon dossier par un expert →"
   }

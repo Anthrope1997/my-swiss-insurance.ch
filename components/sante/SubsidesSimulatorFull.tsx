@@ -12,15 +12,6 @@ import fr from '@/dictionaries/fr.json'
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
-const NON_DATE_DELAI = new Set([
-  'Non requis (automatique)',
-  'Pas de délai annuel fixe (droit dès le 1er jour du 2e mois suivant le dépôt)', // VD
-  'Pas de délai fixe (droit dès le mois suivant le dépôt)',                        // BS
-  '31 oct. 2025 (ordonnaire) ; arrivants de l\'étranger et revenus en baisse –25% : jusqu\'au 31 déc. 2026', // LU
-  '31 déc. 2025 (droit dès janv. 2026) ; hors délai : droit dès M+2',             // TI
-  '31 déc. 2025',                                                                   // AG
-])
-
 const ALL_CODES = Object.keys(SUBSIDES_2026).sort((a, b) =>
   SUBSIDES_2026[a as keyof typeof SUBSIDES_2026].nom.localeCompare(
     SUBSIDES_2026[b as keyof typeof SUBSIDES_2026].nom, 'fr'
@@ -38,6 +29,13 @@ function parseDelai(delai: string): Date | null {
   const m = delai.match(/(\d{1,2})\s+(janv\.|févr\.|mars|avr\.|mai|juin|juil\.|août|sept\.|oct\.|nov\.|déc\.)\s+(\d{4})/)
   if (!m) return null
   return new Date(parseInt(m[3]), FR_MOIS[m[2]], parseInt(m[1]))
+}
+
+function cleanText(s: string): string {
+  return s
+    .replace(/ — /g, ' : ')
+    .replace(/ → /g, ' : ')
+    .replace(/ ; /g, '. ')
 }
 
 function retroStatus(text: string): 'oui' | 'non' | 'inconnu' {
@@ -263,7 +261,7 @@ export default function SubsidesSimulatorFull() {
               <Chevron />
             </div>
             {showNoFormula && cantonData && (
-              <p className="text-[13px] text-slate/60 mt-1.5">{t.form.noFormula}</p>
+              <p className="text-[16px] text-slate/60 mt-1.5">{t.form.noFormula}</p>
             )}
           </div>
 
@@ -281,11 +279,11 @@ export default function SubsidesSimulatorFull() {
                 onChange={e => set({ revenu: e.target.value })}
                 className="input-field pr-24"
               />
-              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[13px] text-slate/60 pointer-events-none">
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[16px] text-slate/60 pointer-events-none">
                 {t.form.revenuSuffix}
               </span>
             </div>
-            <p className="text-[13px] text-slate/60 mt-1.5">{t.form.revenuHint}</p>
+            <p className="text-[16px] text-slate/60 mt-1.5">{t.form.revenuHint}</p>
           </div>
         </div>
 
@@ -387,7 +385,7 @@ export default function SubsidesSimulatorFull() {
 
               {/* Montant */}
               <div className="bg-[#EBF3FB] px-5 sm:px-6 py-6">
-                <span className="inline-flex items-center bg-brand text-white text-[11px] font-bold uppercase tracking-wide px-2.5 py-0.5 rounded-full mb-3">
+                <span className="inline-flex items-center bg-brand text-white text-[16px] font-semibold px-3 py-1 rounded-full mb-3">
                   {t.result.badge}
                 </span>
                 <p className="font-semibold text-ink leading-none mb-1" style={{ fontSize: '32px' }}>
@@ -414,7 +412,7 @@ export default function SubsidesSimulatorFull() {
                       {calTitle}
                     </p>
                     {calBody && (
-                      <p className="text-[13px] text-slate mt-0.5 leading-relaxed">{calBody}</p>
+                      <p className="text-[16px] text-slate mt-0.5 leading-relaxed">{calBody}</p>
                     )}
                   </div>
                 </div>
@@ -425,7 +423,7 @@ export default function SubsidesSimulatorFull() {
                     <IconClockBack />
                     <div>
                       <p className="text-[16px] font-semibold text-ink">{retroTitle}</p>
-                      <p className="text-[13px] text-slate mt-0.5 leading-relaxed">{alertBody}</p>
+                      <p className="text-[16px] text-slate mt-0.5 leading-relaxed">{cleanText(alertBody)}</p>
                     </div>
                   </div>
                 )}
@@ -436,18 +434,19 @@ export default function SubsidesSimulatorFull() {
                     <IconPlaneArrival />
                     <div>
                       <p className="text-[16px] font-semibold text-ink">{t.howTo.arrivantsTitre}</p>
-                      <p className="text-[13px] text-slate mt-0.5 leading-relaxed">{cantonData.arrivants}</p>
+                      <p className="text-[16px] text-slate/70 mt-0.5">{t.howTo.arrivantsSub}</p>
+                      <p className="text-[16px] text-slate mt-1 leading-relaxed">{cleanText(cantonData.arrivants)}</p>
                     </div>
                   </div>
                 )}
 
                 {/* Badge estimation + CTA */}
                 <div className="border-t border-edge pt-4 space-y-3">
-                  <div className="flex items-start gap-2.5 rounded-lg border border-edge bg-cloud px-4 py-3">
-                    <span className="inline-flex shrink-0 mt-0.5 items-center bg-slate/10 text-slate text-[11px] font-bold uppercase tracking-wide px-2.5 py-0.5 rounded-full">
-                      Estimation
+                  <div className="flex items-start gap-3 rounded-lg border border-edge bg-cloud px-4 py-3">
+                    <span className="inline-flex shrink-0 mt-0.5 items-center bg-brand text-white text-[16px] font-semibold px-3 py-1 rounded-full">
+                      {t.estimationBadge}
                     </span>
-                    <p className="text-[13px] text-slate leading-relaxed">{t.estimationNote}</p>
+                    <p className="text-[16px] text-slate leading-relaxed">{t.estimationNote}</p>
                   </div>
                   <button
                     onClick={() => setOfferOpen(true)}
