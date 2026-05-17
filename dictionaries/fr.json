@@ -172,9 +172,12 @@
       "pastTitre": "Délai dépassé",
       "pastBody": "Contactez le service cantonal pour connaître vos options en cours d'année.",
       "futureTitre": "À déposer avant le",
-      "arrivantsTitre": "Nouveaux arrivants en Suisse"
+      "retroactifOui": "Rétroactif",
+      "retroactifNon": "Non rétroactif",
+      "retroactifInconnu": "Rétroactivité à vérifier",
+      "arrivantsTitre": "Nouveaux arrivants"
     },
-    "keyfact": "Cette estimation est indicative. Le montant réel est fixé par le service cantonal sur la base de votre dossier fiscal. Les barèmes sont susceptibles de changer en cours d'année.",
+    "estimationNote": "Estimation indicative. Le montant réel est fixé par le service cantonal sur votre dossier fiscal.",
     "ctaExpert": "Faire vérifier mon dossier par un expert →"
   }
 }

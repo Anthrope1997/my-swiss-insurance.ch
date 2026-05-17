@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import KeyFact from '@/components/ui/KeyFact'
 import {
   type Canton, type Situation, type SubsideResult,
   calculerSubsideGE, calculerSubsideVS, calculerSubsideNE,
@@ -17,9 +16,9 @@ const NON_DATE_DELAI = new Set([
   'Non requis (automatique)',
   'Pas de délai annuel fixe (droit dès le 1er jour du 2e mois suivant le dépôt)', // VD
   'Pas de délai fixe (droit dès le mois suivant le dépôt)',                        // BS
-  '31 oct. 2025 (ordonnaire) ; arrivants de l\'étranger et revenus en baisse –25% : jusqu\'au 31 déc. 2026', // LU — délai ordinaire dépassé
-  '31 déc. 2025 (droit dès janv. 2026) ; hors délai : droit dès M+2',             // TI — dépassé
-  '31 déc. 2025',                                                                   // AG — dépassé
+  '31 oct. 2025 (ordonnaire) ; arrivants de l\'étranger et revenus en baisse –25% : jusqu\'au 31 déc. 2026', // LU
+  '31 déc. 2025 (droit dès janv. 2026) ; hors délai : droit dès M+2',             // TI
+  '31 déc. 2025',                                                                   // AG
 ])
 
 const ALL_CODES = Object.keys(SUBSIDES_2026).sort((a, b) =>
@@ -41,6 +40,14 @@ function parseDelai(delai: string): Date | null {
   return new Date(parseInt(m[3]), FR_MOIS[m[2]], parseInt(m[1]))
 }
 
+function retroStatus(text: string): 'oui' | 'non' | 'inconnu' {
+  const lower = text.toLowerCase()
+  if (lower.includes('pas de rétroactivité') || lower.includes('pas de rétroact')) return 'non'
+  if (lower.includes('non publiée') || lower.includes('à vérifier')) return 'inconnu'
+  if (lower.includes('rétroactif') || lower.includes('rétroactivité')) return 'oui'
+  return 'inconnu'
+}
+
 function calculerSubsideStd(
   revenu: number,
   data: CantonSubside2026,
@@ -48,9 +55,9 @@ function calculerSubsideStd(
   nbEnfants: number,
   isJeune: boolean,
 ): SubsideResult {
-  const seuilBase   = data.seuilNum!
-  const coupleBonus = situation === 'couple' ? Math.round(seuilBase * 0.70) : 0
-  const childBonus  = nbEnfants * 12000
+  const seuilBase      = data.seuilNum!
+  const coupleBonus    = situation === 'couple' ? Math.round(seuilBase * 0.70) : 0
+  const childBonus     = nbEnfants * 12000
   const effectiveSeuil = seuilBase + coupleBonus + childBonus
 
   if (revenu >= effectiveSeuil) {
@@ -67,7 +74,6 @@ function calculerSubsideStd(
     total: adulte * nb + enfant * nbEnfants,
     approx: true,
     label: 'Ordinaire',
-    note: 'Estimation indicative — barème cantonal appliqué de manière linéaire. Le montant réel est déterminé par le service cantonal sur votre dossier fiscal.',
   }
 }
 
@@ -79,8 +85,7 @@ function computeResult(
   nbEnfants: number,
   isJeune: boolean,
 ): SubsideResult | null {
-  if (!data.seuilNum) return null
-  if (revenu <= 0) return null
+  if (!data.seuilNum || revenu <= 0) return null
 
   switch (canton as Canton) {
     case 'GE': return calculerSubsideGE(revenu, situation, nbEnfants, isJeune)
@@ -97,7 +102,7 @@ function fmt(n: number) {
   return n.toLocaleString('fr-CH', { maximumFractionDigits: 0 })
 }
 
-// ─── Icons (Tabler-style inline SVG) ─────────────────────────────────────────
+// ─── Icons ───────────────────────────────────────────────────────────────────
 
 function IconCalendarCheck({ past }: { past?: boolean }) {
   return (
@@ -114,16 +119,16 @@ function IconCalendarCheck({ past }: { past?: boolean }) {
   )
 }
 
-function IconAlertTriangle() {
+function IconClockBack() {
   return (
     <svg
-      className="w-5 h-5 shrink-0 mt-0.5"
-      style={{ color: '#BA7517' }}
+      className="w-5 h-5 shrink-0 mt-0.5 text-brand"
       fill="none" stroke="currentColor" strokeWidth={1.5}
       strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"
     >
-      <path d="M10.363 3.591 2.257 17.125a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636-2.871L13.637 3.591a1.914 1.914 0 0 0-3.274 0z" />
-      <path d="M12 9v4" /><path d="M12 16h.01" />
+      <path d="M12 8v4l2.5 2.5" />
+      <path d="M3.05 11a9 9 0 1 0 .5-4.5" />
+      <path d="M3 3v5h5" />
     </svg>
   )
 }
@@ -149,78 +154,6 @@ function Chevron() {
     >
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
     </svg>
-  )
-}
-
-// ─── Comment obtenir block ────────────────────────────────────────────────────
-
-function CommentObtenir({ data }: { data: CantonSubside2026 }) {
-  const t = fr.simulator.howTo
-  const today    = new Date()
-  const deadline = parseDelai(data.delai)
-  const isPast   = deadline ? today > deadline : false
-  const isNoDeadline = data.delai.startsWith('Pas de délai')
-  const isM2     = data.delai.includes('2e mois')
-
-  let calTitle: string
-  let calBody: string
-
-  if (data.auto) {
-    calTitle = t.autoTitre
-    calBody  = t.autoBody
-  } else if (isNoDeadline) {
-    calTitle = t.noDeadlineTitre
-    calBody  = isM2 ? t.noDeadlineBodyM2 : t.noDeadlineBodyM1
-  } else if (isPast) {
-    calTitle = t.pastTitre
-    calBody  = t.pastBody
-  } else {
-    calTitle = `${t.futureTitre} ${data.delai}`
-    calBody  = ''
-  }
-
-  const alertBody: string | null = data.auto
-    ? null
-    : isNoDeadline
-      ? t.noDeadlineWarning
-      : (data.retroactivite ?? null)
-
-  return (
-    <div className="rounded-xl border border-edge bg-white px-5 py-5 space-y-4">
-      <p className="text-[16px] font-semibold text-ink">{t.titre}</p>
-
-      <div className="flex gap-3 items-start">
-        <IconCalendarCheck past={isPast && !data.auto} />
-        <div>
-          <p
-            className="text-[16px] font-semibold"
-            style={{ color: isPast && !data.auto ? '#BA7517' : 'var(--ink)' }}
-          >
-            {calTitle}
-          </p>
-          {calBody && (
-            <p className="text-[13px] text-slate mt-0.5 leading-relaxed">{calBody}</p>
-          )}
-        </div>
-      </div>
-
-      {alertBody && (
-        <div className="flex gap-3 items-start">
-          <IconAlertTriangle />
-          <p className="text-[13px] text-slate leading-relaxed">{alertBody}</p>
-        </div>
-      )}
-
-      {data.arrivants && (
-        <div className="flex gap-3 items-start">
-          <IconPlaneArrival />
-          <div>
-            <p className="text-[16px] font-semibold text-ink">{t.arrivantsTitre}</p>
-            <p className="text-[13px] text-slate mt-0.5 leading-relaxed">{data.arrivants}</p>
-          </div>
-        </div>
-      )}
-    </div>
   )
 }
 
@@ -262,6 +195,44 @@ export default function SubsidesSimulatorFull() {
 
   const ineligible = result !== null && result.total === 0
   const hasAmount  = result !== null && result.total > 0
+
+  // ── How-to logic (only relevant when hasAmount) ──
+  const today        = new Date()
+  const deadline     = cantonData ? parseDelai(cantonData.delai) : null
+  const isPast       = deadline ? today > deadline : false
+  const isNoDeadline = Boolean(cantonData?.delai.startsWith('Pas de délai'))
+  const isM2         = Boolean(cantonData?.delai.includes('2e mois'))
+
+  let calTitle = ''
+  let calBody  = ''
+  if (cantonData) {
+    if (cantonData.auto) {
+      calTitle = t.howTo.autoTitre
+      calBody  = t.howTo.autoBody
+    } else if (isNoDeadline) {
+      calTitle = t.howTo.noDeadlineTitre
+      calBody  = isM2 ? t.howTo.noDeadlineBodyM2 : t.howTo.noDeadlineBodyM1
+    } else if (isPast) {
+      calTitle = t.howTo.pastTitre
+      calBody  = t.howTo.pastBody
+    } else {
+      calTitle = `${t.howTo.futureTitre} ${cantonData.delai}`
+      calBody  = ''
+    }
+  }
+
+  let alertBody:  string | null = null
+  let retroTitle: string        = ''
+  if (cantonData && !cantonData.auto) {
+    if (isNoDeadline) {
+      alertBody  = t.howTo.noDeadlineWarning
+      retroTitle = t.howTo.retroactifNon
+    } else if (cantonData.retroactivite) {
+      alertBody  = cantonData.retroactivite
+      const s    = retroStatus(cantonData.retroactivite)
+      retroTitle = s === 'oui' ? t.howTo.retroactifOui : s === 'non' ? t.howTo.retroactifNon : t.howTo.retroactifInconnu
+    }
+  }
 
   return (
     <div className="space-y-6">
@@ -410,40 +381,83 @@ export default function SubsidesSimulatorFull() {
             </div>
           )}
 
-          {/* Montant estimé */}
+          {/* ── Carte résultat unique ── */}
           {hasRevenu && result && hasAmount && (
-            <div className="rounded-xl bg-[#EBF3FB] border border-brand/20 px-5 sm:px-6 py-6">
-              <span className="inline-flex items-center bg-brand text-white text-[11px] font-bold uppercase tracking-wide px-2.5 py-0.5 rounded-full mb-3">
-                {t.result.badge}
-              </span>
-              <p className="font-semibold text-ink leading-none mb-1" style={{ fontSize: '32px' }}>
-                CHF {fmt(result.total)}
-                <span className="text-[16px] font-normal text-slate ml-2">{t.result.perMois}</span>
-              </p>
-              <p className="text-[16px] text-slate">
-                soit CHF {fmt(result.total * 12)} par an déduits de votre prime
-              </p>
+            <div className="rounded-xl border border-brand/20 overflow-hidden">
+
+              {/* Montant */}
+              <div className="bg-[#EBF3FB] px-5 sm:px-6 py-6">
+                <span className="inline-flex items-center bg-brand text-white text-[11px] font-bold uppercase tracking-wide px-2.5 py-0.5 rounded-full mb-3">
+                  {t.result.badge}
+                </span>
+                <p className="font-semibold text-ink leading-none mb-1" style={{ fontSize: '32px' }}>
+                  CHF {fmt(result.total)}
+                  <span className="text-[16px] font-normal text-slate ml-2">{t.result.perMois}</span>
+                </p>
+                <p className="text-[16px] text-slate">
+                  soit CHF {fmt(result.total * 12)} par an déduits de votre prime
+                </p>
+              </div>
+
+              {/* Comment obtenir + disclaimer + CTA */}
+              <div className="bg-white border-t border-brand/10 px-5 sm:px-6 py-5 space-y-5">
+                <p className="text-[16px] font-semibold text-ink">{t.howTo.titre}</p>
+
+                {/* Délai / versement */}
+                <div className="flex gap-3 items-start">
+                  <IconCalendarCheck past={isPast && !cantonData.auto} />
+                  <div>
+                    <p
+                      className="text-[16px] font-semibold"
+                      style={{ color: isPast && !cantonData.auto ? '#BA7517' : 'var(--ink)' }}
+                    >
+                      {calTitle}
+                    </p>
+                    {calBody && (
+                      <p className="text-[13px] text-slate mt-0.5 leading-relaxed">{calBody}</p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Rétroactivité */}
+                {alertBody && (
+                  <div className="flex gap-3 items-start">
+                    <IconClockBack />
+                    <div>
+                      <p className="text-[16px] font-semibold text-ink">{retroTitle}</p>
+                      <p className="text-[13px] text-slate mt-0.5 leading-relaxed">{alertBody}</p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Nouveaux arrivants */}
+                {cantonData.arrivants && (
+                  <div className="flex gap-3 items-start">
+                    <IconPlaneArrival />
+                    <div>
+                      <p className="text-[16px] font-semibold text-ink">{t.howTo.arrivantsTitre}</p>
+                      <p className="text-[13px] text-slate mt-0.5 leading-relaxed">{cantonData.arrivants}</p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Badge estimation + CTA */}
+                <div className="border-t border-edge pt-4 space-y-3">
+                  <div className="flex items-start gap-2.5 rounded-lg border border-edge bg-cloud px-4 py-3">
+                    <span className="inline-flex shrink-0 mt-0.5 items-center bg-slate/10 text-slate text-[11px] font-bold uppercase tracking-wide px-2.5 py-0.5 rounded-full">
+                      Estimation
+                    </span>
+                    <p className="text-[13px] text-slate leading-relaxed">{t.estimationNote}</p>
+                  </div>
+                  <button
+                    onClick={() => setOfferOpen(true)}
+                    className="btn-primary w-full"
+                  >
+                    {t.ctaExpert}
+                  </button>
+                </div>
+              </div>
             </div>
-          )}
-
-          {/* Comment obtenir */}
-          {hasRevenu && result && hasAmount && (
-            <CommentObtenir data={cantonData} />
-          )}
-
-          {/* À retenir */}
-          {hasRevenu && result && hasAmount && (
-            <KeyFact>{t.keyfact}</KeyFact>
-          )}
-
-          {/* CTA expert */}
-          {hasRevenu && result && hasAmount && (
-            <button
-              onClick={() => setOfferOpen(true)}
-              className="btn-primary w-full"
-            >
-              {t.ctaExpert}
-            </button>
           )}
         </>
       )}
