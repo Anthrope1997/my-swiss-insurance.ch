@@ -376,6 +376,18 @@ export default function SubsidesSimulatorFull() {
       {/* ── Résultats ── */}
       {submitted && cantonData && (
         <>
+          {/* Pas de barème publié */}
+          {showNoFormula && (
+            <div className="flex items-center gap-3 rounded-xl border border-edge bg-cloud px-5 py-4">
+              <div className="w-9 h-9 rounded-full bg-white border border-edge flex items-center justify-center shrink-0">
+                <svg className="w-4 h-4 text-slate/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <p className="text-[16px] text-slate">{t.form.noFormula}</p>
+            </div>
+          )}
+
           {/* Pas de revenu */}
           {!hasRevenu && hasSeuilNum && (
             <p className="text-[16px] text-red-600 px-1">{t.result.noRevenu}</p>
