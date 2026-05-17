@@ -10,7 +10,7 @@ export default function KeyFact({ label = 'À retenir', children }: KeyFactProps
     <div className="callout mb-6">
       <div className="flex items-center gap-2 mb-2">
         <svg
-          className="text-callout-icon shrink-0" width="20" height="20"
+          className="text-brand shrink-0" width="20" height="20"
           viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
           strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
         >
@@ -18,7 +18,7 @@ export default function KeyFact({ label = 'À retenir', children }: KeyFactProps
           <line x1="9.5" y1="18" x2="14.5" y2="18" />
           <line x1="10" y1="21" x2="14" y2="21" />
         </svg>
-        <span className="text-[16px] font-semibold text-ink uppercase tracking-widest">{label}</span>
+        <span className="text-[16px] font-semibold text-brand uppercase tracking-widest">{label}</span>
       </div>
       <p className="text-[16px]">{children}</p>
     </div>
