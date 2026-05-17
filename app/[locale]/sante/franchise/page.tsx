@@ -147,7 +147,21 @@ export default function FranchisePage() {
         </div>
       </section>
 
-      {/* ── ZONE 2 — En bref / Sommaire ── */}
+      {/* ── ZONE 2 — Simulateur ── */}
+      <div className="border-b border-edge bg-white py-10">
+        <div className="container-xl">
+          <section id="simulateur">
+            <h2 className="article-h2">1. Quelle franchise pour votre profil ?</h2>
+            <p className="article-p mb-2">
+              Indiquez votre canton, votre âge et vos frais médicaux annuels estimés.
+              Le simulateur calcule la franchise qui minimise votre coût total annuel.
+            </p>
+            <FranchiseSimulator />
+          </section>
+        </div>
+      </div>
+
+      {/* ── ZONE 3 — En bref / Sommaire ── */}
       <div className="bg-cloud border-b border-edge py-8">
         <div className="container-xl grid grid-cols-1 md:grid-cols-2 gap-5">
 
@@ -179,20 +193,9 @@ export default function FranchisePage() {
         </div>
       </div>
 
-      {/* ── ZONE 3 — Contenu détaillé ── */}
+      {/* ── ZONE 4 — Contenu détaillé ── */}
       <div className="container-xl py-12">
         <article className="space-y-4">
-
-          {/* 01 — Simulateur */}
-          <section id="simulateur">
-            <h2 className="article-h2">1. Quelle franchise pour votre profil ?</h2>
-
-            <p className="article-p mb-6">
-              Indiquez votre canton, votre âge et vos frais médicaux annuels estimés.
-              Le simulateur calcule la franchise qui minimise votre coût total annuel.
-            </p>
-            <FranchiseSimulator />
-          </section>
 
           {/* 02 — Définition */}
           <section id="definition">
