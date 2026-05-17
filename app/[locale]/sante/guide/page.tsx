@@ -152,9 +152,9 @@ const heroStats = [
 ]
 
 const enBref = [
-  "La LAMal rend l'assurance maladie obligatoire pour toute personne résidant en Suisse depuis 1996 : les prestations de base sont identiques chez les 34 caisses agréées.",
-  "Les primes varient fortement selon le canton : de CHF 403 par mois dans le canton le moins cher à CHF 710 par mois pour le plus cher, adulte avec franchise 300 CHF.",
-  "En combinant la bonne franchise et un modèle alternatif, un adulte peut économiser jusqu'à CHF 1 463 par an sur sa prime mensuelle (données OFSP 2026).",
+  "L'assurance LAMal est obligatoire pour toute personne résidant en Suisse. Les 34 caisses agréées couvrent toutes les mêmes soins de base, seul le prix de la prime change d'une caisse à l'autre.",
+  "Pour un même profil, l'écart de prime entre la caisse la moins chère et la plus chère peut atteindre CHF 5 653 par an.",
+  "Selon votre canton et votre revenu, vous pouvez aussi avoir droit à un subside cantonal qui réduit votre prime de CHF X XXX par an en moyenne.",
 ]
 
 export default function GuideLamalPage() {
