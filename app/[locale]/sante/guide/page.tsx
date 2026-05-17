@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
+import KeyFact from '@/components/ui/KeyFact'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
 import Link from 'next/link'
 import AuthorBio from '@/components/ui/AuthorBio'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import HeroStats from '@/components/ui/HeroStats'
-import FranchiseChart from '@/components/ui/FranchiseChart'
 
 export const metadata: Metadata = {
   title: 'Guide complet LAMal 2026 — Primes, franchises, modèles et subsides',
@@ -395,13 +395,19 @@ export default function GuideLamalPage() {
             <section id="franchise">
               <h2 className="article-h2">5. Choisir sa franchise LAMal</h2>
               <p className="article-p">
-                La franchise est le montant annuel que vous payez avant que l'assurance intervienne.
-                Une franchise élevée réduit la prime mensuelle mais augmente le risque financier en cas de maladie.
+                La franchise est le montant annuel que vous payez vous-même avant que l&apos;assurance n&apos;intervienne.
+                Six paliers existent : CHF 300, 500, 1 000, 1 500, 2 000 et CHF 2 500 par an. Une franchise élevée
+                réduit votre prime mensuelle mais augmente votre risque financier en cas de maladie.
               </p>
 
-              <h3 className="article-h3">Quelle est la franchise la plus économique selon vos frais médicaux annuels ?</h3>
+              <KeyFact label="Point clé">
+                Le point de bascule entre la franchise CHF 2 500 et la franchise CHF 300 se situe autour de
+                <strong> CHF 1 897 de frais médicaux annuels</strong> en moyenne en Suisse. Si vos frais médicaux
+                annuels sont inférieurs à ce seuil, il est plus économique d&apos;opter pour la franchise CHF 2 500.
+                Au-delà, la franchise CHF 300 devient plus avantageuse.
+              </KeyFact>
 
-              <FranchiseChart />
+              <h3 className="article-h3">Quelle est la franchise la plus économique selon vos frais médicaux annuels ?</h3>
 
               <ul className="space-y-2 mb-5">
                 {[
@@ -418,16 +424,6 @@ export default function GuideLamalPage() {
                   </li>
                 ))}
               </ul>
-
-              <div className="callout mb-6">
-                <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">À retenir</p>
-                <p className="text-[16px]">
-                  La franchise maximale de CHF 2 500 est rentable pour la majorité des assurés suisses.
-                  Le seuil de bascule est de <strong>CHF 1 897 de frais médicaux annuels en moyenne nationale</strong> —
-                  soit environ 3 à 4 consultations chez un généraliste et quelques médicaments.
-                  Si vos frais dépassent ce montant, la franchise de CHF 300 devient plus économique au total.
-                </p>
-              </div>
 
               <div className="callout flex gap-3 mb-6">
                 <svg className="text-callout-icon shrink-0 mt-0.5" width="20" height="20"

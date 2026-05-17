@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import FranchiseChart from '@/components/ui/FranchiseChart'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
 import Link from 'next/link'
@@ -286,6 +287,8 @@ export default function FranchisePage() {
             <p className="text-[16px] text-slate/60 mt-3 mb-4">
               Primes pour un adulte (26 ans et plus) à Zurich, modèle standard, OFSP 2026.
             </p>
+
+            <FranchiseChart />
 
             <div className="callout flex gap-3">
               <svg className="text-callout-icon shrink-0 mt-0.5" width="20" height="20"
