@@ -1902,7 +1902,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
 
   TI: {
     nom: 'Tessin',
-    seuilRevenu: 'Formule RIPAM',
+    seuilRevenu: '≈ 52 000 CHF/an', seuilNum: 52000,
     montantMaxNum: 668, montantMax: '≤ 668 CHF/mois',
     auto: false, delai: '31 déc. 2025 (droit dès janv. 2026) ; hors délai : droit dès M+2',
     lien: 'https://www4.ti.ch/dss/ias/prestazioni-e-contributi/scheda/p/s/dettaglio/riduzione-dei-premi-dellassicurazione-malattia-ripam/richiesta-del-formulario-ripam/',
