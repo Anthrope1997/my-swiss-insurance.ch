@@ -123,8 +123,8 @@ const modeles = [
 
 const heroStats = [
   { value: '4',      label: "Modèles d'assurance",  sub: 'standard, médecin de famille, HMO, téléconsultation' },
-  { value: '−24%',   label: 'Réduction maximum',     sub: 'modèle Telmed selon caisse et canton'     },
-  { value: '−11%',   label: 'Réduction moyenne',     sub: 'médecin de famille, toutes caisses'       },
+  { value: '24%',    label: 'Réduction maximum',     sub: 'modèle Telmed selon caisse et canton'     },
+  { value: '11%',    label: 'Réduction moyenne',     sub: 'médecin de famille, toutes caisses'       },
 ]
 
 const toc = [
