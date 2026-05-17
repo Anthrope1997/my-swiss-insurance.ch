@@ -148,7 +148,11 @@ export const produits: ProduitComplementaire[] = [
       noteDetails: '90% des coûts, max CHF 150/an.',
     },
     delaiAttente: { mois: 0, detail: 'Délai d\'attente 365 jours pour maternité uniquement.' },
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 18.15, source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'famille',      montantCHF: 17.75, source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'senior',       montantCHF: 24.45, source: 'site-web', dateReleve: '2026-05-17' },
+    ],
     urlProduit: 'https://www.helsana.ch/fr/prives/assurances/assurances-complementaires/ambulatoires/top.html',
     dateMAJ: '2026-05-17',
     scoreComplet: 82,
@@ -223,7 +227,11 @@ export const produits: ProduitComplementaire[] = [
     },
     delaiAttente: { mois: 6, detail: 'Pas de délai pour variante Light et enfants < 3 ans.' },
     conditionsSouscription: ['Souscription jusqu\'à 50 ans', 'Questionnaire de santé requis (sauf Light et enfants < 3 ans)'],
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 11.10, source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'famille',      montantCHF: 14.00, source: 'site-web', dateReleve: '2026-05-17' },
+      // senior (55 ans) non éligible — souscription jusqu'à 50 ans
+    ],
     urlProduit: 'https://www.helsana.ch/fr/prives/assurances/assurances-complementaires/assurance-dentaire.html',
     dateMAJ: '2026-05-17',
     scoreComplet: 70,
