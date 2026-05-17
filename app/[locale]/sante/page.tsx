@@ -65,7 +65,7 @@ const webSiteSchema = {
 const stats = [
   { value: 'CHF 5 653', label: 'Économie maximale par an',      sub: 'Adulte 35 ans, toutes caisses et franchises' },
   { value: 'CHF 4 154', label: 'Économie moyenne par an',       sub: 'Adulte 35 ans, toutes caisses et franchises' },
-  { value: 'CHF 420',   label: 'Subside mensuel maximal moyen', sub: 'Barèmes 2026, 26 cantons'                    },
+  { value: 'CHF 5 040', label: 'Subside annuel maximal moyen',   sub: 'Barèmes 2026, 26 cantons'                    },
 ]
 
 const guides = [
