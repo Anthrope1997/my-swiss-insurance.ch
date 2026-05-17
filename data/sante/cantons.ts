@@ -1731,7 +1731,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 déc. 2025',
     lien: 'https://www.sva-aargau.ch/private/ihre-private-situation/finanzielle-unterstuetzung/praemienverbilligung/allgemeine',
     primeMoyenne: 419,
-    retroactivite: 'Rétroactif au 1er janvier si demande déposée avant le 31 déc. (délai impératif). Si dépassé : inscription impossible pour l\'année.',
+    retroactivite: 'Votre subside est rétroactif au 1er janvier si votre demande est déposée avant le 31 décembre. Passé ce délai, l\'inscription n\'est plus possible pour l\'année en cours.',
     arrivants: 'Faites votre demande via sva-aargau.ch. Votre subside commence à la date de votre demande.',
   },
 
@@ -1742,7 +1742,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: true, delai: 'Non requis (automatique)',
     lien: 'https://www.ai.ch/themen/gesundheit/krankenversicherung/praemienverbilligung',
     primeMoyenne: 382,
-    retroactivite: 'Attribution automatique par le Gesundheitsamt sur la base des données fiscales — aucun formulaire requis.',
+    retroactivite: 'Votre subside est attribué automatiquement par le service cantonal de la santé sur la base de vos données fiscales. Aucun formulaire n\'est requis.',
     arrivants: 'Si vous êtes nouvellement domicilié dans le canton, contactez le Gesundheitsamt AI pour être enregistré dans le système. Votre subside commence dès le mois de votre demande.',
   },
 
@@ -1764,7 +1764,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: true, delai: '31 déc. 2026',
     lien: 'https://www.gef.be.ch/gef/fr/index/gesundheit/gesundheit/krankenversicherung/praemienverbilligung.html',
     primeMoyenne: 397,
-    retroactivite: 'Attribution automatique (données fiscales N-2). Si situation changée : demande manuelle avant le 31 déc. Pas de rétroactivité en cours d\'année hors cas automatiques.',
+    retroactivite: 'Votre subside est attribué automatiquement sur la base de vos données fiscales. Si votre situation a changé, déposez une demande manuelle avant le 31 décembre.',
     arrivants: 'Si vous n\'êtes pas encore dans le système fiscal bernois, faites une demande manuelle auprès de l\'ASV Berne (asv.dij.be.ch).',
   },
 
@@ -1786,7 +1786,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: 'Pas de délai fixe (droit dès le mois suivant le dépôt)',
     lien: 'https://www.bs.ch/themen/finanzielle-hilfe/leistungen/praemienverbilligung',
     primeMoyenne: 500,
-    retroactivite: 'Sur demande — pas de délai annuel strict pour les résidents ordinaires. Traitement en 2–3 mois.',
+    retroactivite: 'Votre subside est accordé sur demande, sans délai annuel fixe. Le traitement prend en général 2 à 3 mois.',
     arrivants: 'Vous touchez vos subsides à partir de votre date d\'arrivée si la demande est déposée dans les 3 mois. Au-delà, votre subside commence le mois suivant le dépôt.',
   },
 
@@ -1808,7 +1808,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 déc. 2026',
     lien: 'https://www.sva.gr.ch/dienstleistungen/individuelle-praemienverbilligung.html',
     primeMoyenne: 390,
-    retroactivite: 'Potentiellement rétroactif au 1er jan. (non garanti). Délai : 31 déc. de l\'année courante.',
+    retroactivite: 'Votre subside peut être rétroactif au 1er janvier, sans garantie. Le délai est le 31 décembre de l\'année en cours.',
     arrivants: 'Un domicile au 1er janvier dans le canton est requis. Un acompte de 65% est versé provisoirement dans l\'attente de votre taxation.',
   },
 
@@ -1819,7 +1819,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 oct. 2025 (ordonnaire) ; arrivants de l\'étranger et revenus en baisse –25% : jusqu\'au 31 déc. 2026',
     lien: 'https://www.was-luzern.ch/praemienverbilligung',
     primeMoyenne: 395,
-    retroactivite: 'Délai ordinaire : 31 oct. du Vorjahr (système prospectif). Neuberechnung si revenus diminués de –25% par rapport aux données fiscales de référence : demande jusqu\'au 31 déc. 2026 → droit rétroactif recalculé.',
+    retroactivite: 'Le délai ordinaire est le 31 octobre de l\'année précédente. Si vos revenus ont baissé de plus de 25%, vous pouvez demander un recalcul jusqu\'au 31 décembre 2026 : votre subside est alors rétroactif.',
     arrivants: 'Votre subside commence le mois suivant votre demande. Déposez votre formulaire dès que possible, au plus tard le 31 décembre 2026.',
   },
 
@@ -1841,7 +1841,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 mai 2026',
     lien: 'https://www.akow.ch/dienstleistungen/praemienverbilligung',
     primeMoyenne: 303,
-    retroactivite: 'Pas de rétroactivité — délai strict 31 mai. Modifications en cours d\'année ne comptent que pour l\'année suivante. Stichtag : 1er jan.',
+    retroactivite: 'Pas de rétroactivité — délai strict au 31 mai. Toute modification en cours d\'année n\'est prise en compte que l\'année suivante. La date de référence est le 1er janvier.',
     arrivants: 'Le droit est accordé uniquement aux personnes domiciliées au 1er janvier dans le canton. Si vous êtes arrivé en cours d\'année, votre subside débutera l\'année suivante.',
   },
 
@@ -1885,7 +1885,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 déc. 2026',
     lien: 'https://www.sva-sz.ch/dienstleistungen/pr%C3%A4mienverbilligung-ipv',
     primeMoyenne: 347,
-    retroactivite: 'Potentiellement rétroactif au 1er jan. (non garanti). Délai : 31 déc. de l\'année courante.',
+    retroactivite: 'Votre subside peut être rétroactif au 1er janvier, sans garantie. Le délai est le 31 décembre de l\'année en cours.',
     arrivants: 'Remplissez le formulaire disponible sur sva-sz.ch.',
   },
 
@@ -1896,7 +1896,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 déc. 2026',
     lien: 'https://gesundheit.tg.ch/bevoelkerung/krankenversicherung/praemienverbilligung.html/5578',
     primeMoyenne: 360,
-    retroactivite: 'Pas de rétroactivité si délai dépassé — «le droit s\'éteint définitivement, sans possibilité de nouveau calcul». Délai : 31 déc. Stichtag : 1er jan.',
+    retroactivite: 'Pas de rétroactivité si le délai est dépassé : le droit s\'éteint définitivement, sans possibilité de recalcul. Le délai est le 31 décembre. La date de référence est le 1er janvier.',
     arrivants: 'Votre subside commence dès votre affiliation à l\'assurance maladie suisse. Déposez votre demande avant le 31 décembre.',
   },
 
@@ -1907,7 +1907,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 déc. 2025 (droit dès janv. 2026) ; hors délai : droit dès M+2',
     lien: 'https://www4.ti.ch/dss/ias/prestazioni-e-contributi/scheda/p/s/dettaglio/riduzione-dei-premi-dellassicurazione-malattia-ripam/richiesta-del-formulario-ripam/',
     primeMoyenne: 531,
-    retroactivite: 'Rétroactif au 1er jan. si formulaire déposé avant le 31 déc. de l\'année précédente. Sinon : droit dès le mois suivant le dépôt.',
+    retroactivite: 'Votre subside est rétroactif au 1er janvier si vous déposez le formulaire avant le 31 décembre de l\'année précédente. Au-delà, votre droit commence le mois suivant votre demande.',
     arrivants: 'Si vous déposez le formulaire RIPAM avant le 31 décembre, votre subside commence en janvier. Sinon, il commence le mois suivant votre demande.',
   },
 
@@ -1929,7 +1929,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '30 avr. 2026',
     lien: 'https://www.akzug.ch/dienstleistungen/praemienverbilligung',
     primeMoyenne: 360,
-    retroactivite: 'Pas de rétroactivité — délai strict 30 avril. «Es können keine Anträge mehr eingereicht werden.» EL-Bezüger : attribution automatique.',
+    retroactivite: 'Pas de rétroactivité — délai strict au 30 avril. Passé cette date, aucune demande ne peut plus être déposée. Les bénéficiaires de prestations complémentaires reçoivent le subside automatiquement.',
     arrivants: 'Votre subside commence dès le mois de votre demande. Les nouveaux arrivants reçoivent un courrier d\'information de l\'Ausgleichskasse Zug — vous pouvez aussi contacter directement akzug.ch.',
   },
 
@@ -2008,7 +2008,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: true, delai: 'Non requis (automatique)',
     lien: 'https://www.ne.ch/themes/social/assurance-maladie/subsides-assurance-maladie-lamal',
     primeMoyenne: 663,
-    retroactivite: 'Mixte : bénéficiaires 2025 reconduits automatiquement. Nouveaux dans le système → droit à compter de la date de la demande (pas rétroactif au 1er jan.).',
+    retroactivite: 'Si vous êtes déjà bénéficiaire, votre subside est reconduit automatiquement. Si vous faites une première demande, votre droit commence à la date de la demande, sans rétroactivité au 1er janvier.',
     arrivants: 'Faites votre demande au GSR dès votre arrivée. Votre subside commence à la date de la demande. Si vous venez d\'un autre canton, l\'ancien canton reste compétent jusqu\'au 31 décembre, puis Neuchâtel prend le relais dès le 1er janvier.',
     note: 'Renouvellement automatique si situation inchangée. Signaler sans délai au GSR : hausse/baisse revenus, naissance, mariage, divorce, décès.',
     ne: {
@@ -2031,7 +2031,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: true, delai: '31 août 2026',
     lien: 'https://www.ecasfr.ch/fr/Assurances/Reduction-des-primes-d-assurance-maladie/Reduction-des-primes-d-assurance-maladie.html',
     primeMoyenne: 569,
-    retroactivite: 'Non rétroactive — renouvellement automatique annuel sur examen d\'office.',
+    retroactivite: 'Pas de rétroactivité. Votre subside est renouvelé automatiquement chaque année par examen d\'office.',
     arrivants: 'Si vous n\'êtes pas encore dans le système fiscal fribourgeois, contactez l\'ECAS FR au 026 426 77 00.',
     note: 'Base de calcul : taxation fiscale de l\'année N-2. Renouvellement automatique si situation inchangée.',
     fr: {
@@ -2129,7 +2129,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 déc. 2026',
     lien: 'https://www.ecasjura.ch/fr/Assurances/Assurance-maladie',
     primeMoyenne: 633,
-    retroactivite: 'Rétroactivité au 1er jan. garantie si taxation tardive. Délai ultime : 31 déc. de l\'année courante.',
+    retroactivite: 'Votre subside est rétroactif au 1er janvier si votre taxation a été établie tardivement. Le délai est le 31 décembre de l\'année en cours.',
     arrivants: 'Faites votre demande à l\'ECAS dès votre arrivée. Votre subside est rétroactif au 1er janvier si la demande est déposée dans les délais.',
     note: 'Examen d\'office si taxation 2024 reçue avant déc. 2026. Demande requise sinon ou sans courrier dans les 30 jours. Situation déterminante : 1er jan. de l\'année.',
     ju: {
@@ -2156,7 +2156,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: true, delai: 'Non requis (automatique)',
     lien: 'https://www.avsvalais.ch/fr/Assurances/RIP-Reduction-individuelle-des-primes-d-assurance-maladie',
     primeMoyenne: 528,
-    retroactivite: 'Pas de rétroactivité en règle générale. Exception légale : arrivants bénéficiant déjà d\'une PC AVS/AI ou aide sociale → droit depuis l\'établissement en Valais.',
+    retroactivite: 'Pas de rétroactivité en règle générale. Exception : si vous bénéficiez de prestations complémentaires AVS/AI ou de l\'aide sociale, votre droit est ouvert dès votre arrivée en Valais.',
     arrivants: 'En règle générale, votre droit s\'ouvre au 1er janvier de l\'année suivant votre arrivée. Exception : si vous bénéficiez de prestations complémentaires AVS/AI ou de l\'aide sociale, votre droit commence dès votre arrivée.',
     note: 'Bénéficiaires 2025 reconnus : notification automatique, aucune démarche. Nouveaux bénéficiaires : notification fin février, transmettre copie police d\'assurance. Imposés à la source : demande avant le 31 déc.',
     vs: {
