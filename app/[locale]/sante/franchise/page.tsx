@@ -8,7 +8,7 @@ import Link from 'next/link'
 import AuthorBio from '@/components/ui/AuthorBio'
 import UnifiedLeadForm from '@/components/ui/UnifiedLeadForm'
 import HeroStats from '@/components/ui/HeroStats'
-import { nationalBreakEven, nationalBreakEvenJA } from '@/lib/sante/calcul-franchise'
+import { nationalBreakEven, nationalBreakEvenJA, nationalAvgPrime } from '@/lib/sante/calcul-franchise'
 
 export const metadata: Metadata = {
   title: "Franchise LAMal 2026 : quel montant choisir — My Swiss Insurance",
@@ -33,8 +33,9 @@ const articleSchema = {
   mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://my-swiss-insurance.ch/sante/franchise' },
 }
 
-const seuil   = nationalBreakEven()
-const seuilJA = nationalBreakEvenJA()
+const seuil      = nationalBreakEven()
+const seuilJA    = nationalBreakEvenJA()
+const economieMoy = Math.round((nationalAvgPrime(300) - nationalAvgPrime(2500)) * 12)
 const fmtChf  = (n: number) => n.toLocaleString('fr-CH')
 
 const faqItems = [
@@ -90,7 +91,7 @@ const enBref = [
 const heroStats = [
   { value: '6',                       label: 'Niveaux de franchise',       sub: 'de CHF 300 à CHF 2 500 par an'                  },
   { value: `CHF ${fmtChf(seuil)}`,    label: "Seuil d'équilibre moyen",    sub: 'F300 vs F2500 · 26 cantons · adulte · BASE'     },
-  { value: 'CHF 1 463',               label: 'Économie max. sur la prime', sub: 'en passant à F2500 · adulte 35 ans · OFSP 2026' },
+  { value: `CHF ${fmtChf(economieMoy)}`, label: 'Économie moy. sur la prime', sub: 'en passant à F2500 · adulte 35 ans · 26 cantons'  },
 ]
 
 const toc = [
