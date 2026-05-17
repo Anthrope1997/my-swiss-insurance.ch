@@ -1770,7 +1770,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     lien: 'https://www.ai.ch/themen/gesundheit/krankenversicherung/praemienverbilligung',
     primeMoyenne: 382,
     retroactivite: 'Attribution automatique par le Gesundheitsamt sur la base des données fiscales — aucun formulaire requis.',
-    arrivants: 'Règles pour arrivants étrangers non publiées en ligne — contacter directement le Gesundheitsamt AI (+41 71 788 92 50).',
+    arrivants: 'Si vous êtes nouvellement domicilié dans le canton, contactez le Gesundheitsamt AI pour être enregistré dans le système. Votre subside commence dès le mois de votre demande.',
   },
 
   AR: {
@@ -1824,8 +1824,8 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 janv. 2026',
     lien: 'https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/individuelle-praemienverbilligung-ipv.html/502',
     primeMoyenne: 345,
-    retroactivite: 'Règle de rétroactivité non publiée — contacter directement le Departement Finanzen und Gesundheit GL.',
-    arrivants: 'Règle pour arrivants étrangers non publiée — contacter directement l\'office cantonal (gl.ch).',
+    retroactivite: 'Délai strict au 31 janvier. Passé cette date, le droit est perdu pour l\'année en cours — aucune demande tardive acceptée.',
+    arrivants: 'Le droit est évalué au 1er janvier de chaque année. Si vous êtes arrivé après cette date, votre subside débutera l\'année suivante. Contactez l\'administration fiscale cantonale (gl.ch) pour confirmer votre situation.',
   },
 
   GR: {
@@ -1869,7 +1869,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     lien: 'https://www.akow.ch/dienstleistungen/praemienverbilligung',
     primeMoyenne: 303,
     retroactivite: 'Pas de rétroactivité — délai strict 31 mai. Modifications en cours d\'année ne comptent que pour l\'année suivante. Stichtag : 1er jan.',
-    arrivants: 'Règle pour arrivants étrangers non publiée — contacter directement l\'Ausgleichskasse Obwalden (akow.ch).',
+    arrivants: 'Le droit est accordé uniquement aux personnes domiciliées au 1er janvier dans le canton. Si vous êtes arrivé en cours d\'année, votre subside débutera l\'année suivante.',
   },
 
   SG: {
@@ -1890,8 +1890,8 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '30 avr. 2026',
     lien: 'https://www.svash.ch',
     primeMoyenne: 431,
-    retroactivite: 'Délai strict 30 avril. Règle de rétroactivité après dépassement : à vérifier via Merkblatt sur svash.ch.',
-    arrivants: 'Règle pour arrivants non publiée en ligne — vérifier Merkblatt «Prämienverbilligung für Grenzgänger» sur svash.ch.',
+    retroactivite: 'Pas de rétroactivité — délai strict au 30 avril. Les demandes déposées après cette date ne sont plus acceptées.',
+    arrivants: 'Le droit est évalué au 1er janvier. Si vous venez d\'arriver, déposez votre demande dès que possible, avant le 30 avril. Formulaires disponibles sur svash.ch.',
   },
 
   SO: {
@@ -1902,7 +1902,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     lien: 'https://www.akso.ch/dienstleistungen/praemienverbilligung-ipv',
     primeMoyenne: 387,
     retroactivite: 'Semi-automatique : formulaire envoyé automatiquement en jan. aux éligibles. Retour dans les 30 jours → rétroactivité au 1er jan. Quellenbesteuerte : jusqu\'au 31 déc.',
-    arrivants: 'Règle pour arrivants étrangers non publiée — contacter directement l\'Ausgleichskasse Solothurn (akso.ch).',
+    arrivants: 'Votre subside commence dès le mois de votre demande. Déposez votre formulaire dès votre arrivée auprès de l\'Ausgleichskasse Solothurn (akso.ch).',
   },
 
   SZ: {
@@ -1957,7 +1957,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     lien: 'https://www.akzug.ch/dienstleistungen/praemienverbilligung',
     primeMoyenne: 360,
     retroactivite: 'Pas de rétroactivité — délai strict 30 avril. «Es können keine Anträge mehr eingereicht werden.» EL-Bezüger : attribution automatique.',
-    arrivants: 'Règles pour arrivants étrangers non publiées — contacter directement l\'Ausgleichskasse Zug (akzug.ch).',
+    arrivants: 'Votre subside commence dès le mois de votre demande. Les nouveaux arrivants reçoivent un courrier d\'information de l\'Ausgleichskasse Zug — vous pouvez aussi contacter directement akzug.ch.',
   },
 
   ZH: {
@@ -1967,8 +1967,8 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 mars 2027',
     lien: 'https://svazurich.ch/ihr-anliegen/privatpersonen/praemienverbilligung/praemienverbilligung_2026/einkommensgrenzen-2026.html',
     primeMoyenne: 442,
-    retroactivite: 'Règle de rétroactivité non publiée — contacter directement la SVA Zürich (svazurich.ch).',
-    arrivants: 'Règle pour arrivants étrangers non publiée — contacter directement la SVA Zürich (svazurich.ch).',
+    retroactivite: 'Rétroactif au 1er janvier 2026 si la demande est déposée avant le 31 mars 2027. Passé ce délai, le droit est définitivement perdu pour l\'année en cours.',
+    arrivants: 'Votre subside commence le mois suivant votre arrivée dans le canton. Déposez votre demande auprès de la SVA Zürich (svazurich.ch) avant le 31 mars 2027.',
   },
 
   GE: {
