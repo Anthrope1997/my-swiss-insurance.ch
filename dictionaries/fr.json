@@ -178,8 +178,8 @@
       "arrivantsTitre": "Nouveaux arrivants",
       "arrivantsSub": "Délai depuis votre arrivée :"
     },
-    "estimationBadge": "Estimation",
-    "estimationNote": "Estimation indicative. Le montant réel est fixé par le service cantonal sur votre dossier fiscal.",
+    "estimationBadge": "Estimation indicative",
+    "estimationNote": "Le montant réel est fixé par le service cantonal sur votre dossier fiscal.",
     "ctaExpert": "Faire vérifier mon dossier par un expert →"
   }
 }

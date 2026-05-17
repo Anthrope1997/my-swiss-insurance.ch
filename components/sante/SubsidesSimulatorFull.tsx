@@ -211,7 +211,7 @@ export default function SubsidesSimulatorFull() {
       calBody  = isM2 ? t.howTo.noDeadlineBodyM2 : t.howTo.noDeadlineBodyM1
     } else if (isPast) {
       calTitle = t.howTo.pastTitre
-      calBody  = t.howTo.pastBody
+      calBody  = `Délai : ${cantonData.delai}. ${t.howTo.pastBody}`
     } else {
       calTitle = `${t.howTo.futureTitre} ${cantonData.delai}`
       calBody  = ''
