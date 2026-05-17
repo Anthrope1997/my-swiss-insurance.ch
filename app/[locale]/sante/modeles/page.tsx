@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import KeyFact from '@/components/ui/KeyFact'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
 import Link from 'next/link'
@@ -240,19 +241,9 @@ export default function ModelesPage() {
                   </tbody>
                 </table>
               </div>
-              <div className="callout flex gap-3">
-                <svg className="text-callout-icon shrink-0 mt-0.5" width="20" height="20"
-                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
-                     strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
-                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
-                  <line x1="10" y1="21" x2="14" y2="21" />
-                </svg>
-                <div>
-                  <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">À retenir</p>
-                  <p className="text-[16px] leading-relaxed">Toutes les prestations médicales sont identiques quel que soit le modèle. Seule la porte d&apos;entrée dans le système de soins diffère. Les remboursements sont les mêmes.</p>
-                </div>
-              </div>
+              <KeyFact>
+                Toutes les prestations médicales sont identiques quel que soit le modèle. Seule la porte d&apos;entrée dans le système de soins diffère. Les remboursements sont les mêmes.
+              </KeyFact>
             </section>
 
             {/* 2 — Détails */}
@@ -320,22 +311,10 @@ export default function ModelesPage() {
                 Le modèle se choisit une fois par an. Le changement est possible à chaque renouvellement
                 annuel, indépendamment d'un éventuel changement de caisse.
               </p>
-              <div className="callout flex gap-3">
-                <svg className="text-callout-icon shrink-0 mt-0.5" width="20" height="20"
-                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
-                     strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
-                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
-                  <line x1="10" y1="21" x2="14" y2="21" />
-                </svg>
-                <div>
-                  <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">À retenir</p>
-                  <p className="text-[16px] leading-relaxed">
-                    Avis de changement à envoyer avant le 30 novembre pour une prise d&apos;effet au
-                    1er janvier. Passé ce délai, votre modèle actuel est reconduit.
-                  </p>
-                </div>
-              </div>
+              <KeyFact>
+                Avis de changement à envoyer avant le 30 novembre pour une prise d&apos;effet au
+                1er janvier. Passé ce délai, votre modèle actuel est reconduit.
+              </KeyFact>
               <div className="mt-5">
                 <Link href="/sante/changer-de-caisse" className="text-brand hover:underline text-[16px] font-medium">
                   Guide complet : changer de caisse et de modèle →

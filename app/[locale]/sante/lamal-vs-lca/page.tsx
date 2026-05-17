@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import KeyFact from '@/components/ui/KeyFact'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
 import Link from 'next/link'
@@ -298,23 +299,12 @@ export default function LamalVsLcaPage() {
             {/* 4 — Quand souscrire */}
             <section id="quand">
               <h2 className="article-h2">4. Quand souscrire une complémentaire ?</h2>
-              <div className="callout flex gap-3 mb-6">
-                <svg className="text-callout-icon shrink-0 mt-0.5" width="20" height="20"
-                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
-                     strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
-                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
-                  <line x1="10" y1="21" x2="14" y2="21" />
-                </svg>
-                <div>
-                  <p className="font-semibold text-ink mb-1">Le moment de souscription compte</p>
-                  <p className="text-[16px] leading-relaxed">
-                    Plus vous souscrivez tôt et en bonne santé, moins vous risquez d&apos;être exclu ou de payer
-                    une surprime. Si vous avez déjà une maladie au moment de la souscription, l&apos;assureur
-                    peut refuser de vous couvrir pour cette condition, ou accepter à un tarif plus élevé.
-                  </p>
-                </div>
-              </div>
+              <KeyFact>
+                <strong>Le moment de souscription compte :</strong>{' '}
+                plus vous souscrivez tôt et en bonne santé, moins vous risquez d&apos;être exclu ou de payer
+                une surprime. Si vous avez déjà une maladie au moment de la souscription, l&apos;assureur
+                peut refuser de vous couvrir pour cette condition, ou accepter à un tarif plus élevé.
+              </KeyFact>
               <ul className="space-y-3">
                 {[
                   "Souscrivez la complémentaire hospitalière pendant que vous êtes en bonne santé pour éviter les surprimes liées à l'âge.",

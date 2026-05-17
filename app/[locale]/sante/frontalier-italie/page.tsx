@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import KeyFact from '@/components/ui/KeyFact'
 import AuthorBio from '@/components/ui/AuthorBio'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
@@ -230,11 +231,11 @@ export default function FrontalierItaliePage() {
                 </table>
               </div>
 
-              <div className="callout text-[16px]">
+              <KeyFact>
                 <strong>Cas du Tessin :</strong> le Tessin est le seul canton officiellement italophone.
                 La plupart des médecins et hôpitaux tessinois travaillent en italien, ce qui facilite
                 le choix de la LAMal pour les frontaliers provenant de Lombardie ou du Piémont.
-              </div>
+              </KeyFact>
             </section>
 
             {/* Option LAMal */}
@@ -319,10 +320,10 @@ export default function FrontalierItaliePage() {
                 </table>
               </div>
               <p className="text-[13px] text-slate/60 mt-2 md:hidden">Tableau complet visible sur ordinateur.</p>
-              <div className="callout text-[16px]">
+              <KeyFact>
                 Les modèles alternatifs (médecin de famille, Telmed) réduisent la prime de 10 à 20 % par rapport au modèle standard.
                 Si vous êtes éligible aux subsides cantonaux, votre prime nette peut être significativement inférieure.
-              </div>
+              </KeyFact>
             </section>
 
             {/* LAMal ou SSN */}

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import FranchiseChart from '@/components/ui/FranchiseChart'
+import KeyFact from '@/components/ui/KeyFact'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
 import Link from 'next/link'
@@ -224,22 +225,13 @@ export default function FranchisePage() {
               </div>
             </div>
 
-            <div className="callout flex gap-3">
-              <svg className="text-callout-icon shrink-0 mt-0.5" width="20" height="20"
-                   viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
-                   strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
-                <line x1="9.5" y1="18" x2="14.5" y2="18" />
-                <line x1="10" y1="21" x2="14" y2="21" />
-              </svg>
-              <div>
-                <p className="font-semibold text-ink mb-1">Exemple : franchise 1 500 CHF, CHF 2 000 de frais dans l&apos;année</p>
-                <ul className="space-y-1">
-                  <li className="text-[16px]">Vous payez CHF 1 550 : CHF 1 500 (franchise) + CHF 50 (10% de quote-part sur les CHF 500 restants).</li>
-                  <li className="text-[16px]">Votre caisse prend en charge CHF 450 : les 90% au-dessus de la franchise.</li>
-                </ul>
-              </div>
-            </div>
+            <KeyFact label="Exemple">
+              <p className="font-semibold text-ink mb-1">Franchise 1 500 CHF, CHF 2 000 de frais dans l&apos;année</p>
+              <ul className="space-y-1">
+                <li>Vous payez CHF 1 550 : CHF 1 500 (franchise) + CHF 50 (10% de quote-part sur les CHF 500 restants).</li>
+                <li>Votre caisse prend en charge CHF 450 : les 90% au-dessus de la franchise.</li>
+              </ul>
+            </KeyFact>
 
             <p className="article-p mt-6">
               <Link href="/sante/guide" className="text-brand hover:underline">
@@ -290,24 +282,13 @@ export default function FranchisePage() {
 
             <FranchiseChart />
 
-            <div className="callout flex gap-3">
-              <svg className="text-callout-icon shrink-0 mt-0.5" width="20" height="20"
-                   viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
-                   strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
-                <line x1="9.5" y1="18" x2="14.5" y2="18" />
-                <line x1="10" y1="21" x2="14" y2="21" />
-              </svg>
-              <div>
-                <p className="font-semibold text-ink mb-1">Vous hésitez entre CHF 2 500 et CHF 300 ?</p>
-                <p className="text-[16px]">
-                  Avec la franchise CHF 2 500, vous économisez CHF 1 440 par an sur votre prime à Zurich (CHF 120 par mois).
-                  En contrepartie, vous payez jusqu&apos;à CHF 2 500 de votre poche en cas de maladie.
-                  Le point de bascule se situe à CHF 1 899 de frais médicaux annuels : en dessous, la franchise CHF 2 500
-                  est gagnante. Au-dessus, c&apos;est la franchise CHF 300.
-                </p>
-              </div>
-            </div>
+            <KeyFact>
+              <strong>Vous hésitez entre CHF 2 500 et CHF 300 ?</strong>{' '}
+              Avec la franchise CHF 2 500, vous économisez CHF 1 440 par an sur votre prime à Zurich (CHF 120 par mois).
+              En contrepartie, vous payez jusqu&apos;à CHF 2 500 de votre poche en cas de maladie.
+              Le point de bascule se situe à CHF 1 899 de frais médicaux annuels : en dessous, la franchise CHF 2 500
+              est gagnante. Au-dessus, c&apos;est la franchise CHF 300.
+            </KeyFact>
 
             <p className="article-p mt-6">
               <Link href="/sante/comparateur" className="text-brand hover:underline">
@@ -325,21 +306,10 @@ export default function FranchisePage() {
               La quote-part est plafonnée à 350 CHF par an, contre 700 CHF pour un adulte.
             </p>
 
-            <div className="callout flex gap-3 mb-6">
-              <svg className="text-callout-icon shrink-0 mt-0.5" width="20" height="20"
-                   viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
-                   strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
-                <line x1="9.5" y1="18" x2="14.5" y2="18" />
-                <line x1="10" y1="21" x2="14" y2="21" />
-              </svg>
-              <div>
-                <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">Recommandation</p>
-                <p className="text-[16px] leading-relaxed">La franchise 0 CHF par an est conseillée pour les
-                  jeunes enfants qui consultent fréquemment. À partir de l&apos;adolescence (15 à 18 ans),
-                  une franchise plus élevée peut être envisagée si l&apos;enfant est en bonne santé.</p>
-              </div>
-            </div>
+            <KeyFact label="Recommandation">
+              La franchise 0 CHF par an est conseillée pour les jeunes enfants qui consultent fréquemment.
+              À partir de l&apos;adolescence (15 à 18 ans), une franchise plus élevée peut être envisagée si l&apos;enfant est en bonne santé.
+            </KeyFact>
 
             <div className="overflow-x-auto border border-edge rounded-[8px]">
               <table className="stripe-table w-full">
@@ -411,20 +381,10 @@ export default function FranchisePage() {
               ))}
             </ol>
 
-            <div className="callout flex gap-3 my-4">
-              <svg className="text-callout-icon shrink-0 mt-0.5" width="20" height="20"
-                   viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
-                   strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
-                <line x1="9.5" y1="18" x2="14.5" y2="18" />
-                <line x1="10" y1="21" x2="14" y2="21" />
-              </svg>
-              <div>
-                <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">À retenir</p>
-                <p className="text-[16px] leading-relaxed">La demande doit parvenir à votre caisse avant le 30 novembre pour une prise d&apos;effet au 1er janvier.
-                  Passé ce délai, votre franchise reste inchangée pour toute l&apos;année suivante.</p>
-              </div>
-            </div>
+            <KeyFact>
+              La demande doit parvenir à votre caisse avant le 30 novembre pour une prise d&apos;effet au 1er janvier.
+              Passé ce délai, votre franchise reste inchangée pour toute l&apos;année suivante.
+            </KeyFact>
 
             <p className="article-p mt-6">
               <Link href="/sante/changer-de-caisse" className="text-brand hover:underline">

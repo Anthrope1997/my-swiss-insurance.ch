@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import KeyFact from '@/components/ui/KeyFact'
 import AuthorBio from '@/components/ui/AuthorBio'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
@@ -191,12 +192,12 @@ export default function MaFamillePage() {
                 ))}
               </div>
 
-              <div className="callout text-[16px]">
+              <KeyFact>
                 <strong>Liberté de choix :</strong> les parents peuvent affilier leur nourrisson
-                à n'importe quelle caisse, y compris une caisse différente de la leur. Comparez
+                à n&apos;importe quelle caisse, y compris une caisse différente de la leur. Comparez
                 les primes enfant séparément — la caisse la moins chère pour les adultes
-                n'est pas toujours la plus avantageuse pour les enfants.
-              </div>
+                n&apos;est pas toujours la plus avantageuse pour les enfants.
+              </KeyFact>
             </section>
 
             {/* Enfants */}
@@ -336,13 +337,12 @@ export default function MaFamillePage() {
                 </div>
               </div>
 
-              <div className="callout text-[16px]">
-                <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">À retenir</p>
-                <p><strong>LCA hospitalière :</strong> pour une chambre semi-privée ou privée
+              <KeyFact>
+                <strong>LCA hospitalière :</strong> pour une chambre semi-privée ou privée
                 et le libre choix du médecin accoucheur, une LCA hospitalière est nécessaire.
                 Elle doit être souscrite <strong>avant</strong> la grossesse — une grossesse
-                en cours est considérée comme état préexistant et peut entraîner des exclusions.</p>
-              </div>
+                en cours est considérée comme état préexistant et peut entraîner des exclusions.
+              </KeyFact>
             </section>
 
             {/* Retraité */}

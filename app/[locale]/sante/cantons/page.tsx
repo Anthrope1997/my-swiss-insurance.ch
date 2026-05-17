@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import KeyFact from '@/components/ui/KeyFact'
 import Link from 'next/link'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import AuthorBio from '@/components/ui/AuthorBio'
@@ -80,21 +81,11 @@ export default function CantonHubPage() {
             ))}
           </div>
 
-          <div className="callout flex gap-3">
-            <svg className="text-callout-icon shrink-0 mt-0.5" width="20" height="20"
-                 viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
-                 strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
-              <line x1="9.5" y1="18" x2="14.5" y2="18" />
-              <line x1="10" y1="21" x2="14" y2="21" />
-            </svg>
-            <p className="text-[16px] text-slate leading-relaxed">
-              <strong className="text-ink">Comment sont calculées les primes ?</strong> Les montants
-              affichés correspondent aux primes moyennes cantonales pour un adulte de 26 ans et plus,
-              avec une franchise ordinaire de 300 CHF par an et le modèle médecin de famille (HMO ou
-              télémédecine). Source : OFSP, données 2026.
-            </p>
-          </div>
+          <KeyFact label="Méthode de calcul">
+            Les montants affichés correspondent aux primes moyennes cantonales pour un adulte de 26 ans et plus,
+            avec une franchise ordinaire de 300 CHF par an et le modèle médecin de famille (HMO ou
+            télémédecine). Source : OFSP, données 2026.
+          </KeyFact>
         </div>
       </section>
 

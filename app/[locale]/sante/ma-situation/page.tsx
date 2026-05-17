@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import KeyFact from '@/components/ui/KeyFact'
 import AuthorBio from '@/components/ui/AuthorBio'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
@@ -240,24 +241,12 @@ export default function MaSituationPage() {
                 par rapport au salarié exige une planification spécifique.
               </p>
 
-              <div className="callout flex gap-3 mb-6">
-                <svg className="text-callout-icon shrink-0 mt-0.5" width="20" height="20"
-                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
-                     strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
-                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
-                  <line x1="10" y1="21" x2="14" y2="21" />
-                </svg>
-                <div>
-                  <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">À retenir</p>
-                  <p className="text-[16px]">
-                    Sans couverture accidents spécifique, un accident professionnel ou de loisirs
-                    est pris en charge par la LAMal uniquement, avec des franchises et des
-                    quote-parts qui s'appliquent normalement. La couverture accidents optionnelle
-                    via la LAMal (art. 8 LAMal) ou une LAA volontaire sont les deux solutions.
-                  </p>
-                </div>
-              </div>
+              <KeyFact>
+                Sans couverture accidents spécifique, un accident professionnel ou de loisirs
+                est pris en charge par la LAMal uniquement, avec des franchises et des
+                quote-parts qui s&apos;appliquent normalement. La couverture accidents optionnelle
+                via la LAMal (art. 8 LAMal) ou une LAA volontaire sont les deux solutions.
+              </KeyFact>
 
               <div className="space-y-4">
                 {[
@@ -314,21 +303,12 @@ export default function MaSituationPage() {
                 </div>
               </div>
 
-              <div className="callout flex gap-3">
-                <svg className="text-callout-icon shrink-0 mt-0.5" width="20" height="20"
-                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
-                     strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
-                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
-                  <line x1="10" y1="21" x2="14" y2="21" />
-                </svg>
-                <p className="text-[16px]">
-                  <strong>Subsides cantonaux :</strong> la perte d'emploi réduit le revenu déterminant
-                  et ouvre généralement des droits aux subsides. Contactez votre service cantonal
-                  ou votre ORP dès le début du chômage — les subsides non réclamés ne sont
-                  pas versés rétroactivement dans la plupart des cantons.
-                </p>
-              </div>
+              <KeyFact>
+                <strong>Subsides cantonaux :</strong> la perte d&apos;emploi réduit le revenu déterminant
+                et ouvre généralement des droits aux subsides. Contactez votre service cantonal
+                ou votre ORP dès le début du chômage — les subsides non réclamés ne sont
+                pas versés rétroactivement dans la plupart des cantons.
+              </KeyFact>
             </section>
 
             {/* Nouvel arrivant expatrié */}
@@ -341,20 +321,11 @@ export default function MaSituationPage() {
                 Le délai de 90 jours pour s'affilier est une règle absolue : ne le manquez pas.
               </p>
 
-              <div className="callout flex gap-3 mb-6">
-                <svg className="text-callout-icon shrink-0 mt-0.5" width="20" height="20"
-                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
-                     strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
-                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
-                  <line x1="10" y1="21" x2="14" y2="21" />
-                </svg>
-                <p className="text-[16px]">
-                  <strong>90 jours pour choisir :</strong> si vous respectez ce délai, la couverture
-                  est rétroactive à la date d'arrivée. Profitez de ce délai pour comparer les
-                  caisses — changer après le 1er janvier est plus contraignant.
-                </p>
-              </div>
+              <KeyFact>
+                <strong>90 jours pour choisir :</strong> si vous respectez ce délai, la couverture
+                est rétroactive à la date d&apos;arrivée. Profitez de ce délai pour comparer les
+                caisses — changer après le 1er janvier est plus contraignant.
+              </KeyFact>
 
               <div className="space-y-4">
                 {[

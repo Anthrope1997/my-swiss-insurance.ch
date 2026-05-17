@@ -273,23 +273,11 @@ export default function GuideLamalPage() {
                 ))}
               </ul>
 
-              <div className="callout flex gap-3">
-                <svg className="text-callout-icon shrink-0 mt-0.5" width="20" height="20"
-                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
-                     strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
-                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
-                  <line x1="10" y1="21" x2="14" y2="21" />
-                </svg>
-                <div>
-                  <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">À retenir</p>
-                  <p className="text-[16px] leading-relaxed">
-                    Non couvert par la LAMal de base : soins dentaires (sauf accident ou maladie grave),
-                    lunettes et lentilles, médecine alternative non prescrite, chambre privée à l&apos;hôpital.
-                    Ces prestations relèvent des assurances complémentaires LCA.
-                  </p>
-                </div>
-              </div>
+              <KeyFact>
+                Non couvert par la LAMal de base : soins dentaires (sauf accident ou maladie grave),
+                lunettes et lentilles, médecine alternative non prescrite, chambre privée à l&apos;hôpital.
+                Ces prestations relèvent des assurances complémentaires LCA.
+              </KeyFact>
 
               <div className="mt-6">
                 <Link href="/sante/lamal-vs-lca" className="text-brand hover:underline text-[16px] font-medium">
@@ -374,20 +362,11 @@ export default function GuideLamalPage() {
                   </tbody>
                 </table>
               </div>
-              <div className="callout flex gap-3">
-                <svg className="text-callout-icon shrink-0 mt-0.5" width="20" height="20"
-                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
-                     strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
-                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
-                  <line x1="10" y1="21" x2="14" y2="21" />
-                </svg>
-                <p className="text-[16px]">
-                  La caisse la moins chère dans votre canton n'est pas forcément la même que celle de
-                  votre voisin. Les écarts entre assureurs dans un même canton atteignent jusqu'à
-                  CHF 180 par mois pour un adulte.
-                </p>
-              </div>
+              <KeyFact>
+                La caisse la moins chère dans votre canton n&apos;est pas forcément la même que celle de
+                votre voisin. Les écarts entre assureurs dans un même canton atteignent jusqu&apos;à
+                CHF 180 par mois pour un adulte.
+              </KeyFact>
 
             </section>
 
@@ -494,23 +473,11 @@ export default function GuideLamalPage() {
               <p className="text-[13px] text-slate/60 mb-6">
                 Profil : adulte 35 ans, modèle standard, franchise 300 CHF.
               </p>
-              <div className="callout flex gap-3">
-                <svg className="text-callout-icon shrink-0 mt-0.5" width="20" height="20"
-                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
-                     strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
-                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
-                  <line x1="10" y1="21" x2="14" y2="21" />
-                </svg>
-                <div>
-                  <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">À retenir</p>
-                  <p className="text-[16px] leading-relaxed">
-                    Ces chiffres sont des estimations reposant sur les écarts de primes constatés en 2026
-                    pour un adulte, modèle standard, franchise 300 CHF. Les économies réelles dépendent
-                    de votre situation individuelle.
-                  </p>
-                </div>
-              </div>
+              <KeyFact>
+                Ces chiffres sont des estimations reposant sur les écarts de primes constatés en 2026
+                pour un adulte, modèle standard, franchise 300 CHF. Les économies réelles dépendent
+                de votre situation individuelle.
+              </KeyFact>
 
             </section>
 
@@ -593,20 +560,11 @@ export default function GuideLamalPage() {
                 la base de la déclaration d'impôts. Pour les autres, une demande est à déposer auprès du
                 service cantonal compétent, généralement avant le 31 mars.
               </p>
-              <div className="callout flex gap-3">
-                <svg className="text-callout-icon shrink-0 mt-0.5" width="20" height="20"
-                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}
-                     strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z" />
-                  <line x1="9.5" y1="18" x2="14.5" y2="18" />
-                  <line x1="10" y1="21" x2="14" y2="21" />
-                </svg>
-                <p className="text-[16px]">
-                  <strong>Astuce :</strong> si vous pensez avoir droit à un subside mais n&apos;en avez pas reçu,
-                  contactez votre caisse maladie ou le service cantonal. Les subsides non réclamés ne sont
-                  pas versés rétroactivement dans la plupart des cantons.
-                </p>
-              </div>
+              <KeyFact>
+                <strong>Astuce :</strong> si vous pensez avoir droit à un subside mais n&apos;en avez pas reçu,
+                contactez votre caisse maladie ou le service cantonal. Les subsides non réclamés ne sont
+                pas versés rétroactivement dans la plupart des cantons.
+              </KeyFact>
 
               <div className="mt-6">
                 <Link href="/sante/subsides" className="text-brand hover:underline text-[16px] font-medium">

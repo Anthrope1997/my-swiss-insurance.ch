@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import KeyFact from '@/components/ui/KeyFact'
 import AuthorBio from '@/components/ui/AuthorBio'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
@@ -211,14 +212,11 @@ export default function FrontalierFrancePage() {
             <section id="droit-option">
               <h2 className="article-h2">2. Comment fonctionne le droit d'option ?</h2>
 
-              <div className="callout mb-5">
-                <p className="text-[12px] font-semibold text-ink uppercase tracking-widest mb-1">À retenir</p>
-                <p className="text-[16px]">
-                  Dès le premier jour de travail en Suisse, vous disposez de 3 mois pour exercer
-                  votre droit d'option. Ce choix est en principe définitif sauf changement de situation.
-                  Passé ce délai, la LAMal suisse est généralement appliquée par défaut.
-                </p>
-              </div>
+              <KeyFact>
+                Dès le premier jour de travail en Suisse, vous disposez de 3 mois pour exercer
+                votre droit d&apos;option. Ce choix est en principe définitif sauf changement de situation.
+                Passé ce délai, la LAMal suisse est généralement appliquée par défaut.
+              </KeyFact>
 
               <div className="space-y-4 mb-5">
                 {[
@@ -382,10 +380,10 @@ export default function FrontalierFrancePage() {
                 </table>
               </div>
               <p className="text-[13px] text-slate/60 mt-2 md:hidden">Tableau complet visible sur ordinateur.</p>
-              <div className="callout text-[16px]">
+              <KeyFact>
                 Les modèles alternatifs (médecin de famille, Telmed) réduisent la prime de 10 à 20 % par rapport au modèle standard.
                 Si vous êtes éligible aux subsides cantonaux, votre prime nette peut être significativement inférieure.
-              </div>
+              </KeyFact>
             </section>
 
             {/* LAMal ou Sécurité sociale */}

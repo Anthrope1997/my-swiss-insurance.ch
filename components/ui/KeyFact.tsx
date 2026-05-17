@@ -20,7 +20,7 @@ export default function KeyFact({ label = 'À retenir', children }: KeyFactProps
         </svg>
         <span className="text-[16px] font-semibold text-brand uppercase tracking-widest">{label}</span>
       </div>
-      <p className="text-[16px]">{children}</p>
+      <div className="text-[16px] leading-relaxed">{children}</div>
     </div>
   )
 }
