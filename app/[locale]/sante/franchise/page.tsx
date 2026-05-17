@@ -51,7 +51,7 @@ const faqItems = [
   {
     question: "Quelle est la différence entre la franchise et la quote-part ?",
     answer:
-      "La franchise est le montant fixe annuel que vous payez avant que l'assurance intervienne (CHF 300 à CHF 2 500 par an). La quote-part représente 10 % des frais dépassant la franchise. Son plafond est CHF 700 par an pour un adulte et CHF 350 pour un enfant.",
+      "La franchise est le montant fixe annuel que vous payez avant que l'assurance intervienne (CHF 300 à CHF 2 500 par an). La quote-part représente 10 % des frais médicaux dépassant la franchise. Son plafond est CHF 700 par an pour un adulte et CHF 350 pour un enfant.",
   },
   {
     question: "Quelle franchise recommander pour un enfant ?",
@@ -208,7 +208,7 @@ export default function FranchisePage() {
                 <ul className="space-y-2">
                   {[
                     'Montant fixe : CHF 300 à CHF 2 500 par an (adulte)',
-                    "Vous payez 100 % des frais jusqu'à ce montant",
+                    "Vous payez 100 % des frais médicaux jusqu'à ce montant",
                     'Vous la choisissez une fois par an, avant le 30 novembre',
                     'Plus la franchise est élevée, plus la prime mensuelle est basse',
                   ].map((item, i) => (
@@ -220,7 +220,7 @@ export default function FranchisePage() {
                 <h3 className="article-h3">La quote-part</h3>
                 <ul className="space-y-2">
                   {[
-                    '10% des frais dépassant la franchise',
+                    '10 % des frais médicaux dépassant la franchise',
                     'Plafond : CHF 700 par an (adulte), CHF 350 par an (enfant)',
                     'Automatique, non modifiable',
                     'Coût maximum total : franchise + CHF 700 par an',
@@ -232,7 +232,7 @@ export default function FranchisePage() {
             </div>
 
             <KeyFact label="Exemple">
-              <p className="font-semibold text-ink mb-1">Franchise CHF 1 500, CHF 2 000 de frais dans l&apos;année</p>
+              <p className="font-semibold text-ink mb-1">Franchise CHF 1 500, CHF 2 000 de frais médicaux dans l&apos;année</p>
               <ul className="space-y-1">
                 <li>Vous payez CHF 1 550 : CHF 1 500 (franchise) + CHF 50 (10% de quote-part sur les CHF 500 restants).</li>
                 <li>Votre caisse prend en charge CHF 450 : les 90% au-dessus de la franchise.</li>
@@ -293,8 +293,8 @@ export default function FranchisePage() {
             </div>
 
             <KeyFact>
-              <strong>CHF {fmtChf(seuil)} de frais annuels</strong> : seuil entre la franchise CHF 300 et CHF 2 500 pour un adulte de 26 ans et plus.
-              Pour un jeune adulte de 19 à 25 ans, ce seuil descend à <strong>CHF {fmtChf(seuilJA)}</strong> — au-delà, la franchise CHF 300 devient plus avantageuse.
+              Moins de <strong>CHF {fmtChf(seuil)}</strong> de frais médicaux par an : prenez la franchise CHF 2 500, elle coûte moins cher.
+              Au-dessus, prenez la franchise CHF 300 — pour les 19-25 ans, ce seuil est <strong>CHF {fmtChf(seuilJA)}</strong>.
             </KeyFact>
 
             {/* Franchise enfant */}
