@@ -29,6 +29,83 @@ const ALL_CODES = Object.keys(SUBSIDES_2026).sort((a, b) =>
   )
 )
 
+// ─── Délais helpers ──────────────────────────────────────────────────────────
+
+const FR_MOIS: Record<string, number> = {
+  'janv.': 0, 'févr.': 1, 'mars': 2, 'avr.': 3, 'mai': 4, 'juin': 5,
+  'juil.': 6, 'août': 7, 'sept.': 8, 'oct.': 9, 'nov.': 10, 'déc.': 11,
+}
+
+function parseDelai(delai: string): Date | null {
+  const m = delai.match(/(\d{1,2})\s+(janv\.|févr\.|mars|avr\.|mai|juin|juil\.|août|sept\.|oct\.|nov\.|déc\.)\s+(\d{4})/)
+  if (!m) return null
+  return new Date(parseInt(m[3]), FR_MOIS[m[2]], parseInt(m[1]))
+}
+
+function DelaiInfo({ data }: { data: CantonSubside2026 }) {
+  const today = new Date()
+
+  if (data.auto) {
+    return (
+      <div className="space-y-1.5">
+        <p className="text-[14px] font-semibold text-ink">Versement automatique — aucune démarche requise</p>
+        <p className="text-[14px] text-slate leading-relaxed">
+          Le subside est calculé sur la base de votre taxation et déduit directement de votre prime chaque mois pour toute l&apos;année civile 2026.
+        </p>
+        {data.retroactivite && (
+          <p className="text-[13px] text-slate/60 leading-relaxed">{data.retroactivite}</p>
+        )}
+      </div>
+    )
+  }
+
+  if (data.delai.startsWith('Pas de délai')) {
+    const isM2 = data.delai.includes('2e mois')
+    return (
+      <div className="space-y-1.5">
+        <p className="text-[14px] font-semibold text-ink">Pas de date butoir — déposez à tout moment</p>
+        <p className="text-[14px] text-slate leading-relaxed">
+          Le droit s&apos;ouvre {isM2
+            ? 'le 1er jour du 2e mois suivant le dépôt'
+            : 'le mois suivant le dépôt'} de votre dossier.
+          Le subside est ensuite déduit chaque mois de votre prime.
+        </p>
+        <p className="text-[13px] text-slate/60">
+          Pas de rétroactivité au 1er janvier — chaque mois sans dossier déposé est définitivement perdu.
+        </p>
+      </div>
+    )
+  }
+
+  const deadline = parseDelai(data.delai)
+  const isPast   = deadline ? today > deadline : false
+
+  if (isPast) {
+    return (
+      <div className="space-y-1.5">
+        <p className="text-[14px] font-semibold" style={{ color: '#b45309' }}>
+          Délai dépassé ({data.delai})
+        </p>
+        <p className="text-[14px] text-slate leading-relaxed">
+          {data.retroactivite
+            ?? 'Renseignez-vous auprès du service cantonal pour connaître vos options en cours d\'année.'}
+        </p>
+      </div>
+    )
+  }
+
+  return (
+    <div className="space-y-1.5">
+      <p className="text-[14px] font-semibold text-ink">
+        Démarche à effectuer avant le <span className="text-brand">{data.delai}</span>
+      </p>
+      {data.retroactivite && (
+        <p className="text-[14px] text-slate leading-relaxed">{data.retroactivite}</p>
+      )}
+    </div>
+  )
+}
+
 // ─── Calcul standard ─────────────────────────────────────────────────────────
 
 function calculerSubsideStd(
@@ -300,15 +377,7 @@ export default function SubsidesSimulatorFull() {
                           <svg className="w-3.5 h-3.5 text-brand shrink-0" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                             <path d="M5 13l4 4L19 7" />
                           </svg>
-                          <span>Subsides versés automatiquement</span>
-                        </>
-                      ) : !NON_DATE_DELAI.has(cantonData.delai) ? (
-                        <>
-                          <svg className="w-3.5 h-3.5 text-slate shrink-0" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="9" />
-                            <path d="M12 7v5l3 3" />
-                          </svg>
-                          <span>Subsides versés sur demande, démarche à effectuer avant le {cantonData.delai}</span>
+                          <span>Versé automatiquement</span>
                         </>
                       ) : (
                         <>
@@ -316,7 +385,7 @@ export default function SubsidesSimulatorFull() {
                             <circle cx="12" cy="12" r="9" />
                             <path d="M12 7v5l3 3" />
                           </svg>
-                          <span>Subsides versés sur demande</span>
+                          <span>Sur demande — voir détails ci-dessous</span>
                         </>
                       )}
                     </span>
@@ -327,6 +396,12 @@ export default function SubsidesSimulatorFull() {
                   </div>
                 </div>
 
+
+                {/* Délais & démarches */}
+                <div className="border-t border-brand/10 px-4 sm:px-6 py-4">
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-slate/40 mb-2.5">Délais & démarches</p>
+                  <DelaiInfo data={cantonData} />
+                </div>
 
                 {/* Disclaimer + CTA */}
                 <div className="border-t border-brand/10 px-4 sm:px-6 py-5 space-y-4">
