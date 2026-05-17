@@ -293,8 +293,8 @@ export default function FranchisePage() {
             </div>
 
             <KeyFact>
-              Moins de <strong>CHF {fmtChf(seuil)}</strong> de frais médicaux par an : prenez la franchise CHF 2 500, elle coûte moins cher.
-              Au-dessus, prenez la franchise CHF 300 — pour les 19-25 ans, ce seuil est <strong>CHF {fmtChf(seuilJA)}</strong>.
+              Pour un adulte de 26 ans et plus, en dessous de <strong>CHF {fmtChf(seuil)}</strong> de frais médicaux par an, la franchise CHF 2 500 coûte moins cher.
+              Au-delà, la franchise CHF 300 est plus avantageuse. Pour les 19-25 ans, ce seuil descend à <strong>CHF {fmtChf(seuilJA)}</strong>.
             </KeyFact>
 
             {/* Franchise enfant */}
