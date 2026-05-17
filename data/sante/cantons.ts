@@ -1904,10 +1904,10 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     nom: 'Tessin',
     seuilRevenu: '≈ 52 000 CHF/an', seuilNum: 52000,
     montantMaxNum: 668, montantMax: '≤ 668 CHF/mois',
-    auto: false, delai: '31 déc. 2025 (droit dès janv. 2026) ; hors délai : droit dès M+2',
+    auto: false, delai: '31 déc. 2025',
     lien: 'https://www4.ti.ch/dss/ias/prestazioni-e-contributi/scheda/p/s/dettaglio/riduzione-dei-premi-dellassicurazione-malattia-ripam/richiesta-del-formulario-ripam/',
     primeMoyenne: 531,
-    retroactivite: 'Votre subside est rétroactif au 1er janvier 2026 si vous avez déposé le formulaire avant le 31 décembre 2025. Au-delà, votre droit commence le mois suivant votre demande.',
+    retroactivite: 'Pas de rétroactivité après le 31 décembre 2025. Votre subside commence le mois suivant votre demande.',
     arrivants: 'Si vous déposez le formulaire RIPAM avant le 31 décembre, votre subside commence en janvier. Sinon, il commence le mois suivant votre demande.',
   },
 
