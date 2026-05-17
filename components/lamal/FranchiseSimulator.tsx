@@ -212,7 +212,7 @@ export default function FranchiseSimulator() {
             disabled={!canCalculate}
             className="btn-primary disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            Calculer ma franchise optimale
+            Trouver ma franchise optimale →
           </button>
         </div>
 
