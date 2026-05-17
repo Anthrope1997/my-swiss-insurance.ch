@@ -131,12 +131,12 @@ export default function FranchiseSimulator() {
 
   const phrase = result
     ? ageGroup === 'enfant'
-      ? `Dans le canton de ${cantonName}, avec CHF ${fmtN(frais)} de frais estimés, la franchise CHF ${fmtN(result.best.franchise)} est la plus avantageuse pour votre enfant.`
-      : `Dans le canton de ${cantonName}, avec CHF ${fmtN(frais)} de frais estimés, la franchise CHF ${fmtN(result.best.franchise)} est la plus avantageuse.`
+      ? `Dans le canton de ${cantonName}, avec CHF ${fmtN(frais)} de frais médicaux estimés, la franchise de CHF ${fmtN(result.best.franchise)} est la plus avantageuse pour votre enfant.`
+      : `Dans le canton de ${cantonName}, avec CHF ${fmtN(frais)} de frais médicaux estimés, la franchise de CHF ${fmtN(result.best.franchise)} est la plus avantageuse.`
     : null
 
   const economyLine = result && result.economy > 0
-    ? `CHF ${fmtN(result.economy)} de moins par an par rapport à la franchise CHF ${fmtN(result.worst.franchise)}`
+    ? `Économie de CHF ${fmtN(result.economy)} par an par rapport à la franchise de CHF ${fmtN(result.worst.franchise)}`
     : null
 
   const comparateurUrl =

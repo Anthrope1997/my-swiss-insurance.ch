@@ -246,7 +246,7 @@ export default function FranchisePage() {
             <h2 className="article-h2">3. Quelle franchise choisir ?</h2>
 
             <p className="article-p mb-6">
-              La franchise optimale dépend de vos frais médicaux annuels et de votre canton de résidence.
+              La franchise adaptée à votre situation dépend de vos frais médicaux annuels et de votre canton de résidence.
               Les franchises adulte vont de 300 à 2 500 CHF par an. Les franchises enfant vont de 0 à 600 CHF par an.
             </p>
 
@@ -278,20 +278,19 @@ export default function FranchisePage() {
 
             {/* Graphique — desktop uniquement */}
             <p className="article-p mb-4">
-              Votre prime mensuelle est fixée notamment selon la franchise choisie : plus la franchise est élevée, plus la prime baisse — et inversement. En sélectionnant la franchise adaptée à votre profil, vous réduisez votre coût total annuel tout en restant couvert par la LAMal en cas de frais médicaux.
+              Votre prime mensuelle dépend de la franchise choisie. Plus la franchise est élevée, plus la prime baisse, et inversement. En choisissant la franchise adaptée à votre profil, vous réduisez votre coût total annuel tout en restant couvert par la LAMal en cas de frais médicaux.
             </p>
             <p className="text-[16px] font-semibold text-ink mb-3">
-              Coût annuel total par franchise — adulte, prime la moins chère, moyenne suisse
+              Coût annuel moyen par franchise de l&apos;assurance LAMal la moins chère pour un adulte
             </p>
             <div className="hidden md:block">
               <FranchiseChart />
             </div>
 
             <KeyFact>
-              En moyenne suisse, le seuil à partir duquel la franchise CHF 300 devient moins chère que la franchise CHF 2 500 est de{' '}
-              <strong>CHF 1 897 de frais médicaux annuels pour un adulte de 26 ans et plus</strong>, et de{' '}
-              <strong>CHF 1 722 pour un jeune adulte de 19 à 25 ans</strong>{' '}
-              — les primes JA étant plus basses, l&apos;économie réalisée en optant pour la franchise haute est moindre.
+              En moyenne suisse, le seuil d&apos;équilibre entre la franchise CHF 300 et CHF 2 500 est de{' '}
+              <strong>CHF 1 897 de frais médicaux annuels pour un adulte de 26 ans et plus</strong>.
+              Pour un jeune adulte de 19 à 25 ans, ce seuil est de <strong>CHF 1 722</strong>.
               En dessous de ces seuils, la franchise CHF 2 500 est plus avantageuse ; au-dessus, la franchise CHF 300 limite mieux le coût total annuel.
             </KeyFact>
 
