@@ -37,7 +37,7 @@ Chaleureux sans être familier.
 - Longueur maximale : 25 mots par phrase.
 - Une idée par phrase. Jamais deux.
 - Commencer par le fait, pas par la condition.
-  - Bien : "La franchise 2 500 CHF économise 120 CHF par mois."
+  - Bien : "La franchise CHF 2 500 économise CHF 120 par mois."
   - Mal : "Si vous êtes en bonne santé, vous pourriez envisager..."
 - Éviter les constructions passives.
   - Bien : "Votre caisse rembourse les frais au-delà de la franchise."
@@ -56,7 +56,7 @@ Chaleureux sans être familier.
   - "coûte" plutôt que "représente un coût de"
   - "si" plutôt que "dans le cas où"
 - Jamais de jargon sans définition immédiate dans la même phrase.
-- Les chiffres s'écrivent en chiffres, pas en lettres : "300 CHF", jamais "trois cents francs".
+- Les chiffres s'écrivent en chiffres, pas en lettres : "CHF 300", jamais "trois cents francs".
 
 ### Signaux d'écriture IA à éliminer
 
@@ -158,11 +158,17 @@ L'expression "assurance maladie de base LAMal" apparaît **exactement une fois**
 
 ## 8. Typographie
 
+### Montants monétaires
+Le code monétaire **précède toujours le chiffre** : `CHF 300`, jamais `300 CHF`. Sans exception pour tout montant en francs suisses, qu'il s'agisse de primes, franchises, subsides ou économies.
+
+- Bien : `CHF 300 par mois`, `CHF 2 500`, `économie de CHF 1 200 par an`
+- Mal : `300 CHF`, `2 500 CHF`, `1 200 CHF par an`
+
 ### Espaces autour des deux-points
 Le deux-points est **précédé et suivi d'une espace** dans tous les textes visibles : titres, introductions, labels, tableaux, CTAs, blocs "En bref", callouts. Sans exception.
 
-- Bien : `Franchise 300 CHF : prime de référence`
-- Mal : `Franchise 300 CHF: prime de référence`
+- Bien : `Franchise CHF 300 : prime de référence`
+- Mal : `Franchise CHF 300: prime de référence`
 
 ---
 
