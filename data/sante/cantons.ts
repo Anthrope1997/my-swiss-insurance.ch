@@ -1728,7 +1728,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     nom: 'Argovie',
     seuilRevenu: '≈ 42 000 CHF/an', seuilNum: 42000,
     montantMaxNum: 486, montantMax: '≤ 486 CHF/mois',
-    auto: false, delai: '31 déc. 2025',
+    auto: false, delai: '31 déc. 2026',
     lien: 'https://www.sva-aargau.ch/private/ihre-private-situation/finanzielle-unterstuetzung/praemienverbilligung/allgemeine',
     primeMoyenne: 419,
     retroactivite: 'Votre subside est rétroactif au 1er janvier 2026 si votre demande est déposée avant le 31 décembre 2026. Passé ce délai, l\'inscription n\'est plus possible pour l\'année en cours.',
@@ -1753,7 +1753,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 mars 2026',
     lien: 'https://www.sovar.ch/dienstleistungen/pr%C3%A4mienverbilligung-ipv',
     primeMoyenne: 432,
-    retroactivite: 'Pas de rétroactivité — délai strict 31 mars. Si dépassé : droit uniquement à partir du mois de la demande.',
+    retroactivite: 'Pas de rétroactivité. Le délai du 31 mars 2026 étant dépassé, votre subside commence le mois suivant votre demande.',
     arrivants: 'Votre subside commence dès le mois de votre demande. Formulaire disponible sur sovar.ch.',
   },
 
@@ -1797,7 +1797,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 janv. 2026',
     lien: 'https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/individuelle-praemienverbilligung-ipv.html/502',
     primeMoyenne: 345,
-    retroactivite: 'Délai strict au 31 janvier. Passé cette date, le droit est perdu pour l\'année en cours — aucune demande tardive acceptée.',
+    retroactivite: 'Pas de rétroactivité. Le délai du 31 janvier 2026 étant dépassé, le droit est perdu pour l\'année en cours.',
     arrivants: 'Le droit est évalué au 1er janvier de chaque année. Si vous êtes arrivé après cette date, votre subside débutera l\'année suivante. Contactez l\'administration fiscale cantonale (gl.ch) pour confirmer votre situation.',
   },
 
@@ -1816,10 +1816,10 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     nom: 'Lucerne',
     seuilRevenu: '≈ 44 000 CHF/an', seuilNum: 44000,
     montantMaxNum: 469, montantMax: '≤ 469 CHF/mois',
-    auto: false, delai: '31 oct. 2025 (ordonnaire) ; arrivants de l\'étranger et revenus en baisse –25% : jusqu\'au 31 déc. 2026',
+    auto: false, delai: '31 déc. 2026',
     lien: 'https://www.was-luzern.ch/praemienverbilligung',
     primeMoyenne: 395,
-    retroactivite: 'Le délai ordinaire est le 31 octobre de l\'année précédente. Si vos revenus ont baissé de plus de 25%, vous pouvez demander un recalcul jusqu\'au 31 décembre 2026 : votre subside est alors rétroactif.',
+    retroactivite: 'Votre subside est rétroactif si vos revenus ont baissé de plus de 25% par rapport à votre dernière taxation. Vous pouvez demander un recalcul jusqu\'au 31 décembre 2026.',
     arrivants: 'Votre subside commence le mois suivant votre demande. Déposez votre formulaire dès que possible, au plus tard le 31 décembre 2026.',
   },
 
@@ -1830,7 +1830,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '30 avr. 2026',
     lien: 'https://www.aknw.ch/dienstleistungen/praemienverbilligung-ipv',
     primeMoyenne: 288,
-    retroactivite: 'Pas de rétroactivité — délai strict 30 avril. Les demandes déposées après cette date ne sont plus prises en compte.',
+    retroactivite: 'Pas de rétroactivité. Le délai du 30 avril 2026 étant dépassé, aucune demande ne peut plus être déposée pour 2026.',
     arrivants: 'Déposez votre demande dans les 3 mois suivant votre arrivée, au plus tard le 30 avril.',
   },
 
@@ -1852,7 +1852,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 mars 2026',
     lien: 'https://www.svasg.ch/produkte/ipv/',
     primeMoyenne: 430,
-    retroactivite: 'Pas de rétroactivité si délai dépassé — droit uniquement dès le mois de la demande. Délai : 31 mars.',
+    retroactivite: 'Pas de rétroactivité. Le délai du 31 mars 2026 étant dépassé, votre subside commence le mois suivant votre demande.',
     arrivants: 'Votre subside commence le mois suivant votre demande (délai : 31 décembre). Si vous venez d\'un autre canton, le subside ne s\'applique pas pour l\'année de votre déménagement.',
   },
 
@@ -1863,7 +1863,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '30 avr. 2026',
     lien: 'https://www.svash.ch',
     primeMoyenne: 431,
-    retroactivite: 'Pas de rétroactivité — délai strict au 30 avril. Les demandes déposées après cette date ne sont plus acceptées.',
+    retroactivite: 'Pas de rétroactivité. Le délai du 30 avril 2026 étant dépassé, aucune demande ne peut plus être déposée pour 2026.',
     arrivants: 'Le droit est évalué au 1er janvier. Si vous venez d\'arriver, déposez votre demande dès que possible, avant le 30 avril. Formulaires disponibles sur svash.ch.',
   },
 
@@ -1978,7 +1978,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: 'Pas de délai annuel fixe (droit dès le 1er jour du 2e mois suivant le dépôt)',
     lien: 'https://www.vd.ch/sante-soins-et-handicap/assurance-maladie/subside-a-lassurance-maladie',
     primeMoyenne: 638,
-    retroactivite: 'Le droit prend naissance le 1er jour du 2ème mois suivant le dépôt de la demande. Exception : bénéficiaires RI ou PC AVS/AI (dès le début des prestations).',
+    retroactivite: 'Votre subside commence le 1er jour du 2e mois suivant votre demande. Exception : si vous bénéficiez du Revenu d\'insertion (RI) ou de prestations complémentaires AVS/AI, votre droit commence dès le début de ces prestations.',
     arrivants: 'Si vous venez d\'un autre canton, déposez une nouvelle demande auprès de l\'OVAM.',
     note: 'Demande en ligne (vd.ch/ovam) ou en agence d\'assurances sociales. Renouvellement annuel fin octobre basé sur taxation définitive au 17 octobre.',
     vd: {
