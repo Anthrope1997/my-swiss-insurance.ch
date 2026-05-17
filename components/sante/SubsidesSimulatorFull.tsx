@@ -31,6 +31,18 @@ function parseDelai(delai: string): Date | null {
   return new Date(parseInt(m[3]), FR_MOIS[m[2]], parseInt(m[1]))
 }
 
+function formatDelai(delai: string): string {
+  return delai
+    .replace('janv.', 'janvier')
+    .replace('févr.', 'février')
+    .replace('avr.', 'avril')
+    .replace('juil.', 'juillet')
+    .replace('sept.', 'septembre')
+    .replace('oct.', 'octobre')
+    .replace('nov.', 'novembre')
+    .replace('déc.', 'décembre')
+}
+
 function cleanText(s: string): string {
   return s
     .replace(/ — /g, ' : ')
@@ -211,9 +223,9 @@ export default function SubsidesSimulatorFull() {
       calBody  = isM2 ? t.howTo.noDeadlineBodyM2 : t.howTo.noDeadlineBodyM1
     } else if (isPast) {
       calTitle = t.howTo.pastTitre
-      calBody  = `Délai : ${cantonData.delai}. ${t.howTo.pastBody}`
+      calBody  = `Délai : ${formatDelai(cantonData.delai)}. ${t.howTo.pastBody}`
     } else {
-      calTitle = `${t.howTo.futureTitre} ${cantonData.delai}`
+      calTitle = `${t.howTo.futureTitre} ${formatDelai(cantonData.delai)}`
       calBody  = ''
     }
   }
