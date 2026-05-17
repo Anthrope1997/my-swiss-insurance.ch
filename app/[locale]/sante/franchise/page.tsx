@@ -277,8 +277,11 @@ export default function FranchisePage() {
             </div>
 
             {/* Graphique — desktop uniquement */}
+            <p className="article-p mb-4">
+              La prime mensuelle et la franchise jouent en sens inverse : plus la franchise est élevée, plus la prime baisse. Ce mécanisme est un levier d&apos;économie concret — à condition de choisir le bon niveau. Avec la franchise adaptée à votre profil, vous réduisez votre prime annuelle tout en restant bien couvert par la LAMal en cas de frais médicaux imprévus.
+            </p>
             <p className="text-[16px] font-semibold text-ink mb-3">
-              Illustration de l&apos;évolution du coût annuel de l&apos;assurance LAMal d&apos;un adulte ayant choisi la prime la moins chère par franchise en Suisse
+              Illustration du coût annuel moyen pour un adulte de l&apos;assurance LAMal la moins chère, avec une franchise de CHF 300 et de CHF 2 500
             </p>
             <div className="hidden md:block">
               <FranchiseChart />

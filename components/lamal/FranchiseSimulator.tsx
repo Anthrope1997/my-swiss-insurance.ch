@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import { cantonBySlug } from '@/data/sante/cantons'
 
@@ -68,45 +68,66 @@ function fmtN(n: number): string {
   return Math.round(n).toLocaleString('fr-CH')
 }
 
+function computeResult(canton: string, ageGroup: AgeGroup, frais: number) {
+  const data = cantonBySlug[canton]
+  if (!data) return null
+
+  let options: Option[]
+
+  if (ageGroup === 'enfant') {
+    const base = data.primeMoyenneEnfant
+    options = CHILD_FACTORS.map(({ franchise, factor }) => {
+      const primeMois = Math.round(base * factor * 100) / 100
+      return { franchise, primeMois, total: calcTotal(primeMois, franchise, frais, 350) }
+    })
+  } else {
+    const ratio = ageGroup === 'jeuneAdulte' && data.primeMoyenne > 0
+      ? data.primeMoyenneJA / data.primeMoyenne
+      : 1
+    options = data.franchiseTable.map(row => {
+      const primeMois = Math.round(row.primeMois * ratio * 100) / 100
+      return { franchise: row.franchise, primeMois, total: calcTotal(primeMois, row.franchise, frais, 700) }
+    })
+  }
+
+  if (options.length === 0) return null
+  const sorted = [...options].sort((a, b) => a.total - b.total)
+  const best   = sorted[0]
+  const worst  = sorted[sorted.length - 1]
+  return { best, worst, economy: worst.total - best.total }
+}
+
+function Chevron() {
+  return (
+    <svg
+      className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate pointer-events-none"
+      fill="none" stroke="currentColor" viewBox="0 0 24 24"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+    </svg>
+  )
+}
+
 export default function FranchiseSimulator() {
+  const [ageGroup, setAgeGroup] = useState<AgeGroup>('adulte')
   const [postalCode, setPostalCode] = useState('')
-  const [ageGroup, setAgeGroup]     = useState<AgeGroup>('adulte')
   const [fraisRaw, setFraisRaw]     = useState('')
+  const [submitted, setSubmitted]   = useState(false)
+
+  const set = (patch: Partial<{ ageGroup: AgeGroup; postalCode: string; fraisRaw: string }>) => {
+    setSubmitted(false)
+    if (patch.ageGroup !== undefined) setAgeGroup(patch.ageGroup)
+    if (patch.postalCode !== undefined) setPostalCode(patch.postalCode)
+    if (patch.fraisRaw !== undefined) setFraisRaw(patch.fraisRaw)
+  }
 
   const detectedSlug = slugFromPostal(postalCode)
   const canton       = detectedSlug ?? 'zurich'
   const cantonName   = cantonBySlug[canton]?.name ?? 'Zurich'
+  const frais        = Math.max(0, parseInt(fraisRaw.replace(/\s/g, ''), 10) || 0)
+  const canCalculate = fraisRaw.trim() !== ''
 
-  const frais = Math.max(0, parseInt(fraisRaw.replace(/\s/g, ''), 10) || 0)
-
-  const result = useMemo<{ best: Option; worst: Option; economy: number } | null>(() => {
-    const data = cantonBySlug[canton]
-    if (!data) return null
-
-    let options: Option[]
-
-    if (ageGroup === 'enfant') {
-      const base = data.primeMoyenneEnfant
-      options = CHILD_FACTORS.map(({ franchise, factor }) => {
-        const primeMois = Math.round(base * factor * 100) / 100
-        return { franchise, primeMois, total: calcTotal(primeMois, franchise, frais, 350) }
-      })
-    } else {
-      const ratio = ageGroup === 'jeuneAdulte' && data.primeMoyenne > 0
-        ? data.primeMoyenneJA / data.primeMoyenne
-        : 1
-      options = data.franchiseTable.map(row => {
-        const primeMois = Math.round(row.primeMois * ratio * 100) / 100
-        return { franchise: row.franchise, primeMois, total: calcTotal(primeMois, row.franchise, frais, 700) }
-      })
-    }
-
-    if (options.length === 0) return null
-    const sorted = [...options].sort((a, b) => a.total - b.total)
-    const best   = sorted[0]
-    const worst  = sorted[sorted.length - 1]
-    return { best, worst, economy: worst.total - best.total }
-  }, [canton, ageGroup, frais])
+  const result = submitted ? computeResult(canton, ageGroup, frais) : null
 
   const phrase = result
     ? ageGroup === 'enfant'
@@ -121,96 +142,113 @@ export default function FranchiseSimulator() {
   const comparateurUrl =
     `/sante/comparateur?canton=${canton}&franchise=${result?.best.franchise ?? 300}&profil=${ageGroup}`
 
-  const showResult = fraisRaw !== '' && result !== null && phrase !== null
-
   return (
-    <div className="bg-white border border-edge rounded-xl p-6 mt-8">
+    <div className="bg-white border border-edge rounded-xl overflow-hidden mt-8">
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+      {/* ── Formulaire ── */}
+      <div className="px-6 py-6 space-y-5">
 
-        {/* Profil */}
-        <div>
-          <label htmlFor="sim-profil" className="text-[16px] font-medium text-ink mb-2 block">
-            Profil
-          </label>
-          <select
-            id="sim-profil"
-            value={ageGroup}
-            onChange={e => setAgeGroup(e.target.value as AgeGroup)}
-            className="select-field"
-          >
-            <option value="adulte">Adulte — 26 ans et plus</option>
-            <option value="jeuneAdulte">Jeune adulte — 19 à 25 ans</option>
-            <option value="enfant">Enfant — 0 à 18 ans</option>
-          </select>
-        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
 
-        {/* Code postal */}
-        <div>
-          <label htmlFor="sim-postal" className="text-[16px] font-medium text-ink mb-2 block">
-            Code postal
-          </label>
-          <input
-            id="sim-postal"
-            type="text"
-            inputMode="numeric"
-            maxLength={4}
-            placeholder="ex. 1201"
-            value={postalCode}
-            onChange={e => setPostalCode(e.target.value.replace(/\D/g, ''))}
-            className="input-field"
-          />
-        </div>
-
-        {/* Frais médicaux */}
-        <div>
-          <label htmlFor="sim-frais" className="text-[16px] font-medium text-ink mb-2 block">
-            Frais médicaux (CHF / an)
-          </label>
-          <input
-            id="sim-frais"
-            type="text"
-            inputMode="numeric"
-            placeholder="ex. 1500"
-            value={fraisRaw}
-            onChange={e => setFraisRaw(e.target.value.replace(/\D/g, ''))}
-            className="input-field"
-          />
-        </div>
-
-      </div>
-
-      {/* Action secondaire */}
-      <div className="mb-6">
-        <Link
-          href={`/sante/subsides?canton=${canton}`}
-          className="btn-secondary text-[16px]"
-        >
-          Calculer mon subside →
-        </Link>
-      </div>
-
-      {/* Résultat */}
-      {showResult && (
-        <div className="bg-blue-tint rounded-lg px-5 py-4">
-          <div className="flex items-center gap-2 mb-2">
-            <svg
-              className="w-5 h-5 text-brand shrink-0" fill="none" stroke="currentColor"
-              viewBox="0 0 24 24" aria-hidden="true"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-            </svg>
-            <span className="text-[16px] font-semibold text-ink">
-              Franchise recommandée : CHF {fmtN(result!.best.franchise)}
-            </span>
+          {/* Profil */}
+          <div>
+            <label htmlFor="sim-profil" className="block text-[16px] font-medium text-ink mb-2">
+              Profil
+            </label>
+            <div className="relative">
+              <select
+                id="sim-profil"
+                value={ageGroup}
+                onChange={e => set({ ageGroup: e.target.value as AgeGroup })}
+                className="select-field pr-9"
+              >
+                <option value="adulte">Adulte — 26 ans et plus</option>
+                <option value="jeuneAdulte">Jeune adulte — 19 à 25 ans</option>
+                <option value="enfant">Enfant — 0 à 18 ans</option>
+              </select>
+              <Chevron />
+            </div>
           </div>
-          <p className="text-[16px] text-ink leading-relaxed mb-1">{phrase}</p>
-          {economyLine && (
-            <p className="text-[16px] font-semibold text-brand mb-4">{economyLine}</p>
-          )}
-          <Link href={comparateurUrl} className="btn-primary inline-flex items-center gap-2">
-            Comparer les primes dans mon canton →
+
+          {/* Code postal */}
+          <div>
+            <label htmlFor="sim-postal" className="block text-[16px] font-medium text-ink mb-2">
+              Code postal
+            </label>
+            <input
+              id="sim-postal"
+              type="text"
+              inputMode="numeric"
+              maxLength={4}
+              placeholder="ex. 1201"
+              value={postalCode}
+              onChange={e => set({ postalCode: e.target.value.replace(/\D/g, '') })}
+              className="input-field"
+            />
+          </div>
+
+          {/* Frais médicaux */}
+          <div>
+            <label htmlFor="sim-frais" className="block text-[16px] font-medium text-ink mb-2">
+              Frais médicaux (CHF / an)
+            </label>
+            <input
+              id="sim-frais"
+              type="text"
+              inputMode="numeric"
+              placeholder="ex. 1500"
+              value={fraisRaw}
+              onChange={e => set({ fraisRaw: e.target.value.replace(/\D/g, '') })}
+              className="input-field"
+            />
+          </div>
+
+        </div>
+
+        {/* Actions */}
+        <div className="flex flex-wrap items-center gap-4">
+          <button
+            onClick={() => { if (canCalculate) setSubmitted(true) }}
+            disabled={!canCalculate}
+            className="btn-primary disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            Calculer ma franchise optimale
+          </button>
+          <Link
+            href={`/sante/subsides?canton=${canton}`}
+            className="text-[16px] text-brand hover:underline"
+          >
+            Calculer mon subside →
           </Link>
+        </div>
+
+      </div>
+
+      {/* ── Résultat ── */}
+      {submitted && result && phrase && (
+        <div style={{ borderTop: '0.5px solid var(--border)' }}>
+          <div className="px-6 py-6">
+            <div className="rounded-[8px] bg-[var(--blue-tint)] border border-brand/20 px-5 py-5">
+              <div className="flex items-center gap-2 mb-2">
+                <svg
+                  className="w-5 h-5 text-brand shrink-0" fill="none" stroke="currentColor"
+                  viewBox="0 0 24 24" aria-hidden="true"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                <span className="text-[16px] font-semibold text-ink">
+                  Franchise recommandée : CHF {fmtN(result.best.franchise)}
+                </span>
+              </div>
+              <p className="text-[16px] text-ink leading-relaxed mb-1">{phrase}</p>
+              {economyLine && (
+                <p className="text-[16px] font-semibold text-brand mb-4">{economyLine}</p>
+              )}
+              <Link href={comparateurUrl} className="btn-primary inline-flex items-center gap-2">
+                Comparer les primes dans mon canton →
+              </Link>
+            </div>
+          </div>
         </div>
       )}
 
