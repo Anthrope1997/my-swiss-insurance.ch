@@ -11,12 +11,12 @@ import AuthorBio from '@/components/ui/AuthorBio'
 export const metadata: Metadata = {
   title: 'Primes LAMal 2026 : comparez et économisez — My Swiss Insurance',
   description:
-    'Comparez les primes LAMal 2026 gratuitement. Jusqu\'à 5 653 CHF d\'économie par an à Genève. 34 caisses, données OFSP officielles, résultat immédiat.',
+    'Comparez les primes LAMal 2026 gratuitement. Jusqu\'à CHF 5 653 d\'économie par an à Genève. 34 caisses, données OFSP officielles, résultat immédiat.',
   alternates: { canonical: 'https://my-swiss-insurance.ch/sante' },
   openGraph: {
     title: 'Primes LAMal 2026 : comparez et économisez',
     description:
-      'Jusqu\'à 5 653 CHF d\'économie par an. Comparez gratuitement 34 caisses LAMal. Données OFSP 2026.',
+      'Jusqu\'à CHF 5 653 d\'économie par an. Comparez gratuitement 34 caisses LAMal. Données OFSP 2026.',
     url: 'https://my-swiss-insurance.ch/sante',
     type: 'website',
   },
@@ -29,7 +29,7 @@ const faqItems = [
   },
   {
     question: 'Combien peut-on économiser en changeant de caisse LAMal ?',
-    answer: "Jusqu'à 5 653 CHF par an pour un adulte de 35 ans à Genève (franchise 300 CHF, modèle standard, source OFSP 2026). Les 34 caisses agréées proposent les mêmes prestations de base à des prix très différents selon le canton.",
+    answer: "Jusqu'à CHF 5 653 par an pour un adulte de 35 ans à Genève (franchise CHF 300, modèle standard, source OFSP 2026). Les 34 caisses agréées proposent les mêmes prestations de base à des prix très différents selon le canton.",
   },
   {
     question: 'Qui a droit à un subside LAMal en Suisse ?',
@@ -63,9 +63,9 @@ const webSiteSchema = {
 // ── Données ──────────────────────────────────────────────────────────────────
 
 const stats = [
-  { value: '5 653 CHF', label: 'Économie maximale possible en Suisse', sub: 'Adulte 35 ans, tous profils confondus' },
-  { value: '34',        label: 'Caisses agréées',            sub: 'données OFSP 2026'        },
-  { value: '28 %',      label: 'Bénéficiaires de subsides',  sub: 'de la population suisse'  },
+  { value: 'CHF 5 653', label: 'Économie maximale par an',      sub: 'Adulte 35 ans, toutes caisses et franchises' },
+  { value: 'CHF 4 154', label: 'Économie moyenne par an',       sub: 'Adulte 35 ans, toutes caisses et franchises' },
+  { value: 'CHF 420',   label: 'Subside mensuel maximal moyen', sub: 'Barèmes 2026, 26 cantons'                    },
 ]
 
 const guides = [
@@ -211,7 +211,7 @@ export default function LamalPage() {
 
           <p className="text-[16px] text-slate leading-relaxed mb-8">
             En Suisse, toutes les caisses couvrent les mêmes prestations de base. Seul le prix
-            diffère — jusqu'à 5 653 CHF par an d'écart pour un même profil.
+            diffère — jusqu'à CHF 5 653 par an d'écart pour un même profil.
             Comparez gratuitement et trouvez la caisse la moins chère pour votre situation.
           </p>
 
@@ -342,12 +342,12 @@ export default function LamalPage() {
                            hover:border-brand hover:shadow-md transition-all duration-200">
                 <p className="font-bold text-ink text-[22px] mb-1">{c.nom}</p>
                 <p className="text-slate text-[13px] mb-4">
-                  À partir de <span className="font-semibold text-ink">{c.primeMin} CHF par mois</span>
+                  À partir de <span className="font-semibold text-ink">CHF {c.primeMin} par mois</span>
                 </p>
                 <div className="bg-blue-tint rounded-lg px-3 py-2 mb-5">
                   <p className="text-[12px] text-brand font-medium">{fr.shared.economiePossible}</p>
                   <p className="text-[18px] font-bold text-brand leading-tight">
-                    {c.economieAn} CHF par an
+                    CHF {c.economieAn} par an
                   </p>
                 </div>
                 <div className="mt-auto flex items-center gap-1 text-[16px] font-medium text-brand">
@@ -362,7 +362,7 @@ export default function LamalPage() {
           </div>
 
           <p className="text-[12px] text-slate/70 mb-8">
-            Adulte 35 ans, modèle standard, franchise 300 CHF. Source OFSP 2026.
+            Adulte 35 ans, toutes caisses et franchises confondues. Source OFSP 2026.
           </p>
 
         </div>
@@ -396,7 +396,7 @@ export default function LamalPage() {
               <p className="text-[13px] font-bold text-slate/60 uppercase tracking-wide mb-2">
                 Comparateur de primes
               </p>
-              <p className="text-2xl font-bold text-brand leading-none mb-0.5">5 653 CHF</p>
+              <p className="text-2xl font-bold text-brand leading-none mb-0.5">CHF 5 653</p>
               <p className="text-[16px] text-slate mb-6">d&apos;économie maximale en Suisse par an</p>
               <Link href="/fr/sante/comparateur" className="flex items-center gap-1 mt-auto text-brand text-[16px] font-medium">
                 Comparer les primes
