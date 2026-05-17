@@ -1775,7 +1775,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 déc. 2026',
     lien: 'https://www.sva-bl.ch/de/ausgleichskasse/individuelle-praemienverbilligung-ipv',
     primeMoyenne: 466,
-    retroactivite: 'Semi-automatique : formulaire envoyé fin déc. aux éligibles identifiés. Retour dans les 12 mois → rétroactivité au 1er jan. Quellenbesteuerte : jusqu\'au 31 déc.',
+    retroactivite: 'Un formulaire vous est envoyé fin décembre si vous êtes identifié comme éligible. Si vous le retournez dans les 12 mois, votre subside est rétroactif au 1er janvier. Si vous êtes imposé à la source, le délai est le 31 décembre.',
     arrivants: 'Vous avez jusqu\'au 31 décembre de l\'année suivant votre arrivée pour déposer votre demande.',
   },
 
@@ -1874,7 +1874,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 juil. 2026',
     lien: 'https://www.akso.ch/dienstleistungen/praemienverbilligung-ipv',
     primeMoyenne: 387,
-    retroactivite: 'Semi-automatique : formulaire envoyé automatiquement en jan. aux éligibles. Retour dans les 30 jours → rétroactivité au 1er jan. Quellenbesteuerte : jusqu\'au 31 déc.',
+    retroactivite: 'Un formulaire vous est envoyé automatiquement en janvier si vous êtes identifié comme éligible. Si vous le retournez dans les 30 jours, votre subside est rétroactif au 1er janvier. Si vous êtes imposé à la source, le délai est le 31 décembre.',
     arrivants: 'Votre subside commence dès le mois de votre demande. Déposez votre formulaire dès votre arrivée auprès de l\'Ausgleichskasse Solothurn (akso.ch).',
   },
 
@@ -1918,7 +1918,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: true, delai: '31 déc. 2026',
     lien: 'https://www.svsuri.ch/dienstleistungen/pr%C3%A4mienverbilligung-ipv',
     primeMoyenne: 310,
-    retroactivite: 'Attribution automatique pour les taxés (décisions envoyées mi-jan.). Quellenbesteuerte et arrivants : demande obligatoire. Règle exacte de rétroactivité pour demandes tardives : à vérifier sur svsuri.ch.',
+    retroactivite: 'Votre subside est attribué automatiquement sur la base de vos données fiscales. Si vous êtes imposé à la source ou nouvellement arrivé, une demande manuelle est obligatoire sur svsuri.ch.',
     arrivants: 'Remplissez le formulaire disponible sur svsuri.ch. Demande obligatoire si vous êtes arrivé en 2026 ou imposé à la source.',
   },
 
