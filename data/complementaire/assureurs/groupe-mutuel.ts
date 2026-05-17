@@ -1,6 +1,6 @@
 import type { ProduitComplementaire } from '../types'
 
-// Source : groupemutuel.ch — relevé mai 2026
+// Source : groupemutuel.ch — relevé 17 mai 2026 via Playwright (portal POEL)
 
 export const produits: ProduitComplementaire[] = [
 
@@ -429,9 +429,12 @@ export const produits: ProduitComplementaire[] = [
       noteDetails: 'Frais complets en Suisse. Urgences à l\'étranger : CHF 500/j. Hôpitaux et cliniques reconnus GM. Souscription jusqu\'à 60 ans.',
     },
     conditionsSouscription: ['Souscription jusqu\'à 60 ans'],
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 2.10, source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'famille',      montantCHF: 3.60, source: 'site-web', dateReleve: '2026-05-17' },
+    ],
     urlProduit: 'https://www.groupemutuel.ch/fr/clients-prives/nos-produits/sante/assurances-maladie-complementaires/Hospitalisation/Assurance-complementaire-d-hospitalisation.html',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-17',
     scoreComplet: 68,
   },
 
@@ -449,9 +452,12 @@ export const produits: ProduitComplementaire[] = [
       noteDetails: 'Chambre 2 lits. Libre choix du médecin à l\'hôpital. Urgences à l\'étranger : CHF 1\'000/j. Souscription jusqu\'à 60 ans.',
     },
     conditionsSouscription: ['Souscription jusqu\'à 60 ans'],
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 49.70,  source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'famille',      montantCHF: 218.10, source: 'site-web', dateReleve: '2026-05-17' },
+    ],
     urlProduit: 'https://www.groupemutuel.ch/fr/clients-prives/nos-produits/sante/assurances-maladie-complementaires/Hospitalisation/Assurance-complementaire-d-hospitalisation.html',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-17',
     scoreComplet: 72,
   },
 
@@ -469,9 +475,12 @@ export const produits: ProduitComplementaire[] = [
       noteDetails: 'Chambre individuelle. Libre choix du médecin. Urgences à l\'étranger : CHF 1\'500/j. Souscription jusqu\'à 60 ans.',
     },
     conditionsSouscription: ['Souscription jusqu\'à 60 ans'],
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 54.80,  source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'famille',      montantCHF: 231.40, source: 'site-web', dateReleve: '2026-05-17' },
+    ],
     urlProduit: 'https://www.groupemutuel.ch/fr/clients-prives/nos-produits/sante/assurances-maladie-complementaires/Hospitalisation/Assurance-complementaire-d-hospitalisation.html',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-17',
     scoreComplet: 72,
   },
 
@@ -489,9 +498,12 @@ export const produits: ProduitComplementaire[] = [
       noteDetails: 'Chambre individuelle. Libre choix du médecin. Urgences à l\'étranger : CHF 3\'000/j (vs CHF 1\'500 niveau 3). Souscription jusqu\'à 60 ans.',
     },
     conditionsSouscription: ['Souscription jusqu\'à 60 ans'],
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 60.30,  source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'famille',      montantCHF: 254.50, source: 'site-web', dateReleve: '2026-05-17' },
+    ],
     urlProduit: 'https://www.groupemutuel.ch/fr/clients-prives/nos-produits/sante/assurances-maladie-complementaires/Hospitalisation/Assurance-complementaire-d-hospitalisation.html',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-17',
     scoreComplet: 72,
   },
 ]
