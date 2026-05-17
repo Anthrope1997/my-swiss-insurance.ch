@@ -102,11 +102,10 @@ function fmt(n: number) {
 
 // ─── Icons ───────────────────────────────────────────────────────────────────
 
-function IconCalendarCheck({ past }: { past?: boolean }) {
+function IconCalendarCheck() {
   return (
     <svg
-      className="w-5 h-5 shrink-0 mt-0.5"
-      style={{ color: past ? '#BA7517' : 'var(--brand)' }}
+      className="w-5 h-5 shrink-0 mt-0.5 text-brand"
       fill="none" stroke="currentColor" strokeWidth={1.5}
       strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"
     >
@@ -226,11 +225,17 @@ export default function SubsidesSimulatorFull() {
       alertBody  = t.howTo.noDeadlineWarning
       retroTitle = t.howTo.retroactifNon
     } else if (cantonData.retroactivite) {
-      alertBody  = cantonData.retroactivite
-      const s    = retroStatus(cantonData.retroactivite)
-      retroTitle = s === 'oui' ? t.howTo.retroactifOui : s === 'non' ? t.howTo.retroactifNon : t.howTo.retroactifInconnu
+      const s = retroStatus(cantonData.retroactivite)
+      if (s !== 'inconnu') {
+        alertBody  = cantonData.retroactivite
+        retroTitle = s === 'oui' ? t.howTo.retroactifOui : t.howTo.retroactifNon
+      }
     }
   }
+
+  const isUnknownArrivants = (s: string) =>
+    s.toLowerCase().includes('non publiée') || s.toLowerCase().includes('non publiés')
+  const showArrivants = Boolean(cantonData?.arrivants && !isUnknownArrivants(cantonData.arrivants))
 
   return (
     <div className="space-y-6">
@@ -385,7 +390,7 @@ export default function SubsidesSimulatorFull() {
 
               {/* Montant */}
               <div className="bg-[#EBF3FB] px-5 sm:px-6 py-6">
-                <span className="inline-flex items-center bg-brand text-white text-[16px] font-semibold px-3 py-1 rounded-full mb-3">
+                <span className="inline-flex items-center bg-brand text-white text-[16px] px-3 py-1 rounded-full mb-3">
                   {t.result.badge}
                 </span>
                 <p className="font-semibold text-ink leading-none mb-1" style={{ fontSize: '32px' }}>
@@ -403,7 +408,7 @@ export default function SubsidesSimulatorFull() {
 
                 {/* Délai / versement */}
                 <div className="flex gap-3 items-start">
-                  <IconCalendarCheck past={isPast && !cantonData.auto} />
+                  <IconCalendarCheck />
                   <div>
                     <p
                       className="text-[16px] font-semibold"
@@ -429,21 +434,20 @@ export default function SubsidesSimulatorFull() {
                 )}
 
                 {/* Nouveaux arrivants */}
-                {cantonData.arrivants && (
+                {showArrivants && cantonData.arrivants && (
                   <div className="flex gap-3 items-start">
                     <IconPlaneArrival />
                     <div>
                       <p className="text-[16px] font-semibold text-ink">{t.howTo.arrivantsTitre}</p>
-                      <p className="text-[16px] text-slate/70 mt-0.5">{t.howTo.arrivantsSub}</p>
-                      <p className="text-[16px] text-slate mt-1 leading-relaxed">{cleanText(cantonData.arrivants)}</p>
+                      <p className="text-[16px] text-slate mt-0.5 leading-relaxed">{cleanText(cantonData.arrivants)}</p>
                     </div>
                   </div>
                 )}
 
                 {/* Badge estimation + CTA */}
                 <div className="border-t border-edge pt-4 space-y-3">
-                  <div className="flex items-start gap-3 rounded-lg border border-edge bg-cloud px-4 py-3">
-                    <span className="inline-flex shrink-0 mt-0.5 items-center bg-brand text-white text-[16px] font-semibold px-3 py-1 rounded-full">
+                  <div className="flex items-center gap-3 rounded-lg border border-edge bg-cloud px-4 py-3">
+                    <span className="inline-flex shrink-0 items-center bg-brand text-white text-[16px] px-3 py-1 rounded-full">
                       {t.estimationBadge}
                     </span>
                     <p className="text-[16px] text-slate leading-relaxed">{t.estimationNote}</p>
