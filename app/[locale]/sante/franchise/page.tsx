@@ -253,18 +253,26 @@ export default function FranchisePage() {
             {/* Deux cartes : adulte / enfant */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
               <div className="bg-white border border-edge rounded-lg p-5">
-                <h3 className="article-h3">Adulte — 19 ans et plus</h3>
-                <p className="text-[16px] text-slate mb-2">6 niveaux de franchise</p>
-                <p className="text-[16px] font-semibold text-ink">
-                  CHF 300, 500, 1 000, 1 500, 2 000 et 2 500 par an
-                </p>
+                <h3 className="article-h3">Adulte, 19 ans et plus</h3>
+                <ul className="space-y-2 mt-3">
+                  <li className="flex gap-2 items-start text-[16px] text-ink">
+                    {checkIcon}<span>6 niveaux de franchise</span>
+                  </li>
+                  <li className="flex gap-2 items-start text-[16px] text-ink">
+                    {checkIcon}<span>CHF 300, 500, 1 000, 1 500, 2 000 et 2 500 par an</span>
+                  </li>
+                </ul>
               </div>
               <div className="bg-white border border-edge rounded-lg p-5">
-                <h3 className="article-h3">Enfant — 0 à 18 ans</h3>
-                <p className="text-[16px] text-slate mb-2">6 niveaux de franchise</p>
-                <p className="text-[16px] font-semibold text-ink">
-                  CHF 0, 100, 200, 300, 400 et 600 par an
-                </p>
+                <h3 className="article-h3">Enfants, 0 à 18 ans</h3>
+                <ul className="space-y-2 mt-3">
+                  <li className="flex gap-2 items-start text-[16px] text-ink">
+                    {checkIcon}<span>6 niveaux de franchise</span>
+                  </li>
+                  <li className="flex gap-2 items-start text-[16px] text-ink">
+                    {checkIcon}<span>CHF 0, 100, 200, 300, 400 et 600 par an</span>
+                  </li>
+                </ul>
               </div>
             </div>
 
@@ -292,6 +300,48 @@ export default function FranchisePage() {
                 <strong>CHF 200</strong> en moyenne suisse — dès le premier médecin, la franchise 0 CHF devient avantageuse.
               </p>
             </KeyFact>
+
+            {/* Franchise enfant */}
+            <h3 className="article-h3 mt-8">Franchise enfant</h3>
+            <p className="article-p mb-4">
+              Les franchises enfant sont distinctes des franchises adultes, de 0 à 600 CHF par an.
+              La quote-part est plafonnée à 350 CHF par an, contre 700 CHF pour un adulte.
+            </p>
+
+            <KeyFact label="Recommandation">
+              La franchise 0 CHF par an est conseillée pour les jeunes enfants qui consultent fréquemment.
+              À partir de l&apos;adolescence (15 à 18 ans), une franchise plus élevée peut être envisagée si l&apos;enfant est en bonne santé.
+            </KeyFact>
+
+            <div className="overflow-x-auto border border-edge rounded-[8px] mb-4">
+              <table className="stripe-table w-full">
+                <thead>
+                  <tr>
+                    <th className="text-left whitespace-nowrap">Franchise par an</th>
+                    <th className="text-left whitespace-nowrap">Profil adapté</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ['CHF 400 à 600', 'Adolescents en bonne santé, rarement malades'],
+                    ['CHF 200 à 300', 'Enfants en bonne santé, quelques visites annuelles'],
+                    ['CHF 100',       'Enfants avec des consultations régulières'],
+                    ['CHF 0',         'Nourrissons et enfants en bas âge, consultations fréquentes'],
+                  ].map(([fr, profil], i) => (
+                    <tr key={i}>
+                      <td className="font-semibold text-ink whitespace-nowrap">{fr}</td>
+                      <td className="whitespace-nowrap">{profil}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <p className="article-p">
+              <Link href="/sante/ma-famille" className="text-brand hover:underline">
+                Assurance maladie famille et maternité : ce qu&apos;il faut savoir →
+              </Link>
+            </p>
           </section>
 
           {/* 04 — Changement */}

@@ -110,8 +110,8 @@ export default function FranchiseSimulator() {
 
   const phrase = result
     ? ageGroup === 'enfant'
-      ? `Avec CHF ${fmtN(frais)} de frais estimés, la franchise CHF ${fmtN(result.best.franchise)} est la plus avantageuse pour votre enfant.`
-      : `Avec CHF ${fmtN(frais)} de frais estimés, la franchise CHF ${fmtN(result.best.franchise)} est la plus avantageuse dans votre canton.`
+      ? `Dans le canton de ${cantonName}, avec CHF ${fmtN(frais)} de frais estimés, la franchise CHF ${fmtN(result.best.franchise)} est la plus avantageuse pour votre enfant.`
+      : `Dans le canton de ${cantonName}, avec CHF ${fmtN(frais)} de frais estimés, la franchise CHF ${fmtN(result.best.franchise)} est la plus avantageuse.`
     : null
 
   const economyLine = result && result.economy > 0
@@ -160,13 +160,6 @@ export default function FranchiseSimulator() {
             onChange={e => setPostalCode(e.target.value.replace(/\D/g, ''))}
             className="input-field"
           />
-          {postalCode.length === 4 && (
-            <p className={`text-[13px] mt-1 ${detectedSlug ? 'text-slate/60' : 'text-red-500'}`}>
-              {detectedSlug
-                ? `→ ${cantonName}`
-                : 'Code non reconnu — Zurich par défaut'}
-            </p>
-          )}
         </div>
 
         {/* Frais médicaux */}
@@ -185,6 +178,16 @@ export default function FranchiseSimulator() {
           />
         </div>
 
+      </div>
+
+      {/* Action secondaire */}
+      <div className="mb-6">
+        <Link
+          href={`/sante/subsides?canton=${canton}`}
+          className="btn-secondary text-[16px]"
+        >
+          Calculer mon subside →
+        </Link>
       </div>
 
       {/* Résultat */}
