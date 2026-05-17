@@ -2,9 +2,9 @@
 
 import { useRef, useLayoutEffect, useState } from 'react'
 
-// ─── Données réelles — caisse la moins chère, modèle standard, Genève ─────────
-const PRIME_300  = 638.70
-const PRIME_2500 = 519.40
+// ─── Données réelles — primes moyennes suisses, caisse la moins chère, modèle standard ──
+const PRIME_300  = 534.75
+const PRIME_2500 = 415.00
 
 function totalAnnuel(prime: number, franchise: number, frais: number): number {
   return (
@@ -19,8 +19,8 @@ const SEUIL = Math.round((12 * (PRIME_300 - PRIME_2500) + 270) / 0.9)
 const X_MAX = 4000
 
 // ─── Plage Y — fixe ───────────────────────────────────────────────────────────
-const Y_MIN   = 5500
-const Y_MAX   = 10000
+const Y_MIN   = 4500
+const Y_MAX   = 8500
 const Y_RANGE = Y_MAX - Y_MIN
 
 // ─── Tokens de couleur ────────────────────────────────────────────────────────
@@ -99,7 +99,7 @@ const mLeftCx  = mmapX(SEUIL / 2)
 const mRightCx = mmapX((SEUIL + X_MAX) / 2)
 
 // ─── Ticks ────────────────────────────────────────────────────────────────────
-const Y_TICKS = [6000, 7000, 8000, 9000, 10000]
+const Y_TICKS = [5000, 6000, 7000, 8000]
 const X_TICKS = [0, 1000, 2000, 3000, 4000]
 
 // ─── Composant React ──────────────────────────────────────────────────────────
@@ -147,10 +147,10 @@ export default function FranchiseChart() {
   const dotY2500  = aMapY(totalAnnuel(PRIME_2500, 2500, frais))
   const dotY300   = aMapY(totalAnnuel(PRIME_300, 300, frais))
 
-  // Labels axe Y : "CHF 10 000" sur desktop, "10k" sur mobile
+  // Labels axe Y : "CHF 8 000" sur desktop, "8k" sur mobile
   const fmtYLabel    = (v: number) => isMobile ? `${v / 1000}k` : fmtCHF(v)
-  // Bord droit des labels Y aligné juste avant l'axe
-  const yLabelX      = aCL - scaled(isMobile ? 4 : 6)
+  // Bord gauche des labels Y — aligné à gauche depuis la marge
+  const yLabelX      = scaled(6)
   const xLabelGapPx  = isMobile ? 10 : 24
   const annotFontPx  = isMobile ? 12 : 16
   const annotLinePx  = isMobile ? 15 : 20
@@ -289,7 +289,7 @@ export default function FranchiseChart() {
                   key={y}
                   x={yLabelX}
                   y={aMapY(y)}
-                  textAnchor="end"
+                  textAnchor="start"
                   dominantBaseline="middle"
                   fontSize={scaled(16)}
                   fill={C_LABEL}
@@ -323,7 +323,7 @@ export default function FranchiseChart() {
                 <text
                   x={yLabelX}
                   y={aCT - scaled(48)}
-                  textAnchor="end"
+                  textAnchor="start"
                   fontSize={scaled(16)}
                   fill={C_LABEL}
                 >
@@ -389,7 +389,7 @@ export default function FranchiseChart() {
         </div>
 
         <p className="text-[16px] text-slate/60 text-center mt-3">
-          Calculée avec la caisse la moins chère pour chaque franchise dans le canton de Genève, modèle standard
+          Calculée avec les primes moyennes suisses, caisse la moins chère par franchise, modèle standard
         </p>
       </div>
     </div>

@@ -183,7 +183,7 @@ export default function FranchisePage() {
 
           {/* 1 — Définition */}
           <section id="definition">
-            <h2 className="article-h2">Franchise et quote-part : quelle différence ?</h2>
+            <h2 className="article-h2">1. Franchise et quote-part : quelle différence ?</h2>
 
             <p className="article-p mb-6">
               La franchise et la quote-part sont les deux mécanismes de participation aux frais médicaux.
@@ -236,7 +236,7 @@ export default function FranchisePage() {
 
           {/* 2 — Quelle franchise choisir ? (adultes + enfants + simulateur) */}
           <section id="choisir">
-            <h2 className="article-h2">Quelle franchise choisir ?</h2>
+            <h2 className="article-h2">2. Quelle franchise choisir ?</h2>
 
             <p className="article-p mb-6">
               La franchise optimale dépend de vos frais médicaux annuels et de votre canton de résidence.
@@ -374,7 +374,7 @@ export default function FranchisePage() {
 
           {/* 3 — Changement */}
           <section id="changement">
-            <h2 className="article-h2">Comment changer de franchise ?</h2>
+            <h2 className="article-h2">3. Comment changer de franchise ?</h2>
 
             <p className="article-p mb-6">
               Le changement de franchise suit un calendrier strict et n&apos;est possible qu&apos;une fois par an.
@@ -425,7 +425,7 @@ export default function FranchisePage() {
 
           {/* 4 — FAQ */}
           <section id="faq" className="border-t border-edge pt-8">
-            <FAQ items={faqItems} title="Questions fréquentes sur la franchise LAMal" />
+            <FAQ items={faqItems} title="4. Questions fréquentes sur la franchise LAMal" />
           </section>
 
           {/* Formulaire */}
