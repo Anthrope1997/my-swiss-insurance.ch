@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import FranchiseChart from '@/components/ui/FranchiseChart'
+import FranchiseSimulator from '@/components/lamal/FranchiseSimulator'
 import KeyFact from '@/components/ui/KeyFact'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
@@ -25,7 +26,7 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'Franchise LAMal 2026 : quel montant choisir ?',
   datePublished: '2026-01-01',
-  dateModified: '2026-04-22',
+  dateModified: '2026-05-17',
   author: { '@type': 'Organization', name: 'My Swiss Insurance', url: 'https://my-swiss-insurance.ch' },
   publisher: { '@type': 'Organization', name: 'My Swiss Insurance' },
   mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://my-swiss-insurance.ch/sante/franchise' },
@@ -85,7 +86,7 @@ const franchises = [
 
 const enBref = [
   "La franchise 2 500 CHF économise environ 120 CHF par mois sur votre prime et vous expose à 3 200 CHF de reste à charge maximum par an.",
-  "Le seuil d'équilibre entre franchise 300 CHF et 2 500 CHF est de 1 899 CHF de frais médicaux annuels à Zurich (1 897 CHF en moyenne suisse).",
+  "Le seuil d'équilibre entre franchise 300 CHF et 2 500 CHF est de 1 897 CHF de frais médicaux annuels en moyenne suisse.",
   "Les enfants bénéficient de franchises de 0 à 600 CHF par an, avec une quote-part plafonnée à 350 CHF par an.",
 ]
 
@@ -96,11 +97,10 @@ const heroStats = [
 ]
 
 const toc = [
-  { id: 'definition', label: "1. Franchise et quote-part"    },
-  { id: 'tableau',    label: "2. Quelle franchise choisir ?" },
-  { id: 'enfants',    label: "3. Franchise enfant"           },
-  { id: 'changement', label: "4. Changer de franchise"       },
-  { id: 'faq',        label: "5. Questions fréquentes"       },
+  { id: 'definition', label: 'Franchise et quote-part'    },
+  { id: 'choisir',    label: 'Quelle franchise choisir ?' },
+  { id: 'changement', label: 'Changer de franchise'       },
+  { id: 'faq',        label: 'Questions fréquentes'       },
 ]
 
 const guidesAssocies = [
@@ -109,6 +109,12 @@ const guidesAssocies = [
   { href: '/sante/subsides',          label: 'Calculer mes subsides'     },
   { href: '/sante/changer-de-caisse', label: 'Changer de caisse maladie' },
 ]
+
+const checkIcon = (
+  <svg className="w-4 h-4 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
+  </svg>
+)
 
 export default function FranchisePage() {
   return (
@@ -139,14 +145,12 @@ export default function FranchisePage() {
         </div>
       </section>
 
-      {/* ── ZONE 2 — Navigation rapide ── */}
+      {/* ── ZONE 2 — En bref / Sommaire ── */}
       <div className="bg-cloud border-b border-edge py-8">
         <div className="container-xl grid grid-cols-1 md:grid-cols-2 gap-5">
 
           <div className="bg-white border border-edge rounded-xl p-5">
-            <p className="text-2xl font-semibold text-ink mb-3">
-              En bref
-            </p>
+            <p className="text-2xl font-semibold text-ink mb-3">En bref</p>
             <ul className="space-y-3">
               {enBref.map((phrase, i) => (
                 <li key={i} className="flex gap-2.5 text-[16px] text-slate leading-relaxed">
@@ -158,13 +162,13 @@ export default function FranchisePage() {
           </div>
 
           <div className="bg-white border border-edge rounded-xl p-5">
-            <p className="text-2xl font-semibold text-ink mb-3">
-              Sommaire
-            </p>
+            <p className="text-2xl font-semibold text-ink mb-3">Sommaire</p>
             <ul className="space-y-1">
-              {toc.map((item) => (
+              {toc.map((item, i) => (
                 <li key={item.id}>
-                  <a href={`#${item.id}`} className="block text-[16px] text-slate leading-relaxed hover:text-brand hover:bg-cloud px-2 py-1 rounded transition-colors">{item.label}</a>
+                  <a href={`#${item.id}`} className="block text-[16px] text-slate leading-relaxed hover:text-brand hover:bg-cloud px-2 py-1 rounded transition-colors">
+                    {i + 1}. {item.label}
+                  </a>
                 </li>
               ))}
             </ul>
@@ -179,7 +183,7 @@ export default function FranchisePage() {
 
           {/* 1 — Définition */}
           <section id="definition">
-            <h2 className="article-h2">1. Franchise et quote-part : quelle différence ?</h2>
+            <h2 className="article-h2">Franchise et quote-part : quelle différence ?</h2>
 
             <p className="article-p mb-6">
               La franchise et la quote-part sont les deux mécanismes de participation aux frais médicaux.
@@ -196,12 +200,7 @@ export default function FranchisePage() {
                     'Choisie une fois par an, avant le 30 novembre',
                     'Plus la franchise est élevée, plus la prime mensuelle est basse',
                   ].map((item, i) => (
-                    <li key={i} className="flex gap-3 text-[16px] text-slate">
-                      <svg className="w-4 h-4 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
-                      </svg>
-                      {item}
-                    </li>
+                    <li key={i} className="flex gap-3 text-[16px] text-slate">{checkIcon}{item}</li>
                   ))}
                 </ul>
               </div>
@@ -214,12 +213,7 @@ export default function FranchisePage() {
                     'Automatique, non modifiable',
                     'Coût maximum total : franchise + CHF 700 par an',
                   ].map((item, i) => (
-                    <li key={i} className="flex gap-3 text-[16px] text-slate">
-                      <svg className="w-4 h-4 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
-                      </svg>
-                      {item}
-                    </li>
+                    <li key={i} className="flex gap-3 text-[16px] text-slate">{checkIcon}{item}</li>
                   ))}
                 </ul>
               </div>
@@ -240,12 +234,47 @@ export default function FranchisePage() {
             </p>
           </section>
 
-          {/* 2 — Tableau comparatif */}
-          <section id="tableau">
-            <h2 className="article-h2">2. Quelle franchise choisir selon vos frais médicaux annuels ?</h2>
+          {/* 2 — Quelle franchise choisir ? (adultes + enfants + simulateur) */}
+          <section id="choisir">
+            <h2 className="article-h2">Quelle franchise choisir ?</h2>
 
             <p className="article-p mb-6">
-              La franchise 2 500 CHF est avantageuse si vos frais médicaux annuels restent sous 1 899 CHF à Zurich (1 897 CHF en moyenne suisse).
+              La franchise optimale dépend de vos frais médicaux annuels et de votre canton de résidence.
+              Les franchises adulte vont de 300 à 2 500 CHF par an. Les franchises enfant vont de 0 à 600 CHF par an.
+            </p>
+
+            {/* Deux cartes : adulte / enfant */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+              <div className="bg-white border border-edge rounded-lg p-5">
+                <h3 className="article-h3">Adulte — CHF 300 à 2 500</h3>
+                <ul className="space-y-2">
+                  {[
+                    '6 niveaux : 300, 500, 1 000, 1 500, 2 000, 2 500 CHF par an',
+                    'Quote-part : 10 % des frais, plafonnée à CHF 700 par an',
+                    'Choisie une fois par an, avant le 30 novembre',
+                  ].map((item, i) => (
+                    <li key={i} className="flex gap-3 text-[16px] text-slate">{checkIcon}{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bg-white border border-edge rounded-lg p-5">
+                <h3 className="article-h3">Enfant — CHF 0 à 600</h3>
+                <ul className="space-y-2">
+                  {[
+                    '6 niveaux : 0, 100, 200, 300, 400, 600 CHF par an',
+                    'Quote-part : 10 % des frais, plafonnée à CHF 350 par an',
+                    'Franchise 0 CHF conseillée pour les jeunes enfants',
+                  ].map((item, i) => (
+                    <li key={i} className="flex gap-3 text-[16px] text-slate">{checkIcon}{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Tableau adulte */}
+            <h3 className="article-h3">Franchises adulte : seuil d&apos;équilibre par franchise</h3>
+            <p className="article-p mb-4">
+              La franchise 2 500 CHF est avantageuse si vos frais médicaux annuels restent sous le seuil d&apos;équilibre.
               Au-delà, la franchise 300 CHF devient moins coûteuse au total, prime et reste à charge confondus.
             </p>
 
@@ -280,28 +309,21 @@ export default function FranchisePage() {
               Primes pour un adulte (26 ans et plus) à Zurich, modèle standard, OFSP 2026.
             </p>
 
-            <FranchiseChart />
+            {/* Graphique — desktop uniquement */}
+            <div className="hidden md:block">
+              <FranchiseChart />
+            </div>
 
             <KeyFact>
-              <strong>Vous hésitez entre CHF 2 500 et CHF 300 ?</strong>{' '}
-              Avec la franchise CHF 2 500, vous économisez CHF 1 440 par an sur votre prime à Zurich (CHF 120 par mois).
-              En contrepartie, vous payez jusqu&apos;à CHF 2 500 de votre poche en cas de maladie.
-              Le point de bascule se situe à CHF 1 899 de frais médicaux annuels : en dessous, la franchise CHF 2 500
-              est gagnante. Au-dessus, c&apos;est la franchise CHF 300.
+              En moyenne en Suisse, pour les primes adultes les moins chères, le point de bascule se situe
+              vers <strong>CHF 1 897 de frais médicaux annuels</strong>.
+              En dessous de ce seuil, la franchise CHF 2 500 est plus avantageuse.
+              Au-dessus, la franchise CHF 300 limite mieux le reste à charge total.
             </KeyFact>
 
-            <p className="article-p mt-6">
-              <Link href="/sante/comparateur" className="text-brand hover:underline">
-                Comparer les primes LAMal par canton →
-              </Link>
-            </p>
-          </section>
-
-          {/* 3 — Franchise enfant */}
-          <section id="enfants">
-            <h2 className="article-h2">3. Quelle franchise choisir pour un enfant ?</h2>
-
-            <p className="article-p mb-6">
+            {/* Franchises enfant */}
+            <h3 className="article-h3">Franchises enfant : quel niveau choisir ?</h3>
+            <p className="article-p mb-4">
               Les franchises enfant sont distinctes des franchises adultes, de 0 à 600 CHF par an.
               La quote-part est plafonnée à 350 CHF par an, contre 700 CHF pour un adulte.
             </p>
@@ -311,7 +333,7 @@ export default function FranchisePage() {
               À partir de l&apos;adolescence (15 à 18 ans), une franchise plus élevée peut être envisagée si l&apos;enfant est en bonne santé.
             </KeyFact>
 
-            <div className="overflow-x-auto border border-edge rounded-[8px]">
+            <div className="overflow-x-auto border border-edge rounded-[8px] mb-6">
               <table className="stripe-table w-full">
                 <thead>
                   <tr>
@@ -335,6 +357,14 @@ export default function FranchisePage() {
               </table>
             </div>
 
+            {/* Simulateur */}
+            <h3 className="article-h3">Simulateur : quelle franchise pour votre profil ?</h3>
+            <p className="article-p">
+              Sélectionnez votre canton et estimez vos frais médicaux annuels. Le simulateur calcule la franchise
+              qui minimise votre coût total annuel, prime et reste à charge confondus.
+            </p>
+            <FranchiseSimulator />
+
             <p className="article-p mt-6">
               <Link href="/sante/ma-famille" className="text-brand hover:underline">
                 Assurance maladie famille et maternité : ce qu&apos;il faut savoir →
@@ -342,9 +372,9 @@ export default function FranchisePage() {
             </p>
           </section>
 
-          {/* 4 — Changement */}
+          {/* 3 — Changement */}
           <section id="changement">
-            <h2 className="article-h2">4. Comment changer de franchise ?</h2>
+            <h2 className="article-h2">Comment changer de franchise ?</h2>
 
             <p className="article-p mb-6">
               Le changement de franchise suit un calendrier strict et n&apos;est possible qu&apos;une fois par an.
@@ -393,9 +423,9 @@ export default function FranchisePage() {
             </p>
           </section>
 
-          {/* 5 — FAQ */}
+          {/* 4 — FAQ */}
           <section id="faq" className="border-t border-edge pt-8">
-            <FAQ items={faqItems} title="5. Questions fréquentes sur la franchise LAMal" />
+            <FAQ items={faqItems} title="Questions fréquentes sur la franchise LAMal" />
           </section>
 
           {/* Formulaire */}
@@ -408,10 +438,8 @@ export default function FranchisePage() {
             <UnifiedLeadForm redirectOnSuccess="/fr/merci" />
           </div>
 
-          {/* Bandeau MSI */}
-          <AuthorBio publishedDate="1er janvier 2026" updatedDate="22 avril 2026" />
+          <AuthorBio publishedDate="1er janvier 2026" updatedDate="17 mai 2026" />
 
-          {/* Guides associés */}
           <section>
             <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
               Guides associés
