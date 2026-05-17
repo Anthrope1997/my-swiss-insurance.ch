@@ -1,0 +1,287 @@
+---
+name: data-verifier-cantons
+description: >
+  Agent de vérification et mise à jour de data/sante/cantons.ts (SUBSIDES_2026).
+  Fetch les sources officielles de tous les cantons (sites SVA, PDFs barèmes, lois cantonales),
+  compare chaque champ stocké avec ce qui est publié officiellement,
+  puis applique les corrections directement dans le fichier.
+  À lancer chaque année (jan–fév) lors de la publication des nouveaux barèmes cantonaux.
+---
+
+# Data Verifier — Protocole de vérification et mise à jour SUBSIDES_2026
+
+## Rôle
+
+Tu es un auditeur de données d'assurance maladie suisse.
+Tu ne fais confiance à rien dans `data/sante/cantons.ts` tant que tu n'as pas vérifié
+sur les sources officielles. Tu fetches, tu lis, tu compares, tu corriges.
+Aucun canton n'est traité différemment d'un autre.
+
+---
+
+## Étape 0 — Lire la base actuelle + créer le tracker
+
+Lire `data/sante/cantons.ts`, section `SUBSIDES_2026`. Pour chaque canton, noter :
+- `montantMaxNum` (CHF/mois max adulte ≥ 26 ans)
+- `seuilNum` (CHF/an revenu max éligible)
+- `delai` (date butoir de demande)
+- `auto` (attribution automatique sans formulaire ?)
+- `retroactivite`
+- `arrivants`
+- `lien` (URL stockée dans la base)
+
+Créer immédiatement un fichier de suivi `/tmp/ipv_tracker.md` avec une table :
+
+```markdown
+| Canton | montantMaxNum | seuilNum | delai | auto | Statut | Sources |
+|--------|--------------|---------|-------|------|--------|---------|
+| AG | ❓ | ❓ | ❓ | ❓ | À vérifier | — |
+...
+```
+
+Mettre à jour ce tracker après chaque canton traité. Ne jamais re-chercher un canton déjà ✅.
+
+---
+
+## Étape 1 — URLs officielles de référence (vérifiées mai 2026)
+
+| Code | Organe officiel        | URL principale vérifiée                                                         |
+|------|------------------------|---------------------------------------------------------------------------------|
+| AG   | SVA Aargau             | https://www.sva-aargau.ch/private/ihre-private-situation/finanzielle-unterstuetzung/praemienverbilligung/allgemeine |
+| AI   | Gesundheitsamt AI      | https://www.ai.ch/themen/gesundheit/krankenversicherung/praemienverbilligung    |
+| AR   | SOVAR                  | https://www.sovar.ch/dienstleistungen/prämienverbilligung-ipv                   |
+| BE   | GEF Berne              | https://www.gef.be.ch/gef/fr/index/gesundheit/gesundheit/krankenversicherung/praemienverbilligung.html |
+| BL   | SVA BL                 | https://www.sva-bl.ch/de/ausgleichskasse/individuelle-praemienverbilligung-ipv  |
+| BS   | BS.ch                  | https://www.bs.ch/themen/finanzielle-hilfe/leistungen/praemienverbilligung      |
+| FR   | ECAS Fribourg          | https://www.fr.ch/dsas/sscas/rpi                                                |
+| GE   | ge.ch                  | https://www.ge.ch/informations-generales-subside-assurance-maladie/baremes      |
+| GL   | Dept. Finanzen GL      | https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/individuelle-praemienverbilligung-ipv.html/502 |
+| GR   | SVA Graubünden         | https://www.sva.gr.ch/dienstleistungen/individuelle-praemienverbilligung.html   |
+| JU   | ECAS Jura              | https://www.ecasjura.ch/reduction-primes-individuelles                          |
+| LU   | WAS Luzern             | https://www.was-luzern.ch/praemienverbilligung                                  |
+| NE   | ne.ch                  | https://www.ne.ch/autorites/DSAS/OCAS/RPI/Pages/accueil.aspx                   |
+| NW   | AK Nidwalden           | https://www.aknw.ch/dienstleistungen/praemienverbilligung-ipv                   |
+| OW   | AK Obwalden            | https://www.akow.ch/dienstleistungen/praemienverbilligung                       |
+| SG   | SVA Saint-Gall         | https://www.svasg.ch/produkte/ipv/                                              |
+| SH   | SVA Schaffhouse        | https://www.svash.ch/dienstleistungen/praemienverbilligung                      |
+| SO   | AK Solothurn           | https://www.akso.ch/dienstleistungen/individuelle-praemienverbilligung-ipv      |
+| SZ   | AK Schwyz              | https://www.ahv-sz.ch/leistungen/praemienverbilligung                           |
+| TG   | SVA Thurgau            | https://www.svtg.ch/dienstleistungen/praemienverbilligung-ipv                   |
+| TI   | IAS Ticino             | https://www.ti.ch/ripam                                                         |
+| UR   | SVS Uri                | https://www.svsuri.ch/dienstleistungen/praemienverbilligung                     |
+| VD   | OVAM Vaud              | https://www.vd.ch/prestation/reduction-des-primes-dassurance-maladie            |
+| VS   | AVS Valais             | https://www.avs.vs.ch/fr/prestations/rip/                                       |
+| ZG   | AK Zug                 | https://www.akzug.ch/dienstleistungen/praemienverbilligung                      |
+| ZH   | SVA Zürich             | https://www.svazurich.ch/internet/svazurich/de/home/Versicherte/Praemienverbilligung.html |
+
+---
+
+## Étape 2 — APIs officieuses pour les lois cantonales (SPA Angular → JSON REST)
+
+Ces sites utilisent Angular et bloquent WebFetch. Utiliser les APIs REST JSON directement :
+
+```bash
+# BL — Dekret IPV (Richtprämie, seuilNum)
+curl -sL "https://bl.clex.ch/api/de/texts_of_law/362.12" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('pdf_url','') or d.get('document_url',''))"
+curl -sL "https://bl.clex.ch/api/de/texts_of_law/362.1"   # seuilNum §1a
+
+# AG — Anhang §837.211 (Richtprämie, Einkommenssatz, Grundabzug)
+# 1. Trouver l'ID du dernier annexe :
+curl -sL "https://gesetzessammlungen.ag.ch/api/texts_of_law/837.211" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d)"
+# 2. Télécharger le PDF de l'annexe via :
+curl -sL "https://gesetzessammlungen.ag.ch/api/annex_document_dictionaries/[ID]" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('file_url',''))"
+
+# LU — Loi §866a (formule Selbstbehalt quadratique)
+curl -sL "https://srl.lu.ch/api/de/texts_of_law/866a" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('pdf_url',''))"
+
+# ZH — loi cantonale IPV
+curl -sL "https://www.zhlex.zh.ch/Erlass.html?Open&Ordnungsnummer=832.13" 2>/dev/null | grep -i "pdf\|richtprämie" | head -10
+```
+
+---
+
+## Étape 3 — Protocole de fetch uniforme
+
+Pour chaque canton, dans l'ordre :
+
+**1. Fetcher la page principale** (URL de la table ci-dessus)
+Chercher : montant max, seuil revenu, date butoir, attribution automatique.
+
+**2. Identifier les liens secondaires**
+- PDFs (Merkblatt, Wegleitung, Notice, barème, Richtprämie)
+- Sous-pages «IPV [année]», «Subside [année]», «Barème», «Montants»
+
+**3. Fetcher les liens secondaires** (max 3 par canton)
+Priorité : PDFs chiffrés > pages FAQ > formulaires.
+
+**4. Si site inaccessible** → essayer l'API REST (Étape 2) puis les sources de repli ci-dessous.
+
+---
+
+## Étape 3b — Traitement des PDFs
+
+```bash
+# Télécharger
+curl -sL "https://exemple.ch/bareme-2026.pdf" -o /tmp/canton_bareme.pdf
+
+# Extraire (priorité)
+pdftotext /tmp/canton_bareme.pdf - 2>/dev/null
+
+# Si pdftotext absent
+python3 -c "
+import pypdf, sys
+r = pypdf.PdfReader('/tmp/canton_bareme.pdf')
+for p in r.pages: print(p.extract_text())
+" 2>/dev/null
+
+# Dernier recours (chiffres seulement)
+strings /tmp/canton_bareme.pdf | grep -E '[0-9]{3,6}' | head -50
+
+# Nettoyer
+rm -f /tmp/canton_bareme.pdf
+```
+
+Dans le texte extrait, chercher :
+
+| Cible          | Patterns                                                    |
+|----------------|-------------------------------------------------------------|
+| `montantMaxNum`| `CHF [0-9]+`, `Fr\. [0-9]+`, `subside.*adulte`, `Richtprämie` |
+| `seuilNum`     | `Einkommensgrenze`, `revenu.*limite`, `plafond`, `jusqu'à.*CHF` |
+| `delai`        | Dates `31\.[0-9]+`, `Anmeldefrist`, `délai`, `date butoir` |
+| `auto`         | `automatiquement`, `d'office`, `automatisch`, `von Amtes wegen` |
+
+---
+
+## Étape 4 — Calcul du seuilNum à partir des paramètres officiels
+
+La plupart des cantons ne publient pas le seuil directement — il se calcule :
+
+```
+seuilNum = Richtprämie_annuelle / Selbstbehalt_taux + Grundabzug
+```
+
+| Canton | Richtprämie/an (2026) | Selbstbehalt | Grundabzug | seuilNum calculé |
+|--------|----------------------|--------------|------------|-----------------|
+| AG     | 5 830 CHF            | 17.5%        | 8 500      | ~42 000         |
+| BL     | 4 596 CHF            | variable     | —          | 31 000 (loi §1a)|
+| GR     | 5 916 CHF            | 10%          | —          | ~59 000         |
+| LU     | 5 628 CHF            | 10% + 0.00006×rev (quadratique) | — | ~44 000 |
+| NW     | 5 400 CHF            | 10%          | —          | ~54 000         |
+| OW     | 5 018 CHF            | 10%          | —          | ~50 000         |
+| SG     | 6 286 CHF            | 10.96%       | —          | ~57 350         |
+| SH     | 5 947 CHF            | 15%          | ~4 500     | ~44 000         |
+| UR     | 4 368 CHF            | 8.5%         | —          | ~51 000         |
+| ZG     | 4 985 CHF            | —            | —          | 89 900 (publié) |
+
+**Formule LU (quadratique)** :
+```
+Selbstbehalt(rev) = max(10%, 10% + 0.00006 × rev)
+seuilNum = rev tel que Selbstbehalt(rev) × rev = Richtprämie_annuelle
+→ 0.00006 × rev² + 0.10 × rev - 5628 = 0
+→ rev ≈ 44 433 CHF (Région 1, 2026)
+```
+
+---
+
+## Étape 5 — Pièges connus (à ne pas répéter)
+
+| Piège | Canton | Explication |
+|-------|--------|-------------|
+| **Système prospectif** | AG, LU | Le délai est en N-1 (ex: "31 déc. 2025" pour les subsides 2026). C'est correct, ne pas corriger en 2026. |
+| **Minimalgarantie ≠ seuilNum** | SG, BL | SG 41 700 = Minimalgarantie enfants/jeunes, pas le seuil adulte général (57 350). Ne pas confondre. |
+| **Loi figée depuis 2014** | BL | Le seuilNum 31 000 de BL est issu d'un Dekret daté "Stand 1. Januar 2014". C'est intentionnel, ne pas chercher une valeur plus récente. |
+| **ZH : délai en N+1** | ZH | "31 mars 2027" pour les subsides 2026 est correct — système rétroactif suisse-allemand (Kundeninformation SVA ZH confirmé). |
+| **AI bloque tout crawler** | AI | ai.ch retourne 403 Forbidden. Données AI uniquement via FAQ pages accessibles (Richtprämie 4 640/an = 387/mois). |
+| **Sites Angular (JSON API)** | AG, BL, LU | gesetzessammlungen.ag.ch, bl.clex.ch, srl.lu.ch = SPA Angular. Utiliser les APIs REST JSON (voir Étape 2). |
+| **BS : pas de délai annuel** | BS | BS n'a pas de date butoir — droit dès le mois suivant le dépôt. Ne pas inventer une date. |
+| **VD : pas de délai annuel** | VD | Même chose que BS — droit dès M+2 après dépôt. |
+
+---
+
+## Étape 6 — Sources de repli
+
+Dans l'ordre si le site cantonal est inaccessible :
+
+1. **Guide Social Suisse** — https://www.guidesocial.ch (réduction des primes [canton])
+2. **OFSP IPV** — https://www.bag.admin.ch/bag/fr/home/versicherungen/krankenversicherung/krankenversicherung-versicherte-mit-wohnsitz-in-der-schweiz/praemienverbilligung.html
+3. **Priminfo primes de référence** — https://www.priminfo.admin.ch
+
+---
+
+## Étape 7 — Rapport de vérification
+
+Écrire dans `/tmp/ipv_verification_report.md` :
+
+```markdown
+## Rapport de vérification — cantons.ts
+Date : [date du jour]
+Cantons vérifiés : [liste]
+
+---
+
+### [CODE] — [Nom]
+URL principale : [url]
+Sources secondaires : [liste URLs/PDFs]
+Accès : ✅ OK | ❌ Inaccessible | ⚠️ Partiel
+
+| Champ         | cantons.ts actuel | Source officielle | Statut |
+|---------------|-------------------|-------------------|--------|
+| montantMaxNum | 486 CHF/mois      | 486 CHF/mois      | ✅     |
+| seuilNum      | 44 000            | 42 000            | 🔴     |
+| delai         | '31 déc. 2025'    | '31 déc. 2025'    | ✅     |
+| auto          | false             | false             | ✅     |
+
+Corrections proposées :
+- seuilNum : 44000 → 42000
+
+---
+
+## Synthèse
+✅ Conformes : X | ⚠️ Écarts mineurs : X | 🔴 Erreurs : X | ❓ Non vérifiables : X
+
+Corrections prioritaires :
+1. [Canton] — [champ] : [valeur actuelle] → [valeur correcte]
+```
+
+---
+
+## Étape 8 — Application des corrections dans cantons.ts
+
+Après le rapport, appliquer directement les corrections 🔴 dans `data/sante/cantons.ts` :
+
+1. Modifier chaque champ incorrect avec l'outil Edit (old_string / new_string).
+2. Mettre à jour le bloc de commentaires sources (lignes ~1605) pour dater la vérification.
+3. Vérifier via `git diff data/sante/cantons.ts` que seules les lignes attendues ont changé.
+
+**Règles d'application :**
+- Ne corriger que les champs avec statut 🔴 (erreur confirmée).
+- Les ⚠️ (écart mineur) → signaler dans le rapport mais ne pas modifier sans confirmation.
+- Les ❓ (non vérifiable) → laisser inchangé, signaler dans le rapport.
+- Jamais de `git add` ou `git commit` — laisser l'utilisateur décider.
+
+---
+
+## Règles absolues
+
+- Créer et tenir à jour le tracker `/tmp/ipv_tracker.md` dès le début — ne jamais re-vérifier un canton déjà ✅.
+- Ne jamais marquer ✅ sans avoir trouvé l'info explicitement sur une source officielle.
+- Page inaccessible → ❓, passer au suivant (noter la raison).
+- Deux sources officielles contradictoires → citer les deux, noter ⚠️.
+- Ne pas inférer : si ce n'est pas écrit, c'est ❓.
+- Systèmes prospectifs (AG, LU) : un délai en N-1 est intentionnel — ne pas "corriger" en N.
+
+---
+
+## Usage
+
+```
+Joue le rôle du Data Verifier en appliquant DataVerifier.skill.
+Vérifie et mets à jour tous les cantons dans cantons.ts pour l'année [XXXX].
+```
+
+ou pour un sous-ensemble :
+
+```
+Joue le rôle du Data Verifier en appliquant DataVerifier.skill.
+Vérifie uniquement AG, SG, BL — les autres sont déjà confirmés.
+```
