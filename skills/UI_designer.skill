@@ -71,17 +71,37 @@ Toutes les autres sections utilisent `bg-white` : outil interactif, FAQ, formula
 | Formulaire | `bg-white` (sauf homepage) |
 | Données de référence / parts de marché | `bg-white` |
 
-### 0.3 Callouts unifiés — deux variantes
+### 0.3 Encadrés bleus — composant `<KeyFact>` (source unique de vérité)
 
-Tous les callouts utilisent la classe `.callout` avec l'icône ampoule outline 20px (voir §12.3).
-La distinction sémantique est indiquée par le style du label, pas par une classe CSS différente.
+**Tous les encadrés bleus du site utilisent exclusivement `<KeyFact>`.**
+Ne jamais créer un `<div className="callout ...">` inline avec icône et label — utiliser `<KeyFact>`.
 
-| Variante | Style du label | Usage |
-|---|---|---|
-| Astuce / exemple | `font-semibold text-ink mb-1` | Conseils, exemples, clarifications |
-| À retenir / Recommandation | `text-[12px] font-semibold text-ink uppercase tracking-widest mb-1` | Délais légaux, montants exacts, règles sans exception |
+```tsx
+import KeyFact from '@/components/ui/KeyFact'
 
-`callout-success` est identique à `callout` — utiliser `callout` partout.
+// Label par défaut "À retenir"
+<KeyFact>
+  Texte du corps en 16px.
+</KeyFact>
+
+// Label personnalisé
+<KeyFact label="Recommandation">
+  La franchise 0 CHF est conseillée pour les jeunes enfants.
+</KeyFact>
+```
+
+**Anatomie du composant** (`components/ui/KeyFact.tsx`) :
+- Fond `.callout` (`bg-[#dbeafe]`, bordure gauche `#1d4ed8`)
+- Icône ampoule 20px + label sur la même ligne, tous deux en `text-brand`
+- Label : 16px, font-semibold, casse naturelle (pas d'uppercase)
+- Corps : `<div>` 16px leading-relaxed — accepte texte, `<strong>`, `<ul>`, etc.
+- `mb-6` intégré — ne pas ajouter de marge externe
+
+**Labels courants** : `"À retenir"` (défaut), `"Recommandation"`, `"Exemple"`, `"Méthode de calcul"`.
+
+**Ne jamais écrire** : `<div className="callout flex gap-3">` avec SVG inline — remplacer par `<KeyFact>`.
+
+`callout-warning` et `callout-success` sont obsolètes — utiliser `<KeyFact>` partout.
 
 ### 0.4 Espacement des deux-points (typographie française) — règle globale
 

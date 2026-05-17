@@ -561,7 +561,7 @@ export default function GuideLamalPage() {
                 service cantonal compétent, généralement avant le 31 mars.
               </p>
               <KeyFact>
-                <strong>Astuce :</strong> si vous pensez avoir droit à un subside mais n&apos;en avez pas reçu,
+                Si vous pensez avoir droit à un subside mais n&apos;en avez pas reçu,
                 contactez votre caisse maladie ou le service cantonal. Les subsides non réclamés ne sont
                 pas versés rétroactivement dans la plupart des cantons.
               </KeyFact>

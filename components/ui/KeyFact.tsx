@@ -18,7 +18,7 @@ export default function KeyFact({ label = 'À retenir', children }: KeyFactProps
           <line x1="9.5" y1="18" x2="14.5" y2="18" />
           <line x1="10" y1="21" x2="14" y2="21" />
         </svg>
-        <span className="text-[16px] font-semibold text-brand uppercase tracking-widest">{label}</span>
+        <span className="text-[16px] font-semibold text-brand">{label}</span>
       </div>
       <div className="text-[16px] leading-relaxed">{children}</div>
     </div>
