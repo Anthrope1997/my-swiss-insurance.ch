@@ -366,7 +366,7 @@ export default function SubsidesSimulatorFull() {
 
         <button
           onClick={() => { if (form.canton) setSubmitted(true) }}
-          disabled={!form.canton}
+          disabled={!form.canton || showNoFormula}
           className="btn-primary w-full disabled:opacity-40 disabled:cursor-not-allowed"
         >
           {t.form.cta}

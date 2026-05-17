@@ -1731,7 +1731,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 déc. 2025',
     lien: 'https://www.sva-aargau.ch/private/ihre-private-situation/finanzielle-unterstuetzung/praemienverbilligung/allgemeine',
     primeMoyenne: 419,
-    retroactivite: 'Votre subside est rétroactif au 1er janvier si votre demande est déposée avant le 31 décembre. Passé ce délai, l\'inscription n\'est plus possible pour l\'année en cours.',
+    retroactivite: 'Votre subside est rétroactif au 1er janvier 2026 si votre demande est déposée avant le 31 décembre 2026. Passé ce délai, l\'inscription n\'est plus possible pour l\'année en cours.',
     arrivants: 'Faites votre demande via sva-aargau.ch. Votre subside commence à la date de votre demande.',
   },
 
@@ -1775,7 +1775,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 déc. 2026',
     lien: 'https://www.sva-bl.ch/de/ausgleichskasse/individuelle-praemienverbilligung-ipv',
     primeMoyenne: 466,
-    retroactivite: 'Un formulaire vous est envoyé fin décembre si vous êtes identifié comme éligible. Si vous le retournez dans les 12 mois, votre subside est rétroactif au 1er janvier. Si vous êtes imposé à la source, le délai est le 31 décembre.',
+    retroactivite: 'Un formulaire vous est envoyé fin décembre si vous êtes éligible. Si vous le retournez dans les 12 mois, votre subside est rétroactif au 1er janvier 2026. Si vous êtes imposé à la source, le délai est le 31 décembre 2026.',
     arrivants: 'Vous avez jusqu\'au 31 décembre de l\'année suivant votre arrivée pour déposer votre demande.',
   },
 
@@ -1874,7 +1874,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 juil. 2026',
     lien: 'https://www.akso.ch/dienstleistungen/praemienverbilligung-ipv',
     primeMoyenne: 387,
-    retroactivite: 'Un formulaire vous est envoyé automatiquement en janvier si vous êtes identifié comme éligible. Si vous le retournez dans les 30 jours, votre subside est rétroactif au 1er janvier. Si vous êtes imposé à la source, le délai est le 31 décembre.',
+    retroactivite: 'Un formulaire vous est envoyé automatiquement en janvier si vous êtes éligible. Si vous le retournez dans les 30 jours, votre subside est rétroactif au 1er janvier 2026. Si vous êtes imposé à la source, le délai est le 31 décembre 2026.',
     arrivants: 'Votre subside commence dès le mois de votre demande. Déposez votre formulaire dès votre arrivée auprès de l\'Ausgleichskasse Solothurn (akso.ch).',
   },
 
@@ -1907,7 +1907,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 déc. 2025 (droit dès janv. 2026) ; hors délai : droit dès M+2',
     lien: 'https://www4.ti.ch/dss/ias/prestazioni-e-contributi/scheda/p/s/dettaglio/riduzione-dei-premi-dellassicurazione-malattia-ripam/richiesta-del-formulario-ripam/',
     primeMoyenne: 531,
-    retroactivite: 'Votre subside est rétroactif au 1er janvier si vous déposez le formulaire avant le 31 décembre de l\'année précédente. Au-delà, votre droit commence le mois suivant votre demande.',
+    retroactivite: 'Votre subside est rétroactif au 1er janvier 2026 si vous avez déposé le formulaire avant le 31 décembre 2025. Au-delà, votre droit commence le mois suivant votre demande.',
     arrivants: 'Si vous déposez le formulaire RIPAM avant le 31 décembre, votre subside commence en janvier. Sinon, il commence le mois suivant votre demande.',
   },
 
@@ -2129,7 +2129,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 déc. 2026',
     lien: 'https://www.ecasjura.ch/fr/Assurances/Assurance-maladie',
     primeMoyenne: 633,
-    retroactivite: 'Votre subside est rétroactif au 1er janvier si votre taxation a été établie tardivement. Le délai est le 31 décembre de l\'année en cours.',
+    retroactivite: 'Votre subside est rétroactif au 1er janvier 2026 si votre taxation a été établie tardivement. Le délai est le 31 décembre 2026.',
     arrivants: 'Faites votre demande à l\'ECAS dès votre arrivée. Votre subside est rétroactif au 1er janvier si la demande est déposée dans les délais.',
     note: 'Examen d\'office si taxation 2024 reçue avant déc. 2026. Demande requise sinon ou sans courrier dans les 30 jours. Situation déterminante : 1er jan. de l\'année.',
     ju: {

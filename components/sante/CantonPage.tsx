@@ -361,9 +361,9 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
                   <th className="text-left whitespace-nowrap">Franchise</th>
                   <th className="text-left whitespace-nowrap">Prime par mois</th>
                   <th className="text-left whitespace-nowrap hidden sm:table-cell">Prime par an</th>
-                  <th className="text-left whitespace-nowrap">Si aucun frais</th>
-                  <th className="text-left whitespace-nowrap hidden sm:table-cell">Si 3 000 CHF</th>
-                  <th className="text-left whitespace-nowrap hidden md:table-cell">Si 8 000 CHF</th>
+                  <th className="text-left whitespace-nowrap">Si aucun frais médicaux</th>
+                  <th className="text-left whitespace-nowrap hidden sm:table-cell">Si CHF 3 000 de frais</th>
+                  <th className="text-left whitespace-nowrap hidden md:table-cell">Si CHF 8 000 de frais</th>
                 </tr>
               </thead>
               <tbody>
