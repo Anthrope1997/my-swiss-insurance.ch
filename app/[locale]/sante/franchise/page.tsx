@@ -97,10 +97,12 @@ const heroStats = [
 ]
 
 const toc = [
-  { id: 'definition', label: 'Franchise et quote-part'    },
-  { id: 'choisir',    label: 'Quelle franchise choisir ?' },
-  { id: 'changement', label: 'Changer de franchise'       },
-  { id: 'faq',        label: 'Questions fréquentes'       },
+  { id: 'simulateur', label: 'Quelle franchise pour votre profil ?' },
+  { id: 'definition', label: 'Franchise et quote-part'               },
+  { id: 'choisir',    label: 'Quelle franchise choisir ?'            },
+  { id: 'enfants',    label: 'Franchise enfant'                      },
+  { id: 'changement', label: 'Changer de franchise'                  },
+  { id: 'faq',        label: 'Questions fréquentes'                  },
 ]
 
 const guidesAssocies = [
@@ -181,9 +183,20 @@ export default function FranchisePage() {
       <div className="container-xl py-12">
         <article className="space-y-4">
 
-          {/* 1 — Définition */}
+          {/* 01 — Simulateur */}
+          <section id="simulateur">
+            <h2 className="article-h2">1. Quelle franchise pour votre profil ?</h2>
+
+            <p className="article-p mb-6">
+              Indiquez votre canton, votre âge et vos frais médicaux annuels estimés.
+              Le simulateur calcule la franchise qui minimise votre coût total annuel.
+            </p>
+            <FranchiseSimulator />
+          </section>
+
+          {/* 02 — Définition */}
           <section id="definition">
-            <h2 className="article-h2">1. Franchise et quote-part : quelle différence ?</h2>
+            <h2 className="article-h2">2. Franchise et quote-part : quelle différence ?</h2>
 
             <p className="article-p mb-6">
               La franchise et la quote-part sont les deux mécanismes de participation aux frais médicaux.
@@ -234,9 +247,9 @@ export default function FranchisePage() {
             </p>
           </section>
 
-          {/* 2 — Quelle franchise choisir ? (adultes + enfants + simulateur) */}
+          {/* 03 — Quelle franchise choisir ? (adulte — tableau + graphique) */}
           <section id="choisir">
-            <h2 className="article-h2">2. Quelle franchise choisir ?</h2>
+            <h2 className="article-h2">3. Quelle franchise choisir ?</h2>
 
             <p className="article-p mb-6">
               La franchise optimale dépend de vos frais médicaux annuels et de votre canton de résidence.
@@ -320,9 +333,12 @@ export default function FranchisePage() {
               En dessous de ce seuil, la franchise CHF 2 500 est plus avantageuse.
               Au-dessus, la franchise CHF 300 limite mieux le reste à charge total.
             </KeyFact>
+          </section>
 
-            {/* Franchises enfant */}
-            <h3 className="article-h3">Franchises enfant : quel niveau choisir ?</h3>
+          {/* 04 — Franchise enfant */}
+          <section id="enfants">
+            <h2 className="article-h2">4. Franchise enfant</h2>
+
             <p className="article-p mb-4">
               Les franchises enfant sont distinctes des franchises adultes, de 0 à 600 CHF par an.
               La quote-part est plafonnée à 350 CHF par an, contre 700 CHF pour un adulte.
@@ -357,14 +373,6 @@ export default function FranchisePage() {
               </table>
             </div>
 
-            {/* Simulateur */}
-            <h3 className="article-h3">Simulateur : quelle franchise pour votre profil ?</h3>
-            <p className="article-p">
-              Sélectionnez votre canton et estimez vos frais médicaux annuels. Le simulateur calcule la franchise
-              qui minimise votre coût total annuel, prime et reste à charge confondus.
-            </p>
-            <FranchiseSimulator />
-
             <p className="article-p mt-6">
               <Link href="/sante/ma-famille" className="text-brand hover:underline">
                 Assurance maladie famille et maternité : ce qu&apos;il faut savoir →
@@ -372,9 +380,9 @@ export default function FranchisePage() {
             </p>
           </section>
 
-          {/* 3 — Changement */}
+          {/* 05 — Changement */}
           <section id="changement">
-            <h2 className="article-h2">3. Comment changer de franchise ?</h2>
+            <h2 className="article-h2">5. Comment changer de franchise ?</h2>
 
             <p className="article-p mb-6">
               Le changement de franchise suit un calendrier strict et n&apos;est possible qu&apos;une fois par an.
@@ -425,7 +433,7 @@ export default function FranchisePage() {
 
           {/* 4 — FAQ */}
           <section id="faq" className="border-t border-edge pt-8">
-            <FAQ items={faqItems} title="4. Questions fréquentes sur la franchise LAMal" />
+            <FAQ items={faqItems} title="6. Questions fréquentes sur la franchise LAMal" />
           </section>
 
           {/* Formulaire */}
