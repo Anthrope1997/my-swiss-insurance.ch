@@ -8,6 +8,7 @@ import Link from 'next/link'
 import AuthorBio from '@/components/ui/AuthorBio'
 import UnifiedLeadForm from '@/components/ui/UnifiedLeadForm'
 import HeroStats from '@/components/ui/HeroStats'
+import { nationalBreakEven, nationalBreakEvenJA } from '@/lib/sante/calcul-franchise'
 
 export const metadata: Metadata = {
   title: "Franchise LAMal 2026 : quel montant choisir — My Swiss Insurance",
@@ -32,11 +33,15 @@ const articleSchema = {
   mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://my-swiss-insurance.ch/sante/franchise' },
 }
 
+const seuil   = nationalBreakEven()
+const seuilJA = nationalBreakEvenJA()
+const fmtChf  = (n: number) => n.toLocaleString('fr-CH')
+
 const faqItems = [
   {
     question: 'Quelle franchise LAMal choisir en 2026 ?',
     answer:
-      "Choisissez la franchise 2 500 CHF si vous êtes en bonne santé et avez peu de frais médicaux : vous économisez environ CHF 120 par mois sur la prime. Optez pour la franchise 300 CHF si vos dépenses médicales dépassent CHF 1 899 par an (seuil moyen suisse : 1 897 CHF).",
+      `Choisissez la franchise 2 500 CHF si vous êtes en bonne santé et avez peu de frais médicaux : vous économisez environ CHF 120 par mois sur la prime. Optez pour la franchise 300 CHF si vos dépenses médicales dépassent CHF ${fmtChf(seuil)} par an en moyenne suisse.`,
   },
   {
     question: "Peut-on changer de franchise en cours d'année ?",
@@ -78,14 +83,14 @@ const faqSchema = {
 
 const enBref = [
   "La franchise 2 500 CHF économise environ 120 CHF par mois sur votre prime et vous expose à 3 200 CHF de reste à charge maximum par an.",
-  "Le seuil d'équilibre entre franchise 300 CHF et 2 500 CHF est de 1 897 CHF de frais médicaux annuels en moyenne suisse.",
+  `Le seuil d'équilibre entre franchise 300 CHF et 2 500 CHF est de CHF ${fmtChf(seuil)} de frais médicaux annuels en moyenne suisse.`,
   "Les enfants bénéficient de franchises de 0 à 600 CHF par an, avec une quote-part plafonnée à 350 CHF par an.",
 ]
 
 const heroStats = [
-  { value: '6',           label: 'Niveaux de franchise',        sub: 'de 300 à 2 500 CHF par an'                         },
-  { value: '1 897 CHF',   label: "Seuil d'équilibre moyen",      sub: 'F300 vs F2500 · 42 régions · adulte 35 ans'        },
-  { value: '1 463 CHF',   label: 'Économie max. sur la prime',  sub: 'en passant à F2500 · adulte 35 ans · OFSP 2026'    },
+  { value: '6',                       label: 'Niveaux de franchise',       sub: 'de 300 à 2 500 CHF par an'                      },
+  { value: `${fmtChf(seuil)} CHF`,    label: "Seuil d'équilibre moyen",    sub: 'F300 vs F2500 · 26 cantons · adulte · BASE'     },
+  { value: '1 463 CHF',               label: 'Économie max. sur la prime', sub: 'en passant à F2500 · adulte 35 ans · OFSP 2026' },
 ]
 
 const toc = [
@@ -289,8 +294,8 @@ export default function FranchisePage() {
 
             <KeyFact>
               En moyenne suisse, le seuil d&apos;équilibre entre la franchise CHF 300 et CHF 2 500 est de{' '}
-              <strong>CHF 1 897 de frais médicaux annuels pour un adulte de 26 ans et plus</strong>.
-              Pour un jeune adulte de 19 à 25 ans, ce seuil est de <strong>CHF 1 722</strong>.
+              <strong>CHF {fmtChf(seuil)} de frais médicaux annuels pour un adulte de 26 ans et plus</strong>.
+              Pour un jeune adulte de 19 à 25 ans, ce seuil est de <strong>CHF {fmtChf(seuilJA)}</strong>.
               En dessous de ces seuils, la franchise CHF 2 500 est plus avantageuse ; au-dessus, la franchise CHF 300 limite mieux le coût total annuel.
             </KeyFact>
 

@@ -8,6 +8,7 @@ import InfoBox from '@/components/shared/InfoBox'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 import type { Canton } from '@/data/sante/cantons'
+import { cantonBreakEven } from '@/lib/sante/calcul-franchise'
 
 function ordinal(n: number): string {
   return n === 1 ? '1er' : `${n}e`
@@ -30,7 +31,7 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
   const rowMax = canton.franchiseTable.find((r) => r.franchise === 2500)!
   const savingF           = rowMin.cout0 - rowMax.cout0
   const economieFranchise = savingF
-  const breakEven         = canton.breakEvenFranchise
+  const breakEven         = cantonBreakEven(canton.slug) ?? 1900
 
   const heroStats = overrideHeroStats ?? [
     {

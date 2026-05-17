@@ -56,7 +56,6 @@ export interface Canton {
   economieAn: number           // idem × 12
   subsidesPct: string
   nbRegions: number
-  breakEvenFranchise: number  // seuil d'équilibre F300 vs F2500 — avg régions, adulte 35 ans, BASE, sans LAA
   topCaisses: TopCaisse[]      // top 5 caisses les moins chères (avg canton)
   caissePlusChere: TopCaisse
   caisseRef: string            // caisse utilisée pour le tableau des franchises
@@ -84,7 +83,6 @@ const cantons: Canton[] = [
     economieAn: 4220,
     subsidesPct: '28%',
     nbRegions: 2,
-    breakEvenFranchise: 1900,
     topCaisses: [
       { name: 'Galenos',       prime: 579 },
       { name: 'Atupri',        prime: 594 },
@@ -149,7 +147,6 @@ const cantons: Canton[] = [
     economieAn: 5653,
     subsidesPct: '31%',
     nbRegions: 1,
-    breakEvenFranchise: 1891,
     topCaisses: [
       { name: 'Assura',        prime: 634 },
       { name: 'Vivao Sympany', prime: 646 },
@@ -207,7 +204,6 @@ const cantons: Canton[] = [
     economieAn: 3632,
     subsidesPct: '24%',
     nbRegions: 2,
-    breakEvenFranchise: 1891,
     topCaisses: [
       { name: 'ÖKK',      prime: 489 },
       { name: 'Aquilana', prime: 490 },
@@ -266,7 +262,6 @@ const cantons: Canton[] = [
     economieAn: 3846,
     subsidesPct: '26%',
     nbRegions: 2,
-    breakEvenFranchise: 1812,
     topCaisses: [
       { name: 'Visperterminen', prime: 433 },
       { name: 'SLKK',           prime: 453 },
@@ -325,7 +320,6 @@ const cantons: Canton[] = [
     economieAn: 4686,
     subsidesPct: '29%',
     nbRegions: 1,
-    breakEvenFranchise: 1891,
     topCaisses: [
       { name: 'Helsana', prime: 610 },
       { name: 'Atupri',  prime: 618 },
@@ -383,7 +377,6 @@ const cantons: Canton[] = [
     economieAn: 4308,
     subsidesPct: '22%',
     nbRegions: 1,
-    breakEvenFranchise: 1925,
     topCaisses: [
       { name: 'Atupri',   prime: 592 },
       { name: 'Agrisano', prime: 595 },
@@ -441,7 +434,6 @@ const cantons: Canton[] = [
     economieAn: 4081,
     subsidesPct: '16%',
     nbRegions: 1,
-    breakEvenFranchise: 1891,
     topCaisses: [
       { name: 'Vivao Sympany', prime: 359 },
       { name: 'Concordia', prime: 359 },
@@ -498,7 +490,6 @@ const cantons: Canton[] = [
     economieAn: 3925,
     subsidesPct: '18%',
     nbRegions: 1,
-    breakEvenFranchise: 1891,
     topCaisses: [
       { name: 'Assura', prime: 383 },
       { name: 'Vivao Sympany', prime: 385 },
@@ -555,7 +546,6 @@ const cantons: Canton[] = [
     economieAn: 3838,
     subsidesPct: '18%',
     nbRegions: 1,
-    breakEvenFranchise: 1925,
     topCaisses: [
       { name: 'Agrisano', prime: 421 },
       { name: 'Vivao Sympany', prime: 426 },
@@ -612,7 +602,6 @@ const cantons: Canton[] = [
     economieAn: 5140,
     subsidesPct: '18%',
     nbRegions: 1,
-    breakEvenFranchise: 1925,
     topCaisses: [
       { name: 'Agrisano', prime: 411 },
       { name: 'Vivao Sympany', prime: 416 },
@@ -669,7 +658,6 @@ const cantons: Canton[] = [
     economieAn: 3781,
     subsidesPct: '18%',
     nbRegions: 1,
-    breakEvenFranchise: 1924,
     topCaisses: [
       { name: 'Agrisano', prime: 418 },
       { name: 'Sumiswalder', prime: 439 },
@@ -726,7 +714,6 @@ const cantons: Canton[] = [
     economieAn: 3721,
     subsidesPct: '20%',
     nbRegions: 1,
-    breakEvenFranchise: 1907,
     topCaisses: [
       { name: 'Einsiedeln', prime: 408 },
       { name: 'Agrisano', prime: 437 },
@@ -782,7 +769,6 @@ const cantons: Canton[] = [
     economieAn: 4068,
     subsidesPct: '24%',
     nbRegions: 3,
-    breakEvenFranchise: 1914,
     topCaisses: [
       { name: 'Agrisano', prime: 455 },
       { name: 'ÖKK', prime: 465 },
@@ -842,7 +828,6 @@ const cantons: Canton[] = [
     economieAn: 3395,
     subsidesPct: '20%',
     nbRegions: 1,
-    breakEvenFranchise: 1925,
     topCaisses: [
       { name: 'Agrisano', prime: 473 },
       { name: 'Sumiswalder', prime: 474 },
@@ -899,7 +884,6 @@ const cantons: Canton[] = [
     economieAn: 4002,
     subsidesPct: '24%',
     nbRegions: 3,
-    breakEvenFranchise: 1909,
     topCaisses: [
       { name: 'KKLH', prime: 443 },
       { name: 'Sanitas', prime: 472 },
@@ -959,7 +943,6 @@ const cantons: Canton[] = [
     economieAn: 4385,
     subsidesPct: '20%',
     nbRegions: 1,
-    breakEvenFranchise: 1925,
     topCaisses: [
       { name: 'Agrisano', prime: 450 },
       { name: 'ÖKK', prime: 462 },
@@ -1016,7 +999,6 @@ const cantons: Canton[] = [
     economieAn: 3571,
     subsidesPct: '22%',
     nbRegions: 1,
-    breakEvenFranchise: 1925,
     topCaisses: [
       { name: 'Agrisano', prime: 469 },
       { name: 'SLKK', prime: 483 },
@@ -1074,7 +1056,6 @@ const cantons: Canton[] = [
     economieAn: 4286,
     subsidesPct: '22%',
     nbRegions: 3,
-    breakEvenFranchise: 1869,
     topCaisses: [
       { name: 'curaulta', prime: 465 },
       { name: 'ÖKK', prime: 465 },
@@ -1134,7 +1115,6 @@ const cantons: Canton[] = [
     economieAn: 3548,
     subsidesPct: '22%',
     nbRegions: 1,
-    breakEvenFranchise: 1909,
     topCaisses: [
       { name: 'KKLH', prime: 483 },
       { name: 'Sumiswalder', prime: 486 },
@@ -1197,7 +1177,6 @@ const cantons: Canton[] = [
     economieAn: 4285,
     subsidesPct: '26%',
     nbRegions: 3,
-    breakEvenFranchise: 1888,
     topCaisses: [
       { name: 'Rhenusana', prime: 489 },
       { name: 'Wädenswil', prime: 490 },
@@ -1257,7 +1236,6 @@ const cantons: Canton[] = [
     economieAn: 3805,
     subsidesPct: '22%',
     nbRegions: 2,
-    breakEvenFranchise: 1891,
     topCaisses: [
       { name: 'ÖKK', prime: 493 },
       { name: 'Assura', prime: 497 },
@@ -1316,7 +1294,6 @@ const cantons: Canton[] = [
     economieAn: 3558,
     subsidesPct: '24%',
     nbRegions: 1,
-    breakEvenFranchise: 1891,
     topCaisses: [
       { name: 'Sumiswalder', prime: 531 },
       { name: 'Agrisano', prime: 532 },
@@ -1374,7 +1351,6 @@ const cantons: Canton[] = [
     economieAn: 4447,
     subsidesPct: '28%',
     nbRegions: 3,
-    breakEvenFranchise: 1891,
     topCaisses: [
       { name: 'Sumiswalder', prime: 533 },
       { name: 'ÖKK', prime: 548 },
@@ -1434,7 +1410,6 @@ const cantons: Canton[] = [
     economieAn: 4421,
     subsidesPct: '26%',
     nbRegions: 2,
-    breakEvenFranchise: 1891,
     topCaisses: [
       { name: 'ÖKK', prime: 569 },
       { name: 'Sumiswalder', prime: 587 },
@@ -1493,7 +1468,6 @@ const cantons: Canton[] = [
     economieAn: 4721,
     subsidesPct: '32%',
     nbRegions: 1,
-    breakEvenFranchise: 1891,
     topCaisses: [
       { name: 'Assura', prime: 621 },
       { name: 'Vivao Sympany', prime: 625 },
@@ -1551,7 +1525,6 @@ const cantons: Canton[] = [
     economieAn: 4684,
     subsidesPct: '26%',
     nbRegions: 2,
-    breakEvenFranchise: 1925,
     topCaisses: [
       { name: 'Agrisano', prime: 634 },
       { name: 'Galenos', prime: 637 },

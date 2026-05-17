@@ -6,6 +6,7 @@ import Link from 'next/link'
 import AuthorBio from '@/components/ui/AuthorBio'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import HeroStats from '@/components/ui/HeroStats'
+import { nationalBreakEven, cantonBreakEven } from '@/lib/sante/calcul-franchise'
 
 export const metadata: Metadata = {
   title: 'Guide complet LAMal 2026 — Primes, franchises, modèles et subsides',
@@ -37,7 +38,7 @@ const faqItems = [
   },
   {
     question: 'Quelle franchise LAMal choisir ?',
-    answer: "Choisissez la franchise 2 500 CHF si vous êtes en bonne santé et consultez peu : vous économisez environ CHF 119 par mois sur la prime à Genève. Optez pour la franchise 300 CHF si vos dépenses annuelles dépassent CHF 1 891 à Genève (1 897 CHF en moyenne suisse).",
+    answer: `Choisissez la franchise 2 500 CHF si vous êtes en bonne santé et consultez peu : vous économisez environ CHF 119 par mois sur la prime à Genève. Optez pour la franchise 300 CHF si vos dépenses annuelles dépassent CHF ${(cantonBreakEven('geneve') ?? 0).toLocaleString('fr-CH')} à Genève (CHF ${nationalBreakEven().toLocaleString('fr-CH')} en moyenne suisse).`,
   },
   {
     question: "Peut-on changer de caisse maladie en cours d'année ?",
@@ -381,7 +382,7 @@ export default function GuideLamalPage() {
 
               <KeyFact>
                 Le point de bascule entre la franchise CHF 2 500 et la franchise CHF 300 se situe autour de{' '}
-                <strong>CHF 1 897 de frais médicaux annuels</strong>{' '}
+                <strong>CHF {nationalBreakEven().toLocaleString('fr-CH')} de frais médicaux annuels</strong>{' '}
                 en moyenne en Suisse. Si vos frais médicaux annuels sont inférieurs à ce seuil, il est plus économique d&apos;opter pour la franchise CHF 2 500.
                 {' '}Au-delà, la franchise CHF 300 devient plus avantageuse.
               </KeyFact>

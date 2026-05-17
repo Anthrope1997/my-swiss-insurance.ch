@@ -1,10 +1,12 @@
 'use client'
 
 import { useRef, useLayoutEffect, useState } from 'react'
+import { nationalAvgPrime, nationalBreakEven } from '@/lib/sante/calcul-franchise'
 
-// ─── Données réelles — primes moyennes suisses, caisse la moins chère, modèle standard ──
-const PRIME_300  = 534.75
-const PRIME_2500 = 415.00
+// Primes moyennes nationales — caisse la moins chère par franchise, moyennée sur les cantons
+const PRIME_300  = nationalAvgPrime(300)
+const PRIME_2500 = nationalAvgPrime(2500)
+const SEUIL      = nationalBreakEven()
 
 function totalAnnuel(prime: number, franchise: number, frais: number): number {
   return (
@@ -13,9 +15,6 @@ function totalAnnuel(prime: number, franchise: number, frais: number): number {
     Math.min(Math.max(0, frais - franchise) * 0.1, 700)
   )
 }
-
-// Seuil analytique : 12*(p300−p2500) + 270 = 0.9x  →  x ≈ 1 891
-const SEUIL = Math.round((12 * (PRIME_300 - PRIME_2500) + 270) / 0.9)
 const X_MAX = 4000
 
 // ─── Plage Y — fixe ───────────────────────────────────────────────────────────
