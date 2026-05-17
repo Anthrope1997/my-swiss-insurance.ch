@@ -134,5 +134,47 @@
     "droits": "Tous droits réservés",
     "lpd": "Protection des données (LPD)",
     "sources": "Sources officielles :"
+  },
+  "simulator": {
+    "form": {
+      "canton": "Canton de résidence",
+      "cantonPlaceholder": "Sélectionner votre canton…",
+      "revenu": "Revenu déterminant annuel",
+      "revenuHint": "Revenu net fiscal. En cas de doute, utilisez votre revenu imposable.",
+      "revenuPlaceholder": "ex. 45 000",
+      "revenuSuffix": "CHF par an",
+      "age": "Âge",
+      "adulte": "Adulte (26 ans et plus)",
+      "jeune": "Jeune adulte (19 à 25 ans)",
+      "situation": "Situation familiale",
+      "seul": "Personne seule",
+      "couple": "Couple",
+      "enfants": "Enfants à charge",
+      "aucunEnfant": "Aucun",
+      "cta": "Calculer mon subside →",
+      "noFormula": "Ce canton n'a pas publié de barème standard. Consultez directement le service cantonal."
+    },
+    "result": {
+      "badge": "VOTRE ESTIMATION 2026",
+      "perMois": "par mois",
+      "noRevenu": "Entrez votre revenu pour obtenir une estimation chiffrée.",
+      "ineligible": "Revenu hors barème",
+      "ineligibleDetail": "Votre revenu dépasse le seuil d'éligibilité dans ce canton."
+    },
+    "howTo": {
+      "titre": "Comment obtenir votre subside",
+      "autoTitre": "Aucune démarche requise",
+      "autoBody": "Le subside est calculé à partir de vos données fiscales. Il est déduit chaque mois de votre prime pour toute l'année 2026.",
+      "noDeadlineTitre": "Pas de date butoire",
+      "noDeadlineBodyM1": "Le droit s'ouvre le mois suivant le dépôt de votre dossier. Le subside est déduit chaque mois de votre prime.",
+      "noDeadlineBodyM2": "Le droit s'ouvre le 1er jour du 2e mois suivant le dépôt de votre dossier. Le subside est déduit chaque mois de votre prime.",
+      "noDeadlineWarning": "Chaque mois sans dossier déposé est définitivement perdu.",
+      "pastTitre": "Délai dépassé",
+      "pastBody": "Contactez le service cantonal pour connaître vos options en cours d'année.",
+      "futureTitre": "À déposer avant le",
+      "arrivantsTitre": "Nouveaux arrivants en Suisse"
+    },
+    "keyfact": "Cette estimation est indicative. Le montant réel est fixé par le service cantonal sur la base de votre dossier fiscal. Les barèmes sont susceptibles de changer en cours d'année.",
+    "ctaExpert": "Faire vérifier mon dossier par un expert →"
   }
 }

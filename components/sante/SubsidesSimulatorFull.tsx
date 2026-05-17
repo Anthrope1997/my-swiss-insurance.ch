@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
+import KeyFact from '@/components/ui/KeyFact'
 import {
   type Canton, type Situation, type SubsideResult,
   calculerSubsideGE, calculerSubsideVS, calculerSubsideNE,
@@ -9,10 +9,9 @@ import {
 } from '@/lib/sante/calcul-subside'
 import { SUBSIDES_2026, type CantonSubside2026 } from '@/data/sante/cantons'
 import LeadFormModal from '@/components/ui/LeadFormModal'
+import fr from '@/dictionaries/fr.json'
 
 // ─── Data ────────────────────────────────────────────────────────────────────
-
-const PRECISE_CANTONS = new Set<string>(['GE', 'VS', 'NE', 'VD', 'JU', 'FR'])
 
 const NON_DATE_DELAI = new Set([
   'Non requis (automatique)',
@@ -29,7 +28,7 @@ const ALL_CODES = Object.keys(SUBSIDES_2026).sort((a, b) =>
   )
 )
 
-// ─── Délais helpers ──────────────────────────────────────────────────────────
+// ─── Helpers ─────────────────────────────────────────────────────────────────
 
 const FR_MOIS: Record<string, number> = {
   'janv.': 0, 'févr.': 1, 'mars': 2, 'avr.': 3, 'mai': 4, 'juin': 5,
@@ -41,72 +40,6 @@ function parseDelai(delai: string): Date | null {
   if (!m) return null
   return new Date(parseInt(m[3]), FR_MOIS[m[2]], parseInt(m[1]))
 }
-
-function DelaiInfo({ data }: { data: CantonSubside2026 }) {
-  const today = new Date()
-
-  if (data.auto) {
-    return (
-      <div className="space-y-1.5">
-        <p className="text-[14px] font-semibold text-ink">Versement automatique — aucune démarche requise</p>
-        <p className="text-[14px] text-slate leading-relaxed">
-          Le subside est calculé sur la base de votre taxation et déduit directement de votre prime chaque mois pour toute l&apos;année civile 2026.
-        </p>
-        {data.retroactivite && (
-          <p className="text-[13px] text-slate/60 leading-relaxed">{data.retroactivite}</p>
-        )}
-      </div>
-    )
-  }
-
-  if (data.delai.startsWith('Pas de délai')) {
-    const isM2 = data.delai.includes('2e mois')
-    return (
-      <div className="space-y-1.5">
-        <p className="text-[14px] font-semibold text-ink">Pas de date butoir — déposez à tout moment</p>
-        <p className="text-[14px] text-slate leading-relaxed">
-          Le droit s&apos;ouvre {isM2
-            ? 'le 1er jour du 2e mois suivant le dépôt'
-            : 'le mois suivant le dépôt'} de votre dossier.
-          Le subside est ensuite déduit chaque mois de votre prime.
-        </p>
-        <p className="text-[13px] text-slate/60">
-          Pas de rétroactivité au 1er janvier — chaque mois sans dossier déposé est définitivement perdu.
-        </p>
-      </div>
-    )
-  }
-
-  const deadline = parseDelai(data.delai)
-  const isPast   = deadline ? today > deadline : false
-
-  if (isPast) {
-    return (
-      <div className="space-y-1.5">
-        <p className="text-[14px] font-semibold" style={{ color: '#b45309' }}>
-          Délai dépassé ({data.delai})
-        </p>
-        <p className="text-[14px] text-slate leading-relaxed">
-          {data.retroactivite
-            ?? 'Renseignez-vous auprès du service cantonal pour connaître vos options en cours d\'année.'}
-        </p>
-      </div>
-    )
-  }
-
-  return (
-    <div className="space-y-1.5">
-      <p className="text-[14px] font-semibold text-ink">
-        Démarche à effectuer avant le <span className="text-brand">{data.delai}</span>
-      </p>
-      {data.retroactivite && (
-        <p className="text-[14px] text-slate leading-relaxed">{data.retroactivite}</p>
-      )}
-    </div>
-  )
-}
-
-// ─── Calcul standard ─────────────────────────────────────────────────────────
 
 function calculerSubsideStd(
   revenu: number,
@@ -160,25 +93,145 @@ function computeResult(
   }
 }
 
+function fmt(n: number) {
+  return n.toLocaleString('fr-CH', { maximumFractionDigits: 0 })
+}
+
+// ─── Icons (Tabler-style inline SVG) ─────────────────────────────────────────
+
+function IconCalendarCheck({ past }: { past?: boolean }) {
+  return (
+    <svg
+      className="w-5 h-5 shrink-0 mt-0.5"
+      style={{ color: past ? '#BA7517' : 'var(--brand)' }}
+      fill="none" stroke="currentColor" strokeWidth={1.5}
+      strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"
+    >
+      <path d="M11.5 21h-5.5a2 2 0 0 1-2-2v-12a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v6" />
+      <path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" />
+      <path d="M15 19l2 2 4-4" />
+    </svg>
+  )
+}
+
+function IconAlertTriangle() {
+  return (
+    <svg
+      className="w-5 h-5 shrink-0 mt-0.5"
+      style={{ color: '#BA7517' }}
+      fill="none" stroke="currentColor" strokeWidth={1.5}
+      strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"
+    >
+      <path d="M10.363 3.591 2.257 17.125a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636-2.871L13.637 3.591a1.914 1.914 0 0 0-3.274 0z" />
+      <path d="M12 9v4" /><path d="M12 16h.01" />
+    </svg>
+  )
+}
+
+function IconPlaneArrival() {
+  return (
+    <svg
+      className="w-5 h-5 shrink-0 mt-0.5 text-brand"
+      fill="none" stroke="currentColor" strokeWidth={1.5}
+      strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"
+    >
+      <path d="M15 12h5a2 2 0 0 1 0 4h-15l-3-6h3l2 2h3l-2-7h3z" transform="rotate(-15 12 12) translate(0 -1)" />
+      <path d="M3 21h18" />
+    </svg>
+  )
+}
+
+function Chevron() {
+  return (
+    <svg
+      className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate pointer-events-none"
+      fill="none" stroke="currentColor" viewBox="0 0 24 24"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+    </svg>
+  )
+}
+
+// ─── Comment obtenir block ────────────────────────────────────────────────────
+
+function CommentObtenir({ data }: { data: CantonSubside2026 }) {
+  const t = fr.simulator.howTo
+  const today    = new Date()
+  const deadline = parseDelai(data.delai)
+  const isPast   = deadline ? today > deadline : false
+  const isNoDeadline = data.delai.startsWith('Pas de délai')
+  const isM2     = data.delai.includes('2e mois')
+
+  let calTitle: string
+  let calBody: string
+
+  if (data.auto) {
+    calTitle = t.autoTitre
+    calBody  = t.autoBody
+  } else if (isNoDeadline) {
+    calTitle = t.noDeadlineTitre
+    calBody  = isM2 ? t.noDeadlineBodyM2 : t.noDeadlineBodyM1
+  } else if (isPast) {
+    calTitle = t.pastTitre
+    calBody  = t.pastBody
+  } else {
+    calTitle = `${t.futureTitre} ${data.delai}`
+    calBody  = ''
+  }
+
+  const alertBody: string | null = data.auto
+    ? null
+    : isNoDeadline
+      ? t.noDeadlineWarning
+      : (data.retroactivite ?? null)
+
+  return (
+    <div className="rounded-xl border border-edge bg-white px-5 py-5 space-y-4">
+      <p className="text-[16px] font-semibold text-ink">{t.titre}</p>
+
+      <div className="flex gap-3 items-start">
+        <IconCalendarCheck past={isPast && !data.auto} />
+        <div>
+          <p
+            className="text-[16px] font-semibold"
+            style={{ color: isPast && !data.auto ? '#BA7517' : 'var(--ink)' }}
+          >
+            {calTitle}
+          </p>
+          {calBody && (
+            <p className="text-[13px] text-slate mt-0.5 leading-relaxed">{calBody}</p>
+          )}
+        </div>
+      </div>
+
+      {alertBody && (
+        <div className="flex gap-3 items-start">
+          <IconAlertTriangle />
+          <p className="text-[13px] text-slate leading-relaxed">{alertBody}</p>
+        </div>
+      )}
+
+      {data.arrivants && (
+        <div className="flex gap-3 items-start">
+          <IconPlaneArrival />
+          <div>
+            <p className="text-[16px] font-semibold text-ink">{t.arrivantsTitre}</p>
+            <p className="text-[13px] text-slate mt-0.5 leading-relaxed">{data.arrivants}</p>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ─── Form state ───────────────────────────────────────────────────────────────
+
 interface FormState {
   canton:    string
   revenu:    string
   situation: Situation
   nbEnfants: number
   isJeune:   boolean
-}
-
-function fmt(n: number) {
-  return n.toLocaleString('fr-CH', { maximumFractionDigits: 0 })
-}
-
-function Chevron() {
-  return (
-    <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate pointer-events-none"
-         fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-    </svg>
-  )
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -189,6 +242,8 @@ export default function SubsidesSimulatorFull() {
   })
   const [submitted, setSubmitted] = useState(false)
   const [offerOpen, setOfferOpen] = useState(false)
+
+  const t = fr.simulator
 
   const set = (patch: Partial<FormState>) => {
     setSubmitted(false)
@@ -207,19 +262,19 @@ export default function SubsidesSimulatorFull() {
 
   const ineligible = result !== null && result.total === 0
   const hasAmount  = result !== null && result.total > 0
-  const showResult = submitted && Boolean(cantonData) && hasSeuilNum
 
   return (
-    <div className="bg-white border border-edge rounded-xl overflow-hidden">
+    <div className="space-y-6">
 
       {/* ── Formulaire ── */}
-      <div className="px-6 py-6 space-y-5">
+      <div className="rounded-xl border border-[#B5D4F4] bg-[#FAFCFE] px-6 py-6 space-y-5">
 
-        {/* Row 1 : canton + revenu */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+          {/* Canton */}
           <div>
             <label className="block text-[16px] font-medium text-ink mb-2">
-              Canton de résidence
+              {t.form.canton}
             </label>
             <div className="relative">
               <select
@@ -227,43 +282,48 @@ export default function SubsidesSimulatorFull() {
                 onChange={e => set({ canton: e.target.value, revenu: '' })}
                 className="select-field pr-9"
               >
-                <option value="">Sélectionner votre canton…</option>
+                <option value="">{t.form.cantonPlaceholder}</option>
                 {ALL_CODES.map(c => (
-                  <option key={c} value={c}>{c} — {SUBSIDES_2026[c as keyof typeof SUBSIDES_2026].nom}</option>
+                  <option key={c} value={c}>
+                    {c} — {SUBSIDES_2026[c as keyof typeof SUBSIDES_2026].nom}
+                  </option>
                 ))}
               </select>
               <Chevron />
             </div>
             {showNoFormula && cantonData && (
-              <p className="text-[13px] text-slate/60 mt-1.5">
-                Le canton de {cantonData.nom} n&apos;a pas publié de barème standard — consultez directement le service cantonal.
-              </p>
+              <p className="text-[13px] text-slate/60 mt-1.5">{t.form.noFormula}</p>
             )}
           </div>
 
+          {/* Revenu */}
           <div>
             <label className="block text-[16px] font-medium text-ink mb-2">
-              Revenu déterminant annuel (CHF)
+              {t.form.revenu}
             </label>
-            <input
-              type="text"
-              inputMode="numeric"
-              placeholder="ex. 45 000"
-              value={form.revenu}
-              onChange={e => set({ revenu: e.target.value })}
-              className="input-field"
-            />
-            <p className="text-[13px] text-slate/60 mt-1.5">
-              Revenu net fiscal — en cas de doute, utilisez votre revenu imposable.
-            </p>
+            <div className="relative">
+              <input
+                type="text"
+                inputMode="numeric"
+                placeholder={t.form.revenuPlaceholder}
+                value={form.revenu}
+                onChange={e => set({ revenu: e.target.value })}
+                className="input-field pr-24"
+              />
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[13px] text-slate/60 pointer-events-none">
+                {t.form.revenuSuffix}
+              </span>
+            </div>
+            <p className="text-[13px] text-slate/60 mt-1.5">{t.form.revenuHint}</p>
           </div>
         </div>
 
-        {/* Row 2 : âge + situation + enfants */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+
+          {/* Âge */}
           <div>
             <label className="block text-[16px] font-medium text-ink mb-2">
-              Âge
+              {t.form.age}
             </label>
             <div className="relative">
               <select
@@ -271,16 +331,17 @@ export default function SubsidesSimulatorFull() {
                 onChange={e => set({ isJeune: e.target.value === 'jeune' })}
                 className="select-field pr-9"
               >
-                <option value="adulte">Adulte (26 ans et plus)</option>
-                <option value="jeune">Jeune adulte (19 à 25 ans)</option>
+                <option value="adulte">{t.form.adulte}</option>
+                <option value="jeune">{t.form.jeune}</option>
               </select>
               <Chevron />
             </div>
           </div>
 
+          {/* Situation */}
           <div>
             <label className="block text-[16px] font-medium text-ink mb-2">
-              Situation familiale
+              {t.form.situation}
             </label>
             <div className="relative">
               <select
@@ -288,16 +349,17 @@ export default function SubsidesSimulatorFull() {
                 onChange={e => set({ situation: e.target.value as Situation })}
                 className="select-field pr-9"
               >
-                <option value="seul">Personne seule</option>
-                <option value="couple">Couple</option>
+                <option value="seul">{t.form.seul}</option>
+                <option value="couple">{t.form.couple}</option>
               </select>
               <Chevron />
             </div>
           </div>
 
+          {/* Enfants */}
           <div>
             <label className="block text-[16px] font-medium text-ink mb-2">
-              Enfants à charge
+              {t.form.enfants}
             </label>
             <div className="relative">
               <select
@@ -306,7 +368,9 @@ export default function SubsidesSimulatorFull() {
                 className="select-field pr-9"
               >
                 {[0, 1, 2, 3, 4].map(n => (
-                  <option key={n} value={n}>{n === 0 ? 'Aucun' : `${n} enfant${n > 1 ? 's' : ''}`}</option>
+                  <option key={n} value={n}>
+                    {n === 0 ? t.form.aucunEnfant : `${n} enfant${n > 1 ? 's' : ''}`}
+                  </option>
                 ))}
               </select>
               <Chevron />
@@ -314,142 +378,74 @@ export default function SubsidesSimulatorFull() {
           </div>
         </div>
 
-        {/* Bouton */}
         <button
           onClick={() => { if (form.canton) setSubmitted(true) }}
           disabled={!form.canton}
-          className="btn-primary disabled:opacity-40 disabled:cursor-not-allowed"
+          className="btn-primary w-full disabled:opacity-40 disabled:cursor-not-allowed"
         >
-          Calculer mon subside
+          {t.form.cta}
         </button>
-
       </div>
 
       {/* ── Résultats ── */}
       {submitted && cantonData && (
-        <div style={{ borderTop: '0.5px solid var(--border)' }}>
-          <div className="px-3 sm:px-6 py-6 space-y-4">
+        <>
+          {/* Pas de revenu */}
+          {!hasRevenu && hasSeuilNum && (
+            <p className="text-[16px] text-red-600 px-1">{t.result.noRevenu}</p>
+          )}
 
-            {/* Revenu manquant */}
-            {showResult && !hasRevenu && (
-              <p className="text-[16px] text-red-600">
-                Entrez votre revenu déterminant pour obtenir une estimation chiffrée.
+          {/* Non éligible */}
+          {hasRevenu && result && ineligible && (
+            <div className="flex items-center gap-3 rounded-xl border border-edge bg-cloud px-5 py-4">
+              <div className="w-9 h-9 rounded-full bg-white border border-edge flex items-center justify-center shrink-0">
+                <svg className="w-4 h-4 text-slate/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </div>
+              <div>
+                <p className="font-semibold text-ink text-[16px]">{t.result.ineligible}</p>
+                <p className="text-[16px] text-slate mt-0.5">{t.result.ineligibleDetail}</p>
+              </div>
+            </div>
+          )}
+
+          {/* Montant estimé */}
+          {hasRevenu && result && hasAmount && (
+            <div className="rounded-xl bg-[#EBF3FB] border border-brand/20 px-5 sm:px-6 py-6">
+              <span className="inline-flex items-center bg-brand text-white text-[11px] font-bold uppercase tracking-wide px-2.5 py-0.5 rounded-full mb-3">
+                {t.result.badge}
+              </span>
+              <p className="font-semibold text-ink leading-none mb-1" style={{ fontSize: '32px' }}>
+                CHF {fmt(result.total)}
+                <span className="text-[16px] font-normal text-slate ml-2">{t.result.perMois}</span>
               </p>
-            )}
+              <p className="text-[16px] text-slate">
+                soit CHF {fmt(result.total * 12)} par an déduits de votre prime
+              </p>
+            </div>
+          )}
 
-            {/* Non éligible */}
-            {showResult && hasRevenu && result && ineligible && (
-              <div className="flex items-center gap-3 rounded-[8px] border border-edge bg-cloud px-5 py-4">
-                <div className="w-9 h-9 rounded-full bg-white border border-edge flex items-center justify-center shrink-0">
-                  <svg className="w-4 h-4 text-slate/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="font-semibold text-ink text-[16px]">Revenu hors barème</p>
-                  <p className="text-[16px] text-slate mt-0.5">
-                    Votre revenu dépasse le seuil d&apos;éligibilité dans le canton de {cantonData.nom}.
-                  </p>
-                </div>
-              </div>
-            )}
+          {/* Comment obtenir */}
+          {hasRevenu && result && hasAmount && (
+            <CommentObtenir data={cantonData} />
+          )}
 
-            {/* Résultat chiffré */}
-            {showResult && hasRevenu && result && hasAmount && (
-              <div className="rounded-[8px] bg-[var(--blue-tint)] border border-brand/20 overflow-hidden">
+          {/* À retenir */}
+          {hasRevenu && result && hasAmount && (
+            <KeyFact>{t.keyfact}</KeyFact>
+          )}
 
-                {/* En-tête : montant à gauche, canton à droite (desktop) */}
-                <div className="px-4 sm:px-6 py-5 flex items-start justify-between gap-4">
-                  <div className="min-w-0">
-                    <span className="inline-flex items-center bg-brand text-white text-[11px] font-bold uppercase tracking-wide px-2.5 py-0.5 rounded-full mb-2">
-                      Estimation subside mensuel
-                    </span>
-                    <p className="text-4xl font-bold text-ink">
-                      CHF {fmt(result.total)}
-                      <span className="text-[16px] font-normal text-slate ml-2">/mois</span>
-                    </p>
-                    <p className="text-[16px] text-slate mt-1.5">
-                      soit environ CHF {fmt(result.total * 12)} par an déduits de votre prime
-                    </p>
-                    <span className="flex items-center gap-1.5 mt-2 text-[16px] text-slate">
-                      {cantonData.auto ? (
-                        <>
-                          <svg className="w-3.5 h-3.5 text-brand shrink-0" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                            <path d="M5 13l4 4L19 7" />
-                          </svg>
-                          <span>Versé automatiquement</span>
-                        </>
-                      ) : (
-                        <>
-                          <svg className="w-3.5 h-3.5 text-slate shrink-0" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="9" />
-                            <path d="M12 7v5l3 3" />
-                          </svg>
-                          <span>Sur demande — voir détails ci-dessous</span>
-                        </>
-                      )}
-                    </span>
-                  </div>
-                  <div className="hidden sm:block text-right shrink-0">
-                    <p className="text-[16px] font-semibold text-ink">{cantonData.nom}</p>
-                    <p className="text-[16px] text-slate">Barème 2026</p>
-                  </div>
-                </div>
-
-
-                {/* Délais & démarches */}
-                <div className="border-t border-brand/10 px-4 sm:px-6 py-4 space-y-4">
-                  <div>
-                    <p className="text-[11px] font-bold uppercase tracking-widest text-slate/40 mb-2.5">Délais & démarches</p>
-                    <DelaiInfo data={cantonData} />
-                  </div>
-
-                  {cantonData.arrivants && (
-                    <div className="flex gap-2.5">
-                      <svg className="w-4 h-4 text-brand shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                      </svg>
-                      <p className="text-[14px] text-slate leading-relaxed">
-                        <span className="font-semibold text-ink">Nouveaux arrivants : </span>
-                        {cantonData.arrivants}
-                      </p>
-                    </div>
-                  )}
-                </div>
-
-                {/* Disclaimer + CTA */}
-                <div className="border-t border-brand/10 px-4 sm:px-6 py-5 space-y-4">
-                  <div>
-                    <span className="inline-flex items-center bg-brand text-white text-[11px] font-bold uppercase tracking-wide px-2.5 py-0.5 rounded-full mb-2">
-                      Estimation indicative
-                    </span>
-                    <p className="text-[16px] text-slate leading-relaxed">
-                      Les conditions varient selon votre canton et votre situation fiscale. Comme chaque situation est unique, un expert peut vérifier votre éligibilité et vous accompagner dans vos démarches, gratuitement et sans engagement.
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => setOfferOpen(true)}
-                    className="hidden md:flex w-full bg-white border border-edge rounded-lg px-5 py-3 items-center justify-center gap-2 text-[16px] font-semibold text-brand hover:bg-cloud transition-colors"
-                  >
-                    <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                      <path d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" />
-                      <path d="M3 21v-2a4 4 0 0 1 4-4h4" />
-                      <path d="m16 19 2 2 4-4" />
-                    </svg>
-                    Faire vérifier mon dossier par un expert →
-                  </button>
-                  <Link
-                    href="/devis"
-                    className="md:hidden flex w-full bg-white border border-edge rounded-lg px-5 py-3 items-center justify-center text-[16px] font-semibold text-brand"
-                  >
-                    Vérifier mes droits →
-                  </Link>
-                </div>
-              </div>
-            )}
-
-          </div>
-        </div>
+          {/* CTA expert */}
+          {hasRevenu && result && hasAmount && (
+            <button
+              onClick={() => setOfferOpen(true)}
+              className="btn-primary w-full"
+            >
+              {t.ctaExpert}
+            </button>
+          )}
+        </>
       )}
 
       <LeadFormModal open={offerOpen} onClose={() => setOfferOpen(false)} />
