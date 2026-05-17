@@ -1896,7 +1896,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     auto: false, delai: '31 déc. 2026',
     lien: 'https://gesundheit.tg.ch/bevoelkerung/krankenversicherung/praemienverbilligung.html/5578',
     primeMoyenne: 360,
-    retroactivite: 'Pas de rétroactivité si le délai est dépassé : le droit s\'éteint définitivement, sans possibilité de recalcul. Le délai est le 31 décembre. La date de référence est le 1er janvier.',
+    retroactivite: 'Pas de rétroactivité : le droit s\'éteint définitivement une fois le délai dépassé.',
     arrivants: 'Votre subside commence dès votre affiliation à l\'assurance maladie suisse. Déposez votre demande avant le 31 décembre.',
   },
 
