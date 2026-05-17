@@ -1604,14 +1604,38 @@ export default cantons
 
 // ─────────────────────────────────────────────────────────────────────────────
 // SIMULATEUR DE SUBSIDES — données et types
-// Sources officielles (scrapées avril 2026) :
+//
+// Sources officielles — vérification initiale (avril 2026) :
 //   GE : ge.ch/informations-generales-subside-assurance-maladie/baremes
 //   VD : Notice explicative OVAM 2026 (PDF)
 //   NE : ne.ch barèmes 2026 (RSN 821.102, classifications S1–S15)
 //   VS : Echelle RIP 2026 (PDF officiel, Service AVS Valais)
 //   FR : FR-memento_rpi_f_2026.pdf + FR-grille_lissage_des_taux_paliers_f.pdf (ECAS FR)
 //   JU : communiqué SIC jura.ch 2025 + ecasjura.ch RPI 2026
-//   Cantons alémaniques : sites cantonaux officiels (SVA, Ausgleichskasse, etc.)
+//
+// Sources officielles — re-vérification complète (mai 2026) :
+//   AG  : gesetzessammlungen.ag.ch §837.211 Anhang (Richtprämie 5830, Einkommenssatz 17.5%, Grundabzug 8500)
+//         → seuilNum corrigé 44000→42000 ; sva-aargau.ch/informationsblattpv
+//   AI  : ai.ch FAQ Prämienverbilligung (Richtprämie 4640/an = 387/mois) — seuilNum 55000 non vérifiable (site 403)
+//   AR  : sovar.ch (Richtprämie 6024, seuilNum 35000, delai 31.03.2026) ✅
+//   BE  : asv.dij.be.ch (delai corrigé 31 mars 2027→31 déc. 2026) ; be_calc.pdf ✅
+//   BL  : bl.clex.ch §362.12 (Richtprämie 4596/an = 383/mois) ; §362.1 §1a (seuilNum 31000, Stand 2014)
+//   BS  : bs.ch/themen/finanzielle-hilfe/leistungen/praemienverbilligung
+//         → delai corrigé '31 déc. 2026'→'Pas de délai fixe (droit dès le mois suivant le dépôt)' ✅
+//   GR  : SVA Graubünden PDF IPV 2026 (Richtprämie 5916/an, seuilNum ~59000, delai 31.12.2026) ✅
+//   LU  : srl.lu.ch §866a §2 (formule Selbstbehalt quadratique → seuilNum ~44433 ≈ 44000)
+//         was-luzern.ch PDF Richtprämien 2026 Région 1 = 5628/an = 469/mois ✅
+//   NW  : aknw.ch PDF IPV 2026 (Richtprämie 5400, seuilNum 54000, delai 30.04.2026) ✅
+//   OW  : akow.ch PDF IPV 2026 (Richtprämie 5018.40, seuilNum 50000, delai 31.05.2026) ✅
+//   SG  : svasg.ch Merkblatt 2026 (Referenzprämie 6285.60, Selbstbehalt 10.96%, delai 31.03.2026)
+//         → seuilNum corrigé 41700→57350 (6285.60/0.1096) ✅
+//   SH  : SVA Schaffhausen PDF IPV 2026 (Richtprämie 5947, Selbstbehalt 15%, seuilNum ~44000, delai 30.04.2026) ✅
+//   SO  : ahv-iv.ch + akso.ch (seuilNum 74000, delai 31 juil. 2026) ✅
+//   SZ  : ahv-sz.ch (seuilNum 43554, delai 31 déc. 2026) ✅
+//   TG  : SVA Thurgau PDF IPV 2026 (Kat.A 3408/an = 284/mois, delai 31.12.2026) ✅
+//   UR  : svsuri.ch XLSX Richtprämien 2026 (4368/an = 364/mois, Selbstbehalt 8.5%) ✅
+//   ZG  : SVA Zug PDF IPV 2026 (Richtprämie 4984.80, seuilNum 89900, delai 30.04.2026) ✅
+//   ZH  : SVA Zürich Kundeninformation 2026 PDF (delai 31.03.2027 confirmé — système rétroactif) ✅
 // ─────────────────────────────────────────────────────────────────────────────
 
 export type Situation = 'seul' | 'couple'
@@ -1728,7 +1752,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
 
   AG: {
     nom: 'Argovie',
-    seuilRevenu: '≈ 44 000 CHF/an', seuilNum: 44000,
+    seuilRevenu: '≈ 42 000 CHF/an', seuilNum: 42000,
     montantMaxNum: 486, montantMax: '≤ 486 CHF/mois',
     auto: false, delai: '31 déc. 2025',
     lien: 'https://www.sva-aargau.ch/private/ihre-private-situation/finanzielle-unterstuetzung/praemienverbilligung/allgemeine',
@@ -1763,7 +1787,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     nom: 'Berne',
     seuilRevenu: '≤ 35 000 CHF/an', seuilNum: 35000,
     montantMaxNum: 221, montantMax: '≤ 221 CHF/mois',
-    auto: true, delai: '31 mars 2027',
+    auto: true, delai: '31 déc. 2026',
     lien: 'https://www.gef.be.ch/gef/fr/index/gesundheit/gesundheit/krankenversicherung/praemienverbilligung.html',
     primeMoyenne: 397,
     retroactivite: 'Attribution automatique (données fiscales N-2). Si situation changée : demande manuelle avant le 31 déc. Pas de rétroactivité en cours d\'année hors cas automatiques.',
@@ -1785,7 +1809,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     nom: 'Bâle-Ville',
     seuilRevenu: '≤ 49 375 CHF/an', seuilNum: 49375,
     montantMaxNum: 444, montantMax: '≤ 444 CHF/mois',
-    auto: false, delai: '31 déc. 2026',
+    auto: false, delai: 'Pas de délai fixe (droit dès le mois suivant le dépôt)',
     lien: 'https://www.bs.ch/themen/finanzielle-hilfe/leistungen/praemienverbilligung',
     primeMoyenne: 500,
     retroactivite: 'Sur demande — pas de délai annuel strict pour les résidents ordinaires. Traitement en 2–3 mois.',
@@ -1818,11 +1842,11 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     nom: 'Lucerne',
     seuilRevenu: '≈ 44 000 CHF/an', seuilNum: 44000,
     montantMaxNum: 469, montantMax: '≤ 469 CHF/mois',
-    auto: false, delai: '31 oct. 2025',
+    auto: false, delai: '31 oct. 2025 (ordonnaire) ; arrivants de l\'étranger et revenus en baisse –25% : jusqu\'au 31 déc. 2026',
     lien: 'https://www.was-luzern.ch/praemienverbilligung',
     primeMoyenne: 395,
-    retroactivite: 'Règle de rétroactivité non publiée — contacter directement WAS Luzern (was-luzern.ch).',
-    arrivants: 'Règle pour arrivants étrangers non publiée — contacter directement WAS Luzern (+41 41 209 00 00).',
+    retroactivite: 'Délai ordinaire : 31 oct. du Vorjahr (système prospectif). Neuberechnung si revenus diminués de –25% par rapport aux données fiscales de référence : demande jusqu\'au 31 déc. 2026 → droit rétroactif recalculé.',
+    arrivants: 'Droit partiel en cours d\'année possible pour les arrivants de l\'étranger — droit dès le mois suivant la demande. Déposer le formulaire dès que possible, au plus tard le 31 déc. 2026 pour les subsides 2026.',
   },
 
   NW: {
@@ -1849,7 +1873,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
 
   SG: {
     nom: 'Saint-Gall',
-    seuilRevenu: '≤ 41 700 CHF/an', seuilNum: 41700,
+    seuilRevenu: '≤ 57 350 CHF/an', seuilNum: 57350,
     montantMaxNum: 524, montantMax: '≤ 524 CHF/mois',
     auto: false, delai: '31 mars 2026',
     lien: 'https://www.svasg.ch/produkte/ipv/',
@@ -1906,7 +1930,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     nom: 'Tessin',
     seuilRevenu: 'Formule RIPAM',
     montantMaxNum: 668, montantMax: '≤ 668 CHF/mois',
-    auto: false, delai: 'Dépôt possible — rétroactif',
+    auto: false, delai: '31 déc. 2025 (droit dès janv. 2026) ; hors délai : droit dès M+2',
     lien: 'https://www4.ti.ch/dss/ias/prestazioni-e-contributi/scheda/p/s/dettaglio/riduzione-dei-premi-dellassicurazione-malattia-ripam/richiesta-del-formulario-ripam/',
     primeMoyenne: 531,
     retroactivite: 'Rétroactif au 1er jan. si formulaire déposé avant le 31 déc. de l\'année précédente. Sinon : droit dès le mois suivant le dépôt.',
@@ -1977,7 +2001,7 @@ export const SUBSIDES_2026: Record<CantonCode, CantonSubside2026> = {
     nom: 'Vaud',
     seuilRevenu: '≈ 50 000 CHF/an', seuilNum: 50000,
     montantMaxNum: 331, montantMax: '≤ 331 CHF/mois',
-    auto: false, delai: 'Voir OVAM 2026',
+    auto: false, delai: 'Pas de délai annuel fixe (droit dès le 1er jour du 2e mois suivant le dépôt)',
     lien: 'https://www.vd.ch/sante-soins-et-handicap/assurance-maladie/subside-a-lassurance-maladie',
     primeMoyenne: 638,
     retroactivite: 'Le droit prend naissance le 1er jour du 2ème mois suivant le dépôt de la demande. Exception : bénéficiaires RI ou PC AVS/AI (dès le début des prestations).',
