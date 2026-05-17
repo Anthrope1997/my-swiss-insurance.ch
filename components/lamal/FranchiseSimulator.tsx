@@ -206,7 +206,7 @@ export default function FranchiseSimulator() {
         </div>
 
         {/* Actions */}
-        <div className="flex flex-wrap items-center gap-4">
+        <div>
           <button
             onClick={() => { if (canCalculate) setSubmitted(true) }}
             disabled={!canCalculate}
@@ -214,12 +214,6 @@ export default function FranchiseSimulator() {
           >
             Calculer ma franchise optimale
           </button>
-          <Link
-            href={`/sante/subsides?canton=${canton}`}
-            className="text-[16px] text-brand hover:underline"
-          >
-            Calculer mon subside →
-          </Link>
         </div>
 
       </div>

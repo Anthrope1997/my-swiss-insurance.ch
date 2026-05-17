@@ -278,30 +278,21 @@ export default function FranchisePage() {
 
             {/* Graphique — desktop uniquement */}
             <p className="article-p mb-4">
-              La prime mensuelle et la franchise jouent en sens inverse : plus la franchise est élevée, plus la prime baisse. Ce mécanisme est un levier d&apos;économie concret — à condition de choisir le bon niveau. Avec la franchise adaptée à votre profil, vous réduisez votre prime annuelle tout en restant bien couvert par la LAMal en cas de frais médicaux imprévus.
+              Votre prime mensuelle est fixée notamment selon la franchise choisie : plus la franchise est élevée, plus la prime baisse — et inversement. En sélectionnant la franchise adaptée à votre profil, vous réduisez votre coût total annuel tout en restant couvert par la LAMal en cas de frais médicaux.
             </p>
             <p className="text-[16px] font-semibold text-ink mb-3">
-              Illustration du coût annuel moyen pour un adulte de l&apos;assurance LAMal la moins chère, avec une franchise de CHF 300 et de CHF 2 500
+              Coût annuel total par franchise — adulte, prime la moins chère, moyenne suisse
             </p>
             <div className="hidden md:block">
               <FranchiseChart />
             </div>
 
             <KeyFact>
-              <p className="mb-2">
-                En moyenne en Suisse, pour les primes adultes les moins chères, le point de bascule se situe
-                vers <strong>CHF 1 897 de frais médicaux annuels</strong> (franchise 300 vs 2 500 CHF).
-                En dessous de ce seuil, la franchise CHF 2 500 est plus avantageuse.
-                Au-dessus, la franchise CHF 300 limite mieux le reste à charge total.
-              </p>
-              <p className="mb-2">
-                <strong>Jeune adulte (19–25 ans) :</strong> seuil d&apos;équilibre franchise 300 vs 2 500 CHF à environ{' '}
-                <strong>CHF 1 722</strong> en moyenne suisse — les primes JA étant plus basses, l&apos;économie sur la prime est moindre.
-              </p>
-              <p>
-                <strong>Enfant (0–18 ans) :</strong> seuil d&apos;équilibre franchise 0 vs 600 CHF à environ{' '}
-                <strong>CHF 200</strong> en moyenne suisse — dès le premier médecin, la franchise 0 CHF devient avantageuse.
-              </p>
+              En moyenne suisse, le seuil à partir duquel la franchise CHF 300 devient moins chère que la franchise CHF 2 500 est de{' '}
+              <strong>CHF 1 897 de frais médicaux annuels pour un adulte de 26 ans et plus</strong>, et de{' '}
+              <strong>CHF 1 722 pour un jeune adulte de 19 à 25 ans</strong>{' '}
+              — les primes JA étant plus basses, l&apos;économie réalisée en optant pour la franchise haute est moindre.
+              En dessous de ces seuils, la franchise CHF 2 500 est plus avantageuse ; au-dessus, la franchise CHF 300 limite mieux le coût total annuel.
             </KeyFact>
 
             {/* Franchise enfant */}
@@ -310,11 +301,6 @@ export default function FranchisePage() {
               Les franchises enfant sont distinctes des franchises adultes, de 0 à 600 CHF par an.
               La quote-part est plafonnée à 350 CHF par an, contre 700 CHF pour un adulte.
             </p>
-
-            <KeyFact label="Recommandation">
-              La franchise 0 CHF par an est conseillée pour les jeunes enfants qui consultent fréquemment.
-              À partir de l&apos;adolescence (15 à 18 ans), une franchise plus élevée peut être envisagée si l&apos;enfant est en bonne santé.
-            </KeyFact>
 
             <div className="overflow-x-auto border border-edge rounded-[8px] mb-4">
               <table className="stripe-table w-full">
@@ -339,6 +325,11 @@ export default function FranchisePage() {
                 </tbody>
               </table>
             </div>
+
+            <KeyFact label="Recommandation">
+              La franchise 0 CHF par an est conseillée pour les jeunes enfants qui consultent fréquemment.
+              À partir de l&apos;adolescence (15 à 18 ans), une franchise plus élevée peut être envisagée si l&apos;enfant est en bonne santé.
+            </KeyFact>
 
             <p className="article-p">
               <Link href="/sante/ma-famille" className="text-brand hover:underline">
