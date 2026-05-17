@@ -13,7 +13,7 @@ import { nationalBreakEven, nationalBreakEvenJA } from '@/lib/sante/calcul-franc
 export const metadata: Metadata = {
   title: "Franchise LAMal 2026 : quel montant choisir — My Swiss Insurance",
   description:
-    "6 niveaux de franchise LAMal, de 300 à 2 500 CHF par an. Tableau des seuils d'équilibre, franchise enfant et délais de changement. Guide complet 2026.",
+    "6 niveaux de franchise LAMal, de CHF 300 à CHF 2 500 par an. Tableau des seuils d'équilibre, franchise enfant et délais de changement. Guide complet 2026.",
   openGraph: {
     title: 'Franchise LAMal 2026 : quel montant choisir ?',
     description: "Franchise LAMal : seuils d'équilibre, quote-part, enfants. Guide 2026.",
@@ -41,32 +41,32 @@ const faqItems = [
   {
     question: 'Quelle franchise LAMal choisir en 2026 ?',
     answer:
-      `Choisissez la franchise 2 500 CHF si vous êtes en bonne santé et avez peu de frais médicaux : vous économisez environ CHF 120 par mois sur la prime. Optez pour la franchise 300 CHF si vos dépenses médicales dépassent CHF ${fmtChf(seuil)} par an en moyenne suisse.`,
+      `Choisissez la franchise CHF 2 500 si vous êtes en bonne santé et avez peu de frais médicaux : vous économisez environ CHF 120 par mois sur la prime. Optez pour la franchise CHF 300 si vos dépenses médicales dépassent CHF ${fmtChf(seuil)} par an en Suisse.`,
   },
   {
     question: "Peut-on changer de franchise en cours d'année ?",
     answer:
-      "Non. La franchise se choisit une fois par an, au 1er janvier. La demande doit être envoyée à votre caisse avant le 30 novembre.",
+      "Non. Vous choisissez votre franchise une fois par an, au 1er janvier. Envoyez votre demande à votre caisse avant le 30 novembre.",
   },
   {
     question: "Quelle est la différence entre la franchise et la quote-part ?",
     answer:
-      "La franchise est le montant fixe annuel que vous payez entièrement avant que l'assurance intervienne (300 à 2 500 CHF par an). La quote-part est la participation de 10% que vous payez sur les frais dépassant la franchise, jusqu'à un maximum de CHF 700 par an pour un adulte et CHF 350 par an pour un enfant.",
+      "La franchise est le montant fixe annuel que vous payez avant que l'assurance intervienne (CHF 300 à CHF 2 500 par an). La quote-part représente 10 % des frais dépassant la franchise. Son plafond est CHF 700 par an pour un adulte et CHF 350 pour un enfant.",
   },
   {
     question: "Quelle franchise recommander pour un enfant ?",
     answer:
-      "Pour les enfants (0 à 18 ans), la franchise minimale de 0 CHF est recommandée. Les enfants consultent fréquemment : l'économie sur la prime ne compense généralement pas le risque d'un reste à charge élevé. Les franchises enfants disponibles sont 0, 100, 200, 300, 400 et 600 CHF.",
+      "Pour les enfants de 0 à 18 ans, choisissez la franchise CHF 0. Les enfants consultent fréquemment : l'économie sur la prime ne compense pas le risque d'un reste à charge élevé. Les franchises disponibles vont de CHF 0 à CHF 600 par an.",
   },
   {
     question: "La franchise s'applique-t-elle à chaque prestation ?",
     answer:
-      "Non, la franchise est annuelle. Une fois épuisée, l'assurance prend en charge tous les soins supplémentaires (après quote-part de 10%). Elle se réinitialise automatiquement le 1er janvier de chaque année.",
+      "Non, la franchise est annuelle. Dès qu'elle est épuisée, votre assurance prend en charge 90 % des soins supplémentaires. La franchise repart à zéro le 1er janvier de chaque année.",
   },
   {
     question: "La maternité est-elle soumise à la franchise ?",
     answer:
-      "Non. Les prestations liées à la maternité (accouchement, consultations prénatales, soins post-partum sur liste OFSP) sont exonérées de franchise et de quote-part. Aucun reste à charge n'est demandé à la mère pour ces prestations.",
+      "Non. La maternité (accouchement, consultations prénatales, soins post-partum OFSP) échappe à toute franchise et quote-part. La mère ne paie aucun reste à charge pour ces prestations.",
   },
 ]
 
@@ -82,15 +82,15 @@ const faqSchema = {
 
 
 const enBref = [
-  "La franchise 2 500 CHF économise environ 120 CHF par mois sur votre prime et vous expose à 3 200 CHF de reste à charge maximum par an.",
-  `Le seuil d'équilibre entre franchise 300 CHF et 2 500 CHF est de CHF ${fmtChf(seuil)} de frais médicaux annuels en moyenne suisse.`,
-  "Les enfants bénéficient de franchises de 0 à 600 CHF par an, avec une quote-part plafonnée à 350 CHF par an.",
+  "La franchise CHF 2 500 réduit la prime d'environ CHF 120 par mois et expose à un reste à charge annuel de CHF 3 200 maximum.",
+  `Le seuil d'équilibre entre la franchise CHF 300 et CHF 2 500 est de CHF ${fmtChf(seuil)} de frais médicaux annuels en Suisse.`,
+  "Les enfants bénéficient de franchises de CHF 0 à CHF 600 par an, avec une quote-part plafonnée à CHF 350 par an.",
 ]
 
 const heroStats = [
-  { value: '6',                       label: 'Niveaux de franchise',       sub: 'de 300 à 2 500 CHF par an'                      },
-  { value: `${fmtChf(seuil)} CHF`,    label: "Seuil d'équilibre moyen",    sub: 'F300 vs F2500 · 26 cantons · adulte · BASE'     },
-  { value: '1 463 CHF',               label: 'Économie max. sur la prime', sub: 'en passant à F2500 · adulte 35 ans · OFSP 2026' },
+  { value: '6',                       label: 'Niveaux de franchise',       sub: 'de CHF 300 à CHF 2 500 par an'                  },
+  { value: `CHF ${fmtChf(seuil)}`,    label: "Seuil d'équilibre moyen",    sub: 'F300 vs F2500 · 26 cantons · adulte · BASE'     },
+  { value: 'CHF 1 463',               label: 'Économie max. sur la prime', sub: 'en passant à F2500 · adulte 35 ans · OFSP 2026' },
 ]
 
 const toc = [
@@ -135,7 +135,7 @@ export default function FranchisePage() {
           </h1>
           <p className="text-[16px] text-slate leading-relaxed mb-10">
             La franchise est le montant annuel que vous payez avant que votre assurance maladie de base LAMal intervienne.
-            Choisir le bon niveau, entre 300 et 2 500 CHF par an, peut économiser jusqu&apos;à 120 CHF par mois sur votre prime.
+            La franchise CHF 2 500 économise jusqu&apos;à CHF 120 par mois sur la prime par rapport à la franchise CHF 300.
           </p>
 
           <HeroStats stats={heroStats} />
@@ -207,9 +207,9 @@ export default function FranchisePage() {
                 <h3 className="article-h3">La franchise</h3>
                 <ul className="space-y-2">
                   {[
-                    'Montant fixe : 300 à 2 500 CHF par an (adulte)',
-                    "Vous payez 100% des frais jusqu'à ce montant",
-                    'Choisie une fois par an, avant le 30 novembre',
+                    'Montant fixe : CHF 300 à CHF 2 500 par an (adulte)',
+                    "Vous payez 100 % des frais jusqu'à ce montant",
+                    'Vous la choisissez une fois par an, avant le 30 novembre',
                     'Plus la franchise est élevée, plus la prime mensuelle est basse',
                   ].map((item, i) => (
                     <li key={i} className="flex gap-3 text-[16px] text-slate">{checkIcon}{item}</li>
@@ -232,7 +232,7 @@ export default function FranchisePage() {
             </div>
 
             <KeyFact label="Exemple">
-              <p className="font-semibold text-ink mb-1">Franchise 1 500 CHF, CHF 2 000 de frais dans l&apos;année</p>
+              <p className="font-semibold text-ink mb-1">Franchise CHF 1 500, CHF 2 000 de frais dans l&apos;année</p>
               <ul className="space-y-1">
                 <li>Vous payez CHF 1 550 : CHF 1 500 (franchise) + CHF 50 (10% de quote-part sur les CHF 500 restants).</li>
                 <li>Votre caisse prend en charge CHF 450 : les 90% au-dessus de la franchise.</li>
@@ -252,7 +252,7 @@ export default function FranchisePage() {
 
             <p className="article-p mb-6">
               La franchise adaptée à votre situation dépend de vos frais médicaux annuels et de votre canton de résidence.
-              Les franchises adulte vont de 300 à 2 500 CHF par an. Les franchises enfant vont de 0 à 600 CHF par an.
+              Les franchises adulte vont de CHF 300 à CHF 2 500 par an. Les franchises enfant vont de CHF 0 à CHF 600 par an.
             </p>
 
             {/* Deux cartes : adulte / enfant */}
@@ -283,7 +283,7 @@ export default function FranchisePage() {
 
             {/* Graphique — desktop uniquement */}
             <p className="article-p mb-4">
-              Votre prime mensuelle dépend de la franchise choisie. Plus la franchise est élevée, plus la prime baisse, et inversement. En choisissant la franchise adaptée à votre profil, vous réduisez votre coût total annuel tout en restant couvert par la LAMal en cas de frais médicaux.
+              Votre prime mensuelle dépend de la franchise que vous choisissez. Plus la franchise est élevée, plus la prime baisse, et inversement. La franchise optimale réduit votre coût total annuel tout en maintenant votre couverture LAMal.
             </p>
             <p className="text-[16px] font-semibold text-ink mb-3">
               Coût annuel moyen par franchise de l&apos;assurance LAMal la moins chère pour un adulte
@@ -293,17 +293,15 @@ export default function FranchisePage() {
             </div>
 
             <KeyFact>
-              En moyenne suisse, le seuil d&apos;équilibre entre la franchise CHF 300 et CHF 2 500 est de{' '}
-              <strong>CHF {fmtChf(seuil)} de frais médicaux annuels pour un adulte de 26 ans et plus</strong>.
-              Pour un jeune adulte de 19 à 25 ans, ce seuil est de <strong>CHF {fmtChf(seuilJA)}</strong>.
-              En dessous de ces seuils, la franchise CHF 2 500 est plus avantageuse ; au-dessus, la franchise CHF 300 limite mieux le coût total annuel.
+              <strong>CHF {fmtChf(seuil)} de frais annuels</strong> : seuil entre la franchise CHF 300 et CHF 2 500 pour un adulte de 26 ans et plus.
+              Pour un jeune adulte de 19 à 25 ans, ce seuil descend à <strong>CHF {fmtChf(seuilJA)}</strong> — au-delà, la franchise CHF 300 devient plus avantageuse.
             </KeyFact>
 
             {/* Franchise enfant */}
             <h3 className="article-h3 mt-8">Franchise enfant</h3>
             <p className="article-p mb-4">
-              Les franchises enfant sont distinctes des franchises adultes, de 0 à 600 CHF par an.
-              La quote-part est plafonnée à 350 CHF par an, contre 700 CHF pour un adulte.
+              Les franchises enfant vont de CHF 0 à CHF 600 par an.
+              La quote-part est plafonnée à CHF 350 par an, contre CHF 700 pour un adulte.
             </p>
 
             <div className="overflow-x-auto border border-edge rounded-[8px] mb-4">
@@ -331,8 +329,8 @@ export default function FranchisePage() {
             </div>
 
             <KeyFact label="Recommandation">
-              La franchise 0 CHF par an est conseillée pour les jeunes enfants qui consultent fréquemment.
-              À partir de l&apos;adolescence (15 à 18 ans), une franchise plus élevée peut être envisagée si l&apos;enfant est en bonne santé.
+              Choisissez la franchise CHF 0 pour les jeunes enfants qui consultent fréquemment.
+              Pour un adolescent en bonne santé (15 à 18 ans), une franchise plus élevée réduit la prime sans risque disproportionné.
             </KeyFact>
 
             <p className="article-p">
@@ -356,17 +354,17 @@ export default function FranchisePage() {
                 {
                   n: '1',
                   t: 'Avant le 30 novembre',
-                  d: "Informez votre caisse par écrit ou via votre espace client en ligne de votre souhait de modifier votre franchise pour l'année suivante.",
+                  d: "Informez votre caisse par écrit ou via votre espace client en ligne que vous souhaitez modifier votre franchise pour l'année suivante.",
                 },
                 {
                   n: '2',
                   t: "Prise d'effet au 1er janvier",
-                  d: "La nouvelle franchise s'applique dès le 1er janvier. Toutes les dépenses médicales de l'année précédente sont calculées avec l'ancienne franchise.",
+                  d: "La nouvelle franchise s'applique dès le 1er janvier. L'ancienne franchise couvre toutes les dépenses médicales de l'année écoulée.",
                 },
                 {
                   n: '3',
                   t: 'Franchise et changement de caisse',
-                  d: 'Si vous changez de caisse, vous choisissez simultanément votre franchise chez la nouvelle caisse. Le processus se fait en une seule démarche.',
+                  d: 'Vous choisissez votre franchise chez la nouvelle caisse en même temps que vous changez de caisse. Une seule démarche suffit.',
                 },
               ].map(s => (
                 <li key={s.n} className="flex gap-4">
@@ -382,8 +380,8 @@ export default function FranchisePage() {
             </ol>
 
             <KeyFact>
-              La demande doit parvenir à votre caisse avant le 30 novembre pour une prise d&apos;effet au 1er janvier.
-              Passé ce délai, votre franchise reste inchangée pour toute l&apos;année suivante.
+              Envoyez votre demande à votre caisse avant le 30 novembre pour une prise d&apos;effet au 1er janvier.
+              Passé ce délai, votre franchise reste inchangée pour toute l&apos;année.
             </KeyFact>
 
             <p className="article-p mt-6">
