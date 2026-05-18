@@ -3,7 +3,7 @@ name: scraper-complementaires
 description: >
   Agent de collecte et mise à jour des tarifs LCA (assurances complémentaires) suisses.
   Cible : remplir tarifs: [] dans data/complementaire/assureurs/*.ts pour les 3 profils standard.
-  À lancer pour compléter la couverture tarifaire ou vérifier/mettre à jour les prix existants.
+  À lancer pour compléter la couverture tarifaire, vérifier ou mettre à jour les prix existants.
 ---
 
 # Scraper Complémentaires — Protocole Phase 2
@@ -34,50 +34,123 @@ Tu travailles assureur par assureur, profil par profil, sans jamais inventer de 
 | `famille` | 15.06.1991 | F | 1201 | Genève | 35 ans |
 | `senior` | 15.01.1971 | M | 1000 | Lausanne | 55 ans |
 
-Toujours relever les 3 profils. Si un profil est inéligible (ex: dentaire 55+), laisser hors tarifs et commenter.
+Toujours relever les 3 profils. Si un profil est inéligible (ex: dentaire senior), laisser hors tarifs et ajouter un commentaire dans le code.
 
 ---
 
 ## État des tarifs — mai 2026
 
-**189 produits / 22 assureurs / 239 entrées tarifaires**
+**189 produits / 22 assureurs / 120 avec tarifs (63.5%)**
 
-### ✅ Complets (8 assureurs — ne pas re-scraper sauf mise à jour annuelle)
+### ✅ Complets — ne pas re-scraper sauf mise à jour annuelle
 
-| Assureur | Produits | Script |
+| Assureur | Produits | Script / méthode |
 |---|---|---|
 | swica | 10/10 | `scripts/swica_tarifs.py` |
 | kpt | 10/10 | `scripts/kpt_tarifs.py` |
 | sanitas | 9/9 | `scripts/sanitas_tarifs.py` |
-| concordia | 10/10 | `scripts/concordia_tarifs.py` |
-| helsana | 8/8 | `scripts/helsana_top_dental.py` + `scripts/helsana_tarifs.py` |
-| atupri | 4/4 | *(tarifs saisis manuellement)* |
-| groupe-mutuel | 14/14 | *(tarifs saisis manuellement)* |
-| visana | 5/5 | *(tarifs saisis manuellement)* |
+| concordia | 10/10 | `scripts/concordia_tarifs.py` (API `/ipr/rest/praemien`) |
+| helsana | 8/8 | `scripts/helsana_tarifs.py` + `scripts/helsana_top_dental.py` |
+| atupri | 4/4 | Saisie manuelle |
+| groupe-mutuel | 14/14 | Saisie manuelle |
+| visana | 5/5 | Saisie manuelle |
+| sympany | 11/11 | API directe — voir section Sympany ci-dessous |
+| aquilana | 7/7 | PDF tarifaires |
+| css | 10/10 | `scripts/css_tarifs.py` |
 
-### ⚠️ Partiels (3 assureurs — priorité haute)
+### ⚠️ Partiels — priorité haute
 
-| Assureur | Trouvés | Manquants | Technique recommandée |
+| Assureur | Trouvés | Manquants | Blocage connu |
 |---|---|---|---|
-| assura | 8/10 | complementa-extra, materna-varia | Playwright portail assura.ch |
-| css | 7/10 | alt-economy, alt-balance, alt-premium | Calculateur alt-médecines séparé (URL différente) |
-| egk | 4/7 | 3 produits | À investiguer — portail egk.ch |
+| assura | 9/10 | complementa-extra | Formulaire non-personnalisé (prix "à partir de" seulement) |
+| axa | 9/10 | 1 produit | À identifier |
+| egk | 4/7 | egk-dent-500, egk-dent-1000, egk-dent-1500 | API egk.ch à intercepter |
 
-### ❌ Zéro tarif (11 assureurs — priorité normale)
+### ❌ Zéro tarif — priorité normale (69 produits manquants)
 
-| Assureur | Produits | Notes |
+| Assureur | Produits | Piste recommandée |
 |---|---|---|
-| agrisano | 5 | Portail agriculteurs, accès restreint possible |
-| aquilana | 7 | Petit assureur régional |
-| axa | 10 | Grand assureur — portail complexe |
-| innova | 7 | |
-| okk | 14 | SSL parfois expiré |
-| rhenusana | 10 | |
-| slkk | 4 | |
-| sodalis | 10 | |
-| sumiswalder | 9 | |
-| sympany | 11 | Pages calculateur en 404 au dernier test |
+| agrisano | 5 | Calculateur web — Technique B (Playwright) |
+| innova | 7 | Portail innova.ch — Technique A (intercept API) |
+| okk | 14 | SSL parfois expiré — essayer Technique C (PDF) |
+| rhenusana | 10 | Portal BBTP `rhenusana.bbtp.ch/portal/offerten/` — bloqé sur radio button |
+| slkk | 4 | Petit assureur |
+| sodalis | 10 | Portal BBTP `web.sodalis.ch/portal/offerten` — NPA et DOB identifiés |
+| sumiswalder | 9 | Portal BBTP `portal.sumiswalder.ch` — limité canton BE |
 | vita-surselva | 5 | Petit assureur régional |
+
+---
+
+## APIs connues et fonctionnelles
+
+### Sympany — API directe (confirmé mai 2026)
+
+```python
+import json, urllib.request
+
+# 1. Récupérer subZip via areas API
+# NPA 1000 → subZip=26 | NPA 1201 → subZip=0
+areas_url = 'https://api-public.sympany.ch/products/areas?searchZip=1000&country=ch'
+
+# 2. Appel tarif
+BASE = 'https://api-public.sympany.ch/products/offer'
+params = 'sex=m&dateOfBirth=2000-01-15&country=ch&zip=1000&subZip=26&language=de&isPolicyOwner=true&insuranceStartDate=2027-01-01'
+url = f'{BASE}?{params}'
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
+    'Accept': 'application/json',
+    'Referer': 'https://calculator.sympany.ch/',
+    'Origin': 'https://calculator.sympany.ch'
+}
+req = urllib.request.Request(url, headers=headers)
+data = json.loads(urllib.request.urlopen(req).read())
+
+# 3. Extraction — prix dans configurations[].coverageOptions[].price
+# Filtrer accident=False pour la variante standard
+for prod in data['products']:
+    for var in prod['variations']:
+        for config in var['configurations']:
+            for opt in config['coverageOptions']:
+                if not opt.get('accident', True):
+                    print(prod['id'], opt['price'])
+
+# Dental : produit 'DE', variation 'DE'
+# index 0 = dental-basic | index 1 = dental-comfort | index 2 = dental-premium
+```
+
+**Mapping produit API → slug TS :**
+
+| ID API | Slug fichier |
+|---|---|
+| `HG` | sympany-hospital-generale |
+| `HDP` | sympany-hospital-demi-privee |
+| `HP` | sympany-hospital-privee |
+| `HF` | sympany-hospital-flex |
+| `HGL` | sympany-hospital-globale |
+| `HAP` | sympany-hospital-accident-privee |
+| `AP` | sympany-ambulatoire-plus |
+| `APR` | sympany-ambulatoire-premium |
+| `DE` (idx 0) | sympany-dental-basic |
+| `DE` (idx 1) | sympany-dental-comfort |
+| `DE` (idx 2) | sympany-dental-premium |
+
+**NPA → subZip :**
+- NPA 1000 → subZip=26 (id=3834214)
+- NPA 1201 → subZip=0
+
+### Concordia — API REST (confirmé)
+
+```bash
+# POST /ipr/rest/praemien avec corps JSON {dob, npa, sex, product}
+# Voir scripts/concordia_tarifs.py
+```
+
+### KPT — API REST (confirmé)
+
+```bash
+# Voir scripts/kpt_tarifs.py
+# Note : senior (55H) non disponible pour produits hospitaliers commune/demi-privée/privée
+```
 
 ---
 
@@ -85,26 +158,18 @@ Toujours relever les 3 profils. Si un profil est inéligible (ex: dentaire 55+),
 
 ### Technique A — Interception API REST (le plus fiable)
 
-Certains assureurs exposent une API JSON non documentée appelée pendant le calcul de prime.
-
 ```bash
 # Lancer l'interception générique :
 python3 scripts/phase2_intercept.py
 # Ouvrir DevTools → Network → XHR/Fetch pendant le calcul
-# Chercher des réponses JSON avec des champs comme "premium", "praemie", "montant"
+# Chercher des réponses JSON avec : "premium", "praemie", "montant", "price", "tarif"
 ```
 
-**Succès confirmés :**
-- Concordia : `POST /ipr/rest/praemien` — corps JSON avec `{dob, npa, sex, product}`
-- CSS : API VVG standard intercept (voir `scripts/css_tarifs.py`)
-- Sanitas : API intercept (voir `scripts/sanitas_tarifs.py`)
+**Succès confirmés :** Concordia, CSS, Sanitas, KPT, Sympany
 
-### Technique B — Playwright headless (portail Angular/React)
-
-Utilisé quand il n'y a pas d'API exposée. Simuler un utilisateur qui remplit le formulaire.
+### Technique B — Playwright headless (portail Angular/React/Aurelia)
 
 ```python
-# Squelette générique :
 from playwright.sync_api import sync_playwright
 
 PROFILS = [
@@ -117,32 +182,51 @@ with sync_playwright() as p:
     browser = p.chromium.launch(headless=True)
     ctx = browser.new_context(locale='fr-CH', viewport={'width': 1280, 'height': 900})
     page = ctx.new_page()
-    # ... navigation + extraction
+
+    # Intercepter les réponses JSON en parallèle
+    api_calls = []
+    page.on('response', lambda r: api_calls.append(r.json()) if 'json' in r.headers.get('content-type','') else None)
 ```
 
-**Pièges Angular Material (Helsana) :**
+**Pièges Angular Material (ex: Helsana) :**
 - Inputs = `input.mat-input-element` (pas `input[type=text]`)
-- "Weiter" = `<a role="button">` dans `<hls-btn-primary class="next-step">` (pas un `<button>`)
-- "Produkte ansehen" = **navigation** vers `/products/comparison/<id>`, pas un expand inline
-- Cliquer tous les boutons à la fois → seul le premier s'ouvre. Clic **séquentiel** obligatoire.
-- Retour via lien "Zurück" entre chaque catégorie (pas `page.go_back()` en premier recours)
+- "Weiter" = `<a role="button">` dans `<hls-btn-primary>` — pas un `<button>`
+- Navigation vers `/products/comparison/<id>` — clic séquentiel obligatoire (pas simultané)
 - Script de référence : `scripts/helsana_top_dental.py`
+
+**Pièges overlay cookies (ex: Sympany calculator) :**
+```python
+# Masquer l'overlay usercentrics avant tout clic
+page.evaluate("""
+    el = document.getElementById('usercentrics-root');
+    if (el) el.style.cssText = 'display:none!important;pointer-events:none!important;';
+""")
+```
+
+**Pièges IDs numériques (ex: `id="1-firstname"`) :**
+```python
+# Sélecteur CSS invalide si l'ID commence par un chiffre → passer par JS
+page.evaluate('document.querySelector(\'[id="1-firstname"]\').value = "Paul"')
+```
+
+**Portail BBTP (Sodalis, Rhenusana, Sumiswalder) :**
+- URL pattern : `[assureur].bbtp.ch/portal/offerten/` ou `web.[assureur].ch/portal/offerten`
+- Formulaire : NPA → TAB → année → radio genre → prénom → Submit
+- Radio button bloqué par `<span class="radio-group">` qui intercepte les pointer events
+- Fix : `page.locator('#id').dispatch_event('click')` au lieu de `.click()`
 
 ### Technique C — PDF tarifaires publiés
 
 ```bash
 # Télécharger et extraire
 curl -sL "https://assureur.ch/tarifs-2026.pdf" -o /tmp/tarifs.pdf
-pdftotext /tmp/tarifs.pdf -
-# ou
 python3 -c "import pypdf; r=pypdf.PdfReader('/tmp/tarifs.pdf'); [print(p.extract_text()) for p in r.pages]"
+# ou : python3 -m pdfminer.high_level fichier.pdf
 ```
 
-Chercher les patterns : `CHF [0-9]+.[0-9]{2}`, `Fr. [0-9]+`, `prime.*mois`, `Prämie.*Monat`
+Pattern à chercher : `CHF [0-9]+\.[0-9]{2}`, `Fr. [0-9]+`, `prime.*mois`, `Prämie.*Monat`
 
 ### Technique D — Scraping HTML direct
-
-Pour les portails simples sans JS complexe.
 
 ```python
 import requests
@@ -171,9 +255,9 @@ export const produits: ProduitComplementaire[] = [
     description: 'Description courte.',
     // ... champs spécifiques à la famille
     tarifs: [
-      { profilId: 'jeune-adulte', montantCHF: 18.15, source: 'site-web', dateReleve: 'YYYY-MM-DD' },
-      { profilId: 'famille',      montantCHF: 17.75, source: 'site-web', dateReleve: 'YYYY-MM-DD' },
-      { profilId: 'senior',       montantCHF: 24.45, source: 'site-web', dateReleve: 'YYYY-MM-DD' },
+      { profilId: 'jeune-adulte', montantCHF: 18.15, source: 'api', dateReleve: 'YYYY-MM-DD' },
+      { profilId: 'famille',      montantCHF: 17.75, source: 'api', dateReleve: 'YYYY-MM-DD' },
+      { profilId: 'senior',       montantCHF: 24.45, source: 'api', dateReleve: 'YYYY-MM-DD' },
     ],
     urlProduit: 'https://...',
     dateMAJ: 'YYYY-MM-DD',
@@ -182,51 +266,94 @@ export const produits: ProduitComplementaire[] = [
 ]
 ```
 
-**Valeurs source autorisées :** `'site-web'` | `'api'` | `'pdf'` | `'telephone'`
+**Champs obligatoires dans chaque entrée tarif :**
+- `profilId` : `'jeune-adulte'` | `'famille'` | `'senior'`
+- `montantCHF` : prime mensuelle en CHF (nombre décimal, pas de chaîne)
+- `source` : `'api'` | `'site-web'` | `'pdf'` | `'courtier'` | `'appel'` | `'estime'`
+- `dateReleve` : date ISO du relevé (`'YYYY-MM-DD'`)
+
+**PAS** de champs `age`, `genre`, `npa` — ils ne font pas partie du type `TarifMensuel`.
 
 ---
 
 ## Workflow pour un nouvel assureur
 
 1. **Lire** `data/complementaire/assureurs/[assureur].ts` — identifier les `tarifs: []`
-2. **Investiguer** le portail (DevTools Network → chercher API JSON pendant calcul de prime)
+2. **Investiguer** le portail : DevTools Network → chercher appels JSON pendant le calcul de prime
 3. **Choisir** la technique (A > B > C > D par ordre de fiabilité)
-4. **Écrire** un script dans `scripts/[assureur]_tarifs.py` si Playwright/API
-5. **Relever** les 3 profils, noter les inéligibilités
+4. **Écrire** un script dans `scripts/[assureur]_tarifs.py` si nécessaire
+5. **Relever** les 3 profils, noter les inéligibilités avec un commentaire dans le code
 6. **Mettre à jour** le fichier `.ts` avec les tarifs
-7. **Vérifier** : `npx tsc --noEmit --skipLibCheck`
-8. **Ne pas commiter** — laisser l'utilisateur valider d'abord
+7. **Vérifier** : `npx tsc --noEmit`
+8. **Ne pas commiter** — laisser l'utilisateur valider
+
+## Workflow pour mise à jour / contrôle des prix existants
+
+1. **Lire** le fichier cible — noter les `dateReleve` actuelles et les `montantCHF`
+2. **Re-exécuter** le script ou l'API avec les mêmes profils
+3. **Comparer** : noter les écarts > 2% (variation tarifaire normale) vs > 10% (bug ou changement produit)
+4. **Mettre à jour** les `montantCHF` et `dateReleve` si les prix ont changé
+5. **Ne pas modifier** les prix identiques (évite les diffs inutiles)
 
 ---
 
 ## Règles absolues
 
-- Ne jamais inventer ou estimer un tarif — si non trouvé, laisser `tarifs: []`
-- Toujours noter la `dateReleve` du jour du relevé
-- Si un profil est inéligible, commenter dans le code : `// senior non éligible — souscription jusqu'à X ans`
-- Ne pas commiter sans validation utilisateur (`git add` + `git commit` = action réversible mais visible)
+- **Ne jamais inventer ou estimer un tarif** — si non trouvé, laisser `tarifs: []`
+- **Toujours noter `dateReleve`** au jour du relevé (`YYYY-MM-DD`)
+- **Si un profil est inéligible**, ajouter un commentaire : `// senior non éligible — souscription jusqu'à X ans`
+- **Ne pas commiter** sans validation utilisateur
 - Prendre des screenshots `/tmp/[assureur]_[profil]_*.png` pendant le scraping pour débogage
 - Si un portail bloque (403, captcha, JS complexe) → passer à la technique suivante, ne pas insister
 
 ---
 
-## Usage
+## Commandes de vérification
+
+```bash
+# Vérifier couverture actuelle
+python3 -c "
+import glob, re
+total, filled = 0, 0
+for f in sorted(glob.glob('data/complementaire/assureurs/*.ts')):
+    if 'index' in f: continue
+    c = open(f).read()
+    blocks = re.split(r'\n  \{', c)
+    p = f_p = 0
+    for b in blocks[1:]:
+        if \"id: '\" in b:
+            p += 1
+            m = re.search(r'tarifs:\s*\[(.*?)\]', b, re.DOTALL)
+            if m and 'montantCHF' in m.group(1): f_p += 1
+    total += p; filled += f_p
+    print(f'{\"✓\" if f_p==p else (\"⚠\" if f_p else \"✗\")} {f.split(\"/\")[-1].replace(\".ts\",\"\")}: {f_p}/{p}')
+print(f'TOTAL: {filled}/{total} = {100*filled/total:.1f}%')
+"
+
+# Vérifier TypeScript
+npx tsc --noEmit
+```
+
+---
+
+## Invocation
 
 ```
-Joue le rôle du Scraper Complémentaires en appliquant ScraperComplementaires.skill.
+/ScraperComplementaires
 Complète les tarifs manquants pour [assureur].
 ```
 
-ou pour vérifier/mettre à jour les prix existants :
-
 ```
-Joue le rôle du Scraper Complémentaires en appliquant ScraperComplementaires.skill.
+/ScraperComplementaires
 Mets à jour tous les tarifs de [assureur] — vérifier si les prix ont changé depuis [date].
 ```
 
-ou pour traiter tous les partiels :
+```
+/ScraperComplementaires
+Complète les partiels : egk (3 dentaires manquants), puis agrisano (5 produits).
+```
 
 ```
-Joue le rôle du Scraper Complémentaires en appliquant ScraperComplementaires.skill.
-Complète les 3 assureurs partiels : assura (2 manquants), css (3 manquants), egk (3 manquants).
+/ScraperComplementaires
+Contrôle complet — re-scraper les 12 assureurs complets et signaler les écarts de prix.
 ```
