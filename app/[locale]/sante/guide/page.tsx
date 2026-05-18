@@ -146,15 +146,25 @@ const toc = [
 ]
 
 const heroStats = [
-  { value: '55 %',      label: 'Réduction maximale sur une prime', sub: 'Adulte 35 ans, toutes caisses et franchises'     },
-  { value: 'CHF 4 154', label: 'Économie moyenne par an',          sub: 'Adulte 35 ans, toutes caisses et franchises'     },
-  { value: '2,5 M',     label: "Résidents bénéficiant d'un subside", sub: '28 % de la population suisse'                 },
+  { value: 'CHF 310 par mois', label: 'Moyenne des primes cantonales LAMal les moins chères', sub: 'Adulte 35 ans, franchise CHF 2 500, modèle Telmed' },
+  { value: 'CHF 4 154',        label: 'Économie moyenne par an',                              sub: 'Adulte 35 ans, modèle standard'                    },
+  { value: '2,5 M',            label: "Résidents bénéficiant d'un subside",                  sub: '28 % de la population suisse'                       },
 ]
 
 const enBref = [
-  "L'assurance LAMal est obligatoire pour toute personne résidant en Suisse. Les 34 caisses agréées couvrent toutes les mêmes soins de base, seul le prix de la prime change d'une caisse à l'autre.",
-  "Pour un même profil, l'écart de prime entre la caisse la moins chère et la plus chère peut atteindre CHF 5 653 par an.",
-  "Selon votre canton et votre revenu, vous pouvez aussi avoir droit à un subside cantonal qui réduit votre prime de CHF 5 040 par an en moyenne.",
+  <>{"L'assurance LAMal est obligatoire pour toute personne résidant en Suisse. Les "}
+    <strong className="font-medium text-ink">34 caisses agréées couvrent les mêmes soins de base</strong>
+    {", seul le prix de la prime change."}</>,
+  <>{"Pour un même profil, l'écart de prime entre la caisse la moins chère et la plus chère peut atteindre "}
+    <strong className="font-medium text-ink">55 %</strong>
+    {", soit jusqu'à "}
+    <strong className="font-medium text-ink">CHF 5 653 par an</strong>
+    {"."}</>,
+  <>{"Selon votre canton et votre revenu, vous pouvez aussi avoir droit à un subside cantonal. En moyenne, il représente "}
+    <strong className="font-medium text-ink">CHF 5 040 par an</strong>
+    {", soit environ "}
+    <strong className="font-medium text-ink">CHF 420 par mois</strong>
+    {"."}</>,
 ]
 
 export default function GuideLamalPage() {
