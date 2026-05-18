@@ -83,15 +83,25 @@ const faqSchema = {
 
 
 const enBref = [
-  "La franchise CHF 2 500 réduit la prime d'environ CHF 120 par mois et expose à un reste à charge annuel de CHF 3 200 maximum.",
-  `Le seuil d'équilibre entre la franchise CHF 300 et CHF 2 500 est de CHF ${fmtChf(seuil)} de frais médicaux annuels en Suisse.`,
-  "Les enfants bénéficient de franchises de CHF 0 à CHF 600 par an, avec une quote-part plafonnée à CHF 350 par an.",
+  <>{"La franchise est le montant que vous payez avant que l'assurance n'intervienne. "}
+    <strong className="font-medium text-ink">{"Une franchise élevée réduit votre prime mensuelle mais augmente votre charge financière"}</strong>
+    {" en cas de frais médicaux."}</>,
+  <>{"Pour un adulte (26 ans et plus), le seuil d'équilibre entre la franchise CHF 300 et CHF 2 500 est de "}
+    <strong className="font-medium text-ink">CHF 1 900 par an</strong>
+    {" de frais médicaux. Il est plus bas pour un jeune adulte (19 à 25 ans), autour de "}
+    <strong className="font-medium text-ink">CHF {fmtChf(seuilJA)} par an</strong>
+    {"."}</>,
+  <>{"Les enfants (0 à 18 ans) bénéficient de franchises de "}
+    <strong className="font-medium text-ink">CHF 0 à CHF 600 par an</strong>
+    {", avec une quote-part plafonnée à "}
+    <strong className="font-medium text-ink">CHF 350 par an</strong>
+    {"."}</>,
 ]
 
 const heroStats = [
-  { value: '6',                       label: 'Niveaux de franchise',       sub: 'de CHF 300 à CHF 2 500 par an'                  },
-  { value: `CHF ${fmtChf(seuil)}`,    label: "Seuil d'équilibre moyen",    sub: 'F300 vs F2500 · 26 cantons · adulte · BASE'     },
-  { value: `CHF ${fmtChf(economieMoy)}`, label: 'Économie moy. sur la prime', sub: 'en passant à F2500 · adulte 35 ans · 26 cantons'  },
+  { value: `CHF ${fmtChf(economieMoy)}`, label: 'Économie moyenne par an',          sub: 'Adulte 35 ans, franchise CHF 300 vs CHF 2 500' },
+  { value: '6',                          label: 'Niveaux de franchise pour adultes', sub: 'De CHF 300 à CHF 2 500 par an'                 },
+  { value: 'CHF 700',                    label: 'Quote-part annuelle maximale',      sub: 'Adulte, dès 19 ans'                            },
 ]
 
 const toc = [
