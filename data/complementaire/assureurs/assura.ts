@@ -126,9 +126,13 @@ export const produits: ProduitComplementaire[] = [
       implants: false,
       noteDetails: 'CHF 1\'000/an après franchise CHF 500. Soins courants uniquement.',
     },
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 11.15, source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'famille',      montantCHF: 11.80, source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'senior',       montantCHF: 19.45, source: 'site-web', dateReleve: '2026-05-18' },
+    ],
     urlProduit: 'https://www.assura.ch/fr/assurances/assurances-complementaires/complement-assurance-de-base',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-18',
     scoreComplet: 80,
   },
 

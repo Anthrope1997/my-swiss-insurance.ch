@@ -147,7 +147,7 @@ export interface DelaiAttente {
 export interface TarifMensuel {
   profilId: ProfilType
   montantCHF: number
-  source: 'site-web' | 'courtier' | 'appel' | 'estime'
+  source: 'site-web' | 'api' | 'pdf' | 'courtier' | 'appel' | 'estime'
   dateReleve: string  // ISO date
 }
 

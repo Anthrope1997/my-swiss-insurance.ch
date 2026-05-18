@@ -186,9 +186,13 @@ export const produits: ProduitComplementaire[] = [
       noteDetails: '~80 méthodes reconnues CSS. Sans franchise. Sans certificat médical. Accès direct aux thérapeutes CSS. Tarifs plafonnés par méthode (si dépassement, patient paie la différence). Requiert myFlex ambulatoire ou hospitalier.',
     },
     conditionsSouscription: ['Requiert myFlex Ambulatoire ou Hospitalier CSS'],
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 7.30,  source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'famille',      montantCHF: 20.60, source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'senior',       montantCHF: 16.50, source: 'site-web', dateReleve: '2026-05-18' },
+    ],
     urlProduit: 'https://www.css.ch/fr/clients-prives/bien-assure/caisse-maladie/assurance-complementaire/medecine-alternative.html',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-18',
     scoreComplet: 80,
   },
 
@@ -206,9 +210,13 @@ export const produits: ProduitComplementaire[] = [
       noteDetails: 'Mêmes conditions que Economy, plafond élevé à CHF 3\'000/an.',
     },
     conditionsSouscription: ['Requiert myFlex Ambulatoire ou Hospitalier CSS'],
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 13.30, source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'famille',      montantCHF: 37.90, source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'senior',       montantCHF: 30.30, source: 'site-web', dateReleve: '2026-05-18' },
+    ],
     urlProduit: 'https://www.css.ch/fr/clients-prives/bien-assure/caisse-maladie/assurance-complementaire/medecine-alternative.html',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-18',
     scoreComplet: 80,
   },
 
@@ -226,9 +234,13 @@ export const produits: ProduitComplementaire[] = [
       noteDetails: 'Plafond CHF 10\'000/an — l\'un des plus élevés du marché.',
     },
     conditionsSouscription: ['Requiert myFlex Ambulatoire ou Hospitalier CSS'],
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 21.20, source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'famille',      montantCHF: 60.10, source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'senior',       montantCHF: 48.10, source: 'site-web', dateReleve: '2026-05-18' },
+    ],
     urlProduit: 'https://www.css.ch/fr/clients-prives/bien-assure/caisse-maladie/assurance-complementaire/medecine-alternative.html',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-18',
     scoreComplet: 80,
   },
 
