@@ -27,7 +27,7 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'Franchise LAMal 2026 : quel montant choisir ?',
   datePublished: '2026-01-01',
-  dateModified: '2026-05-17',
+  dateModified: '2026-05-18',
   author: { '@type': 'Organization', name: 'My Swiss Insurance', url: 'https://my-swiss-insurance.ch' },
   publisher: { '@type': 'Organization', name: 'My Swiss Insurance' },
   mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://my-swiss-insurance.ch/sante/franchise' },
@@ -87,7 +87,7 @@ const enBref = [
     <strong className="font-medium text-ink">{"Une franchise élevée réduit votre prime mensuelle mais augmente votre charge financière"}</strong>
     {" en cas de frais médicaux."}</>,
   <>{"Pour un adulte (26 ans et plus), le seuil d'équilibre entre la franchise CHF 300 et CHF 2 500 est de "}
-    <strong className="font-medium text-ink">CHF 1 900 par an</strong>
+    <strong className="font-medium text-ink">CHF {fmtChf(seuil)} par an</strong>
     {" de frais médicaux. Il est plus bas pour un jeune adulte (19 à 25 ans), autour de "}
     <strong className="font-medium text-ink">CHF {fmtChf(seuilJA)} par an</strong>
     {"."}</>,
