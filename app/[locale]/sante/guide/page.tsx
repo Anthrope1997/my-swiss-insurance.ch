@@ -146,7 +146,7 @@ const toc = [
 ]
 
 const heroStats = [
-  { value: 'CHF 310 par mois', label: 'Moyenne des primes cantonales LAMal les moins chères', sub: 'Adulte 35 ans, franchise CHF 2 500, modèle Telmed' },
+  { value: 'CHF 310 par mois', label: 'Prime LAMal la moins chère',                          sub: 'Moyenne par canton, adulte 35 ans'                },
   { value: 'CHF 4 154',        label: 'Économie moyenne par an',                              sub: 'Adulte 35 ans, modèle standard'                    },
   { value: '2,5 M',            label: "Résidents bénéficiant d'un subside",                  sub: '28 % de la population suisse'                       },
 ]
