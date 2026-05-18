@@ -60,16 +60,19 @@ export function nationalBreakEven(): number {
 }
 
 // ─── Jeune adulte (19–25 ans) — F300 vs F2500 ───────────────────────────────
-// Approximation : primes du franchiseTable adulte × ratio primeMoyenneJA/primeMoyenne
+// Ratio JA/adulte = 0.748, calculé sur les 26 cantons depuis primes.json
+// (BASE, f300, sans LAA, annee_naissance 2005 vs 1990 — uniforme sur tous les cantons)
+// Note : primeMoyenneJA/primeMoyenne dans cantons.ts donne ~0.89 (faux) car
+// primeMoyenne est basé sur un sous-ensemble de caisses, pas la moyenne réelle.
+const JA_ADULT_RATIO = 0.748
 
 export function cantonBreakEvenJA(slug: string): number | null {
   const data = cantonBySlug[slug]
-  if (!data || data.primeMoyenne === 0) return null
-  const ratio = data.primeMoyenneJA / data.primeMoyenne
+  if (!data) return null
   const f300  = data.franchiseTable.find(r => r.franchise === 300)
   const f2500 = data.franchiseTable.find(r => r.franchise === 2500)
   if (!f300 || !f2500) return null
-  return breakEven(f300.primeMois * ratio, f2500.primeMois * ratio, 300)
+  return breakEven(f300.primeMois * JA_ADULT_RATIO, f2500.primeMois * JA_ADULT_RATIO, 300)
 }
 
 /** Seuil d'équilibre F300 vs F2500 moyen national (jeune adulte 19–25 ans). */
