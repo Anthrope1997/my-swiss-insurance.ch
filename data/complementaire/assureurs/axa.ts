@@ -308,7 +308,7 @@ export const produits: ProduitComplementaire[] = [
       couvert: true,
       orthodontie: true,
       implants: false,
-      noteDetails: 'Dédié aux enfants. Orthodontie incluse. Souscription recommandée avant 5 ans (examen médical requis après). Montants dans l\'aperçu des prestations AXA.',
+      noteDetails: 'Dédié aux enfants. Orthodontie incluse. Souscription recommandée avant 5 ans (examen médical requis après). Tarifs observés (NPA 1000, garçon 8 ans, mai 2026) : Dentaire 1000 = CHF 19/mois, Dentaire 2000 = CHF 28/mois, Dentaire 3000 = CHF 35/mois.',
     },
     conditionsSouscription: ['Remise famille 5% (2 membres) / 10% (3+ membres)', 'Dédié aux enfants et adolescents', 'Souscription recommandée avant 5 ans'],
     tarifs: [],

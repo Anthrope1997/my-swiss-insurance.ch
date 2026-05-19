@@ -40,7 +40,8 @@ Toujours relever les 3 profils. Si un profil est inéligible (ex: dentaire senio
 
 ## État des tarifs — mai 2026
 
-**189 produits / 22 assureurs / 120 avec tarifs (63.5%)**
+**189 produits / 22 assureurs / 170 avec tarifs (89.9%)**
+Dernière mise à jour : 2026-05-19
 
 ### ✅ Complets — ne pas re-scraper sauf mise à jour annuelle
 
@@ -50,34 +51,34 @@ Toujours relever les 3 profils. Si un profil est inéligible (ex: dentaire senio
 | kpt | 10/10 | `scripts/kpt_tarifs.py` |
 | sanitas | 9/9 | `scripts/sanitas_tarifs.py` |
 | concordia | 10/10 | `scripts/concordia_tarifs.py` (API `/ipr/rest/praemien`) |
-| helsana | 8/8 | `scripts/helsana_tarifs.py` + `scripts/helsana_top_dental.py` |
+| helsana | 8/8 | `scripts/helsana_tarifs.py` (portal.helsana.ch, fresh context par pass) |
 | atupri | 4/4 | Saisie manuelle |
 | groupe-mutuel | 14/14 | Saisie manuelle |
 | visana | 5/5 | Saisie manuelle |
 | sympany | 11/11 | API directe — voir section Sympany ci-dessous |
 | aquilana | 7/7 | PDF tarifaires |
 | css | 10/10 | `scripts/css_tarifs.py` |
+| okk | 14/14 | Playwright Firefox + consent bypass — `oekk.ch/klickweb-oekk/personen` |
+| innova | 7/7 | Playwright Firefox Angular SPA — `offerten.innova.ch/endkunden-ui/offer/new/person-selection` |
+| slkk | 4/4 | Saisie manuelle |
+| sodalis | 10/10 | Saisie manuelle |
+| sumiswalder | 9/9 | Saisie manuelle |
+| assura | 10/10 | API assura (materna-varia famille ajouté) |
+| vita-surselva | 5/5 | Innova AG comme underwriter — Playwright innova.ch |
 
-### ⚠️ Partiels — priorité haute
+### ⚠️ Partiels — blocage confirmé
 
-| Assureur | Trouvés | Manquants | Blocage connu |
+| Assureur | Trouvés | Manquants | Blocage définitif |
 |---|---|---|---|
-| assura | 9/10 | complementa-extra | Formulaire non-personnalisé (prix "à partir de" seulement) |
-| axa | 9/10 | 1 produit | À identifier |
-| egk | 4/7 | egk-dent-500, egk-dent-1000, egk-dent-1500 | API egk.ch à intercepter |
+| axa | 9/10 | `axa-dental-enfants` | Profil enfant incompatible avec nos 3 profils adultes. Prix observés (8 ans, NPA 1000) : Dentaire 1000 = CHF 19, 2000 = CHF 28, 3000 = CHF 35/mois. |
+| egk | 4/7 | `egk-dent-500`, `egk-dent-1000`, `egk-dent-1500` | EGK-DENT absent du calculateur egk.ch/calculate (seul EGK-SUN visible). Requiert appel conseiller : +41 (0)61 765 51 11 |
 
-### ❌ Zéro tarif — priorité normale (69 produits manquants)
+### ❌ Zéro tarif — blocage définitif (online)
 
-| Assureur | Produits | Piste recommandée |
+| Assureur | Produits | Raison et contact |
 |---|---|---|
-| agrisano | 5 | Calculateur web — Technique B (Playwright) |
-| innova | 7 | Portail innova.ch — Technique A (intercept API) |
-| okk | 14 | SSL parfois expiré — essayer Technique C (PDF) |
-| rhenusana | 10 | Portal BBTP `rhenusana.bbtp.ch/portal/offerten/` — bloqé sur radio button |
-| slkk | 4 | Petit assureur |
-| sodalis | 10 | Portal BBTP `web.sodalis.ch/portal/offerten` — NPA et DOB identifiés |
-| sumiswalder | 9 | Portal BBTP `portal.sumiswalder.ch` — limité canton BE |
-| vita-surselva | 5 | Petit assureur régional |
+| agrisano | 5 | Calculateur agrisano (Vuetify SPA) = LAMal uniquement. Complémentaires via agences régionales. Contact : agrisano.ch/fr/contact/votre-agence-regionale |
+| rhenusana | 10 | `rhenusana.bbtp.ch` TCP timeout systématique. Site principal rhenusana.ch sans tarifs. Contact : +41 71 727 88 00 |
 
 ---
 
@@ -350,10 +351,15 @@ Mets à jour tous les tarifs de [assureur] — vérifier si les prix ont changé
 
 ```
 /ScraperComplementaires
-Complète les partiels : egk (3 dentaires manquants), puis agrisano (5 produits).
+Mise à jour annuelle — re-scraper les 18 assureurs complets et signaler les écarts de prix.
 ```
 
 ```
 /ScraperComplementaires
-Contrôle complet — re-scraper les 12 assureurs complets et signaler les écarts de prix.
+Débloquer les 3 EGK-DENT manquants via appel téléphonique (+41 61 765 51 11) ou en testant une nouvelle URL calc EGK.
+```
+
+```
+/ScraperComplementaires
+Débloquer Rhenusana (10 produits) : tester bonus.ch ou appeler +41 71 727 88 00.
 ```

@@ -254,7 +254,9 @@ export const produits: ProduitComplementaire[] = [
     },
     delaiAttente: { mois: 12 },
     conditionsSouscription: ['Souscription uniquement via conseiller Assura (non disponible en ligne)', 'Couverture cesse à la fin de l\'année des 50 ans'],
-    tarifs: [],
+    tarifs: [
+      { profilId: 'famille', montantCHF: 194.70, source: 'api', dateReleve: '2026-05-18' },
+    ],
     urlProduit: 'https://www.assura.ch/fr/assurances/assurances-complementaires/assurance-maternite',
     dateMAJ: '2026-05-15',
     scoreComplet: 78,

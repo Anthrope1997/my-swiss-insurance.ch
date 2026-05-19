@@ -1,7 +1,9 @@
 import type { ProduitComplementaire } from '../types'
 
 // Source : sodalis.ch — relevé mai 2026
-// Note : sodalis est une caisse régionale (Suisse centrale)
+// Note : sodalis est une caisse régionale basée à Visp (VS)
+// Tarifs relevés via portail BBTP web.sodalis.ch/portal/offerten avec NPA 3930 (Visp, VS)
+// Le calculateur exige un assureur de base sodalis — non disponible en VD/GE
 // Transport urgence : couverture via Medicall (mondiale illimitée)
 
 export const produits: ProduitComplementaire[] = [
@@ -14,7 +16,7 @@ export const produits: ProduitComplementaire[] = [
     nomProduit: 'Sana',
     famille: 'ambulatoire',
     familles: ['ambulatoire', 'medecines-douces', 'optique', 'prevention'],
-    description: 'Couverture ambulatoire d\'entrée sodalis : médecines alternatives 70%/CHF 500, optique 50%/CHF 150 (3 ans), acupuncture 10 séances, fitness 50%/CHF 200, médicaments 50%, transport mondial illimité via Medicall.',
+    description: 'Couverture ambulatoire d\'entrée sodalis : médecines alternatives 70%/CHF 500, optique CHF 150 (3 ans), acupuncture 10 séances, fitness CHF 200/an, médicaments 50%, transport mondial illimité via Medicall.',
     ambulatoire: {
       postes: [
         { nom: 'Médicaments non remboursés LAMal', couvert: true, pourcent: 50 },
@@ -46,9 +48,13 @@ export const produits: ProduitComplementaire[] = [
       coachingSante: false,
       noteDetails: 'Fitness : 50%/CHF 200/an (en combinaison avec l\'assurance hospitalière sodalis).',
     },
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 10.10, source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'famille',      montantCHF: 10.10, source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'senior',       montantCHF: 12.20, source: 'site-web', dateReleve: '2026-05-18' },
+    ],
     urlProduit: 'https://www.sodalis.ch/de/fuer-private/versicherungen/zusatzversicherung/sana-sana-plus',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-18',
     scoreComplet: 65,
   },
 
@@ -91,9 +97,13 @@ export const produits: ProduitComplementaire[] = [
       coachingSante: false,
       noteDetails: 'Fitness : 50%/CHF 200/an (en combinaison avec l\'assurance hospitalière sodalis).',
     },
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 26.30, source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'famille',      montantCHF: 26.30, source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'senior',       montantCHF: 31.70, source: 'site-web', dateReleve: '2026-05-18' },
+    ],
     urlProduit: 'https://www.sodalis.ch/de/fuer-private/versicherungen/zusatzversicherung/sana-sana-plus',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-18',
     scoreComplet: 70,
   },
 
@@ -112,9 +122,13 @@ export const produits: ProduitComplementaire[] = [
       zoneGeographique: 'suisse',
       noteDetails: 'Urgences médicales internationales : max CHF 100\'000. Transport & sauvetage illimité via Medicall. Thérapies EMR : 70%/CHF 600/an. Rooming-in : CHF 50/nuit max 30 nuits. Fitness : 50%/CHF 200/an. Naissance : CHF 100. Enfants gratuits si un parent est assuré sodalis.',
     },
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 5.25,  source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'famille',      montantCHF: 6.40,  source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'senior',       montantCHF: 11.65, source: 'site-web', dateReleve: '2026-05-18' },
+    ],
     urlProduit: 'https://www.sodalis.ch/de/fuer-private/versicherungen/zusatzversicherung/spitalversicherung',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-18',
     scoreComplet: 68,
   },
 
@@ -131,9 +145,13 @@ export const produits: ProduitComplementaire[] = [
       zoneGeographique: 'monde',
       noteDetails: 'Chambre 2 lits. Franchise : CHF 100/j max 30 jours/an. Urgences internationales : CHF 200\'000. Transport illimité via Medicall. Rooming-in : CHF 50/nuit max 30 nuits. Enfants gratuits si parent assuré.',
     },
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 55.10,  source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'famille',      montantCHF: 66.20,  source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'senior',       montantCHF: 113.60, source: 'site-web', dateReleve: '2026-05-18' },
+    ],
     urlProduit: 'https://www.sodalis.ch/de/fuer-private/versicherungen/zusatzversicherung/spitalversicherung',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-18',
     scoreComplet: 65,
   },
 
@@ -150,9 +168,13 @@ export const produits: ProduitComplementaire[] = [
       zoneGeographique: 'monde',
       noteDetails: 'Chambre individuelle. Franchise : CHF 200/j max 30 jours/an. Urgences internationales : CHF 200\'000. Transport illimité via Medicall. Enfants gratuits si parent assuré.',
     },
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 86.60,  source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'famille',      montantCHF: 109.70, source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'senior',       montantCHF: 196.40, source: 'site-web', dateReleve: '2026-05-18' },
+    ],
     urlProduit: 'https://www.sodalis.ch/de/fuer-private/versicherungen/zusatzversicherung/spitalversicherung',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-18',
     scoreComplet: 65,
   },
 
@@ -169,9 +191,13 @@ export const produits: ProduitComplementaire[] = [
       zoneGeographique: 'monde',
       noteDetails: 'Division choisie au moment de l\'admission. Combine les avantages des 3 variantes avec suppléments journaliers selon division. Transport & sauvetage illimité Medicall. Enfants gratuits si parent assuré.',
     },
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 39.00, source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'famille',      montantCHF: 48.50, source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'senior',       montantCHF: 92.00, source: 'site-web', dateReleve: '2026-05-18' },
+    ],
     urlProduit: 'https://www.sodalis.ch/de/fuer-private/versicherungen/zusatzversicherung/spitalversicherung',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-18',
     scoreComplet: 62,
   },
 
@@ -191,9 +217,13 @@ export const produits: ProduitComplementaire[] = [
       implants: false,
       noteDetails: 'Traitements, laboratoire, prophylaxie (tarif SSO). Enfants 0-3 ans : gratuits. Enfants 3-6 ans : 50% remise, sans bilan dentaire requis.',
     },
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 19.80, source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'famille',      montantCHF: 24.30, source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'senior',       montantCHF: 32.40, source: 'site-web', dateReleve: '2026-05-18' },
+    ],
     urlProduit: 'https://www.sodalis.ch/de/fuer-private/versicherungen/zusatzversicherung/denta',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-18',
     scoreComplet: 60,
   },
 
@@ -211,9 +241,13 @@ export const produits: ProduitComplementaire[] = [
       implants: false,
       noteDetails: 'Traitements, laboratoire, prophylaxie. Enfants 0-3 ans : gratuits. Enfants 3-6 ans : 50% remise.',
     },
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 27.00, source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'famille',      montantCHF: 37.80, source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'senior',       montantCHF: 65.70, source: 'site-web', dateReleve: '2026-05-18' },
+    ],
     urlProduit: 'https://www.sodalis.ch/de/fuer-private/versicherungen/zusatzversicherung/denta',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-18',
     scoreComplet: 62,
   },
 
@@ -231,9 +265,13 @@ export const produits: ProduitComplementaire[] = [
       implants: false,
       noteDetails: 'Traitements, laboratoire, prophylaxie. Enfants 0-3 ans : gratuits. Enfants 3-6 ans : 50% remise.',
     },
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 36.00, source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'famille',      montantCHF: 50.40, source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'senior',       montantCHF: 79.20, source: 'site-web', dateReleve: '2026-05-18' },
+    ],
     urlProduit: 'https://www.sodalis.ch/de/fuer-private/versicherungen/zusatzversicherung/denta',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-18',
     scoreComplet: 65,
   },
 
@@ -251,9 +289,13 @@ export const produits: ProduitComplementaire[] = [
       implants: false,
       noteDetails: 'Traitements, laboratoire, prophylaxie, orthodontie. Enfants 0-3 ans : gratuits. Enfants 3-6 ans : 50% remise.',
     },
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 49.50, source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'famille',      montantCHF: 67.50, source: 'site-web', dateReleve: '2026-05-18' },
+      { profilId: 'senior',       montantCHF: 99.00, source: 'site-web', dateReleve: '2026-05-18' },
+    ],
     urlProduit: 'https://www.sodalis.ch/de/fuer-private/versicherungen/zusatzversicherung/denta',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-18',
     scoreComplet: 68,
   },
 ]
