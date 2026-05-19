@@ -15,8 +15,10 @@ import { cantonBySlug } from '@/data/sante/cantons'
 const QP = 0.1  // taux de quote-part LAMal
 
 // Facteurs de prime enfant relatifs à primeMoyenneEnfant (référence : F300 = 1.00)
+// Source : calcul direct depuis primes.json (BASE, sans LAA, annee_naissance 2015, 26 cantons)
+// F0 non présent dans les données OFSP — extrapolé depuis la pente F100→F200
 const CHILD_FACTORS: Record<number, number> = {
-  0: 1.08, 100: 1.04, 200: 1.02, 300: 1.00, 400: 0.97, 600: 0.93,
+  0: 1.161, 100: 1.110, 200: 1.059, 300: 1.000, 400: 0.960, 500: 0.903, 600: 0.857,
 }
 
 // ─── Formule canonique ────────────────────────────────────────────────────────

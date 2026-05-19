@@ -8,7 +8,7 @@ import Link from 'next/link'
 import AuthorBio from '@/components/ui/AuthorBio'
 import UnifiedLeadForm from '@/components/ui/UnifiedLeadForm'
 import HeroStats from '@/components/ui/HeroStats'
-import { nationalBreakEven, nationalBreakEvenJA, nationalAvgPrime } from '@/lib/sante/calcul-franchise'
+import { nationalBreakEven, nationalBreakEvenJA, nationalBreakEvenEnfant, nationalAvgPrime } from '@/lib/sante/calcul-franchise'
 
 export const metadata: Metadata = {
   title: "Franchise LAMal 2026 : quel montant choisir — My Swiss Insurance",
@@ -33,10 +33,11 @@ const articleSchema = {
   mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://my-swiss-insurance.ch/sante/franchise' },
 }
 
-const seuil      = nationalBreakEven()
-const seuilJA    = nationalBreakEvenJA()
+const seuil       = nationalBreakEven()
+const seuilJA     = nationalBreakEvenJA()
+const seuilEnfant = nationalBreakEvenEnfant()
 const economieMoy = Math.round((nationalAvgPrime(300) - nationalAvgPrime(2500)) * 12)
-const fmtChf  = (n: number) => n.toLocaleString('fr-CH')
+const fmtChf = (n: number) => n.toLocaleString('fr-CH')
 
 const faqItems = [
   {
@@ -87,21 +88,19 @@ const enBref = [
     <strong className="font-medium text-ink">{"Une franchise élevée réduit votre prime mensuelle mais augmente votre charge financière"}</strong>
     {" en cas de frais médicaux."}</>,
   <>{"Pour un adulte (26 ans et plus), le seuil d'équilibre entre la franchise CHF 300 et CHF 2 500 est de "}
-    <strong className="font-medium text-ink">CHF {fmtChf(seuil)} par an</strong>
-    {" de frais médicaux. Il est plus bas pour un jeune adulte (19 à 25 ans), autour de "}
-    <strong className="font-medium text-ink">CHF {fmtChf(seuilJA)} par an</strong>
+    <strong className="font-medium text-ink">CHF {fmtChf(seuil)} de frais médicaux annuels</strong>
+    {". Il est plus bas pour un jeune adulte (19 à 25 ans), autour de "}
+    <strong className="font-medium text-ink">CHF {fmtChf(seuilJA)} de frais médicaux par an</strong>
     {"."}</>,
-  <>{"Les enfants (0 à 18 ans) bénéficient de franchises de "}
-    <strong className="font-medium text-ink">CHF 0 à CHF 600 par an</strong>
-    {", avec une quote-part plafonnée à "}
-    <strong className="font-medium text-ink">CHF 350 par an</strong>
+  <>{"Pour un enfant (0 à 18 ans), le seuil d'équilibre entre la franchise CHF 0 et CHF 600 est de "}
+    <strong className="font-medium text-ink">CHF {fmtChf(seuilEnfant)} de frais médicaux par an</strong>
     {"."}</>,
 ]
 
 const heroStats = [
-  { value: `CHF ${fmtChf(economieMoy)}`, label: 'Économie moyenne par an',          sub: 'Adulte 35 ans, franchise CHF 300 vs CHF 2 500' },
-  { value: '6',                          label: 'Niveaux de franchise pour adultes', sub: 'De CHF 300 à CHF 2 500 par an'                 },
-  { value: 'CHF 700',                    label: 'Quote-part annuelle maximale',      sub: 'Adulte, dès 19 ans'                            },
+  { value: `CHF ${fmtChf(economieMoy)}`, label: 'Économie moyenne par an',          sub: 'Adulte, franchise CHF 300 vs CHF 2 500' },
+  { value: '6',                          label: 'Niveaux de franchise pour adultes', sub: 'De CHF 300 à CHF 2 500 par an'          },
+  { value: 'CHF 700',                    label: 'Quote-part annuelle maximale',      sub: 'Adulte, dès 19 ans'                     },
 ]
 
 const toc = [
