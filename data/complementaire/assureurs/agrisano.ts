@@ -88,19 +88,23 @@ export const produits: ProduitComplementaire[] = [
     assureurId: 'agrisano',
     nomProduit: 'Hospital Flex',
     famille: 'hospitalier',
-    description: 'Hospitalisation flexible Agrisano : choix libre de la division (commune, semi-privée ou privée) à chaque séjour. Disponible en 2 variantes (Flex 1 et Flex 2). Libre choix du médecin.',
+    description: 'Hospitalisation flexible Agrisano : choix libre de la division (commune, semi-privée ou privée) à chaque séjour. Disponible en 2 variantes (Flex 1 et Flex 2). Underwrité par Helsana Zusatzversicherungen AG.',
     hospitalier: {
       typeChambre: 'flex',
       libreChoixHopital: true,
       libreChoixMedecin: true,
       zoneGeographique: 'suisse',
-      noteDetails: 'Division choisie à chaque hospitalisation. Hôpitaux de la liste LAMal et Helsana. 2 variantes : Hospital Flex 1 et Flex 2. Allocation accouchement ambulatoire incluse (délai 365 jours). Rooming-in et aide ménagère inclus.',
+      noteDetails: 'Division choisie à chaque hospitalisation. Hôpitaux de la liste LAMal et Helsana. 2 variantes : Flex 1 (35%/50% participation) et Flex 2 (20%/35% participation). Allocation accouchement ambulatoire incluse (délai 365 jours). Rooming-in et aide ménagère inclus. Underwrité par Helsana Zusatzversicherungen AG (ZVB Helsana 0424). Tarifs issus du portail Helsana (même produit, même underwriter).',
     },
     delaiAttente: { mois: 12, detail: 'Délai 365 jours pour l\'allocation accouchement ambulatoire.' },
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 52.00,  source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'famille',      montantCHF: 42.30,  source: 'site-web', dateReleve: '2026-05-17' },
+      { profilId: 'senior',       montantCHF: 118.60, source: 'site-web', dateReleve: '2026-05-17' },
+    ],
     urlProduit: 'https://www.agrisano.ch/de/angebot/zusatzversicherungen/hospital-flex',
-    dateMAJ: '2026-05-15',
-    scoreComplet: 60,
+    dateMAJ: '2026-05-19',
+    scoreComplet: 65,
   },
 
   {
