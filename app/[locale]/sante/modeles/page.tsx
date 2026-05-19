@@ -25,7 +25,7 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'Modèles LAMal 2026 : standard, médecin de famille, HMO et Telmed',
   datePublished: '2026-01-01',
-  dateModified: '2026-04-22',
+  dateModified: '2026-05-19',
   author: { '@type': 'Organization', name: 'My Swiss Insurance', url: 'https://my-swiss-insurance.ch' },
   publisher: { '@type': 'Organization', name: 'My Swiss Insurance' },
   mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://my-swiss-insurance.ch/sante/modeles' },
@@ -45,7 +45,7 @@ const faqItems = [
   {
     question: 'Les prestations sont-elles identiques dans tous les modèles ?',
     answer:
-      "Oui. Tous les modèles LAMal couvrent les mêmes prestations définies par l'OFSP. La différence porte uniquement sur la porte d'entrée dans le système de soins (libre choix ou porte d'entrée obligatoire). Les remboursements sont identiques une fois le parcours de soins respecté.",
+      "Oui. Tous les modèles LAMal couvrent les mêmes prestations définies par l'OFSP. La différence porte uniquement sur le premier interlocuteur médical : libre choix pour le modèle standard, ou consultation obligatoire auprès du médecin de famille, d'un centre HMO ou d'une hotline médicale pour les modèles alternatifs. Les remboursements sont identiques une fois le parcours de soins respecté.",
   },
   {
     question: "Qu'est-ce que le modèle Telmed ?",
@@ -81,7 +81,7 @@ const modeles = [
     reduction: null,
     badgeStyle: 'bg-cloud text-slate border-edge',
     borderColor: 'border-brand',
-    desc: "Accès direct à n'importe quel médecin ou spécialiste en Suisse, sans restriction ni porte d'entrée obligatoire. C'est le modèle le plus cher : il sert de référence pour comparer les autres.",
+    desc: "Accès direct à n'importe quel médecin ou spécialiste en Suisse, sans obligation de consulter un interlocuteur médical en premier. C'est le modèle le plus cher : il sert de référence pour comparer les autres.",
     avantages: ['Liberté totale de choix du médecin', 'Accès direct aux spécialistes', 'Aucune contrainte de réseau'],
     inconvenients: ['Prime la plus élevée', 'Aucune réduction disponible'],
     ideal: 'Vous consultez régulièrement plusieurs spécialistes ou souhaitez un accès direct sans filtrage.',
@@ -103,7 +103,7 @@ const modeles = [
     reduction: "jusqu'à −20%",
     badgeStyle: '',
     borderColor: 'border-brand',
-    desc: "Vous êtes rattaché à un réseau fermé de médecins agréés (cabinet de groupe ou centre HMO). La porte d'entrée est un médecin du réseau. Réduction moyenne de 12% (de 3% à 20%) selon la région.",
+    desc: "Vous êtes rattaché à un réseau fermé de médecins agréés (cabinet de groupe ou centre HMO). Vous devez d'abord contacter un médecin de ce réseau avant tout spécialiste. Réduction moyenne de 12 % (de 3 % à 20 %) selon la région.",
     avantages: ['Réduction de prime jusqu\'à 20%', 'Coordination interne des soins', 'Qualité homogène du réseau'],
     inconvenients: ['Réseau limité en zones rurales', 'Liberté de choix réduite', 'Changement de médecin complexe'],
     ideal: "Vous habitez une grande ville avec un réseau HMO dense et appréciez la médecine de groupe.",
@@ -122,9 +122,9 @@ const modeles = [
 ]
 
 const heroStats = [
-  { value: '4',      label: "Modèles d'assurance",  sub: 'standard, médecin de famille, HMO, téléconsultation' },
-  { value: '24%',    label: 'Réduction maximum',     sub: 'modèle Telmed selon caisse et canton'     },
-  { value: '11%',    label: 'Réduction moyenne',     sub: 'médecin de famille, toutes caisses'       },
+  { value: '4',        label: "Modèles d'assurance",                    sub: 'Standard, médecin de famille, HMO, Telmed' },
+  { value: '24 %', label: 'Réduction maximale avec Telmed',         sub: 'Selon caisse et canton'                    },
+  { value: '11 %', label: 'Réduction moyenne en changeant de modèle', sub: 'Adulte 35 ans'                           },
 ]
 
 const toc = [
@@ -142,9 +142,15 @@ const guidesAssocies = [
 ]
 
 const enBref = [
-  "La LAMal propose 4 modèles d'assurance : standard, médecin de famille, HMO et Telmed — tous couvrent exactement les mêmes prestations.",
-  "Les modèles alternatifs réduisent la prime jusqu'à 24% (Telmed) en imposant une porte d'entrée médicale obligatoire avant toute consultation chez un spécialiste.",
-  "Le choix se fait une fois par an avant le 30 novembre ; le modèle standard reste la référence si vous consultez régulièrement plusieurs spécialistes.",
+  <>{"La LAMal propose quatre modèles d'assurance : "}
+    <strong className="font-medium text-ink">{"standard, médecin de famille, HMO et Telmed"}</strong>
+    {". Tous couvrent exactement les mêmes prestations de base."}</>,
+  <>{"Les modèles alternatifs réduisent la prime de "}
+    <strong className="font-medium text-ink">CHF 700 par an en moyenne</strong>
+    {". En contrepartie, vous devez consulter votre médecin de famille, un centre HMO ou un service de téléconsultation avant toute visite chez un spécialiste."}</>,
+  <>{"Pour changer de modèle, envoyez votre demande à votre caisse "}
+    <strong className="font-medium text-ink">avant le 30 novembre</strong>
+    {". Le changement prend effet au 1er janvier. Sans demande, votre modèle actuel est reconduit automatiquement."}</>,
 ]
 
 export default function ModelesPage() {
@@ -211,8 +217,8 @@ export default function ModelesPage() {
               <h2 className="article-h2">1. Comment les 4 modèles se comparent-ils ?</h2>
               <p className="article-p">
                 Tous les modèles couvrent les mêmes prestations LAMal. La différence porte uniquement
-                sur la porte d&apos;entrée dans le système de soins : libre pour le standard, imposée pour les
-                trois modèles alternatifs qui offrent en contrepartie jusqu&apos;à 24% de réduction de prime.
+                sur le premier interlocuteur médical : libre accès aux spécialistes pour le standard, consultation
+                obligatoire imposée pour les trois modèles alternatifs, qui offrent en contrepartie jusqu&apos;à 24 % de réduction de prime.
               </p>
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-6">
                 <table className="stripe-table w-full">
@@ -220,7 +226,7 @@ export default function ModelesPage() {
                     <tr>
                       <th className="text-left whitespace-nowrap">Modèle</th>
                       <th className="text-left whitespace-nowrap">Réduction prime</th>
-                      <th className="hidden sm:table-cell text-left whitespace-nowrap">Porte d'entrée</th>
+                      <th className="hidden sm:table-cell text-left whitespace-nowrap">Premier contact médical</th>
                       <th className="hidden md:table-cell text-left whitespace-nowrap">Disponibilité</th>
                     </tr>
                   </thead>
@@ -242,7 +248,7 @@ export default function ModelesPage() {
                 </table>
               </div>
               <KeyFact>
-                Toutes les prestations médicales sont identiques quel que soit le modèle. Seule la porte d&apos;entrée dans le système de soins diffère. Les remboursements sont les mêmes.
+                Toutes les prestations médicales sont identiques quel que soit le modèle. Seul le premier contact médical obligatoire diffère. Les remboursements sont les mêmes.
               </KeyFact>
             </section>
 
