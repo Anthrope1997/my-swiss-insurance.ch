@@ -1,6 +1,6 @@
 import type { ProduitComplementaire } from '../types'
 
-// Source : agrisano.ch + flyer PDF AGRI-spézial — relevé mai 2026
+// Source : agrisano.ch + flyer PDF AGRI-spézial + flyer PDF AGRI-dental — relevé mai 2026
 // Note : AGRI-spézial est EXCLUSIVEMENT réservé à la population agricole (agriculteurs et familles rurales)
 // Les autres produits sont ouverts à tous.
 
@@ -131,17 +131,23 @@ export const produits: ProduitComplementaire[] = [
     assureurId: 'agrisano',
     nomProduit: 'AGRI-dental',
     famille: 'dentaire',
-    description: 'Assurance dentaire Agrisano : 50% des frais dentaires non couverts (prévention, orthodontie, traitements conservateurs). Montant maximum annuel à confirmer sur agrisano.ch.',
+    description: 'Assurance dentaire Agrisano : 50% des frais dentaires non couverts (prévention, hygiène, orthodontie, couronnes, bridges). Franchise CHF 500/an, max remboursé CHF 3\'000/an. Nécessite AGRI-spézial. Réservé à la population agricole.',
     dentaire: {
       couvert: true,
       pourcentSoins: 50,
+      montantMaxSoins: 3000,
       orthodontie: true,
       implants: false,
-      noteDetails: 'Couvre : prévention (hygiène), orthodontie, obturations, couronnes, bridges. Calculé sur les tarifs KVG.',
+      noteDetails: 'Franchise CHF 500/an. 50% des frais couverts jusqu\'à CHF 3\'000/an. Couvre : hygiène dentaire, orthodontie, obturations, couronnes, bridges (tarif KVG). Délai de carence 6 mois (hygiène) / 12 mois (traitements). Souscription possible jusqu\'à 55 ans. Nécessite AGRI-spézial. Tarifs issus du Flyer PDF (mai 2026).',
     },
-    tarifs: [],
+    conditionsSouscription: ['Réservé à la population agricole (membres Agrisano)', 'Nécessite la souscription à AGRI-spézial'],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 15.10, source: 'pdf', dateReleve: '2026-05-19' },
+      { profilId: 'famille',      montantCHF: 15.10, source: 'pdf', dateReleve: '2026-05-19' },
+      { profilId: 'senior',       montantCHF: 20.40, source: 'pdf', dateReleve: '2026-05-19' },
+    ],
     urlProduit: 'https://www.agrisano.ch/de/angebot/zusatzversicherungen/agri-dental',
-    dateMAJ: '2026-05-15',
-    scoreComplet: 52,
+    dateMAJ: '2026-05-19',
+    scoreComplet: 55,
   },
 ]
