@@ -83,7 +83,7 @@ export default function CantonHubPage() {
 
           <KeyFact label="Méthode de calcul">
             Les montants affichés correspondent aux primes moyennes cantonales pour un adulte de 26 ans et plus,
-            avec une franchise ordinaire de 300 CHF par an et le modèle médecin de famille (HMO ou
+            avec une franchise ordinaire de 300 CHF par an et le modèle médecin de famille (centre médical ou
             télémédecine). Source : OFSP, données 2026.
           </KeyFact>
         </div>

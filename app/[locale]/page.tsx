@@ -101,7 +101,7 @@ const guides = [
       </svg>
     ),
     title: 'Les 4 modèles d\'assurance',
-    desc: 'Standard, médecin de famille, HMO, Telmed : jusqu\'à 24 % d\'économie sur la prime',
+    desc: 'Standard, médecin de famille, centre médical, télémédecine : jusqu\'à 24 % d\'économie sur la prime',
     href: '/sante/modeles',
   },
   {

@@ -62,7 +62,7 @@ const faqItems = [
   {
     question: 'Quelle caisse LAMal choisir en tant que frontalier français ?',
     answer:
-      "Les primes LAMal pour les frontaliers sont calculées selon le canton de travail (pas le canton de résidence). Comparez les caisses disponibles dans votre canton de travail principal — les écarts peuvent dépasser CHF 100 par mois entre la caisse la moins chère et la plus chère pour un même profil. Le modèle Telmed ou médecin de famille réduit la prime de 10 à 20 % supplémentaires.",
+      "Les primes LAMal pour les frontaliers sont calculées selon le canton de travail (pas le canton de résidence). Comparez les caisses disponibles dans votre canton de travail principal — les écarts peuvent dépasser CHF 100 par mois entre la caisse la moins chère et la plus chère pour un même profil. Le modèle télémédecine ou médecin de famille réduit la prime de 10 à 20 % supplémentaires.",
   },
   {
     question: 'Que devient mon assurance si je cesse mon activité en Suisse ?',
@@ -101,7 +101,7 @@ const toc = [
 const heroStats = [
   { value: '3 mois',   label: "Délai droit d'option",    sub: 'dès le premier jour de travail en Suisse' },
   { value: '~100 000', label: 'Frontaliers genevois',    sub: 'le plus grand flux franco-suisse'         },
-  { value: '−20%',     label: 'Réduction prime possible', sub: 'avec modèle Telmed ou médecin famille'   },
+  { value: '−20%',     label: 'Réduction prime possible', sub: 'avec télémédecine ou médecin de famille'  },
 ]
 
 const enBref = [
@@ -381,7 +381,7 @@ export default function FrontalierFrancePage() {
               </div>
               <p className="text-[13px] text-slate/60 mt-2 md:hidden">Tableau complet visible sur ordinateur.</p>
               <KeyFact>
-                Les modèles alternatifs (médecin de famille, Telmed) réduisent la prime de 10 à 20 % par rapport au modèle standard.
+                Les modèles alternatifs (médecin de famille, télémédecine) réduisent la prime de 10 à 20 % par rapport au modèle standard.
                 Si vous êtes éligible aux subsides cantonaux, votre prime nette peut être significativement inférieure.
               </KeyFact>
             </section>

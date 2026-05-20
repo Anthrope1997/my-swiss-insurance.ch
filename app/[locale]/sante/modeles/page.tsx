@@ -8,12 +8,12 @@ import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import HeroStats from '@/components/ui/HeroStats'
 
 export const metadata: Metadata = {
-  title: 'Modèles LAMal 2026 : standard, médecin de famille, HMO, Telmed',
+  title: 'Modèles LAMal 2026 : standard, médecin de famille, centre médical, télémédecine',
   description:
-    "Les 4 modèles d'assurance LAMal en Suisse : standard, médecin de famille, HMO et Telmed. Économies, contraintes et conseils pour choisir. Guide 2026.",
+    "Les 4 modèles d'assurance LAMal en Suisse : standard, médecin de famille, centre médical et télémédecine. Économies, contraintes et conseils pour choisir. Guide 2026.",
   openGraph: {
     title: 'Modèles LAMal 2026 : quel modèle choisir ?',
-    description: 'Comparez les 4 modèles LAMal : standard, médecin de famille, HMO, téléconsultation. Économies et conseils.',
+    description: 'Comparez les 4 modèles LAMal : standard, médecin de famille, centre médical, télémédecine. Économies et conseils.',
     url: 'https://my-swiss-insurance.ch/sante/modeles',
     type: 'article',
   },
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'Modèles LAMal 2026 : standard, médecin de famille, HMO et Telmed',
+  headline: 'Modèles LAMal 2026 : standard, médecin de famille, centre médical et télémédecine',
   datePublished: '2026-01-01',
   dateModified: '2026-05-19',
   author: { '@type': 'Organization', name: 'My Swiss Insurance', url: 'https://my-swiss-insurance.ch' },
@@ -35,7 +35,7 @@ const faqItems = [
   {
     question: "Quel modèle LAMal permet d'économiser le plus ?",
     answer:
-      "Le modèle Telmed offre la plus grande réduction de prime (jusqu'à 24%) selon la caisse et le canton. Le modèle médecin de famille offre jusqu'à 20%. Les économies réelles dépendent de votre caisse et de votre région. Le HMO peut être très avantageux en ville mais son réseau est limité en zone rurale.",
+      "Le modèle télémédecine offre la plus grande réduction de prime (jusqu'à 24%) selon la caisse et le canton. Le modèle médecin de famille offre jusqu'à 20%. Les économies réelles dépendent de votre caisse et de votre région. Le modèle centre médical peut être très avantageux en ville mais son réseau est limité en zone rurale.",
   },
   {
     question: "Peut-on changer de modèle LAMal en cours d'année ?",
@@ -45,17 +45,17 @@ const faqItems = [
   {
     question: 'Les prestations sont-elles identiques dans tous les modèles ?',
     answer:
-      "Oui. Tous les modèles LAMal couvrent les mêmes prestations définies par l'OFSP. La différence porte uniquement sur le premier interlocuteur médical : libre choix pour le modèle standard, ou consultation obligatoire auprès du médecin de famille, d'un centre HMO ou d'une hotline médicale pour les modèles alternatifs. Les remboursements sont identiques une fois le parcours de soins respecté.",
+      "Oui. Tous les modèles LAMal couvrent les mêmes prestations définies par l'OFSP. La différence porte uniquement sur le premier interlocuteur médical : libre choix pour le modèle standard, ou consultation obligatoire auprès du médecin de famille, d'un centre médical ou d'une hotline médicale pour les modèles alternatifs. Les remboursements sont identiques une fois le parcours de soins respecté.",
   },
   {
-    question: "Qu'est-ce que le modèle Telmed ?",
+    question: "Qu'est-ce que le modèle télémédecine ?",
     answer:
-      "Le modèle Telmed impose de passer par une hotline médicale (Medgate, Medi24 ou équivalent) avant toute consultation en cabinet ou aux urgences non vitales. La consultation téléphonique ou par application est disponible 24 heures sur 24. Ce modèle est particulièrement adapté aux personnes à l'aise avec le numérique.",
+      "Le modèle télémédecine impose de passer par une hotline médicale (Medgate, Medi24 ou équivalent) avant toute consultation en cabinet ou aux urgences non vitales. La consultation téléphonique ou par application est disponible 24 heures sur 24. Ce modèle est particulièrement adapté aux personnes à l'aise avec le numérique.",
   },
   {
-    question: 'Le modèle HMO est-il disponible partout en Suisse ?',
+    question: 'Le modèle centre médical est-il disponible partout en Suisse ?',
     answer:
-      "Non. Les réseaux HMO sont concentrés dans les centres urbains (Zurich, Berne, Genève, Lausanne, Bâle). Dans les zones rurales et de montagne, ce modèle est souvent indisponible ou peu pratique. Vérifiez la disponibilité du réseau dans votre commune avant de choisir.",
+      "Non. Les réseaux de centres médicaux sont concentrés dans les centres urbains (Zurich, Berne, Genève, Lausanne, Bâle). Dans les zones rurales et de montagne, ce modèle est souvent indisponible ou peu pratique. Vérifiez la disponibilité du réseau dans votre commune avant de choisir.",
   },
   {
     question: 'Le modèle médecin de famille impose-t-il un seul médecin pour toute la famille ?',
@@ -89,41 +89,41 @@ const modeles = [
   {
     id: 'hausarzt',
     title: 'Médecin de famille',
-    reduction: "jusqu'à −20%",
+    reduction: "jusqu'à −20 %",
     badgeStyle: '',
     borderColor: 'border-brand',
-    desc: "Vous consultez d'abord votre médecin de famille, qui vous oriente si besoin vers un spécialiste. La consultation chez le généraliste est toujours prioritaire. Réduction moyenne de 11% (jusqu'à 20%) selon la caisse et le canton.",
-    avantages: ['Suivi médical coordonné', 'Réduction de prime jusqu\'à 20%', 'Médecin de confiance établi'],
+    desc: "Vous consultez d'abord votre médecin de famille, qui vous oriente si besoin vers un spécialiste. La consultation chez le généraliste est toujours prioritaire. Réduction moyenne de 11 % (jusqu'à 20 %) selon la caisse et le canton.",
+    avantages: ['Suivi médical coordonné', 'Réduction de prime jusqu'à 20 %', 'Médecin de confiance établi'],
     inconvenients: ['Passage obligatoire par le médecin de famille', 'Accès aux spécialistes moins direct'],
     ideal: 'Vous avez déjà un médecin de famille et souhaitez maintenir une relation de confiance tout en économisant.',
   },
   {
     id: 'hmo',
-    title: 'HMO (centre médical)',
-    reduction: "jusqu'à −20%",
+    title: 'Centre médical',
+    reduction: "jusqu'à −20 %",
     badgeStyle: '',
     borderColor: 'border-brand',
-    desc: "Vous êtes rattaché à un réseau fermé de médecins agréés (cabinet de groupe ou centre HMO). Vous devez d'abord contacter un médecin de ce réseau avant tout spécialiste. Réduction moyenne de 12 % (de 3 % à 20 %) selon la région.",
-    avantages: ['Réduction de prime jusqu\'à 20%', 'Coordination interne des soins', 'Qualité homogène du réseau'],
+    desc: "Vous êtes rattaché à un réseau fermé de médecins agréés (cabinet de groupe ou centre médical). Vous devez d'abord contacter un médecin de ce réseau avant tout spécialiste. Réduction moyenne de 12 % (de 3 % à 20 %) selon la région.",
+    avantages: ['Réduction de prime jusqu'à 20 %', 'Coordination interne des soins', 'Qualité homogène du réseau'],
     inconvenients: ['Réseau limité en zones rurales', 'Liberté de choix réduite', 'Changement de médecin complexe'],
-    ideal: "Vous habitez une grande ville avec un réseau HMO dense et appréciez la médecine de groupe.",
+    ideal: "Vous habitez une grande ville avec un réseau dense de centres médicaux et appréciez la médecine de groupe.",
   },
   {
     id: 'telmed',
-    title: 'Telmed (téléconsultation)',
-    reduction: "jusqu'à −24%",
+    title: 'Télémédecine',
+    reduction: "jusqu'à −24 %",
     badgeStyle: '',
     borderColor: 'border-brand',
-    desc: "Première consultation par téléphone ou application (Medgate, Medi24, Doctorline...) avant tout rendez-vous en cabinet ou aux urgences non vitales. Disponible 24 heures sur 24, 7 jours sur 7. Réduction moyenne de 12% (de 5% à 24%) selon la caisse.",
-    avantages: ['Plus grande réduction de prime (jusqu\'à 24%)', 'Disponible 24 heures sur 24', 'Pratique pour les actifs et familles'],
+    desc: "Première consultation par téléphone ou application (Medgate, Medi24, Doctorline...) avant tout rendez-vous en cabinet ou aux urgences non vitales. Disponible 24 heures sur 24, 7 jours sur 7. Réduction moyenne de 12 % (de 5 % à 24 %) selon la caisse.",
+    avantages: ['Plus grande réduction de prime (jusqu'à 24 %)', 'Disponible 24 heures sur 24', 'Pratique pour les actifs et familles'],
     inconvenients: ['Passage obligatoire par la hotline', 'Dépendance aux outils numériques', 'Pas toujours adapté aux urgences'],
     ideal: "Vous êtes à l'aise avec la technologie, rarement malade ou cherchez la réduction maximale.",
   },
 ]
 
 const heroStats = [
-  { value: '4',        label: "Modèles d'assurance",                    sub: 'Standard, médecin de famille, HMO, Telmed' },
-  { value: '24 %', label: 'Réduction maximale avec Telmed',         sub: 'Selon caisse et canton'                    },
+  { value: '4',        label: "Modèles d'assurance",                    sub: 'Standard, médecin de famille, centre médical, télémédecine' },
+  { value: '24 %', label: 'Réduction maximale en télémédecine',         sub: 'Selon caisse et canton'                    },
   { value: '11 %', label: 'Réduction moyenne en changeant de modèle', sub: 'Adulte 35 ans'                           },
 ]
 
@@ -143,11 +143,11 @@ const guidesAssocies = [
 
 const enBref = [
   <>{"La LAMal propose quatre modèles d'assurance : "}
-    <strong className="font-medium text-ink">{"standard, médecin de famille, HMO et Telmed"}</strong>
+    <strong className="font-medium text-ink">{"standard, médecin de famille, centre médical et télémédecine"}</strong>
     {". Tous couvrent exactement les mêmes prestations de base."}</>,
   <>{"Les modèles alternatifs réduisent la prime de "}
     <strong className="font-medium text-ink">CHF 700 par an en moyenne</strong>
-    {". En contrepartie, vous devez consulter votre médecin de famille, un centre HMO ou un service de téléconsultation avant toute visite chez un spécialiste."}</>,
+    {". En contrepartie, vous devez consulter votre médecin de famille, un centre médical ou un service de téléconsultation avant toute visite chez un spécialiste."}</>,
   <>{"Pour changer de modèle, envoyez votre demande à votre caisse "}
     <strong className="font-medium text-ink">avant le 30 novembre</strong>
     {". Le changement prend effet au 1er janvier. Sans demande, votre modèle actuel est reconduit automatiquement."}</>,
@@ -173,7 +173,7 @@ export default function ModelesPage() {
           </h1>
           <p className="text-[16px] text-slate max-w-2xl leading-relaxed mb-10">
             L&apos;assurance maladie de base LAMal propose quatre modèles d&apos;assurance. Le modèle standard offre le plus de liberté.
-            Les trois modèles alternatifs (médecin de famille, HMO, Telmed) réduisent la prime jusqu&apos;à
+            Les trois modèles alternatifs (médecin de famille, centre médical, télémédecine) réduisent la prime jusqu&apos;à
             24 % en échange d&apos;un interlocuteur médical imposé avant toute consultation chez un spécialiste.
           </p>
 
@@ -232,9 +232,9 @@ export default function ModelesPage() {
                   </thead>
                   <tbody>
                     {[
-                      ['Telmed', "jusqu'à −24%", 'Télémédecine (application ou téléphone)', 'Partout'],
-                      ['HMO', "jusqu'à −20%", 'Réseau de cabinets agréés', 'Grandes villes'],
-                      ["Médecin de famille", "jusqu'à −20%", 'Médecin généraliste attitré', 'Très large'],
+                      ['Télémédecine', "jusqu'à −24 %", 'Télémédecine (application ou téléphone)', 'Partout'],
+                      ['Centre médical', "jusqu'à −20 %", 'Réseau de cabinets agréés', 'Grandes villes'],
+                      ["Médecin de famille", "jusqu'à −20 %", 'Médecin généraliste attitré', 'Très large'],
                       ['Standard', 'Aucune', 'Libre', 'Partout'],
                     ].map(([modele, reduction, entree, dispo], i) => (
                       <tr key={i}>

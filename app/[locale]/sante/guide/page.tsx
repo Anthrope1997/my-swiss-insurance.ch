@@ -146,24 +146,22 @@ const toc = [
 ]
 
 const heroStats = [
-  { value: 'CHF 198 par mois', label: 'Prime LAMal la plus basse en Suisse',                  sub: 'Adulte 35 ans, modèle Telmed'                     },
-  { value: 'CHF 4 154',        label: 'Économie moyenne par an',                              sub: 'Adulte 35 ans, modèle standard'                    },
-  { value: '2,5 M',            label: "Résidents bénéficiant d'un subside",                  sub: '28 % de la population suisse'                       },
+  { value: 'CHF 4 154',  label: 'Économie moyenne par an',      sub: '49 % de réduction de prime LAMal'                      },
+  { value: '6',          label: 'Niveaux de franchise',          sub: 'De CHF 300 à CHF 2 500 pour un adulte'                      },
+  { value: '4',          label: 'Modèles de soins',              sub: 'Standard, médecin de famille, centre médical, télémédecine'  },
 ]
 
 const enBref = [
   <>{"L'assurance LAMal est obligatoire pour toute personne résidant en Suisse. Les "}
-    <strong className="font-medium text-ink">34 caisses agréées couvrent les mêmes soins de base</strong>
-    {", seul le prix de la prime change."}</>,
-  <>{"Pour un même profil, l'écart de prime entre la caisse la moins chère et la plus chère peut atteindre "}
-    <strong className="font-medium text-ink">55 %</strong>
-    {", soit jusqu'à "}
+    <strong className="font-medium text-ink">34 caisses agréées</strong>
+    {" couvrent les mêmes soins de base, seul le prix de la prime change."}</>,
+  <>{"Économisez jusqu'à "}
     <strong className="font-medium text-ink">CHF 5 653 par an</strong>
-    {"."}</>,
-  <>{"Selon votre canton et votre revenu, vous pouvez aussi avoir droit à un subside cantonal. En moyenne, il représente "}
+    {" sur votre assurance LAMal en comparant les assureurs, les franchises et les modèles d'assurance disponibles."}</>,
+  <>{"Vous pouvez aussi avoir droit à un subside selon votre situation : "}
+    <strong className="font-medium text-ink">28 % des résidents en bénéficient</strong>
+    {". Cette subvention cantonale réduit votre prime LAMal et représente en moyenne "}
     <strong className="font-medium text-ink">CHF 5 040 par an</strong>
-    {", soit environ "}
-    <strong className="font-medium text-ink">CHF 420 par mois</strong>
     {"."}</>,
 ]
 
@@ -182,8 +180,7 @@ export default function GuideLamalPage() {
             Guide complet LAMal 2026
           </h1>
           <p className="text-[16px] text-slate max-w-2xl leading-relaxed mb-10">
-            Choisissez la bonne franchise et le bon modèle, vérifiez vos droits aux subsides,
-            et économisez sur votre assurance maladie de base LAMal.
+            Comparez les assureurs, choisissez une franchise et un modèle médical adaptés à vos besoins, vérifiez vos droits aux subsides, et économisez sur votre assurance maladie de base LAMal.
           </p>
 
           <HeroStats stats={heroStats} className="mb-8" />
@@ -427,13 +424,13 @@ export default function GuideLamalPage() {
                     desc: "Vous consultez d'abord votre médecin de famille, qui vous oriente si besoin vers un spécialiste. Réduction moyenne de 11% (jusqu'à −20%) selon la caisse et le canton.",
                   },
                   {
-                    title: 'HMO (centre médical)',
+                    title: 'Centre médical',
                     reduction: "jusqu'à −20%",
                     border: 'border-brand',
-                    desc: "Vous êtes rattaché à un réseau fermé de médecins agréés (cabinet ou centre HMO). Réseau limité en zones rurales. Réduction moyenne de 12% (de −3% à −20%) selon la région.",
+                    desc: "Vous êtes rattaché à un réseau fermé de médecins agréés (cabinet ou centre médical). Réseau limité en zones rurales. Réduction moyenne de 12% (de −3% à −20%) selon la région.",
                   },
                   {
-                    title: 'Telmed (conseil téléphonique)',
+                    title: 'Télémédecine (conseil téléphonique)',
                     reduction: "jusqu'à −24%",
                     border: 'border-brand',
                     desc: 'Première consultation par téléphone ou application avant tout rendez-vous en cabinet (Medgate, Medi24...). Disponible 24 heures sur 24. Réduction moyenne de 12% (de −5% à −24%) selon la caisse.',
