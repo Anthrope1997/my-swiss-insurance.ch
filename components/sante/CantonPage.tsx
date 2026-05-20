@@ -295,7 +295,7 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
               Économiser avec un modèle alternatif dans le {canton.cantonDe}
             </h2>
             <p className="text-[16px] text-slate mb-6">
-              Le modèle standard offre la liberté de consulter n&apos;importe quel médecin sans restriction. En optant pour un modèle alternatif (médecin de famille, HMO ou télémédecine), vous réduisez votre prime tout en conservant les mêmes remboursements LAMal.
+              Le modèle standard offre la liberté de consulter n&apos;importe quel médecin sans restriction. En optant pour un modèle alternatif (médecin de famille, centre médical ou télémédecine), vous réduisez votre prime tout en conservant les mêmes remboursements LAMal.
             </p>
             <div className="border border-edge rounded-[8px] overflow-hidden">
               <table className="stripe-table w-full text-[16px]">

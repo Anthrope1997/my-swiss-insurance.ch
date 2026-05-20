@@ -334,7 +334,7 @@ export default function FrontalierAllemagnePage() {
               </div>
               <p className="text-[13px] text-slate/60 mt-2 md:hidden">Tableau complet visible sur ordinateur.</p>
               <KeyFact>
-                Les modèles alternatifs (médecin de famille, Telmed) réduisent la prime de 10 à 20 % par rapport au modèle standard.
+                Les modèles alternatifs (médecin de famille, télémédecine) réduisent la prime de 10 à 20 % par rapport au modèle standard.
                 Si vous êtes éligible aux subsides cantonaux, votre prime nette peut être significativement inférieure.
               </KeyFact>
             </section>

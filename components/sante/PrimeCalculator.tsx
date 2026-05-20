@@ -5,7 +5,7 @@ import type { Canton } from '@/data/sante/cantons'
 
 const AGE_OPTIONS = ['0-18', '19-25', '26-35', '36-50', '51-65', '65+']
 const FRANCHISE_OPTIONS = ['300', '500', '1000', '1500', '2000', '2500']
-const MODELE_OPTIONS = ['Standard', 'Médecin de famille', 'HMO', 'Telmed']
+const MODELE_OPTIONS = ['Standard', 'Médecin de famille', 'Centre médical', 'Télémédecine']
 
 const AGE_COEF: Record<string, number> = {
   '0-18': 0.45, '19-25': 0.78, '26-35': 1.00,
@@ -16,7 +16,7 @@ const FRANCHISE_COEF: Record<string, number> = {
   '1500': 0.80, '2000': 0.75, '2500': 0.71,
 }
 const MODELE_COEF: Record<string, number> = {
-  'Standard': 1.00, 'Médecin de famille': 0.88, 'HMO': 0.85, 'Telmed': 0.82,
+  'Standard': 1.00, 'Médecin de famille': 0.88, 'Centre médical': 0.85, 'Télémédecine': 0.82,
 }
 
 interface Result { caisse: string; prime: number }

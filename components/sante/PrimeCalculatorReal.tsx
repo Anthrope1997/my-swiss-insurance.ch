@@ -39,14 +39,14 @@ const FRANCHISES: Record<AgeGroup, number[]> = {
 const MODELE_LABELS: Record<Modele, string> = {
   BASE: 'Libre choix du médecin (standard)',
   HAM:  'Médecin de famille',
-  HMO:  'HMO (réseau de soins)',
+  HMO:  'Centre médical',
   DIV:  'Télémédecine',
 }
 
 const MODELE_INFO: Record<Modele, string> = {
   BASE: 'Accès direct à n\'importe quel médecin ou spécialiste en Suisse, sans restriction. C\'est le modèle le plus cher — il sert de référence pour comparer les autres.',
   HAM:  'Vous consultez d\'abord votre médecin de famille, qui vous oriente si besoin. Réduction moyenne de 11% (jusqu\'à −20%) selon la caisse et le canton.',
-  HMO:  'Vous êtes rattaché à un réseau fermé de médecins agréés (cabinet ou centre HMO). Réduction moyenne de 12% (de −3% à −20%) selon la région.',
+  HMO:  'Vous êtes rattaché à un réseau fermé de médecins agréés (cabinet ou centre médical). Réduction moyenne de 12% (de −3% à −20%) selon la région.',
   DIV:  'Première consultation par téléphone ou application avant tout rendez-vous en cabinet. Réduction moyenne de 12% (de −5% à −24%) selon la caisse.',
 }
 

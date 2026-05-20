@@ -90,7 +90,7 @@ const toc = [
 const heroStats = [
   { value: '3 mois',   label: "Délai droit d'option",   sub: 'dès le premier jour de travail en Suisse' },
   { value: '~CHF 686', label: 'Prime mensuelle Tessin',  sub: 'adulte, modèle standard, franchise 300 CHF' },
-  { value: '−20%',     label: 'Réduction prime possible', sub: 'avec modèle Telmed ou médecin famille'    },
+  { value: '−20%',     label: 'Réduction prime possible', sub: 'avec télémédecine ou médecin de famille'   },
 ]
 
 const enBref = [
@@ -249,7 +249,7 @@ export default function FrontalierItaliePage() {
                   },
                   {
                     titre: 'Primes LAMal au Tessin',
-                    desc: "Le Tessin affiche des primes LAMal parmi les plus élevées de Suisse (environ CHF 686 par mois pour un adulte, modèle standard, franchise 300 CHF). Comparez les caisses disponibles et les modèles alternatifs (Telmed, médecin de famille) pour réduire la prime de 10 à 20 %.",
+                    desc: "Le Tessin affiche des primes LAMal parmi les plus élevées de Suisse (environ CHF 686 par mois pour un adulte, modèle standard, franchise 300 CHF). Comparez les caisses disponibles et les modèles alternatifs (télémédecine, médecin de famille) pour réduire la prime de 10 à 20 %.",
                   },
                 ].map((item, i) => (
                   <div key={i} className="border border-edge rounded-[8px] p-5 bg-white">
@@ -321,7 +321,7 @@ export default function FrontalierItaliePage() {
               </div>
               <p className="text-[13px] text-slate/60 mt-2 md:hidden">Tableau complet visible sur ordinateur.</p>
               <KeyFact>
-                Les modèles alternatifs (médecin de famille, Telmed) réduisent la prime de 10 à 20 % par rapport au modèle standard.
+                Les modèles alternatifs (médecin de famille, télémédecine) réduisent la prime de 10 à 20 % par rapport au modèle standard.
                 Si vous êtes éligible aux subsides cantonaux, votre prime nette peut être significativement inférieure.
               </KeyFact>
             </section>

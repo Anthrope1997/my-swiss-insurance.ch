@@ -49,7 +49,7 @@ const faqItems = [
   },
   {
     question: "Faut-il informer son médecin en cas de changement de caisse ?",
-    answer: "Oui, c'est recommandé. Communiquez vos nouvelles coordonnées d'assuré à votre médecin de famille et tout autre prestataire de santé. Présentez votre nouvelle carte d'assuré lors de votre première consultation. En cas de modèle médecin de famille ou HMO, vérifiez que votre médecin est dans le réseau.",
+    answer: "Oui, c'est recommandé. Communiquez vos nouvelles coordonnées d'assuré à votre médecin de famille et tout autre prestataire de santé. Présentez votre nouvelle carte d'assuré lors de votre première consultation. En cas de modèle médecin de famille ou centre médical, vérifiez que votre médecin est dans le réseau.",
   },
   {
     question: "Comment changer de caisse en cas de déménagement dans un autre canton ?",

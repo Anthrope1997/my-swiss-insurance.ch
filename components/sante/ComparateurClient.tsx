@@ -37,7 +37,7 @@ const FRANCHISES_ENFANT = [100, 200, 300, 400, 500, 600]
 const MODELE_LABELS: Record<Modele, string> = {
   BASE: 'Standard',
   HAM:  'Médecin de famille',
-  HMO:  'HMO',
+  HMO:  'Centre médical',
   DIV:  'Télémédecine',
 }
 
@@ -94,7 +94,7 @@ const faqItems = [
   },
   {
     question: 'Comment économiser sur sa prime LAMal ?',
-    answer: "Trois leviers principaux : choisir un modèle alternatif (médecin de famille, HMO, Télémédecine) pour jusqu'à 24% de réduction selon la caisse et le canton ; augmenter sa franchise si vous êtes en bonne santé ; changer de caisse chaque année avant le 30 novembre.",
+    answer: "Trois leviers principaux : choisir un modèle alternatif (médecin de famille, centre médical, télémédecine) pour jusqu'à 24% de réduction selon la caisse et le canton ; augmenter sa franchise si vous êtes en bonne santé ; changer de caisse chaque année avant le 30 novembre.",
   },
   {
     question: 'Frontalier ou expatrié, suis-je concerné par la LAMal ?',
@@ -331,7 +331,7 @@ export default function ComparateurClient() {
               <div>
                 <label className="flex items-center text-[13px] font-medium text-ink mb-1.5">
                   Modèle d&apos;assurance
-                  <InfoTooltip text={"Standard : libre choix du médecin et spécialiste.\nMédecin de famille (−15 %) : passage obligatoire par votre médecin traitant.\nHMO (−18 %) : soins via le réseau HMO.\nTélémédecine (−20 %) : première consultation par téléphone.\nLes réductions varient selon la caisse et le canton."} />
+                  <InfoTooltip text={"Standard : libre choix du médecin et spécialiste.\nMédecin de famille (−15 %) : passage obligatoire par votre médecin traitant.\nCentre médical (−18 %) : soins via un réseau de centres médicaux agréés.\nTélémédecine (−20 %) : première consultation par téléphone.\nLes réductions varient selon la caisse et le canton."} />
                 </label>
                 <div className="relative">
                   <select

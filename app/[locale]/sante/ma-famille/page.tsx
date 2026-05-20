@@ -271,8 +271,8 @@ export default function MaFamillePage() {
                     desc: "Au 1er janvier de l'année des 26 ans, le tarif adulte s'applique automatiquement. Les franchises enfants (0 à 600 CHF) sont remplacées par les franchises adultes (300 à 2 500 CHF). Anticipez ce changement pour choisir votre nouvelle franchise.",
                   },
                   {
-                    titre: 'Modèle Telmed souvent recommandé',
-                    desc: "Pour un jeune adulte en bonne santé, à l'aise avec les outils numériques, le modèle Telmed (consultation médicale par téléphone ou application avant tout rendez-vous) réduit la prime de 15 à 24 % supplémentaires. Combiné à une franchise élevée, les économies peuvent dépasser CHF 200 par mois.",
+                    titre: 'Modèle télémédecine souvent recommandé',
+                    desc: "Pour un jeune adulte en bonne santé, à l'aise avec les outils numériques, le modèle télémédecine (consultation médicale par téléphone ou application avant tout rendez-vous) réduit la prime de 15 à 24 % supplémentaires. Combiné à une franchise élevée, les économies peuvent dépasser CHF 200 par mois.",
                   },
                 ].map((item, i) => (
                   <div key={i} className="border border-edge rounded-[8px] p-5 bg-white">
