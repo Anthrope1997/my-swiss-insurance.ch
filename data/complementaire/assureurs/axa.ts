@@ -312,6 +312,7 @@ export const produits: ProduitComplementaire[] = [
     },
     conditionsSouscription: ['Remise famille 5% (2 membres) / 10% (3+ membres)', 'Dédié aux enfants et adolescents', 'Souscription recommandée avant 5 ans'],
     tarifs: [],
+    masquer: true,
     urlProduit: 'https://www.axa.ch/fr/particuliers/offres/sante-accidents/assurance-complementaire/assurance-dentaire.html',
     dateMAJ: '2026-05-15',
     scoreComplet: 55,

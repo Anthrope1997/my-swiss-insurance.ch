@@ -181,6 +181,7 @@ export interface ProduitComplementaire {
   urlCGA?: string                    // URL du PDF des Conditions Générales
   dateMAJ: string                    // ISO date dernière mise à jour
   scoreComplet: number               // 0-100 — % des champs renseignés (auto-calculé)
+  masquer?: true                     // Exclure du comparateur (tarif non disponible en ligne)
 }
 
 // ─── Besoin utilisateur → familles pertinentes ────────────────────────────────

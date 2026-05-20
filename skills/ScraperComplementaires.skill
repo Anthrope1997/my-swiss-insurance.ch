@@ -67,13 +67,15 @@ Dernière mise à jour : 2026-05-20
 | vita-surselva | 5/5 | Innova AG comme underwriter — Playwright innova.ch |
 | rhenusana | 10/10 | Playwright Firefox, IP suisse requise — `rhenusana.bbtp.ch/portal/offerten/`. Script : `/tmp/rhenusana_v5.py`. Clé : JS fill PLZ + Gemeinde select (NPA 1000 → 3 options, sélectionner idx 1) + VvgParameterDetailViewModels selects pour Silber/Gold/Platin |
 
-### ⚠️ Partiels — blocage définitif (7 produits restants)
+### ⚠️ Masqués du comparateur — `masquer: true` dans le fichier TS
 
-| Assureur | Trouvés | Manquants | Blocage définitif |
-|---|---|---|---|
-| axa | 9/10 | `axa-dental-enfants` | Profil enfant incompatible avec nos 3 profils adultes. Prix observés (8 ans, NPA 1000) : Dentaire 1000 = CHF 19, 2000 = CHF 28, 3000 = CHF 35/mois. |
-| egk | 4/7 | `egk-dent-500`, `egk-dent-1000`, `egk-dent-1500` | EGK-DENT absent du calculateur egk.ch/calculer (seul EGK-SUN visible). Redirige vers agences. Requiert appel : +41 (0)61 765 51 11 |
-| agrisano | 2/5 | `agri-spezial`, `agri-natuerlich`, `spitalzusatz` | AGRI-dental + Hospital Flex OK. Autres : "Prämie = Alter + Kanton, via Regionalstelle". Aucun tarif en ligne. |
+Ces 7 produits restent dans la base de données mais sont filtrés du comparateur (`!p.masquer` dans `ComparateurComplementairesClient.tsx`).
+
+| Assureur | Produits masqués | Raison |
+|---|---|---|
+| axa | `axa-dental-enfants` | Profil enfant — `profilId: 'enfant'` absent du type TS. Prix observés en noteDetails. |
+| egk | `egk-dent-500`, `egk-dent-1000`, `egk-dent-1500` | EGK-DENT absent du calculateur en ligne. |
+| agrisano | `agri-spezial`, `agri-natuerlich`, `spitalzusatz` | Tarifs exclusivement via agences régionales. |
 
 ---
 

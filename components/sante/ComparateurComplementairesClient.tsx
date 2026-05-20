@@ -72,7 +72,7 @@ export default function ComparateurComplementairesClient() {
   const [showOnlyWithPrices, setShowOnlyWithPrices] = useState(true)
 
   const produits = useMemo(() => {
-    let filtered = tousLesProduits
+    let filtered = tousLesProduits.filter((p) => !p.masquer)
 
     // Category filter
     if (selectedFamille !== 'all') {
@@ -102,7 +102,7 @@ export default function ComparateurComplementairesClient() {
   }, [selectedProfil, selectedFamille, showOnlyWithPrices])
 
   const totalWithPrices = tousLesProduits.filter((p) =>
-    p.tarifs.some((t) => t.profilId === selectedProfil)
+    !p.masquer && p.tarifs.some((t) => t.profilId === selectedProfil)
   ).length
 
   return (
