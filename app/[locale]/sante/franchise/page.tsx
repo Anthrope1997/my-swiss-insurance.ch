@@ -37,6 +37,7 @@ const seuil       = nationalBreakEven()
 const seuilJA     = nationalBreakEvenJA()
 const seuilEnfant = nationalBreakEvenEnfant()
 const economieMoy = Math.round((nationalAvgPrime(300) - nationalAvgPrime(2500)) * 12)
+const pctEconomie = Math.round((nationalAvgPrime(300) - nationalAvgPrime(2500)) / nationalAvgPrime(300) * 100)
 const fmtChf = (n: number) => n.toLocaleString('fr-CH')
 
 const faqItems = [
@@ -87,20 +88,22 @@ const enBref = [
   <>{"La franchise est le montant que vous payez avant que l'assurance n'intervienne. "}
     <strong className="font-medium text-ink">{"Une franchise élevée réduit votre prime mensuelle mais augmente votre charge financière"}</strong>
     {" en cas de frais médicaux."}</>,
-  <>{"Pour un adulte (26 ans et plus), le seuil d'équilibre entre la franchise CHF 300 et CHF 2 500 est de "}
-    <strong className="font-medium text-ink">CHF {fmtChf(seuil)} de frais médicaux annuels</strong>
-    {". Il est plus bas pour un jeune adulte (19 à 25 ans), autour de "}
-    <strong className="font-medium text-ink">CHF {fmtChf(seuilJA)} de frais médicaux par an</strong>
-    {"."}</>,
-  <>{"Pour un enfant (0 à 18 ans), le seuil d'équilibre entre la franchise CHF 0 et CHF 600 est de "}
-    <strong className="font-medium text-ink">CHF {fmtChf(seuilEnfant)} de frais médicaux par an</strong>
-    {"."}</>,
+  <>{"Pour un adulte (26 ans et plus), la franchise CHF 2 500 est plus économique tant que vos frais médicaux annuels restent inférieurs à "}
+    <strong className="font-medium text-ink">CHF {fmtChf(seuil)}</strong>
+    {". Au-delà, la franchise CHF 300 est plus avantageuse. Ce seuil descend à "}
+    <strong className="font-medium text-ink">CHF {fmtChf(seuilJA)}</strong>
+    {" pour un jeune adulte (19 à 25 ans) et à "}
+    <strong className="font-medium text-ink">CHF {fmtChf(seuilEnfant)}</strong>
+    {" pour un enfant (0 à 18 ans)."}</>,
+  <>{"Pour changer de franchise, signalez-le à votre assureur "}
+    <strong className="font-medium text-ink">{"avant le 30 novembre"}</strong>
+    {". Le changement prend effet au 1er janvier. Sans demande, votre franchise actuelle est reconduite automatiquement."}</>,
 ]
 
 const heroStats = [
-  { value: `CHF ${fmtChf(economieMoy)}`, label: 'Économie moyenne par an',          sub: 'Adulte, franchise CHF 300 vs CHF 2 500' },
-  { value: '6',                          label: 'Niveaux de franchise pour adultes', sub: 'De CHF 300 à CHF 2 500 par an'          },
-  { value: 'CHF 700',                    label: 'Quote-part annuelle maximale',      sub: 'Adulte, dès 19 ans'                     },
+  { value: `CHF ${fmtChf(economieMoy)}`, label: 'Économie moyenne par an',          sub: `${pctEconomie} % d'économie en changeant de franchise` },
+  { value: '6',                          label: 'Niveaux de franchise pour adultes', sub: 'De CHF 300 à CHF 2 500 par an'                              },
+  { value: 'CHF 700',                    label: 'Quote-part pour un adulte',         sub: 'CHF 350 pour un enfant'                                     },
 ]
 
 const toc = [
