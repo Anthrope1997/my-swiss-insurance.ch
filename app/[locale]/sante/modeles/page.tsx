@@ -93,7 +93,7 @@ const modeles = [
     badgeStyle: '',
     borderColor: 'border-brand',
     desc: "Vous consultez d'abord votre médecin de famille, qui vous oriente si besoin vers un spécialiste. La consultation chez le généraliste est toujours prioritaire. Réduction moyenne de 11 % (jusqu'à 20 %) selon la caisse et le canton.",
-    avantages: ['Suivi médical coordonné', 'Réduction de prime jusqu'à 20 %', 'Médecin de confiance établi'],
+    avantages: ['Suivi médical coordonné', "Réduction de prime jusqu'à 20 %", 'Médecin de confiance établi'],
     inconvenients: ['Passage obligatoire par le médecin de famille', 'Accès aux spécialistes moins direct'],
     ideal: 'Vous avez déjà un médecin de famille et souhaitez maintenir une relation de confiance tout en économisant.',
   },
@@ -104,7 +104,7 @@ const modeles = [
     badgeStyle: '',
     borderColor: 'border-brand',
     desc: "Vous êtes rattaché à un réseau fermé de médecins agréés (cabinet de groupe ou centre médical). Vous devez d'abord contacter un médecin de ce réseau avant tout spécialiste. Réduction moyenne de 12 % (de 3 % à 20 %) selon la région.",
-    avantages: ['Réduction de prime jusqu'à 20 %', 'Coordination interne des soins', 'Qualité homogène du réseau'],
+    avantages: ["Réduction de prime jusqu'à 20 %", 'Coordination interne des soins', 'Qualité homogène du réseau'],
     inconvenients: ['Réseau limité en zones rurales', 'Liberté de choix réduite', 'Changement de médecin complexe'],
     ideal: "Vous habitez une grande ville avec un réseau dense de centres médicaux et appréciez la médecine de groupe.",
   },
@@ -115,7 +115,7 @@ const modeles = [
     badgeStyle: '',
     borderColor: 'border-brand',
     desc: "Première consultation par téléphone ou application (Medgate, Medi24, Doctorline...) avant tout rendez-vous en cabinet ou aux urgences non vitales. Disponible 24 heures sur 24, 7 jours sur 7. Réduction moyenne de 12 % (de 5 % à 24 %) selon la caisse.",
-    avantages: ['Plus grande réduction de prime (jusqu'à 24 %)', 'Disponible 24 heures sur 24', 'Pratique pour les actifs et familles'],
+    avantages: ["Plus grande réduction de prime (jusqu'à 24 %)", 'Disponible 24 heures sur 24', 'Pratique pour les actifs et familles'],
     inconvenients: ['Passage obligatoire par la hotline', 'Dépendance aux outils numériques', 'Pas toujours adapté aux urgences'],
     ideal: "Vous êtes à l'aise avec la technologie, rarement malade ou cherchez la réduction maximale.",
   },
@@ -145,10 +145,10 @@ const enBref = [
   <>{"La LAMal propose quatre modèles d'assurance : "}
     <strong className="font-medium text-ink">{"standard, médecin de famille, centre médical et télémédecine"}</strong>
     {". Tous couvrent exactement les mêmes prestations de base."}</>,
-  <>{"Les modèles alternatifs réduisent la prime de "}
+  <>{"Les modèles alternatifs réduisent la prime mensuelle de "}
     <strong className="font-medium text-ink">CHF 700 par an en moyenne</strong>
-    {". En contrepartie, vous devez consulter votre médecin de famille, un centre médical ou un service de téléconsultation avant toute visite chez un spécialiste."}</>,
-  <>{"Pour changer de modèle, envoyez votre demande à votre caisse "}
+    {". En contrepartie, vous devez consulter votre médecin de famille, un centre médical ou un service de télémédecine avant toute visite chez un spécialiste."}</>,
+  <>{"Pour changer de modèle, signalez-le à votre assureur "}
     <strong className="font-medium text-ink">avant le 30 novembre</strong>
     {". Le changement prend effet au 1er janvier. Sans demande, votre modèle actuel est reconduit automatiquement."}</>,
 ]
@@ -171,10 +171,9 @@ export default function ModelesPage() {
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
             Modèles LAMal 2026 : lequel choisir ?
           </h1>
-          <p className="text-[16px] text-slate max-w-2xl leading-relaxed mb-10">
-            L&apos;assurance maladie de base LAMal propose quatre modèles d&apos;assurance. Le modèle standard offre le plus de liberté.
-            Les trois modèles alternatifs (médecin de famille, centre médical, télémédecine) réduisent la prime jusqu&apos;à
-            24 % en échange d&apos;un interlocuteur médical imposé avant toute consultation chez un spécialiste.
+          <p className="text-[16px] text-slate leading-relaxed mb-10">
+            La LAMal propose quatre modèles d&apos;assurance : standard, médecin de famille, centre médical et télémédecine.
+            Comparez leur fonctionnement et choisissez celui qui correspond à vos habitudes médicales pour économiser sur votre prime LAMal.
           </p>
 
           <HeroStats stats={heroStats} className="mb-8" />
