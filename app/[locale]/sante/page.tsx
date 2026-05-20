@@ -63,9 +63,9 @@ const webSiteSchema = {
 // ── Données ──────────────────────────────────────────────────────────────────
 
 const stats = [
-  { value: '55 %',      label: 'Réduction maximale sur une prime', sub: 'Adulte 35 ans, toutes caisses et franchises'     },
-  { value: 'CHF 4 154', label: 'Économie moyenne par an',         sub: 'Adulte 35 ans, toutes caisses et franchises'     },
-  { value: '2,5 M',     label: "Résidents bénéficiant d'un subside", sub: '28 % de la population suisse'               },
+  { value: 'CHF 5 653', label: 'Économie maximale par an',       sub: "Jusqu'à 55 % de réduction de prime LAMal"  },
+  { value: 'CHF 4 154', label: 'Économie moyenne par an',        sub: '56 % de réduction de prime LAMal'           },
+  { value: 'CHF 420',   label: 'Subside moyen versé en Suisse',  sub: '28 % des résidents en bénéficient'          },
 ]
 
 const guides = [
