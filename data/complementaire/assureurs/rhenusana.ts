@@ -1,8 +1,9 @@
 import type { ProduitComplementaire } from '../types'
 
 // Source : rhenusana.ch — relevé mai 2026
+// Tarifs : portail rhenusana.bbtp.ch/portal/offerten/ — scraping Playwright 2026-05-20
 // Note : rhenusana est basée à Altstätten (SG), région du Rhin
-// Gammes en 3 niveaux : Argent / Or / Platine
+// Gammes en 3 niveaux : Argent / Or / Platine (Silber / Gold / Platin dans le portail)
 
 export const produits: ProduitComplementaire[] = [
 
@@ -30,9 +31,13 @@ export const produits: ProduitComplementaire[] = [
       montantMaxAnnuel: 100,
       noteDetails: '90%/CHF 100/an (adultes). Option Lifecycle : +CHF 150/an supplémentaire.',
     },
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 12.40, source: 'site-web', dateReleve: '2026-05-20' },
+      { profilId: 'famille',      montantCHF: 12.40, source: 'site-web', dateReleve: '2026-05-20' },
+      { profilId: 'senior',       montantCHF: 16.30, source: 'site-web', dateReleve: '2026-05-20' },
+    ],
     urlProduit: 'https://rhenusana.ch/zusatzversicherung/rhenuplus/',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-20',
     scoreComplet: 65,
   },
 
@@ -72,9 +77,13 @@ export const produits: ProduitComplementaire[] = [
       coachingSante: false,
       noteDetails: 'Fitness 75%/CHF 200/an. Examens médicaux préventifs 75%/CHF 200/an.',
     },
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 31.70, source: 'site-web', dateReleve: '2026-05-20' },
+      { profilId: 'famille',      montantCHF: 31.70, source: 'site-web', dateReleve: '2026-05-20' },
+      { profilId: 'senior',       montantCHF: 40.00, source: 'site-web', dateReleve: '2026-05-20' },
+    ],
     urlProduit: 'https://rhenusana.ch/zusatzversicherung/rhenuplus/',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-20',
     scoreComplet: 76,
   },
 
@@ -114,9 +123,13 @@ export const produits: ProduitComplementaire[] = [
       coachingSante: false,
       noteDetails: 'Fitness 75%/CHF 400/an. Examens médicaux préventifs 75%/CHF 400/an.',
     },
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 64.20, source: 'site-web', dateReleve: '2026-05-20' },
+      { profilId: 'famille',      montantCHF: 64.20, source: 'site-web', dateReleve: '2026-05-20' },
+      { profilId: 'senior',       montantCHF: 80.20, source: 'site-web', dateReleve: '2026-05-20' },
+    ],
     urlProduit: 'https://rhenusana.ch/zusatzversicherung/rhenuplus/',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-20',
     scoreComplet: 82,
   },
 
@@ -135,9 +148,13 @@ export const produits: ProduitComplementaire[] = [
       zoneGeographique: 'suisse',
       noteDetails: 'Couverture complète division commune dans toute la Suisse et Liechtenstein. Urgences à l\'étranger (UE/EFTA selon accords bilatéraux) : max 60 jours/an en hôpital public.',
     },
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 6.80, source: 'site-web', dateReleve: '2026-05-20' },
+      { profilId: 'famille',      montantCHF: 6.80, source: 'site-web', dateReleve: '2026-05-20' },
+      { profilId: 'senior',       montantCHF: 8.20, source: 'site-web', dateReleve: '2026-05-20' },
+    ],
     urlProduit: 'https://rhenusana.ch/zusatzversicherung/rhenuswiss/',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-20',
     scoreComplet: 60,
   },
 
@@ -154,9 +171,13 @@ export const produits: ProduitComplementaire[] = [
       zoneGeographique: 'suisse',
       noteDetails: 'Hôpitaux partenaires rhenusana. Franchise CHF 50/séjour. Cures médicales incluses. Aide ménagère en cas de maladie aiguë. Système bonus fidélité.',
     },
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 33.00, source: 'site-web', dateReleve: '2026-05-20' },
+      { profilId: 'famille',      montantCHF: 36.70, source: 'site-web', dateReleve: '2026-05-20' },
+      { profilId: 'senior',       montantCHF: 59.40, source: 'site-web', dateReleve: '2026-05-20' },
+    ],
     urlProduit: 'https://rhenusana.ch/zusatzversicherung/rhenuhospital/',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-20',
     scoreComplet: 58,
   },
 
@@ -173,9 +194,13 @@ export const produits: ProduitComplementaire[] = [
       zoneGeographique: 'suisse',
       noteDetails: 'Hôpitaux partenaires. Franchise CHF 50/séjour. Cures médicales et aide ménagère. Psychiatrie au tarif de référence du canton de résidence. Système bonus fidélité.',
     },
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 46.00,  source: 'site-web', dateReleve: '2026-05-20' },
+      { profilId: 'famille',      montantCHF: 57.00,  source: 'site-web', dateReleve: '2026-05-20' },
+      { profilId: 'senior',       montantCHF: 125.00, source: 'site-web', dateReleve: '2026-05-20' },
+    ],
     urlProduit: 'https://rhenusana.ch/zusatzversicherung/rhenuhospital/',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-20',
     scoreComplet: 60,
   },
 
@@ -192,9 +217,13 @@ export const produits: ProduitComplementaire[] = [
       zoneGeographique: 'suisse',
       noteDetails: 'Hôpitaux partenaires. Franchise CHF 200/séjour. Cures médicales et aide ménagère. Système bonus fidélité.',
     },
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 113.30, source: 'site-web', dateReleve: '2026-05-20' },
+      { profilId: 'famille',      montantCHF: 113.30, source: 'site-web', dateReleve: '2026-05-20' },
+      { profilId: 'senior',       montantCHF: 275.90, source: 'site-web', dateReleve: '2026-05-20' },
+    ],
     urlProduit: 'https://rhenusana.ch/zusatzversicherung/rhenuhospital/',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-20',
     scoreComplet: 60,
   },
 
@@ -214,9 +243,13 @@ export const produits: ProduitComplementaire[] = [
       implants: false,
       noteDetails: 'Prévention, traitements conservateurs, prothèses, prophylaxie. Orthodontie adultes incluse.',
     },
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 17.40, source: 'site-web', dateReleve: '2026-05-20' },
+      { profilId: 'famille',      montantCHF: 17.40, source: 'site-web', dateReleve: '2026-05-20' },
+      { profilId: 'senior',       montantCHF: 24.00, source: 'site-web', dateReleve: '2026-05-20' },
+    ],
     urlProduit: 'https://rhenusana.ch/zusatzversicherung/rhenudenta/',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-20',
     scoreComplet: 65,
   },
 
@@ -234,9 +267,13 @@ export const produits: ProduitComplementaire[] = [
       implants: false,
       noteDetails: 'Prévention, traitements conservateurs, prothèses, prophylaxie, chirurgie maxillofaciale. Orthodontie adultes incluse.',
     },
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 44.30, source: 'site-web', dateReleve: '2026-05-20' },
+      { profilId: 'famille',      montantCHF: 44.30, source: 'site-web', dateReleve: '2026-05-20' },
+      { profilId: 'senior',       montantCHF: 61.80, source: 'site-web', dateReleve: '2026-05-20' },
+    ],
     urlProduit: 'https://rhenusana.ch/zusatzversicherung/rhenudenta/',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-20',
     scoreComplet: 70,
   },
 
@@ -254,9 +291,13 @@ export const produits: ProduitComplementaire[] = [
       implants: true,
       noteDetails: '90% des frais, max CHF 2\'000/an. Option supplémentaire : 75% des frais au-delà de CHF 5\'000, jusqu\'à CHF 30\'000. Orthodontie adultes et chirurgie maxillofaciale incluses.',
     },
-    tarifs: [],
+    tarifs: [
+      { profilId: 'jeune-adulte', montantCHF: 83.90,  source: 'site-web', dateReleve: '2026-05-20' },
+      { profilId: 'famille',      montantCHF: 83.90,  source: 'site-web', dateReleve: '2026-05-20' },
+      { profilId: 'senior',       montantCHF: 117.30, source: 'site-web', dateReleve: '2026-05-20' },
+    ],
     urlProduit: 'https://rhenusana.ch/zusatzversicherung/rhenudenta/',
-    dateMAJ: '2026-05-15',
+    dateMAJ: '2026-05-20',
     scoreComplet: 82,
   },
 ]
