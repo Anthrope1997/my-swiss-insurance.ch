@@ -234,8 +234,8 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen, tagline
   const [consentError, setConsentError] = useState('')
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' })
-  }, [step])
+    if (fullscreen) window.scrollTo({ top: 0, behavior: 'instant' })
+  }, [step, fullscreen])
 
   useEffect(() => {
     function onIntent(e: Event) {
