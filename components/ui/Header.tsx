@@ -12,8 +12,21 @@ const menuSections: {
   label: string
   icon: React.ReactNode
   links: { href: string; label: string }[]
-  ctaLink?: { href: string; label: string }
 }[] = [
+  {
+    id: 'calculateurs',
+    label: 'Calculateurs',
+    icon: (
+      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+          d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+      </svg>
+    ),
+    links: [
+      { href: '/sante/comparateur', label: 'Comparateur de primes LAMal' },
+      { href: '/sante/subsides',    label: 'Simulateur de subsides'       },
+    ],
+  },
   {
     id: 'guides',
     label: 'Guides',
@@ -29,8 +42,6 @@ const menuSections: {
       { href: '/sante/modeles',           label: 'Les 4 modèles LAMal'     },
       { href: '/sante/lamal-vs-lca',      label: 'LAMal vs complémentaire' },
       { href: '/sante/changer-de-caisse', label: 'Changer de caisse'       },
-      { href: '/sante/comparateur',       label: 'Comparateur de caisses'  },
-      { href: '/sante/subsides',          label: 'Calculateur de subsides' },
     ],
   },
 ]
@@ -49,21 +60,33 @@ function ChevronDown({ rotated }: { rotated: boolean }) {
 export default function Header() {
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [expandedSection, setExpandedSection] = useState<string | null>(null)
+  const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set())
   const [offerOpen, setOfferOpen] = useState(false)
 
   useEffect(() => {
     setMobileOpen(false)
-    setExpandedSection(null)
+    setExpandedSections(new Set())
   }, [pathname])
+
+  // Les deux sections s'ouvrent par défaut à l'ouverture du menu
+  useEffect(() => {
+    if (mobileOpen) {
+      setExpandedSections(new Set(['calculateurs', 'guides']))
+    }
+  }, [mobileOpen])
 
   function close() {
     setMobileOpen(false)
-    setExpandedSection(null)
+    setExpandedSections(new Set())
   }
 
   function toggleSection(id: string) {
-    setExpandedSection(s => s === id ? null : id)
+    setExpandedSections(prev => {
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
+      return next
+    })
   }
 
   return (
@@ -143,9 +166,9 @@ export default function Header() {
                       {section.icon}
                     </span>
                     <span className="flex-1 text-left">{section.label}</span>
-                    <ChevronDown rotated={expandedSection === section.id} />
+                    <ChevronDown rotated={expandedSections.has(section.id)} />
                   </button>
-                  {expandedSection === section.id && (
+                  {expandedSections.has(section.id) && (
                     <div className="bg-white/5 border-b border-white/10">
                       {section.links.map((link, i) => (
                         <Link key={link.href} href={link.href} onClick={close}
@@ -154,12 +177,6 @@ export default function Header() {
                           {link.label}
                         </Link>
                       ))}
-                      {section.ctaLink && (
-                        <Link href={section.ctaLink.href} onClick={close}
-                          className="block pl-5 py-2.5 text-[13px] text-white hover:text-blue-300 border-t border-white/5">
-                          {section.ctaLink.label}
-                        </Link>
-                      )}
                     </div>
                   )}
                 </div>
