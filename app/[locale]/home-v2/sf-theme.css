@@ -1,0 +1,54 @@
+/* BlaBlaCar + bleu électrique — tokens v2 */
+
+/* ── Texte ── */
+.sf-theme .text-navy        { color: #054652 !important; }
+.sf-theme .text-brand       { color: #1d4ed8 !important; }
+.sf-theme .text-brand-light { color: #3b82f6 !important; }
+.sf-theme .text-ink         { color: #131314 !important; }
+.sf-theme .text-slate       { color: #576680 !important; }
+.sf-theme .text-muted       { color: #6F8B90 !important; }
+
+/* ── Fonds ── */
+.sf-theme .bg-navy          { background-color: #054652 !important; }
+.sf-theme .bg-brand         { background-color: #1d4ed8 !important; }
+.sf-theme .bg-cloud         { background-color: #F5F7FB !important; }
+.sf-theme .bg-blue-tint     { background-color: #dbeafe !important; }
+
+/* ── Bordures ── */
+.sf-theme .border-navy      { border-color: #054652 !important; }
+.sf-theme .border-brand     { border-color: #1d4ed8 !important; }
+.sf-theme .border-edge      { border-color: #E9ECF0 !important; }
+.sf-theme .divide-edge > :not([hidden]) ~ :not([hidden]) { border-color: #E9ECF0 !important; }
+
+/* ── Typographie article ── */
+.sf-theme .article-h2       { color: #131314 !important; border-color: #E9ECF0 !important; }
+.sf-theme .article-h3       { color: #131314 !important; }
+.sf-theme .article-p        { color: #576680 !important; }
+
+/* ── Tableaux ── */
+.sf-theme .stripe-table thead th    { background-color: #F5F7FB !important; border-color: #E9ECF0 !important; color: #131314 !important; }
+.sf-theme .stripe-table td          { border-color: #E9ECF0 !important; color: #576680 !important; }
+.sf-theme .stripe-table tr:hover td { background-color: #F5F7FB !important; }
+
+/* ── Boutons ── */
+.sf-theme .btn-primary            { background-color: #1d4ed8 !important; }
+.sf-theme .btn-primary:hover      { background-color: #1e40af !important; }
+.sf-theme .btn-secondary          { border-color: #E9ECF0 !important; color: #131314 !important; }
+.sf-theme .btn-secondary:hover    { background-color: #F5F7FB !important; }
+
+/* ── Hover utilitaires ── */
+.sf-theme .hover\:bg-brand-dark:hover { background-color: #1e40af !important; }
+.sf-theme .hover\:text-brand:hover    { color: #1d4ed8 !important; }
+.sf-theme .hover\:border-brand:hover  { border-color: #1d4ed8 !important; }
+.sf-theme .border-t-2.border-navy     { border-color: #054652 !important; }
+
+/* ── Signalisation sémantique ── */
+.sf-theme .text-success       { color: #16a34a !important; }
+.sf-theme .text-warning       { color: #d97706 !important; }
+.sf-theme .text-error         { color: #dc2626 !important; }
+.sf-theme .bg-success-light   { background-color: #dcfce7 !important; }
+.sf-theme .bg-warning-light   { background-color: #fef3c7 !important; }
+.sf-theme .bg-error-light     { background-color: #fee2e2 !important; }
+.sf-theme .border-success     { border-color: #16a34a !important; }
+.sf-theme .border-warning     { border-color: #d97706 !important; }
+.sf-theme .border-error       { border-color: #dc2626 !important; }
