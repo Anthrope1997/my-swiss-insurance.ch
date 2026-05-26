@@ -67,8 +67,8 @@ const TRANCHES_AGE = [
   { value: 'adulte',       label: 'Adulte (26 ans et plus)'    },
 ]
 
-const CONSENT_TRAITEMENT_TEXT = "J'autorise My Swiss Insurance et ses conseillers partenaires à collecter et traiter mes données pour me proposer une assurance personnalisée adaptée à ma situation."
-const CONSENT_MARKETING_TEXT = "Je souhaite recevoir des offres pour d'autres produits d'assurance."
+const CONSENT_TRAITEMENT_TEXT = "J'autorise My Swiss Insurance et ses conseillers partenaires à collecter et traiter mes données pour me proposer une assurance adaptée à ma situation."
+const CONSENT_MARKETING_TEXT = "Je souhaite recevoir des offres personnalisées pour d'autres assurances."
 
 const STEP_LABELS = d.form.labels
 const STEP_CONTEXT = d.form.contexts
@@ -798,7 +798,7 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen, tagline
 
               <p className="text-[13px] leading-snug text-secondary">
                 Vos données sont traitées conformément à notre{' '}
-                <a href="/fr/politique-de-confidentialite" className="text-[#185FA5] underline hover:text-[#0F4C8A]">
+                <a href="/fr/politique-confidentialite" className="text-[#185FA5] underline hover:text-[#0F4C8A]">
                   politique de confidentialité
                 </a>. Vous pouvez vous désinscrire à tout moment.
               </p>
