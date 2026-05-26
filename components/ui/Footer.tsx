@@ -10,33 +10,13 @@ const columns: {
   {
     title: 'Guides',
     links: [
-      { href: '/sante/guide',            label: 'Comprendre la LAMal'   },
-      { href: '/sante/franchise',        label: 'Choisir sa franchise'  },
-      { href: '/sante/modeles',          label: 'Les 4 modèles LAMal'   },
-      { href: '/sante/lamal-vs-lca',     label: 'LAMal vs complémentaire' },
-      { href: '/sante/changer-de-caisse', label: 'Changer de caisse'    },
-      { href: '/sante/comparateur',      label: 'Comparateur de caisses' },
+      { href: '/sante/guide',             label: 'Comprendre la LAMal'     },
+      { href: '/sante/franchise',         label: 'Choisir sa franchise'    },
+      { href: '/sante/modeles',           label: 'Les 4 modèles LAMal'     },
+      { href: '/sante/lamal-vs-lca',      label: 'LAMal vs complémentaire' },
+      { href: '/sante/changer-de-caisse', label: 'Changer de caisse'       },
+      { href: '/sante/comparateur',       label: 'Comparateur de caisses'  },
       { href: '/sante/subsides',          label: 'Calculateur de subsides' },
-    ],
-  },
-  {
-    title: 'Par canton',
-    ctaLink: { href: '/sante/cantons', label: 'Tous les cantons →' },
-    links: [
-      { href: '/sante/canton/argovie',   label: 'Argovie'   },
-      { href: '/sante/canton/berne',     label: 'Berne'     },
-      { href: '/sante/canton/geneve',    label: 'Genève'    },
-      { href: '/sante/canton/saint-gall', label: 'Saint-Gall' },
-      { href: '/sante/canton/vaud',      label: 'Vaud'      },
-      { href: '/sante/canton/zurich',    label: 'Zurich'    },
-    ],
-  },
-  {
-    title: 'Par situation de vie',
-    links: [
-      { href: '/sante/ma-situation', label: 'Ma situation' },
-      { href: '/sante/ma-famille',   label: 'Ma famille'   },
-      { href: '/sante/frontalier',   label: 'Frontaliers'  },
     ],
   },
   {

@@ -6,6 +6,7 @@ import UnifiedLeadForm from '@/components/ui/UnifiedLeadForm'
 
 export const metadata: Metadata = {
   title: 'LAMal par situation de vie — Salarié, famille, expatrié 2026',
+  robots: { index: false, follow: false },
   description:
     'Choisissez votre profil pour des conseils LAMal adaptés : salarié ou indépendant, famille ou retraité, expatrié ou frontalier. Guide 2026.',
   openGraph: {

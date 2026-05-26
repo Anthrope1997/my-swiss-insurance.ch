@@ -6,6 +6,7 @@ import UnifiedLeadForm from '@/components/ui/UnifiedLeadForm'
 
 export const metadata: Metadata = {
   title: 'LAMal pour les frontaliers en Suisse romande 2026',
+  robots: { index: false, follow: false },
   description:
     "Guide LAMal frontaliers 2026 : droit d'option pour les frontaliers français, allemands et italiens. Choisissez votre nationalité pour un guide adapté.",
   openGraph: {

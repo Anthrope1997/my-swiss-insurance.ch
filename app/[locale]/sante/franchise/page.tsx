@@ -346,11 +346,6 @@ export default function FranchisePage() {
               Pour un adolescent en bonne santé (15 à 18 ans), une franchise plus élevée réduit la prime sans risque disproportionné.
             </KeyFact>
 
-            <p className="article-p">
-              <Link href="/sante/ma-famille" className="text-brand hover:underline">
-                Assurance maladie famille et maternité : ce qu&apos;il faut savoir →
-              </Link>
-            </p>
           </section>
 
           {/* 04 — Changement */}

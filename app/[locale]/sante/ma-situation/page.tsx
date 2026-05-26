@@ -9,6 +9,7 @@ import HeroStats from '@/components/ui/HeroStats'
 
 export const metadata: Metadata = {
   title: 'LAMal selon votre situation professionnelle en 2026',
+  robots: { index: false, follow: false },
   description:
     "LAMal pour salarié, indépendant, chômeur et nouvel arrivant expatrié en Suisse : franchise optimale, couverture accidents, subsides et démarches d'affiliation. Guide 2026.",
   openGraph: {

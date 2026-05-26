@@ -6,6 +6,7 @@ const canton = cantonBySlug['zurich']
 
 export const metadata: Metadata = {
   title: `Assurance maladie à Zurich 2026 : primes, caisses et subsides`,
+  robots: { index: false, follow: false },
   description: `Prime moyenne ${canton.primeMoyenne} CHF par mois à Zurich. Caisse la moins chère : ${canton.topCaisses[0].name} dès ${canton.topCaisses[0].prime} CHF par mois. Économie max : CHF ${canton.economieAn}/an. Données OFSP 2026.`,
   alternates: { canonical: 'https://my-swiss-insurance.ch/sante/canton/zurich' },
   openGraph: {

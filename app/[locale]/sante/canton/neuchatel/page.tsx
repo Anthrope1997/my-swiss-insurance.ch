@@ -6,6 +6,7 @@ const canton = cantonBySlug['neuchatel']
 
 export const metadata: Metadata = {
   title: 'Assurance maladie à Neuchâtel 2026 : primes, caisses et subsides',
+  robots: { index: false, follow: false },
   description: `Prime moyenne ${canton.primeMoyenne} CHF par mois à Neuchâtel. Caisse la moins chère : ${canton.topCaisses[0].name} dès ${canton.topCaisses[0].prime} CHF par mois. Économie max : CHF ${canton.economieAn}/an. Données OFSP 2026.`,
   alternates: { canonical: 'https://my-swiss-insurance.ch/sante/canton/neuchatel' },
   openGraph: {

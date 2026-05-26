@@ -2,15 +2,20 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import UnifiedLeadForm from '@/components/ui/UnifiedLeadForm'
 import CantonSearch from '@/components/ui/CantonSearch'
+import { Inter } from 'next/font/google'
+import './sf-theme.css'
+
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Économisez sur votre assurance maladie suisse en 2026 — My Swiss Insurance',
+  robots: { index: false, follow: false },
   description:
-    'Comparez les primes LAMal 2026 gratuitement. Jusqu\'à 5 653 CHF d\'économie par an à Genève. 34 caisses, données OFSP officielles, résultat immédiat.',
+    "Comparez les primes LAMal 2026 gratuitement. Jusqu'à 5 653 CHF d'économie par an à Genève. 34 caisses, données OFSP officielles, résultat immédiat.",
   alternates: { canonical: 'https://my-swiss-insurance.ch' },
   openGraph: {
     title: 'Économisez sur votre assurance maladie suisse en 2026',
-    description: 'Jusqu\'à 5 653 CHF d\'économie par an. Comparez gratuitement 34 caisses LAMal. Données OFSP 2026.',
+    description: "Jusqu'à 5 653 CHF d'économie par an. Comparez gratuitement 34 caisses LAMal. Données OFSP 2026.",
     url: 'https://my-swiss-insurance.ch',
     type: 'website',
   },
@@ -33,41 +38,63 @@ const cantonCards = [
   { nom: 'Genève',  primeMin: '634', economieAn: "5'653", href: '/sante/canton/geneve' },
 ]
 
+// Palette BlaBlaCar + bleu électrique + tokens sémantiques
+const P = {
+  // Structure
+  navy:        '#054652',  // sarcelle foncée BlaBlaCar
+  action:      '#1d4ed8',  // bleu électrique — CTA, liens
+  actionLight: '#3b82f6',  // bleu medium — accents secondaires
+  tint:        '#dbeafe',  // teinte bleu électrique — fonds callout bleu
+  bgWarm:      '#FFFFFF',
+  surface:     '#F5F7FB',  // fond sections alternées
+  border:      '#E9ECF0',
+  // Texte — 4 niveaux
+  textDark:    '#131314',  // titres H1
+  textPrimary: '#25282B',  // corps principal
+  textBody:    '#576680',  // descriptions, labels
+  textMuted:   '#6F8B90',  // métadonnées, sources
+  // Signalisation sémantique
+  success:     '#16a34a',  // économies, positif
+  successBg:   '#dcfce7',
+  warning:     '#d97706',  // délais, attention
+  warningBg:   '#fef3c7',
+  error:       '#dc2626',  // erreurs
+  errorBg:     '#fee2e2',
+}
+
 export default function HomePageV2() {
   return (
-    <>
+    <div className={`${inter.className} sf-theme`}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-      {/* ── 1. HERO ────────────────────────────────────────────────────────────── */}
-      <section className="bg-white pt-20 pb-20 sm:pt-28 sm:pb-24">
+      {/* ── 1. HERO ── */}
+      <section style={{ backgroundColor: P.bgWarm }} className="pt-20 pb-20 sm:pt-28 sm:pb-24">
         <div className="container-xl">
 
-          {/* Indicateur éditorial — discret, fonctionnel */}
-          <p className="text-[12px] font-semibold text-muted uppercase tracking-widest mb-6">
-            Données OFSP 2026 · 34 caisses agréées
-          </p>
-
-          {/* H1 : authorité, pas slogan */}
-          <h1 className="text-4xl sm:text-5xl font-bold text-navy leading-tight mb-5 max-w-2xl">
+          <h1 className="text-4xl sm:text-5xl font-bold leading-tight mb-5"
+            style={{ color: P.textDark }}>
             L'assurance maladie suisse, expliquée sans détour
           </h1>
 
-          <p className="text-[17px] text-slate leading-relaxed mb-10 max-w-xl">
+          <p className="text-[17px] leading-relaxed mb-10" style={{ color: P.textBody }}>
             En Suisse, toutes les caisses couvrent les mêmes soins. Seul le prix change.
-            L'écart atteint <strong className="font-semibold text-ink">5 653 CHF par an</strong> à Genève
-            pour un même profil. Nos guides vous aident à comprendre, comparer et décider.
+            L'écart atteint{' '}
+            <strong className="font-semibold" style={{ color: P.navy }}>5 653 CHF par an</strong>{' '}
+            à Genève pour un même profil. Nos guides vous aident à comprendre, comparer et décider.
           </p>
 
-          {/* Stats — données éditoriales, pas metric cards */}
-          <div className="flex flex-wrap gap-x-10 gap-y-4 mb-10 border-t border-edge pt-8">
+          {/* Tuiles stats */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-10">
             {[
-              { value: "5'653 CHF", label: 'économie annuelle possible à Genève' },
-              { value: '34',        label: "caisses agréées par l'OFSP" },
-              { value: '28 %',      label: "de résidents bénéficient d'un subside" },
+              { value: "5'653 CHF", line1: 'économie annuelle',  line2: 'possible à Genève' },
+              { value: '34',        line1: 'caisses agréées',    line2: "par l'OFSP" },
+              { value: '28 %',      line1: 'des résidents',      line2: "bénéficient d'un subside" },
             ].map(s => (
-              <div key={s.value}>
-                <p className="text-2xl font-bold text-navy leading-none">{s.value}</p>
-                <p className="text-[13px] text-slate mt-1">{s.label}</p>
+              <div key={s.value} className="rounded-xl p-5"
+                style={{ backgroundColor: P.surface, border: `1px solid ${P.border}` }}>
+                <p className="text-2xl font-bold leading-none mb-2" style={{ color: P.action }}>{s.value}</p>
+                <p className="text-[16px] leading-tight font-medium" style={{ color: P.textDark }}>{s.line1}</p>
+                <p className="text-[16px] leading-tight" style={{ color: P.textBody }}>{s.line2}</p>
               </div>
             ))}
           </div>
@@ -88,60 +115,64 @@ export default function HomePageV2() {
         </div>
       </section>
 
-      {/* ── 2. GUIDES ─────────────────────────────────────────────────────────── */}
-      <section className="bg-cloud border-t border-edge py-20">
+      {/* ── 2. GUIDES ── */}
+      <section className="py-20" style={{ backgroundColor: P.surface, borderTop: `1px solid ${P.border}` }}>
         <div className="container-xl">
 
           <div className="mb-10">
-            <h2 className="text-2xl font-semibold text-ink mb-2">Comprendre la LAMal</h2>
-            <p className="text-[16px] text-slate">
+            <h2 className="text-2xl font-semibold mb-2" style={{ color: P.textDark }}>Comprendre la LAMal</h2>
+            <p className="text-[16px]" style={{ color: P.textBody }}>
               Tout ce qu'il faut savoir sur l'assurance de base obligatoire : prestations, franchises,
               modèles et droits aux subsides.
             </p>
           </div>
 
-          {/* Asymétrique : 1 guide featured + 3 compacts */}
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-5 mb-10">
 
             {/* Featured */}
             <Link href="/sante/guide"
-              className="group lg:col-span-2 bg-navy rounded-xl p-8 flex flex-col
-                         hover:bg-navy/90 transition-colors duration-200">
-              <p className="text-[11px] font-semibold text-white/50 uppercase tracking-widest mb-4">Guide complet</p>
-              <h3 className="text-xl font-semibold text-white leading-snug mb-3 flex-1">
-                Comprendre la LAMal de A à Z
-              </h3>
-              <p className="text-[15px] text-white/70 leading-relaxed mb-6">
-                Fonctionnement, prestations couvertes, primes 2026 par canton, modèles de soins et droits
-                de chaque résident.
-              </p>
-              <span className="flex items-center gap-1.5 text-white text-[13px] font-medium">
-                Lire le guide
-                <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200"
-                  fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                </svg>
-              </span>
+              className="group lg:col-span-2 flex flex-col rounded-xl overflow-hidden transition-all duration-200"
+              style={{ backgroundColor: P.bgWarm, border: `1px solid ${P.border}` }}>
+              <div className="h-1" style={{ backgroundColor: P.navy }} />
+              <div className="p-8 flex flex-col flex-1">
+                <p className="text-[16px] font-semibold uppercase tracking-widest mb-4" style={{ color: P.textMuted }}>
+                  Guide complet
+                </p>
+                <h3 className="text-xl font-semibold leading-snug mb-3 flex-1" style={{ color: P.textDark }}>
+                  Comprendre la LAMal de A à Z
+                </h3>
+                <p className="text-[16px] leading-relaxed mb-6" style={{ color: P.textBody }}>
+                  Fonctionnement, prestations couvertes, primes 2026 par canton, modèles de soins et droits
+                  de chaque résident.
+                </p>
+                <span className="flex items-center gap-1.5 text-[16px] font-medium" style={{ color: P.action }}>
+                  Lire le guide
+                  <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200"
+                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </div>
             </Link>
 
             {/* 3 guides compacts */}
             <div className="lg:col-span-3 flex flex-col gap-3">
               {[
-                { title: 'Choisir sa franchise', desc: 'Trouvez le palier le plus avantageux selon votre usage des soins', href: '/sante/franchise' },
-                { title: 'Les 4 modèles d\'assurance', desc: 'Libre choix, médecin de famille, centre médical, télémédecine : jusqu\'à 24 % d\'économie', href: '/sante/modeles' },
+                { title: 'Choisir sa franchise', desc: "Trouvez le palier le plus avantageux selon votre usage des soins", href: '/sante/franchise' },
+                { title: "Les 4 modèles d'assurance", desc: "Libre choix, médecin de famille, centre médical, télémédecine : jusqu'à 24 % d'économie", href: '/sante/modeles' },
                 { title: 'LAMal et complémentaire', desc: 'Obligatoire ou facultative : ce que la LCA couvre en plus et pour quel profil', href: '/sante/lamal-vs-lca' },
               ].map(g => (
                 <Link key={g.href} href={g.href}
-                  className="group bg-white border border-edge rounded-xl px-6 py-5 flex items-start gap-5
-                             hover:border-brand transition-colors duration-200">
+                  className="group rounded-xl px-6 py-5 flex items-start gap-5 transition-all duration-200"
+                  style={{ backgroundColor: P.bgWarm, border: `1px solid ${P.border}` }}>
                   <div className="flex-1">
-                    <p className="font-semibold text-ink text-[16px] mb-1 group-hover:text-brand transition-colors">
+                    <p className="font-semibold text-[16px] mb-1 transition-colors" style={{ color: P.navy }}>
                       {g.title}
                     </p>
-                    <p className="text-[15px] text-slate leading-relaxed">{g.desc}</p>
+                    <p className="text-[16px] leading-relaxed" style={{ color: P.textBody }}>{g.desc}</p>
                   </div>
-                  <svg className="w-4 h-4 text-muted group-hover:text-brand group-hover:translate-x-0.5
-                                  transition-all duration-200 shrink-0 mt-1"
+                  <svg className="w-4 h-4 shrink-0 mt-1 transition-all duration-200"
+                    style={{ color: P.textMuted }}
                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -151,13 +182,12 @@ export default function HomePageV2() {
 
           </div>
 
-          {/* Nudge */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4
-                          border-t border-edge pt-8">
-            <p className="text-[16px] text-slate">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-8"
+            style={{ borderTop: `1px solid ${P.border}` }}>
+            <p className="text-[16px]" style={{ color: P.textBody }}>
               Vous souhaitez changer de caisse ? Un expert gère les démarches pour vous.
             </p>
-            <a href="#formulaire" className="btn-primary text-[15px] shrink-0 whitespace-nowrap">
+            <a href="#formulaire" className="btn-primary text-[16px] shrink-0 whitespace-nowrap">
               Prendre rendez-vous
             </a>
           </div>
@@ -165,37 +195,32 @@ export default function HomePageV2() {
         </div>
       </section>
 
-      {/* ── 3. PAR SITUATION ──────────────────────────────────────────────────── */}
-      <section className="bg-white border-t border-edge py-20">
+      {/* ── 3. PAR SITUATION ── */}
+      <section className="py-20" style={{ backgroundColor: P.bgWarm, borderTop: `1px solid ${P.border}` }}>
         <div className="container-xl">
 
           <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-ink mb-2">Selon votre situation</h2>
-            <p className="text-[16px] text-slate">
+            <h2 className="text-2xl font-semibold mb-2" style={{ color: P.textDark }}>Selon votre situation</h2>
+            <p className="text-[16px]" style={{ color: P.textBody }}>
               Franchise, modèle et éligibilité aux subsides varient selon votre profil.
             </p>
           </div>
 
-          {/* Liste horizontale — pas de grid de cards identiques */}
-          <div className="divide-y divide-edge border-t border-b border-edge">
+          <div style={{ borderTop: `1px solid ${P.border}`, borderBottom: `1px solid ${P.border}` }}>
             {[
               { title: 'Salarié, indépendant, chômeur ou nouvel arrivant', href: '/sante/ma-situation', label: 'Ma situation' },
               { title: 'Enfants, maternité, jeunes adultes et retraite', href: '/sante/ma-famille', label: 'Ma famille' },
-              { title: 'Frontaliers : droit d\'option, LAMal ou système étranger', href: '/sante/frontalier', label: 'Frontaliers' },
-            ].map(s => (
+              { title: "Frontaliers : droit d'option, LAMal ou système étranger", href: '/sante/frontalier', label: 'Frontaliers' },
+            ].map((s, i, arr) => (
               <Link key={s.href} href={s.href}
-                className="group flex items-center justify-between py-5 hover:bg-cloud/40 -mx-2 px-2
-                           transition-colors duration-150 rounded">
+                className="group flex items-center justify-between py-5 -mx-2 px-2 rounded transition-colors duration-150"
+                style={{ borderBottom: i < arr.length - 1 ? `1px solid ${P.border}` : undefined }}>
                 <div>
-                  <p className="text-[11px] font-semibold text-muted uppercase tracking-widest mb-0.5">
-                    {s.label}
-                  </p>
-                  <p className="text-[17px] text-ink font-medium group-hover:text-brand transition-colors">
-                    {s.title}
-                  </p>
+                  <p className="text-[16px] font-semibold uppercase tracking-widest mb-0.5"
+                    style={{ color: P.textMuted }}>{s.label}</p>
+                  <p className="text-[17px] font-medium" style={{ color: P.navy }}>{s.title}</p>
                 </div>
-                <svg className="w-5 h-5 text-muted group-hover:text-brand group-hover:translate-x-0.5
-                                transition-all duration-200 shrink-0"
+                <svg className="w-5 h-5 shrink-0" style={{ color: P.textMuted }}
                   fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M9 5l7 7-7 7" />
                 </svg>
@@ -206,15 +231,13 @@ export default function HomePageV2() {
         </div>
       </section>
 
-      {/* ── 4. PAR CANTON ─────────────────────────────────────────────────────── */}
-      <section className="bg-cloud border-t border-edge py-20">
+      {/* ── 4. PAR CANTON ── */}
+      <section className="py-20" style={{ backgroundColor: P.surface, borderTop: `1px solid ${P.border}` }}>
         <div className="container-xl">
 
-          <div className="max-w-2xl mb-8">
-            <h2 className="text-2xl font-semibold text-ink mb-2">
-              Primes 2026 par canton
-            </h2>
-            <p className="text-[16px] text-slate">
+          <div className="mb-8">
+            <h2 className="text-2xl font-semibold mb-2" style={{ color: P.textDark }}>Primes 2026 par canton</h2>
+            <p className="text-[16px]" style={{ color: P.textBody }}>
               Les primes varient du simple au double selon le canton.
               Adulte 35 ans, modèle standard, franchise 300 CHF. Source : OFSP 2026.
             </p>
@@ -224,30 +247,31 @@ export default function HomePageV2() {
             <CantonSearch />
           </div>
 
-          {/* 4 cantons — cards épurées */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
             {cantonCards.map(c => (
               <Link key={c.nom} href={c.href}
-                className="group bg-white border border-edge rounded-xl p-5
-                           hover:border-brand transition-colors duration-200">
-                <p className="font-bold text-ink text-[19px] mb-1">{c.nom}</p>
-                <p className="text-[13px] text-slate mb-3">
-                  dès <span className="font-medium text-ink">{c.primeMin} CHF</span>/mois
+                className="group rounded-xl p-5 transition-all duration-200"
+                style={{ backgroundColor: P.bgWarm, border: `1px solid ${P.border}` }}>
+                <p className="font-bold text-[19px] mb-1" style={{ color: P.navy }}>{c.nom}</p>
+                <p className="text-[16px] mb-3" style={{ color: P.textBody }}>
+                  dès <span className="font-medium" style={{ color: P.navy }}>{c.primeMin} CHF</span>/mois
                 </p>
-                <p className="text-[12px] text-muted mb-0.5">Économie possible</p>
-                <p className="text-[18px] font-bold text-navy">{c.economieAn} CHF/an</p>
-                <p className="text-[12px] font-medium text-brand mt-3 group-hover:underline">
-                  Voir le détail
+                <p className="text-[16px] mb-0.5" style={{ color: P.textMuted }}>Économie possible</p>
+                <p className="text-[18px] font-bold" style={{ color: P.success }}>
+                  {c.economieAn} CHF/an
+                </p>
+                <p className="text-[16px] font-medium mt-3" style={{ color: P.action }}>
+                  Voir le détail →
                 </p>
               </Link>
             ))}
           </div>
 
           <div className="text-center">
-            <p className="text-[15px] text-slate mb-4">
+            <p className="text-[16px] mb-4" style={{ color: P.textBody }}>
               Comparez toutes les caisses pour votre profil exact
             </p>
-            <Link href="/sante/comparateur" className="btn-primary text-[15px]">
+            <Link href="/sante/comparateur" className="btn-primary text-[16px]">
               Ouvrir le comparateur
             </Link>
           </div>
@@ -255,15 +279,15 @@ export default function HomePageV2() {
         </div>
       </section>
 
-      {/* ── 5. À PROPOS ───────────────────────────────────────────────────────── */}
-      <section className="bg-white border-t border-edge py-20">
+      {/* ── 5. À PROPOS ── */}
+      <section className="py-20" style={{ backgroundColor: P.bgWarm, borderTop: `1px solid ${P.border}` }}>
         <div className="container-xl">
 
-          <div className="max-w-xl mb-12">
-            <h2 className="text-2xl font-semibold text-ink mb-3">
+          <div className="mb-12">
+            <h2 className="text-2xl font-semibold mb-3" style={{ color: P.textDark }}>
               Une source de référence sur la LAMal
             </h2>
-            <p className="text-[16px] text-slate leading-relaxed">
+            <p className="text-[16px] leading-relaxed" style={{ color: P.textBody }}>
               My Swiss Insurance publie des données officielles OFSP pour aider les résidents, expatriés
               et frontaliers à décider en connaissance de cause.
             </p>
@@ -271,16 +295,16 @@ export default function HomePageV2() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { label: 'Source des données',  desc: 'Données officielles de l\'OFSP et des 26 cantons suisses' },
+              { label: 'Source des données',  desc: "Données officielles de l'OFSP et des 26 cantons suisses" },
               { label: 'Couverture',          desc: 'Toutes les caisses agréées en Suisse, pour chaque canton' },
               { label: 'Mise à jour',         desc: 'Chaque automne après la publication des nouvelles primes OFSP' },
               { label: 'Service',             desc: 'Comparer et se faire conseiller par un expert est gratuit' },
             ].map(f => (
-              <div key={f.label} className="border-t-2 border-navy pt-5">
-                <p className="text-[12px] font-semibold text-navy uppercase tracking-wide mb-2">
+              <div key={f.label} className="pt-5" style={{ borderTop: `2px solid ${P.navy}` }}>
+                <p className="text-[16px] font-semibold uppercase tracking-wide mb-2" style={{ color: P.navy }}>
                   {f.label}
                 </p>
-                <p className="text-[15px] text-slate leading-relaxed">{f.desc}</p>
+                <p className="text-[16px] leading-relaxed" style={{ color: P.textBody }}>{f.desc}</p>
               </div>
             ))}
           </div>
@@ -288,24 +312,21 @@ export default function HomePageV2() {
         </div>
       </section>
 
-      {/* ── 6. FORMULAIRE ─────────────────────────────────────────────────────── */}
-      <section id="formulaire" className="bg-cloud border-t border-edge">
-        <div className="container-xl max-w-2xl">
-
+      {/* ── 6. FORMULAIRE ── */}
+      <section id="formulaire" style={{ backgroundColor: P.surface, borderTop: `1px solid ${P.border}` }}>
+        <div className="container-xl">
           <div className="text-center mb-6">
-            <h2 className="text-2xl sm:text-3xl font-semibold text-ink leading-tight mb-3">
+            <h2 className="text-2xl sm:text-3xl font-semibold leading-tight mb-3" style={{ color: P.textDark }}>
               Un conseil personnalisé, gratuit
             </h2>
-            <p className="text-[16px] text-slate leading-relaxed">
+            <p className="text-[16px] leading-relaxed" style={{ color: P.textBody }}>
               Un expert analyse votre profil, identifie la meilleure option pour votre situation
               et gère le changement de votre côté. Réponse sous 24 heures, sans engagement.
             </p>
           </div>
-
           <UnifiedLeadForm redirectOnSuccess="/merci" />
-
         </div>
       </section>
-    </>
+    </div>
   )
 }

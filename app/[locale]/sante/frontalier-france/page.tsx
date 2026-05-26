@@ -10,6 +10,7 @@ import HeroStats from '@/components/ui/HeroStats'
 
 export const metadata: Metadata = {
   title: 'LAMal pour les frontaliers français en Suisse romande 2026',
+  robots: { index: false, follow: false },
   description:
     "Droit d'option LAMal pour les frontaliers franco-suisses : délai de 3 mois, LAMal vs Sécurité sociale française, formulaire S1, cas Genève. Guide complet 2026.",
   openGraph: {

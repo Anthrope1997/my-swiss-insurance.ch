@@ -10,6 +10,7 @@ import HeroStats from '@/components/ui/HeroStats'
 
 export const metadata: Metadata = {
   title: 'LAMal pour les frontaliers allemands en Suisse 2026',
+  robots: { index: false, follow: false },
   description:
     "Droit d'option LAMal pour les frontaliers germano-suisses : LAMal vs GKV allemand, cantons bâlois, formulaire S1 et démarches concrètes. Guide 2026.",
   openGraph: {

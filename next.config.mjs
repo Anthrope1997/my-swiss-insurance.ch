@@ -1,10 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
-  experimental: {
-    outputFileTracingIncludes: {
-      '/api/primes': ['./data/sante/*.json'],
-    },
+  outputFileTracingIncludes: {
+    '/api/primes': ['./data/sante/*.json'],
   },
   async redirects() {
     return [

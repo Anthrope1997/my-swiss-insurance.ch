@@ -6,9 +6,14 @@ import Link from 'next/link'
 import AuthorBio from '@/components/ui/AuthorBio'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import { nationalBreakEven, cantonBreakEven } from '@/lib/sante/calcul-franchise'
+import { Inter } from 'next/font/google'
+import '../../home-v2/sf-theme.css'
+
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Guide complet LAMal 2026 — Primes, franchises, modèles et subsides',
+  robots: { index: false, follow: false },
   description:
     "Guide LAMal 2026 : primes par canton (OFSP), franchises 300–2500 CHF avec seuil d'équilibre, 4 modèles d'assurance, changement de caisse et subsides.",
   openGraph: {
@@ -146,51 +151,49 @@ const toc = [
 
 const enBref = [
   <>{"L'assurance LAMal est obligatoire pour toute personne résidant en Suisse. Les "}
-    <strong className="font-medium text-white">34 caisses agréées</strong>
+    <strong className="font-medium text-ink">34 caisses agréées</strong>
     {" couvrent les mêmes soins de base, seul le prix de la prime change."}</>,
   <>{"Économisez jusqu'à "}
-    <strong className="font-medium text-white">CHF 5 653 par an</strong>
+    <strong className="font-medium text-ink">CHF 5 653 par an</strong>
     {" sur votre assurance LAMal en comparant les assureurs, les franchises et les modèles d'assurance disponibles."}</>,
   <>{"Vous pouvez aussi avoir droit à un subside selon votre situation : "}
-    <strong className="font-medium text-white">28 % des résidents en bénéficient</strong>
+    <strong className="font-medium text-ink">28 % des résidents en bénéficient</strong>
     {". Cette subvention cantonale réduit votre prime LAMal et représente en moyenne "}
-    <strong className="font-medium text-white">CHF 5 040 par an</strong>
+    <strong className="font-medium text-ink">CHF 5 040 par an</strong>
     {"."}</>,
 ]
 
 export default function GuideLamalPage() {
   return (
-    <>
+    <div className={`${inter.className} sf-theme`}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       {/* ── Hero ── */}
-      <section className="bg-white border-b border-edge pt-12 pb-14">
+      <section className="pt-12 pb-14" style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid #E9ECF0' }}>
         <div className="container-xl">
           <Breadcrumb items={[{ label: 'Accueil', href: '/' }, { label: 'LAMal', href: '/sante' }, { label: 'Comprendre la LAMal' }]} />
 
-          <p className="text-[12px] font-semibold text-muted uppercase tracking-widest mb-5">
-            Données OFSP 2026 · 34 caisses agréées
-          </p>
-
-          <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold leading-tight mb-4" style={{ color: '#131314' }}>
             Guide complet LAMal 2026
           </h1>
-          <p className="text-[17px] text-slate max-w-2xl leading-relaxed">
+          <p className="text-[17px] leading-relaxed" style={{ color: '#576680' }}>
             Comparez les assureurs, choisissez une franchise et un modèle médical adaptés à vos besoins,
             vérifiez vos droits aux subsides, et économisez sur votre assurance maladie de base LAMal.
           </p>
 
-          {/* Stat strip éditorial */}
-          <div className="flex flex-wrap gap-x-10 gap-y-4 border-t border-edge pt-8 mt-8">
+          {/* Tuiles stats */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-8">
             {[
-              { value: "CHF 5'653", label: 'économie max possible à Genève, adulte 35 ans' },
-              { value: '6',         label: 'niveaux de franchise, de 300 à 2 500 CHF' },
-              { value: '4',         label: "modèles de soins, dont télémédecine jusqu'à −24%" },
+              { value: "CHF 5'653", line1: 'économie max possible',   line2: 'à Genève, adulte 35 ans' },
+              { value: '6',         line1: 'niveaux de franchise',     line2: 'de 300 à 2 500 CHF' },
+              { value: '4',         line1: 'modèles de soins',         line2: "dont télémédecine jusqu'à −24%" },
             ].map(s => (
-              <div key={s.value}>
-                <p className="text-2xl font-bold text-navy leading-none">{s.value}</p>
-                <p className="text-[13px] text-slate mt-1">{s.label}</p>
+              <div key={s.value} className="rounded-xl p-5"
+                style={{ backgroundColor: '#F5F7FB', border: '1px solid #E9ECF0' }}>
+                <p className="text-2xl font-bold leading-none mb-2" style={{ color: '#1d4ed8' }}>{s.value}</p>
+                <p className="text-[16px] leading-tight font-medium" style={{ color: '#131314' }}>{s.line1}</p>
+                <p className="text-[16px] leading-tight" style={{ color: '#576680' }}>{s.line2}</p>
               </div>
             ))}
           </div>
@@ -198,30 +201,34 @@ export default function GuideLamalPage() {
       </section>
 
       {/* ── Zone 2 — Navigation rapide ── */}
-      <div className="bg-cloud border-b border-edge py-8">
+      <div className="py-8" style={{ backgroundColor: '#F5F7FB', borderBottom: '1px solid #E9ECF0' }}>
         <div className="container-xl grid grid-cols-1 md:grid-cols-2 gap-5">
 
-          {/* En bref — carte navy autoritaire */}
-          <div className="bg-navy rounded-xl p-6">
-            <p className="text-[11px] font-semibold text-white/50 uppercase tracking-widest mb-4">En bref</p>
-            <ul className="space-y-3">
-              {enBref.map((phrase, i) => (
-                <li key={i} className="flex gap-2.5 text-[15px] text-white/80 leading-relaxed">
-                  <span className="text-white/40 font-bold shrink-0 mt-0.5" aria-hidden="true">—</span>
-                  <span>{phrase}</span>
-                </li>
-              ))}
-            </ul>
+          {/* En bref — carte accentuée */}
+          <div className="rounded-xl overflow-hidden" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E9ECF0' }}>
+            <div className="h-1" style={{ backgroundColor: '#054652' }} />
+            <div className="p-6">
+              <p className="text-[16px] font-semibold uppercase tracking-widest mb-4" style={{ color: '#131314' }}>En bref</p>
+              <ul className="space-y-3">
+                {enBref.map((phrase, i) => (
+                  <li key={i} className="flex gap-2.5 text-[16px] leading-relaxed" style={{ color: '#576680' }}>
+                    <span className="font-bold shrink-0 mt-0.5" style={{ color: '#6F8B90' }} aria-hidden="true">—</span>
+                    <span>{phrase}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           {/* Sommaire — navigation utilitaire */}
-          <div className="bg-white border border-edge rounded-xl p-5">
-            <p className="text-[11px] font-semibold text-muted uppercase tracking-widest mb-4">Sommaire</p>
+          <div className="rounded-xl p-5" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E9ECF0' }}>
+            <p className="text-[16px] font-semibold uppercase tracking-widest mb-4" style={{ color: '#131314' }}>Sommaire</p>
             <ul className="space-y-0.5">
               {toc.map((item) => (
                 <li key={item.id}>
                   <a href={`#${item.id}`}
-                    className="block text-[15px] text-slate leading-relaxed hover:text-brand hover:bg-cloud px-2 py-1.5 rounded transition-colors">
+                    className="block text-[16px] leading-relaxed px-2 py-1.5 rounded transition-colors hover:bg-[#dbeafe]"
+                    style={{ color: '#576680' }}>
                     {item.label}
                   </a>
                 </li>
@@ -237,7 +244,7 @@ export default function GuideLamalPage() {
 
             {/* 1 — Définition */}
             <section id="definition" className="pt-2">
-              <h2 className="article-h2">1. Qu'est-ce que la LAMal ?</h2>
+              <h2 className="article-h2">Qu'est-ce que la LAMal ?</h2>
               <p className="article-p">
                 La <strong>loi fédérale sur l'assurance-maladie (LAMal)</strong> est la loi suisse qui rend
                 l'assurance maladie de base obligatoire pour toute personne résidant en Suisse, en vigueur
@@ -256,7 +263,7 @@ export default function GuideLamalPage() {
 
             {/* 2 — Couverture */}
             <section id="couverture">
-              <h2 className="article-h2">2. Ce que couvre la LAMal</h2>
+              <h2 className="article-h2">Ce que couvre la LAMal</h2>
               <p className="article-p">
                 Le catalogue des prestations obligatoires est défini et révisé par l'OFSP.
                 Voici les prestations prises en charge après franchise et quote-part :
@@ -313,7 +320,7 @@ export default function GuideLamalPage() {
 
             {/* 3 — Primes */}
             <section id="primes">
-              <h2 className="article-h2">3. Primes LAMal 2026 par canton</h2>
+              <h2 className="article-h2">Primes LAMal 2026 par canton</h2>
               <p className="article-p">
                 Primes moyennes indicatives 2026 pour un <strong>adulte (26 ans et +)</strong>,
                 modèle standard, franchise de 300 CHF. Les primes effectives varient selon l'assureur.
@@ -333,7 +340,8 @@ export default function GuideLamalPage() {
                       <tr key={c.code}>
                         <td className="font-medium text-ink whitespace-nowrap">
                           <div className="flex items-center gap-4">
-                            <span className="inline-flex items-center justify-center w-10 py-0.5 rounded text-[16px] font-bold bg-navy text-white shrink-0 text-center">
+                            <span className="inline-flex items-center justify-center w-10 py-0.5 rounded text-[16px] font-bold shrink-0 text-center"
+                              style={{ backgroundColor: '#16a34a', color: '#ffffff' }}>
                               {c.code}
                             </span>
                             {c.name}
@@ -361,7 +369,7 @@ export default function GuideLamalPage() {
 
             {/* 4 — Assureurs */}
             <section id="assureurs">
-              <h2 className="article-h2">4. Principaux assureurs LAMal en Suisse</h2>
+              <h2 className="article-h2">Principaux assureurs LAMal en Suisse</h2>
               <p className="article-p">
                 34 caisses sont agréées par l'OFSP. Les prestations de base sont identiques
                 chez tous les assureurs. Seules les primes, la qualité du service et les options
@@ -397,7 +405,7 @@ export default function GuideLamalPage() {
 
             {/* 5 — Franchise */}
             <section id="franchise">
-              <h2 className="article-h2">5. Choisir sa franchise LAMal</h2>
+              <h2 className="article-h2">Choisir sa franchise LAMal</h2>
               <p className="article-p">
                 La franchise est le montant annuel que vous payez vous-même avant que l&apos;assurance n&apos;intervienne.
                 Six paliers existent : CHF 300, 500, 1 000, 1 500, 2 000 et CHF 2 500 par an. Une franchise élevée
@@ -420,7 +428,7 @@ export default function GuideLamalPage() {
 
             {/* 6 — Modèles */}
             <section id="modeles">
-              <h2 className="article-h2">6. Les 4 modèles d'assurance LAMal</h2>
+              <h2 className="article-h2">Les 4 modèles d'assurance LAMal</h2>
               <p className="article-p">
                 Chaque modèle impose des contraintes différentes sur l'accès aux soins.
                 Les modèles alternatifs réduisent la prime en échange d'une porte d'entrée obligatoire.
@@ -431,38 +439,40 @@ export default function GuideLamalPage() {
                   {
                     title: 'Standard (libre choix)',
                     reduction: null,
-                    bg: 'bg-white border border-edge',
+                    bgColor: '#FFFFFF',
                     desc: "Accès direct à n'importe quel médecin ou spécialiste en Suisse, sans restriction. C'est le modèle le plus cher, la référence pour comparer les alternatives.",
                   },
                   {
                     title: 'Médecin de famille',
                     reduction: "jusqu'à −20%",
-                    bg: 'bg-cloud border border-edge',
+                    bgColor: '#F5F7FB',
                     desc: "Vous consultez d'abord votre médecin de famille, qui vous oriente si besoin vers un spécialiste. Réduction moyenne de 11% (jusqu'à −20%) selon la caisse et le canton.",
                   },
                   {
                     title: 'Centre médical',
                     reduction: "jusqu'à −20%",
-                    bg: 'bg-cloud border border-edge',
+                    bgColor: '#F5F7FB',
                     desc: "Vous êtes rattaché à un réseau fermé de médecins agréés (cabinet ou centre médical). Réseau limité en zones rurales. Réduction moyenne de 12% (de −3% à −20%) selon la région.",
                   },
                   {
                     title: 'Télémédecine (conseil téléphonique)',
                     reduction: "jusqu'à −24%",
-                    bg: 'bg-cloud border border-edge',
+                    bgColor: '#F5F7FB',
                     desc: 'Première consultation par téléphone ou application avant tout rendez-vous en cabinet (Medgate, Medi24...). Disponible 24 heures sur 24. Réduction moyenne de 12% (de −5% à −24%) selon la caisse.',
                   },
                 ].map((m, i) => (
-                  <div key={i} className={`${m.bg} rounded-[8px] p-5`}>
+                  <div key={i} className="rounded-[8px] p-5"
+                    style={{ backgroundColor: m.bgColor, border: '1px solid #E9ECF0' }}>
                     <div className="flex items-center justify-between gap-3 mb-2">
-                      <h3 className="font-semibold text-ink text-[16px]">{m.title}</h3>
+                      <h3 className="font-semibold text-[16px]" style={{ color: '#054652' }}>{m.title}</h3>
                       {m.reduction && (
-                        <span className="text-[12px] font-semibold text-brand bg-blue-tint border border-brand/20 px-2.5 py-0.5 rounded-full shrink-0">
+                        <span className="text-[16px] font-semibold px-2.5 py-0.5 rounded-full shrink-0"
+                          style={{ color: '#ffffff', backgroundColor: '#054652' }}>
                           {m.reduction}
                         </span>
                       )}
                     </div>
-                    <p className="text-[16px] text-slate">{m.desc}</p>
+                    <p className="text-[16px]" style={{ color: '#576680' }}>{m.desc}</p>
                   </div>
                 ))}
               </div>
@@ -476,7 +486,7 @@ export default function GuideLamalPage() {
 
             {/* 7 — Économies */}
             <section id="economies">
-              <h2 className="article-h2">7. Économies possibles en changeant de caisse</h2>
+              <h2 className="article-h2">Économies possibles en changeant de caisse</h2>
               <p className="article-p">
                 Certains cantons sont en effet divisés en plusieurs régions de prime. Les écarts de
                 primes entre caisses au sein d'une même région sont significatifs. Voici l'économie
@@ -485,17 +495,18 @@ export default function GuideLamalPage() {
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                 {economies.map((r) => (
-                  <div key={r.canton} className="bg-cloud border border-edge rounded-[8px] p-5">
-                    <p className="font-semibold text-ink mb-1">{r.canton}</p>
-                    <p className="text-2xl font-bold text-navy">
+                  <div key={r.canton} className="rounded-[8px] p-5"
+                    style={{ backgroundColor: '#dcfce7', border: '1px solid #E9ECF0' }}>
+                    <p className="font-semibold mb-1" style={{ color: '#054652' }}>{r.canton}</p>
+                    <p className="text-2xl font-bold" style={{ color: '#16a34a' }}>
                       {r.annuel}
-                      <span className="text-[13px] font-normal text-slate"> par an</span>
+                      <span className="text-[16px] font-normal" style={{ color: '#576680' }}> par an</span>
                     </p>
-                    <p className="text-[13px] text-slate mt-0.5">soit {r.mensuel} par mois d'économie</p>
+                    <p className="text-[16px] mt-0.5" style={{ color: '#576680' }}>soit {r.mensuel} par mois d'économie</p>
                   </div>
                 ))}
               </div>
-              <p className="text-[13px] text-slate/60 mb-6">
+              <p className="text-[16px] mb-6" style={{ color: '#6F8B90' }}>
                 Profil : adulte 35 ans, modèle standard, franchise 300 CHF.
               </p>
               <KeyFact>
@@ -508,7 +519,7 @@ export default function GuideLamalPage() {
 
             {/* 8 — Changer */}
             <section id="changer">
-              <h2 className="article-h2">8. Comment changer de caisse maladie ?</h2>
+              <h2 className="article-h2">Comment changer de caisse maladie ?</h2>
 
               <p className="article-p">
                 Le changement ordinaire se fait au 1er janvier, sur résiliation envoyée avant le 30 novembre.
@@ -549,7 +560,8 @@ export default function GuideLamalPage() {
                   { n: '4', t: "Recevez votre carte d'assuré", d: "Valide dès le 1er janvier de l'année suivante." },
                 ].map((s) => (
                   <li key={s.n} className="flex gap-4">
-                    <span className="w-7 h-7 bg-navy text-white rounded-full flex items-center justify-center text-[13px] font-semibold shrink-0 mt-0.5">
+                    <span className="w-7 h-7 rounded-full flex items-center justify-center text-[16px] font-semibold shrink-0 mt-0.5"
+                      style={{ backgroundColor: '#16a34a', color: '#ffffff' }}>
                       {s.n}
                     </span>
                     <div>
@@ -569,7 +581,7 @@ export default function GuideLamalPage() {
 
             {/* 9 — Subsides */}
             <section id="subsides">
-              <h2 className="article-h2">9. Subsides LAMal : qui y a droit ?</h2>
+              <h2 className="article-h2">Subsides LAMal : qui y a droit ?</h2>
               <p className="article-p">
                 Les <strong>subsides de primes</strong> sont des aides financières versées par les cantons
                 aux personnes dont les revenus sont modestes. 28 % de la population suisse en bénéficient.
@@ -600,7 +612,7 @@ export default function GuideLamalPage() {
 
             {/* 10 — FAQ */}
             <section id="faq" className="border-t border-edge pt-8">
-              <FAQ items={faqItems} title="10. Questions fréquentes sur la LAMal" />
+              <FAQ items={faqItems} title="Questions fréquentes sur la LAMal" />
             </section>
 
             {/* Formulaire contact */}
@@ -634,6 +646,6 @@ export default function GuideLamalPage() {
 
         </article>
       </div>
-    </>
+    </div>
   )
 }

@@ -9,6 +9,7 @@ import HeroStats from '@/components/ui/HeroStats'
 
 export const metadata: Metadata = {
   title: 'LAMal pour votre famille en 2026 : enfants, maternité et retraite',
+  robots: { index: false, follow: false },
   description:
     'LAMal famille 2026 : affiliation nourrisson, franchise enfant, couverture maternité sans franchise (art. 64 LAMal), tarif jeune adulte, subsides famille et LCA hospitalière retraité.',
   openGraph: {

@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import fr from '@/dictionaries/fr.json'
 import UnifiedLeadForm from '@/components/ui/UnifiedLeadForm'
-import CantonSearch from '@/components/ui/CantonSearch'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
 import HeroStats from '@/components/ui/HeroStats'
@@ -113,60 +111,6 @@ const guides = [
     desc: "La complémentaire vous couvre là où l'assurance maladie LAMal obligatoire s'arrête",
     href: '/sante/lamal-vs-lca',
   },
-  {
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-          d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-      </svg>
-    ),
-    title: 'Comparer les complémentaires',
-    desc: 'Hospitalisation, ambulatoire, dentaire, médecines douces : prix et prestations 2026',
-    href: '/sante/complementaires',
-  },
-]
-
-const situations = [
-  {
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-      </svg>
-    ),
-    title: 'Ma situation',
-    desc: 'Salarié, indépendant, chômeur, nouvel arrivant',
-    href: '/sante/ma-situation',
-  },
-  {
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-      </svg>
-    ),
-    title: 'Ma famille',
-    desc: 'Enfants, maternité, jeunes adultes, retraite',
-    href: '/sante/ma-famille',
-  },
-  {
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-          d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
-    title: 'Frontaliers',
-    desc: "Droit d'option, LAMal ou système du pays de résidence",
-    href: '/sante/frontalier',
-  },
-]
-
-const cantonCards = [
-  { nom: 'Berne',   primeMin: '533', economieAn: "4'447", href: '/sante/canton/berne'  },
-  { nom: 'Genève',  primeMin: '634', economieAn: "5'653", href: '/sante/canton/geneve' },
-  { nom: 'Vaud',    primeMin: '579', economieAn: "4'220", href: '/sante/canton/vaud'   },
-  { nom: 'Zurich',  primeMin: '489', economieAn: "4'285", href: '/sante/canton/zurich' },
 ]
 
 const aproposFaits = [
@@ -270,105 +214,7 @@ export default function LamalPage() {
         </div>
       </section>
 
-      {/* ── 3. PAR SITUATION DE VIE ─────────────────────────────────────────── */}
-      <section className="bg-white border-t border-edge py-12">
-        <div className="container-xl">
-
-          <div className="mb-6">
-            <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
-              Votre assurance LAMal selon votre situation
-            </h2>
-            <p className="text-[16px] text-slate leading-relaxed">
-              Votre situation personnelle détermine le contrat LAMal le plus avantageux pour vous.
-              Franchise, modèle et éligibilité aux subsides varient selon votre profil.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-            {situations.map(s => (
-              <Link
-                key={s.href} href={s.href}
-                className="group flex flex-col bg-white border border-edge rounded-xl p-6
-                           hover:border-brand hover:shadow-md transition-all duration-200"
-              >
-                <div className="w-9 h-9 bg-blue-tint border border-brand/20 rounded-lg
-                                flex items-center justify-center text-brand mb-4
-                                group-hover:bg-brand group-hover:text-white group-hover:border-brand
-                                transition-colors duration-200">
-                  {s.icon}
-                </div>
-                <h3 className="font-semibold text-ink text-[16px] mb-2
-                               group-hover:text-brand transition-colors">
-                  {s.title}
-                </h3>
-                <p className="text-slate text-[16px] leading-relaxed flex-1">{s.desc}</p>
-                <div className="flex items-center gap-1 mt-5 text-brand text-[16px] font-medium">
-                  Découvrir
-                  <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200"
-                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
-              </Link>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* ── 4. PAR CANTON ───────────────────────────────────────────────────── */}
-      <section className="bg-white border-t border-edge py-12">
-        <div className="container-xl">
-
-          <div className="mb-8">
-            <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
-              Primes et économies par canton en 2026
-            </h2>
-            <p className="text-[16px] text-slate leading-relaxed">
-              Sélectionnez votre canton pour accéder aux données détaillées : primes, classement
-              des caisses et simulateur de subsides.
-            </p>
-          </div>
-
-          <div className="mb-10">
-            <CantonSearch />
-          </div>
-
-          {/* 4 cantons les plus peuplés */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-3">
-            {cantonCards.map(c => (
-              <Link key={c.nom} href={c.href}
-                className="group bg-white border border-edge rounded-xl p-6 flex flex-col
-                           hover:border-brand hover:shadow-md transition-all duration-200">
-                <p className="font-bold text-ink text-[22px] mb-1">{c.nom}</p>
-                <p className="text-slate text-[13px] mb-4">
-                  À partir de <span className="font-semibold text-ink">CHF {c.primeMin} par mois</span>
-                </p>
-                <div className="bg-blue-tint rounded-lg px-3 py-2 mb-5">
-                  <p className="text-[12px] text-brand font-medium">{fr.shared.economiePossible}</p>
-                  <p className="text-[18px] font-bold text-brand leading-tight">
-                    CHF {c.economieAn} par an
-                  </p>
-                </div>
-                <div className="mt-auto flex items-center gap-1 text-[16px] font-medium text-brand">
-                  Consulter la page canton
-                  <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200"
-                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
-              </Link>
-            ))}
-          </div>
-
-          <p className="text-[12px] text-slate/70 mb-8">
-            Adulte 35 ans, toutes caisses et franchises confondues. Source OFSP 2026.
-          </p>
-
-        </div>
-      </section>
-
-      {/* ── 4b. OUTILS ─────────────────────────────────────────────────────── */}
+      {/* ── 3. OUTILS ──────────────────────────────────────────────────────── */}
       <section className="bg-white border-t border-edge py-12">
         <div className="container-xl">
           <div className="mb-8">
@@ -398,7 +244,7 @@ export default function LamalPage() {
               </p>
               <p className="text-2xl font-bold text-brand leading-none mb-0.5">CHF 5 653</p>
               <p className="text-[16px] text-slate mb-6">d&apos;économie maximale en Suisse par an</p>
-              <Link href="/fr/sante/comparateur" className="flex items-center gap-1 mt-auto text-brand text-[16px] font-medium">
+              <Link href="/sante/comparateur" className="flex items-center gap-1 mt-auto text-brand text-[16px] font-medium">
                 Comparer les primes
                 <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200"
                   fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -427,7 +273,7 @@ export default function LamalPage() {
               </p>
               <p className="text-2xl font-bold text-brand leading-none mb-0.5">28 %</p>
               <p className="text-[16px] text-slate mb-6">des assurés bénéficient d&apos;un subside</p>
-              <Link href="/fr/sante/subsides" className="flex items-center gap-1 mt-auto text-brand text-[16px] font-medium">
+              <Link href="/sante/subsides" className="flex items-center gap-1 mt-auto text-brand text-[16px] font-medium">
                 Calculer mon subside
                 <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200"
                   fill="none" stroke="currentColor" viewBox="0 0 24 24">

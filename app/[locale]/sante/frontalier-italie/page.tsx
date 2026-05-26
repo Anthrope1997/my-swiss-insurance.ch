@@ -10,6 +10,7 @@ import HeroStats from '@/components/ui/HeroStats'
 
 export const metadata: Metadata = {
   title: 'LAMal pour les frontaliers italiens en Suisse 2026',
+  robots: { index: false, follow: false },
   description:
     "Droit d'option LAMal pour les frontaliers italo-suisses : LAMal vs SSN italien, cantons Tessin, Grisons et Valais, formulaire S1 et démarches. Guide 2026.",
   openGraph: {
