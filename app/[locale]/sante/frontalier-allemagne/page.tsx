@@ -256,7 +256,7 @@ export default function FrontalierAllemagnePage() {
                 {[
                   {
                     titre: 'Spécificité tarifaire LAMal à Bâle',
-                    desc: "Les primes LAMal dans les cantons de Bâle-Ville et Bâle-Campagne figurent parmi les plus élevées de Suisse (autour de CHF 625 à 668 par mois pour un adulte en modèle standard, franchise CHF 300). Ce facteur est important dans le calcul économique entre LAMal et GKV pour les frontaliers à revenus modestes ou moyens.",
+                    desc: "Les primes LAMal dans les cantons de Bâle-Ville et Bâle-Campagne figurent parmi les plus élevées de Suisse (autour de CHF 625 à 668 par mois pour un adulte en modèle standard, franchise de CHF 300). Ce facteur est important dans le calcul économique entre LAMal et GKV pour les frontaliers à revenus modestes ou moyens.",
                   },
                   {
                     titre: 'Accès aux soins dans les deux pays',
@@ -301,7 +301,7 @@ export default function FrontalierAllemagnePage() {
             <section id="primes">
               <h2 className="article-h2">5. Primes indicatives 2026 dans votre canton de travail</h2>
               <p className="article-p">
-                Adulte de 35 ans, franchise CHF 300, modèle standard, données indicatives OFSP 2026.
+                Adulte de 35 ans, franchise de CHF 300, modèle standard, données indicatives OFSP 2026.
                 L'écart entre la caisse la moins chère et la plus chère peut dépasser CHF 260 par mois dans les cantons bâlois.
               </p>
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-5">

@@ -239,7 +239,7 @@ export default function HomePageV2() {
             <h2 className="text-2xl font-semibold mb-2" style={{ color: P.textDark }}>Primes 2026 par canton</h2>
             <p className="text-[16px]" style={{ color: P.textBody }}>
               Les primes varient du simple au double selon le canton.
-              Adulte 35 ans, modèle standard, franchise CHF 300. Source : OFSP 2026.
+              Adulte 35 ans, modèle standard, franchise de CHF 300. Source : OFSP 2026.
             </p>
           </div>
 

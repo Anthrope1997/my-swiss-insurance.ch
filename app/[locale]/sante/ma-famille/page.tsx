@@ -77,7 +77,7 @@ const faqItems = [
   {
     question: 'Quelle franchise recommander pour un enfant ?',
     answer:
-      "La franchise CHF 0 est recommandée pour les nourrissons et jeunes enfants, qui consultent fréquemment un médecin. Les franchises disponibles pour les enfants sont CHF 0, CHF 100, CHF 200, CHF 300, CHF 400 et CHF 600. La quote-part enfant est plafonnée à CHF 350 par an, contre CHF 700 pour un adulte. Pour les adolescents en bonne santé, une franchise plus élevée peut être envisagée.",
+      "La franchise de CHF 0 est recommandée pour les nourrissons et jeunes enfants, qui consultent fréquemment un médecin. Les franchises disponibles pour les enfants sont CHF 0, CHF 100, CHF 200, CHF 300, CHF 400 et CHF 600. La quote-part enfant est plafonnée à CHF 350 par an, contre CHF 700 pour un adulte. Pour les adolescents en bonne santé, une franchise plus élevée peut être envisagée.",
   },
 ]
 

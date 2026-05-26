@@ -87,7 +87,7 @@ const cantonTable = [
 const faqItems = [
   {
     question: 'Quelle est la caisse maladie la moins chère en Suisse ?',
-    answer: "La caisse la moins chère dépend de votre canton, de votre âge et du modèle choisi. Pour un adulte avec franchise CHF 300 et modèle standard, les primes débutent à CHF 403 par mois à Zoug et atteignent CHF 710 par mois à Genève. Les écarts entre caisses dans une même région atteignent jusqu'à CHF 229 par mois.",
+    answer: "La caisse la moins chère dépend de votre canton, de votre âge et du modèle choisi. Pour un adulte avec franchise de CHF 300 et modèle standard, les primes débutent à CHF 403 par mois à Zoug et atteignent CHF 710 par mois à Genève. Les écarts entre caisses dans une même région atteignent jusqu'à CHF 229 par mois.",
   },
   {
     question: 'Les prestations sont-elles identiques dans toutes les caisses ?',
@@ -641,7 +641,7 @@ export default function ComparateurClient() {
             Quelle est la prime LAMal dans votre canton ?
           </h2>
           <p className="article-p mb-8">
-            Primes de référence pour un adulte de 35 ans, modèle standard, franchise CHF 300, sans couverture accident.
+            Primes de référence pour un adulte de 35 ans, modèle standard, franchise de CHF 300, sans couverture accident.
             Les écarts entre caisses au sein d&apos;un même canton peuvent atteindre plusieurs centaines de francs par mois.
           </p>
 

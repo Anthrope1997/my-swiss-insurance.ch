@@ -348,7 +348,7 @@ export default function HomePage() {
             <p className="text-[16px] text-slate leading-relaxed">
               Sélectionnez votre canton pour accéder aux données détaillées : primes, classement
               des caisses et simulateur de subsides. Adulte 35 ans, modèle standard,
-              franchise CHF 300. Source OFSP 2026.
+              franchise de CHF 300. Source OFSP 2026.
             </p>
           </div>
 

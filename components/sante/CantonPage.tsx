@@ -37,12 +37,12 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
     {
       value: `CHF ${cheapest.prime}`,
       label: 'Prime adulte la moins chère',
-      sub: 'adulte 35 ans, modèle standard, franchise CHF 300',
+      sub: 'adulte 35 ans, modèle standard, franchise de CHF 300',
     },
     {
       value: `CHF ${canton.primeMoyenneEnfant}`,
       label: 'Prime enfant la moins chère',
-      sub: 'enfant 0–18 ans, modèle standard, franchise CHF 300',
+      sub: 'enfant 0–18 ans, modèle standard, franchise de CHF 300',
     },
     {
       value: canton.subside.subsideMensuelMax ? `CHF ${canton.subside.subsideMensuelMax}` : '–',
@@ -54,7 +54,7 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
   const enBref = overrideEnBref ?? [
     `Avec une franchise de CHF 300, la prime la moins chère est de CHF ${Math.round(rowMin.primeMois)} par mois (CHF ${formatChf(rowMin.primeAn)} par an).`,
     `Avec une franchise de CHF 2 500, la prime la moins chère est de CHF ${Math.round(rowMax.primeMois)} par mois (CHF ${formatChf(rowMax.primeAn)} par an).`,
-    `La franchise CHF 300 devient plus avantageuse si vos frais médicaux dépassent CHF ${formatChf(breakEven)} par an.`,
+    `La franchise de CHF 300 devient plus avantageuse si vos frais médicaux dépassent CHF ${formatChf(breakEven)} par an.`,
   ]
 
   const tocBase = [
@@ -70,7 +70,7 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
     {
       question: `Quelle est la caisse la moins chère à ${canton.villePrincipale} en 2026 ?`,
       answer:
-        `${cheapest.name} est la caisse la moins chère à ${canton.villePrincipale} en 2026, à partir de CHF ${cheapest.prime} par mois pour un adulte de 35 ans (franchise CHF 300, modèle standard, source OFSP 2026). ` +
+        `${cheapest.name} est la caisse la moins chère à ${canton.villePrincipale} en 2026, à partir de CHF ${cheapest.prime} par mois pour un adulte de 35 ans (franchise de CHF 300, modèle standard, source OFSP 2026). ` +
         `En choisissant la meilleure caisse plutôt que la plus chère, vous économisez jusqu'à CHF ${formatChf(canton.economieAn)} par an pour des prestations identiques.`,
     },
     {
@@ -97,7 +97,7 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
     {
       question: `Quelle est la différence de prime entre adulte et jeune adulte dans le canton de ${canton.name} ?`,
       answer:
-        `Dans le canton de ${canton.name} en 2026, la prime standard (franchise CHF 300, modèle de base) est de CHF ${canton.primeMoyenneJA} par mois pour un jeune adulte de 19 à 25 ans. La prime moyenne tous profils confondus est de CHF ${canton.primeMoyenne} pour un adulte. ` +
+        `Dans le canton de ${canton.name} en 2026, la prime standard (franchise de CHF 300, modèle de base) est de CHF ${canton.primeMoyenneJA} par mois pour un jeune adulte de 19 à 25 ans. La prime moyenne tous profils confondus est de CHF ${canton.primeMoyenne} pour un adulte. ` +
         `Cet écart de CHF ${canton.primeMoyenne - canton.primeMoyenneJA} par mois représente CHF ${formatChf((canton.primeMoyenne - canton.primeMoyenneJA) * 12)} par an.`,
     },
     {
@@ -211,7 +211,7 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
             Quelles caisses sont les moins chères dans le {canton.cantonDe} en 2026 ?
           </h2>
           <p className="text-[16px] text-slate mb-6">
-            Classement pour un adulte de 35 ans, franchise CHF 300, modèle standard, sans couverture accident,
+            Classement pour un adulte de 35 ans, franchise de CHF 300, modèle standard, sans couverture accident,
             en moyenne sur {canton.nbRegions > 1 ? `les ${canton.nbRegions} régions tarifaires` : `l'ensemble`} du canton.
             Les primes varient selon votre profil exact et votre commune.
           </p>
@@ -278,13 +278,13 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
             <p className="text-[16px] text-slate mt-5">
               Pour un jeune adulte de 19 à 25 ans, la meilleure prime dans le {canton.cantonDe} est de{' '}
               <strong className="text-ink">CHF {canton.caisseJA.prime} par mois</strong>{' '}
-              ({canton.caisseJA.name}, franchise CHF 300, modèle standard).
+              ({canton.caisseJA.name}, franchise de CHF 300, modèle standard).
             </p>
           )}
           <p className="text-[16px] text-slate mt-3">
             Pour un enfant de 0 à 18 ans, la meilleure prime dans le {canton.cantonDe} est de{' '}
             <strong className="text-ink">CHF {canton.primeMoyenneEnfant} par mois</strong>{' '}
-            (franchise CHF 300, modèle standard).
+            (franchise de CHF 300, modèle standard).
           </p>
         </section>
 
