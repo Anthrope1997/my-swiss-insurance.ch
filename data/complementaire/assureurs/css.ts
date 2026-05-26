@@ -276,7 +276,7 @@ export const produits: ProduitComplementaire[] = [
     assureurId: 'css',
     nomProduit: 'Assurance Dentaire Variante 4',
     famille: 'dentaire',
-    description: 'Couverture dentaire maximale : 75% des frais remboursés jusqu\'à CHF 5\'000/an, avec franchise CHF 500.',
+    description: 'Couverture dentaire maximale : 75% des frais remboursés jusqu\'à CHF 5\'000/an, avec franchise de CHF 500.',
     dentaire: {
       couvert: true,
       pourcentSoins: 75,

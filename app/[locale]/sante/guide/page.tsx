@@ -7,7 +7,14 @@ import AuthorBio from '@/components/ui/AuthorBio'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import HeroStats from '@/components/ui/HeroStats'
 import { breakEven, primeMoyenne, economieMoyenne, economieMax, subsideMoyen } from '@/lib/sante/formules'
+import { nationalBreakEven, nationalBreakEvenJA, nationalBreakEvenEnfant, nationalAvgPrime } from '@/lib/sante/calcul-franchise'
 import { formatChf } from '@/lib/shared/formatters'
+
+const seuilAdulte       = nationalBreakEven()
+const seuilJA           = nationalBreakEvenJA()
+const seuilEnfant       = nationalBreakEvenEnfant()
+const economieAnnuelle  = Math.round((nationalAvgPrime(300) - nationalAvgPrime(2500)) * 12)
+const economieMensuelle = Math.round(nationalAvgPrime(300) - nationalAvgPrime(2500))
 
 export const metadata: Metadata = {
   title: 'Guide complet LAMal 2026 — Primes, franchises, modèles et subsides',
@@ -39,7 +46,7 @@ const faqItems = [
   },
   {
     question: 'Quelle franchise LAMal choisir ?',
-    answer: `Choisissez la franchise CHF 2 500 si vous êtes en bonne santé et consultez peu : vous économisez environ CHF 120 par mois sur la prime. Optez pour la franchise CHF 300 si vos dépenses annuelles dépassent CHF ${breakEven({ canton: 'GE' }).toLocaleString('fr-CH')} à Genève (CHF ${breakEven().toLocaleString('fr-CH')} en moyenne suisse).`,
+    answer: `Choisissez la franchise de CHF 2 500 si vous êtes en bonne santé et consultez peu : vous économisez environ CHF 120 par mois sur la prime. Optez pour la franchise de CHF 300 si vos dépenses annuelles dépassent CHF ${breakEven({ canton: 'GE' }).toLocaleString('fr-CH')} à Genève (CHF ${breakEven().toLocaleString('fr-CH')} en moyenne suisse).`,
   },
   {
     question: "Peut-on changer de caisse maladie en cours d'année ?",
@@ -318,7 +325,7 @@ export default function GuideLamalPage() {
                 </table>
               </div>
               <p className="text-[16px] text-slate/60 mt-3">
-                Adulte 35 ans · modèle standard · franchise CHF 300 · moyennes pondérées par population · données OFSP 2026.
+                Adulte 35 ans · modèle standard · franchise de CHF 300 · moyennes pondérées par population · données OFSP 2026.
               </p>
 
               <div className="mt-6">
@@ -368,18 +375,36 @@ export default function GuideLamalPage() {
             <section id="franchise">
               <h2 className="article-h2">5. Choisir sa franchise LAMal</h2>
               <p className="article-p">
-                La franchise est le montant annuel que vous payez vous-même avant que l&apos;assurance n&apos;intervienne.
-                Six paliers existent : CHF 300, 500, 1 000, 1 500, 2 000 et CHF 2 500 par an. Une franchise élevée
-                réduit votre prime mensuelle mais augmente votre risque financier en cas de maladie.
+                Choisir la bonne franchise est l&apos;un des leviers les plus efficaces pour réduire votre prime LAMal.
+                Pour un adulte, en passant de la franchise de CHF 300 à la franchise de CHF 2 500, vous économisez en moyenne{' '}
+                <strong className="font-medium text-ink">CHF {formatChf(economieAnnuelle)} par an</strong>{' '}
+                sur votre prime, soit environ{' '}
+                <strong className="font-medium text-ink">CHF {formatChf(economieMensuelle)} par mois</strong>.
               </p>
-
-              <KeyFact>
-                Le point de bascule entre la franchise CHF 2 500 et la franchise CHF 300 se situe autour de{' '}
-                <strong>CHF {breakEven().toLocaleString('fr-CH')} de frais médicaux annuels</strong>{' '}
-                en moyenne en Suisse. Si vos frais médicaux annuels sont inférieurs à ce seuil, il est plus économique d&apos;opter pour la franchise CHF 2 500.
-                {' '}Au-delà, la franchise CHF 300 devient plus avantageuse.
+              <p className="article-p">
+                Votre prime mensuelle et votre franchise évoluent en sens inverse : une franchise élevée réduit votre prime et vous fait économiser chaque mois,
+                mais augmente votre reste à charge en cas de frais médicaux.
+                La franchise la mieux adaptée à votre situation est donc celle qui équilibre l&apos;économie mensuelle sur la prime et le reste à charge potentiel en cas de soins.
+              </p>
+              <p className="article-p">
+                En cas de soins, votre reste à charge se compose de deux éléments : la franchise (montant fixe annuel que vous payez vous-même avant l&apos;intervention de l&apos;assurance),
+                puis la quote-part (10 % des frais au-delà de la franchise, plafonnée à{' '}
+                <strong className="font-medium text-ink">CHF 700 par an</strong> pour un adulte et{' '}
+                <strong className="font-medium text-ink">CHF 350 par an</strong> pour un enfant).
+              </p>
+              <p className="article-p">
+                Six paliers existent pour les adultes (de CHF 300 à CHF 2 500 par an) et six pour les enfants (de CHF 0 à CHF 600 par an).
+                Le palier optimal dépend de vos frais médicaux annuels estimés.
+              </p>
+              <KeyFact label="À retenir">
+                Pour un adulte (26 ans et plus), la franchise de CHF 2 500 reste avantageuse tant que vos frais médicaux annuels restent inférieurs à{' '}
+                <strong className="font-medium text-ink">CHF {formatChf(seuilAdulte)}</strong>.
+                Au-delà, la franchise de CHF 300 devient plus économique. Ce seuil descend à{' '}
+                <strong className="font-medium text-ink">CHF {formatChf(seuilJA)}</strong>{' '}
+                pour un jeune adulte (19 à 25 ans) et à{' '}
+                <strong className="font-medium text-ink">CHF {formatChf(seuilEnfant)}</strong>{' '}
+                pour un enfant (0 à 18 ans).
               </KeyFact>
-
               <div className="mt-6">
                 <Link href="/sante/franchise" className="text-brand hover:underline text-[16px] font-medium">
                   Guide complet : choisir sa franchise LAMal →
@@ -465,11 +490,11 @@ export default function GuideLamalPage() {
                 ))}
               </div>
               <p className="text-[13px] text-slate/60 mb-6">
-                Profil : adulte 35 ans, modèle standard, franchise CHF 300.
+                Profil : adulte 35 ans, modèle standard, franchise de CHF 300.
               </p>
               <KeyFact>
                 Ces chiffres sont des estimations reposant sur les écarts de primes constatés en 2026
-                pour un adulte, modèle standard, franchise CHF 300. Les économies réelles dépendent
+                pour un adulte, modèle standard, franchise de CHF 300. Les économies réelles dépendent
                 de votre situation individuelle.
               </KeyFact>
 

@@ -44,7 +44,7 @@ const faqItems = [
   {
     question: 'Quelle franchise LAMal choisir en 2026 ?',
     answer:
-      `Choisissez la franchise CHF 2 500 si vous êtes en bonne santé et avez peu de frais médicaux : vous économisez environ CHF 120 par mois sur la prime. Optez pour la franchise CHF 300 si vos dépenses médicales dépassent CHF ${fmtChf(seuil)} par an en Suisse.`,
+      `Choisissez la franchise de CHF 2 500 si vous êtes en bonne santé et avez peu de frais médicaux : vous économisez environ CHF 120 par mois sur la prime. Optez pour la franchise de CHF 300 si vos dépenses médicales dépassent CHF ${fmtChf(seuil)} par an en Suisse.`,
   },
   {
     question: "Peut-on changer de franchise en cours d'année ?",
@@ -59,7 +59,7 @@ const faqItems = [
   {
     question: "Quelle franchise recommander pour un enfant ?",
     answer:
-      "Pour les enfants de 0 à 18 ans, choisissez la franchise CHF 0. Les enfants consultent fréquemment : l'économie sur la prime ne compense pas le risque d'un reste à charge élevé. Les franchises disponibles vont de CHF 0 à CHF 600 par an.",
+      "Pour les enfants de 0 à 18 ans, choisissez la franchise de CHF 0. Les enfants consultent fréquemment : l'économie sur la prime ne compense pas le risque d'un reste à charge élevé. Les franchises disponibles vont de CHF 0 à CHF 600 par an.",
   },
   {
     question: "La franchise s'applique-t-elle à chaque prestation ?",
@@ -88,9 +88,9 @@ const enBref = [
   <>{"La franchise est le montant que vous payez avant que l'assurance n'intervienne. "}
     <strong className="font-medium text-ink">{"Une franchise élevée réduit votre prime mensuelle mais augmente votre charge financière"}</strong>
     {" en cas de frais médicaux."}</>,
-  <>{"Pour un adulte (26 ans et plus), la franchise CHF 2 500 est plus économique tant que vos frais médicaux annuels restent inférieurs à "}
+  <>{"Pour un adulte (26 ans et plus), la franchise de CHF 2 500 est plus économique tant que vos frais médicaux annuels restent inférieurs à "}
     <strong className="font-medium text-ink">CHF {fmtChf(seuil)}</strong>
-    {". Au-delà, la franchise CHF 300 est plus avantageuse. Ce seuil descend à "}
+    {". Au-delà, la franchise de CHF 300 est plus avantageuse. Ce seuil descend à "}
     <strong className="font-medium text-ink">CHF {fmtChf(seuilJA)}</strong>
     {" pour un jeune adulte (19 à 25 ans) et à "}
     <strong className="font-medium text-ink">CHF {fmtChf(seuilEnfant)}</strong>
@@ -148,7 +148,7 @@ export default function FranchisePage() {
           </h1>
           <p className="text-[16px] text-slate leading-relaxed mb-10">
             La franchise est le montant annuel que vous payez avant que votre assurance maladie de base LAMal intervienne.
-            La franchise CHF 2 500 économise jusqu&apos;à CHF 120 par mois sur la prime par rapport à la franchise CHF 300.
+            La franchise de CHF 2 500 économise jusqu&apos;à CHF 120 par mois sur la prime par rapport à la franchise de CHF 300.
           </p>
 
           <HeroStats stats={heroStats} />
@@ -306,8 +306,8 @@ export default function FranchisePage() {
             </div>
 
             <KeyFact>
-              Pour un adulte de 26 ans et plus, en dessous de <strong>CHF {fmtChf(seuil)}</strong> de frais médicaux par an, la franchise CHF 2 500 coûte moins cher.
-              Au-delà, la franchise CHF 300 est plus avantageuse. Pour les 19-25 ans, ce seuil descend à <strong>CHF {fmtChf(seuilJA)}</strong>.
+              Pour un adulte de 26 ans et plus, en dessous de <strong>CHF {fmtChf(seuil)}</strong> de frais médicaux par an, la franchise de CHF 2 500 coûte moins cher.
+              Au-delà, la franchise de CHF 300 est plus avantageuse. Pour les 19-25 ans, ce seuil descend à <strong>CHF {fmtChf(seuilJA)}</strong>.
             </KeyFact>
 
             {/* Franchise enfant */}
@@ -342,7 +342,7 @@ export default function FranchisePage() {
             </div>
 
             <KeyFact label="Recommandation">
-              Choisissez la franchise CHF 0 pour les jeunes enfants qui consultent fréquemment.
+              Choisissez la franchise de CHF 0 pour les jeunes enfants qui consultent fréquemment.
               Pour un adolescent en bonne santé (15 à 18 ans), une franchise plus élevée réduit la prime sans risque disproportionné.
             </KeyFact>
 

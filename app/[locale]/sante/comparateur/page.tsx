@@ -34,7 +34,7 @@ const faqSchema = {
       name:    "Quelle est la caisse maladie la moins chère en Suisse ?",
       acceptedAnswer: {
         '@type': 'Answer',
-        text:    "La caisse la moins chère dépend de votre canton, de votre âge et du modèle choisi. Les primes débutent à CHF 403 par mois à Zoug et atteignent CHF 710 par mois à Genève pour un adulte avec franchise CHF 300 et modèle standard.",
+        text:    "La caisse la moins chère dépend de votre canton, de votre âge et du modèle choisi. Les primes débutent à CHF 403 par mois à Zoug et atteignent CHF 710 par mois à Genève pour un adulte avec franchise de CHF 300 et modèle standard.",
       },
     },
     {

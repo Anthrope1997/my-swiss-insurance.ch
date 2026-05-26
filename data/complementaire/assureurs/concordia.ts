@@ -62,7 +62,7 @@ export const produits: ProduitComplementaire[] = [
       libreChoixHopital: true,
       libreChoixMedecin: true,
       zoneGeographique: 'suisse',
-      noteDetails: 'Option franchise CHF 5\'000 disponible. Libre choix selon division sélectionnée.',
+      noteDetails: 'Option franchise de CHF 5\'000 disponible. Libre choix selon division sélectionnée.',
     },
     tarifs: [
       { profilId: 'jeune-adulte', montantCHF: 18.00, source: 'site-web', dateReleve: '2026-05-15' },

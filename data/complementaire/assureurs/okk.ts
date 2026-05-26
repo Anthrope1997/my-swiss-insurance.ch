@@ -13,7 +13,7 @@ export const produits: ProduitComplementaire[] = [
     nomProduit: 'NATURE Mini',
     famille: 'medecines-douces',
     familles: ['medecines-douces', 'optique'],
-    description: 'Entrée en médecines alternatives ÖKK : 5 thérapies reconnues, 80%/CHF 1\'000, optique adultes CHF 80/an, franchise CHF 300.',
+    description: 'Entrée en médecines alternatives ÖKK : 5 thérapies reconnues, 80%/CHF 1\'000, optique adultes CHF 80/an, franchise de CHF 300.',
     medecinesDouces: {
       listesReconnues: ['ASCA'],
       therapiesCouvertes: ['acupuncture', 'homeopathie', 'phytotherapie', 'medecine-traditionnelle-chinoise'],
@@ -44,7 +44,7 @@ export const produits: ProduitComplementaire[] = [
     nomProduit: 'NATURE Midi',
     famille: 'medecines-douces',
     familles: ['medecines-douces', 'optique'],
-    description: 'Médecines alternatives intermédiaires : 80%/CHF 5\'000, optique adultes CHF 150/an, chirurgie laser CHF 500, franchise CHF 300.',
+    description: 'Médecines alternatives intermédiaires : 80%/CHF 5\'000, optique adultes CHF 150/an, chirurgie laser CHF 500, franchise de CHF 300.',
     medecinesDouces: {
       listesReconnues: ['ASCA'],
       therapiesCouvertes: ['acupuncture', 'homeopathie', 'phytotherapie', 'medecine-traditionnelle-chinoise'],
@@ -75,7 +75,7 @@ export const produits: ProduitComplementaire[] = [
     nomProduit: 'NATURE Plus',
     famille: 'medecines-douces',
     familles: ['medecines-douces', 'optique'],
-    description: 'La couverture médecines alternatives maximale ÖKK : 80%/CHF 10\'000, optique adultes CHF 200/an, laser CHF 500, franchise CHF 300.',
+    description: 'La couverture médecines alternatives maximale ÖKK : 80%/CHF 10\'000, optique adultes CHF 200/an, laser CHF 500, franchise de CHF 300.',
     medecinesDouces: {
       listesReconnues: ['ASCA'],
       therapiesCouvertes: ['acupuncture', 'homeopathie', 'phytotherapie', 'medecine-traditionnelle-chinoise'],

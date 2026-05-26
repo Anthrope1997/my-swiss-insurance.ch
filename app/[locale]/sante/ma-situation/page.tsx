@@ -97,7 +97,7 @@ const toc = [
 const heroStats = [
   { value: '90 jours', label: "Délai d'affiliation",  sub: 'dès la prise de domicile en Suisse' },
   { value: '8 heures', label: 'Seuil couverture LAA', sub: 'par semaine, accidents non professionnels inclus' },
-  { value: '25–30%',   label: 'Économie possible',    sub: 'avec franchise CHF 2 000 – CHF 2 500' },
+  { value: '25–30%',   label: 'Économie possible',    sub: 'avec franchise de CHF 2 000 – CHF 2 500' },
 ]
 
 const enBref = [
@@ -218,9 +218,9 @@ export default function MaSituationPage() {
                   </h3>
                   <p className="text-[16px] text-slate">
                     La franchise optimale dépend de votre fréquence de soins. Pour un salarié
-                    en bonne santé, la franchise CHF 2 500 réduit la prime de ~CHF 120 par mois.
+                    en bonne santé, la franchise de CHF 2 500 réduit la prime de ~CHF 120 par mois.
                     Pour un salarié avec un médecin de famille régulier ou un traitement en cours,
-                    la franchise CHF 300 devient avantageuse dès que les frais annuels dépassent
+                    la franchise de CHF 300 devient avantageuse dès que les frais annuels dépassent
                     environ CHF 1 440. Consultez la{' '}
                     <Link href="/sante/franchise" className="text-brand hover:underline">
                       page franchise
@@ -261,7 +261,7 @@ export default function MaSituationPage() {
                   },
                   {
                     titre: 'Franchise élevée souvent avantageuse',
-                    desc: "Si votre trésorerie le permet, une franchise CHF 2 000 à CHF 2 500 réduit la prime mensuelle de 25 à 30 %. Provisionnez la différence sur un compte épargne dédié. Les primes LAMal sont partiellement déductibles de votre revenu imposable — montant forfaitaire variable selon le canton.",
+                    desc: "Si votre trésorerie le permet, une franchise de CHF 2 000 à CHF 2 500 réduit la prime mensuelle de 25 à 30 %. Provisionnez la différence sur un compte épargne dédié. Les primes LAMal sont partiellement déductibles de votre revenu imposable — montant forfaitaire variable selon le canton.",
                   },
                   {
                     titre: 'Vérifier les subsides chaque année',

@@ -124,7 +124,7 @@ export const produits: ProduitComplementaire[] = [
       montantMaxSoins: 1000,
       orthodontie: false,
       implants: false,
-      noteDetails: 'CHF 1\'000/an après franchise CHF 500. Soins courants uniquement.',
+      noteDetails: 'CHF 1\'000/an après franchise de CHF 500. Soins courants uniquement.',
     },
     tarifs: [
       { profilId: 'jeune-adulte', montantCHF: 11.15, source: 'site-web', dateReleve: '2026-05-18' },
@@ -225,7 +225,7 @@ export const produits: ProduitComplementaire[] = [
       ],
       montantMaxAnnuel: 2000,
       pourcent: 80,
-      noteDetails: '11 thérapies médicales couvertes. CHF 80/séance (illimité). Médicaments Swissmedic : CHF 2\'000/an remboursés à 80% après franchise CHF 200. Prescriptions médicales requises. Souscription jusqu\'à 99 ans. Réduction CHF 2.25/mois si combiné avec Natura.',
+      noteDetails: '11 thérapies médicales couvertes. CHF 80/séance (illimité). Médicaments Swissmedic : CHF 2\'000/an remboursés à 80% après franchise de CHF 200. Prescriptions médicales requises. Souscription jusqu\'à 99 ans. Réduction CHF 2.25/mois si combiné avec Natura.',
     },
     delaiAttente: { mois: 0 },
     tarifs: [

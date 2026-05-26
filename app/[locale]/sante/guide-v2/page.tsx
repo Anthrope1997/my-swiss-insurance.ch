@@ -42,7 +42,7 @@ const faqItems = [
   },
   {
     question: 'Quelle franchise LAMal choisir ?',
-    answer: `Choisissez la franchise CHF 2 500 si vous êtes en bonne santé et consultez peu : vous économisez environ CHF 119 par mois sur la prime à Genève. Optez pour la franchise CHF 300 si vos dépenses annuelles dépassent CHF ${(cantonBreakEven('geneve') ?? 0).toLocaleString('fr-CH')} à Genève (CHF ${nationalBreakEven().toLocaleString('fr-CH')} en moyenne suisse).`,
+    answer: `Choisissez la franchise de CHF 2 500 si vous êtes en bonne santé et consultez peu : vous économisez environ CHF 119 par mois sur la prime à Genève. Optez pour la franchise de CHF 300 si vos dépenses annuelles dépassent CHF ${(cantonBreakEven('geneve') ?? 0).toLocaleString('fr-CH')} à Genève (CHF ${nationalBreakEven().toLocaleString('fr-CH')} en moyenne suisse).`,
   },
   {
     question: "Peut-on changer de caisse maladie en cours d'année ?",
@@ -357,7 +357,7 @@ export default function GuideLamalPage() {
                 </table>
               </div>
               <p className="text-[16px] text-slate/60 mt-3">
-                Adultes 26 ans et +, modèle standard, franchise CHF 300. Source : OFSP, primes moyennes cantonales 2026.
+                Adultes 26 ans et +, modèle standard, franchise de CHF 300. Source : OFSP, primes moyennes cantonales 2026.
               </p>
 
               <div className="mt-6">
@@ -413,10 +413,10 @@ export default function GuideLamalPage() {
               </p>
 
               <KeyFact>
-                Le point de bascule entre la franchise CHF 2 500 et la franchise CHF 300 se situe autour de{' '}
+                Le point de bascule entre la franchise de CHF 2 500 et la franchise de CHF 300 se situe autour de{' '}
                 <strong>CHF {nationalBreakEven().toLocaleString('fr-CH')} de frais médicaux annuels</strong>{' '}
-                en moyenne en Suisse. Si vos frais médicaux annuels sont inférieurs à ce seuil, il est plus économique d&apos;opter pour la franchise CHF 2 500.
-                {' '}Au-delà, la franchise CHF 300 devient plus avantageuse.
+                en moyenne en Suisse. Si vos frais médicaux annuels sont inférieurs à ce seuil, il est plus économique d&apos;opter pour la franchise de CHF 2 500.
+                {' '}Au-delà, la franchise de CHF 300 devient plus avantageuse.
               </KeyFact>
 
               <div className="mt-6">
@@ -507,11 +507,11 @@ export default function GuideLamalPage() {
                 ))}
               </div>
               <p className="text-[16px] mb-6" style={{ color: '#6F8B90' }}>
-                Profil : adulte 35 ans, modèle standard, franchise CHF 300.
+                Profil : adulte 35 ans, modèle standard, franchise de CHF 300.
               </p>
               <KeyFact>
                 Ces chiffres sont des estimations reposant sur les écarts de primes constatés en 2026
-                pour un adulte, modèle standard, franchise CHF 300. Les économies réelles dépendent
+                pour un adulte, modèle standard, franchise de CHF 300. Les économies réelles dépendent
                 de votre situation individuelle.
               </KeyFact>
 
