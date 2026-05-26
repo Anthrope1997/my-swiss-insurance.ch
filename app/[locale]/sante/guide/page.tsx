@@ -90,7 +90,6 @@ const CANTON_NAMES: Record<string, string> = {
 const premiums = Object.entries(CANTON_NAMES)
   .map(([code, name]) => ({ code, name, prime: primeMoyenne({ canton: code }) }))
   .sort((a, b) => b.prime - a.prime)
-]
 
 const franchises = [
   { montant: 300,  prime: 638.70, economie: 0,      ecAnn: 0,    breakEven: '—',          conseil: 'Recommandé si frais médicaux dépassent CHF 1 891 par an' },
@@ -420,7 +419,7 @@ export default function GuideLamalPage() {
                     title: 'Télémédecine (conseil téléphonique)',
                     reduction: "jusqu'à −16%",
                     border: 'border-brand',
-                    desc: 'Première consultation par téléphone ou application avant tout rendez-vous en cabinet (Medgate, Medi24...). Disponible 24 heures sur 24. Réduction moyenne de 10% (jusqu'à −16%) selon la caisse.',
+                    desc: "Première consultation par téléphone ou application avant tout rendez-vous en cabinet (Medgate, Medi24...). Disponible 24 heures sur 24. Réduction moyenne de 10 % (jusqu'à −16 %) selon la caisse.",
                   },
                 ].map((m, i) => (
                   <div key={i} className={`bg-white border ${m.border} border-l-4 rounded-[8px] p-5`}>
