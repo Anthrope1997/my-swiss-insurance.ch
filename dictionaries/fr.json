@@ -16,7 +16,7 @@
     }
   },
   "header": {
-    "ctaFull": "Recevez les meilleures offres",
+    "ctaFull": "Comparer mes primes gratuitement",
     "ctaShort": "Être conseillé"
   },
   "metrics": {
@@ -60,10 +60,9 @@
       "Pour vous recontacter sous 24 heures"
     ],
     "objectifs": {
-      "compare": "Trouver la caisse la moins chère",
-      "switch": "Changer de caisse facilement",
-      "subsides": "Vérifier mes subsides",
-      "conseil": "Ajuster mon contrat"
+      "economiser": "Économiser sur mes primes LAMal",
+      "adapter": "Adapter ma franchise ou mon modèle de santé",
+      "subside": "Vérifier mon droit à un subside"
     },
     "profils": {
       "seul": "Seul(e)",
