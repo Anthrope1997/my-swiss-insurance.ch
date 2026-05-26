@@ -1,0 +1,172 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{padding:.75rem 0 1.5rem;font-family:var(--font-sans)}
+h3{font-size:15px;font-weight:500;color:var(--color-text-primary);margin:1.25rem 0 .4rem}
+table{width:100%;border-collapse:collapse;font-size:12px;line-height:1.5}
+thead tr{background:var(--color-background-secondary)}
+th{font-weight:500;font-size:11px;color:var(--color-text-secondary);text-align:left;padding:6px 8px;border-bottom:.5px solid var(--color-border-tertiary);border-right:.5px solid var(--color-border-tertiary)}
+th:last-child{border-right:none}
+td{padding:6px 8px;vertical-align:top;border-bottom:.5px solid var(--color-border-tertiary);border-right:.5px solid var(--color-border-tertiary);color:var(--color-text-primary);font-size:12px}
+td:last-child{border-right:none}
+tr:last-child td{border-bottom:none}
+.c{font-weight:500;white-space:nowrap;font-size:12px}
+.org{font-size:10px;color:var(--color-text-secondary);display:block}
+.b{display:inline-block;font-size:10px;font-weight:500;padding:1px 5px;border-radius:3px;white-space:nowrap;margin-bottom:2px}
+.yes{background:var(--color-background-success);color:var(--color-text-success)}
+.no{background:var(--color-background-danger);color:var(--color-text-danger)}
+.part{background:var(--color-background-warning);color:var(--color-text-warning)}
+.aut{background:var(--color-background-info);color:var(--color-text-info)}
+.nf{background:var(--color-background-secondary);color:var(--color-text-secondary)}
+.src{font-size:10px;color:var(--color-text-secondary);margin-top:3px;word-break:break-all}
+.note{font-size:11px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:6px 8px;margin:.75rem 0 0;color:var(--color-text-secondary)}
+</style>
+<div class="wrap">
+<h3>Partie 2 — 15 cantons manquants (données 2026)</h3>
+<table>
+<thead><tr>
+<th style="width:80px">Canton / organe</th>
+<th style="width:165px">A) Rétroactivité + condition</th>
+<th style="width:185px">B) Nouvel arrivant de l'étranger</th>
+<th style="width:140px">C) Source</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><span class="c">AG (Argovie)</span><span class="org">SVA Aargau</span></td>
+<td><span class="b yes">Oui — rétroactif 1er jan.</span><br>Délai: sept–31 déc. de l'année précédente (pour 2026: 31.12.2025). Si dépassé: plus d'inscription possible. Droit rétroactif à jan. versé en cours d'année.</td>
+<td>Déposer un «Änderungsantrag» via sva-aargau.ch. Sozialhilfe-Beziehende: automatique. Pour cas ordinaires: rétroactivité max 12 mois si Sozialhilfe; sinon dès la demande. Pas de formulaire «Zuzug» distinct trouvé.</td>
+<td class="src">sva-aargau.ch/informationsblattpv<br>sva-aargau.ch/codebestellung<br>ag.ch § 17 Abs. 2 KVGG</td>
+</tr>
+<tr>
+<td><span class="c">AI (App. Rh.-Int.)</span><span class="org">Gesundheitsamt AI</span></td>
+<td><span class="b aut">Automatique — 100%</span><br>Attribution automatique par le Gesundheitsamt sur base des données fiscales. Aucun formulaire à déposer. Règle si non identifié automatiquement: <span style="font-style:italic">à vérifier directement (tel +41 71 788 92 50)</span></td>
+<td><span class="b nf">À vérifier</span><br>La page officielle ne précise pas les règles pour les arrivants de l'étranger non encore dans le système fiscal AI. Contacter directement le Gesundheitsamt AI.</td>
+<td class="src">ai.ch/themen/gesundheit-alter-und-soziales/individuelle-praemienverbilligung<br>Loi: GS 832.501 (ai.clex.ch)</td>
+</tr>
+<tr>
+<td><span class="c">AR (App. Rh.-Ext.)</span><span class="org">SOVAR</span></td>
+<td><span class="b no">Non — délai strict 31 mars</span><br>Frist 2026: 31 mars 2026 (expiré). Si dépassé: droit uniquement à partir du mois de la demande.</td>
+<td><span class="b part">Dès le mois de la demande</span><br>«Personen, die aus dem Ausland zugezogen sind, können ab dem Monat Anspruch geltend machen, in dem sie ihren Antrag eingereicht haben.» Formulaire spécifique «Zuzug aus dem Ausland 2026» disponible.</td>
+<td class="src">sovar.ch/dienstleistungen/praemienverbilligung-ipv<br>ar.ch/DGS/news — Communiqué déc. 2025</td>
+</tr>
+<tr>
+<td><span class="c">BL (Bâle-Camp.)</span><span class="org">SVA BL</span></td>
+<td><span class="b part">Partielle / semi-auto</span><br>Formulaire envoyé automatiquement fin déc. 2025 aux ordentlich besteuerten. Délai de retour: indiqué sur formulaire (12 mois). Quellenbesteuerte: jusqu'au 31.12 de l'année. Si non reçu: formulaire en ligne dès fév.</td>
+<td><span class="b yes">Jusqu'au 31 déc. de l'année N+1</span><br>«Personen, die aus dem Ausland zuziehen, können bis zum 31. Dezember des dem Zuzugsjahr folgenden Anspruchsjahres ein Gesuch einreichen.» Calcul basé sur la 1re décision fiscale BL.</td>
+<td class="src">sva-bl.ch/de/ausgleichskasse/individuelle-praemienverbilligung-ipv/zuziehende-personen<br>sva-bl.ch/…/haeufige-fragen-ipv</td>
+</tr>
+<tr>
+<td><span class="c">BS (Bâle-Ville)</span><span class="org">ASB Bâle</span></td>
+<td><span class="b part">Partielle — sur demande</span><br>Pas de délai annuel strict identifié pour les résidents ordinaires. Formulaire papier/online à envoyer à l'ASB. Délai de traitement: 2–3 mois.</td>
+<td><span class="b yes">Dès l'assurance si ≤ 3 mois</span><br>«Zuziehende aus dem Ausland können ab Versicherungsbeginn eine Prämienverbilligung erhalten, sofern sie den Antrag innert drei Monaten ab Zuzug einreichen. Bei späterer Antragstellung: Anspruch ab Folgemonat.»</td>
+<td class="src">bs.ch/themen/finanzielle-hilfe/leistungen/praemienverbilligung<br>bs.ch/…/praemienverbilligung-beantragen</td>
+</tr>
+<tr>
+<td><span class="c">GR (Grisons)</span><span class="org">SVA Graubünden</span></td>
+<td><span class="b yes">Oui — potentiellement rétroactif</span><br>Délai (Verwirkungsfrist): 31 déc. de l'année courante (pour 2026: 31.12.2026). «Je nach Anmeldeeingang erhalten Sie die Prämienverbilligung möglicherweise rückwirkend per 1. Januar 2026.» — rétroactivité non garantie mais possible.</td>
+<td><span class="b nf">À vérifier directement</span><br>Domicile au 1er jan. requis; des Vorschussleistungen (65%) sont versées provisoirement. Règle spécifique «Zuzug aus dem Ausland» non publiée en ligne; contacter SVA GR.</td>
+<td class="src">formulare.sva.gr.ch/downloads/ipv_anmeldung_d.pdf<br>formulare.sva.gr.ch/downloads/ipv_wegleitung_d.pdf<br>sva.gr.ch</td>
+</tr>
+<tr>
+<td><span class="c">NW (Nidwald)</span><span class="org">AK Nidwalden</span></td>
+<td><span class="b no">Non — délai strict 30 avril</span><br>Frist 2026: 30 avril 2026. «Später eingereichte Gesuche werden nicht mehr berücksichtigt.» Pas de rétroactivité.</td>
+<td><span class="b part">Dans les 3 mois après l'arrivée</span><br>«Personen, die aus dem Ausland zuziehen, haben die Anmeldung innert 3 Monaten seit der Einreise einzureichen.» Délai absolu: 30 avril de l'année.</td>
+<td class="src">aknw.ch/uploads/…/Merkblatt-Praemienverbilligung-2026.pdf<br>aknw.ch</td>
+</tr>
+<tr>
+<td><span class="c">OW (Obwald)</span><span class="org">AK Obwalden</span></td>
+<td><span class="b no">Non — délai strict 31 mai</span><br>Frist 2026: 31 mai 2026. «Anmeldungen nach diesem Zeitpunkt können wir nicht mehr berücksichtigen.» Stichtag 1er jan.; modifications en cours d'année ne comptent que l'année suivante.</td>
+<td><span class="b nf">À vérifier</span><br>La page indique que le droit est évalué sur la base des données du 1er jan. 2026. Pas de règle explicite pour arrivants étrangers en cours d'année trouvée.</td>
+<td class="src">akow.ch/dienstleistungen/praemienverbilligung<br>ow.ch/fachbereiche/2737</td>
+</tr>
+<tr>
+<td><span class="c">SG (Saint-Gall)</span><span class="org">SVA SG</span></td>
+<td><span class="b no">Non — délai 31 mars</span><br>Frist: 31 mars. «Wenn Sie die Frist verpasst haben, besteht im betroffenen Jahr nur für die Monate ab der Antragstellung ein Anspruch» (= pas de rétroactivité).</td>
+<td><span class="b part">Dès le mois de la demande</span><br>«Für Personen, die aus dem Ausland in den Kanton St.Gallen zuziehen, sind die Verhältnisse zum Zeitpunkt der Anmeldung massgebend. Der Anspruch beginnt ab dem Monat der Anmeldung. Die Anmeldefrist endet am 31. Dezember 2026.»<br>Arrivant inter-cantonal: pas de droit l'année du déménagement.</td>
+<td class="src">svasg.ch/online-schalter/pdf/form_4400.pdf<br>svasg.ch/produkte/ipv/<br>sg.ch/gesundheit/praemienverbilligung</td>
+</tr>
+<tr>
+<td><span class="c">SH (Schaffhouse)</span><span class="org">SVA Schaffhausen</span></td>
+<td><span class="b no">Non — délai strict 30 avril</span><br>Frist 2026: 30 avril 2026 (expiré). Règle de rétroactivité après délai: <span style="font-style:italic">à vérifier via Merkblatt sur svash.ch</span>.</td>
+<td><span class="b nf">À vérifier</span><br>Merkblatt «Prämienverbilligung für Grenzgänger» disponible sur svash.ch; règle arrivant ordinaire non publiée dans les sources accessibles.</td>
+<td class="src">svash.ch/online-schalter/formulare-merkblaetter/formulare-praemienverbilligung/</td>
+</tr>
+<tr>
+<td><span class="c">SO (Soleure)</span><span class="org">AK Solothurn</span></td>
+<td><span class="b part">Semi-automatique — 30 jours</span><br>L'AK envoie automatiquement les formulaires aux éligibles identifiés (jan. 2026). Délai de retour: 30 jours. Quellenbesteuerte: formulaire disponible dès mai, jusqu'au 31 déc. Rétroactivité si retour dans les délais: oui (vers jan.).</td>
+<td><span class="b nf">À vérifier</span><br>Pas de règle explicite «Zuzug aus dem Ausland» trouvée sur akso.ch. Contacter directement l'Ausgleichskasse Solothurn.</td>
+<td class="src">akso.ch/dienstleistungen/praemienverbilligung-ipv<br>akso.ch/…/individuelle-praemienverbilligung-ipv-quellensteuer/</td>
+</tr>
+<tr>
+<td><span class="c">SZ (Schwytz)</span><span class="org">SVA Schwyz</span></td>
+<td><span class="b yes">Oui — potentiellement rétroactif</span><br>Délai (Verwirkungsfrist): 31 déc. de l'année en cours (pour 2026: 31.12.2026). «Je nach Anmeldeeingang erhalten Sie die Prämienverbilligung möglicherweise rückwirkend per 1. Januar 2026.» — formulation identique à GR.</td>
+<td><span class="b nf">À vérifier</span><br>Formulaire digital disponible sur sva-sz.ch. Règle spécifique Zuzug non publiée dans les sources accessibles.</td>
+<td class="src">sva-sz.ch/dienstleistungen/praemienverbilligung-ipv</td>
+</tr>
+<tr>
+<td><span class="c">TG (Thurgovie)</span><span class="org">Amt für Gesundheit TG</span></td>
+<td><span class="b no">Non — délai 31 déc., strict</span><br>«Wird diese Frist [31 Dezember] verpasst, verfällt der Anspruch vollumfänglich. Eine Neubemessung ist ausgeschlossen.» Attribution par les communes (principe d'inscription). Stichtag: 1er jan.</td>
+<td><span class="b part">Dès l'assurance suisse obligatoire</span><br>Kurzaufenthalter/arrivants étrangers: «Massgebend sind die persönlichen Verhältnisse zum Zeitpunkt der Rechtsunterstellung unter die Schweizer Versicherungspflicht. Der Antrag ist spätestens am 31. Dezember einzureichen.» Ajustement parité de pouvoir d'achat appliqué.</td>
+<td class="src">gesundheit.tg.ch/bevoelkerung/krankenversicherung/praemienverbilligung.html/5578<br>svztg.ch</td>
+</tr>
+<tr>
+<td><span class="c">TI (Tessin)</span><span class="org">IAS / RIPAM</span></td>
+<td><span class="b yes">Oui — si demande avant 31 déc. N-1</span><br>«Il diritto alla RIPAM è dato a decorrere dal mese di gennaio dell'anno di competenza se il formulario è trasmesso entro il 31 dicembre dell'anno che precede. Se inoltrato nel corso dell'anno di competenza, il diritto decorre solo dal mese seguente.» ✓ Confirme vos données.</td>
+<td><span class="b part">Dès le mois suivant si tardif</span><br>Arrivant inter-cantonal: ancien canton compétent jusqu'au 31 déc. (règle fédérale). Arrivant de l'étranger: droit dès jan. si formulaire déposé avant le 31 déc. de l'année précédente; sinon dès le mois suivant le dépôt.</td>
+<td class="src">ti.ch/dss/ias/…/richiesta-del-formulario-ripam/<br>ti.ch/dss/ias/prestazioni-e-contributi/formulario-ripam-2026</td>
+</tr>
+<tr>
+<td><span class="c">UR (Uri)</span><span class="org">SVS Uri</span></td>
+<td><span class="b aut">Automatique pour taxés</span><br>Entscheidungen envoyés mi-jan. 2026. Quellenbesteuerte et arrivants: demande obligatoire auprès SVS Uri selon les fristen en vigueur. Règle exacte de rétroactivité pour les demandes tardives: <span style="font-style:italic">à vérifier sur svsuri.ch</span>.</td>
+<td><span class="b part">Demande obligatoire — formulaire spécifique</span><br>«Quellenbesteuerte und Personen, die 2026 in den Kanton Uri zuziehen, müssen eine Anmeldung bei der SVS Uri einreichen.» Formulaire «Zuzug im 2026 aus Ausland» disponible sur svsuri.ch. Fristen à respecter.</td>
+<td class="src">svsuri.ch/dienstleistungen/praemienverbilligung-ipv<br>ur.ch/dienstleistungen/3519<br>urnerzeitung.ch déc. 2025</td>
+</tr>
+<tr>
+<td><span class="c">ZG (Zoug)</span><span class="org">AK Zug</span></td>
+<td><span class="b no">Non — délai strict 30 avril</span><br>Frist 2026: 30 avril 2026 (expiré). «Es können keine Anträge mehr eingereicht werden.» EL-Bezüger: automatique. Stichtag: 1er jan. 2026.</td>
+<td><span class="b nf">À vérifier</span><br>Règle générale: wohnsitz au 1er jan. Un formulaire «Zuzug» n'est pas mentionné explicitement sur akzug.ch. Contacter directement l'Ausgleichskasse Zug.</td>
+<td class="src">akzug.ch/dienstleistungen/praemienverbilligung<br>Loi: Prämienverbilligungsverordnung ZG</td>
+</tr>
+</tbody>
+</table>
+
+<h3 style="margin-top:1.5rem">Partie 3 — Compléments cantons romands (NE, JU, VS, BE)</h3>
+<table>
+<thead><tr>
+<th style="width:80px">Canton</th>
+<th style="width:165px">A) Rétroactivité (précision)</th>
+<th style="width:185px">B) Nouvel arrivant — précision</th>
+<th style="width:140px">C) Source</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><span class="c">NE (Neuchâtel)</span><span class="org">OCAB + GSR</span></td>
+<td><span class="b part">Mixte selon régime</span><br>Automaticité mixte 2026: bénéficiaires 2025 → reconduction sans formulaire. Personnes nouvelles dans le système (sans avis fiscal NE ou sans coupon-réponse précédent) → demande formelle au GSR. Effet du subside dans ce cas: <strong>à compter de la date d'ouverture de la demande</strong> (pas rétroactif au 1er jan.).</td>
+<td><span class="b part">GSR dès l'arrivée — droit non rétroactif</span><br>Nouveaux arrivants non encore dans le système NE: demande au GSR (guichet social régional) immédiatement. RDU calculé sur données actuelles. Droit: à compter de la date de la demande, pas du 1er jan. Pour Zuzug inter-cantonal: ancien canton compétent jusqu'au 31 déc., puis NE à partir du 1er jan. suivant.</td>
+<td class="src">ne.ch/autorites/DECS/SASO/assurance-maladie/subsidesLAMal/<br>guidesocial.ch/…/557<br>LILAMal art. 17–18; RALILAMal art. 31</td>
+</tr>
+<tr>
+<td><span class="c">JU (Jura)</span><span class="org">ECAS Jura</span></td>
+<td><span class="b yes">Oui — rétroactivité 1er jan. garantie</span><br>La rétroactivité en cas de taxation tardive est <strong>explicitement confirmée</strong> par le communiqué officiel: «Les personnes taxées après les dates susmentionnées recevront automatiquement une information de l'ECAS avec un droit rétroactif au 1er janvier 2026.» Délai ultime: 31 déc. de l'année courante pour les non-taxés. La source "impossible" était incorrecte.</td>
+<td><span class="b part">Demande selon profil — rétroactif 1er jan.</span><br>Arrivant de Berne (Moutier): continuité via données bernoise, droit rétroactif garanti. Arrivant d'un autre canton: demande à l'ECAS; droit rétroactif au 1er jan. Arrivant de l'étranger: demande formelle, droit rétroactif au 1er jan. si dans les délais.</td>
+<td class="src">jura.ch/…/Subsides-des-primes-de-l-assurance-maladie-dans-le-canton-du-Jura-pour-2026<br>ecasjura.ch/fr/Moutier/Assurance-maladie</td>
+</tr>
+<tr>
+<td><span class="c">VS (Valais)</span><span class="org">SVA Valais / DSSC</span></td>
+<td><span class="b part">Exception légale — PC/aide sociale uniquement</span><br>La seule exception expressément prévue est légale (= dans le texte officiel du GSR Valais): arrivants bénéficiant déjà d'une PC AVS/AI ou d'aide sociale cantonale → droit depuis l'établissement. Pour divorce, chômage, baisse de revenu: <strong>non trouvé dans les sources officielles</strong>. Ces cas ne figurent pas dans le texte publié par le GSR; il est probable qu'ils relèvent d'une pratique administrative discrétionnaire, non d'une exception légale.</td>
+<td><span class="b part">PC/aide sociale: droit dès l'arrivée; autres: année suivante</span><br>Règle générale: domicile au 1er jan. requis. Exception textuelle: arrivants «qui bénéficient déjà d'une prestation complémentaire AVS/AI ou d'une aide sociale cantonale, peuvent bénéficier des subsides depuis leur établissement en Valais». Pour tous les autres arrivants ordinaires: droit ouvert à partir du 1er jan. de l'année suivante seulement.</td>
+<td class="src">guidesocial.ch/recherche/neuchatel/fiche/assurance-maladie-lamal-557<br>(§ GSR Valais, fiche LAMal canton VS)</td>
+</tr>
+<tr>
+<td><span class="c">BE (Berne)</span><span class="org">ASV Berne</span></td>
+<td><span class="b aut">Automatique (N-2)</span><br>Attribution automatique via données fiscales N-2. Si situation changée: demande manuelle avant le 31 déc. de l'année courante pour l'année suivante. Pas de règle de rétroactivité en cours d'année hors cas automatiques.</td>
+<td><span class="b nf">À vérifier — source incomplète</span><br>L'ASV indique que les arrivants non encore dans le système fiscal bernois doivent faire une demande manuelle. La base de calcul utilisée (revenus actuels vs. première taxation BE) et le délai exact ne sont pas spécifiés dans les pages publiques accessibles. <strong>Recommandation: contacter directement l'ASV Berne</strong> (asv.dij.be.ch).</td>
+<td class="src">asv.dij.be.ch/de/start/themen/pv/pv_anrecht-auf-pv-beantragen.html<br>Loi BE: SG 836.31 (Prämienverbilligungsverordnung BE)</td>
+</tr>
+</tbody>
+</table>
+
+<div class="note">
+<strong>Règle fédérale de référence (art. 65 LAMal + OAMal):</strong> Pour tous les cantons, le déménagement inter-cantonal en cours d'année laisse le canton de domicile au 1er janvier compétent jusqu'au 31 déc. Les arrivants de l'étranger relèvent d'une règle propre à chaque canton (souvent: droit dès le mois de la demande). Les cantons qui ne précisent rien sur leur site appliquent a minima l'art. 65 LAMal — mais les modalités exactes sont à confirmer directement auprès de l'organisme cantonal.
+</div>
+</div>
