@@ -173,7 +173,6 @@ interface FormData {
   cantonTravail: string
   trancheAge: string
   situation: string
-  genre: string
   prenom: string
   nom: string
   telephone: string
@@ -207,7 +206,6 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen, tagline
     residenceType: 'resident',
     canton: '', codePostal: '', pays: '', cantonTravail: '', trancheAge: '',
     situation: '',
-    genre: '',
     prenom: '', nom: '', telephone: '', email: '',
     consentTraitement: false,
     consentMarketing: false,
@@ -337,7 +335,6 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen, tagline
           situation: form.situation,
           intention: form.intent,
           type: form.residenceType === 'frontalier' ? 'frontalier' : 'canton',
-          genre: form.genre,
           consentTraitement: form.consentTraitement,
           consentMarketing: form.consentMarketing,
           consentTraitementText: CONSENT_TRAITEMENT_TEXT,
@@ -577,26 +574,6 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen, tagline
         {/* Step 4 — Coordonnées */}
         {step === 4 && (
           <form id="lead-form-step4" className={`step-anim ${fullscreen ? 'space-y-2' : 'space-y-4'}`} onSubmit={handleSubmit}>
-            <div>
-              <label className={`block text-[16px] font-medium text-ink ${fullscreen ? 'mb-1' : 'mb-1.5'}`}>Genre</label>
-              <div className="flex bg-cloud rounded-lg p-1 gap-1">
-                {(['Monsieur', 'Madame'] as const).map(g => (
-                  <button
-                    key={g}
-                    type="button"
-                    onClick={() => set({ genre: g })}
-                    className={[
-                      `flex-1 ${fullscreen ? 'py-1.5' : 'py-2'} text-[14px] font-medium rounded-md transition-all duration-150`,
-                      form.genre === g
-                        ? 'bg-white text-brand shadow-sm'
-                        : 'text-slate hover:text-ink',
-                    ].join(' ')}
-                  >
-                    {g}
-                  </button>
-                ))}
-              </div>
-            </div>
             <div className={`grid grid-cols-2 ${fullscreen ? 'gap-2' : 'gap-3'}`}>
               <div>
                 <label className={`block text-[16px] font-medium text-ink ${fullscreen ? 'mb-1' : 'mb-1.5'}`}>{d.form.champs.prenom}</label>

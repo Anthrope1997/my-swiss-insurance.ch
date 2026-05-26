@@ -12,7 +12,6 @@ interface LeadPayload {
   situation?: string
   intention?: string
   type?: string
-  genre?: string
   consentTraitement?: boolean
   consentMarketing?: boolean
   consentTraitementText?: string
@@ -28,7 +27,7 @@ export async function POST(req: NextRequest) {
 
     const {
       nom, email, telephone, canton, codePostal, pays, cantonTravail,
-      profil, situation, intention, type, genre,
+      profil, situation, intention, type,
       consentTraitement, consentMarketing, consentTraitementText, consentMarketingText,
     } = body
 
@@ -63,7 +62,6 @@ export async function POST(req: NextRequest) {
       situation:    situation    || null,
       intention:    intention    || null,
       type:         type         || 'devis',
-      genre:        genre        || null,
       timestamp:    new Date().toISOString(),
       source:       req.headers.get('referer') || 'direct',
       consent: {
@@ -73,7 +71,6 @@ export async function POST(req: NextRequest) {
         case1Checked: consentTraitement     ?? false,
         case2Text:    consentMarketingText  || null,
         case2Checked: consentMarketing      ?? false,
-        genre:        genre                 || null,
       },
     }
 
