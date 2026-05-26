@@ -7,12 +7,12 @@ import HeroStats from '@/components/ui/HeroStats'
 export const metadata: Metadata = {
   title: 'Économisez sur votre assurance maladie suisse en 2026 — My Swiss Insurance',
   description:
-    'Comparez les primes LAMal 2026 gratuitement. Jusqu\'à 5 653 CHF d\'économie par an à Genève. 34 caisses, données OFSP officielles, résultat immédiat.',
+    'Comparez les primes LAMal 2026 gratuitement. Jusqu\'à CHF 5 653 d\'économie par an à Genève. 34 caisses, données OFSP officielles, résultat immédiat.',
   alternates: { canonical: 'https://my-swiss-insurance.ch' },
   openGraph: {
     title: 'Économisez sur votre assurance maladie suisse en 2026',
     description:
-      'Jusqu\'à 5 653 CHF d\'économie par an. Comparez gratuitement 34 caisses LAMal. Données OFSP 2026.',
+      'Jusqu\'à CHF 5 653 d\'économie par an. Comparez gratuitement 34 caisses LAMal. Données OFSP 2026.',
     url: 'https://my-swiss-insurance.ch',
     type: 'website',
   },
@@ -35,7 +35,7 @@ const faqSchema = {
       name: 'Combien peut-on économiser en changeant de caisse LAMal ?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Jusqu\'à 5 653 CHF par an pour un adulte de 35 ans à Genève (tous modèles et franchises confondus, source OFSP 2026). Les 34 caisses agréées proposent les mêmes prestations de base à des prix très différents selon le canton.',
+        text: 'Jusqu\'à CHF 5 653 par an pour un adulte de 35 ans à Genève (tous modèles et franchises confondus, source OFSP 2026). Les 34 caisses agréées proposent les mêmes prestations de base à des prix très différents selon le canton.',
       },
     },
     {
@@ -199,7 +199,7 @@ export default function HomePage() {
 
           <p className="text-[16px] text-slate leading-relaxed mb-8 max-w-2xl">
             En Suisse, toutes les caisses couvrent les mêmes prestations de base. Seul le prix
-            diffère, jusqu'à 5 653 CHF par an d'écart pour un même profil à Genève.
+            diffère, jusqu'à CHF 5 653 par an d'écart pour un même profil à Genève.
             Comparez gratuitement et trouvez la caisse la moins chère pour votre situation.
           </p>
 
@@ -348,7 +348,7 @@ export default function HomePage() {
             <p className="text-[16px] text-slate leading-relaxed">
               Sélectionnez votre canton pour accéder aux données détaillées : primes, classement
               des caisses et simulateur de subsides. Adulte 35 ans, modèle standard,
-              franchise 300 CHF. Source OFSP 2026.
+              franchise CHF 300. Source OFSP 2026.
             </p>
           </div>
 

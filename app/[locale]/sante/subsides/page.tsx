@@ -35,7 +35,7 @@ const faqItems = [
   {
     question: 'Quand suis-je éligible aux subsides LAMal ?',
     answer:
-      "Vous êtes éligible si votre revenu déterminant est inférieur aux seuils fixés par votre canton de résidence. Ces seuils varient de 27 000 CHF par an (Jura) à plus de 65 000 CHF par an (Neuchâtel) selon le canton, votre situation familiale et le nombre d'enfants à charge. Environ 2,5 millions de personnes en bénéficient en Suisse.",
+      "Vous êtes éligible si votre revenu déterminant est inférieur aux seuils fixés par votre canton de résidence. Ces seuils varient de CHF 27 000 par an (Jura) à plus de CHF 65 000 par an (Neuchâtel) selon le canton, votre situation familiale et le nombre d'enfants à charge. Environ 2,5 millions de personnes en bénéficient en Suisse.",
   },
   {
     question: 'Comment est calculé le revenu déterminant ?',
@@ -106,7 +106,7 @@ export default function SubsidesPage() {
           <HeroStats stats={[
             { value: '2,5 millions', label: 'Bénéficiaires en Suisse', sub: 'Soit environ 28 % de la population' },
             { value: '26 cantons',   label: 'Barèmes distincts',       sub: 'Critères et montants variables'    },
-            { value: '≤ 643 CHF',   label: 'Subside mensuel maximum', sub: 'Canton de Neuchâtel, barème 2026'  },
+            { value: '≤ CHF 643',   label: 'Subside mensuel maximum', sub: 'Canton de Neuchâtel, barème 2026'  },
           ]} className="mb-8" />
 
         </div>

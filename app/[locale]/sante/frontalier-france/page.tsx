@@ -349,7 +349,7 @@ export default function FrontalierFrancePage() {
             <section id="primes">
               <h2 className="article-h2">6. Primes indicatives 2026 dans votre canton de travail</h2>
               <p className="article-p">
-                Adulte de 35 ans, franchise 300 CHF, modèle standard, données OFSP 2026.
+                Adulte de 35 ans, franchise CHF 300, modèle standard, données OFSP 2026.
                 L'écart entre la caisse la moins chère et la plus chère peut dépasser CHF 200 par mois dans le même canton.
               </p>
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-5">

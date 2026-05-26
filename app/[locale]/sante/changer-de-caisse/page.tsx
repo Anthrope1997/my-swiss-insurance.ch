@@ -78,7 +78,7 @@ const faqSchema = {
 const heroStats = [
   { value: '30 novembre', label: 'Date limite ordinaire',  sub: 'pour changer au 1er janvier suivant' },
   { value: '1er janvier', label: 'Date de prise d\'effet', sub: 'du nouveau contrat LAMal'             },
-  { value: '5 653 CHF',   label: 'Économie max. en Suisse', sub: 'adulte 35 ans, données OFSP 2026'   },
+  { value: 'CHF 5 653',   label: 'Économie max. en Suisse', sub: 'adulte 35 ans, données OFSP 2026'   },
 ]
 
 const toc = [

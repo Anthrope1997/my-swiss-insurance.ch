@@ -35,26 +35,26 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
 
   const heroStats = overrideHeroStats ?? [
     {
-      value: `${cheapest.prime} CHF`,
+      value: `CHF ${cheapest.prime}`,
       label: 'Prime adulte la moins chère',
-      sub: 'adulte 35 ans, modèle standard, franchise 300 CHF',
+      sub: 'adulte 35 ans, modèle standard, franchise CHF 300',
     },
     {
-      value: `${canton.primeMoyenneEnfant} CHF`,
+      value: `CHF ${canton.primeMoyenneEnfant}`,
       label: 'Prime enfant la moins chère',
-      sub: 'enfant 0–18 ans, modèle standard, franchise 300 CHF',
+      sub: 'enfant 0–18 ans, modèle standard, franchise CHF 300',
     },
     {
-      value: canton.subside.subsideMensuelMax ? `${canton.subside.subsideMensuelMax} CHF` : '–',
+      value: canton.subside.subsideMensuelMax ? `CHF ${canton.subside.subsideMensuelMax}` : '–',
       label: 'Subside mensuel max.',
       sub: canton.subside.subsideMensuelMax ? 'barème cantonal 2026' : 'Barème non publié',
     },
   ]
 
   const enBref = overrideEnBref ?? [
-    `Avec une franchise de 300 CHF, la prime la moins chère est de ${Math.round(rowMin.primeMois)} CHF par mois (${formatChf(rowMin.primeAn)} CHF par an).`,
-    `Avec une franchise de 2 500 CHF, la prime la moins chère est de ${Math.round(rowMax.primeMois)} CHF par mois (${formatChf(rowMax.primeAn)} CHF par an).`,
-    `La franchise 300 CHF devient plus avantageuse si vos frais médicaux dépassent CHF ${formatChf(breakEven)} par an.`,
+    `Avec une franchise de CHF 300, la prime la moins chère est de CHF ${Math.round(rowMin.primeMois)} par mois (CHF ${formatChf(rowMin.primeAn)} par an).`,
+    `Avec une franchise de CHF 2 500, la prime la moins chère est de CHF ${Math.round(rowMax.primeMois)} par mois (CHF ${formatChf(rowMax.primeAn)} par an).`,
+    `La franchise CHF 300 devient plus avantageuse si vos frais médicaux dépassent CHF ${formatChf(breakEven)} par an.`,
   ]
 
   const tocBase = [
@@ -70,7 +70,7 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
     {
       question: `Quelle est la caisse la moins chère à ${canton.villePrincipale} en 2026 ?`,
       answer:
-        `${cheapest.name} est la caisse la moins chère à ${canton.villePrincipale} en 2026, à partir de ${cheapest.prime} CHF par mois pour un adulte de 35 ans (franchise 300 CHF, modèle standard, source OFSP 2026). ` +
+        `${cheapest.name} est la caisse la moins chère à ${canton.villePrincipale} en 2026, à partir de CHF ${cheapest.prime} par mois pour un adulte de 35 ans (franchise CHF 300, modèle standard, source OFSP 2026). ` +
         `En choisissant la meilleure caisse plutôt que la plus chère, vous économisez jusqu'à CHF ${formatChf(canton.economieAn)} par an pour des prestations identiques.`,
     },
     {
@@ -91,14 +91,14 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
     {
       question: `Le canton de ${canton.name} est-il cher pour l'assurance maladie ?`,
       answer:
-        `Avec une prime moyenne de ${canton.primeMoyenne} CHF par mois pour un adulte (tous modèles et franchises confondus), le canton de ${canton.name} se classe au ${ordinal(canton.rang)} rang sur 26 cantons suisses, du moins cher au plus cher (source OFSP 2026). ` +
+        `Avec une prime moyenne de CHF ${canton.primeMoyenne} par mois pour un adulte (tous modèles et franchises confondus), le canton de ${canton.name} se classe au ${ordinal(canton.rang)} rang sur 26 cantons suisses, du moins cher au plus cher (source OFSP 2026). ` +
         `Les primes varient selon votre commune de résidence${canton.nbRegions > 1 ? `, le canton compte ${canton.nbRegions} régions tarifaires OFSP` : ''}, votre franchise et le modèle d'assurance choisi.`,
     },
     {
       question: `Quelle est la différence de prime entre adulte et jeune adulte dans le canton de ${canton.name} ?`,
       answer:
-        `Dans le canton de ${canton.name} en 2026, la prime standard (franchise 300 CHF, modèle de base) est de ${canton.primeMoyenneJA} CHF par mois pour un jeune adulte de 19 à 25 ans. La prime moyenne tous profils confondus est de ${canton.primeMoyenne} CHF pour un adulte. ` +
-        `Cet écart de ${canton.primeMoyenne - canton.primeMoyenneJA} CHF par mois représente ${formatChf((canton.primeMoyenne - canton.primeMoyenneJA) * 12)} CHF par an.`,
+        `Dans le canton de ${canton.name} en 2026, la prime standard (franchise CHF 300, modèle de base) est de CHF ${canton.primeMoyenneJA} par mois pour un jeune adulte de 19 à 25 ans. La prime moyenne tous profils confondus est de CHF ${canton.primeMoyenne} pour un adulte. ` +
+        `Cet écart de CHF ${canton.primeMoyenne - canton.primeMoyenneJA} par mois représente CHF ${formatChf((canton.primeMoyenne - canton.primeMoyenneJA) * 12)} par an.`,
     },
     {
       question: `Les prestations LAMal sont-elles identiques dans toutes les caisses ?`,
@@ -211,7 +211,7 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
             Quelles caisses sont les moins chères dans le {canton.cantonDe} en 2026 ?
           </h2>
           <p className="text-[16px] text-slate mb-6">
-            Classement pour un adulte de 35 ans, franchise 300 CHF, modèle standard, sans couverture accident,
+            Classement pour un adulte de 35 ans, franchise CHF 300, modèle standard, sans couverture accident,
             en moyenne sur {canton.nbRegions > 1 ? `les ${canton.nbRegions} régions tarifaires` : `l'ensemble`} du canton.
             Les primes varient selon votre profil exact et votre commune.
           </p>
@@ -237,13 +237,13 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
                         </span>
                       </td>
                       <td className="font-semibold text-ink whitespace-nowrap">{c.name}</td>
-                      <td className="text-left font-bold text-brand whitespace-nowrap">{c.prime} CHF</td>
+                      <td className="text-left font-bold text-brand whitespace-nowrap">CHF {c.prime}</td>
                       <td className="text-left whitespace-nowrap hidden sm:table-cell text-slate">
-                        {formatChf(c.prime * 12)} CHF
+                        CHF {formatChf(c.prime * 12)}
                       </td>
                       <td className="text-left whitespace-nowrap hidden md:table-cell">
                         <span className="text-brand font-semibold">
-                          {formatChf(econAn)} CHF par an
+                          CHF {formatChf(econAn)} par an
                         </span>
                       </td>
                     </tr>
@@ -257,9 +257,9 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
                     </span>
                   </td>
                   <td className="text-slate whitespace-nowrap">{canton.caissePlusChere.name}</td>
-                  <td className="text-left text-slate whitespace-nowrap">{canton.caissePlusChere.prime} CHF</td>
+                  <td className="text-left text-slate whitespace-nowrap">CHF {canton.caissePlusChere.prime}</td>
                   <td className="text-left whitespace-nowrap hidden sm:table-cell text-slate/60">
-                    {formatChf(canton.caissePlusChere.prime * 12)} CHF
+                    CHF {formatChf(canton.caissePlusChere.prime * 12)}
                   </td>
                   <td className="text-left whitespace-nowrap hidden md:table-cell text-[16px] text-slate/50 italic">
                     Caisse la plus chère
@@ -277,14 +277,14 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
           {canton.caisseJA && (
             <p className="text-[16px] text-slate mt-5">
               Pour un jeune adulte de 19 à 25 ans, la meilleure prime dans le {canton.cantonDe} est de{' '}
-              <strong className="text-ink">{canton.caisseJA.prime} CHF par mois</strong>{' '}
-              ({canton.caisseJA.name}, franchise 300 CHF, modèle standard).
+              <strong className="text-ink">CHF {canton.caisseJA.prime} par mois</strong>{' '}
+              ({canton.caisseJA.name}, franchise CHF 300, modèle standard).
             </p>
           )}
           <p className="text-[16px] text-slate mt-3">
             Pour un enfant de 0 à 18 ans, la meilleure prime dans le {canton.cantonDe} est de{' '}
-            <strong className="text-ink">{canton.primeMoyenneEnfant} CHF par mois</strong>{' '}
-            (franchise 300 CHF, modèle standard).
+            <strong className="text-ink">CHF {canton.primeMoyenneEnfant} par mois</strong>{' '}
+            (franchise CHF 300, modèle standard).
           </p>
         </section>
 
@@ -318,13 +318,13 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
                         <td className="font-medium text-ink whitespace-nowrap">{m.modele}</td>
                         <td className="whitespace-nowrap text-slate">{m.caisse}</td>
                         <td className={`text-left whitespace-nowrap font-semibold ${i === 0 ? 'text-slate' : 'text-brand'}`}>
-                          {m.prime.toFixed(2)} CHF
+                          CHF {m.prime.toFixed(2)}
                         </td>
                         <td className="text-left whitespace-nowrap hidden sm:table-cell">
                           {i === 0 ? (
                             <span className="text-slate/50 text-[16px] italic">Référence</span>
                           ) : (
-                            <span className="text-brand font-semibold">{formatChf(econAn)} CHF</span>
+                            <span className="text-brand font-semibold">CHF {formatChf(econAn)}</span>
                           )}
                         </td>
                         <td className="text-left whitespace-nowrap hidden sm:table-cell text-slate">
@@ -352,7 +352,7 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
           <p className="text-[16px] text-slate mb-6">
             Tableau établi pour <strong className="text-ink">{canton.caisseRef}</strong>, adulte de 35 ans,
             sans couverture accident. Le coût total inclut la prime annuelle, la franchise et la quote-part
-            (10 %, maximum 700 CHF par an).
+            (10 %, maximum CHF 700 par an).
           </p>
           <div className="border border-edge rounded-[8px] overflow-hidden">
             <table className="stripe-table w-full text-[16px]">
@@ -385,16 +385,16 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
               <p className="text-[16px] font-bold text-ink/50 uppercase tracking-wide mb-3">
                 Si vous êtes rarement malade
               </p>
-              <p className="text-xl font-bold text-brand mb-1">Franchise 2 500 CHF</p>
+              <p className="text-xl font-bold text-brand mb-1">Franchise CHF 2 500</p>
               <p className="text-[16px] text-ink">
-                Économie de {formatChf(economieFranchise)} CHF par an sur la prime
+                Économie de CHF {formatChf(economieFranchise)} par an sur la prime
               </p>
             </div>
             <div className="bg-cloud border border-edge rounded-[8px] px-5 py-4">
               <p className="text-[16px] font-bold text-ink/50 uppercase tracking-wide mb-3">
                 Si vous avez des soins réguliers
               </p>
-              <p className="text-xl font-bold text-brand mb-1">Franchise 300 CHF</p>
+              <p className="text-xl font-bold text-brand mb-1">Franchise CHF 300</p>
               <p className="text-[16px] text-ink">
                 Franchise plus avantageuse à partir de CHF {formatChf(breakEven)} de frais médicaux
               </p>
@@ -428,7 +428,7 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
             <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
               <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Subside max</p>
               <p className="text-[16px] font-medium text-ink">
-                {canton.subside.subsideMensuelMax ? `${canton.subside.subsideMensuelMax} CHF / mois` : '—'}
+                {canton.subside.subsideMensuelMax ? `CHF ${canton.subside.subsideMensuelMax} / mois` : '—'}
               </p>
             </div>
             <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">

@@ -86,7 +86,7 @@ const cantonTable = [
 const faqItems = [
   {
     question: 'Quelle est la caisse maladie la moins chère en Suisse ?',
-    answer: "La caisse la moins chère dépend de votre canton, de votre âge et du modèle choisi. Pour un adulte avec franchise 300 CHF et modèle standard, les primes débutent à CHF 403 par mois à Zoug et atteignent CHF 710 par mois à Genève. Les écarts entre caisses dans une même région atteignent jusqu'à CHF 229 par mois.",
+    answer: "La caisse la moins chère dépend de votre canton, de votre âge et du modèle choisi. Pour un adulte avec franchise CHF 300 et modèle standard, les primes débutent à CHF 403 par mois à Zoug et atteignent CHF 710 par mois à Genève. Les écarts entre caisses dans une même région atteignent jusqu'à CHF 229 par mois.",
   },
   {
     question: 'Les prestations sont-elles identiques dans toutes les caisses ?',
@@ -101,8 +101,8 @@ const faqItems = [
     answer: "Les frontaliers travaillant en Suisse ont en principe le choix entre la LAMal suisse et une assurance dans leur pays de résidence. Ce droit d'option doit être exercé dans les trois mois suivant le début de l'activité. Les expatriés résidant en Suisse sont soumis à l'obligation d'affiliation dans les 90 jours suivant leur arrivée, sauf exceptions prévues par les accords bilatéraux.",
   },
   {
-    question: 'Quelle est la différence entre une franchise de 300 et 2 500 CHF ?',
-    answer: "Avec une franchise de 300 CHF, vous payez moins lors des soins (l'assurance prend en charge après 300 CHF de frais par an) mais votre prime mensuelle est plus élevée. Avec une franchise de 2 500 CHF, vous assumez davantage de frais médicaux en cas de maladie, mais votre prime est nettement plus basse. Ce choix est avantageux si vous êtes en bonne santé et consultez peu. En règle générale, le point mort se situe autour de 1 000 à 1 500 CHF de frais médicaux annuels.",
+    question: 'Quelle est la différence entre une franchise de CHF 300 et CHF 2 500 ?',
+    answer: "Avec une franchise de CHF 300, vous payez moins lors des soins (l'assurance prend en charge après CHF 300 de frais par an) mais votre prime mensuelle est plus élevée. Avec une franchise de CHF 2 500, vous assumez davantage de frais médicaux en cas de maladie, mais votre prime est nettement plus basse. Ce choix est avantageux si vous êtes en bonne santé et consultez peu. En règle générale, le point mort se situe autour de CHF 1 000 à CHF 1 500 de frais médicaux annuels.",
   },
 ]
 
@@ -656,7 +656,7 @@ export default function ComparateurClient() {
             Quelle est la prime LAMal dans votre canton ?
           </h2>
           <p className="article-p mb-8">
-            Primes de référence pour un adulte de 35 ans, modèle standard, franchise 300 CHF, sans couverture accident.
+            Primes de référence pour un adulte de 35 ans, modèle standard, franchise CHF 300, sans couverture accident.
             Les écarts entre caisses au sein d&apos;un même canton peuvent atteindre plusieurs centaines de francs par mois.
           </p>
 

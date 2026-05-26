@@ -154,9 +154,9 @@ export default function LamalPage() {
           </h1>
 
           <p className="text-[16px] text-slate leading-relaxed mb-8">
-            En Suisse, toutes les caisses couvrent les mêmes prestations de base. Seul le prix
-            diffère — jusqu'à CHF 5 653 par an d'écart pour un même profil.
-            Comparez gratuitement et trouvez la caisse la moins chère pour votre situation.
+            Toutes les caisses couvrent les mêmes prestations de base — le prix seul diffère,
+            jusqu'à CHF 5 653 par an d'écart pour un même profil.
+            Comparez gratuitement les primes 2026 et trouvez la caisse la moins chère pour votre situation.
           </p>
 
           {/* Stats */}
@@ -292,7 +292,7 @@ export default function LamalPage() {
 
           <div className="mb-6">
             <h2 className="text-3xl font-bold text-ink leading-tight mb-4">
-              Une source de référence sur la LAMal en Suisse
+              Source de référence sur la LAMal en Suisse
             </h2>
             <p className="text-[16px] text-slate leading-relaxed">
               My Swiss Insurance s'appuie sur les données officielles de l'Office fédéral de la

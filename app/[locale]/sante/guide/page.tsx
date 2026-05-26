@@ -11,7 +11,7 @@ import { nationalBreakEven, cantonBreakEven } from '@/lib/sante/calcul-franchise
 export const metadata: Metadata = {
   title: 'Guide complet LAMal 2026 — Primes, franchises, modèles et subsides',
   description:
-    "Guide LAMal 2026 : primes par canton (OFSP), franchises 300–2500 CHF avec seuil d'équilibre, 4 modèles d'assurance, changement de caisse et subsides.",
+    "Guide LAMal 2026 : primes par canton (OFSP), franchises CHF 300 – CHF 2 500 avec seuil d'équilibre, 4 modèles d'assurance, changement de caisse et subsides.",
   openGraph: {
     title: 'Guide complet LAMal 2026 — Primes, franchises et subsides',
     description: 'La référence LAMal 2026 : primes par canton, franchises, modèles et subsides. Données OFSP.',
@@ -38,7 +38,7 @@ const faqItems = [
   },
   {
     question: 'Quelle franchise LAMal choisir ?',
-    answer: `Choisissez la franchise 2 500 CHF si vous êtes en bonne santé et consultez peu : vous économisez environ CHF 119 par mois sur la prime à Genève. Optez pour la franchise 300 CHF si vos dépenses annuelles dépassent CHF ${(cantonBreakEven('geneve') ?? 0).toLocaleString('fr-CH')} à Genève (CHF ${nationalBreakEven().toLocaleString('fr-CH')} en moyenne suisse).`,
+    answer: `Choisissez la franchise CHF 2 500 si vous êtes en bonne santé et consultez peu : vous économisez environ CHF 119 par mois sur la prime à Genève. Optez pour la franchise CHF 300 si vos dépenses annuelles dépassent CHF ${(cantonBreakEven('geneve') ?? 0).toLocaleString('fr-CH')} à Genève (CHF ${nationalBreakEven().toLocaleString('fr-CH')} en moyenne suisse).`,
   },
   {
     question: "Peut-on changer de caisse maladie en cours d'année ?",
@@ -126,10 +126,10 @@ const assureurs = [
 ]
 
 const economies = [
-  { canton: 'Genève',    mensuel: 'CHF 471', annuel: 'CHF 5 653' },
-  { canton: 'Neuchâtel', mensuel: 'CHF 391', annuel: 'CHF 4 686' },
-  { canton: 'Valais',    mensuel: 'CHF 321', annuel: 'CHF 3 846' },
-  { canton: 'Vaud',      mensuel: 'CHF 352', annuel: 'CHF 4 220' },
+  { canton: 'Berne',   mensuel: 'CHF 371', annuel: 'CHF 4 447' },
+  { canton: 'Genève',  mensuel: 'CHF 471', annuel: 'CHF 5 653' },
+  { canton: 'Vaud',    mensuel: 'CHF 352', annuel: 'CHF 4 220' },
+  { canton: 'Zurich',  mensuel: 'CHF 357', annuel: 'CHF 4 285' },
 ]
 
 const toc = [
@@ -299,7 +299,7 @@ export default function GuideLamalPage() {
               <h2 className="article-h2">3. Primes LAMal 2026 par canton</h2>
               <p className="article-p">
                 Primes moyennes indicatives 2026 pour un <strong>adulte (26 ans et +)</strong>,
-                modèle standard, franchise de 300 CHF. Les primes effectives varient selon l'assureur.
+                modèle standard, franchise de CHF 300. Les primes effectives varient selon l'assureur.
               </p>
 
               <div className="overflow-x-auto border border-edge rounded-[8px]">
@@ -332,7 +332,7 @@ export default function GuideLamalPage() {
                 </table>
               </div>
               <p className="text-[16px] text-slate/60 mt-3">
-                Adultes 26 ans et +, modèle standard, franchise 300 CHF. Source : OFSP, primes moyennes cantonales 2026.
+                Adultes 26 ans et +, modèle standard, franchise CHF 300. Source : OFSP, primes moyennes cantonales 2026.
               </p>
 
               <div className="mt-6">
@@ -403,7 +403,7 @@ export default function GuideLamalPage() {
 
             {/* 6 — Modèles */}
             <section id="modeles">
-              <h2 className="article-h2">6. Les 4 modèles d'assurance LAMal</h2>
+              <h2 className="article-h2">6. Choisir son modèle d'assurance LAMal</h2>
               <p className="article-p">
                 Chaque modèle impose des contraintes différentes sur l'accès aux soins.
                 Les modèles alternatifs réduisent la prime en échange d'une porte d'entrée obligatoire.
@@ -461,7 +461,7 @@ export default function GuideLamalPage() {
             <section id="economies">
               <h2 className="article-h2">7. Économies possibles en changeant de caisse</h2>
               <p className="article-p">
-                Certains cantons sont en effet divisés en plusieurs régions de prime. Les écarts de
+                Certains cantons sont divisés en plusieurs régions de prime. Les écarts de
                 primes entre caisses au sein d'une même région sont significatifs. Voici l'économie
                 maximale réalisable en choisissant la caisse la moins chère plutôt que la plus chère,
                 au sein de la même région, pour les cantons ci-dessous :
@@ -479,11 +479,11 @@ export default function GuideLamalPage() {
                 ))}
               </div>
               <p className="text-[13px] text-slate/60 mb-6">
-                Profil : adulte 35 ans, modèle standard, franchise 300 CHF.
+                Profil : adulte 35 ans, modèle standard, franchise CHF 300.
               </p>
               <KeyFact>
                 Ces chiffres sont des estimations reposant sur les écarts de primes constatés en 2026
-                pour un adulte, modèle standard, franchise 300 CHF. Les économies réelles dépendent
+                pour un adulte, modèle standard, franchise CHF 300. Les économies réelles dépendent
                 de votre situation individuelle.
               </KeyFact>
 

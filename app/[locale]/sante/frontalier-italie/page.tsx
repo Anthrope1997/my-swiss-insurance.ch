@@ -90,7 +90,7 @@ const toc = [
 
 const heroStats = [
   { value: '3 mois',   label: "Délai droit d'option",   sub: 'dès le premier jour de travail en Suisse' },
-  { value: '~CHF 686', label: 'Prime mensuelle Tessin',  sub: 'adulte, modèle standard, franchise 300 CHF' },
+  { value: '~CHF 686', label: 'Prime mensuelle Tessin',  sub: 'adulte, modèle standard, franchise CHF 300' },
   { value: '−20%',     label: 'Réduction prime possible', sub: 'avec télémédecine ou médecin de famille'   },
 ]
 
@@ -250,7 +250,7 @@ export default function FrontalierItaliePage() {
                   },
                   {
                     titre: 'Primes LAMal au Tessin',
-                    desc: "Le Tessin affiche des primes LAMal parmi les plus élevées de Suisse (environ CHF 686 par mois pour un adulte, modèle standard, franchise 300 CHF). Comparez les caisses disponibles et les modèles alternatifs (télémédecine, médecin de famille) pour réduire la prime de 10 à 20 %.",
+                    desc: "Le Tessin affiche des primes LAMal parmi les plus élevées de Suisse (environ CHF 686 par mois pour un adulte, modèle standard, franchise CHF 300). Comparez les caisses disponibles et les modèles alternatifs (télémédecine, médecin de famille) pour réduire la prime de 10 à 20 %.",
                   },
                 ].map((item, i) => (
                   <div key={i} className="border border-edge rounded-[8px] p-5 bg-white">
@@ -291,7 +291,7 @@ export default function FrontalierItaliePage() {
             <section id="primes">
               <h2 className="article-h2">5. Primes indicatives 2026 dans votre canton de travail</h2>
               <p className="article-p">
-                Adulte de 35 ans, franchise 300 CHF, modèle standard, données indicatives OFSP 2026.
+                Adulte de 35 ans, franchise CHF 300, modèle standard, données indicatives OFSP 2026.
                 Le Tessin affiche les primes les plus élevées parmi les cantons frontaliers italiens.
               </p>
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-5">

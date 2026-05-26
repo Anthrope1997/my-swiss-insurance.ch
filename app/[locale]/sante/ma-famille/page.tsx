@@ -37,7 +37,7 @@ const faqItems = [
   {
     question: 'Mon nouveau-né est-il couvert dès la naissance ?',
     answer:
-      "Oui, à condition de l'affilier dans les 3 mois suivant la naissance. Si ce délai est respecté, la couverture est rétroactive à la date de naissance. Le nourrisson peut être affilié à n'importe quelle caisse, pas nécessairement celle des parents. Les parents choisissent également la franchise enfant (de 0 à 600 CHF) et, si désiré, un modèle alternatif.",
+      "Oui, à condition de l'affilier dans les 3 mois suivant la naissance. Si ce délai est respecté, la couverture est rétroactive à la date de naissance. Le nourrisson peut être affilié à n'importe quelle caisse, pas nécessairement celle des parents. Les parents choisissent également la franchise enfant (de CHF 0 à CHF 600) et, si désiré, un modèle alternatif.",
   },
   {
     question: "La franchise s'applique-t-elle pendant la grossesse ?",
@@ -77,7 +77,7 @@ const faqItems = [
   {
     question: 'Quelle franchise recommander pour un enfant ?',
     answer:
-      "La franchise 0 CHF est recommandée pour les nourrissons et jeunes enfants, qui consultent fréquemment un médecin. Les franchises disponibles pour les enfants sont 0, 100, 200, 300, 400 et 600 CHF. La quote-part enfant est plafonnée à 350 CHF par an, contre 700 CHF pour un adulte. Pour les adolescents en bonne santé, une franchise plus élevée peut être envisagée.",
+      "La franchise CHF 0 est recommandée pour les nourrissons et jeunes enfants, qui consultent fréquemment un médecin. Les franchises disponibles pour les enfants sont CHF 0, CHF 100, CHF 200, CHF 300, CHF 400 et CHF 600. La quote-part enfant est plafonnée à CHF 350 par an, contre CHF 700 pour un adulte. Pour les adolescents en bonne santé, une franchise plus élevée peut être envisagée.",
   },
 ]
 
@@ -102,7 +102,7 @@ const toc = [
 
 const heroStats = [
   { value: '3 mois',   label: "Délai d'affiliation nourrisson", sub: 'couverture rétroactive à la naissance' },
-  { value: '0 CHF',    label: 'Franchise recommandée',          sub: 'nourrissons et jeunes enfants'         },
+  { value: 'CHF 0',    label: 'Franchise recommandée',          sub: 'nourrissons et jeunes enfants'         },
   { value: '−20–25%',  label: 'Réduction jeune adulte',         sub: 'tarif réduit de 19 à 25 ans'          },
 ]
 
@@ -182,8 +182,8 @@ export default function MaFamillePage() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
                 {[
                   { label: "Délai d'affiliation", valeur: '3 mois', note: 'dès la naissance' },
-                  { label: 'Franchise recommandée', valeur: '0 CHF', note: 'pour les nourrissons' },
-                  { label: 'Quote-part maximale', valeur: '350 CHF', note: 'par an pour les enfants' },
+                  { label: 'Franchise recommandée', valeur: 'CHF 0', note: 'pour les nourrissons' },
+                  { label: 'Quote-part maximale', valeur: 'CHF 350', note: 'par an pour les enfants' },
                 ].map((m, i) => (
                   <div key={i} className="bg-cloud border border-edge rounded-[8px] p-4 text-center">
                     <p className="text-[11px] font-semibold text-slate uppercase tracking-wide mb-1">{m.label}</p>
@@ -207,7 +207,7 @@ export default function MaFamillePage() {
               <p className="article-p">
                 Les enfants bénéficient d'un tarif de prime nettement inférieur aux adultes
                 et d'un régime de participation aux frais allégé. La quote-part est plafonnée
-                à 350 CHF par an (contre 700 CHF pour un adulte).
+                à CHF 350 par an (contre CHF 700 pour un adulte).
               </p>
 
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-6">
@@ -269,7 +269,7 @@ export default function MaFamillePage() {
                   },
                   {
                     titre: 'Bascule vers le tarif adulte à 26 ans',
-                    desc: "Au 1er janvier de l'année des 26 ans, le tarif adulte s'applique automatiquement. Les franchises enfants (0 à 600 CHF) sont remplacées par les franchises adultes (300 à 2 500 CHF). Anticipez ce changement pour choisir votre nouvelle franchise.",
+                    desc: "Au 1er janvier de l'année des 26 ans, le tarif adulte s'applique automatiquement. Les franchises enfants (CHF 0 à CHF 600) sont remplacées par les franchises adultes (CHF 300 à CHF 2 500). Anticipez ce changement pour choisir votre nouvelle franchise.",
                   },
                   {
                     titre: 'Modèle télémédecine souvent recommandé',
@@ -359,8 +359,8 @@ export default function MaFamillePage() {
               <div className="space-y-4">
                 {[
                   {
-                    titre: 'Franchise 300 CHF généralement recommandée',
-                    desc: "Les frais médicaux augmentent statistiquement avec l'âge. La franchise basse (300 CHF) devient rapidement avantageuse dès que les dépenses médicales annuelles dépassent environ CHF 1 440. Pour un retraité consultant régulièrement un médecin ou suivi pour une pathologie chronique, c'est souvent le meilleur choix.",
+                    titre: 'Franchise CHF 300 généralement recommandée',
+                    desc: "Les frais médicaux augmentent statistiquement avec l'âge. La franchise basse (CHF 300) devient rapidement avantageuse dès que les dépenses médicales annuelles dépassent environ CHF 1 440. Pour un retraité consultant régulièrement un médecin ou suivi pour une pathologie chronique, c'est souvent le meilleur choix.",
                   },
                   {
                     titre: 'Subsides prioritaires pour les retraités à revenus modestes',

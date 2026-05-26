@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title: 'Guide complet LAMal 2026 — Primes, franchises, modèles et subsides',
   robots: { index: false, follow: false },
   description:
-    "Guide LAMal 2026 : primes par canton (OFSP), franchises 300–2500 CHF avec seuil d'équilibre, 4 modèles d'assurance, changement de caisse et subsides.",
+    "Guide LAMal 2026 : primes par canton (OFSP), franchises CHF 300 – CHF 2 500 avec seuil d'équilibre, 4 modèles d'assurance, changement de caisse et subsides.",
   openGraph: {
     title: 'Guide complet LAMal 2026 — Primes, franchises et subsides',
     description: 'La référence LAMal 2026 : primes par canton, franchises, modèles et subsides. Données OFSP.',
@@ -42,7 +42,7 @@ const faqItems = [
   },
   {
     question: 'Quelle franchise LAMal choisir ?',
-    answer: `Choisissez la franchise 2 500 CHF si vous êtes en bonne santé et consultez peu : vous économisez environ CHF 119 par mois sur la prime à Genève. Optez pour la franchise 300 CHF si vos dépenses annuelles dépassent CHF ${(cantonBreakEven('geneve') ?? 0).toLocaleString('fr-CH')} à Genève (CHF ${nationalBreakEven().toLocaleString('fr-CH')} en moyenne suisse).`,
+    answer: `Choisissez la franchise CHF 2 500 si vous êtes en bonne santé et consultez peu : vous économisez environ CHF 119 par mois sur la prime à Genève. Optez pour la franchise CHF 300 si vos dépenses annuelles dépassent CHF ${(cantonBreakEven('geneve') ?? 0).toLocaleString('fr-CH')} à Genève (CHF ${nationalBreakEven().toLocaleString('fr-CH')} en moyenne suisse).`,
   },
   {
     question: "Peut-on changer de caisse maladie en cours d'année ?",
@@ -186,7 +186,7 @@ export default function GuideLamalPage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-8">
             {[
               { value: "CHF 5'653", line1: 'économie max possible',   line2: 'à Genève, adulte 35 ans' },
-              { value: '6',         line1: 'niveaux de franchise',     line2: 'de 300 à 2 500 CHF' },
+              { value: '6',         line1: 'niveaux de franchise',     line2: 'de CHF 300 à CHF 2 500' },
               { value: '4',         line1: 'modèles de soins',         line2: "dont télémédecine jusqu'à −24%" },
             ].map(s => (
               <div key={s.value} className="rounded-xl p-5"
@@ -323,7 +323,7 @@ export default function GuideLamalPage() {
               <h2 className="article-h2">Primes LAMal 2026 par canton</h2>
               <p className="article-p">
                 Primes moyennes indicatives 2026 pour un <strong>adulte (26 ans et +)</strong>,
-                modèle standard, franchise de 300 CHF. Les primes effectives varient selon l'assureur.
+                modèle standard, franchise de CHF 300. Les primes effectives varient selon l'assureur.
               </p>
 
               <div className="overflow-x-auto border border-edge rounded-[8px]">
@@ -357,7 +357,7 @@ export default function GuideLamalPage() {
                 </table>
               </div>
               <p className="text-[16px] text-slate/60 mt-3">
-                Adultes 26 ans et +, modèle standard, franchise 300 CHF. Source : OFSP, primes moyennes cantonales 2026.
+                Adultes 26 ans et +, modèle standard, franchise CHF 300. Source : OFSP, primes moyennes cantonales 2026.
               </p>
 
               <div className="mt-6">
@@ -507,11 +507,11 @@ export default function GuideLamalPage() {
                 ))}
               </div>
               <p className="text-[16px] mb-6" style={{ color: '#6F8B90' }}>
-                Profil : adulte 35 ans, modèle standard, franchise 300 CHF.
+                Profil : adulte 35 ans, modèle standard, franchise CHF 300.
               </p>
               <KeyFact>
                 Ces chiffres sont des estimations reposant sur les écarts de primes constatés en 2026
-                pour un adulte, modèle standard, franchise 300 CHF. Les économies réelles dépendent
+                pour un adulte, modèle standard, franchise CHF 300. Les économies réelles dépendent
                 de votre situation individuelle.
               </KeyFact>
 

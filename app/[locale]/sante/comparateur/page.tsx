@@ -34,7 +34,7 @@ const faqSchema = {
       name:    "Quelle est la caisse maladie la moins chère en Suisse ?",
       acceptedAnswer: {
         '@type': 'Answer',
-        text:    "La caisse la moins chère dépend de votre canton, de votre âge et du modèle choisi. Les primes débutent à CHF 403 par mois à Zoug et atteignent CHF 710 par mois à Genève pour un adulte avec franchise 300 CHF et modèle standard.",
+        text:    "La caisse la moins chère dépend de votre canton, de votre âge et du modèle choisi. Les primes débutent à CHF 403 par mois à Zoug et atteignent CHF 710 par mois à Genève pour un adulte avec franchise CHF 300 et modèle standard.",
       },
     },
     {
@@ -63,10 +63,10 @@ const faqSchema = {
     },
     {
       '@type': 'Question',
-      name:    "Quelle est la différence entre une franchise de 300 et 2 500 CHF ?",
+      name:    "Quelle est la différence entre une franchise de CHF 300 et CHF 2 500 ?",
       acceptedAnswer: {
         '@type': 'Answer',
-        text:    "Avec une franchise de 300 CHF, la prime est plus élevée mais vous payez moins en cas de soins. Avec une franchise de 2 500 CHF, la prime est nettement plus basse mais vous assumez davantage de frais médicaux. Ce choix est avantageux si vous consultez peu.",
+        text:    "Avec une franchise de CHF 300, la prime est plus élevée mais vous payez moins en cas de soins. Avec une franchise de CHF 2 500, la prime est nettement plus basse mais vous assumez davantage de frais médicaux. Ce choix est avantageux si vous consultez peu.",
       },
     },
   ],
