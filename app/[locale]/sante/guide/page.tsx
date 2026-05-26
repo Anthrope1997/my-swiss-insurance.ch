@@ -6,7 +6,8 @@ import Link from 'next/link'
 import AuthorBio from '@/components/ui/AuthorBio'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import HeroStats from '@/components/ui/HeroStats'
-import { breakEven, primeMoyenne, economieMoyenne, economieMax } from '@/lib/sante/formules'
+import { breakEven, primeMoyenne, economieMoyenne, economieMax, subsideMoyen } from '@/lib/sante/formules'
+import { formatChf } from '@/lib/shared/formatters'
 
 export const metadata: Metadata = {
   title: 'Guide complet LAMal 2026 — Primes, franchises, modèles et subsides',

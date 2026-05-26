@@ -5,6 +5,8 @@ import Link from 'next/link'
 import AuthorBio from '@/components/ui/AuthorBio'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import HeroStats from '@/components/ui/HeroStats'
+import { economieMax } from '@/lib/sante/formules'
+import { formatChf } from '@/lib/shared/formatters'
 
 export const metadata: Metadata = {
   title: 'Changer de caisse maladie en Suisse — Guide résiliation LAMal 2026',
@@ -78,7 +80,7 @@ const faqSchema = {
 const heroStats = [
   { value: '30 novembre', label: 'Date limite ordinaire',  sub: 'pour changer au 1er janvier suivant' },
   { value: '1er janvier', label: 'Date de prise d\'effet', sub: 'du nouveau contrat LAMal'             },
-  { value: 'CHF 5 653',   label: 'Économie max. en Suisse', sub: 'adulte 35 ans, données OFSP 2026'   },
+  { value: `CHF ${formatChf(economieMax() * 12)}`, label: 'Économie max. en Suisse', sub: 'Adulte 35 ans · F300 · standard · données OFSP 2026' },
 ]
 
 const toc = [
@@ -123,7 +125,7 @@ export default function ChangerDeCaissePage() {
           </h1>
           <p className="text-[16px] text-slate max-w-2xl leading-relaxed mb-10">
             Procédure complète pour changer d&apos;assurance maladie de base LAMal, dates clés et
-            modèle de lettre. Économisez jusqu&apos;à CHF 2 000 par an.
+            modèle de lettre. Économisez jusqu&apos;à CHF 2 748 par an.
           </p>
 
           <HeroStats stats={heroStats} className="mb-8" />

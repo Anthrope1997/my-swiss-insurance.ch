@@ -6,6 +6,7 @@ import Link from 'next/link'
 import AuthorBio from '@/components/ui/AuthorBio'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import HeroStats from '@/components/ui/HeroStats'
+import { modeleEconomieMax, modeleEconomieMoyenne, primeMoyenne } from '@/lib/sante/formules'
 
 export const metadata: Metadata = {
   title: 'Modèles LAMal 2026 : standard, médecin de famille, centre médical, télémédecine',

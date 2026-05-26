@@ -5,10 +5,10 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 export const metadata: Metadata = {
   title: 'Comparateur caisses maladie LAMal 2026 — Primes par canton',
   description:
-    "Comparez les primes LAMal 2026 par code postal. Trouvez la caisse maladie la moins chère selon votre profil, franchise et modèle. Données officielles OFSP — jusqu'à CHF 5 653 d'économie par an.",
+    "Comparez les primes LAMal 2026 par code postal. Trouvez la caisse maladie la moins chère selon votre profil, franchise et modèle. Données officielles OFSP — jusqu'à CHF 2 748 d'économie par an.",
   openGraph: {
     title: 'Comparateur de caisses maladie LAMal 2026',
-    description: "Primes LAMal 2026 par canton : comparez et économisez jusqu'à CHF 5 653 par an.",
+    description: "Primes LAMal 2026 par canton : comparez et économisez jusqu'à CHF 2 748 par an.",
     url: 'https://my-swiss-insurance.ch/sante/comparateur',
     type: 'article',
   },
@@ -50,7 +50,7 @@ const faqSchema = {
       name:    "Comment économiser sur sa prime LAMal ?",
       acceptedAnswer: {
         '@type': 'Answer',
-        text:    "Choisissez un modèle alternatif (médecin de famille, centre médical, télémédecine) pour jusqu'à 24% de réduction, augmentez votre franchise si vous êtes en bonne santé, et changez de caisse avant le 30 novembre.",
+        text:    "Choisissez un modèle alternatif (médecin de famille, centre médical, télémédecine) pour jusqu'à 19% de réduction, augmentez votre franchise si vous êtes en bonne santé, et changez de caisse avant le 30 novembre.",
       },
     },
     {

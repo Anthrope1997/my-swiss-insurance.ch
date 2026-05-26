@@ -5,16 +5,18 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
 import HeroStats from '@/components/ui/HeroStats'
 import AuthorBio from '@/components/ui/AuthorBio'
+import { economieMax, economieMoyenne, subsideMoyen } from '@/lib/sante/formules'
+import { formatChf } from '@/lib/shared/formatters'
 
 export const metadata: Metadata = {
   title: 'Primes LAMal 2026 : comparez et économisez — My Swiss Insurance',
   description:
-    'Comparez les primes LAMal 2026 gratuitement. Jusqu\'à CHF 5 653 d\'économie par an à Genève. 34 caisses, données OFSP officielles, résultat immédiat.',
+    'Comparez les primes LAMal 2026 gratuitement. Jusqu\'à CHF 2 748 d\'économie par an. 34 caisses, données OFSP officielles, résultat immédiat.',
   alternates: { canonical: 'https://my-swiss-insurance.ch/sante' },
   openGraph: {
     title: 'Primes LAMal 2026 : comparez et économisez',
     description:
-      'Jusqu\'à CHF 5 653 d\'économie par an. Comparez gratuitement 34 caisses LAMal. Données OFSP 2026.',
+      'Jusqu\'à CHF 2 748 d\'économie par an. Comparez gratuitement 34 caisses LAMal. Données OFSP 2026.',
     url: 'https://my-swiss-insurance.ch/sante',
     type: 'website',
   },
@@ -27,7 +29,7 @@ const faqItems = [
   },
   {
     question: 'Combien peut-on économiser en changeant de caisse LAMal ?',
-    answer: "Jusqu'à CHF 5 653 par an pour un adulte de 35 ans à Genève (franchise CHF 300, modèle standard, source OFSP 2026). Les 34 caisses agréées proposent les mêmes prestations de base à des prix très différents selon le canton.",
+    answer: "Jusqu'à CHF 2 748 par an pour un adulte de 35 ans (franchise CHF 300, modèle standard, source OFSP 2026). Les 34 caisses agréées proposent les mêmes prestations de base à des prix très différents selon le canton.",
   },
   {
     question: 'Qui a droit à un subside LAMal en Suisse ?',
@@ -61,9 +63,9 @@ const webSiteSchema = {
 // ── Données ──────────────────────────────────────────────────────────────────
 
 const stats = [
-  { value: 'CHF 5 653', label: 'Économie maximale par an',       sub: "Jusqu'à 55 % de réduction de prime LAMal"  },
-  { value: 'CHF 4 154', label: 'Économie moyenne par an',        sub: '56 % de réduction de prime LAMal'           },
-  { value: 'CHF 420',   label: 'Subside moyen versé en Suisse',  sub: '28 % des résidents en bénéficient'          },
+  { value: `CHF ${formatChf(economieMax() * 12)}`,     label: 'Économie maximale par an',  sub: 'Adulte 35 ans · F300 · standard · données OFSP 2026'           },
+  { value: `CHF ${formatChf(economieMoyenne() * 12)}`, label: 'Économie moyenne par an',   sub: 'Moyenne pondérée par région · adulte 35 ans · F300 · standard'  },
+  { value: `CHF ${formatChf(subsideMoyen())}`,         label: 'Subside mensuel moyen',     sub: '28 % des résidents en bénéficient'                             },
 ]
 
 const guides = [
@@ -97,7 +99,7 @@ const guides = [
       </svg>
     ),
     title: "Les 4 modèles d'assurance",
-    desc: "Standard, médecin de famille, centre médical, télémédecine : jusqu'à 24 % d'économie sur la prime",
+    desc: "Standard, médecin de famille, centre médical, télémédecine : jusqu'à 19 % d'économie sur la prime",
     href: '/sante/modeles',
   },
   {
@@ -155,7 +157,7 @@ export default function LamalPage() {
 
           <p className="text-[16px] text-slate leading-relaxed mb-8">
             Toutes les caisses couvrent les mêmes prestations de base — le prix seul diffère,
-            jusqu'à CHF 5 653 par an d'écart pour un même profil.
+            jusqu'à CHF 2 748 par an d'écart pour un même profil.
             Comparez gratuitement les primes 2026 et trouvez la caisse la moins chère pour votre situation.
           </p>
 
@@ -242,7 +244,7 @@ export default function LamalPage() {
               <p className="text-[13px] font-bold text-slate/60 uppercase tracking-wide mb-2">
                 Comparateur de primes
               </p>
-              <p className="text-2xl font-bold text-brand leading-none mb-0.5">CHF 5 653</p>
+              <p className="text-2xl font-bold text-brand leading-none mb-0.5">CHF 2 748</p>
               <p className="text-[16px] text-slate mb-6">d&apos;économie maximale en Suisse par an</p>
               <Link href="/sante/comparateur" className="flex items-center gap-1 mt-auto text-brand text-[16px] font-medium">
                 Comparer les primes
