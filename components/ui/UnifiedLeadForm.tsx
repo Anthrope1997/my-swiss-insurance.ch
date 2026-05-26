@@ -343,8 +343,11 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen, tagline
         }),
       })
       if (!res.ok) throw new Error()
-      setStatus('success')
-      if (redirectOnSuccess) router.push(redirectOnSuccess)
+      if (redirectOnSuccess) {
+        router.push(redirectOnSuccess)
+      } else {
+        setStatus('success')
+      }
     } catch {
       setStatus('error')
       setError('Une erreur est survenue. Veuillez réessayer.')
