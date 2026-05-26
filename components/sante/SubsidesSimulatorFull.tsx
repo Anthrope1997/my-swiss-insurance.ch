@@ -8,6 +8,7 @@ import {
 } from '@/lib/sante/calcul-subside'
 import { SUBSIDES_2026, type CantonSubside2026 } from '@/data/sante/cantons'
 import LeadFormModal from '@/components/ui/LeadFormModal'
+import UnifiedCombobox from '@/components/ui/UnifiedCombobox'
 import fr from '@/dictionaries/fr.json'
 
 // ─── Data ────────────────────────────────────────────────────────────────────
@@ -155,17 +156,6 @@ function IconPlaneArrival() {
   )
 }
 
-function Chevron() {
-  return (
-    <svg
-      className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate pointer-events-none"
-      fill="none" stroke="currentColor" viewBox="0 0 24 24"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-    </svg>
-  )
-}
-
 // ─── Form state ───────────────────────────────────────────────────────────────
 
 interface FormState {
@@ -262,21 +252,18 @@ export default function SubsidesSimulatorFull() {
             <label className="block text-[16px] font-medium text-ink mb-2">
               {t.form.canton}
             </label>
-            <div className="relative">
-              <select
-                value={form.canton}
-                onChange={e => set({ canton: e.target.value, revenu: '' })}
-                className="select-field pr-9"
-              >
-                <option value="">{t.form.cantonPlaceholder}</option>
-                {ALL_CODES.map(c => (
-                  <option key={c} value={c}>
-                    {c} — {SUBSIDES_2026[c as keyof typeof SUBSIDES_2026].nom}
-                  </option>
-                ))}
-              </select>
-              <Chevron />
-            </div>
+            <UnifiedCombobox
+              options={ALL_CODES.map(c => ({
+                value: c,
+                label: SUBSIDES_2026[c as keyof typeof SUBSIDES_2026].nom,
+                abbreviation: c,
+              }))}
+              value={form.canton}
+              onChange={v => set({ canton: v, revenu: '' })}
+              placeholder={t.form.cantonPlaceholder}
+              searchable={true}
+              showAbbreviation={true}
+            />
             {showNoFormula && cantonData && (
               <p className="text-[16px] text-slate/60 mt-1.5">{t.form.noFormula}</p>
             )}
@@ -311,17 +298,16 @@ export default function SubsidesSimulatorFull() {
             <label className="block text-[16px] font-medium text-ink mb-2">
               {t.form.age}
             </label>
-            <div className="relative">
-              <select
-                value={form.isJeune ? 'jeune' : 'adulte'}
-                onChange={e => set({ isJeune: e.target.value === 'jeune' })}
-                className="select-field pr-9"
-              >
-                <option value="adulte">{t.form.adulte}</option>
-                <option value="jeune">{t.form.jeune}</option>
-              </select>
-              <Chevron />
-            </div>
+            <UnifiedCombobox
+              options={[
+                { value: 'adulte', label: t.form.adulte },
+                { value: 'jeune',  label: t.form.jeune  },
+              ]}
+              value={form.isJeune ? 'jeune' : 'adulte'}
+              onChange={v => set({ isJeune: v === 'jeune' })}
+              searchable={false}
+              showAbbreviation={false}
+            />
           </div>
 
           {/* Situation */}
@@ -329,17 +315,16 @@ export default function SubsidesSimulatorFull() {
             <label className="block text-[16px] font-medium text-ink mb-2">
               {t.form.situation}
             </label>
-            <div className="relative">
-              <select
-                value={form.situation}
-                onChange={e => set({ situation: e.target.value as Situation })}
-                className="select-field pr-9"
-              >
-                <option value="seul">{t.form.seul}</option>
-                <option value="couple">{t.form.couple}</option>
-              </select>
-              <Chevron />
-            </div>
+            <UnifiedCombobox
+              options={[
+                { value: 'seul',   label: t.form.seul   },
+                { value: 'couple', label: t.form.couple  },
+              ]}
+              value={form.situation}
+              onChange={v => set({ situation: v as Situation })}
+              searchable={false}
+              showAbbreviation={false}
+            />
           </div>
 
           {/* Enfants */}
@@ -347,20 +332,16 @@ export default function SubsidesSimulatorFull() {
             <label className="block text-[16px] font-medium text-ink mb-2">
               {t.form.enfants}
             </label>
-            <div className="relative">
-              <select
-                value={form.nbEnfants}
-                onChange={e => set({ nbEnfants: parseInt(e.target.value) })}
-                className="select-field pr-9"
-              >
-                {[0, 1, 2, 3, 4].map(n => (
-                  <option key={n} value={n}>
-                    {n === 0 ? t.form.aucunEnfant : `${n} enfant${n > 1 ? 's' : ''}`}
-                  </option>
-                ))}
-              </select>
-              <Chevron />
-            </div>
+            <UnifiedCombobox
+              options={[0, 1, 2, 3, 4].map(n => ({
+                value: String(n),
+                label: n === 0 ? t.form.aucunEnfant : `${n} enfant${n > 1 ? 's' : ''}`,
+              }))}
+              value={String(form.nbEnfants)}
+              onChange={v => set({ nbEnfants: parseInt(v) })}
+              searchable={false}
+              showAbbreviation={false}
+            />
           </div>
         </div>
 

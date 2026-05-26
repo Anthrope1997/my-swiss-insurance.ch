@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import CantonCombobox, { CANTON_NAMES } from '@/components/ui/CantonCombobox'
+import UnifiedCombobox from '@/components/ui/UnifiedCombobox'
 import fr from '@/dictionaries/fr.json'
 
 const d = fr
@@ -479,22 +480,15 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen, tagline
                 </div>
                 <div>
                   <label className={`block text-[16px] font-medium text-ink ${fullscreen ? 'mb-1' : 'mb-1.5'}`}>{d.form.champs.trancheAge}</label>
-                  <div className="relative">
-                    <select
-                      value={form.trancheAge}
-                      onChange={e => set({ trancheAge: e.target.value })}
-                      className={`select-field ${fullscreen ? '!h-10' : '!h-11'} pr-9`}
-                    >
-                      <option value="">{d.form.champs.selectPlaceholder}</option>
-                      {TRANCHES_AGE.map(t => (
-                        <option key={t.value} value={t.value}>{t.label}</option>
-                      ))}
-                    </select>
-                    <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate pointer-events-none"
-                      fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </div>
+                  <UnifiedCombobox
+                    options={TRANCHES_AGE.map(t => ({ value: t.value, label: t.label }))}
+                    value={form.trancheAge}
+                    onChange={v => set({ trancheAge: v })}
+                    placeholder={d.form.champs.selectPlaceholder}
+                    searchable={false}
+                    showAbbreviation={false}
+                    className={fullscreen ? '!h-10' : '!h-11'}
+                  />
                 </div>
               </div>
             )}
@@ -504,17 +498,15 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen, tagline
                 <div className={`grid grid-cols-2 ${fullscreen ? 'gap-2' : 'gap-3'}`}>
                   <div>
                     <label className={`block text-[16px] font-medium text-ink ${fullscreen ? 'mb-1' : 'mb-1.5'}`}>{d.form.champs.pays}</label>
-                    <input
-                      type="text"
-                      list="pays-frontaliers-list"
-                      placeholder="France"
+                    <UnifiedCombobox
+                      options={PAYS_FRONTALIERS.map(p => ({ value: p, label: p }))}
                       value={form.pays}
-                      onChange={e => set({ pays: e.target.value })}
-                      className={`input-field ${fullscreen ? '!h-10' : '!h-11'}`}
+                      onChange={v => set({ pays: v })}
+                      placeholder="France"
+                      searchable={false}
+                      showAbbreviation={false}
+                      className={fullscreen ? '!h-10' : '!h-11'}
                     />
-                    <datalist id="pays-frontaliers-list">
-                      {PAYS_FRONTALIERS.map(p => <option key={p} value={p} />)}
-                    </datalist>
                   </div>
                   <div>
                     <label className={`block text-[16px] font-medium text-ink ${fullscreen ? 'mb-1' : 'mb-1.5'}`}>{d.form.champs.cantonTravail}</label>
@@ -527,22 +519,15 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen, tagline
                 </div>
                 <div>
                   <label className={`block text-[16px] font-medium text-ink ${fullscreen ? 'mb-1' : 'mb-1.5'}`}>{d.form.champs.trancheAge}</label>
-                  <div className="relative">
-                    <select
-                      value={form.trancheAge}
-                      onChange={e => set({ trancheAge: e.target.value })}
-                      className={`select-field ${fullscreen ? '!h-10' : '!h-11'} pr-9`}
-                    >
-                      <option value="">{d.form.champs.selectPlaceholder}</option>
-                      {TRANCHES_AGE.map(t => (
-                        <option key={t.value} value={t.value}>{t.label}</option>
-                      ))}
-                    </select>
-                    <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate pointer-events-none"
-                      fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </div>
+                  <UnifiedCombobox
+                    options={TRANCHES_AGE.map(t => ({ value: t.value, label: t.label }))}
+                    value={form.trancheAge}
+                    onChange={v => set({ trancheAge: v })}
+                    placeholder={d.form.champs.selectPlaceholder}
+                    searchable={false}
+                    showAbbreviation={false}
+                    className={fullscreen ? '!h-10' : '!h-11'}
+                  />
                 </div>
               </div>
             )}

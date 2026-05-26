@@ -8,6 +8,7 @@ import FAQ from '@/components/ui/FAQ'
 import UnifiedLeadForm from '@/components/ui/UnifiedLeadForm'
 import HeroStats from '@/components/ui/HeroStats'
 import LeadFormModal from '@/components/ui/LeadFormModal'
+import UnifiedCombobox from '@/components/ui/UnifiedCombobox'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -309,22 +310,16 @@ export default function ComparateurClient() {
                 <label className="block text-[13px] font-medium text-ink mb-1.5">
                   Franchise
                 </label>
-                <div className="relative">
-                  <select
-                    value={franchise}
-                    onChange={e => setFranchise(Number(e.target.value))}
-                    className="select-field pr-9"
-                  >
-                    {franchises.map(f => (
-                      <option key={f} value={f}>
-                        {f.toLocaleString('fr-CH')} CHF
-                      </option>
-                    ))}
-                  </select>
-                  <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </div>
+                <UnifiedCombobox
+                  options={franchises.map(f => ({
+                    value: String(f),
+                    label: `CHF ${f.toLocaleString('fr-CH')}`,
+                  }))}
+                  value={String(franchise)}
+                  onChange={v => setFranchise(Number(v))}
+                  searchable={false}
+                  showAbbreviation={false}
+                />
               </div>
 
               {/* Modèle */}
@@ -333,20 +328,16 @@ export default function ComparateurClient() {
                   Modèle d&apos;assurance
                   <InfoTooltip text={"Standard : libre choix du médecin et spécialiste.\nMédecin de famille (−15 %) : passage obligatoire par votre médecin traitant.\nCentre médical (−18 %) : soins via un réseau de centres médicaux agréés.\nTélémédecine (−20 %) : première consultation par téléphone.\nLes réductions varient selon la caisse et le canton."} />
                 </label>
-                <div className="relative">
-                  <select
-                    value={modele}
-                    onChange={e => setModele(e.target.value as Modele)}
-                    className="select-field pr-9"
-                  >
-                    {(Object.entries(MODELE_LABELS) as [Modele, string][]).map(([k, v]) => (
-                      <option key={k} value={k}>{v}</option>
-                    ))}
-                  </select>
-                  <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </div>
+                <UnifiedCombobox
+                  options={(Object.entries(MODELE_LABELS) as [Modele, string][]).map(([k, v]) => ({
+                    value: k,
+                    label: v,
+                  }))}
+                  value={modele}
+                  onChange={v => setModele(v as Modele)}
+                  searchable={false}
+                  showAbbreviation={false}
+                />
               </div>
             </div>
 
@@ -358,20 +349,17 @@ export default function ComparateurClient() {
                 <label className="block text-[13px] font-medium text-ink mb-1.5">
                   Profil
                 </label>
-                <div className="relative">
-                  <select
-                    value={profil}
-                    onChange={e => setProfil(e.target.value as Profil)}
-                    className="select-field pr-9"
-                  >
-                    <option value="adulte">Adulte (26 ans et plus)</option>
-                    <option value="jeune_adulte">Jeune adulte (19 à 25 ans)</option>
-                    <option value="enfant">Enfant (0 à 18 ans)</option>
-                  </select>
-                  <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </div>
+                <UnifiedCombobox
+                  options={[
+                    { value: 'adulte',      label: 'Adulte (26 ans et plus)' },
+                    { value: 'jeune_adulte', label: 'Jeune adulte (19 à 25 ans)' },
+                    { value: 'enfant',      label: 'Enfant (0 à 18 ans)' },
+                  ]}
+                  value={profil}
+                  onChange={v => setProfil(v as Profil)}
+                  searchable={false}
+                  showAbbreviation={false}
+                />
               </div>
 
               {/* Couverture accident (masquée pour enfant) */}
@@ -381,19 +369,16 @@ export default function ComparateurClient() {
                     Couverture accident
                     <InfoTooltip text="Les salariés travaillant plus de 8 heures par semaine chez un employeur sont couverts pour les accidents via la LAA. Si vous êtes indépendant ou travaillez moins de 8h/semaine, sélectionnez 'Avec couverture accident'." />
                   </label>
-                  <div className="relative">
-                    <select
-                      value={accident ? 'oui' : 'non'}
-                      onChange={e => setAccident(e.target.value === 'oui')}
-                      className="select-field pr-9"
-                    >
-                      <option value="non">Sans couverture accident</option>
-                      <option value="oui">Avec couverture accident</option>
-                    </select>
-                    <svg className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </div>
+                  <UnifiedCombobox
+                    options={[
+                      { value: 'non', label: 'Sans couverture accident' },
+                      { value: 'oui', label: 'Avec couverture accident' },
+                    ]}
+                    value={accident ? 'oui' : 'non'}
+                    onChange={v => setAccident(v === 'oui')}
+                    searchable={false}
+                    showAbbreviation={false}
+                  />
                 </div>
               )}
             </div>
