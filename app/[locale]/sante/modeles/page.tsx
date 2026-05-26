@@ -8,6 +8,14 @@ import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import HeroStats from '@/components/ui/HeroStats'
 import { modeleEconomieMax, modeleEconomieMoyenne, primeMoyenne } from '@/lib/sante/formules'
 
+const _base = primeMoyenne()
+const hamMaxPct = Math.round(modeleEconomieMax('HAM') / _base * 100)   // 16
+const hmoMaxPct = Math.round(modeleEconomieMax('HMO') / _base * 100)   // 19
+const divMaxPct = Math.round(modeleEconomieMax('DIV') / _base * 100)   // 16
+const hamMoyPct = Math.round(modeleEconomieMoyenne('HAM') / _base * 100)  // 9
+const hmoMoyPct = Math.round(modeleEconomieMoyenne('HMO') / _base * 100)  // 12
+const divMoyPct = Math.round(modeleEconomieMoyenne('DIV') / _base * 100)  // 10
+
 export const metadata: Metadata = {
   title: 'Modèles LAMal 2026 : standard, médecin de famille, centre médical, télémédecine',
   description:
@@ -36,7 +44,7 @@ const faqItems = [
   {
     question: "Quel modèle LAMal permet d'économiser le plus ?",
     answer:
-      "Le modèle télémédecine offre la plus grande réduction de prime (jusqu'à 24%) selon la caisse et le canton. Le modèle médecin de famille offre jusqu'à 20%. Les économies réelles dépendent de votre caisse et de votre région. Le modèle centre médical peut être très avantageux en ville mais son réseau est limité en zone rurale.",
+      `Le modèle centre médical offre la plus grande réduction de prime (jusqu'à ${hmoMaxPct}%) selon les données OFSP 2026. Les modèles médecin de famille et télémédecine offrent jusqu'à ${hamMaxPct}%. Les économies réelles dépendent de votre caisse et de votre région.`,
   },
   {
     question: "Peut-on changer de modèle LAMal en cours d'année ?",
@@ -90,33 +98,33 @@ const modeles = [
   {
     id: 'hausarzt',
     title: 'Médecin de famille',
-    reduction: "jusqu'à −20 %",
+    reduction: `jusqu'à −${hamMaxPct} %`,
     badgeStyle: '',
     borderColor: 'border-brand',
-    desc: "Vous consultez d'abord votre médecin de famille, qui vous oriente si besoin vers un spécialiste. La consultation chez le généraliste est toujours prioritaire. Réduction moyenne de 11 % (jusqu'à 20 %) selon la caisse et le canton.",
-    avantages: ['Suivi médical coordonné', "Réduction de prime jusqu'à 20 %", 'Médecin de confiance établi'],
+    desc: `Vous consultez d'abord votre médecin de famille, qui vous oriente si besoin vers un spécialiste. La consultation chez le généraliste est toujours prioritaire. Réduction moyenne de ${hamMoyPct} % (jusqu'à ${hamMaxPct} %) selon la caisse et le canton.`,
+    avantages: ['Suivi médical coordonné', `Réduction de prime jusqu'à ${hamMaxPct} %`, 'Médecin de confiance établi'],
     inconvenients: ['Passage obligatoire par le médecin de famille', 'Accès aux spécialistes moins direct'],
     ideal: 'Vous avez déjà un médecin de famille et souhaitez maintenir une relation de confiance tout en économisant.',
   },
   {
     id: 'hmo',
     title: 'Centre médical',
-    reduction: "jusqu'à −20 %",
+    reduction: `jusqu'à −${hmoMaxPct} %`,
     badgeStyle: '',
     borderColor: 'border-brand',
-    desc: "Vous êtes rattaché à un réseau fermé de médecins agréés (cabinet de groupe ou centre médical). Vous devez d'abord contacter un médecin de ce réseau avant tout spécialiste. Réduction moyenne de 12 % (de 3 % à 20 %) selon la région.",
-    avantages: ["Réduction de prime jusqu'à 20 %", 'Coordination interne des soins', 'Qualité homogène du réseau'],
+    desc: `Vous êtes rattaché à un réseau fermé de médecins agréés (cabinet de groupe ou centre médical). Vous devez d'abord contacter un médecin de ce réseau avant tout spécialiste. Réduction moyenne de ${hmoMoyPct} % (jusqu'à ${hmoMaxPct} %) selon la région.`,
+    avantages: [`Réduction de prime jusqu'à ${hmoMaxPct} %`, 'Coordination interne des soins', 'Qualité homogène du réseau'],
     inconvenients: ['Réseau limité en zones rurales', 'Liberté de choix réduite', 'Changement de médecin complexe'],
     ideal: "Vous habitez une grande ville avec un réseau dense de centres médicaux et appréciez la médecine de groupe.",
   },
   {
     id: 'telmed',
     title: 'Télémédecine',
-    reduction: "jusqu'à −24 %",
+    reduction: `jusqu'à −${divMaxPct} %`,
     badgeStyle: '',
     borderColor: 'border-brand',
-    desc: "Première consultation par téléphone ou application (Medgate, Medi24, Doctorline...) avant tout rendez-vous en cabinet ou aux urgences non vitales. Disponible 24 heures sur 24, 7 jours sur 7. Réduction moyenne de 12 % (de 5 % à 24 %) selon la caisse.",
-    avantages: ["Plus grande réduction de prime (jusqu'à 24 %)", 'Disponible 24 heures sur 24', 'Pratique pour les actifs et familles'],
+    desc: `Première consultation par téléphone ou application (Medgate, Medi24, Doctorline...) avant tout rendez-vous en cabinet ou aux urgences non vitales. Disponible 24 heures sur 24, 7 jours sur 7. Réduction moyenne de ${divMoyPct} % (jusqu'à ${divMaxPct} %) selon la caisse.`,
+    avantages: [`Réduction de prime jusqu'à ${divMaxPct} %`, 'Disponible 24 heures sur 24', 'Pratique pour les actifs et familles'],
     inconvenients: ['Passage obligatoire par la hotline', 'Dépendance aux outils numériques', 'Pas toujours adapté aux urgences'],
     ideal: "Vous êtes à l'aise avec la technologie, rarement malade ou cherchez la réduction maximale.",
   },
@@ -124,8 +132,8 @@ const modeles = [
 
 const heroStats = [
   { value: '4',        label: "Modèles d'assurance",                    sub: 'Standard, médecin de famille, centre médical, télémédecine' },
-  { value: '24 %', label: 'Réduction maximale en télémédecine',         sub: 'Selon caisse et canton'                    },
-  { value: '11 %', label: 'Réduction moyenne en changeant de modèle', sub: 'Adulte 35 ans'                           },
+  { value: `${divMaxPct} %`, label: 'Réduction maximale en télémédecine',   sub: 'Adulte 35 ans · F300 · standard · données OFSP 2026' },
+  { value: `${Math.round((hamMoyPct + hmoMoyPct + divMoyPct) / 3)} %`, label: 'Réduction moyenne en changeant de modèle', sub: 'Adulte 35 ans' },
 ]
 
 const toc = [
@@ -218,7 +226,7 @@ export default function ModelesPage() {
               <p className="article-p">
                 Tous les modèles couvrent les mêmes prestations LAMal. La différence porte uniquement
                 sur le premier interlocuteur médical : libre accès aux spécialistes pour le standard, consultation
-                obligatoire imposée pour les trois modèles alternatifs, qui offrent en contrepartie jusqu&apos;à 24 % de réduction de prime.
+                obligatoire imposée pour les trois modèles alternatifs, qui offrent en contrepartie jusqu&apos;à 19 % de réduction de prime.
               </p>
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-6">
                 <table className="stripe-table w-full">
@@ -232,9 +240,9 @@ export default function ModelesPage() {
                   </thead>
                   <tbody>
                     {[
-                      ['Télémédecine', "jusqu'à −24 %", 'Télémédecine (application ou téléphone)', 'Partout'],
-                      ['Centre médical', "jusqu'à −20 %", 'Réseau de cabinets agréés', 'Grandes villes'],
-                      ["Médecin de famille", "jusqu'à −20 %", 'Médecin généraliste attitré', 'Très large'],
+                      ['Centre médical', `jusqu'à −${hmoMaxPct} %`, 'Réseau de cabinets agréés', 'Grandes villes'],
+                      ['Télémédecine', `jusqu'à −${divMaxPct} %`, 'Télémédecine (application ou téléphone)', 'Partout'],
+                      ["Médecin de famille", `jusqu'à −${hamMaxPct} %`, 'Médecin généraliste attitré', 'Très large'],
                       ['Standard', 'Aucune', 'Libre', 'Partout'],
                     ].map(([modele, reduction, entree, dispo], i) => (
                       <tr key={i}>

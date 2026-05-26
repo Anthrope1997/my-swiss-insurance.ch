@@ -39,7 +39,7 @@ const faqItems = [
   },
   {
     question: 'Quelle franchise LAMal choisir ?',
-    answer: `Choisissez la franchise CHF 2 500 si vous êtes en bonne santé et consultez peu : vous économisez environ CHF 119 par mois sur la prime à Genève. Optez pour la franchise CHF 300 si vos dépenses annuelles dépassent CHF ${breakEven({ canton: 'geneve' }).toLocaleString('fr-CH')} à Genève (CHF ${breakEven().toLocaleString('fr-CH')} en moyenne suisse).`,
+    answer: `Choisissez la franchise CHF 2 500 si vous êtes en bonne santé et consultez peu : vous économisez environ CHF 120 par mois sur la prime. Optez pour la franchise CHF 300 si vos dépenses annuelles dépassent CHF ${breakEven({ canton: 'GE' }).toLocaleString('fr-CH')} à Genève (CHF ${breakEven().toLocaleString('fr-CH')} en moyenne suisse).`,
   },
   {
     question: "Peut-on changer de caisse maladie en cours d'année ?",
@@ -77,33 +77,19 @@ const faqSchema = {
   })),
 }
 
-const premiums = [
-  { code: 'GE', name: 'Genève',             prime: 710.41 },
-  { code: 'TI', name: 'Tessin',             prime: 686.10 },
-  { code: 'BS', name: 'Bâle-Ville',         prime: 668.40 },
-  { code: 'NE', name: 'Neuchâtel',          prime: 663.19 },
-  { code: 'VD', name: 'Vaud',               prime: 637.64 },
-  { code: 'JU', name: 'Jura',               prime: 633.21 },
-  { code: 'BL', name: 'Bâle-Campagne',      prime: 625.02 },
-  { code: 'BE', name: 'Berne',              prime: 578.26 },
-  { code: 'SO', name: 'Soleure',            prime: 560.35 },
-  { code: 'SH', name: 'Schaffhouse',        prime: 535.68 },
-  { code: 'ZH', name: 'Zurich',             prime: 530.65 },
-  { code: 'AG', name: 'Argovie',            prime: 527.98 },
-  { code: 'VS', name: 'Valais',             prime: 527.58 },
-  { code: 'FR', name: 'Fribourg',           prime: 522.27 },
-  { code: 'GR', name: 'Grisons',            prime: 517.47 },
-  { code: 'AR', name: 'Appenzell Rh.-Ext.', prime: 508.83 },
-  { code: 'TG', name: 'Thurgovie',          prime: 508.64 },
-  { code: 'LU', name: 'Lucerne',            prime: 499.87 },
-  { code: 'GL', name: 'Glaris',             prime: 498.01 },
-  { code: 'SG', name: 'Saint-Gall',         prime: 495.59 },
-  { code: 'SZ', name: 'Schwyz',             prime: 484.88 },
-  { code: 'OW', name: 'Obwald',             prime: 467.13 },
-  { code: 'UR', name: 'Uri',                prime: 463.33 },
-  { code: 'NW', name: 'Nidwald',            prime: 459.98 },
-  { code: 'AI', name: 'Appenzell Rh.-Int.', prime: 424.35 },
-  { code: 'ZG', name: 'Zoug',              prime: 403.06 },
+const CANTON_NAMES: Record<string, string> = {
+  GE: 'Genève',    TI: 'Tessin',             BS: 'Bâle-Ville',        NE: 'Neuchâtel',
+  VD: 'Vaud',      JU: 'Jura',               BL: 'Bâle-Campagne',     BE: 'Berne',
+  SO: 'Soleure',   SH: 'Schaffhouse',         ZH: 'Zurich',            AG: 'Argovie',
+  VS: 'Valais',    FR: 'Fribourg',            GR: 'Grisons',           AR: 'Appenzell Rh.-Ext.',
+  TG: 'Thurgovie', LU: 'Lucerne',             GL: 'Glaris',            SG: 'Saint-Gall',
+  SZ: 'Schwyz',    OW: 'Obwald',              UR: 'Uri',               NW: 'Nidwald',
+  AI: 'Appenzell Rh.-Int.', ZG: 'Zoug',
+}
+
+const premiums = Object.entries(CANTON_NAMES)
+  .map(([code, name]) => ({ code, name, prime: primeMoyenne({ canton: code }) }))
+  .sort((a, b) => b.prime - a.prime)
 ]
 
 const franchises = [
@@ -127,10 +113,10 @@ const assureurs = [
 ]
 
 const economies = [
-  { canton: 'Berne',   mensuel: 'CHF 371', annuel: 'CHF 4 447' },
-  { canton: 'Genève',  mensuel: 'CHF 471', annuel: 'CHF 5 653' },
-  { canton: 'Vaud',    mensuel: 'CHF 352', annuel: 'CHF 4 220' },
-  { canton: 'Zurich',  mensuel: 'CHF 357', annuel: 'CHF 4 285' },
+  { canton: 'Berne',  mensuel: `CHF ${economieMax({ canton: 'BE' }).toLocaleString('fr-CH')}`, annuel: `CHF ${(economieMax({ canton: 'BE' }) * 12).toLocaleString('fr-CH')}` },
+  { canton: 'Genève', mensuel: `CHF ${economieMax({ canton: 'GE' }).toLocaleString('fr-CH')}`, annuel: `CHF ${(economieMax({ canton: 'GE' }) * 12).toLocaleString('fr-CH')}` },
+  { canton: 'Vaud',   mensuel: `CHF ${economieMax({ canton: 'VD' }).toLocaleString('fr-CH')}`, annuel: `CHF ${(economieMax({ canton: 'VD' }) * 12).toLocaleString('fr-CH')}` },
+  { canton: 'Zurich', mensuel: `CHF ${economieMax({ canton: 'ZH' }).toLocaleString('fr-CH')}`, annuel: `CHF ${(economieMax({ canton: 'ZH' }) * 12).toLocaleString('fr-CH')}` },
 ]
 
 const toc = [
@@ -147,7 +133,7 @@ const toc = [
 ]
 
 const heroStats = [
-  { value: 'CHF 4 154',  label: 'Économie moyenne par an',      sub: '49 % de réduction de prime LAMal'                      },
+  { value: `CHF ${formatChf(economieMoyenne() * 12)}`, label: 'Économie moyenne par an', sub: 'Adulte 35 ans · F300 · standard · données OFSP 2026' },
   { value: '6',          label: 'Niveaux de franchise',          sub: 'De CHF 300 à CHF 2 500 pour un adulte'                      },
   { value: '4',          label: 'Modèles de soins',              sub: 'Standard, médecin de famille, centre médical, télémédecine'  },
 ]
@@ -157,12 +143,12 @@ const enBref = [
     <strong className="font-medium text-ink">34 caisses agréées</strong>
     {" couvrent les mêmes soins de base, seul le prix de la prime change."}</>,
   <>{"Économisez jusqu'à "}
-    <strong className="font-medium text-ink">CHF 5 653 par an</strong>
+    <strong className="font-medium text-ink">{`CHF ${formatChf(economieMax() * 12)} par an`}</strong>
     {" sur votre assurance LAMal en comparant les assureurs, les franchises et les modèles d'assurance disponibles."}</>,
   <>{"Vous pouvez aussi avoir droit à un subside selon votre situation : "}
     <strong className="font-medium text-ink">28 % des résidents en bénéficient</strong>
     {". Cette subvention cantonale réduit votre prime LAMal et représente en moyenne "}
-    <strong className="font-medium text-ink">CHF 5 040 par an</strong>
+    <strong className="font-medium text-ink">{`CHF ${formatChf(subsideMoyen() * 12)} par an`}</strong>
     {"."}</>,
 ]
 
@@ -323,7 +309,7 @@ export default function GuideLamalPage() {
                             {c.name}
                           </div>
                         </td>
-                        <td className="font-semibold text-ink whitespace-nowrap">CHF {c.prime.toFixed(2)}</td>
+                        <td className="font-semibold text-ink whitespace-nowrap">CHF {c.prime.toLocaleString('fr-CH')}</td>
                         <td className="text-slate whitespace-nowrap">
                           CHF {(c.prime * 12).toLocaleString('fr-CH', { maximumFractionDigits: 0 }).replace(/['\u2019\u202F]/g, ' ')}
                         </td>
@@ -333,7 +319,7 @@ export default function GuideLamalPage() {
                 </table>
               </div>
               <p className="text-[16px] text-slate/60 mt-3">
-                Adultes 26 ans et +, modèle standard, franchise CHF 300. Source : OFSP, primes moyennes cantonales 2026.
+                Adulte 35 ans · modèle standard · franchise CHF 300 · moyennes pondérées par population · données OFSP 2026.
               </p>
 
               <div className="mt-6">
@@ -420,21 +406,21 @@ export default function GuideLamalPage() {
                   },
                   {
                     title: 'Médecin de famille',
-                    reduction: "jusqu'à −20%",
+                    reduction: "jusqu'à −16%",
                     border: 'border-brand',
-                    desc: "Vous consultez d'abord votre médecin de famille, qui vous oriente si besoin vers un spécialiste. Réduction moyenne de 11% (jusqu'à −20%) selon la caisse et le canton.",
+                    desc: "Vous consultez d'abord votre médecin de famille, qui vous oriente si besoin vers un spécialiste. Réduction moyenne de 9% (jusqu'à −16%) selon la caisse et le canton.",
                   },
                   {
                     title: 'Centre médical',
-                    reduction: "jusqu'à −20%",
+                    reduction: "jusqu'à −19%",
                     border: 'border-brand',
-                    desc: "Vous êtes rattaché à un réseau fermé de médecins agréés (cabinet ou centre médical). Réseau limité en zones rurales. Réduction moyenne de 12% (de −3% à −20%) selon la région.",
+                    desc: "Vous êtes rattaché à un réseau fermé de médecins agréés (cabinet ou centre médical). Réseau limité en zones rurales. Réduction moyenne de 12% (jusqu'à −19%) selon la région.",
                   },
                   {
                     title: 'Télémédecine (conseil téléphonique)',
-                    reduction: "jusqu'à −24%",
+                    reduction: "jusqu'à −16%",
                     border: 'border-brand',
-                    desc: 'Première consultation par téléphone ou application avant tout rendez-vous en cabinet (Medgate, Medi24...). Disponible 24 heures sur 24. Réduction moyenne de 12% (de −5% à −24%) selon la caisse.',
+                    desc: 'Première consultation par téléphone ou application avant tout rendez-vous en cabinet (Medgate, Medi24...). Disponible 24 heures sur 24. Réduction moyenne de 10% (jusqu'à −16%) selon la caisse.',
                   },
                 ].map((m, i) => (
                   <div key={i} className={`bg-white border ${m.border} border-l-4 rounded-[8px] p-5`}>
