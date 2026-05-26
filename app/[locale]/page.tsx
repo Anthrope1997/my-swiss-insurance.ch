@@ -43,7 +43,7 @@ const faqSchema = {
       name: 'Qui a droit à un subside LAMal en Suisse ?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: '25 à 30 % de la population suisse bénéficie d\'une réduction individuelle des primes (subside). Les conditions varient selon le canton et le revenu déterminant. Un simulateur est disponible sur my-swiss-insurance.ch.',
+        text: '28 % de la population suisse bénéficient d\'une réduction individuelle des primes (subside). Les conditions varient selon le canton et le revenu déterminant. Un simulateur est disponible sur my-swiss-insurance.ch.',
       },
     },
   ],
@@ -65,9 +65,9 @@ const webSiteSchema = {
 // ── Données ──────────────────────────────────────────────────────────────────
 
 const stats = [
-  { value: "5'653 CHF", label: 'Économie annuelle possible', sub: 'à Genève, tous profils' },
+  { value: "CHF 5 653", label: 'Économie annuelle possible', sub: 'à Genève, tous profils' },
   { value: '34',        label: 'Caisses agréées',            sub: 'données OFSP 2026'        },
-  { value: '25 à 30 %', label: 'Bénéficiaires de subsides',  sub: 'de la population suisse'  },
+  { value: '28 %',      label: 'Bénéficiaires de subsides',  sub: 'de la population suisse'  },
 ]
 
 const guides = [
@@ -154,10 +154,10 @@ const situations = [
 ]
 
 const cantonCards = [
-  { nom: 'Zurich',  primeMin: '489', economieAn: "4'285", href: '/sante/canton/zurich' },
-  { nom: 'Berne',   primeMin: '533', economieAn: "4'447",   href: '/sante/canton/berne'  },
-  { nom: 'Vaud',    primeMin: '579', economieAn: "4'220", href: '/sante/canton/vaud'   },
-  { nom: 'Genève',  primeMin: '634', economieAn: "5'653", href: '/sante/canton/geneve' },
+  { nom: 'Zurich',  primeMin: '489', economieAn: "4 285", href: '/sante/canton/zurich' },
+  { nom: 'Berne',   primeMin: '533', economieAn: "4 447", href: '/sante/canton/berne'  },
+  { nom: 'Vaud',    primeMin: '579', economieAn: "4 220", href: '/sante/canton/vaud'   },
+  { nom: 'Genève',  primeMin: '634', economieAn: "5 653", href: '/sante/canton/geneve' },
 ]
 
 const aproposFaits = [
@@ -237,7 +237,7 @@ export default function HomePage() {
               Tout comprendre sur l'assurance maladie suisse
             </h2>
             <p className="text-[16px] text-slate leading-relaxed">
-              La LAMal est obligatoire pour tous les résidents en Suisse depuis 1996. Franchises,
+              L'assurance maladie de base LAMal est obligatoire pour tous les résidents en Suisse depuis 1996. Franchises,
               modèles alternatifs, subsides cantonaux : nos guides couvrent chaque aspect avec
               des données officielles OFSP.
             </p>
@@ -297,7 +297,7 @@ export default function HomePage() {
 
           <div className="max-w-2xl mb-12">
             <h2 className="text-3xl font-bold text-brand leading-tight mb-4">
-              Des conseils adaptés à votre profil
+              Conseils adaptés à votre profil
             </h2>
             <p className="text-[16px] text-slate leading-relaxed">
               Votre situation personnelle détermine la stratégie LAMal optimale. Franchise, modèle
@@ -364,12 +364,12 @@ export default function HomePage() {
                            hover:border-brand hover:shadow-md transition-all duration-200">
                 <p className="font-bold text-ink text-[22px] mb-1">{c.nom}</p>
                 <p className="text-slate text-[13px] mb-4">
-                  À partir de <span className="font-semibold text-ink">{c.primeMin} CHF</span>/mois
+                  À partir de <span className="font-semibold text-ink">CHF {c.primeMin}</span>/mois
                 </p>
                 <div className="bg-blue-light2 rounded-lg px-3 py-2 mb-5">
                   <p className="text-[12px] text-brand font-medium">Économie possible</p>
                   <p className="text-[18px] font-bold text-ink leading-tight">
-                    {c.economieAn} CHF/an
+                    CHF {c.economieAn}/an
                   </p>
                 </div>
                 <div className="mt-auto flex items-center gap-1 text-[13px] font-medium text-brand">
@@ -402,7 +402,7 @@ export default function HomePage() {
 
           <div className="max-w-2xl mb-12">
             <h2 className="text-3xl font-bold text-brand leading-tight mb-4">
-              Une source de référence sur la LAMal en Suisse
+              Source de référence sur la LAMal en Suisse
             </h2>
             <p className="text-[16px] text-slate leading-relaxed">
               My Swiss Insurance publie des données officielles OFSP pour aider les résidents,
