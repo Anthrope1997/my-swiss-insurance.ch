@@ -20,22 +20,24 @@ const STEP1_OPTIONS: { id: string; label: string; icon: React.ReactNode }[] = [
     ),
   },
   {
-    id: 'adapter',
-    label: d.form.objectifs.adapter,
-    icon: (
-      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-          d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-      </svg>
-    ),
-  },
-  {
     id: 'subside',
     label: d.form.objectifs.subside,
     icon: (
       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
           d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+  },
+  {
+    id: 'complementaire',
+    label: d.form.objectifs.complementaire,
+    icon: (
+      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+          d="M12 3l8 4v5c0 5.25-3.5 10.14-8 12C7.5 22.14 4 17.25 4 12V7l8-4z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+          d="M12 9v6M9 12h6" />
       </svg>
     ),
   },
@@ -392,8 +394,14 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen, tagline
         {tagline && step === 1 && (
           <p className="text-[14px] text-slate leading-snug mt-1 mb-2">{tagline}</p>
         )}
-        <p className={`font-semibold text-ink ${fullscreen ? 'text-[16px] mb-0' : 'text-[18px] mb-1'}`}>{STEP_LABELS[step - 1]}</p>
-        <p className={`text-[16px] text-slate ${fullscreen ? 'mb-3' : 'mb-6'}`}>{STEP_CONTEXT[step - 1]}</p>
+        <p className={[
+          'font-semibold text-ink',
+          fullscreen ? 'text-[16px]' : 'text-[18px]',
+          STEP_CONTEXT[step - 1] ? (fullscreen ? 'mb-0' : 'mb-1') : (fullscreen ? 'mb-3' : 'mb-6'),
+        ].join(' ')}>{STEP_LABELS[step - 1]}</p>
+        {STEP_CONTEXT[step - 1] && (
+          <p className={`text-[16px] text-slate ${fullscreen ? 'mb-3' : 'mb-6'}`}>{STEP_CONTEXT[step - 1]}</p>
+        )}
       </div>
 
       {/* ── Middle: step content ── */}

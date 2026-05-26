@@ -52,17 +52,17 @@
     "titre": "Recevoir un conseil personnalisé",
     "etape": "Étape",
     "sur": "sur",
-    "labels": ["Votre objectif", "Votre situation", "Votre profil", "Vos coordonnées"],
+    "labels": ["Comment pouvons-nous vous aider ?", "Votre situation", "Votre profil", "Vos coordonnées"],
     "contexts": [
-      "Dites-nous ce que vous recherchez",
+      "",
       "Quelques infos sur votre situation",
       "Votre profil familial",
       "Pour vous recontacter sous 24 heures"
     ],
     "objectifs": {
-      "economiser": "Économiser sur mes primes LAMal",
-      "adapter": "Adapter ma franchise ou mon modèle de santé",
-      "subside": "Vérifier mon droit à un subside"
+      "economiser": "Économiser sur vos primes LAMal",
+      "subside": "Vérifier vos droits aux subsides",
+      "complementaire": "Comparer les complémentaires santé"
     },
     "profils": {
       "seul": "Seul(e)",
