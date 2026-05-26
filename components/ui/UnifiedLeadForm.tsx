@@ -67,6 +67,9 @@ const TRANCHES_AGE = [
   { value: 'adulte',       label: 'Adulte (26 ans et plus)'    },
 ]
 
+const CONSENT_TRAITEMENT_TEXT = "J'autorise My Swiss Insurance et ses conseillers partenaires à collecter et traiter mes données pour me proposer une assurance personnalisée adaptée à ma situation."
+const CONSENT_MARKETING_TEXT = "Je souhaite recevoir des offres pour d'autres produits d'assurance."
+
 const STEP_LABELS = d.form.labels
 const STEP_CONTEXT = d.form.contexts
 
@@ -180,10 +183,13 @@ interface FormData {
   cantonTravail: string
   trancheAge: string
   situation: string
+  genre: string
   prenom: string
   nom: string
   telephone: string
   email: string
+  consentTraitement: boolean
+  consentMarketing: boolean
 }
 
 function CheckIcon() {
@@ -211,7 +217,10 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen, tagline
     residenceType: 'resident',
     canton: '', codePostal: '', pays: '', cantonTravail: '', trancheAge: '',
     situation: '',
+    genre: '',
     prenom: '', nom: '', telephone: '', email: '',
+    consentTraitement: false,
+    consentMarketing: false,
   })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [error, setError] = useState('')
@@ -221,6 +230,8 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen, tagline
   const [emailError, setEmailError] = useState('')
   const phoneGroupRef = useRef<HTMLDivElement>(null)
   const phoneDropdownRef = useRef<HTMLDivElement>(null)
+  const consent1Ref = useRef<HTMLInputElement>(null)
+  const [consentError, setConsentError] = useState('')
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' })
@@ -312,6 +323,11 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen, tagline
     const phoneOk = validatePhone()
     const emailOk = validateEmail()
     if (!phoneOk || !emailOk) return
+    if (!form.consentTraitement) {
+      setConsentError('Vous devez accepter cette condition pour continuer')
+      consent1Ref.current?.focus()
+      return
+    }
 
     setStatus('loading')
     setError('')
@@ -331,6 +347,11 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen, tagline
           situation: form.situation,
           intention: form.intent,
           type: form.residenceType === 'frontalier' ? 'frontalier' : 'canton',
+          genre: form.genre,
+          consentTraitement: form.consentTraitement,
+          consentMarketing: form.consentMarketing,
+          consentTraitementText: CONSENT_TRAITEMENT_TEXT,
+          consentMarketingText: CONSENT_MARKETING_TEXT,
         }),
       })
       if (!res.ok) throw new Error()
@@ -566,6 +587,26 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen, tagline
         {/* Step 4 — Coordonnées */}
         {step === 4 && (
           <form id="lead-form-step4" className={`step-anim ${fullscreen ? 'space-y-2' : 'space-y-4'}`} onSubmit={handleSubmit}>
+            <div>
+              <label className={`block text-[16px] font-medium text-ink ${fullscreen ? 'mb-1' : 'mb-1.5'}`}>Genre</label>
+              <div className="flex bg-cloud rounded-lg p-1 gap-1">
+                {(['Monsieur', 'Madame'] as const).map(g => (
+                  <button
+                    key={g}
+                    type="button"
+                    onClick={() => set({ genre: g })}
+                    className={[
+                      `flex-1 ${fullscreen ? 'py-1.5' : 'py-2'} text-[14px] font-medium rounded-md transition-all duration-150`,
+                      form.genre === g
+                        ? 'bg-white text-brand shadow-sm'
+                        : 'text-slate hover:text-ink',
+                    ].join(' ')}
+                  >
+                    {g}
+                  </button>
+                ))}
+              </div>
+            </div>
             <div className={`grid grid-cols-2 ${fullscreen ? 'gap-2' : 'gap-3'}`}>
               <div>
                 <label className={`block text-[16px] font-medium text-ink ${fullscreen ? 'mb-1' : 'mb-1.5'}`}>{d.form.champs.prenom}</label>
@@ -722,6 +763,47 @@ export default function UnifiedLeadForm({ redirectOnSuccess, fullscreen, tagline
 
         {step === 4 && (
           <>
+            <div className="space-y-3 mb-4">
+              <div>
+                <label className="flex items-start gap-2 cursor-pointer">
+                  <input
+                    ref={consent1Ref}
+                    type="checkbox"
+                    checked={form.consentTraitement}
+                    onChange={e => { set({ consentTraitement: e.target.checked }); if (consentError) setConsentError('') }}
+                    className="mt-0.5 shrink-0 w-4 h-4 accent-[#0F4C8A] cursor-pointer"
+                  />
+                  <span className="text-[13px] text-left leading-snug text-secondary">
+                    {CONSENT_TRAITEMENT_TEXT}{' '}<span style={{ color: '#A32D2D' }}>*</span>
+                  </span>
+                </label>
+                {consentError && (
+                  <p className="text-[13px] mt-1 ml-6" style={{ color: '#A32D2D' }}>{consentError}</p>
+                )}
+              </div>
+
+              <div>
+                <label className="flex items-start gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={form.consentMarketing}
+                    onChange={e => set({ consentMarketing: e.target.checked })}
+                    className="mt-0.5 shrink-0 w-4 h-4 accent-[#0F4C8A] cursor-pointer"
+                  />
+                  <span className="text-[13px] text-left leading-snug text-secondary">
+                    {CONSENT_MARKETING_TEXT}
+                  </span>
+                </label>
+              </div>
+
+              <p className="text-[13px] leading-snug text-secondary">
+                Vos données sont traitées conformément à notre{' '}
+                <a href="/fr/politique-de-confidentialite" className="text-[#185FA5] underline hover:text-[#0F4C8A]">
+                  politique de confidentialité
+                </a>. Vous pouvez vous désinscrire à tout moment.
+              </p>
+            </div>
+
             <button
               type="submit"
               form="lead-form-step4"
