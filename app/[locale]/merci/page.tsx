@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Demande reçue — My Swiss Insurance',
-  description: 'Votre demande a bien été reçue. Un expert vous contacte sous 24 heures ouvrables.',
+  description: 'Votre demande a bien été reçue. Un conseiller vous contacte sous 24 heures.',
   robots: { index: false },
 }
 
@@ -18,7 +18,7 @@ export default function MerciPage() {
         </div>
         <h1 className="text-3xl font-bold text-brand mb-3">Demande bien reçue</h1>
         <p className="text-[16px] text-slate leading-relaxed mb-8">
-          Un expert vous contacte sous 24 heures ouvrables.
+          Un conseiller vous contacte sous 24 heures.
         </p>
         <Link href="/fr" className="btn-secondary">
           Retour à l'accueil
