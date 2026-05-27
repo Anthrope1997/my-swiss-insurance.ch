@@ -364,11 +364,11 @@ export default function FrontalierFrancePage() {
                   </thead>
                   <tbody>
                     {[
-                      ['Genève',    'CHF 634', 'CHF 863', 'CHF 229/mois'],
-                      ['Vaud',      'CHF 579', 'CHF 686', 'CHF 107/mois'],
-                      ['Neuchâtel', 'CHF 610', 'CHF 755', 'CHF 145/mois'],
-                      ['Jura',      'CHF 592', 'CHF 707', 'CHF 115/mois'],
-                      ['Valais',    'CHF 433', 'CHF 575', 'CHF 142/mois'],
+                      ['Genève',    'CHF 442', 'CHF 909', 'CHF 467/mois'],
+                      ['Vaud',      'CHF 385', 'CHF 759', 'CHF 374/mois'],
+                      ['Neuchâtel', 'CHF 398', 'CHF 789', 'CHF 391/mois'],
+                      ['Jura',      'CHF 404', 'CHF 757', 'CHF 353/mois'],
+                      ['Valais',    'CHF 277', 'CHF 638', 'CHF 361/mois'],
                     ].map((row, i) => (
                       <tr key={i}>
                         <td className="font-semibold text-ink">{row[0]}</td>

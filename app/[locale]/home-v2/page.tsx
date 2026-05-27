@@ -11,11 +11,11 @@ export const metadata: Metadata = {
   title: 'Économisez sur votre assurance maladie suisse en 2026 — My Swiss Insurance',
   robots: { index: false, follow: false },
   description:
-    "Comparez les primes LAMal 2026 gratuitement. Jusqu'à CHF 5 653 d'économie par an à Genève. 34 caisses, données OFSP officielles, résultat immédiat.",
+    "Comparez les primes LAMal 2026 gratuitement. Jusqu'à CHF 5 604 d'économie par an. 34 caisses, données OFSP officielles, résultat immédiat.",
   alternates: { canonical: 'https://my-swiss-insurance.ch' },
   openGraph: {
     title: 'Économisez sur votre assurance maladie suisse en 2026',
-    description: "Jusqu'à CHF 5 653 d'économie par an. Comparez gratuitement 34 caisses LAMal. Données OFSP 2026.",
+    description: "Jusqu'à CHF 5 604 d'économie par an. Comparez gratuitement 34 caisses LAMal. Données OFSP 2026.",
     url: 'https://my-swiss-insurance.ch',
     type: 'website',
   },
@@ -26,16 +26,16 @@ const faqSchema = {
   '@type': 'FAQPage',
   mainEntity: [
     { '@type': 'Question', name: "L'assurance maladie est-elle obligatoire en Suisse ?", acceptedAnswer: { '@type': 'Answer', text: "Oui, la LAMal rend l'assurance maladie obligatoire pour tout résident en Suisse depuis 1996. L'affiliation doit intervenir dans les 3 mois suivant l'arrivée." } },
-    { '@type': 'Question', name: 'Combien peut-on économiser en changeant de caisse LAMal ?', acceptedAnswer: { '@type': 'Answer', text: "Jusqu'à CHF 5 653 par an pour un adulte de 35 ans à Genève (tous modèles et franchises confondus, source OFSP 2026). Les 34 caisses agréées proposent les mêmes prestations de base à des prix très différents selon le canton." } },
+    { '@type': 'Question', name: 'Combien peut-on économiser en changeant de caisse LAMal ?', acceptedAnswer: { '@type': 'Answer', text: "Jusqu'à CHF 5 604 par an pour un adulte de 35 ans (tous modèles et franchises confondus, source OFSP 2026). Les 34 caisses agréées proposent les mêmes prestations de base à des prix très différents selon le canton." } },
     { '@type': 'Question', name: 'Qui a droit à un subside LAMal en Suisse ?', acceptedAnswer: { '@type': 'Answer', text: "25 à 30 % de la population suisse bénéficie d'une réduction individuelle des primes (subside). Les conditions varient selon le canton et le revenu déterminant." } },
   ],
 }
 
 const cantonCards = [
-  { nom: 'Zurich',  primeMin: '489', economieAn: "4'285", href: '/sante/canton/zurich' },
-  { nom: 'Berne',   primeMin: '533', economieAn: "4'447", href: '/sante/canton/berne'  },
-  { nom: 'Vaud',    primeMin: '579', economieAn: "4'220", href: '/sante/canton/vaud'   },
-  { nom: 'Genève',  primeMin: '634', economieAn: "5'653", href: '/sante/canton/geneve' },
+  { nom: 'Zurich',  primeMin: '296', economieAn: "4'248", href: '/sante/canton/zurich' },
+  { nom: 'Berne',   primeMin: '325', economieAn: "4'452", href: '/sante/canton/berne'  },
+  { nom: 'Vaud',    primeMin: '385', economieAn: "4'128", href: '/sante/canton/vaud'   },
+  { nom: 'Genève',  primeMin: '442', economieAn: "5'604", href: '/sante/canton/geneve' },
 ]
 
 // Palette BlaBlaCar + bleu électrique + tokens sémantiques
@@ -79,14 +79,14 @@ export default function HomePageV2() {
           <p className="text-[17px] leading-relaxed mb-10" style={{ color: P.textBody }}>
             En Suisse, toutes les caisses couvrent les mêmes soins. Seul le prix change.
             L'écart atteint{' '}
-            <strong className="font-semibold" style={{ color: P.navy }}>CHF 5 653 par an</strong>{' '}
+            <strong className="font-semibold" style={{ color: P.navy }}>CHF 5 604 par an</strong>{' '}
             à Genève pour un même profil. Nos guides vous aident à comprendre, comparer et décider.
           </p>
 
           {/* Tuiles stats */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-10">
             {[
-              { value: "CHF 5 653", line1: 'économie annuelle',  line2: 'possible à Genève' },
+              { value: "CHF 5 604", line1: 'économie annuelle',  line2: 'possible à Genève' },
               { value: '34',        line1: 'caisses agréées',    line2: "par l'OFSP" },
               { value: '28 %',      line1: 'des résidents',      line2: "bénéficient d'un subside" },
             ].map(s => (
@@ -159,7 +159,7 @@ export default function HomePageV2() {
             <div className="lg:col-span-3 flex flex-col gap-3">
               {[
                 { title: 'Choisir sa franchise', desc: "Trouvez le palier le plus avantageux selon votre usage des soins", href: '/sante/franchise' },
-                { title: "Les 4 modèles d'assurance", desc: "Libre choix, médecin de famille, centre médical, télémédecine : jusqu'à 24 % d'économie", href: '/sante/modeles' },
+                { title: "Les 4 modèles d'assurance", desc: "Libre choix, médecin de famille, centre médical, télémédecine : jusqu'à 22 % d'économie", href: '/sante/modeles' },
                 { title: 'LAMal et complémentaire', desc: 'Obligatoire ou facultative : ce que la LCA couvre en plus et pour quel profil', href: '/sante/lamal-vs-lca' },
               ].map(g => (
                 <Link key={g.href} href={g.href}

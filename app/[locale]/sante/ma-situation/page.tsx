@@ -221,7 +221,7 @@ export default function MaSituationPage() {
                     en bonne santé, la franchise de CHF 2 500 réduit la prime de ~CHF 120 par mois.
                     Pour un salarié avec un médecin de famille régulier ou un traitement en cours,
                     la franchise de CHF 300 devient avantageuse dès que les frais annuels dépassent
-                    environ CHF 1 440. Consultez la{' '}
+                    environ CHF 1 900. Consultez la{' '}
                     <Link href="/sante/franchise" className="text-brand hover:underline">
                       page franchise
                     </Link>{' '}

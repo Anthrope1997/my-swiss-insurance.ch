@@ -360,7 +360,7 @@ export default function MaFamillePage() {
                 {[
                   {
                     titre: 'Franchise CHF 300 généralement recommandée',
-                    desc: "Les frais médicaux augmentent statistiquement avec l'âge. La franchise basse (CHF 300) devient rapidement avantageuse dès que les dépenses médicales annuelles dépassent environ CHF 1 440. Pour un retraité consultant régulièrement un médecin ou suivi pour une pathologie chronique, c'est souvent le meilleur choix.",
+                    desc: "Les frais médicaux augmentent statistiquement avec l'âge. La franchise basse (CHF 300) devient rapidement avantageuse dès que les dépenses médicales annuelles dépassent environ CHF 1 900. Pour un retraité consultant régulièrement un médecin ou suivi pour une pathologie chronique, c'est souvent le meilleur choix.",
                   },
                   {
                     titre: 'Subsides prioritaires pour les retraités à revenus modestes',

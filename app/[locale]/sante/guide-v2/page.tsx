@@ -130,10 +130,10 @@ const assureurs = [
 ]
 
 const economies = [
-  { canton: 'Genève',    mensuel: 'CHF 471', annuel: "CHF 5'653" },
-  { canton: 'Neuchâtel', mensuel: 'CHF 391', annuel: "CHF 4'686" },
-  { canton: 'Valais',    mensuel: 'CHF 321', annuel: "CHF 3'846" },
-  { canton: 'Vaud',      mensuel: 'CHF 352', annuel: "CHF 4'220" },
+  { canton: 'Genève',    mensuel: 'CHF 467', annuel: "CHF 5'604" },
+  { canton: 'Neuchâtel', mensuel: 'CHF 391', annuel: "CHF 4'692" },
+  { canton: 'Valais',    mensuel: 'CHF 315', annuel: "CHF 3'780" },
+  { canton: 'Vaud',      mensuel: 'CHF 344', annuel: "CHF 4'128" },
 ]
 
 const toc = [
@@ -154,7 +154,7 @@ const enBref = [
     <strong className="font-medium text-ink">34 caisses agréées</strong>
     {" couvrent les mêmes soins de base, seul le prix de la prime change."}</>,
   <>{"Économisez jusqu'à "}
-    <strong className="font-medium text-ink">CHF 5 653 par an</strong>
+    <strong className="font-medium text-ink">CHF 5 604 par an</strong>
     {" sur votre assurance LAMal en comparant les assureurs, les franchises et les modèles d'assurance disponibles."}</>,
   <>{"Vous pouvez aussi avoir droit à un subside selon votre situation : "}
     <strong className="font-medium text-ink">28 % des résidents en bénéficient</strong>
@@ -185,9 +185,9 @@ export default function GuideLamalPage() {
           {/* Tuiles stats */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-8">
             {[
-              { value: "CHF 5'653", line1: 'économie max possible',   line2: 'à Genève, adulte 35 ans' },
+              { value: "CHF 5'604", line1: 'économie max possible',   line2: 'à Genève, adulte 35 ans' },
               { value: '6',         line1: 'niveaux de franchise',     line2: 'de CHF 300 à CHF 2 500' },
-              { value: '4',         line1: 'modèles de soins',         line2: "dont télémédecine jusqu'à −24%" },
+              { value: '4',         line1: 'modèles de soins',         line2: "dont télémédecine jusqu'à −18%" },
             ].map(s => (
               <div key={s.value} className="rounded-xl p-5"
                 style={{ backgroundColor: '#F5F7FB', border: '1px solid #E9ECF0' }}>
@@ -446,19 +446,19 @@ export default function GuideLamalPage() {
                     title: 'Médecin de famille',
                     reduction: "jusqu'à −20%",
                     bgColor: '#F5F7FB',
-                    desc: "Vous consultez d'abord votre médecin de famille, qui vous oriente si besoin vers un spécialiste. Réduction moyenne de 11% (jusqu'à −20%) selon la caisse et le canton.",
+                    desc: "Vous consultez d'abord votre médecin de famille, qui vous oriente si besoin vers un spécialiste. Réduction moyenne de 11% (jusqu'à −18%) selon la caisse et le canton.",
                   },
                   {
                     title: 'Centre médical',
                     reduction: "jusqu'à −20%",
                     bgColor: '#F5F7FB',
-                    desc: "Vous êtes rattaché à un réseau fermé de médecins agréés (cabinet ou centre médical). Réseau limité en zones rurales. Réduction moyenne de 12% (de −3% à −20%) selon la région.",
+                    desc: "Vous êtes rattaché à un réseau fermé de médecins agréés (cabinet ou centre médical). Réseau limité en zones rurales. Réduction moyenne de 12% (de −3% à −22%) selon la région.",
                   },
                   {
                     title: 'Télémédecine (conseil téléphonique)',
-                    reduction: "jusqu'à −24%",
+                    reduction: "jusqu'à −18%",
                     bgColor: '#F5F7FB',
-                    desc: 'Première consultation par téléphone ou application avant tout rendez-vous en cabinet (Medgate, Medi24...). Disponible 24 heures sur 24. Réduction moyenne de 12% (de −5% à −24%) selon la caisse.',
+                    desc: 'Première consultation par téléphone ou application avant tout rendez-vous en cabinet (Medgate, Medi24...). Disponible 24 heures sur 24. Réduction moyenne de 12% (de −5% à −18%) selon la caisse.',
                   },
                 ].map((m, i) => (
                   <div key={i} className="rounded-[8px] p-5"

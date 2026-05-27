@@ -125,7 +125,7 @@ export default function ChangerDeCaissePage() {
           </h1>
           <p className="text-[16px] text-slate max-w-2xl leading-relaxed mb-10">
             Procédure complète pour changer d&apos;assurance maladie de base LAMal, dates clés et
-            modèle de lettre. Économisez jusqu&apos;à CHF 2 748 par an.
+            modèle de lettre. Économisez jusqu&apos;à CHF 5 604 par an.
           </p>
 
           <HeroStats stats={heroStats} className="mb-8" />
