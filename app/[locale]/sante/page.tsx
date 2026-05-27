@@ -63,8 +63,8 @@ const webSiteSchema = {
 // ── Données ──────────────────────────────────────────────────────────────────
 
 const stats = [
-  { value: `CHF ${formatChf(economieMax() * 12)}/an`,     label: 'Économie maximale en changeant de caisse', sub: 'Assurance LAMal, adulte 35 ans' },
-  { value: `CHF ${formatChf(economieMoyenne() * 12)}/an`, label: 'Économie moyenne en changeant de caisse',  sub: 'Assurance LAMal, adulte 35 ans' },
+  { value: `CHF ${formatChf(economieMax() * 12)}/an`,     label: 'Économie maximale réalisable'            , sub: 'Assurance LAMal, adulte 35 ans' },
+  { value: `CHF ${formatChf(economieMoyenne() * 12)}/an`, label: 'Économie moyenne réalisable'             ,  sub: 'Assurance LAMal, adulte 35 ans' },
   { value: `CHF ${formatChf(subsideMoyen() * 12)}/an`,    label: 'Subside cantonal moyen',      sub: 'Pour les 28 % qui en bénéficient'   },
 ]
 
@@ -156,9 +156,10 @@ export default function LamalPage() {
           </h1>
 
           <p className="text-[16px] text-slate leading-relaxed mb-8">
-            Toutes les caisses couvrent les mêmes prestations de base : seul le prix change,{' '}
-            jusqu’à <strong>CHF 5 604 par an d’écart</strong> pour un même profil.{' '}
-            Comparez gratuitement et trouvez la caisse la moins chère.
+            Toutes les caisses couvrent les mêmes prestations de base : seul le prix change,
+            jusqu’à <strong>CHF 5 604 par an d’écart</strong> pour un même profil.
+            Comparez les assureurs, ajustez votre franchise et adaptez votre modèle d’assurance
+            à votre situation pour réduire votre prime.
           </p>
 
           {/* Stats */}
