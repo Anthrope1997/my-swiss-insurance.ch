@@ -344,14 +344,14 @@ export default function FranchiseChart() {
 
               {/* 10 — Annotations de zone */}
               <text x={aLeftCx} y={annotY} textAnchor="middle" fontSize={scaled(annotFontPx)} fontWeight={600} fill={C_F2500}>
-                {isMobile ? 'CHF 2 500' : 'Franchise CHF 2 500'}
+                {isMobile ? 'CHF 2 500' : 'Franchise de CHF 2 500'}
               </text>
               <text x={aLeftCx} y={annotY + scaled(annotLinePx)} textAnchor="middle" fontSize={scaled(annotFontPx)} fontWeight={600} fill={C_F2500}>
                 plus avantageuse
               </text>
 
               <text x={aRightCx} y={annotY} textAnchor="middle" fontSize={scaled(annotFontPx)} fontWeight={600} fill={C_F300}>
-                {isMobile ? 'CHF 300' : 'Franchise CHF 300'}
+                {isMobile ? 'CHF 300' : 'Franchise de CHF 300'}
               </text>
               <text x={aRightCx} y={annotY + scaled(annotLinePx)} textAnchor="middle" fontSize={scaled(annotFontPx)} fontWeight={600} fill={C_F300}>
                 plus avantageuse

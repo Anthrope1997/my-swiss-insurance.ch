@@ -101,7 +101,7 @@ const enBref = [
 ]
 
 const heroStats = [
-  { value: `CHF ${fmtChf(economieMoy)}`, label: 'Économie moyenne par an',          sub: `${pctEconomie} % d'économie en changeant de franchise` },
+  { value: `CHF ${fmtChf(economieMoy)}/an`, label: 'Économie moyenne réalisable',   sub: 'En changeant de franchise'                               },
   { value: '6',                          label: 'Niveaux de franchise pour adultes', sub: 'De CHF 300 à CHF 2 500 par an'                              },
   { value: 'CHF 700',                    label: 'Quote-part pour un adulte',         sub: 'CHF 350 pour un enfant'                                     },
 ]
@@ -195,7 +195,7 @@ export default function FranchisePage() {
             <h2 className="article-h2">1. Quelle franchise pour votre profil ?</h2>
             <p className="article-p mb-2">
               Indiquez votre code postal, votre profil et vos frais médicaux annuels estimés.
-              Le simulateur calcule la franchise qui minimise votre coût total annuel.
+              Le simulateur vous indique quelle est la franchise la plus avantageuse selon votre situation.
             </p>
             <FranchiseSimulator />
           </section>
@@ -245,10 +245,10 @@ export default function FranchisePage() {
             </div>
 
             <KeyFact label="Exemple">
-              <p className="font-semibold text-ink mb-1">Franchise CHF 1 500, CHF 2 000 de frais médicaux dans l&apos;année</p>
+              <p className="font-semibold text-ink mb-1">Franchise de CHF 1 500 et CHF 2 000 de frais médicaux dans l&apos;année</p>
               <ul className="space-y-1">
-                <li>Vous payez CHF 1 550 : CHF 1 500 (franchise) + CHF 50 (10% de quote-part sur les CHF 500 restants).</li>
-                <li>Votre caisse prend en charge CHF 450 : les 90% au-dessus de la franchise.</li>
+                <li>Vous payez CHF 1 550 : CHF 1 500 (franchise) + CHF 50 (10 % de quote-part sur les CHF 500 restants).</li>
+                <li>Votre caisse prend en charge CHF 450 : les 90 % au-dessus de la franchise.</li>
               </ul>
             </KeyFact>
 
@@ -306,8 +306,8 @@ export default function FranchisePage() {
             </div>
 
             <KeyFact>
-              Pour un adulte de 26 ans et plus, en dessous de <strong>CHF {fmtChf(seuil)}</strong> de frais médicaux par an, la franchise de CHF 2 500 coûte moins cher.
-              Au-delà, la franchise de CHF 300 est plus avantageuse. Pour les 19-25 ans, ce seuil descend à <strong>CHF {fmtChf(seuilJA)}</strong>.
+              Pour un adulte (26 ans et plus), en dessous de <strong>CHF {fmtChf(seuil)}</strong> de frais médicaux par an, la franchise de CHF 2 500 coûte moins cher.
+              Au-delà, la franchise de CHF 300 est plus avantageuse. Ce seuil descend à <strong>CHF {fmtChf(seuilJA)}</strong> pour un jeune adulte (19 à 25 ans) et à <strong>CHF {fmtChf(seuilEnfant)}</strong> pour un enfant (0 à 18 ans).
             </KeyFact>
 
             {/* Franchise enfant */}
