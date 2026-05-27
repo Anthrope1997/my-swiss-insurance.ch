@@ -373,7 +373,7 @@ export default function GuideLamalPage() {
               </div>
               <KeyFact>
                 La caisse la plus avantageuse dépend de votre âge, de votre modèle d&apos;assurance et de votre franchise.
-                Ces trois leviers déterminent quelle caisse offre la prime la moins chère pour votre situation,
+                Ces trois leviers déterminent quelle caisse offre la prime la moins chère selon votre situation,
                 avec des écarts qui peuvent atteindre jusqu&apos;à CHF 180 par mois pour un adulte.
               </KeyFact>
 
