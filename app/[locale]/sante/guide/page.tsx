@@ -6,7 +6,7 @@ import Link from 'next/link'
 import AuthorBio from '@/components/ui/AuthorBio'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import HeroStats from '@/components/ui/HeroStats'
-import { breakEven, primeMoyenne, economieMoyenne, economieMax, subsideMoyen } from '@/lib/sante/formules'
+import { breakEven, primeMoyenne, economieMoyenne, economieMax, subsideMoyen, modeleEconomieMax } from '@/lib/sante/formules'
 import { nationalBreakEven, nationalBreakEvenJA, nationalBreakEvenEnfant, nationalAvgPrime } from '@/lib/sante/calcul-franchise'
 import { formatChf } from '@/lib/shared/formatters'
 
@@ -138,10 +138,14 @@ const toc = [
   { id: 'faq',        label: '10. FAQ' },
 ]
 
+const modeleMaxPct = Math.round(
+  Math.max(modeleEconomieMax('HMO'), modeleEconomieMax('DIV'), modeleEconomieMax('HAM')) / primeMoyenne() * 100
+)
+
 const heroStats = [
-  { value: `CHF ${formatChf(economieMoyenne() * 12)}`, label: 'Économie moyenne par an', sub: 'Adulte 35 ans, toutes franchises et modèles, données OFSP 2026' },
-  { value: '6',          label: 'Niveaux de franchise',          sub: 'De CHF 300 à CHF 2 500 pour un adulte'                      },
-  { value: '4',          label: 'Modèles de soins',              sub: 'Standard, médecin de famille, centre médical, télémédecine'  },
+  { value: `CHF ${formatChf(economieMoyenne() * 12)}/an`, label: 'Économie moyenne réalisable', sub: 'Assurance LAMal, adulte 35 ans' },
+  { value: '6',          label: 'Niveaux de franchise',     sub: 'De CHF 300 à CHF 2 500 pour un adulte'                     },
+  { value: '4',          label: 'Modèles de soins',        sub: `Jusqu’à ${modeleMaxPct} % d’économie réalisable` },
 ]
 
 const enBref = [
@@ -153,7 +157,7 @@ const enBref = [
     {" sur votre assurance LAMal en comparant les assureurs, les franchises et les modèles d'assurance disponibles."}</>,
   <>{"Vous pouvez aussi avoir droit à un subside selon votre situation : "}
     <strong className="font-medium text-ink">28 % des résidents en bénéficient</strong>
-    {". Cette subvention cantonale réduit votre prime LAMal et représente en moyenne "}
+    {". Cette subvention cantonale réduit votre prime LAMal et représente en moyenne une économie de "}
     <strong className="font-medium text-ink">{`CHF ${formatChf(subsideMoyen() * 12)} par an`}</strong>
     {"."}</>,
 ]
