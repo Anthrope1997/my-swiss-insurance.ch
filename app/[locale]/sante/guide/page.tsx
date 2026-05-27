@@ -6,7 +6,7 @@ import Link from 'next/link'
 import AuthorBio from '@/components/ui/AuthorBio'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import HeroStats from '@/components/ui/HeroStats'
-import { breakEven, primeMoyenne, economieMoyenne, economieMax, subsideMoyen, modeleEconomieMax } from '@/lib/sante/formules'
+import { breakEven, primeMoyenne, economieMoyenne, economieMax, subsideMoyen, modeleEconomieMax, modeleEconomieMoyenne } from '@/lib/sante/formules'
 import { nationalBreakEven, nationalBreakEvenJA, nationalBreakEvenEnfant, nationalAvgPrime } from '@/lib/sante/calcul-franchise'
 import { formatChf } from '@/lib/shared/formatters'
 
@@ -46,7 +46,7 @@ const faqItems = [
   },
   {
     question: 'Quelle franchise LAMal choisir ?',
-    answer: `Choisissez la franchise de CHF 2 500 si vous êtes en bonne santé et consultez peu : vous économisez environ CHF 120 par mois sur la prime. Optez pour la franchise de CHF 300 si vos dépenses annuelles dépassent CHF ${breakEven({ canton: 'GE' }).toLocaleString('fr-CH')} à Genève (CHF ${breakEven().toLocaleString('fr-CH')} en moyenne suisse).`,
+    answer: `Choisissez la franchise de CHF 2 500 si vous êtes en bonne santé et consultez peu : vous économisez environ CHF 120 par mois sur la prime. Optez pour la franchise de CHF 300 à partir d'environ CHF ${formatChf(Math.round(breakEven()))} de frais médicaux annuels.`,
   },
   {
     question: "Peut-on changer de caisse maladie en cours d'année ?",
@@ -141,6 +141,13 @@ const toc = [
 const modeleMaxPct = Math.round(
   Math.max(modeleEconomieMax('HMO'), modeleEconomieMax('DIV'), modeleEconomieMax('HAM')) / primeMoyenne() * 100
 )
+const _primeMoyGuide = primeMoyenne()
+const hamMaxPct = Math.round(modeleEconomieMax('HAM') / _primeMoyGuide * 100)
+const hmoMaxPct = Math.round(modeleEconomieMax('HMO') / _primeMoyGuide * 100)
+const divMaxPct = Math.round(modeleEconomieMax('DIV') / _primeMoyGuide * 100)
+const hamMoyPct = Math.round(modeleEconomieMoyenne('HAM') / _primeMoyGuide * 100)
+const hmoMoyPct = Math.round(modeleEconomieMoyenne('HMO') / _primeMoyGuide * 100)
+const divMoyPct = Math.round(modeleEconomieMoyenne('DIV') / _primeMoyGuide * 100)
 
 const heroStats = [
   { value: `CHF ${formatChf(economieMoyenne() * 12)}/an`, label: 'Économie moyenne réalisable', sub: 'Assurance LAMal, adulte 35 ans' },
@@ -157,7 +164,7 @@ const enBref = [
     {" sur votre assurance LAMal en comparant les assureurs, les franchises et les modèles d'assurance disponibles."}</>,
   <>{"Vous pouvez aussi avoir droit à un subside selon votre situation : "}
     <strong className="font-medium text-ink">28 % des résidents en bénéficient</strong>
-    {". Cette subvention cantonale réduit votre prime LAMal et représente en moyenne une économie de "}
+    {", soit environ 2,5 millions de personnes. Cette subvention cantonale réduit votre prime LAMal et représente en moyenne une économie de "}
     <strong className="font-medium text-ink">{`CHF ${formatChf(subsideMoyen() * 12)} par an`}</strong>
     {"."}</>,
 ]
@@ -228,9 +235,6 @@ export default function GuideLamalPage() {
                 Contrairement aux assurances complémentaires (LCA), les prestations de base LAMal ne peuvent
                 être ni refusées ni exclues pour des raisons de santé : tout résident en Suisse a le droit
                 d'être assuré, sans sélection médicale.
-              </p>
-              <p className="text-[16px] text-slate/60 mt-3">
-                Source : OFSP (bag.admin.ch), art. 3 LAMal (RS 832.10)
               </p>
             </section>
 
@@ -329,7 +333,7 @@ export default function GuideLamalPage() {
                 </table>
               </div>
               <p className="text-[16px] text-slate/60 mt-3">
-                Adulte 35 ans, modèle standard, franchise de CHF 300, moyennes pondérées par population, données OFSP 2026.
+                Adulte 35 ans, modèle standard, franchise de CHF 300, données OFSP 2026.
               </p>
 
               <div className="mt-6">
@@ -368,9 +372,9 @@ export default function GuideLamalPage() {
                 </table>
               </div>
               <KeyFact>
-                La caisse la moins chère dans votre canton n&apos;est pas forcément la même que celle de
-                votre voisin. Les écarts entre assureurs dans un même canton atteignent jusqu&apos;à
-                CHF 180 par mois pour un adulte.
+                La caisse la plus avantageuse dépend de votre âge, de votre modèle d&apos;assurance et de votre franchise.
+                Ces trois leviers déterminent quelle caisse offre la prime la moins chère pour votre situation,
+                avec des écarts qui peuvent atteindre jusqu&apos;à CHF 180 par mois pour un adulte.
               </KeyFact>
 
             </section>
@@ -380,7 +384,7 @@ export default function GuideLamalPage() {
               <h2 className="article-h2">5. Choisir sa franchise LAMal</h2>
               <p className="article-p">
                 Choisir la bonne franchise est l&apos;un des leviers les plus efficaces pour réduire votre prime LAMal.
-                Pour un adulte, en passant de la franchise de CHF 300 à la franchise de CHF 2 500, vous économisez en moyenne{' '}
+                Pour un adulte sans frais médicaux, en passant de la franchise de CHF 300 à la franchise de CHF 2 500, vous économisez en moyenne{' '}
                 <strong className="font-medium text-ink">CHF {formatChf(economieAnnuelle)} par an</strong>{' '}
                 sur votre prime, soit environ{' '}
                 <strong className="font-medium text-ink">CHF {formatChf(economieMensuelle)} par mois</strong>.
@@ -434,28 +438,28 @@ export default function GuideLamalPage() {
                   },
                   {
                     title: 'Médecin de famille',
-                    reduction: "jusqu'à −16%",
+                    reduction: `jusqu'à −${hamMaxPct} %`,
                     border: 'border-brand',
-                    desc: "Vous consultez d'abord votre médecin de famille, qui vous oriente si besoin vers un spécialiste. Réduction moyenne de 9% (jusqu'à −16%) selon la caisse et le canton.",
+                    desc: `Vous consultez d'abord votre médecin de famille, qui vous oriente si besoin vers un spécialiste. Réduction moyenne de ${hamMoyPct} % (jusqu'à −${hamMaxPct} %) selon la caisse et le canton.`,
                   },
                   {
                     title: 'Centre médical',
-                    reduction: "jusqu'à −19%",
+                    reduction: `jusqu'à −${hmoMaxPct} %`,
                     border: 'border-brand',
-                    desc: "Vous êtes rattaché à un réseau fermé de médecins agréés (cabinet ou centre médical). Réseau limité en zones rurales. Réduction moyenne de 12% (jusqu'à −19%) selon la région.",
+                    desc: `Vous êtes rattaché à un réseau fermé de médecins agréés (cabinet ou centre médical). Réseau limité en zones rurales. Réduction moyenne de ${hmoMoyPct} % (jusqu'à −${hmoMaxPct} %) selon la région.`,
                   },
                   {
                     title: 'Télémédecine (conseil téléphonique)',
-                    reduction: "jusqu'à −16%",
+                    reduction: `jusqu'à −${divMaxPct} %`,
                     border: 'border-brand',
-                    desc: "Première consultation par téléphone ou application avant tout rendez-vous en cabinet (Medgate, Medi24...). Disponible 24 heures sur 24. Réduction moyenne de 10 % (jusqu'à −16 %) selon la caisse.",
+                    desc: `Première consultation par téléphone ou application avant tout rendez-vous en cabinet (Medgate, Medi24...). Disponible 24 heures sur 24. Réduction moyenne de ${divMoyPct} % (jusqu'à −${divMaxPct} %) selon la caisse.`,
                   },
                 ].map((m, i) => (
                   <div key={i} className={`bg-white border ${m.border} border-l-4 rounded-[8px] p-5`}>
                     <div className="flex items-center justify-between gap-3 mb-2">
                       <h3 className="font-semibold text-ink text-[16px]">{m.title}</h3>
                       {m.reduction && (
-                        <span className="text-[12px] font-semibold text-brand bg-blue-tint border border-brand/20 px-2.5 py-0.5 rounded-full shrink-0">
+                        <span className="text-[16px] font-semibold text-brand bg-blue-tint border border-brand/20 px-2.5 py-0.5 rounded-full shrink-0">
                           {m.reduction}
                         </span>
                       )}
@@ -487,13 +491,13 @@ export default function GuideLamalPage() {
                     <p className="font-semibold text-ink mb-1">{r.canton}</p>
                     <p className="text-2xl font-bold text-brand">
                       {r.annuel}
-                      <span className="text-[13px] font-normal text-slate"> par an</span>
+                      <span className="text-[16px] font-normal text-slate"> par an</span>
                     </p>
-                    <p className="text-[13px] text-slate mt-0.5">soit {r.mensuel} par mois d'économie</p>
+                    <p className="text-[16px] text-slate mt-0.5">soit {r.mensuel} par mois d'économie</p>
                   </div>
                 ))}
               </div>
-              <p className="text-[13px] text-slate/60 mb-6">
+              <p className="text-[16px] text-slate/60 mb-6">
                 Profil : adulte 35 ans, modèle standard, franchise de CHF 300.
               </p>
               <KeyFact>
@@ -547,7 +551,7 @@ export default function GuideLamalPage() {
                   { n: '4', t: "Recevez votre carte d'assuré", d: "Valide dès le 1er janvier de l'année suivante." },
                 ].map((s) => (
                   <li key={s.n} className="flex gap-4">
-                    <span className="w-7 h-7 bg-brand text-white rounded-full flex items-center justify-center text-[13px] font-semibold shrink-0 mt-0.5">
+                    <span className="w-8 h-8 bg-brand text-white rounded-full flex items-center justify-center text-[16px] font-semibold shrink-0 mt-0.5">
                       {s.n}
                     </span>
                     <div>
@@ -609,7 +613,7 @@ export default function GuideLamalPage() {
 
             {/* Guides associés */}
             <section>
-              <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
+              <p className="text-[16px] font-semibold text-slate uppercase tracking-widest mb-4">
                 Guides associés
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -620,7 +624,7 @@ export default function GuideLamalPage() {
                   { href: '/sante/changer-de-caisse', label: 'Changer de caisse maladie' },
                 ].map(({ href, label }) => (
                   <Link key={href} href={href}
-                    className="flex items-center gap-2 text-[13px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                    className="flex items-center gap-2 text-[16px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
                     <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>

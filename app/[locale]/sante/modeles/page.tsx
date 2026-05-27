@@ -9,12 +9,12 @@ import HeroStats from '@/components/ui/HeroStats'
 import { modeleEconomieMax, modeleEconomieMoyenne, primeMoyenne } from '@/lib/sante/formules'
 
 const _base = primeMoyenne()
-const hamMaxPct = Math.round(modeleEconomieMax('HAM') / _base * 100)   // 16
-const hmoMaxPct = Math.round(modeleEconomieMax('HMO') / _base * 100)   // 19
-const divMaxPct = Math.round(modeleEconomieMax('DIV') / _base * 100)   // 16
-const hamMoyPct = Math.round(modeleEconomieMoyenne('HAM') / _base * 100)  // 9
-const hmoMoyPct = Math.round(modeleEconomieMoyenne('HMO') / _base * 100)  // 12
-const divMoyPct = Math.round(modeleEconomieMoyenne('DIV') / _base * 100)  // 10
+const hamMaxPct = Math.round(modeleEconomieMax('HAM') / _base * 100)   // 18
+const hmoMaxPct = Math.round(modeleEconomieMax('HMO') / _base * 100)   // 22
+const divMaxPct = Math.round(modeleEconomieMax('DIV') / _base * 100)   // 18
+const hamMoyPct = Math.round(modeleEconomieMoyenne('HAM') / _base * 100)  // 11
+const hmoMoyPct = Math.round(modeleEconomieMoyenne('HMO') / _base * 100)  // 14
+const divMoyPct = Math.round(modeleEconomieMoyenne('DIV') / _base * 100)  // 11
 
 export const metadata: Metadata = {
   title: 'Modèles LAMal 2026 : standard, médecin de famille, centre médical, télémédecine',
