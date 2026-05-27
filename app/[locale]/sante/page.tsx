@@ -63,8 +63,8 @@ const webSiteSchema = {
 // ── Données ──────────────────────────────────────────────────────────────────
 
 const stats = [
-  { value: `CHF ${formatChf(economieMax() * 12)}`,     label: 'Économie maximale par an',  sub: 'Adulte 35 ans · F300 · standard · données OFSP 2026'           },
-  { value: `CHF ${formatChf(economieMoyenne() * 12)}`, label: 'Économie moyenne par an',   sub: 'Moyenne pondérée par région · adulte 35 ans · F300 · standard'  },
+  { value: `CHF ${formatChf(economieMax() * 12)}`,     label: 'Économie maximale par an',  sub: 'Adulte 35 ans · toutes franchises et modèles · données OFSP 2026' },
+  { value: `CHF ${formatChf(economieMoyenne() * 12)}`, label: 'Économie moyenne par an',   sub: 'Adulte 35 ans · moyenne pondérée par région · données OFSP 2026'  },
   { value: `CHF ${formatChf(subsideMoyen())}`,         label: 'Subside mensuel moyen',     sub: '28 % des résidents en bénéficient'                             },
 ]
 

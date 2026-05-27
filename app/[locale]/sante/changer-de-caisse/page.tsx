@@ -80,7 +80,7 @@ const faqSchema = {
 const heroStats = [
   { value: '30 novembre', label: 'Date limite ordinaire',  sub: 'pour changer au 1er janvier suivant' },
   { value: '1er janvier', label: 'Date de prise d\'effet', sub: 'du nouveau contrat LAMal'             },
-  { value: `CHF ${formatChf(economieMax() * 12)}`, label: 'Économie max. en Suisse', sub: 'Adulte 35 ans · F300 · standard · données OFSP 2026' },
+  { value: `CHF ${formatChf(economieMax() * 12)}`, label: 'Économie max. en Suisse', sub: 'Adulte 35 ans · toutes franchises et modèles · données OFSP 2026' },
 ]
 
 const toc = [

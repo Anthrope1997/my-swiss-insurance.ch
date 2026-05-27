@@ -132,7 +132,7 @@ const modeles = [
 
 const heroStats = [
   { value: '4',        label: "Modèles d'assurance",                    sub: 'Standard, médecin de famille, centre médical, télémédecine' },
-  { value: `${divMaxPct} %`, label: 'Réduction maximale en télémédecine',   sub: 'Adulte 35 ans · F300 · standard · données OFSP 2026' },
+  { value: `${divMaxPct} %`, label: 'Réduction maximale en télémédecine',   sub: 'Adulte 35 ans · données OFSP 2026' },
   { value: `${Math.round((hamMoyPct + hmoMoyPct + divMoyPct) / 3)} %`, label: 'Réduction moyenne en changeant de modèle', sub: 'Adulte 35 ans' },
 ]
 

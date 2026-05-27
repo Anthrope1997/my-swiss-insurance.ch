@@ -139,7 +139,7 @@ const toc = [
 ]
 
 const heroStats = [
-  { value: `CHF ${formatChf(economieMoyenne() * 12)}`, label: 'Économie moyenne par an', sub: 'Adulte 35 ans · F300 · standard · données OFSP 2026' },
+  { value: `CHF ${formatChf(economieMoyenne() * 12)}`, label: 'Économie moyenne par an', sub: 'Adulte 35 ans · toutes franchises et modèles · données OFSP 2026' },
   { value: '6',          label: 'Niveaux de franchise',          sub: 'De CHF 300 à CHF 2 500 pour un adulte'                      },
   { value: '4',          label: 'Modèles de soins',              sub: 'Standard, médecin de famille, centre médical, télémédecine'  },
 ]

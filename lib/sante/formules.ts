@@ -87,27 +87,27 @@ function getRegionPop(): Map<string, { canton: string; pop: number }> {
 const _statsCache = new Map<string, RegionStats[]>()
 
 function computeRegionStats(
-  franchise: number,
-  modele: string,
+  franchise: number | undefined,
+  modele: string | undefined,
   naissance = ADULTE_NAISSANCE,
 ): RegionStats[] {
-  const key = `${franchise}:${modele}:${naissance}`
+  const key = `${franchise ?? '*'}:${modele ?? '*'}:${naissance}`
   if (_statsCache.has(key)) return _statsCache.get(key)!
 
   const filtered = getPrimes().filter(
     p =>
       p.annee_naissance === naissance &&
-      p.franchise === franchise &&
-      p.modele_categorie === modele &&
+      (franchise === undefined || p.franchise === franchise) &&
+      (modele === undefined || p.modele_categorie === modele) &&
       !p.avec_accident,
   )
 
-  // Dédoublonnage : une prime par (région, assureur) — les NPA multiples dans une région
-  // ont la même prime pour le même assureur
+  // Dédoublonnage : une prime par (région, assureur, franchise, modele) — les NPA multiples
+  // dans une région ont la même prime pour le même (assureur, franchise, modele)
   const byRegion = new Map<string, Map<string, number>>()
   for (const p of filtered) {
     if (!byRegion.has(p.region_id)) byRegion.set(p.region_id, new Map())
-    byRegion.get(p.region_id)!.set(p.assureur, p.prime_nette)
+    byRegion.get(p.region_id)!.set(`${p.assureur}:${p.franchise}:${p.modele_categorie}`, p.prime_nette)
   }
 
   const regionPop = getRegionPop()
@@ -144,7 +144,7 @@ function weightedMean(vals: number[], weights: number[]): number {
 }
 
 function scope(opts: Opts): RegionStats[] {
-  const { franchise = DEFAULT_FRANCHISE, modele = DEFAULT_MODELE, canton } = opts
+  const { franchise, modele, canton } = opts
   return filterRegions(computeRegionStats(franchise, modele), canton)
 }
 
@@ -152,8 +152,8 @@ function scope(opts: Opts): RegionStats[] {
 
 export interface Opts {
   canton?: string    // code 2 lettres ex. "GE" — omis = national
-  franchise?: number // défaut 300
-  modele?: string    // défaut 'BASE'
+  franchise?: number // omis = toutes les franchises
+  modele?: string    // omis = tous les modèles
 }
 
 // ─── Primes ───────────────────────────────────────────────────────────────────
@@ -204,8 +204,8 @@ export function economieMoyenne(opts: Opts = {}): number {
  */
 export function breakEven(opts: { canton?: string; Fa?: number; Fb?: number } = {}): number {
   const { canton, Fa = 300, Fb = 2500 } = opts
-  const pFa = primeMoyenne({ canton, franchise: Fa })
-  const pFb = primeMoyenne({ canton, franchise: Fb })
+  const pFa = primeMoyenne({ canton, franchise: Fa, modele: DEFAULT_MODELE })
+  const pFb = primeMoyenne({ canton, franchise: Fb, modele: DEFAULT_MODELE })
   return Math.round(((pFa - pFb) * 12 + (1 - QP) * Fa) / (1 - QP))
 }
 
