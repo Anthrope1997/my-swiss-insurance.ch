@@ -230,14 +230,14 @@ export default function ModelesPage() {
               <p className="article-p">
                 Tous les modèles couvrent les mêmes prestations LAMal. La différence porte uniquement
                 sur le premier interlocuteur médical : libre accès aux spécialistes pour le standard, consultation
-                obligatoire imposée pour les trois modèles alternatifs, qui offrent en contrepartie jusqu&apos;à 19 % de réduction de prime.
+                obligatoire imposée pour les trois modèles alternatifs, qui offrent en contrepartie jusqu&apos;à {hmoMaxPct} % de réduction de prime.
               </p>
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-6">
                 <table className="stripe-table w-full">
                   <thead>
                     <tr>
                       <th className="text-left whitespace-nowrap">Modèle</th>
-                      <th className="text-left whitespace-nowrap">Réduction prime</th>
+                      <th className="text-left whitespace-nowrap">Économie potentielle</th>
                       <th className="hidden sm:table-cell text-left whitespace-nowrap">Premier contact médical</th>
                       <th className="hidden md:table-cell text-left whitespace-nowrap">Disponibilité</th>
                     </tr>
@@ -273,11 +273,11 @@ export default function ModelesPage() {
                     <div className="flex items-center justify-between gap-3 mb-3">
                       <h3 className="font-semibold text-ink text-[18px]">{m.title}</h3>
                       {m.reduction ? (
-                        <span className="text-[12px] font-semibold text-brand bg-blue-tint border border-brand/20 px-2.5 py-0.5 rounded-full shrink-0">
+                        <span className="text-[16px] font-semibold text-brand bg-blue-tint border border-brand/20 px-2.5 py-0.5 rounded-full shrink-0">
                           {m.reduction}
                         </span>
                       ) : (
-                        <span className="text-[12px] text-slate bg-cloud border border-edge px-2.5 py-0.5 rounded-full shrink-0">
+                        <span className="text-[16px] text-slate bg-cloud border border-edge px-2.5 py-0.5 rounded-full shrink-0">
                           Référence
                         </span>
                       )}
@@ -285,10 +285,10 @@ export default function ModelesPage() {
                     <p className="text-[16px] text-slate mb-4">{m.desc}</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                       <div>
-                        <p className="text-[12px] font-semibold text-slate uppercase tracking-wide mb-2">Avantages</p>
+                        <p className="text-[16px] font-semibold text-slate uppercase tracking-wide mb-2">Avantages</p>
                         <ul className="space-y-1.5">
                           {m.avantages.map((a, i) => (
-                            <li key={i} className="flex gap-2 text-[13px] text-slate">
+                            <li key={i} className="flex gap-2 text-[16px] text-slate">
                               <svg className="w-3.5 h-3.5 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                               </svg>
@@ -298,10 +298,10 @@ export default function ModelesPage() {
                         </ul>
                       </div>
                       <div>
-                        <p className="text-[12px] font-semibold text-slate uppercase tracking-wide mb-2">Contraintes</p>
+                        <p className="text-[16px] font-semibold text-slate uppercase tracking-wide mb-2">Contraintes</p>
                         <ul className="space-y-1.5">
                           {m.inconvenients.map((c, i) => (
-                            <li key={i} className="flex gap-2 text-[13px] text-slate">
+                            <li key={i} className="flex gap-2 text-[16px] text-slate">
                               <svg className="w-3.5 h-3.5 text-slate/50 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                               </svg>
@@ -312,7 +312,7 @@ export default function ModelesPage() {
                       </div>
                     </div>
                     <div className="bg-cloud border border-edge rounded-md px-4 py-2.5">
-                      <p className="text-[13px] text-slate">
+                      <p className="text-[16px] text-slate">
                         <span className="font-semibold text-ink">Idéal pour : </span>
                         {m.ideal}
                       </p>
@@ -353,13 +353,13 @@ export default function ModelesPage() {
 
             {/* Guides associés */}
             <section>
-              <p className="text-[13px] font-semibold text-slate uppercase tracking-widest mb-4">
+              <p className="text-[16px] font-semibold text-slate uppercase tracking-widest mb-4">
                 Guides associés
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {guidesAssocies.map(({ href, label }) => (
                   <Link key={href} href={href}
-                    className="flex items-center gap-2 text-[13px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
+                    className="flex items-center gap-2 text-[16px] text-slate hover:text-brand border border-edge rounded-[8px] px-4 py-3 transition-colors hover:border-brand/30">
                     <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
