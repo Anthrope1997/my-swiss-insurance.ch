@@ -132,8 +132,8 @@ const modeles = [
 
 const heroStats = [
   { value: '4',        label: "Modèles d'assurance",                    sub: 'Standard, médecin de famille, centre médical, télémédecine' },
-  { value: `${divMaxPct} %`, label: 'Réduction maximale en télémédecine',   sub: 'Adulte 35 ans, données OFSP 2026' },
-  { value: `${Math.round((hamMoyPct + hmoMoyPct + divMoyPct) / 3)} %`, label: 'Réduction moyenne en changeant de modèle', sub: 'Adulte 35 ans' },
+  { value: `${divMaxPct} %`, label: 'Économie maximale réalisable',   sub: 'En passant en télémédecine, adulte 35 ans' },
+  { value: `${Math.round((hamMoyPct + hmoMoyPct + divMoyPct) / 3)} %`, label: 'Économie moyenne réalisable', sub: 'En changeant de modèle, adulte 35 ans' },
 ]
 
 const toc = [
@@ -151,7 +151,7 @@ const guidesAssocies = [
 ]
 
 const enBref = [
-  <>{"La LAMal propose quatre modèles d'assurance : "}
+  <>{"L'assurance LAMal se décline en quatre modèles d'assurance : "}
     <strong className="font-medium text-ink">{"standard, médecin de famille, centre médical et télémédecine"}</strong>
     {". Tous couvrent exactement les mêmes prestations de base."}</>,
   <>{"Les modèles alternatifs réduisent la prime mensuelle de "}
@@ -178,11 +178,11 @@ export default function ModelesPage() {
           ]} />
 
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
-            Modèles LAMal 2026 : lequel choisir ?
+            Modèles d'assurance LAMal 2026 : lequel choisir ?
           </h1>
           <p className="text-[16px] text-slate leading-relaxed mb-10">
-            La LAMal propose quatre modèles d&apos;assurance : standard, médecin de famille, centre médical et télémédecine.
-            Comparez leur fonctionnement et choisissez celui qui correspond à vos habitudes médicales pour économiser sur votre prime LAMal.
+            L&apos;assurance LAMal se décline en quatre modèles : standard, médecin de famille, centre médical et télémédecine.
+            Comparez leur fonctionnement et choisissez celui qui correspond à vos habitudes médicales pour économiser sur votre prime.
           </p>
 
           <HeroStats stats={heroStats} className="mb-8" />
