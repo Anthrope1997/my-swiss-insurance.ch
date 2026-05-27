@@ -177,7 +177,7 @@ export default function GuideLamalPage() {
             Guide complet LAMal 2026
           </h1>
           <p className="text-[16px] text-slate max-w-2xl leading-relaxed mb-10">
-            Comparez les assureurs, choisissez une franchise et un modèle médical adaptés à vos besoins, vérifiez vos droits aux subsides, et économisez sur votre assurance maladie de base LAMal.
+            Pour économiser sur votre prime LAMal, ajustez votre franchise et adaptez votre modèle d’assurance. Vérifiez aussi vos droits aux subsides.
           </p>
 
           <HeroStats stats={heroStats} className="mb-8" />
