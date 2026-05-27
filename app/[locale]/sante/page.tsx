@@ -99,7 +99,7 @@ const guides = [
       </svg>
     ),
     title: "Les 4 modèles d'assurance",
-    desc: "Standard, médecin de famille, centre médical, télémédecine : jusqu'à 19 % d'économie sur la prime",
+    desc: "Modèles standard, médecin de famille, centre médical, télémédecine : jusqu'à 19 % d'économie sur vos primes",
     href: '/sante/modeles',
   },
   {
@@ -176,9 +176,9 @@ export default function LamalPage() {
               Tout comprendre sur l'assurance maladie suisse
             </h2>
             <p className="text-[16px] text-slate leading-relaxed">
-              L'assurance maladie de base LAMal est obligatoire pour tous les résidents en Suisse depuis
-              1996. Nos guides couvrent chaque aspect pour vous aider à faire le bon choix :
-              franchises, modèles alternatifs et subsides cantonaux.
+              L&apos;assurance maladie de base LAMal est obligatoire pour tous les résidents en Suisse depuis
+              1996. Franchise, modèle de soins, subsides cantonaux : nos guides détaillent chaque levier
+              pour réduire vos primes tout en restant bien protégé en cas de frais médicaux.
             </p>
           </div>
 
@@ -224,8 +224,7 @@ export default function LamalPage() {
               Comparer les primes et simuler vos subsides en 2026
             </h2>
             <p className="text-[16px] text-slate leading-relaxed">
-              Nos outils utilisent les données officielles de l&apos;OFSP, des 26 cantons et des
-              34 caisses agréées pour vous fournir des résultats personnalisés.
+              Nos outils s&apos;appuient sur les données officielles de l&apos;OFSP, des 26 cantons et des 34 caisses agréées.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -242,7 +241,10 @@ export default function LamalPage() {
                 </svg>
               </div>
               <p className="text-[13px] font-bold text-slate/60 uppercase tracking-wide mb-2">
-                Comparateur de primes
+                Comparateur de primes LAMal
+              </p>
+              <p className="text-[13px] text-slate leading-relaxed mb-3">
+                Les 34 caisses LAMal couvrent toutes les mêmes prestations de base : seul le prix de votre prime change d&apos;une caisse à l&apos;autre.
               </p>
               <p className="text-2xl font-bold text-brand leading-none mb-0.5">CHF 2 748</p>
               <p className="text-[16px] text-slate mb-6">d&apos;économie maximale en Suisse par an</p>
@@ -272,6 +274,9 @@ export default function LamalPage() {
               </div>
               <p className="text-[13px] font-bold text-slate/60 uppercase tracking-wide mb-2">
                 Simulateur de subsides
+              </p>
+              <p className="text-[13px] text-slate leading-relaxed mb-3">
+                Le subside est une aide cantonale qui réduit votre prime LAMal selon votre canton et votre revenu fiscal.
               </p>
               <p className="text-2xl font-bold text-brand leading-none mb-0.5">28 %</p>
               <p className="text-[16px] text-slate mb-6">des assurés bénéficient d&apos;un subside</p>
