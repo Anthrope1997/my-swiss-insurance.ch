@@ -195,7 +195,7 @@ export default function FranchisePage() {
             <h2 className="article-h2">1. Quelle franchise pour votre profil ?</h2>
             <p className="article-p mb-2">
               Indiquez votre code postal, votre profil et vos frais médicaux annuels estimés.
-              Le simulateur vous indique quelle est la franchise la plus avantageuse selon votre situation.
+              Le simulateur vous indique la franchise la plus avantageuse selon votre situation.
             </p>
             <FranchiseSimulator />
           </section>
