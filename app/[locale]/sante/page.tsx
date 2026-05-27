@@ -241,9 +241,9 @@ export default function LamalPage() {
                   <path d="M4 20h14" />
                 </svg>
               </div>
-              <Link href="/sante/comparateur" className="inline-block bg-brand text-white text-[12px] font-bold uppercase tracking-widest px-3 py-1 rounded-md mb-4">
+              <p className="text-[12px] font-bold text-brand uppercase tracking-widest mb-4">
                 Comparateur de primes LAMal
-              </Link>
+              </p>
               <p className="text-[16px] text-slate leading-relaxed mb-3">
                 Les 34 caisses LAMal couvrent toutes les mêmes prestations de base : seul le prix de votre prime change d&apos;une caisse à l&apos;autre.
               </p>
@@ -273,9 +273,9 @@ export default function LamalPage() {
                   <path d="M16 17l0 .01" />
                 </svg>
               </div>
-              <Link href="/sante/subsides" className="inline-block bg-brand text-white text-[12px] font-bold uppercase tracking-widest px-3 py-1 rounded-md mb-4">
+              <p className="text-[12px] font-bold text-brand uppercase tracking-widest mb-4">
                 Simulateur de subsides
-              </Link>
+              </p>
               <p className="text-[16px] text-slate leading-relaxed mb-3">
                 Le subside est une aide cantonale qui réduit votre prime LAMal selon votre canton et votre revenu fiscal.
               </p>
