@@ -393,8 +393,8 @@ export default function GuideLamalPage() {
                 <strong className="font-medium text-ink">CHF 350 par an</strong> pour un enfant).
               </p>
               <p className="article-p">
-                Six paliers existent pour les adultes (de CHF 300 à CHF 2 500 par an) et six pour les enfants (de CHF 0 à CHF 600 par an).
-                Le palier optimal dépend de vos frais médicaux annuels estimés.
+                Six niveaux de franchise s&apos;appliquent aux adultes (de CHF 300 à CHF 2 500 par an) comme aux enfants (de CHF 0 à CHF 600 par an).
+                Le niveau le plus économique dépend de vos frais médicaux annuels et de votre situation personnelle.
               </p>
               <KeyFact label="À retenir">
                 Pour un adulte (26 ans et plus), la franchise de CHF 2 500 reste avantageuse tant que vos frais médicaux annuels restent inférieurs à{' '}
