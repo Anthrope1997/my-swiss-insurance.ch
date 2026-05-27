@@ -65,9 +65,9 @@ const webSiteSchema = {
 // ── Données ──────────────────────────────────────────────────────────────────
 
 const stats = [
-  { value: "CHF 5 604", label: 'Économie annuelle possible', sub: 'adulte 35 ans, tous profils' },
-  { value: '34',        label: 'Caisses agréées',            sub: 'données OFSP 2026'        },
-  { value: '28 %',      label: 'Bénéficiaires de subsides',  sub: 'de la population suisse'  },
+  { value: 'CHF 5 604/an', label: 'Économie maximale en changeant de caisse', sub: 'Assurance LAMal, adulte 35 ans'      },
+  { value: 'CHF 4 020/an', label: 'Économie moyenne en changeant de caisse',  sub: 'Assurance LAMal, adulte 35 ans'      },
+  { value: 'CHF 4 980/an', label: 'Subside cantonal moyen',                   sub: 'Pour les 28 % qui en bénéficient'   },
 ]
 
 const guides = [
