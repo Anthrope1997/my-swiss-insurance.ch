@@ -9,7 +9,7 @@ import { economieMax, economieMoyenne, subsideMoyen } from '@/lib/sante/formules
 import { formatChf } from '@/lib/shared/formatters'
 
 export const metadata: Metadata = {
-  title: 'Primes LAMal 2026 : comparez et économisez — My Swiss Insurance',
+  title: 'Primes LAMal 2026 : comparez et économisez',
   description:
     'Comparez les primes LAMal 2026 gratuitement. Jusqu\'à CHF 5 604 d\'économie par an. 34 caisses, données OFSP officielles, résultat immédiat.',
   alternates: { canonical: 'https://my-swiss-insurance.ch/sante' },
@@ -63,9 +63,9 @@ const webSiteSchema = {
 // ── Données ──────────────────────────────────────────────────────────────────
 
 const stats = [
-  { value: `CHF ${formatChf(economieMax() * 12)}`,     label: 'Économie maximale par an',  sub: 'Adulte 35 ans · toutes franchises et modèles · données OFSP 2026' },
-  { value: `CHF ${formatChf(economieMoyenne() * 12)}`, label: 'Économie moyenne par an',   sub: 'Adulte 35 ans · moyenne pondérée par région · données OFSP 2026'  },
-  { value: `CHF ${formatChf(subsideMoyen())}`,         label: 'Subside mensuel moyen',     sub: '28 % des résidents en bénéficient'                             },
+  { value: `CHF ${formatChf(economieMax() * 12)}/an`,     label: 'Économie maximale en Suisse', sub: 'Assurance LAMal, adulte 35 ans' },
+  { value: `CHF ${formatChf(economieMoyenne() * 12)}/an`, label: 'Économie moyenne en Suisse',  sub: 'Assurance LAMal, adulte 35 ans' },
+  { value: `CHF ${formatChf(subsideMoyen() * 12)}/an`,    label: 'Subside cantonal moyen',      sub: '28 % des résidents en bénéficient' },
 ]
 
 const guides = [
@@ -156,9 +156,9 @@ export default function LamalPage() {
           </h1>
 
           <p className="text-[16px] text-slate leading-relaxed mb-8">
-            Toutes les caisses couvrent les mêmes prestations de base — le prix seul diffère,
-            jusqu'à CHF 5 604 par an d'écart pour un même profil.
-            Comparez gratuitement les primes 2026 et trouvez la caisse la moins chère pour votre situation.
+            Toutes les caisses couvrent les mêmes prestations de base : seul le prix change,{' '}
+            jusqu’à <strong>CHF 5 604 par an d’écart</strong> pour un même profil.{' '}
+            Comparez gratuitement et trouvez la caisse la moins chère.
           </p>
 
           {/* Stats */}
