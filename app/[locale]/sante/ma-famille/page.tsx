@@ -273,7 +273,7 @@ export default function MaFamillePage() {
                   },
                   {
                     titre: 'Modèle télémédecine souvent recommandé',
-                    desc: "Pour un jeune adulte en bonne santé, à l'aise avec les outils numériques, le modèle télémédecine (consultation médicale par téléphone ou application avant tout rendez-vous) réduit la prime de 15 à 24 % supplémentaires. Combiné à une franchise élevée, les économies peuvent dépasser CHF 200 par mois.",
+                    desc: "Pour un jeune adulte en bonne santé, à l'aise avec les outils numériques, le modèle télémédecine (consultation médicale par téléphone ou application avant tout rendez-vous) réduit la prime de 12 à 22 % supplémentaires. Combiné à une franchise élevée, les économies peuvent dépasser CHF 200 par mois.",
                   },
                 ].map((item, i) => (
                   <div key={i} className="border border-edge rounded-[8px] p-5 bg-white">

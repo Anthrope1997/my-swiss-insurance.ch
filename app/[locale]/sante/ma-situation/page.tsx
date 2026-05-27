@@ -340,7 +340,7 @@ export default function MaSituationPage() {
                   },
                   {
                     titre: 'Modèle standard recommandé au départ',
-                    desc: "Le temps de trouver un médecin de famille de confiance et de vous orienter dans le système suisse, commencez par le modèle standard. Vous pourrez basculer vers un modèle alternatif (télémédecine, centre médical, médecin de famille) dès le 1er janvier suivant, avec des économies de prime allant jusqu'à 24 %.",
+                    desc: "Le temps de trouver un médecin de famille de confiance et de vous orienter dans le système suisse, commencez par le modèle standard. Vous pourrez basculer vers un modèle alternatif (télémédecine, centre médical, médecin de famille) dès le 1er janvier suivant, avec des économies de prime allant jusqu'à 22 %.",
                   },
                   {
                     titre: 'Frontalier ou détaché en Suisse ?',

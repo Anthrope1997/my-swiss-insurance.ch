@@ -91,7 +91,7 @@ const toc = [
 const heroStats = [
   { value: '3 mois',   label: "Délai droit d'option",   sub: 'dès le premier jour de travail en Suisse' },
   { value: '~CHF 686', label: 'Prime mensuelle Tessin',  sub: 'adulte, modèle standard, franchise de CHF 300' },
-  { value: '−20%',     label: 'Réduction prime possible', sub: 'avec télémédecine ou médecin de famille'   },
+  { value: '−18%',     label: 'Réduction prime possible', sub: 'avec télémédecine ou médecin de famille'   },
 ]
 
 const enBref = [
@@ -250,7 +250,7 @@ export default function FrontalierItaliePage() {
                   },
                   {
                     titre: 'Primes LAMal au Tessin',
-                    desc: "Le Tessin affiche des primes LAMal parmi les plus élevées de Suisse (environ CHF 686 par mois pour un adulte, modèle standard, franchise de CHF 300). Comparez les caisses disponibles et les modèles alternatifs (télémédecine, médecin de famille) pour réduire la prime de 10 à 20 %.",
+                    desc: "Le Tessin affiche des primes LAMal parmi les plus élevées de Suisse (environ CHF 686 par mois pour un adulte, modèle standard, franchise de CHF 300). Comparez les caisses disponibles et les modèles alternatifs (télémédecine, médecin de famille) pour réduire la prime de 10 à 18 %.",
                   },
                 ].map((item, i) => (
                   <div key={i} className="border border-edge rounded-[8px] p-5 bg-white">
@@ -308,7 +308,7 @@ export default function FrontalierItaliePage() {
                     {[
                       ['Tessin',  'CHF 573', 'CHF 810', 'CHF 237/mois'],
                       ['Grisons', 'CHF 445', 'CHF 620', 'CHF 175/mois'],
-                      ['Valais',  'CHF 433', 'CHF 575', 'CHF 142/mois'],
+                      ['Valais',  'CHF 277', 'CHF 638', 'CHF 361/mois'],
                     ].map((row, i) => (
                       <tr key={i}>
                         <td className="font-semibold text-ink">{row[0]}</td>
