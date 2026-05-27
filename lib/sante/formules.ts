@@ -206,8 +206,8 @@ export function economieMoyenne(opts: Opts = {}): number {
  */
 export function breakEven(opts: { canton?: string; Fa?: number; Fb?: number } = {}): number {
   const { canton, Fa = 300, Fb = 2500 } = opts
-  const pFa = primeMoyenne({ canton, franchise: Fa, modele: DEFAULT_MODELE })
-  const pFb = primeMoyenne({ canton, franchise: Fb, modele: DEFAULT_MODELE })
+  const pFa = primeMoyenne({ canton, franchise: Fa, modele: DEFAULT_MODELE, avecAccident: false })
+  const pFb = primeMoyenne({ canton, franchise: Fb, modele: DEFAULT_MODELE, avecAccident: false })
   return Math.round(((pFa - pFb) * 12 + (1 - QP) * Fa) / (1 - QP))
 }
 
@@ -226,8 +226,8 @@ function modeleEcoPairs(
   modele: ModeleAlt,
   franchise: number,
 ): { eco: number; pop: number }[] {
-  const base = computeRegionStats(franchise, 'BASE')
-  const alt  = computeRegionStats(franchise, modele)
+  const base = computeRegionStats(franchise, 'BASE', ADULTE_NAISSANCE, false)
+  const alt  = computeRegionStats(franchise, modele, ADULTE_NAISSANCE, false)
   const altMap = new Map(alt.map(r => [r.region_id, r]))
 
   return base
