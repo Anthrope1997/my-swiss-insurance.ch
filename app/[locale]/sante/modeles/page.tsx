@@ -7,6 +7,7 @@ import AuthorBio from '@/components/ui/AuthorBio'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import HeroStats from '@/components/ui/HeroStats'
 import { modeleEconomieMax, modeleEconomieMoyenne, primeMoyenne } from '@/lib/sante/formules'
+import { formatChf } from '@/lib/shared/formatters'
 
 const _base = primeMoyenne()
 const hamMaxPct = Math.round(modeleEconomieMax('HAM') / _base * 100)   // 18
@@ -15,6 +16,9 @@ const divMaxPct = Math.round(modeleEconomieMax('DIV') / _base * 100)   // 18
 const hamMoyPct = Math.round(modeleEconomieMoyenne('HAM') / _base * 100)  // 11
 const hmoMoyPct = Math.round(modeleEconomieMoyenne('HMO') / _base * 100)  // 14
 const divMoyPct = Math.round(modeleEconomieMoyenne('DIV') / _base * 100)  // 11
+const maxModelPct   = Math.max(hamMaxPct, hmoMaxPct, divMaxPct)
+const maxModelAnnuel = Math.round(Math.max(modeleEconomieMax('HMO'), modeleEconomieMax('DIV'), modeleEconomieMax('HAM')) * 12)
+const moyModelAnnuel = Math.round((modeleEconomieMoyenne('HAM') + modeleEconomieMoyenne('HMO') + modeleEconomieMoyenne('DIV')) / 3 * 12)
 
 export const metadata: Metadata = {
   title: 'Modèles LAMal 2026 : standard, médecin de famille, centre médical, télémédecine',
@@ -131,9 +135,9 @@ const modeles = [
 ]
 
 const heroStats = [
-  { value: '4',        label: "Modèles d'assurance",                    sub: 'Standard, médecin de famille, centre médical, télémédecine' },
-  { value: `${divMaxPct} %`, label: 'Économie maximale réalisable',   sub: 'En passant en télémédecine, adulte 35 ans' },
-  { value: `${Math.round((hamMoyPct + hmoMoyPct + divMoyPct) / 3)} %`, label: 'Économie moyenne réalisable', sub: 'En changeant de modèle, adulte 35 ans' },
+  { value: '4',        label: "Modèles de soins",          sub: `Jusqu’à ${maxModelPct} % d’économie réalisable` },
+  { value: `CHF ${formatChf(maxModelAnnuel)}/an`, label: 'Économie maximale réalisable',   sub: "En changeant de modèle d’assurance" },
+  { value: `CHF ${formatChf(moyModelAnnuel)}/an`, label: 'Économie moyenne réalisable', sub: "En changeant de modèle d’assurance" },
 ]
 
 const toc = [
