@@ -44,7 +44,7 @@ const faqItems = [
   {
     question: 'Quelle franchise LAMal choisir en 2026 ?',
     answer:
-      `Choisissez la franchise de CHF 2 500 si vous êtes en bonne santé et avez peu de frais médicaux : vous économisez environ CHF 120 par mois sur la prime. Optez pour la franchise de CHF 300 si vos dépenses médicales dépassent CHF ${fmtChf(seuil)} par an en Suisse.`,
+      `Choisissez la franchise de CHF 2 500 si vous êtes un adulte en bonne santé et avez peu de frais médicaux : vous économisez environ CHF 120 par mois sur la prime. Optez pour la franchise de CHF 300 si vos dépenses médicales dépassent CHF ${fmtChf(seuil)} par an en Suisse.`,
   },
   {
     question: "Peut-on changer de franchise en cours d'année ?",
