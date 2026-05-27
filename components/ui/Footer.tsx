@@ -35,10 +35,10 @@ export default function Footer() {
   return (
     <footer className="bg-navy text-white/60">
       <div className="container-xl pt-16 pb-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 mb-14">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-10 mb-14">
 
           {/* Colonne marque */}
-          <div className="col-span-2 md:col-span-2">
+          <div className="col-span-2 md:col-span-1">
             <Link href="/sante" className="flex items-center gap-2.5 mb-5">
               <ShieldIcon />
               <span className="text-white font-semibold text-[16px]">My Swiss Insurance</span>
