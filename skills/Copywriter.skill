@@ -37,7 +37,7 @@ Chaleureux sans être familier.
 - Longueur maximale : 25 mots par phrase.
 - Une idée par phrase. Jamais deux.
 - Commencer par le fait, pas par la condition.
-  - Bien : "La franchise CHF 2 500 économise CHF 120 par mois."
+  - Bien : "La franchise de CHF 2 500 économise CHF 120 par mois."
   - Mal : "Si vous êtes en bonne santé, vous pourriez envisager..."
 - Éviter les constructions passives.
   - Bien : "Votre caisse rembourse les frais au-delà de la franchise."
@@ -163,6 +163,14 @@ Le code monétaire **précède toujours le chiffre** : `CHF 300`, jamais `300 CH
 
 - Bien : `CHF 300 par mois`, `CHF 2 500`, `économie de CHF 1 200 par an`
 - Mal : `300 CHF`, `2 500 CHF`, `1 200 CHF par an`
+
+### Franchise + montant CHF
+Dans tout texte courant, la préposition **"de"** est obligatoire entre "franchise" et le montant : `franchise de CHF X`, jamais `franchise CHF X`.
+
+- Bien : `la franchise de CHF 2 500`, `passer à la franchise de CHF 300`, `franchise de CHF 0 pour les enfants`
+- Mal : `la franchise CHF 2 500`, `franchise CHF 300`
+
+Exception : les titres de tuiles et en-têtes de colonnes de tableaux qui présentent une franchise en tant qu'étiquette isolée peuvent omettre "de" (`Franchise CHF 300` comme intitulé de colonne ou de carte). La distinction est entre **texte courant** (préposition obligatoire) et **étiquette autonome** (préposition optionnelle).
 
 ### Espaces autour des deux-points
 Le deux-points est **précédé et suivi d'une espace** dans tous les textes visibles : titres, introductions, labels, tableaux, CTAs, blocs "En bref", callouts. Sans exception.

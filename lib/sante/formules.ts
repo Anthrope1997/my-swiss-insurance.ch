@@ -90,8 +90,9 @@ function computeRegionStats(
   franchise: number | undefined,
   modele: string | undefined,
   naissance = ADULTE_NAISSANCE,
+  avecAccident?: boolean,
 ): RegionStats[] {
-  const key = `${franchise ?? '*'}:${modele ?? '*'}:${naissance}`
+  const key = `${franchise ?? '*'}:${modele ?? '*'}:${naissance}:${avecAccident ?? '*'}`
   if (_statsCache.has(key)) return _statsCache.get(key)!
 
   const filtered = getPrimes().filter(
@@ -99,15 +100,15 @@ function computeRegionStats(
       p.annee_naissance === naissance &&
       (franchise === undefined || p.franchise === franchise) &&
       (modele === undefined || p.modele_categorie === modele) &&
-      !p.avec_accident,
+      (avecAccident === undefined || p.avec_accident === avecAccident),
   )
 
-  // Dédoublonnage : une prime par (région, assureur, franchise, modele) — les NPA multiples
+  // Dédoublonnage : une prime par (région, assureur, franchise, modele, accident) — les NPA multiples
   // dans une région ont la même prime pour le même (assureur, franchise, modele)
   const byRegion = new Map<string, Map<string, number>>()
   for (const p of filtered) {
     if (!byRegion.has(p.region_id)) byRegion.set(p.region_id, new Map())
-    byRegion.get(p.region_id)!.set(`${p.assureur}:${p.franchise}:${p.modele_categorie}`, p.prime_nette)
+    byRegion.get(p.region_id)!.set(`${p.assureur}:${p.franchise}:${p.modele_categorie}:${p.avec_accident}`, p.prime_nette)
   }
 
   const regionPop = getRegionPop()
@@ -144,16 +145,17 @@ function weightedMean(vals: number[], weights: number[]): number {
 }
 
 function scope(opts: Opts): RegionStats[] {
-  const { franchise, modele, canton } = opts
-  return filterRegions(computeRegionStats(franchise, modele), canton)
+  const { franchise, modele, canton, avecAccident } = opts
+  return filterRegions(computeRegionStats(franchise, modele, ADULTE_NAISSANCE, avecAccident), canton)
 }
 
 // ─── Options des requêtes ─────────────────────────────────────────────────────
 
 export interface Opts {
-  canton?: string    // code 2 lettres ex. "GE" — omis = national
-  franchise?: number // omis = toutes les franchises
-  modele?: string    // omis = tous les modèles
+  canton?: string        // code 2 lettres ex. "GE" — omis = national
+  franchise?: number     // omis = toutes les franchises
+  modele?: string        // omis = tous les modèles
+  avecAccident?: boolean // omis = avec et sans accident
 }
 
 // ─── Primes ───────────────────────────────────────────────────────────────────
