@@ -141,9 +141,7 @@ export default function SubsidesPage() {
                 reçoit directement le montant et le déduit de votre prime mensuelle.
               </p>
               <p className="article-p">
-                Dans les 19 autres cantons, vous devez déposer une <strong>demande explicite</strong> auprès
-                du service cantonal compétent, généralement avant la date limite annuelle indiquée dans
-                le simulateur. Un subside non réclamé n'est pas versé rétroactivement.
+                Dans les 19 autres cantons, vous devez soumettre votre demande auprès de votre administration cantonale, avant la date limite indiquée dans le simulateur. Un subside non réclamé n'est pas versé rétroactivement.
               </p>
 
               <KeyFact>
