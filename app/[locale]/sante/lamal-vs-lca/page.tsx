@@ -108,9 +108,9 @@ const guidesAssocies = [
 ]
 
 const enBref = [
-  "La LAMal est obligatoire pour tous les résidents suisses — prestations identiques chez tous les assureurs, admission garantie sans sélection médicale.",
+  "La LAMal est obligatoire pour tous les résidents suisses. Prestations identiques chez tous les assureurs, admission garantie sans sélection médicale.",
   "La LCA (complémentaire) est facultative et couvre ce que la LAMal exclut : chambre privée, soins dentaires, lunettes, médecine alternative.",
-  "Contrairement à la LAMal, un assureur peut refuser une complémentaire ou imposer des exclusions — souscrivez pendant que vous êtes en bonne santé.",
+  "Contrairement à la LAMal, un assureur peut refuser une complémentaire ou imposer des exclusions. Souscrivez pendant que vous êtes en bonne santé.",
 ]
 
 export default function LamalVsLcaPage() {

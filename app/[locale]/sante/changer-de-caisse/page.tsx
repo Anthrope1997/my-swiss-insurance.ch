@@ -9,11 +9,11 @@ import { economieMax } from '@/lib/sante/formules'
 import { formatChf } from '@/lib/shared/formatters'
 
 export const metadata: Metadata = {
-  title: 'Changer de caisse maladie en Suisse — Guide résiliation LAMal 2026',
+  title: 'Changer de caisse maladie en Suisse : Guide résiliation LAMal 2026',
   description:
     'Comment changer de caisse maladie : délais, procédure, modèle de lettre de résiliation. Date limite 30 novembre. Guide complet 2026.',
   openGraph: {
-    title: 'Changer de caisse maladie — Résiliation LAMal 2026',
+    title: 'Changer de caisse maladie : Résiliation LAMal 2026',
     description: "Procédure complète pour changer d'assureur LAMal : dates, étapes et modèle de lettre.",
     url: 'https://my-swiss-insurance.ch/sante/changer-de-caisse',
     type: 'article',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'Changer de caisse maladie LAMal en Suisse — Guide 2026',
+  headline: 'Changer de caisse maladie LAMal en Suisse : Guide 2026',
   datePublished: '2026-01-01',
   dateModified: '2026-04-01',
   author: { '@type': 'Organization', name: 'My Swiss Insurance', url: 'https://my-swiss-insurance.ch' },
@@ -80,7 +80,7 @@ const faqSchema = {
 const heroStats = [
   { value: '30 novembre', label: 'Date limite ordinaire',  sub: 'pour changer au 1er janvier suivant' },
   { value: '1er janvier', label: 'Date de prise d\'effet', sub: 'du nouveau contrat LAMal'             },
-  { value: `CHF ${formatChf(economieMax() * 12)}`, label: 'Économie max. en Suisse', sub: 'Adulte 35 ans · toutes franchises et modèles · données OFSP 2026' },
+  { value: `CHF ${formatChf(economieMax() * 12)}`, label: 'Économie max. en Suisse', sub: 'Adulte 35 ans, toutes franchises et modèles, données OFSP 2026' },
 ]
 
 const toc = [
@@ -101,7 +101,7 @@ const guidesAssocies = [
 
 const enBref = [
   "La résiliation ordinaire doit être envoyée par courrier recommandé avant le 30 novembre pour un changement d'assureur au 1er janvier suivant.",
-  "La nouvelle caisse est légalement obligée d'accepter tout résident suisse — aucune sélection médicale n'est possible pour la LAMal de base.",
+  "La nouvelle caisse est légalement obligée d'accepter tout résident suisse. Aucune sélection médicale n'est possible pour la LAMal de base.",
   "En cas de hausse de prime annoncée par votre caisse, vous disposez d'un mois supplémentaire pour résilier, même après la date limite du 30 novembre.",
 ]
 

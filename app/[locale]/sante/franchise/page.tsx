@@ -11,7 +11,7 @@ import HeroStats from '@/components/ui/HeroStats'
 import { nationalBreakEven, nationalBreakEvenJA, nationalBreakEvenEnfant, nationalAvgPrime } from '@/lib/sante/calcul-franchise'
 
 export const metadata: Metadata = {
-  title: "Franchise LAMal 2026 : quel montant choisir — My Swiss Insurance",
+  title: "Franchise LAMal 2026 : quel montant choisir",
   description:
     "6 niveaux de franchise LAMal, de CHF 300 à CHF 2 500 par an. Tableau des seuils d'équilibre, franchise enfant et délais de changement. Guide complet 2026.",
   openGraph: {

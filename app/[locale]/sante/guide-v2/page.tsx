@@ -12,12 +12,12 @@ import '../../home-v2/sf-theme.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Guide complet LAMal 2026 — Primes, franchises, modèles et subsides',
+  title: 'Guide complet LAMal 2026 : Primes, franchises, modèles et subsides',
   robots: { index: false, follow: false },
   description:
-    "Guide LAMal 2026 : primes par canton (OFSP), franchises CHF 300 – CHF 2 500 avec seuil d'équilibre, 4 modèles d'assurance, changement de caisse et subsides.",
+    "Guide LAMal 2026 : primes par canton (OFSP), franchises CHF 300 - CHF 2 500 avec seuil d'équilibre, 4 modèles d'assurance, changement de caisse et subsides.",
   openGraph: {
-    title: 'Guide complet LAMal 2026 — Primes, franchises et subsides',
+    title: 'Guide complet LAMal 2026 : Primes, franchises et subsides',
     description: 'La référence LAMal 2026 : primes par canton, franchises, modèles et subsides. Données OFSP.',
     url: 'https://my-swiss-insurance.ch/sante/guide',
     type: 'article',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'Guide complet LAMal 2026 — Primes, franchises, modèles et subsides',
+  headline: 'Guide complet LAMal 2026 : Primes, franchises, modèles et subsides',
   datePublished: '2026-01-01',
   dateModified: '2026-04-22',
   author: { '@type': 'Organization', name: 'My Swiss Insurance', url: 'https://my-swiss-insurance.ch' },
@@ -110,7 +110,7 @@ const premiums = [
 ]
 
 const franchises = [
-  { montant: 300,  prime: 638.70, economie: 0,      ecAnn: 0,    breakEven: '—',          conseil: 'Recommandé si frais médicaux dépassent CHF 1 891 par an' },
+  { montant: 300,  prime: 638.70, economie: 0,      ecAnn: 0,    breakEven: '-',          conseil: 'Recommandé si frais médicaux dépassent CHF 1 891 par an' },
   { montant: 500,  prime: 627.90, economie: 10.80,  ecAnn: 130,  breakEven: 'CHF 444',    conseil: 'Avantage limité' },
   { montant: 1000, prime: 600.70, economie: 38.00,  ecAnn: 456,  breakEven: 'CHF 807',    conseil: "Bon si moins d'une consultation majeure par an" },
   { montant: 1500, prime: 573.60, economie: 65.10,  ecAnn: 781,  breakEven: 'CHF 1 168',  conseil: 'Bon équilibre pour personnes saines' },
@@ -212,7 +212,7 @@ export default function GuideLamalPage() {
               <ul className="space-y-3">
                 {enBref.map((phrase, i) => (
                   <li key={i} className="flex gap-2.5 text-[16px] leading-relaxed" style={{ color: '#576680' }}>
-                    <span className="font-bold shrink-0 mt-0.5" style={{ color: '#6F8B90' }} aria-hidden="true">—</span>
+                    <span className="font-bold shrink-0 mt-0.5" style={{ color: '#6F8B90' }} aria-hidden="true">-</span>
                     <span>{phrase}</span>
                   </li>
                 ))}

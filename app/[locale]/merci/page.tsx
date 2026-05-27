@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Demande reçue — My Swiss Insurance',
+  title: 'Demande reçue',
   description: 'Votre demande a bien été reçue. Un conseiller vous contacte sous 24 heures.',
   robots: { index: false },
 }

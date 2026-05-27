@@ -51,7 +51,7 @@ export default function PrimeCalculator({ canton }: { canton: Canton }) {
           prenom: prenom.trim(),
           email: email.trim(),
           canton: canton.name,
-          situation: `Calculateur · ${age} ans · franchise ${franchise} CHF · ${modele}`,
+          situation: `Calculateur, ${age} ans, franchise ${franchise} CHF, ${modele}`,
         }),
       })
       if (res.ok) { setUnlocked(true); setGateStatus('done') }
@@ -158,7 +158,7 @@ export default function PrimeCalculator({ canton }: { canton: Canton }) {
                 Débloquez votre comparaison complète
               </h3>
               <p className="text-[16px] text-slate mb-5">
-                Top 3 complet + économie annuelle calculée · Gratuit · Sans engagement
+                Top 3 complet + économie annuelle calculée, gratuit, sans engagement
               </p>
               <form onSubmit={handleGate} className="space-y-3">
                 <input

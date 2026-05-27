@@ -44,7 +44,7 @@ export default function EmailCTA({ subject }: Props) {
         Recevez {subject} par email
       </h2>
       <p className="text-[13px] text-slate mb-4">
-        Gratuit · Sans engagement · Données OFSP 2026
+        Gratuit, sans engagement, données OFSP 2026
       </p>
       <form onSubmit={handleSubmit} className="flex gap-2">
         <input

@@ -5,7 +5,7 @@ import CantonSearch from '@/components/ui/CantonSearch'
 import HeroStats from '@/components/ui/HeroStats'
 
 export const metadata: Metadata = {
-  title: 'Économisez sur votre assurance maladie suisse en 2026 — My Swiss Insurance',
+  title: 'Économisez sur votre assurance maladie suisse en 2026',
   description:
     'Comparez les primes LAMal 2026 gratuitement. Jusqu\'à CHF 5 604 d\'économie par an. 34 caisses, données OFSP officielles, résultat immédiat.',
   alternates: { canonical: 'https://my-swiss-insurance.ch' },

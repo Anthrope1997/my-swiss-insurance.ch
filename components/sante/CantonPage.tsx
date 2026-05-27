@@ -42,10 +42,10 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
     {
       value: `CHF ${canton.primeMoyenneEnfant}`,
       label: 'Prime enfant la moins chère',
-      sub: 'enfant 0–18 ans, modèle standard, franchise de CHF 300',
+      sub: 'enfant 0-18 ans, modèle standard, franchise de CHF 300',
     },
     {
-      value: canton.subside.subsideMensuelMax ? `CHF ${canton.subside.subsideMensuelMax}` : '–',
+      value: canton.subside.subsideMensuelMax ? `CHF ${canton.subside.subsideMensuelMax}` : '-',
       label: 'Subside mensuel max.',
       sub: canton.subside.subsideMensuelMax ? 'barème cantonal 2026' : 'Barème non publié',
     },
@@ -328,7 +328,7 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
                           )}
                         </td>
                         <td className="text-left whitespace-nowrap hidden sm:table-cell text-slate">
-                          {i === 0 ? '—' : `−${econPct} %`}
+                          {i === 0 ? '-' : `−${econPct} %`}
                         </td>
                       </tr>
                     )
@@ -422,13 +422,13 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
             <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
               <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Date butoir</p>
               <p className="text-[16px] font-medium text-ink">
-                {canton.subside.automatique ? 'Non requis' : (canton.subside.delai ?? '—')}
+                {canton.subside.automatique ? 'Non requis' : (canton.subside.delai ?? '-')}
               </p>
             </div>
             <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
               <p className="text-[16px] font-bold text-slate/60 uppercase tracking-wide mb-1">Subside max</p>
               <p className="text-[16px] font-medium text-ink">
-                {canton.subside.subsideMensuelMax ? `CHF ${canton.subside.subsideMensuelMax} / mois` : '—'}
+                {canton.subside.subsideMensuelMax ? `CHF ${canton.subside.subsideMensuelMax} / mois` : '-'}
               </p>
             </div>
             <div className="bg-cloud border border-edge rounded-[8px] px-4 py-3">
@@ -451,7 +451,7 @@ export default function CantonPage({ canton, noFaqSchema = false, heroIntro, ove
                   {canton.subside.tableauProfils.map((row) => (
                     <tr key={row.profil}>
                       <td className="text-ink font-medium whitespace-nowrap">{row.profil}</td>
-                      <td className={`text-left font-semibold whitespace-nowrap ${row.subsideMax === '—' ? 'text-slate' : 'text-brand'}`}>
+                      <td className={`text-left font-semibold whitespace-nowrap ${row.subsideMax === '-' ? 'text-slate' : 'text-brand'}`}>
                         {row.subsideMax}
                       </td>
                       <td className="text-left text-ink whitespace-nowrap">{row.revenuMax}</td>

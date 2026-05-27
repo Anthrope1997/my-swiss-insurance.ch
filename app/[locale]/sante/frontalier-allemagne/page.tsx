@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description:
     "Droit d'option LAMal pour les frontaliers germano-suisses : LAMal vs GKV allemand, cantons bâlois, formulaire S1 et démarches concrètes. Guide 2026.",
   openGraph: {
-    title: 'LAMal frontaliers allemands — Suisse 2026',
+    title: 'LAMal frontaliers allemands : Suisse 2026',
     description:
       "Frontaliers germano-suisses : droit d'option LAMal ou GKV, cantons bâlois et cas particuliers.",
     url: 'https://my-swiss-insurance.ch/sante/frontalier-allemagne',
@@ -95,9 +95,9 @@ const heroStats = [
 ]
 
 const enBref = [
-  "Les frontaliers germano-suisses ont un droit d'option entre la LAMal suisse et le GKV allemand — à exercer dans les 3 mois suivant le début de l'emploi.",
+  "Les frontaliers germano-suisses ont un droit d'option entre la LAMal suisse et le GKV allemand. À exercer dans les 3 mois suivant le début de l'emploi.",
   "Le GKV couvre gratuitement les membres de la famille sans revenu, ce qui le rend souvent plus économique pour les familles avec conjoint ou enfants restés en Allemagne.",
-  "Avec la LAMal, l'accès au réseau médical suisse est complet — avec le GKV, les soins en Suisse sont limités aux urgences.",
+  "Avec la LAMal, l'accès au réseau médical suisse est complet. Avec le GKV, les soins en Suisse sont limités aux urgences.",
 ]
 
 export default function FrontalierAllemagnePage() {

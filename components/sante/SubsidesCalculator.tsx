@@ -87,14 +87,14 @@ export default function SubsidesCalculator({ fixedCanton, cantonInfos }: Props =
               className="select-field pr-9"
             >
               <option value="">Sélectionner votre canton…</option>
-              <optgroup label="Suisse romande — calcul détaillé">
+              <optgroup label="Suisse romande : calcul détaillé">
                 {calcEntries.map(([code, info]) => (
-                  <option key={code} value={code}>{code} — {info.nom}</option>
+                  <option key={code} value={code}>{code} : {info.nom}</option>
                 ))}
               </optgroup>
-              <optgroup label="Autres cantons — données indicatives">
+              <optgroup label="Autres cantons : données indicatives">
                 {otherEntries.map(([code, info]) => (
-                  <option key={code} value={code}>{code} — {info.nom}</option>
+                  <option key={code} value={code}>{code} : {info.nom}</option>
                 ))}
               </optgroup>
             </select>
@@ -181,7 +181,7 @@ export default function SubsidesCalculator({ fixedCanton, cantonInfos }: Props =
                   className="select-field text-[16px]"
                 >
                   <option value="adulte">Adulte (26+)</option>
-                  <option value="jeune">Jeune adulte (19–25)</option>
+                  <option value="jeune">Jeune adulte (19-25)</option>
                 </select>
               </div>
             </div>
@@ -205,7 +205,7 @@ export default function SubsidesCalculator({ fixedCanton, cantonInfos }: Props =
               <span className="text-[16px] text-slate/60">CHF / an</span>
             </div>
             <p className="text-[12px] text-slate/60 mt-1.5">
-              Revenu net fiscal — en cas de doute, utilisez votre revenu imposable.
+              Revenu net fiscal, en cas de doute, utilisez votre revenu imposable.
             </p>
           </div>
 
@@ -247,7 +247,7 @@ export default function SubsidesCalculator({ fixedCanton, cantonInfos }: Props =
                   <div className="flex items-end justify-between gap-4 flex-wrap">
                     <div>
                       <p className="text-[12px] text-slate/60 uppercase tracking-wide mb-1">
-                        Estimation subside mensuel{result.label && result.label !== 'Ordinaire' ? ` — ${result.label}` : ''}
+                        Estimation subside mensuel{result.label && result.label !== 'Ordinaire' ? ` : ${result.label}` : ''}
                       </p>
                       <p className="text-4xl font-bold text-white">
                         CHF {fmt(result.total)}
@@ -288,7 +288,7 @@ export default function SubsidesCalculator({ fixedCanton, cantonInfos }: Props =
                   )}
 
                   <p className="text-[11px] text-slate">
-                    Estimation indicative 2026 — le montant réel est déterminé par le canton sur la base de votre dossier fiscal.
+                    Estimation indicative 2026, le montant réel est déterminé par le canton sur la base de votre dossier fiscal.
                   </p>
                 </div>
               )}

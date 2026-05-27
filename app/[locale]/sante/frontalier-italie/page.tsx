@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description:
     "Droit d'option LAMal pour les frontaliers italo-suisses : LAMal vs SSN italien, cantons Tessin, Grisons et Valais, formulaire S1 et démarches. Guide 2026.",
   openGraph: {
-    title: 'LAMal frontaliers italiens — Suisse 2026',
+    title: 'LAMal frontaliers italiens : Suisse 2026',
     description:
       "Frontaliers italo-suisses : droit d'option LAMal ou SSN, Tessin, Grisons, Valais et démarches concrètes.",
     url: 'https://my-swiss-insurance.ch/sante/frontalier-italie',
@@ -95,8 +95,8 @@ const heroStats = [
 ]
 
 const enBref = [
-  "Les frontaliers italo-suisses (Tessin, Grisons, Valais) ont un droit d'option entre la LAMal suisse et le SSN italien — à exercer dans les 3 mois suivant le début de l'emploi.",
-  "Le SSN est financé par l'impôt et gratuit au point de service en Italie — la LAMal offre en échange un accès complet au réseau médical suisse de qualité homogène.",
+  "Les frontaliers italo-suisses (Tessin, Grisons, Valais) ont un droit d'option entre la LAMal suisse et le SSN italien. À exercer dans les 3 mois suivant le début de l'emploi.",
+  "Le SSN est financé par l'impôt et gratuit au point de service en Italie. La LAMal offre en échange un accès complet au réseau médical suisse de qualité homogène.",
   "Si votre famille et vos médecins sont en Italie, le SSN reste plus adapté ; si vous vous soignez principalement en Suisse, la LAMal est généralement préférable.",
 ]
 
@@ -201,7 +201,7 @@ export default function FrontalierItaliePage() {
             <section id="comparaison">
               <h2 className="article-h2">2. Quelles différences entre LAMal et SSN italien ?</h2>
               <p className="article-p">
-                Le SSN est financé par l'impôt et gratuit au point de service — la LAMal est une
+                Le SSN est financé par l'impôt et gratuit au point de service, la LAMal est une
                 prime fixe individuelle. La qualité des soins italiens varie fortement selon la région.
               </p>
               <div className="overflow-x-auto border border-edge rounded-[8px] mb-5">

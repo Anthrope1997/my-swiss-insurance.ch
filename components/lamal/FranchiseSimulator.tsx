@@ -162,9 +162,9 @@ export default function FranchiseSimulator() {
                 onChange={e => set({ ageGroup: e.target.value as AgeGroup })}
                 className="select-field pr-9"
               >
-                <option value="adulte">Adulte — 26 ans et plus</option>
-                <option value="jeuneAdulte">Jeune adulte — 19 à 25 ans</option>
-                <option value="enfant">Enfant — 0 à 18 ans</option>
+                <option value="adulte">Adulte (26 ans et plus)</option>
+                <option value="jeuneAdulte">Jeune adulte (19-25 ans)</option>
+                <option value="enfant">Enfant (0-18 ans)</option>
               </select>
               <Chevron />
             </div>

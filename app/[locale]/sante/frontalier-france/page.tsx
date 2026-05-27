@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description:
     "Droit d'option LAMal pour les frontaliers franco-suisses : délai de 3 mois, LAMal vs Sécurité sociale française, formulaire S1, cas Genève. Guide complet 2026.",
   openGraph: {
-    title: 'LAMal frontaliers français — Suisse romande 2026',
+    title: 'LAMal frontaliers français : Suisse romande 2026',
     description:
       "Frontaliers franco-suisses : droit d'option LAMal ou Sécurité sociale, formulaire S1 et cas particulier genevois.",
     url: 'https://my-swiss-insurance.ch/sante/frontalier-france',
@@ -63,7 +63,7 @@ const faqItems = [
   {
     question: 'Quelle caisse LAMal choisir en tant que frontalier français ?',
     answer:
-      "Les primes LAMal pour les frontaliers sont calculées selon le canton de travail (pas le canton de résidence). Comparez les caisses disponibles dans votre canton de travail principal — les écarts peuvent dépasser CHF 100 par mois entre la caisse la moins chère et la plus chère pour un même profil. Le modèle télémédecine ou médecin de famille réduit la prime de 10 à 20 % supplémentaires.",
+      "Les primes LAMal pour les frontaliers sont calculées selon le canton de travail (pas le canton de résidence). Comparez les caisses disponibles dans votre canton de travail principal, les écarts peuvent dépasser CHF 100 par mois entre la caisse la moins chère et la plus chère pour un même profil. Le modèle télémédecine ou médecin de famille réduit la prime de 10 à 20 % supplémentaires.",
   },
   {
     question: 'Que devient mon assurance si je cesse mon activité en Suisse ?',
@@ -106,9 +106,9 @@ const heroStats = [
 ]
 
 const enBref = [
-  "Les frontaliers franco-suisses ont un droit d'option entre la LAMal suisse et la Sécurité sociale française — ce choix doit être exercé dans les 3 mois suivant le début de l'emploi.",
+  "Les frontaliers franco-suisses ont un droit d'option entre la LAMal suisse et la Sécurité sociale française. Ce choix doit être exercé dans les 3 mois suivant le début de l'emploi.",
   "La LAMal offre un accès complet au réseau médical suisse et ouvre des droits aux subsides cantonaux, mais ne couvre pas les soins programmés en France.",
-  "Une fois exercé, le droit d'option est en principe définitif — un changement n'est possible qu'en cas de mariage, divorce, départ à la retraite ou perte d'emploi prolongée.",
+  "Une fois exercé, le droit d'option est en principe définitif. Un changement n'est possible qu'en cas de mariage, divorce, départ à la retraite ou perte d'emploi prolongée.",
 ]
 
 export default function FrontalierFrancePage() {
@@ -227,7 +227,7 @@ export default function FrontalierFrancePage() {
                   },
                   {
                     titre: 'Situations ouvrant une révision du choix',
-                    desc: "Le droit d'option ne peut être modifié qu'en cas de changement de situation reconnu : mariage ou divorce, déménagement hors de France, départ à la retraite, perte d'emploi prolongée. Ces révisions ne sont pas automatiques — elles doivent être sollicitées auprès des autorités compétentes.",
+                    desc: "Le droit d'option ne peut être modifié qu'en cas de changement de situation reconnu : mariage ou divorce, déménagement hors de France, départ à la retraite, perte d'emploi prolongée. Ces révisions ne sont pas automatiques, elles doivent être sollicitées auprès des autorités compétentes.",
                   },
                 ].map((item, i) => (
                   <div key={i} className="border border-edge rounded-[8px] p-5 bg-white">

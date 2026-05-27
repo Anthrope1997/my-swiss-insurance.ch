@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import UnifiedLeadForm from '@/components/ui/UnifiedLeadForm'
 
 export const metadata: Metadata = {
-  title: 'Obtenir un devis LAMal — My Swiss Insurance',
+  title: 'Obtenir un devis LAMal',
   description:
     'Comparez gratuitement les primes LAMal 2026. Remplissez le formulaire et un expert vous répond sous 24 h.',
   robots: { index: false },

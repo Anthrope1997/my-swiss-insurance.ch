@@ -156,7 +156,7 @@ export default function ComparateurComplementairesClient() {
         <p className="text-sm text-gray-500">
           <span className="font-semibold text-gray-900">{produits.length} produit{produits.length > 1 ? 's' : ''}</span>
           {' '}affiché{produits.length > 1 ? 's' : ''}
-          {' '}— {totalWithPrices} tarifs disponibles pour ce profil
+          {' '}: {totalWithPrices} tarifs disponibles pour ce profil
         </p>
         <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer select-none">
           <input
@@ -234,7 +234,7 @@ export default function ComparateurComplementairesClient() {
                           {p.prixMois.toFixed(2).replace('.', '.')}
                         </span>
                       ) : (
-                        <span className="text-gray-300">—</span>
+                        <span className="text-gray-300">-</span>
                       )}
                     </td>
 

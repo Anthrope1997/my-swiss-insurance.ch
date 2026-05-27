@@ -46,7 +46,7 @@ const editorialSchema = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://my-swiss-insurance.ch'),
   title: {
-    default: 'My Swiss Insurance — Assurance maladie en Suisse',
+    default: 'My Swiss Insurance : Assurance maladie en Suisse',
     template: '%s | My Swiss Insurance',
   },
   description:

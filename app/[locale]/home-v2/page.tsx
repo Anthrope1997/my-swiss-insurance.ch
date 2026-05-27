@@ -8,7 +8,7 @@ import './sf-theme.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Économisez sur votre assurance maladie suisse en 2026 — My Swiss Insurance',
+  title: 'Économisez sur votre assurance maladie suisse en 2026',
   robots: { index: false, follow: false },
   description:
     "Comparez les primes LAMal 2026 gratuitement. Jusqu'à CHF 5 604 d'économie par an. 34 caisses, données OFSP officielles, résultat immédiat.",

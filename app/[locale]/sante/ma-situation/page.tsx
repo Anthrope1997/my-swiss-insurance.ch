@@ -42,7 +42,7 @@ const faqItems = [
   {
     question: 'Que devient ma LAMal si je perds mon emploi ?',
     answer:
-      "La LAMal reste obligatoire et continue sans interruption. La perte d'emploi n'entraîne aucune suspension de couverture. Deux changements importants : (1) vous devenez potentiellement éligible aux subsides cantonaux si vos revenus chutent sous les seuils cantonaux — à demander immédiatement auprès de votre service cantonal ; (2) la couverture LAA accidents reste active via l'assurance chômage pendant toute la durée des indemnités, puis cesse 30 jours après la fin du droit.",
+      "La LAMal reste obligatoire et continue sans interruption. La perte d'emploi n'entraîne aucune suspension de couverture. Deux changements importants : (1) vous devenez potentiellement éligible aux subsides cantonaux si vos revenus chutent sous les seuils cantonaux, à demander immédiatement auprès de votre service cantonal ; (2) la couverture LAA accidents reste active via l'assurance chômage pendant toute la durée des indemnités, puis cesse 30 jours après la fin du droit.",
   },
   {
     question: "Comment s'affilier à la LAMal en arrivant en Suisse ?",
@@ -50,7 +50,7 @@ const faqItems = [
       "Dès la prise de domicile officielle, vous disposez de 90 jours pour choisir une caisse et vous affilier. Si ce délai est respecté, la couverture est rétroactive à la date d'arrivée. Les pièces nécessaires sont : permis de séjour (B, C, G, L ou N) et attestation de domicile officielle. Aucune caisse ne peut vous refuser pour l'assurance de base (art. 4 LAMal). Passé 90 jours, les autorités cantonales attribuent d'office une caisse.",
   },
   {
-    question: "Puis-je cumuler emploi salarié et activité indépendante — quelle couverture LAMal ?",
+    question: "Puis-je cumuler emploi salarié et activité indépendante : quelle couverture LAMal ?",
     answer:
       "La LAMal est unique : un seul contrat couvre l'ensemble de votre activité, quelle que soit sa nature. En revanche, la couverture LAA dépend du statut. Pour votre activité salariée, la LAA est couverte par l'employeur dès 8 heures par semaine. Pour votre activité indépendante, cette couverture est absente. Vous devez activer la couverture accidents LAMal pour protéger votre activité indépendante, sauf si votre volume horaire salarié dépasse 8 heures hebdomadaires et couvre l'ensemble de vos risques.",
   },
@@ -67,7 +67,7 @@ const faqItems = [
   {
     question: 'Un salarié à temps partiel est-il couvert pour les accidents ?',
     answer:
-      "Oui, mais avec une distinction importante. Pour un emploi d'au moins 8 heures par semaine chez un même employeur, la LAA couvre à la fois les accidents professionnels et les accidents non professionnels. En dessous de 8 heures, seuls les accidents professionnels sont couverts par la LAA de l'employeur. Les accidents non professionnels sont alors à la charge de la LAMal — vérifiez que votre caisse inclut cette couverture.",
+      "Oui, mais avec une distinction importante. Pour un emploi d'au moins 8 heures par semaine chez un même employeur, la LAA couvre à la fois les accidents professionnels et les accidents non professionnels. En dessous de 8 heures, seuls les accidents professionnels sont couverts par la LAA de l'employeur. Les accidents non professionnels sont alors à la charge de la LAMal, vérifiez que votre caisse inclut cette couverture.",
   },
   {
     question: "Peut-on désactiver la couverture accidents LAMal si l'on devient salarié ?",
@@ -97,7 +97,7 @@ const toc = [
 const heroStats = [
   { value: '90 jours', label: "Délai d'affiliation",  sub: 'dès la prise de domicile en Suisse' },
   { value: '8 heures', label: 'Seuil couverture LAA', sub: 'par semaine, accidents non professionnels inclus' },
-  { value: '25–30%',   label: 'Économie possible',    sub: 'avec franchise de CHF 2 000 – CHF 2 500' },
+  { value: '25-30%',   label: 'Économie possible',    sub: 'avec franchise de CHF 2 000 - CHF 2 500' },
 ]
 
 const enBref = [
@@ -180,7 +180,7 @@ export default function MaSituationPage() {
                   <p className="text-[16px] text-slate">
                     Au-delà de 8 heures hebdomadaires, l'employeur couvre à la fois les accidents
                     professionnels et les accidents non professionnels via la LAA. En dessous de ce seuil,
-                    seuls les accidents professionnels sont couverts — les accidents non professionnels
+                    seuls les accidents professionnels sont couverts, les accidents non professionnels
                     restent à la charge de la LAMal. Vérifiez votre taux d'activité si vous travaillez
                     à temps partiel pour plusieurs employeurs.
                   </p>
@@ -207,7 +207,7 @@ export default function MaSituationPage() {
                     En cas de chômage, la LAMal continue sans interruption et votre couverture
                     accidents reste active via l'assurance chômage pendant toute la durée des
                     indemnités, puis 30 jours après leur terme. La baisse de revenu ouvre
-                    immédiatement des droits potentiels aux subsides cantonaux — ne tardez pas
+                    immédiatement des droits potentiels aux subsides cantonaux, ne tardez pas
                     à faire la demande auprès de votre service cantonal.
                   </p>
                 </div>
@@ -261,7 +261,7 @@ export default function MaSituationPage() {
                   },
                   {
                     titre: 'Franchise élevée souvent avantageuse',
-                    desc: "Si votre trésorerie le permet, une franchise de CHF 2 000 à CHF 2 500 réduit la prime mensuelle de 25 à 30 %. Provisionnez la différence sur un compte épargne dédié. Les primes LAMal sont partiellement déductibles de votre revenu imposable — montant forfaitaire variable selon le canton.",
+                    desc: "Si votre trésorerie le permet, une franchise de CHF 2 000 à CHF 2 500 réduit la prime mensuelle de 25 à 30 %. Provisionnez la différence sur un compte épargne dédié. Les primes LAMal sont partiellement déductibles de votre revenu imposable, montant forfaitaire variable selon le canton.",
                   },
                   {
                     titre: 'Vérifier les subsides chaque année',
@@ -307,7 +307,7 @@ export default function MaSituationPage() {
               <KeyFact>
                 <strong>Subsides cantonaux :</strong> la perte d&apos;emploi réduit le revenu déterminant
                 et ouvre généralement des droits aux subsides. Contactez votre service cantonal
-                ou votre ORP dès le début du chômage — les subsides non réclamés ne sont
+                ou votre ORP dès le début du chômage, les subsides non réclamés ne sont
                 pas versés rétroactivement dans la plupart des cantons.
               </KeyFact>
             </section>
@@ -325,7 +325,7 @@ export default function MaSituationPage() {
               <KeyFact>
                 <strong>90 jours pour choisir :</strong> si vous respectez ce délai, la couverture
                 est rétroactive à la date d&apos;arrivée. Profitez de ce délai pour comparer les
-                caisses — changer après le 1er janvier est plus contraignant.
+                caisses, changer après le 1er janvier est plus contraignant.
               </KeyFact>
 
               <div className="space-y-4">

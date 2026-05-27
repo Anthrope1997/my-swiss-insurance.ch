@@ -3,11 +3,11 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'À propos — My Swiss Insurance',
+  title: 'À propos : My Swiss Insurance',
   description:
     'My Swiss Insurance est un service indépendant d\'information et de comparaison des caisses maladie suisses, basé à Lausanne en Suisse romande.',
   openGraph: {
-    title: 'À propos — My Swiss Insurance',
+    title: 'À propos : My Swiss Insurance',
     description: 'Service indépendant de comparaison des caisses maladie suisses en Suisse romande.',
     url: 'https://my-swiss-insurance.ch/a-propos',
     type: 'article',
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 const aboutSchema = {
   '@context': 'https://schema.org',
   '@type': 'AboutPage',
-  name: 'À propos — My Swiss Insurance',
+  name: 'À propos : My Swiss Insurance',
   description: 'Service indépendant de comparaison des caisses maladie suisses en Suisse romande',
   url: 'https://my-swiss-insurance.ch/a-propos',
 }

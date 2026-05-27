@@ -35,8 +35,8 @@ export const produits: ProduitComplementaire[] = [
         { nom: 'Examens labo médecine complémentaire', couvert: true, montantMaxAnnuel: 500 },
         { nom: 'Vaccins (non-LAMal)', couvert: true, montantMaxAnnuel: 200 },
         { nom: 'Orthodontie / chirurgie bucco-maxillaire (<18 ans)', couvert: true, pourcent: 80, montantMaxAnnuel: 10000, noteDetails: 'Délai de carence 3 ans.' },
-        { nom: 'Optique — enfants (<18 ans)', couvert: true, montantMaxAnnuel: 200, noteDetails: 'Max CHF 200 / 2 ans.' },
-        { nom: 'Optique — adultes', couvert: true, montantMaxAnnuel: 200, noteDetails: 'Max CHF 200 / 3 ans (idem laser).' },
+        { nom: 'Optique, enfants (<18 ans)', couvert: true, montantMaxAnnuel: 200, noteDetails: 'Max CHF 200 / 2 ans.' },
+        { nom: 'Optique, adultes', couvert: true, montantMaxAnnuel: 200, noteDetails: 'Max CHF 200 / 3 ans (idem laser).' },
         { nom: 'Check-up médical préventif', couvert: true, montantMaxAnnuel: 200 },
         { nom: 'Gynécologie préventive', couvert: true, noteDetails: '2 examens / 3 ans. Mammographie tous les 2 ans dès 50 ans (si pas AOS).' },
         { nom: 'Transport urgence Suisse et étranger', couvert: true, montantMaxAnnuel: 100000 },
@@ -53,7 +53,7 @@ export const produits: ProduitComplementaire[] = [
     medecinesDouces: {
       listesReconnues: ['ASCA', 'autre'],
       therapiesCouvertes: ['acupuncture', 'homeopathie', 'osteopathie', 'naturopathie', 'phytotherapie', 'reflexologie', 'shiatsu', 'ayurveda'],
-      noteDetails: '14\'000+ naturopathes et médecins reconnus par EGK. Traités à l\'égal des médecins conventionnés — unique en Suisse. Listes EMR, ASCA et autres. Médecine comp. illimitée à 80%.',
+      noteDetails: '14\'000+ naturopathes et médecins reconnus par EGK. Traités à l\'égal des médecins conventionnés, unique en Suisse. Listes EMR, ASCA et autres. Médecine comp. illimitée à 80%.',
     },
     hospitalier: {
       typeChambre: 'generale',

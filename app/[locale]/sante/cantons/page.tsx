@@ -6,7 +6,7 @@ import AuthorBio from '@/components/ui/AuthorBio'
 import UnifiedLeadForm from '@/components/ui/UnifiedLeadForm'
 
 export const metadata: Metadata = {
-  title: 'Primes LAMal par canton 2026 — Comparatif Suisse',
+  title: 'Primes LAMal par canton 2026 : Comparatif Suisse',
   robots: { index: false, follow: false },
   description: 'Comparez les primes LAMal dans les 26 cantons suisses. Trouvez la caisse maladie la moins chère selon votre lieu de résidence.',
   alternates: { canonical: 'https://my-swiss-insurance.ch/sante/cantons' },

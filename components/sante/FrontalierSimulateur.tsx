@@ -71,7 +71,7 @@ function calculerRecommandation(reponses: Record<string, string>): {
       niveau: 'lamal',
       titre: 'La LAMal semble adaptée à votre situation',
       description:
-        'Votre profil — soins principalement en Suisse, situation stable, éligibilité possible aux subsides — plaide en faveur de la LAMal suisse. Vous bénéficieriez d\'un accès complet au système de santé suisse.',
+        'Votre profil (soins principalement en Suisse, situation stable, éligibilité possible aux subsides) plaide en faveur de la LAMal suisse. Vous bénéficieriez d\'un accès complet au système de santé suisse.',
       points: [
         'Accès direct à tous les médecins et hôpitaux suisses',
         reponses.subsides === 'oui' ? 'Droit potentiel aux subsides cantonaux' : 'Couverture complète dès la prise d\'effet',
@@ -86,7 +86,7 @@ function calculerRecommandation(reponses: Record<string, string>): {
       niveau: 'pays',
       titre: 'Le système de votre pays de résidence semble plus adapté',
       description:
-        'Votre profil — soins principalement dans votre pays, famille restée au pays, mission temporaire — suggère que rester dans votre système national pourrait être plus avantageux.',
+        'Votre profil (soins principalement dans votre pays, famille restée au pays, mission temporaire) suggère que rester dans votre système national pourrait être plus avantageux.',
       points: [
         'Continuité avec votre médecin habituel et votre réseau de soins',
         'Couverture de votre famille dans votre pays',

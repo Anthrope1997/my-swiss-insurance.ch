@@ -152,7 +152,7 @@ export const produits: ProduitComplementaire[] = [
         { nom: 'Cure récupération après hospitalisation (sur ordonnance)', couvert: true, montantMaxAnnuel: 420, noteDetails: 'CHF 20/j, max 21 jours/an.' },
         { nom: 'Cure balnéaire ambulatoire (sur ordonnance)', couvert: true, pourcent: 50, montantMaxAnnuel: 250, noteDetails: '50%, max CHF 250/an.' },
         { nom: 'Transport / sauvetage / rapatriement / recherche', couvert: true, montantMaxAnnuel: 10000, noteDetails: 'Via assurance Assistance SLKK, max CHF 10\'000/personne.' },
-        { nom: 'Dentaire — soins non-LAMal (extraction, radio, anesthésie, gingivectomie)', couvert: true, montantMaxAnnuel: 300, noteDetails: 'Max CHF 300/an (Standard et Complet).' },
+        { nom: 'Dentaire, soins non-LAMal (extraction, radio, anesthésie, gingivectomie)', couvert: true, montantMaxAnnuel: 300, noteDetails: 'Max CHF 300/an (Standard et Complet).' },
         { nom: 'Stérilisation / Vasectomie', couvert: true, montantMaxAnnuel: 500, noteDetails: 'CHF 500, une fois.' },
         { nom: 'Gynécologie préventive', couvert: true, noteDetails: 'Incluse.' },
         // ─ Alternativ (et Complet) ─
@@ -161,9 +161,9 @@ export const produits: ProduitComplementaire[] = [
         { nom: 'Équipements médicaux (sur ordonnance)', couvert: true, pourcent: 90, montantMaxAnnuel: 300, noteDetails: 'Variante Alternativ/Complet : 90%, max CHF 300/an.' },
         { nom: 'Lunettes / lentilles (variante Alternativ)', couvert: true, pourcent: 90, noteDetails: 'Alternativ : 90% (sans plafond précisé). Standard/Complet : 50%/CHF 200/an. Jeunesse : 50%/CHF 300/an.' },
         // ─ Jeunesse (0-18 ans) ─
-        { nom: 'Orthodontie — Jeunesse (<18 ans)', couvert: true, pourcent: 70, montantMaxAnnuel: 3000, noteDetails: '70%, max CHF 3\'000, une fois. Variante Jeunesse uniquement.' },
-        { nom: 'Lunettes / lentilles — Jeunesse', couvert: true, pourcent: 50, montantMaxAnnuel: 300, noteDetails: 'Jeunesse : 50%, max CHF 300/an.' },
-        { nom: 'Dentaire — Jeunesse (soins non-LAMal)', couvert: true, montantMaxAnnuel: 300, noteDetails: 'Max CHF 300/an (Jeunesse).' },
+        { nom: 'Orthodontie, Jeunesse (<18 ans)', couvert: true, pourcent: 70, montantMaxAnnuel: 3000, noteDetails: '70%, max CHF 3\'000, une fois. Variante Jeunesse uniquement.' },
+        { nom: 'Lunettes / lentilles, Jeunesse', couvert: true, pourcent: 50, montantMaxAnnuel: 300, noteDetails: 'Jeunesse : 50%, max CHF 300/an.' },
+        { nom: 'Dentaire, Jeunesse (soins non-LAMal)', couvert: true, montantMaxAnnuel: 300, noteDetails: 'Max CHF 300/an (Jeunesse).' },
       ],
     },
     medecinesDouces: {

@@ -5,12 +5,12 @@ import Link from 'next/link'
 import UnifiedLeadForm from '@/components/ui/UnifiedLeadForm'
 
 export const metadata: Metadata = {
-  title: 'LAMal par situation de vie — Salarié, famille, expatrié 2026',
+  title: 'LAMal par situation de vie : Salarié, famille, expatrié 2026',
   robots: { index: false, follow: false },
   description:
     'Choisissez votre profil pour des conseils LAMal adaptés : salarié ou indépendant, famille ou retraité, expatrié ou frontalier. Guide 2026.',
   openGraph: {
-    title: 'LAMal par situation de vie — Conseils personnalisés 2026',
+    title: 'LAMal par situation de vie : Conseils personnalisés 2026',
     description: 'Salarié, famille, expatrié : quelle LAMal choisir selon votre situation ?',
     url: 'https://my-swiss-insurance.ch/sante/par-profil',
     type: 'website',

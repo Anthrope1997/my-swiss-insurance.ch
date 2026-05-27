@@ -72,7 +72,7 @@ const faqItems = [
   {
     question: 'La prime LAMal augmente-t-elle à la retraite ?',
     answer:
-      "Non. Il n'existe pas de tarif senior en LAMal. Le tarif adulte (26 ans et plus) reste identique quel que soit l'âge. Les primes varient selon la caisse, le canton de résidence, le modèle et la franchise choisis — mais jamais selon l'âge au-delà de 26 ans. En revanche, les retraités à revenus modestes ont souvent droit aux subsides cantonaux.",
+      "Non. Il n'existe pas de tarif senior en LAMal. Le tarif adulte (26 ans et plus) reste identique quel que soit l'âge. Les primes varient selon la caisse, le canton de résidence, le modèle et la franchise choisis, mais jamais selon l'âge au-delà de 26 ans. En revanche, les retraités à revenus modestes ont souvent droit aux subsides cantonaux.",
   },
   {
     question: 'Quelle franchise recommander pour un enfant ?',
@@ -103,13 +103,13 @@ const toc = [
 const heroStats = [
   { value: '3 mois',   label: "Délai d'affiliation nourrisson", sub: 'couverture rétroactive à la naissance' },
   { value: 'CHF 0',    label: 'Franchise recommandée',          sub: 'nourrissons et jeunes enfants'         },
-  { value: '−20–25%',  label: 'Réduction jeune adulte',         sub: 'tarif réduit de 19 à 25 ans'          },
+  { value: '−20-25%',  label: 'Réduction jeune adulte',         sub: 'tarif réduit de 19 à 25 ans'          },
 ]
 
 const enBref = [
   "En Suisse, il n'existe pas d'assurance familiale groupée : chaque enfant doit être affilié individuellement dès la naissance, dans les 3 mois suivant sa naissance.",
-  "La maternité est entièrement couverte sans franchise ni quote-part (art. 64 LAMal) — consultations prénatales, accouchement et soins post-partum inclus.",
-  "Le tarif jeune adulte (19–25 ans) réduit la prime de 20 à 25% ; à 26 ans, la bascule vers le tarif adulte est automatique.",
+  "La maternité est entièrement couverte sans franchise ni quote-part (art. 64 LAMal) : consultations prénatales, accouchement et soins post-partum inclus.",
+  "Le tarif jeune adulte (19-25 ans) réduit la prime de 20 à 25% ; à 26 ans, la bascule vers le tarif adulte est automatique.",
 ]
 
 export default function MaFamillePage() {
@@ -131,7 +131,7 @@ export default function MaFamillePage() {
           <p className="text-[16px] text-slate max-w-2xl leading-relaxed mb-10">
             La Suisse n&apos;a pas d&apos;assurance familiale groupée : chaque membre de la famille
             dispose de son propre contrat d&apos;assurance maladie de base LAMal, avec des règles spécifiques selon l&apos;âge.
-            Nourrissons, enfants, jeunes adultes, maternité, retraite — ce guide couvre
+            Nourrissons, enfants, jeunes adultes, maternité, retraite : ce guide couvre
             chaque étape avec les chiffres et les règles légales applicables en 2026.
           </p>
 
@@ -196,7 +196,7 @@ export default function MaFamillePage() {
               <KeyFact>
                 <strong>Liberté de choix :</strong> les parents peuvent affilier leur nourrisson
                 à n&apos;importe quelle caisse, y compris une caisse différente de la leur. Comparez
-                les primes enfant séparément — la caisse la moins chère pour les adultes
+                les primes enfant séparément, la caisse la moins chère pour les adultes
                 n&apos;est pas toujours la plus avantageuse pour les enfants.
               </KeyFact>
             </section>
@@ -330,7 +330,7 @@ export default function MaFamillePage() {
                       'Soins esthétiques post-grossesse',
                     ].map((item, i) => (
                       <li key={i} className="flex gap-2">
-                        <span className="text-slate font-bold shrink-0 mt-0.5">–</span>
+                        <span className="text-slate font-bold shrink-0 mt-0.5">-</span>
                         {item}
                       </li>
                     ))}
@@ -341,7 +341,7 @@ export default function MaFamillePage() {
               <KeyFact>
                 <strong>LCA hospitalière :</strong> pour une chambre semi-privée ou privée
                 et le libre choix du médecin accoucheur, une LCA hospitalière est nécessaire.
-                Elle doit être souscrite <strong>avant</strong> la grossesse — une grossesse
+                Elle doit être souscrite <strong>avant</strong> la grossesse. Une grossesse
                 en cours est considérée comme état préexistant et peut entraîner des exclusions.
               </KeyFact>
             </section>
@@ -368,7 +368,7 @@ export default function MaFamillePage() {
                   },
                   {
                     titre: 'LCA hospitalière : à souscrire avant la retraite',
-                    desc: "La LAMal de base couvre uniquement la division commune à l'hôpital. Une LCA hospitalière garantit la chambre semi-privée ou privée et le libre choix du médecin chef — particulièrement utile pour les hospitalisations qui deviennent plus fréquentes. À souscrire avant 65 ans pour des conditions optimales et éviter les exclusions liées à l'âge.",
+                    desc: "La LAMal de base couvre uniquement la division commune à l'hôpital. Une LCA hospitalière garantit la chambre semi-privée ou privée et le libre choix du médecin chef, particulièrement utile pour les hospitalisations qui deviennent plus fréquentes. À souscrire avant 65 ans pour des conditions optimales et éviter les exclusions liées à l'âge.",
                   },
                   {
                     titre: 'Planifier les primes dans le budget retraite',

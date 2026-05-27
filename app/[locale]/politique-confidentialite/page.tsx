@@ -3,7 +3,7 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Politique de confidentialité — LPD',
+  title: 'Politique de confidentialité : LPD',
   description: 'Politique de confidentialité de My Swiss Insurance conforme à la Loi fédérale sur la Protection des Données (LPD, RS 235.1).',
   robots: { index: false, follow: false },
 }
@@ -115,7 +115,7 @@ export default function PolitiqueConfidentialitePage() {
             <strong className="text-ink">
               Préposé fédéral à la protection des données et à la transparence (PFPDT)
             </strong>{' '}
-            — <a href="https://www.pfpdt.admin.ch" target="_blank" rel="noopener noreferrer"
+            : <a href="https://www.pfpdt.admin.ch" target="_blank" rel="noopener noreferrer"
               className="text-brand hover:underline">www.pfpdt.admin.ch</a>
           </p>
         </section>

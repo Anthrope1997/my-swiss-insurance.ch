@@ -231,7 +231,7 @@ export const produits: ProduitComplementaire[] = [
       therapiesCouvertes: ['acupuncture', 'osteopathie', 'homeopathie', 'naturopathie', 'reflexologie'],
       montantMaxAnnuel: 10000,
       pourcent: 75,
-      noteDetails: 'Plafond CHF 10\'000/an — l\'un des plus élevés du marché.',
+      noteDetails: 'Plafond CHF 10\'000/an, l\'un des plus élevés du marché.',
     },
     conditionsSouscription: ['Requiert myFlex Ambulatoire ou Hospitalier CSS'],
     tarifs: [

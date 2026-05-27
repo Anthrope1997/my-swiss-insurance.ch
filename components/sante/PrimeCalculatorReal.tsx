@@ -44,7 +44,7 @@ const MODELE_LABELS: Record<Modele, string> = {
 }
 
 const MODELE_INFO: Record<Modele, string> = {
-  BASE: 'Accès direct à n\'importe quel médecin ou spécialiste en Suisse, sans restriction. C\'est le modèle le plus cher — il sert de référence pour comparer les autres.',
+  BASE: 'Accès direct à n\'importe quel médecin ou spécialiste en Suisse, sans restriction. C\'est le modèle le plus cher, il sert de référence pour comparer les autres.',
   HAM:  'Vous consultez d\'abord votre médecin de famille, qui vous oriente si besoin. Réduction moyenne de 11% (jusqu\'à −20%) selon la caisse et le canton.',
   HMO:  'Vous êtes rattaché à un réseau fermé de médecins agréés (cabinet ou centre médical). Réduction moyenne de 12% (de −3% à −20%) selon la région.',
   DIV:  'Première consultation par téléphone ou application avant tout rendez-vous en cabinet. Réduction moyenne de 12% (de −5% à −24%) selon la caisse.',
@@ -52,8 +52,8 @@ const MODELE_INFO: Record<Modele, string> = {
 
 const AGE_LABELS: Record<AgeGroup, string> = {
   adulte: 'Adulte (26 ans et +)',
-  jeune:  'Jeune adulte (19–25 ans)',
-  enfant: 'Enfant (0–18 ans)',
+  jeune:  'Jeune adulte (19-25 ans)',
+  enfant: 'Enfant (0-18 ans)',
 }
 
 const FREE_ROWS = 5
@@ -169,7 +169,7 @@ export default function PrimeCalculatorReal() {
           prenom: prenom.trim(),
           email:  email.trim(),
           canton: npaInfo?.canton ?? '',
-          situation: `Calculateur · ${npa} · ${AGE_LABELS[ageGroup]} · CHF ${franchise} · ${MODELE_LABELS[modele]}`,
+          situation: `Calculateur, ${npa}, ${AGE_LABELS[ageGroup]}, CHF ${franchise}, ${MODELE_LABELS[modele]}`,
         }),
       })
       if (res.ok) { setShowAll(true); setGateStatus('done') }
@@ -260,7 +260,7 @@ export default function PrimeCalculatorReal() {
               <div className="bg-cloud rounded-lg p-4">
                 <p className="font-semibold text-ink text-[16px] mb-1">Sans couverture accident (recommandé pour la plupart)</p>
                 <p className="text-slate text-[16px] leading-relaxed">
-                  Si vous êtes salarié à <strong>8 heures ou plus par semaine</strong> chez un même employeur, votre assurance accident est obligatoirement couverte par votre employeur (LAA). Vous ne devez pas la payer via la LAMal — cochez cette option pour une prime moins élevée.
+                  Si vous êtes salarié à <strong>8 heures ou plus par semaine</strong> chez un même employeur, votre assurance accident est obligatoirement couverte par votre employeur (LAA). Vous ne devez pas la payer via la LAMal, cochez cette option pour une prime moins élevée.
                 </p>
               </div>
               <div className="bg-cloud rounded-lg p-4">
@@ -309,7 +309,7 @@ export default function PrimeCalculatorReal() {
             </div>
             {npaInfo && (
               <p className="mt-1.5 text-[16px] text-brand font-medium">
-                ✓ {npaInfo.commune} · {npaInfo.canton}
+                ✓ {npaInfo.commune}, {npaInfo.canton}
               </p>
             )}
             {npaError && (
@@ -450,10 +450,10 @@ export default function PrimeCalculatorReal() {
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="text-[17px] font-semibold text-ink">
-                    {results.length} offres — {npaInfo?.commune} · {npaInfo?.canton}
+                    {results.length} offres : {npaInfo?.commune}, {npaInfo?.canton}
                   </h3>
                   <p className="text-[16px] text-slate mt-0.5">
-                    {MODELE_LABELS[modele]} · Franchise CHF&nbsp;{franchise} · {AGE_LABELS[ageGroup]}
+                    {MODELE_LABELS[modele]}, Franchise CHF&nbsp;{franchise}, {AGE_LABELS[ageGroup]}
                   </p>
                 </div>
               </div>
@@ -491,7 +491,7 @@ export default function PrimeCalculatorReal() {
                           <td className="text-right hidden md:table-cell">
                             {saving > 0
                               ? <span className="text-green-700 font-medium">−{(saving * 12).toFixed(0)}&nbsp;CHF/an</span>
-                              : <span className="text-slate">—</span>
+                              : <span className="text-slate">-</span>
                             }
                           </td>
                         </tr>
@@ -542,7 +542,7 @@ export default function PrimeCalculatorReal() {
                       <p className="mt-2 text-[16px] text-red-500">Une erreur est survenue. Réessayez.</p>
                     )}
                     <p className="mt-3 text-[12px] text-slate/60">
-                      Sans engagement · Conformément à la LPD ·{' '}
+                      Sans engagement, conformément à la LPD,{' '}
                       <a href="/politique-confidentialite" className="underline">Politique de confidentialité</a>
                     </p>
                   </form>

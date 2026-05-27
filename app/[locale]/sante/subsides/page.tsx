@@ -9,11 +9,11 @@ import SubsidesSimulatorFull from '@/components/sante/SubsidesSimulatorFull'
 import HeroStats from '@/components/ui/HeroStats'
 
 export const metadata: Metadata = {
-  title: 'Calculateur de subsides LAMal 2026 — Estimez votre aide cantonale',
+  title: 'Calculateur de subsides LAMal 2026 : Estimez votre aide cantonale',
   description:
     "Calculez votre subside LAMal 2026 en 30 secondes : sélectionnez votre canton, entrez votre revenu, obtenez une estimation personnalisée. Données officielles pour les 26 cantons.",
   openGraph: {
-    title: 'Calculateur de subsides LAMal 2026 — Estimez votre aide cantonale',
+    title: 'Calculateur de subsides LAMal 2026 : Estimez votre aide cantonale',
     description: "Simulateur de subsides LAMal 2026 : estimation personnalisée par canton, revenu et situation familiale. Données officielles.",
     url: 'https://my-swiss-insurance.ch/sante/subsides',
     type: 'article',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'Calculateur de subsides LAMal 2026 — Estimez votre aide cantonale',
+  headline: 'Calculateur de subsides LAMal 2026 : Estimez votre aide cantonale',
   datePublished: '2026-01-01',
   dateModified: '2026-05-17',
   author: { '@type': 'Organization', name: 'My Swiss Insurance', url: 'https://my-swiss-insurance.ch' },
@@ -45,7 +45,7 @@ const faqItems = [
   {
     question: 'Dois-je faire une demande ou le subside est-il attribué automatiquement ?',
     answer:
-      "Cela dépend de votre canton. Dans sept cantons (Genève, Valais, Neuchâtel, Berne, Fribourg, Uri et Appenzell Rhodes-Intérieures), le subside est attribué automatiquement sur la base des données fiscales — aucun formulaire n'est requis. Dans les 19 autres cantons, une demande doit être déposée auprès du service cantonal compétent, généralement avant une date limite annuelle.",
+      "Cela dépend de votre canton. Dans sept cantons (Genève, Valais, Neuchâtel, Berne, Fribourg, Uri et Appenzell Rhodes-Intérieures), le subside est attribué automatiquement sur la base des données fiscales, aucun formulaire n'est requis. Dans les 19 autres cantons, une demande doit être déposée auprès du service cantonal compétent, généralement avant une date limite annuelle.",
   },
   {
     question: 'Le subside est-il versé directement sur mon compte ou à ma caisse maladie ?',
@@ -135,8 +135,8 @@ export default function SubsidesPage() {
 
               <h3 className="article-h3">Automatique ou sur demande</h3>
               <p className="article-p">
-                Dans sept cantons — <strong>Genève, Valais, Neuchâtel, Berne, Fribourg, Uri et Appenzell
-                Rhodes-Intérieures</strong> — le subside est attribué <strong>automatiquement</strong>{' '}
+                Dans sept cantons (<strong>Genève, Valais, Neuchâtel, Berne, Fribourg, Uri et Appenzell
+                Rhodes-Intérieures</strong>), le subside est attribué <strong>automatiquement</strong>{' '}
                 sur la base des données fiscales. Aucun formulaire n'est nécessaire : la caisse maladie
                 reçoit directement le montant et le déduit de votre prime mensuelle.
               </p>

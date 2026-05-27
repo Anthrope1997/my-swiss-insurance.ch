@@ -17,11 +17,11 @@ const economieAnnuelle  = Math.round((nationalAvgPrime(300) - nationalAvgPrime(2
 const economieMensuelle = Math.round(nationalAvgPrime(300) - nationalAvgPrime(2500))
 
 export const metadata: Metadata = {
-  title: 'Guide complet LAMal 2026 — Primes, franchises, modèles et subsides',
+  title: 'Guide complet LAMal 2026 : Primes, franchises, modèles et subsides',
   description:
-    "Guide LAMal 2026 : primes par canton (OFSP), franchises CHF 300 – CHF 2 500 avec seuil d'équilibre, 4 modèles d'assurance, changement de caisse et subsides.",
+    "Guide LAMal 2026 : primes par canton (OFSP), franchises CHF 300 - CHF 2 500 avec seuil d'équilibre, 4 modèles d'assurance, changement de caisse et subsides.",
   openGraph: {
-    title: 'Guide complet LAMal 2026 — Primes, franchises et subsides',
+    title: 'Guide complet LAMal 2026 : Primes, franchises et subsides',
     description: 'La référence LAMal 2026 : primes par canton, franchises, modèles et subsides. Données OFSP.',
     url: 'https://my-swiss-insurance.ch/sante/guide',
     type: 'article',
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'Guide complet LAMal 2026 — Primes, franchises, modèles et subsides',
+  headline: 'Guide complet LAMal 2026 : Primes, franchises, modèles et subsides',
   datePublished: '2026-01-01',
   dateModified: '2026-04-22',
   author: { '@type': 'Organization', name: 'My Swiss Insurance', url: 'https://my-swiss-insurance.ch' },
@@ -99,7 +99,7 @@ const premiums = Object.entries(CANTON_NAMES)
   .sort((a, b) => b.prime - a.prime)
 
 const franchises = [
-  { montant: 300,  prime: 638.70, economie: 0,      ecAnn: 0,    breakEven: '—',          conseil: 'Recommandé si frais médicaux dépassent CHF 1 891 par an' },
+  { montant: 300,  prime: 638.70, economie: 0,      ecAnn: 0,    breakEven: '-',          conseil: 'Recommandé si frais médicaux dépassent CHF 1 891 par an' },
   { montant: 500,  prime: 627.90, economie: 10.80,  ecAnn: 130,  breakEven: 'CHF 444',    conseil: 'Avantage limité' },
   { montant: 1000, prime: 600.70, economie: 38.00,  ecAnn: 456,  breakEven: 'CHF 807',    conseil: "Bon si moins d'une consultation majeure par an" },
   { montant: 1500, prime: 573.60, economie: 65.10,  ecAnn: 781,  breakEven: 'CHF 1 168',  conseil: 'Bon équilibre pour personnes saines' },
@@ -139,7 +139,7 @@ const toc = [
 ]
 
 const heroStats = [
-  { value: `CHF ${formatChf(economieMoyenne() * 12)}`, label: 'Économie moyenne par an', sub: 'Adulte 35 ans · toutes franchises et modèles · données OFSP 2026' },
+  { value: `CHF ${formatChf(economieMoyenne() * 12)}`, label: 'Économie moyenne par an', sub: 'Adulte 35 ans, toutes franchises et modèles, données OFSP 2026' },
   { value: '6',          label: 'Niveaux de franchise',          sub: 'De CHF 300 à CHF 2 500 pour un adulte'                      },
   { value: '4',          label: 'Modèles de soins',              sub: 'Standard, médecin de famille, centre médical, télémédecine'  },
 ]
@@ -325,7 +325,7 @@ export default function GuideLamalPage() {
                 </table>
               </div>
               <p className="text-[16px] text-slate/60 mt-3">
-                Adulte 35 ans · modèle standard · franchise de CHF 300 · moyennes pondérées par population · données OFSP 2026.
+                Adulte 35 ans, modèle standard, franchise de CHF 300, moyennes pondérées par population, données OFSP 2026.
               </p>
 
               <div className="mt-6">

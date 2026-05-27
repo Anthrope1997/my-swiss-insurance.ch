@@ -6,7 +6,7 @@ import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import AuthorBio from '@/components/ui/AuthorBio'
 
 export const metadata: Metadata = {
-  title: 'Comparateur assurances complémentaires Suisse 2026 — Prix & Prestations',
+  title: 'Comparateur assurances complémentaires Suisse 2026 : Prix & Prestations',
   robots: { index: false, follow: false },
   description:
     "Comparez les assurances complémentaires suisses (LCA) : hospitalisation, ambulatoire, dentaire, médecines douces. Prix mensuels pour jeune adulte, famille et senior. Données relevées mai 2026.",
@@ -79,7 +79,7 @@ export default function ComparateurComplementairesPage() {
           </h1>
           <p className="text-lg text-gray-600 max-w-3xl">
             Comparez les prix et prestations des principales assurances complémentaires (LCA) en Suisse.
-            Tarifs mensuels relevés en mai 2026 pour trois profils types — données directement collectées
+            Tarifs mensuels relevés en mai 2026 pour trois profils types, données directement collectées
             sur les sites des assureurs.
           </p>
         </header>

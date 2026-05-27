@@ -75,7 +75,7 @@ export function calculerSubsideGE(
     total: adulte * nb + enfant * nbEnfants,
     approx: true,
     label: `Groupe ${groupe.groupe}`,
-    note: 'Estimation — seuils intermédiaires des groupes 2–8 interpolés. Consultez ge.ch pour le montant officiel exact.',
+    note: 'Estimation, seuils intermédiaires des groupes 2-8 interpolés. Consultez ge.ch pour le montant officiel exact.',
   }
 }
 
@@ -148,7 +148,7 @@ export function calculerSubsideNE(
         total: adulte * nb + b.enfant * nbEnfants,
         approx: true,
         label: b.label,
-        note: 'Estimation basée sur les classifications S1–S15. Barème complet : RSN 821.102.',
+        note: 'Estimation basée sur les classifications S1-S15. Barème complet : RSN 821.102.',
       }
     }
   }
@@ -191,7 +191,7 @@ export function calculerSubsideVD(
     total: adulte * nb + enfant * nbEnfants,
     approx: true,
     label: 'Ordinaire',
-    note: "Subside ordinaire — estimation indicative OVAM 2026. Un subside spécifique peut s'ajouter si vos primes dépassent 10 % du revenu.",
+    note: "Subside ordinaire, estimation indicative OVAM 2026. Un subside spécifique peut s'ajouter si vos primes dépassent 10 % du revenu.",
   }
 }
 
@@ -245,7 +245,7 @@ export function calculerSubsideFR(
     label: `${taux}%`,
     note:
       'Calculé sur les primes de référence région 1 (district de la Sarine). ' +
-      'Région 2 (autres districts) : adulte CHF 524/mois, jeune CHF 386/mois, enfant CHF 124/mois — montants légèrement inférieurs. ' +
+      'Région 2 (autres districts) : adulte CHF 524/mois, jeune CHF 386/mois, enfant CHF 124/mois, montants légèrement inférieurs. ' +
       'Délai de demande : 31 août 2026. Source : ECAS Fribourg.',
   }
 }
@@ -278,7 +278,7 @@ export function calculerSubsideJU(
     label: 'Maximum ordinaire',
     note:
       'Montant maximum du subside ordinaire 2026. ' +
-      'Le barème gradué complet (15–225 CHF/mois adulte) n\'est pas publié — ' +
+      'Le barème gradué complet (15-225 CHF/mois adulte) n\'est pas publié, ' +
       'le montant réel dépend de votre revenu exact. ' +
       'Délai de demande : 31 décembre 2026.',
   }

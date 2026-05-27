@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Mentions légales',
-  description: 'Mentions légales de My Swiss Insurance — informations sur l\'éditeur, la responsabilité et la protection des données (LPD).',
+  description: 'Mentions légales de My Swiss Insurance : informations sur l\'éditeur, la responsabilité et la protection des données (LPD).',
   robots: { index: false, follow: false },
 }
 
@@ -59,7 +59,7 @@ export default function MentionsLegalesPage() {
             <strong className="text-ink">
               Préposé fédéral à la protection des données et à la transparence (PFPDT)
             </strong>{' '}
-            — <a href="https://www.pfpdt.admin.ch" target="_blank" rel="noopener noreferrer"
+            : <a href="https://www.pfpdt.admin.ch" target="_blank" rel="noopener noreferrer"
               className="text-brand hover:underline">www.pfpdt.admin.ch</a>
           </p>
           <p className="mt-3">
