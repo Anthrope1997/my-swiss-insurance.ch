@@ -211,7 +211,7 @@ export default function FranchiseSimulator() {
         <div style={{ borderTop: '0.5px solid var(--border)' }}>
           <div className="px-6 py-6">
             <div className="rounded-[8px] bg-[var(--blue-tint)] border border-brand/20 px-5 py-5">
-              <p className="text-[16px] font-semibold text-ink mb-2 whitespace-nowrap">
+              <p className="text-[16px] font-semibold text-brand mb-2 whitespace-nowrap">
                 Franchise recommandée : CHF {fmtN(result.best.franchise)}
               </p>
               <p className="text-[16px] text-ink leading-relaxed mb-1">{phrase}</p>
