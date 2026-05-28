@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import ComparateurClient from '@/components/sante/ComparateurClient'
 import Breadcrumb from '@/components/ui/Breadcrumb'
@@ -77,7 +78,9 @@ export default function ComparateurPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <ComparateurClient />
+      <Suspense>
+        <ComparateurClient />
+      </Suspense>
     </>
   )
 }

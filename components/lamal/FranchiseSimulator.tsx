@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { cantonBySlug } from '@/data/sante/cantons'
+import UnifiedCombobox from '@/components/ui/UnifiedCombobox'
 
 type AgeGroup = 'adulte' | 'jeuneAdulte' | 'enfant'
 
@@ -97,16 +98,6 @@ function computeResult(canton: string, ageGroup: AgeGroup, frais: number) {
   return { best, worst, economy: worst.total - best.total }
 }
 
-function Chevron() {
-  return (
-    <svg
-      className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate pointer-events-none"
-      fill="none" stroke="currentColor" viewBox="0 0 24 24"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-    </svg>
-  )
-}
 
 export default function FranchiseSimulator() {
   const [ageGroup, setAgeGroup] = useState<AgeGroup>('adulte')
@@ -136,8 +127,10 @@ export default function FranchiseSimulator() {
     : null
 
 
-  const comparateurUrl =
-    `/sante/comparateur?canton=${canton}&franchise=${result?.best.franchise ?? 300}&profil=${ageGroup}`
+  const profilParam = ageGroup === 'jeuneAdulte' ? 'jeune_adulte' : ageGroup
+  const comparateurUrl = postalCode
+    ? `/sante/comparateur?npa=${postalCode}&franchise=${result?.best.franchise ?? 300}&profil=${profilParam}`
+    : `/sante/comparateur?franchise=${result?.best.franchise ?? 300}&profil=${profilParam}`
 
   return (
     <div className="bg-white border border-edge rounded-xl overflow-hidden mt-8">
@@ -149,22 +142,20 @@ export default function FranchiseSimulator() {
 
           {/* Profil */}
           <div>
-            <label htmlFor="sim-profil" className="block text-[16px] font-medium text-ink mb-2">
+            <label className="block text-[16px] font-medium text-ink mb-2">
               Profil
             </label>
-            <div className="relative">
-              <select
-                id="sim-profil"
-                value={ageGroup}
-                onChange={e => set({ ageGroup: e.target.value as AgeGroup })}
-                className="select-field pr-9"
-              >
-                <option value="adulte">Adulte (26 ans et plus)</option>
-                <option value="jeuneAdulte">Jeune adulte (19-25 ans)</option>
-                <option value="enfant">Enfant (0-18 ans)</option>
-              </select>
-              <Chevron />
-            </div>
+            <UnifiedCombobox
+              options={[
+                { value: 'adulte',      label: 'Adulte (26 ans et plus)' },
+                { value: 'jeuneAdulte', label: 'Jeune adulte (19-25 ans)' },
+                { value: 'enfant',      label: 'Enfant (0-18 ans)' },
+              ]}
+              value={ageGroup}
+              onChange={v => set({ ageGroup: v as AgeGroup })}
+              searchable={false}
+              showAbbreviation={false}
+            />
           </div>
 
           {/* Code postal */}
@@ -229,7 +220,7 @@ export default function FranchiseSimulator() {
                   {'Économie estimée : '}<strong className="font-medium text-ink">CHF {fmtN(result.economy)} par an</strong>{' par rapport à la franchise de CHF '}{fmtN(result.worst.franchise)}{'.'}
                 </p>
               )}
-              <Link href={comparateurUrl} className="btn-primary w-full justify-center">
+              <Link href={comparateurUrl} className="btn-primary w-full md:w-auto md:mx-auto justify-center">
                 Comparer les primes dans mon canton →
               </Link>
             </div>

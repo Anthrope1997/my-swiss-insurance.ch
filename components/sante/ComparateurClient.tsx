@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
+import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import AuthorBio from '@/components/ui/AuthorBio'
@@ -147,14 +148,22 @@ function InfoTooltip({ text }: { text: string }) {
 // ─── Main component ──────────────────────────────────────────────────────────
 
 export default function ComparateurClient() {
-  // — Calculator state —
-  const [npa, setNpa]               = useState('')
+  const searchParams = useSearchParams()
+
+  // — Calculator state (initialized from URL params when present) —
+  const [npa, setNpa]               = useState(() => searchParams.get('npa') ?? '')
   const [npaInfo, setNpaInfo]       = useState<NpaInfo | null>(null)
   const [npaError, setNpaError]     = useState('')
   const [npaLoading, setNpaLoading] = useState(false)
-  const [franchise, setFranchise]   = useState(300)
+  const [franchise, setFranchise]   = useState(() => {
+    const f = parseInt(searchParams.get('franchise') ?? '', 10)
+    return FRANCHISES_ADULTE.includes(f) || FRANCHISES_ENFANT.includes(f) ? f : 300
+  })
   const [modele, setModele]         = useState<Modele>('BASE')
-  const [profil, setProfil]         = useState<Profil>('adulte')
+  const [profil, setProfil]         = useState<Profil>(() => {
+    const p = searchParams.get('profil')
+    return (p === 'adulte' || p === 'jeune_adulte' || p === 'enfant') ? p as Profil : 'adulte'
+  })
   const [accident, setAccident]     = useState(false)
 
   // — Results state —
@@ -190,6 +199,15 @@ export default function ComparateurClient() {
     } finally {
       setNpaLoading(false)
     }
+  }, [])
+
+  // Auto-validate NPA pre-filled from URL params on mount
+  useEffect(() => {
+    const initialNpa = searchParams.get('npa')
+    if (initialNpa && /^\d{4}$/.test(initialNpa)) {
+      validateNpa(initialNpa)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleNpaChange = (v: string) => {
