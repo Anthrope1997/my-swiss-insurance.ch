@@ -99,9 +99,9 @@ const guidesAssocies = [
 ]
 
 const enBref: ReactNode[] = [
-  <>La résiliation ordinaire doit être envoyée par courrier recommandé <strong className="font-medium text-ink">avant le 30 novembre</strong> pour un changement d&apos;assureur au 1er janvier suivant.</>,
-  <>La nouvelle caisse a <strong className="font-medium text-ink">l&apos;obligation légale d&apos;accepter votre demande</strong>. Aucune sélection médicale n&apos;est possible pour la LAMal de base.</>,
-  <>En cas de hausse de prime annoncée par votre caisse, vous disposez d&apos;<strong className="font-medium text-ink">un mois pour résilier</strong>, même après la date limite du 30 novembre.</>,
+  <>Votre demande de résiliation doit être envoyée par courrier recommandé <strong className="font-medium text-ink">avant le 30 novembre</strong> pour un changement d&apos;assureur au 1er janvier. Vous pouvez également mandater votre nouvel assureur pour qu&apos;il s&apos;occupe de cette démarche à votre place.</>,
+  <>Tout assureur a <strong className="font-medium text-ink">l&apos;obligation légale d&apos;accepter votre demande</strong> de souscription ou de résiliation, quelle que soit votre situation personnelle. Aucune sélection médicale n&apos;est autorisée pour l&apos;assurance LAMal de base.</>,
+  <>En cas de hausse de prime annoncée tardivement par votre caisse, vous disposez d&apos;<strong className="font-medium text-ink">un mois pour résilier</strong> à partir de la date de notification, même si la date limite du 30 novembre est dépassée.</>,
 ]
 
 export default function ChangerDeCaissePage() {
