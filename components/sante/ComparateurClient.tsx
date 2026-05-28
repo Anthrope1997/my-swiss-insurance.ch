@@ -10,6 +10,7 @@ import UnifiedLeadForm from '@/components/ui/UnifiedLeadForm'
 import HeroStats from '@/components/ui/HeroStats'
 import LeadFormModal from '@/components/ui/LeadFormModal'
 import UnifiedCombobox from '@/components/ui/UnifiedCombobox'
+import fr from '@/dictionaries/fr.json'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -715,11 +716,9 @@ export default function ComparateurClient() {
       {/* ── FORMULAIRE ────────────────────────────────────────────────────── */}
       <div id="contact" className="scroll-mt-20 bg-white border-b border-edge py-12">
         <div className="container-xl">
-          <h2 className="text-2xl font-semibold text-ink hover:text-brand transition-colors mb-3">Vous souhaitez être accompagné ?</h2>
+          <h2 className="text-2xl font-semibold text-ink hover:text-brand transition-colors mb-3">{fr.needHelp.titre}</h2>
           <p className="text-[16px] text-slate mb-6 leading-relaxed">
-            
-            Un conseiller vous rappelle sous 24 heures pour répondre à vos questions. C’est gratuit et sans engagement.
-          
+            {fr.needHelp.description}
           </p>
           <UnifiedLeadForm redirectOnSuccess="/fr/merci" />
         </div>

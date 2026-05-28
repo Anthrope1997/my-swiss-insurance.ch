@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
+import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import KeyFact from '@/components/ui/KeyFact'
 import Link from 'next/link'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import AuthorBio from '@/components/ui/AuthorBio'
-import UnifiedLeadForm from '@/components/ui/UnifiedLeadForm'
 
 export const metadata: Metadata = {
   title: 'Primes LAMal par canton 2026 : Comparatif Suisse',
@@ -92,15 +92,7 @@ export default function CantonHubPage() {
 
       {/* ── 3. FORMULAIRE ── */}
       <div className="container-xl">
-        <div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4">
-          <h2 className="text-2xl font-semibold text-ink hover:text-brand transition-colors mb-3">Vous souhaitez être accompagné ?</h2>
-          <p className="text-[16px] text-slate mb-6 leading-relaxed">
-            
-            Un conseiller vous rappelle sous 24 heures pour répondre à vos questions. C’est gratuit et sans engagement.
-          
-          </p>
-          <UnifiedLeadForm redirectOnSuccess="/fr/merci" />
-        </div>
+        <NeedHelpSection />
       </div>
 
       <div className="container-xl mt-4 pb-12">

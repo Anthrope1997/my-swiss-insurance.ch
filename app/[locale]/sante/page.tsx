@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
+import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import Link from 'next/link'
-import UnifiedLeadForm from '@/components/ui/UnifiedLeadForm'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
 import HeroStats from '@/components/ui/HeroStats'
@@ -333,15 +333,7 @@ export default function LamalPage() {
 
       {/* ── 7. FORMULAIRE ───────────────────────────────────────────────────── */}
       <div className="container-xl">
-        <div id="contact" className="scroll-mt-20 border-t border-edge pt-12 mt-4">
-          <h2 className="text-2xl font-semibold text-ink hover:text-brand transition-colors mb-3">Vous souhaitez être accompagné ?</h2>
-          <p className="text-[16px] text-slate mb-6 leading-relaxed">
-            
-            Un conseiller vous rappelle sous 24 heures pour répondre à vos questions. C’est gratuit et sans engagement.
-          
-          </p>
-          <UnifiedLeadForm redirectOnSuccess="/fr/merci" />
-        </div>
+        <NeedHelpSection />
       </div>
 
       {/* Bandeau éditorial */}
