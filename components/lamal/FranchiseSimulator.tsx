@@ -73,7 +73,8 @@ function computeResult(canton: string, ageGroup: AgeGroup, frais: number) {
   const data = cantonBySlug[canton]
   if (!data) return null
 
-  const refFranchise = ageGroup === 'enfant' ? 0 : 300
+  const lowFranchise  = ageGroup === 'enfant' ? 0    : 300
+  const highFranchise = ageGroup === 'enfant' ? 600  : 2500
 
   let options: Option[]
 
@@ -94,9 +95,10 @@ function computeResult(canton: string, ageGroup: AgeGroup, frais: number) {
   }
 
   if (options.length === 0) return null
-  const sorted      = [...options].sort((a, b) => a.total - b.total)
-  const best        = sorted[0]
-  const ref         = options.find(o => o.franchise === refFranchise) ?? sorted[sorted.length - 1]
+  const sorted       = [...options].sort((a, b) => a.total - b.total)
+  const best         = sorted[0]
+  const refFranchise = best.franchise === lowFranchise ? highFranchise : lowFranchise
+  const ref          = options.find(o => o.franchise === refFranchise) ?? sorted[sorted.length - 1]
   const economyVsRef = Math.max(0, ref.total - best.total)
   return { best, ref, refFranchise, economyVsRef }
 }
@@ -211,22 +213,14 @@ export default function FranchiseSimulator() {
               <p className="text-[16px] font-semibold text-brand mb-2 whitespace-nowrap">
                 Franchise recommandée : CHF {fmtN(result.best.franchise)}
               </p>
-              {result.best.franchise !== result.refFranchise ? (
-                <p className="text-[16px] text-ink leading-relaxed mb-4">
-                  {'Dans le canton de '}{cantonName}{', vous pouvez économiser en moyenne '}
-                  <strong className="font-medium text-ink">{'CHF '}{fmtN(result.economyVsRef)}{' par an'}</strong>
-                  {ageGroup === 'enfant'
-                    ? ' pour votre enfant en choisissant une franchise de CHF '
-                    : ' en choisissant une franchise de CHF '
-                  }{fmtN(result.best.franchise)}{' au lieu de la franchise de CHF '}{fmtN(result.refFranchise)}{'.'}
-                </p>
-              ) : (
-                <p className="text-[16px] text-ink leading-relaxed mb-4">
-                  {'Dans le canton de '}{cantonName}{', la franchise de CHF '}{fmtN(result.refFranchise)}
-                  {ageGroup === 'enfant' ? ' est la plus avantageuse pour votre enfant avec ' : ' est la plus avantageuse avec '}
-                  {fmtN(frais)}{' CHF de frais médicaux annuels.'}
-                </p>
-              )}
+              <p className="text-[16px] text-ink leading-relaxed mb-4">
+                {'Dans le canton de '}{cantonName}{', vous pouvez économiser en moyenne '}
+                <strong className="font-medium text-ink">{'CHF '}{fmtN(result.economyVsRef)}{' par an'}</strong>
+                {ageGroup === 'enfant'
+                  ? ' pour votre enfant en choisissant une franchise de CHF '
+                  : ' en choisissant une franchise de CHF '
+                }{fmtN(result.best.franchise)}{' au lieu de la franchise de CHF '}{fmtN(result.refFranchise)}{'.'}
+              </p>
               <Link href={comparateurUrl} className="btn-primary w-full md:w-auto md:mx-auto justify-center">
                 Comparer les primes →
               </Link>
