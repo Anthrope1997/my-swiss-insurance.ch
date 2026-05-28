@@ -120,12 +120,6 @@ export default function FranchiseSimulator() {
 
   const result = submitted ? computeResult(canton, ageGroup, frais) : null
 
-  const phrase = result
-    ? ageGroup === 'enfant'
-      ? `Dans le canton de ${cantonName}, avec CHF ${fmtN(frais)} de frais médicaux annuels, la franchise de CHF ${fmtN(result.best.franchise)} est la plus avantageuse pour votre enfant.`
-      : `Dans le canton de ${cantonName}, avec CHF ${fmtN(frais)} de frais médicaux annuels, la franchise de CHF ${fmtN(result.best.franchise)} est la plus avantageuse.`
-    : null
-
 
   const profilParam = ageGroup === 'jeuneAdulte' ? 'jeune_adulte' : ageGroup
   const comparateurUrl = postalCode
@@ -207,17 +201,21 @@ export default function FranchiseSimulator() {
       </div>
 
       {/* ── Résultat ── */}
-      {submitted && result && phrase && (
+      {submitted && result && (
         <div style={{ borderTop: '0.5px solid var(--border)' }}>
           <div className="px-6 py-6">
             <div className="rounded-[8px] bg-[var(--blue-tint)] border border-brand/20 px-5 py-5">
               <p className="text-[16px] font-semibold text-brand mb-2 whitespace-nowrap">
                 Franchise recommandée : CHF {fmtN(result.best.franchise)}
               </p>
-              <p className="text-[16px] text-ink leading-relaxed mb-1">{phrase}</p>
               {result.economy > 0 && (
-                <p className="text-[16px] text-ink mb-4">
-                  <strong className="font-medium text-ink">{'En choisissant la franchise de CHF '}{fmtN(result.best.franchise)}{', vous économisez en moyenne CHF '}{fmtN(result.economy)}{' par rapport à celle de CHF '}{fmtN(result.worst.franchise)}{'.'}</strong>
+                <p className="text-[16px] text-ink leading-relaxed mb-4">
+                  {'Dans le canton de '}{cantonName}{', vous pouvez économiser en moyenne '}
+                  <strong className="font-medium text-ink">{'CHF '}{fmtN(result.economy)}{' par an'}</strong>
+                  {ageGroup === 'enfant'
+                    ? ' pour votre enfant en choisissant une franchise de CHF '
+                    : ' en choisissant une franchise de CHF '
+                  }{fmtN(result.best.franchise)}{' au lieu de CHF '}{fmtN(result.worst.franchise)}{'.'}
                 </p>
               )}
               <Link href={comparateurUrl} className="btn-primary w-full md:w-auto md:mx-auto justify-center">
