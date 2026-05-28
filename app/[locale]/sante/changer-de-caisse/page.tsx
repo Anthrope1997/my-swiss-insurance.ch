@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import type { Metadata } from 'next'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
@@ -5,8 +6,6 @@ import Link from 'next/link'
 import AuthorBio from '@/components/ui/AuthorBio'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import HeroStats from '@/components/ui/HeroStats'
-import { economieMax } from '@/lib/sante/formules'
-import { formatChf } from '@/lib/shared/formatters'
 
 export const metadata: Metadata = {
   title: 'Changer de caisse maladie en Suisse : Guide résiliation LAMal 2026',
@@ -26,7 +25,7 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'Changer de caisse maladie LAMal en Suisse : Guide 2026',
   datePublished: '2026-01-01',
-  dateModified: '2026-04-01',
+  dateModified: '2026-05-28',
   author: { '@type': 'Organization', name: 'My Swiss Insurance', url: 'https://my-swiss-insurance.ch' },
   publisher: { '@type': 'Organization', name: 'My Swiss Insurance' },
   mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://my-swiss-insurance.ch/sante/changer-de-caisse' },
@@ -78,9 +77,9 @@ const faqSchema = {
 }
 
 const heroStats = [
-  { value: '30 novembre', label: 'Date limite ordinaire',  sub: 'pour changer au 1er janvier suivant' },
-  { value: '1er janvier', label: 'Date de prise d\'effet', sub: 'du nouveau contrat LAMal'             },
-  { value: `CHF ${formatChf(economieMax() * 12)}`, label: 'Économie max. en Suisse', sub: 'Adulte 35 ans, toutes franchises et modèles, données OFSP 2026' },
+  { value: '30 novembre',  label: 'Date limite',               sub: 'Pour soumettre votre résiliation'       },
+  { value: '1er janvier',  label: 'Date de prise d\'effet',    sub: 'De votre nouvelle assurance LAMal'      },
+  { value: 'CHF 4 020/an', label: 'Économie moyenne réalisable', sub: 'Pour un adulte changeant de caisse'  },
 ]
 
 const toc = [
@@ -99,10 +98,10 @@ const guidesAssocies = [
   { href: '/sante/guide',        label: 'Guide complet LAMal 2026' },
 ]
 
-const enBref = [
-  "La résiliation ordinaire doit être envoyée par courrier recommandé avant le 30 novembre pour un changement d'assureur au 1er janvier suivant.",
-  "La nouvelle caisse est légalement obligée d'accepter tout résident suisse. Aucune sélection médicale n'est possible pour la LAMal de base.",
-  "En cas de hausse de prime annoncée par votre caisse, vous disposez d'un mois supplémentaire pour résilier, même après la date limite du 30 novembre.",
+const enBref: ReactNode[] = [
+  <>La résiliation ordinaire doit être envoyée par courrier recommandé <strong className="font-medium text-ink">avant le 30 novembre</strong> pour un changement d&apos;assureur au 1er janvier suivant.</>,
+  <>La nouvelle caisse a <strong className="font-medium text-ink">l&apos;obligation légale d&apos;accepter votre demande</strong>. Aucune sélection médicale n&apos;est possible pour la LAMal de base.</>,
+  <>En cas de hausse de prime annoncée par votre caisse, vous disposez d&apos;<strong className="font-medium text-ink">un mois pour résilier</strong>, même après la date limite du 30 novembre.</>,
 ]
 
 export default function ChangerDeCaissePage() {
@@ -121,11 +120,10 @@ export default function ChangerDeCaissePage() {
           ]} />
 
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
-            Comment changer de caisse maladie en Suisse
+            Comment changer d&apos;assurance maladie LAMal en 2026 ?
           </h1>
           <p className="text-[16px] text-slate max-w-2xl leading-relaxed mb-10">
-            Procédure complète pour changer d&apos;assurance maladie de base LAMal, dates clés et
-            modèle de lettre. Économisez jusqu&apos;à CHF 5 604 par an.
+            Vous pouvez changer d&apos;assureur LAMal chaque année et économiser en moyenne CHF 4 020 par an sur vos primes. Voici la procédure complète pour effectuer cette démarche.
           </p>
 
           <HeroStats stats={heroStats} className="mb-8" />
