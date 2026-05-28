@@ -52,7 +52,12 @@
     "titre": "Recevoir un conseil personnalisé",
     "etape": "Étape",
     "sur": "sur",
-    "labels": ["Comment pouvons-nous vous aider ?", "Votre situation", "Votre profil", "Vos coordonnées"],
+    "labels": [
+      "Que souhaitez-vous faire ?",
+      "Votre situation",
+      "Votre profil",
+      "Vos coordonnées"
+    ],
     "contexts": [
       "",
       "Quelques infos sur votre situation",
@@ -101,8 +106,8 @@
     "retour": "← Retour"
   },
   "needHelp": {
-    "titre": "Besoin d'aide ?",
-    "description": "Un expert vous rappelle sous 24 heures pour établir avec vous une solution personnalisée. Gratuit, sans engagement."
+    "titre": "Vous souhaitez être accompagné ?",
+    "description": "Un conseiller vous rappelle sous 24 heures pour répondre à vos questions. C’est gratuit et sans engagement."
   },
   "modal": {
     "introPart1": "Un conseiller spécialisé vous présente les offres les plus avantageuses",
