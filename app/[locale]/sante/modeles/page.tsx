@@ -19,6 +19,7 @@ const divMoyPct = Math.round(modeleEconomieMoyenne('DIV') / _base * 100)  // 11
 const maxModelPct   = Math.max(hamMaxPct, hmoMaxPct, divMaxPct)
 const maxModelAnnuel = Math.round(Math.max(modeleEconomieMax('HMO'), modeleEconomieMax('DIV'), modeleEconomieMax('HAM')) * 12)
 const moyModelAnnuel = Math.round((modeleEconomieMoyenne('HAM') + modeleEconomieMoyenne('HMO') + modeleEconomieMoyenne('DIV')) / 3 * 12)
+const moyModelPct = Math.round((hamMoyPct + hmoMoyPct + divMoyPct) / 3)        // 12
 
 export const metadata: Metadata = {
   title: 'Modèles LAMal 2026 : standard, médecin de famille, centre médical, télémédecine',
@@ -155,11 +156,11 @@ const guidesAssocies = [
 ]
 
 const enBref = [
-  <>{"L'assurance LAMal se décline en quatre modèles d'assurance : "}
+  <>{"L'assurance LAMal propose quatre modèles d'accès aux soins : "}
     <strong className="font-medium text-ink">{"standard, médecin de famille, centre médical et télémédecine"}</strong>
     {". Tous couvrent exactement les mêmes prestations de base."}</>,
-  <>{"Les modèles alternatifs réduisent la prime mensuelle de "}
-    <strong className="font-medium text-ink">CHF 700 par an en moyenne</strong>
+  <>{"Choisir un modèle alternatif vous permet de réduire votre prime mensuelle de "}
+    <strong className="font-medium text-ink">{moyModelPct}{'\xa0'}% en moyenne, soit CHF {formatChf(moyModelAnnuel)}/an</strong>
     {". En contrepartie, vous devez consulter votre médecin de famille, un centre médical ou un service de télémédecine avant toute visite chez un spécialiste."}</>,
   <>{"Pour changer de modèle, signalez-le à votre assureur "}
     <strong className="font-medium text-ink">avant le 30 novembre</strong>
