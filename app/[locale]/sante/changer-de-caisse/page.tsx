@@ -79,7 +79,7 @@ const faqSchema = {
 const heroStats = [
   { value: '30 novembre',  label: 'Date limite de résiliation', sub: 'Démarche gratuite et déléguable'        },
   { value: '1er janvier',  label: 'Date de prise d\'effet',    sub: 'De votre nouvelle assurance LAMal'      },
-  { value: 'CHF 4 020/an', label: 'Économie moyenne réalisable', sub: 'Pour un adulte changeant de caisse'  },
+  { value: 'CHF 4 020/an', label: 'Économie moyenne réalisable', sub: 'Assurance LAMal, adulte 35 ans'      },
 ]
 
 const toc = [
