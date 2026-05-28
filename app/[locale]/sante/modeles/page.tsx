@@ -327,7 +327,7 @@ export default function ModelesPage() {
             <section id="changement">
               <h2 className="article-h2">3. Comment changer de modèle ?</h2>
               <p className="article-p">
-                Vous pouvez changer de modèle d'assurance une fois par an, sans avoir besoin de changer de caisse.
+                Vous pouvez changer de modèle d'assurance une fois par an, même sans changer de caisse.
               </p>
               <KeyFact>
                 Avis de changement à envoyer avant le 30 novembre pour une prise d&apos;effet au
