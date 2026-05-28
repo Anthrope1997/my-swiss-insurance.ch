@@ -131,13 +131,10 @@ export default function FranchiseSimulator() {
 
   const phrase = result
     ? ageGroup === 'enfant'
-      ? `Dans le canton de ${cantonName}, avec CHF ${fmtN(frais)} de frais médicaux estimés, la franchise de CHF ${fmtN(result.best.franchise)} est la plus avantageuse pour votre enfant.`
-      : `Dans le canton de ${cantonName}, avec CHF ${fmtN(frais)} de frais médicaux estimés, la franchise de CHF ${fmtN(result.best.franchise)} est la plus avantageuse.`
+      ? `Dans le canton de ${cantonName}, avec CHF ${fmtN(frais)} de frais médicaux annuels, la franchise de CHF ${fmtN(result.best.franchise)} est la plus avantageuse pour votre enfant.`
+      : `Dans le canton de ${cantonName}, avec CHF ${fmtN(frais)} de frais médicaux annuels, la franchise de CHF ${fmtN(result.best.franchise)} est la plus avantageuse.`
     : null
 
-  const economyLine = result && result.economy > 0
-    ? `Économie de CHF ${fmtN(result.economy)} par an par rapport à la franchise de CHF ${fmtN(result.worst.franchise)}`
-    : null
 
   const comparateurUrl =
     `/sante/comparateur?canton=${canton}&franchise=${result?.best.franchise ?? 300}&profil=${ageGroup}`
@@ -190,7 +187,7 @@ export default function FranchiseSimulator() {
           {/* Frais médicaux */}
           <div>
             <label htmlFor="sim-frais" className="block text-[16px] font-medium text-ink mb-2">
-              Frais médicaux (CHF / an)
+              Frais médicaux annuels
             </label>
             <input
               id="sim-frais"
@@ -223,22 +220,16 @@ export default function FranchiseSimulator() {
         <div style={{ borderTop: '0.5px solid var(--border)' }}>
           <div className="px-6 py-6">
             <div className="rounded-[8px] bg-[var(--blue-tint)] border border-brand/20 px-5 py-5">
-              <div className="flex items-center gap-2 mb-2">
-                <svg
-                  className="w-5 h-5 text-brand shrink-0" fill="none" stroke="currentColor"
-                  viewBox="0 0 24 24" aria-hidden="true"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                <span className="text-[16px] font-semibold text-ink">
-                  Franchise recommandée : CHF {fmtN(result.best.franchise)}
-                </span>
-              </div>
+              <p className="text-[16px] font-semibold text-ink mb-2 whitespace-nowrap">
+                Franchise recommandée : CHF {fmtN(result.best.franchise)}
+              </p>
               <p className="text-[16px] text-ink leading-relaxed mb-1">{phrase}</p>
-              {economyLine && (
-                <p className="text-[16px] font-semibold text-brand mb-4">{economyLine}</p>
+              {result.economy > 0 && (
+                <p className="text-[16px] text-ink mb-4">
+                  {'Économie estimée : '}<strong className="font-medium text-ink">CHF {fmtN(result.economy)} par an</strong>{' par rapport à la franchise de CHF '}{fmtN(result.worst.franchise)}{'.'}
+                </p>
               )}
-              <Link href={comparateurUrl} className="btn-primary inline-flex items-center gap-2">
+              <Link href={comparateurUrl} className="btn-primary w-full justify-center">
                 Comparer les primes dans mon canton →
               </Link>
             </div>
