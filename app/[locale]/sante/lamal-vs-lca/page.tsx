@@ -25,7 +25,7 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'LAMal vs LCA : assurance de base et complémentaire en Suisse',
   datePublished: '2026-01-01',
-  dateModified: '2026-04-01',
+  dateModified: '2026-05-28',
   author: { '@type': 'Organization', name: 'My Swiss Insurance', url: 'https://my-swiss-insurance.ch' },
   publisher: { '@type': 'Organization', name: 'My Swiss Insurance' },
   mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://my-swiss-insurance.ch/sante/lamal-vs-lca' },
@@ -87,9 +87,9 @@ const comparaison = [
 ]
 
 const heroStats = [
-  { value: 'Dès CHF 60 par mois', label: "coût moyen d'une complémentaire en Suisse", sub: '' },
-  { value: 'Facultative',          label: 'non obligatoire',                            sub: '' },
-  { value: '4 types',              label: 'de complémentaires',                         sub: '' },
+  { value: '22 assureurs', label: 'proposent des complémentaires LCA en Suisse', sub: '189 produits référencés 2026' },
+  { value: 'Facultative',  label: 'non obligatoire, contrairement à la LAMal',   sub: 'Seule la LAMal est imposée par la loi' },
+  { value: '4 types',      label: 'de complémentaires principales',               sub: 'hospitalière · ambulatoire · dentaire · internationale' },
 ]
 
 const toc = [
@@ -264,17 +264,17 @@ export default function LamalVsLcaPage() {
                 {[
                   {
                     title: 'Complémentaire hospitalière',
-                    cost: 'CHF 40 à 200 par mois',
+                    cost: 'CHF 2 à 220 par mois',
                     desc: "Chambre semi-privée ou privée, libre choix du médecin-chef, hôpital de votre choix en Suisse ou à l'étranger.",
                   },
                   {
                     title: 'Complémentaire ambulatoire',
-                    cost: 'CHF 15 à 60 par mois',
+                    cost: 'CHF 8 à 146 par mois',
                     desc: 'Médecines alternatives (acupuncture, ostéopathie), lunettes et lentilles, prévention renforcée, fitness.',
                   },
                   {
                     title: 'Complémentaire dentaire',
-                    cost: 'CHF 20 à 80 par mois',
+                    cost: 'CHF 11 à 86 par mois',
                     desc: 'Détartrage, plombages, couronnes, orthodontie. Non couvert par la LAMal sauf en cas d\'accident.',
                   },
                   {
@@ -310,7 +310,7 @@ export default function LamalVsLcaPage() {
                   "Souscrivez la complémentaire hospitalière pendant que vous êtes en bonne santé pour éviter les surprimes liées à l'âge.",
                   'Pour les enfants, une complémentaire dentaire peut être rentable dès le plus jeune âge.',
                   'Voyageurs fréquents et expatriés : une complémentaire internationale est souvent indispensable.',
-                  'Comparez les offres : les écarts pour des prestations similaires peuvent dépasser 50%.',
+                  'Comparez les offres : les écarts de prime pour des prestations similaires peuvent dépasser 200 %.',
                 ].map((item, i) => (
                   <li key={i} className="flex gap-3 text-[16px] text-slate">
                     <svg className="w-4 h-4 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
