@@ -49,7 +49,7 @@ const faqItems = [
   {
     question: "Quel modèle LAMal permet d'économiser le plus ?",
     answer:
-      `Le modèle centre médical offre la plus grande réduction de prime (jusqu'à ${hmoMaxPct}%) selon les données OFSP 2026. Les modèles médecin de famille et télémédecine offrent jusqu'à ${hamMaxPct}%. Les économies réelles dépendent de votre caisse et de votre région.`,
+      `Le modèle centre médical offre la plus grande réduction de prime (jusqu'à ${hmoMaxPct}\xa0%). Les modèles médecin de famille et télémédecine vous permettent d'économiser jusqu'à ${hamMaxPct}\xa0%. Les économies maximales réalisables dépendent de votre caisse actuelle et de votre situation.`,
   },
   {
     question: "Peut-on changer de modèle LAMal en cours d'année ?",
@@ -327,8 +327,7 @@ export default function ModelesPage() {
             <section id="changement">
               <h2 className="article-h2">3. Comment changer de modèle ?</h2>
               <p className="article-p">
-                Le modèle se choisit une fois par an. Le changement est possible à chaque renouvellement
-                annuel, indépendamment d'un éventuel changement de caisse.
+                Vous pouvez changer de modèle d'assurance une fois par an, sans avoir besoin de changer de caisse.
               </p>
               <KeyFact>
                 Avis de changement à envoyer avant le 30 novembre pour une prise d&apos;effet au
