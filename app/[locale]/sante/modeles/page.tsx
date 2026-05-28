@@ -49,7 +49,7 @@ const faqItems = [
   {
     question: "Quel modèle LAMal permet d'économiser le plus ?",
     answer:
-      `Le modèle centre médical offre la plus grande réduction de prime (jusqu'à ${hmoMaxPct}\xa0%). Les modèles médecin de famille et télémédecine vous permettent d'économiser jusqu'à ${hamMaxPct}\xa0%. Les économies maximales réalisables dépendent de votre caisse actuelle et de votre situation.`,
+      `Vous pouvez économiser jusqu'à CHF ${formatChf(maxModelAnnuel)} par an, soit jusqu'à ${maxModelPct}\xa0% de réduction sur vos primes LAMal en choisissant un modèle alternatif. Le montant exact des économies que vous pouvez réaliser dépend de votre caisse actuelle, de votre canton, et de votre situation personnelle.`,
   },
   {
     question: "Peut-on changer de modèle LAMal en cours d'année ?",
