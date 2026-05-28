@@ -133,7 +133,7 @@ export default function FranchiseSimulator() {
     : `/sante/comparateur?franchise=${result?.best.franchise ?? 300}&profil=${profilParam}`
 
   return (
-    <div className="bg-white border border-edge rounded-xl overflow-hidden mt-8">
+    <div className="bg-white border border-edge rounded-xl mt-8">
 
       {/* ── Formulaire ── */}
       <div className="px-6 py-6 space-y-5">
@@ -200,7 +200,7 @@ export default function FranchiseSimulator() {
             disabled={!canCalculate}
             className="btn-primary disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            Trouver ma franchise optimale
+            Calculer ma franchise
           </button>
         </div>
 
@@ -217,11 +217,11 @@ export default function FranchiseSimulator() {
               <p className="text-[16px] text-ink leading-relaxed mb-1">{phrase}</p>
               {result.economy > 0 && (
                 <p className="text-[16px] text-ink mb-4">
-                  {'Économie estimée : '}<strong className="font-medium text-ink">CHF {fmtN(result.economy)} par an</strong>{' par rapport à la franchise de CHF '}{fmtN(result.worst.franchise)}{'.'}
+                  <strong className="font-medium text-ink">{'En choisissant la franchise de CHF '}{fmtN(result.best.franchise)}{', vous économisez en moyenne CHF '}{fmtN(result.economy)}{' par rapport à celle de CHF '}{fmtN(result.worst.franchise)}{'.'}</strong>
                 </p>
               )}
               <Link href={comparateurUrl} className="btn-primary w-full md:w-auto md:mx-auto justify-center">
-                Comparer les primes dans mon canton →
+                Comparer les primes →
               </Link>
             </div>
           </div>
