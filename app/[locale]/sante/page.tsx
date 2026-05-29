@@ -65,7 +65,7 @@ const webSiteSchema = {
 const stats = [
   { value: `CHF ${formatChf(economieMax() * 12)}/an`,     label: 'Économie maximale réalisable'            , sub: 'Assurance LAMal, adulte 35 ans' },
   { value: `CHF ${formatChf(economieMoyenne() * 12)}/an`, label: 'Économie moyenne réalisable'             ,  sub: 'Assurance LAMal, adulte 35 ans' },
-  { value: `CHF ${formatChf(subsideMoyen() * 12)}/an`,    label: 'Subside cantonal moyen',      sub: 'Pour les 28 % qui en bénéficient'   },
+  { value: `CHF ${formatChf(subsideMoyen() * 12)}/an`,    label: 'Subside cantonal moyen',      sub: '28% des résidents en bénéficient'   },
 ]
 
 const guides = [
