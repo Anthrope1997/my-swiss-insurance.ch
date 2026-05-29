@@ -7,13 +7,15 @@ import AuthorBio from '@/components/ui/AuthorBio'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import SubsidesSimulatorFull from '@/components/sante/SubsidesSimulatorFull'
 import HeroStats from '@/components/ui/HeroStats'
+import { subsideMoyen } from '@/lib/sante/formules'
+import { formatChf } from '@/lib/shared/formatters'
 
 export const metadata: Metadata = {
-  title: 'Calculateur de subsides LAMal 2026 : Estimez votre aide cantonale',
+  title: 'Simulateur de subsides LAMal 2026 : Estimez votre aide cantonale',
   description:
     "Calculez votre subside LAMal 2026 en 30 secondes : sélectionnez votre canton, entrez votre revenu, obtenez une estimation personnalisée. Données officielles pour les 26 cantons.",
   openGraph: {
-    title: 'Calculateur de subsides LAMal 2026 : Estimez votre aide cantonale',
+    title: 'Simulateur de subsides LAMal 2026 : Estimez votre aide cantonale',
     description: "Simulateur de subsides LAMal 2026 : estimation personnalisée par canton, revenu et situation familiale. Données officielles.",
     url: 'https://my-swiss-insurance.ch/sante/subsides',
     type: 'article',
@@ -23,7 +25,7 @@ export const metadata: Metadata = {
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'Calculateur de subsides LAMal 2026 : Estimez votre aide cantonale',
+  headline: 'Simulateur de subsides LAMal 2026 : Estimez votre aide cantonale',
   datePublished: '2026-01-01',
   dateModified: '2026-05-17',
   author: { '@type': 'Organization', name: 'My Swiss Insurance', url: 'https://my-swiss-insurance.ch' },
@@ -92,21 +94,20 @@ export default function SubsidesPage() {
           <Breadcrumb items={[
             { label: 'Accueil', href: '/' },
             { label: 'LAMal',   href: '/sante' },
-            { label: 'Calculateur de subsides' },
+            { label: 'Simulateur de subsides' },
           ]} />
 
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
-            Calculateur de subsides LAMal 2026
+            Simulateur de subsides LAMal 2026
           </h1>
           <p className="text-[16px] text-slate max-w-2xl leading-relaxed mb-10">
-            Estimez en 30 secondes le subside sur votre assurance maladie de base LAMal selon votre canton,
-            votre revenu et votre situation familiale. Données officielles 2026 pour les 26 cantons.
+            Vérifiez votre éligibilité et estimez le montant de vos subsides pour votre assurance LAMal. Ils peuvent s&apos;élever jusqu&apos;à CHF 7 716 par an, soit CHF 643 par mois.
           </p>
 
           <HeroStats stats={[
-            { value: '2,5 millions', label: 'Bénéficiaires en Suisse', sub: 'Soit environ 28 % de la population' },
-            { value: '26 cantons',   label: 'Barèmes distincts',       sub: 'Critères et montants variables'    },
-            { value: '≤ CHF 643',   label: 'Subside mensuel maximum', sub: 'Canton de Neuchâtel, barème 2026'  },
+            { value: '2,5 millions',                              label: 'Bénéficiaires en Suisse',     sub: 'Soit 28 % des résidents'       },
+            { value: '26 cantons',                               label: 'Accordent des subsides',       sub: 'Critères et montants variables'   },
+            { value: `CHF ${formatChf(subsideMoyen() * 12)}/an`, label: 'Subside cantonal moyen',      sub: 'Soit CHF 415/mois' },
           ]} className="mb-8" />
 
         </div>
