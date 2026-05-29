@@ -105,9 +105,9 @@ export default function SubsidesPage() {
           </p>
 
           <HeroStats stats={[
-            { value: '2,5 millions',                              label: 'Bénéficiaires en Suisse',     sub: 'Soit 28 % des résidents'       },
-            { value: '26 cantons',                               label: 'Accordent des subsides',       sub: 'Critères et montants variables'   },
-            { value: `CHF ${formatChf(subsideMoyen() * 12)}/an`, label: 'Subside cantonal moyen',      sub: 'Soit CHF 415/mois' },
+            { value: `CHF ${formatChf(subsideMoyen() * 12)}/an`, label: 'Subside cantonal moyen',      sub: 'Soit CHF 415/mois'               },
+            { value: '2,5 millions',                              label: 'Bénéficiaires en Suisse',     sub: 'Soit 28 % des résidents'         },
+            { value: '26 cantons',                                label: 'Accordent des subsides',      sub: 'Critères et montants variables'      },
           ]} className="mb-8" />
 
         </div>
