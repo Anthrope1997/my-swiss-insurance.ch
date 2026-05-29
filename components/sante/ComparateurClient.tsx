@@ -275,16 +275,15 @@ export default function ComparateurClient() {
             { label: 'Comparateur de caisses' },
           ]} />
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
-            Comparateur de caisses maladie LAMal 2026
+            Comparateur de primes LAMal 2026
           </h1>
           <p className="text-[18px] text-slate leading-relaxed mb-10">
-            En Suisse, les primes de l&apos;assurance maladie de base LAMal varient jusqu&apos;à 97 % au sein d&apos;une même région selon l&apos;assureur.
-            Comparez toutes les caisses selon votre code postal, votre franchise et votre modèle.
+            Toutes les caisses couvrent les mêmes prestations de base : seul le prix change, jusqu’à CHF 5 604 par an d’écart pour un même profil. Comparez les assureurs, ajustez votre franchise et adaptez votre modèle d’assurance à votre situation pour réduire votre prime.
           </p>
           <HeroStats stats={[
-            { value: '34 caisses',  label: 'Comparées en temps réel',  sub: 'Données officielles OFSP 2026'      },
-            { value: 'CHF 5 653',   label: 'Économie possible par an', sub: 'Canton de Genève, tous profils confondus'  },
-            { value: '97%',         label: 'Écart de prime possible',  sub: 'Entre caisses dans une même région' },
+            { value: '34 caisses',    label: 'Comparées en temps réel',       sub: 'Agréées par l’OFSP'              },
+            { value: 'CHF 5 604/an', label: 'Économie maximale réalisable', sub: 'Assurance LAMal, adulte 35 ans'   },
+            { value: 'CHF 4 020/an', label: 'Économie moyenne réalisable',  sub: 'Assurance LAMal, adulte 35 ans'   },
           ]} className="mb-8" />
         </div>
       </section>
