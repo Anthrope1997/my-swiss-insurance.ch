@@ -241,6 +241,10 @@ export default function GuideLamalPage() {
             {/* 2 — Couverture */}
             <section id="couverture">
               <h2 className="article-h2">2. Ce que couvre la LAMal</h2>
+              <p className="article-p">
+                Le catalogue des prestations obligatoires est défini et révisé par l&apos;OFSP.
+                Voici les prestations prises en charge après franchise et quote-part :
+              </p>
 
               <h3 className="article-h3">Soins ambulatoires</h3>
               <ul className="space-y-2 mb-6">
