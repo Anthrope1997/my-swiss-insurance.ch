@@ -241,21 +241,17 @@ export default function GuideLamalPage() {
             {/* 2 — Couverture */}
             <section id="couverture">
               <h2 className="article-h2">2. Ce que couvre la LAMal</h2>
-              <p className="article-p">
-                Le catalogue des prestations obligatoires est défini et révisé par l'OFSP.
-                Voici les prestations prises en charge après franchise et quote-part :
-              </p>
 
               <h3 className="article-h3">Soins ambulatoires</h3>
               <ul className="space-y-2 mb-6">
                 {[
-                  'Médecin de famille et spécialistes (avec renvoi médical selon le modèle)',
+                  'Médecin de famille et spécialistes (libre choix avec le modèle standard, sous conditions avec les modèles alternatifs)',
                   'Soins d\'urgence 24 heures sur 24, 7 jours sur 7',
-                  'Analyses de laboratoire et imagerie médicale prescrite',
-                  'Physiothérapie (sur prescription)',
-                  'Psychothérapie (psychologues agréés, depuis 2022)',
-                  'Médicaments sur la Liste des spécialités (LS)',
-                  'Soins infirmiers à domicile (spitex)',
+                  'Analyses de laboratoire et imagerie médicale (sur prescription médicale)',
+                  'Physiothérapie (sur prescription médicale)',
+                  'Psychothérapie (sur prescription médicale)',
+                  'Médicaments (selon la Liste des spécialités)',
+                  'Soins infirmiers à domicile',
                 ].map((item, i) => (
                   <li key={i} className="flex gap-3 text-[16px] text-slate">
                     <svg className="w-4 h-4 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -269,7 +265,7 @@ export default function GuideLamalPage() {
               <h3 className="article-h3">Hospitalisation</h3>
               <ul className="space-y-2 mb-6">
                 {[
-                  'Chambre commune, dans tout hôpital agréé par le canton',
+                  'Lit en chambre commune (dans les hôpitaux agréés par votre canton)',
                   'Chirurgie, soins intensifs, réhabilitation',
                   'Maternité (accouchement, soins pré et post-partum)',
                 ].map((item, i) => (
@@ -284,7 +280,7 @@ export default function GuideLamalPage() {
 
               <KeyFact>
                 Non couvert par la LAMal de base : soins dentaires (sauf accident ou maladie grave),
-                lunettes et lentilles, médecine alternative non prescrite, chambre privée à l&apos;hôpital.
+                lunettes et lentilles, médecine alternative (sauf si prescrite par un médecin agréé), chambre privée à l&apos;hôpital.
                 Ces prestations relèvent des assurances complémentaires LCA.
               </KeyFact>
 
