@@ -269,7 +269,7 @@ export default function GuideLamalPage() {
               <h3 className="article-h3">Hospitalisation</h3>
               <ul className="space-y-2 mb-6">
                 {[
-                  'Lit en chambre commune (dans les hôpitaux agréés par votre canton)',
+                  'Lit en chambre commune (dans les hôpitaux agréés de votre canton)',
                   'Chirurgie, soins intensifs, réhabilitation',
                   'Maternité (accouchement, soins pré et post-partum)',
                 ].map((item, i) => (
