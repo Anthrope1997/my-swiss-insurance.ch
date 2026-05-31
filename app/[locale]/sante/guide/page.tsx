@@ -302,10 +302,19 @@ export default function GuideLamalPage() {
 
               <KeyFact>
                 Pour une couverture plus complète, vous pouvez souscrire à une assurance complémentaire (LCA). Elle est facultative, et se décline en plusieurs types pour s&apos;adapter à vos besoins&nbsp;:
-                <ul className="mt-2 space-y-1">
-                  <li><strong>Ambulatoire&nbsp;:</strong> médecine douce, soins dentaires et optiques, contribution aux activités sportives</li>
-                  <li><strong>Hospitalière&nbsp;:</strong> chambre privée avec libre choix du médecin et de l&apos;hôpital, partout en Suisse</li>
-                  <li><strong>Voyage&nbsp;:</strong> prise en charge complète des soins et du rapatriement à l&apos;étranger, au-delà des limites de l&apos;assurance LAMal</li>
+                <ul className="mt-2 space-y-2">
+                  {[
+                    { label: 'Ambulatoire', text: 'médecine douce, soins dentaires et optiques, contribution aux activités sportives' },
+                    { label: 'Hospitalière', text: 'chambre privée avec libre choix du médecin et de l\'hôpital, partout en Suisse' },
+                    { label: 'Voyage', text: 'prise en charge complète des soins et du rapatriement à l\'étranger, au-delà des limites de l\'assurance LAMal' },
+                  ].map(({ label, text }, i) => (
+                    <li key={i} className="flex gap-3 text-[16px]">
+                      <svg className="w-4 h-4 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span><strong>{label}&nbsp;:</strong> {text}</span>
+                    </li>
+                  ))}
                 </ul>
                 Contrairement à l&apos;assurance de base LAMal, une complémentaire sélectionne ses clients. Le montant des primes dépend de votre âge, de votre état de santé, ainsi que de votre canton de résidence.
               </KeyFact>
