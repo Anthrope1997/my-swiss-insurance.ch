@@ -254,7 +254,7 @@ export default function GuideLamalPage() {
                   'Analyses de laboratoire et imagerie médicale (sur prescription médicale)',
                   'Physiothérapie (sur prescription médicale)',
                   'Psychothérapie (sur prescription médicale)',
-                  'Médicaments (selon la Liste des spécialités)',
+                  'Médicaments remboursables (sur prescription médicale)',
                   'Soins infirmiers à domicile',
                 ].map((item, i) => (
                   <li key={i} className="flex gap-3 text-[16px] text-slate">
@@ -270,7 +270,7 @@ export default function GuideLamalPage() {
               <ul className="space-y-2 mb-6">
                 {[
                   'Lit en chambre commune dans les hôpitaux agréés de votre canton',
-                  'Chirurgie, soins intensifs, réhabilitation',
+                  'Chirurgie, soins intensifs et réhabilitation (sur indication médicale)',
                   'Maternité (accouchement, soins pré et post-partum)',
                 ].map((item, i) => (
                   <li key={i} className="flex gap-3 text-[16px] text-slate">
