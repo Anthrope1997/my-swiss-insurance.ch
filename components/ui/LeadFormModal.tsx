@@ -30,7 +30,6 @@ export default function LeadFormModal({ open, onClose }: Props) {
           <div className="px-4 pt-6 pb-3 sm:px-8 sm:pt-8 sm:pb-4">
             <div className="flex items-start justify-between gap-4 mb-6">
               <div>
-                <h2 className="text-[18px] font-semibold text-ink mb-2">{fr.popup.titre}</h2>
                 <p className="text-[16px] text-slate leading-relaxed">{fr.popup.description}</p>
               </div>
               <button
