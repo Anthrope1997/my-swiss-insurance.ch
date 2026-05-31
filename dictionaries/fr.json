@@ -109,6 +109,10 @@
     "titre": "Vous souhaitez être accompagné ?",
     "description": "Un conseiller vous rappelle sous 24 heures pour répondre à vos questions. C’est gratuit et sans engagement."
   },
+  "popup": {
+    "titre": "Recevez les meilleures offres pour votre profil",
+    "description": "Un conseiller vous rappelle sous 24 heures avec les meilleures offres pour votre profil. C’est gratuit et sans engagement."
+  },
   "modal": {
     "introPart1": "Un conseiller spécialisé vous présente les offres les plus avantageuses",
     "introDelai": "sous 24 heures",
