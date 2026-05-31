@@ -20,16 +20,6 @@ const STEP1_OPTIONS: { id: string; label: string; icon: React.ReactNode }[] = [
     ),
   },
   {
-    id: 'subside',
-    label: d.form.objectifs.subside,
-    icon: (
-      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
-  },
-  {
     id: 'complementaire',
     label: d.form.objectifs.complementaire,
     icon: (
@@ -38,6 +28,16 @@ const STEP1_OPTIONS: { id: string; label: string; icon: React.ReactNode }[] = [
           d="M12 3l8 4v5c0 5.25-3.5 10.14-8 12C7.5 22.14 4 17.25 4 12V7l8-4z" />
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
           d="M12 9v6M9 12h6" />
+      </svg>
+    ),
+  },
+  {
+    id: 'subside',
+    label: d.form.objectifs.subside,
+    icon: (
+      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
   },
