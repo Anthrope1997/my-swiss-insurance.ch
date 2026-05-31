@@ -301,7 +301,7 @@ export default function GuideLamalPage() {
               </ul>
 
               <KeyFact>
-                <p className="mb-2">Pour une couverture plus complète, vous pouvez souscrire à une <strong>assurance complémentaire (LCA)</strong>. Elle est facultative, et se décline en plusieurs types pour s&apos;adapter à vos besoins&nbsp;:</p>
+                <p className="mb-2">L&apos;assurance de base LAMal couvre les soins essentiels. Pour une couverture plus complète, vous pouvez souscrire à une <strong>assurance complémentaire (LCA)</strong>. Elle est facultative et se décline en fonction de vos besoins&nbsp;:</p>
                 <ul className="space-y-2 mb-2">
                   {[
                     { label: 'Ambulatoire', text: 'médecine douce, soins dentaires et optiques, contribution aux activités sportives' },
