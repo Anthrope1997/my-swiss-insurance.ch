@@ -282,10 +282,32 @@ export default function GuideLamalPage() {
                 ))}
               </ul>
 
+              <h3 className="article-h3">Exclusions</h3>
+              <ul className="space-y-2 mb-6">
+                {[
+                  'Soins dentaires (sauf accident ou maladie grave)',
+                  'Lunettes et lentilles',
+                  'Médecine alternative (sauf si prescrite par un médecin agréé)',
+                  'Chirurgie esthétique (sauf reconstruction médicalement justifiée)',
+                  'Chambre privée ou semi-privée à l\'hôpital',
+                ].map((item, i) => (
+                  <li key={i} className="flex gap-3 text-[16px] text-slate">
+                    <svg className="w-4 h-4 text-slate/40 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
               <KeyFact>
-                Non couvert par la LAMal de base : soins dentaires (sauf accident ou maladie grave),
-                lunettes et lentilles, médecine alternative (sauf si prescrite par un médecin agréé), chambre privée à l&apos;hôpital.
-                Ces prestations relèvent des assurances complémentaires LCA.
+                Pour une couverture plus complète, vous pouvez souscrire à une assurance complémentaire (LCA). Elle est facultative, et se décline en plusieurs types pour s&apos;adapter à vos besoins&nbsp;:
+                <ul className="mt-2 space-y-1">
+                  <li><strong>Ambulatoire&nbsp;:</strong> médecine douce, soins dentaires et optiques, contribution aux activités sportives</li>
+                  <li><strong>Hospitalière&nbsp;:</strong> chambre privée avec libre choix du médecin et de l&apos;hôpital, partout en Suisse</li>
+                  <li><strong>Voyage&nbsp;:</strong> prise en charge complète des soins et du rapatriement à l&apos;étranger, au-delà des limites de l&apos;assurance LAMal</li>
+                </ul>
+                Contrairement à l&apos;assurance de base LAMal, une complémentaire sélectionne ses clients. Le montant des primes dépend de votre âge, de votre état de santé, ainsi que de votre canton de résidence.
               </KeyFact>
 
               <div className="mt-6">
