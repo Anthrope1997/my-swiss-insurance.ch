@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import type { ReactNode } from 'react'
 import KeyFact from '@/components/ui/KeyFact'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
@@ -87,9 +88,9 @@ const comparaison = [
 ]
 
 const heroStats = [
-  { value: '22 assureurs', label: 'proposent des complémentaires LCA en Suisse', sub: '189 produits référencés 2026' },
-  { value: 'Facultative',  label: 'non obligatoire, contrairement à la LAMal',   sub: 'Seule la LAMal est imposée par la loi' },
-  { value: '4 types',      label: 'de complémentaires principales',               sub: 'hospitalière · ambulatoire · dentaire · internationale' },
+  { value: '4',                       label: 'Catégories de complémentaires',       sub: '22 assureurs agréés en 2026' },
+  { value: 'Dès CHF 34/mois',        label: 'Pour une complémentaire complète',  sub: 'Adulte 35 ans, en bonne santé' },
+  { value: 'Primes variables',         label: 'En fonction de votre état de santé', sub: 'De votre âge, canton et situation familiale' },
 ]
 
 const toc = [
@@ -107,10 +108,10 @@ const guidesAssocies = [
   { href: '/sante/modeles',     label: 'Les 4 modèles LAMal'      },
 ]
 
-const enBref = [
-  "La LAMal est obligatoire pour tous les résidents suisses. Prestations identiques chez tous les assureurs, admission garantie sans sélection médicale.",
-  "La LCA (complémentaire) est facultative et couvre ce que la LAMal exclut : chambre privée, soins dentaires, lunettes, médecine alternative.",
-  "Contrairement à la LAMal, un assureur peut refuser une complémentaire ou imposer des exclusions. Souscrivez pendant que vous êtes en bonne santé.",
+const enBref: ReactNode[] = [
+  <>L&apos;assurance LAMal est <strong className="font-medium text-ink">obligatoire</strong>, sans sélection médicale, pour tous les résidents suisses et frontaliers. Les prestations sont identiques chez tous les assureurs, seules les primes diffèrent.</>,
+  <>La <strong className="font-medium text-ink">complémentaire santé LCA est facultative</strong> et couvre ce que la LAMal exclut : soins ambulatoires, soins dentaires, médecines douces et soins hospitaliers. Les primes peuvent varier fortement en fonction de la couverture sélectionnée.</>,
+  <>Contrairement à la LAMal, un assureur peut <strong className="font-medium text-ink">refuser une complémentaire</strong> ou imposer des exclusions médicales selon votre situation. <strong className="font-medium text-ink">Souscrivez pendant que vous êtes en bonne santé</strong> pour bénéficier d&apos;une couverture plus large et bloquer vos primes.</>,
 ]
 
 export default function LamalVsLcaPage() {
@@ -129,13 +130,10 @@ export default function LamalVsLcaPage() {
           ]} />
 
           <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
-            Assurance de base et complémentaire : quelles différences ?
+            Assurance LAMal et complémentaires santé LCA : quelles différences en 2026 ?
           </h1>
           <p className="text-[16px] text-slate max-w-2xl leading-relaxed mb-10">
-            L'assurance maladie de base LAMal rembourse les soins essentiels : médecin, hôpital, médicaments sur ordonnance.
-            L'assurance complémentaire couvre ce qu'elle exclut : chambre privée à l'hôpital,
-            médecine alternative, soins dentaires, lunettes. Elle est facultative, mais peut faire
-            une vraie différence selon votre situation.
+            L’assurance LAMal couvre vos soins essentiels. La complémentaire (LCA) est facultative et étend votre couverture santé, selon vos besoins : soins ambulatoires, soins dentaires, médecines douces et soins hospitaliers.
           </p>
 
           <HeroStats stats={heroStats} className="mb-8" />
