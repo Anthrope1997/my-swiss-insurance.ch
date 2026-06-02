@@ -304,9 +304,10 @@ export default function GuideLamalPage() {
                 <p className="mb-2">L&apos;assurance de base LAMal couvre les soins essentiels. Pour une couverture plus complète, vous pouvez souscrire à une <strong>assurance complémentaire (LCA)</strong>. Elle est facultative et se décline en fonction de vos besoins&nbsp;:</p>
                 <ul className="space-y-2 mb-2">
                   {[
-                    { label: 'Ambulatoire', text: 'médecine douce, soins dentaires et optiques, contribution aux activités sportives' },
-                    { label: 'Hospitalière', text: 'chambre privée avec libre choix du médecin et de l\'hôpital, partout en Suisse' },
-                    { label: 'Voyage', text: 'prise en charge complète des soins et du rapatriement en Suisse, au-delà des limites de l\'assurance LAMal' },
+                    { label: 'Soins hospitaliers', text: 'chambre privée et libre choix de l\'hôpital' },
+                    { label: 'Soins dentaires', text: 'détartrage, orthodontie et implants' },
+                    { label: 'Soins ambulatoires', text: 'médicaments non remboursés, optique, psychothérapie, maternité et activités sportives' },
+                    { label: 'Médecines douces', text: 'acupuncture, homéopathie, naturopathie et autres' },
                   ].map(({ label, text }, i) => (
                     <li key={i} className="flex gap-3 text-[16px]">
                       <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-brand shrink-0" aria-hidden="true" />
