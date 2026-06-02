@@ -146,7 +146,7 @@ export default function FrontalierFrancePage() {
             <p className="text-2xl font-semibold text-ink mb-3">En bref</p>
             <ul className="space-y-3">
               {enBref.map((phrase, i) => (
-                <li key={i} className="flex gap-2.5 text-[16px] text-slate leading-relaxed">
+                <li key={i} className="flex gap-2.5 items-center text-[16px] text-slate leading-relaxed">
                   <span className="text-brand font-bold shrink-0 mt-0.5" aria-hidden="true">•</span>
                   <span>{phrase}</span>
                 </li>
@@ -185,7 +185,7 @@ export default function FrontalierFrancePage() {
                   <h3 className="font-semibold text-ink text-[16px] mb-3">Cantons principalement concernés</h3>
                   <ul className="space-y-1.5 text-[13px] text-slate">
                     {['Genève (le plus grand flux frontalier)', 'Vaud', 'Neuchâtel', 'Jura', 'Valais'].map((c, i) => (
-                      <li key={i} className="flex gap-2">
+                      <li key={i} className="flex gap-2 items-center">
                         <span className="text-brand font-bold shrink-0">•</span>{c}
                       </li>
                     ))}
@@ -200,7 +200,7 @@ export default function FrontalierFrancePage() {
                       "Retour au domicile en principe chaque jour ou au moins une fois par semaine",
                       'Permis de travail G ou équivalent',
                     ].map((c, i) => (
-                      <li key={i} className="flex gap-2">
+                      <li key={i} className="flex gap-2 items-center">
                         <span className="text-brand font-bold shrink-0">•</span>{c}
                       </li>
                     ))}
@@ -252,8 +252,8 @@ export default function FrontalierFrancePage() {
                     'Liberté de choix de la caisse et du modèle',
                     "Couverture accidents automatique en cas d'emploi salarié (LAA)",
                   ].map((item, i) => (
-                    <li key={i} className="flex gap-2">
-                      <svg className="w-3.5 h-3.5 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <li key={i} className="flex gap-2 items-center">
+                      <svg className="w-3.5 h-3.5 text-brand shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                       </svg>
                       {item}
@@ -286,7 +286,7 @@ export default function FrontalierFrancePage() {
                     "Pas de rupture avec vos droits de retraite en France",
                     'Complémentaire santé française (mutuelle) applicable',
                   ].map((item, i) => (
-                    <li key={i} className="flex gap-2">
+                    <li key={i} className="flex gap-2 items-center">
                       <span className="text-slate font-bold shrink-0">•</span>
                       {item}
                     </li>

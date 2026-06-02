@@ -149,7 +149,7 @@ export default function LamalVsLcaPage() {
             <p className="text-2xl font-semibold text-ink mb-3">En bref</p>
             <ul className="space-y-3">
               {enBref.map((phrase, i) => (
-                <li key={i} className="flex gap-2.5 text-[16px] text-slate leading-relaxed">
+                <li key={i} className="flex gap-2.5 items-center text-[16px] text-slate leading-relaxed">
                   <span className="text-brand font-bold shrink-0 mt-0.5" aria-hidden="true">•</span>
                   <span>{phrase}</span>
                 </li>
@@ -194,8 +194,8 @@ export default function LamalVsLcaPage() {
                       'Urgences 24 heures sur 24',
                       'Subsides cantonaux possibles',
                     ].map((item, i) => (
-                      <li key={i} className="flex gap-2.5 text-[16px] text-slate">
-                        <svg className="w-4 h-4 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <li key={i} className="flex gap-2.5 items-center text-[16px] text-slate">
+                        <svg className="w-4 h-4 text-brand shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                         </svg>
                         {item}
@@ -216,8 +216,8 @@ export default function LamalVsLcaPage() {
                       'Soins dentaires et orthodontie',
                       'Lunettes et lentilles',
                     ].map((item, i) => (
-                      <li key={i} className="flex gap-2.5 text-[16px] text-slate">
-                        <svg className="w-4 h-4 text-slate/40 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <li key={i} className="flex gap-2.5 items-center text-[16px] text-slate">
+                        <svg className="w-4 h-4 text-slate/40 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v14M5 12h14" />
                         </svg>
                         {item}
@@ -312,8 +312,8 @@ export default function LamalVsLcaPage() {
                   'Voyageurs fréquents et expatriés : une complémentaire internationale est souvent indispensable.',
                   'Comparez les offres : les écarts de prime pour des prestations similaires peuvent dépasser 200 %.',
                 ].map((item, i) => (
-                  <li key={i} className="flex gap-3 text-[16px] text-slate">
-                    <svg className="w-4 h-4 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <li key={i} className="flex gap-3 items-center text-[16px] text-slate">
+                    <svg className="w-4 h-4 text-brand shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                     {item}

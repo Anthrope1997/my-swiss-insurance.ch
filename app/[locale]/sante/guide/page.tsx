@@ -198,7 +198,7 @@ export default function GuideLamalPage() {
             <p className="text-2xl font-semibold text-ink mb-3">En bref</p>
             <ul className="space-y-3">
               {enBref.map((phrase, i) => (
-                <li key={i} className="flex gap-2.5 text-[16px] text-slate leading-relaxed">
+                <li key={i} className="flex gap-2.5 items-center text-[16px] text-slate leading-relaxed">
                   <span className="text-brand font-bold shrink-0 mt-0.5" aria-hidden="true">•</span>
                   <span>{phrase}</span>
                 </li>
@@ -257,8 +257,8 @@ export default function GuideLamalPage() {
                   'Médicaments remboursables (sur prescription médicale)',
                   'Soins infirmiers à domicile',
                 ].map((item, i) => (
-                  <li key={i} className="flex gap-3 text-[16px] text-slate">
-                    <svg className="w-4 h-4 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <li key={i} className="flex gap-3 items-center text-[16px] text-slate">
+                    <svg className="w-4 h-4 text-brand shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                     </svg>
                     {item}
@@ -273,8 +273,8 @@ export default function GuideLamalPage() {
                   'Chirurgie, soins intensifs et réhabilitation (sur indication médicale)',
                   'Maternité (accouchement, soins pré et post-partum)',
                 ].map((item, i) => (
-                  <li key={i} className="flex gap-3 text-[16px] text-slate">
-                    <svg className="w-4 h-4 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <li key={i} className="flex gap-3 items-center text-[16px] text-slate">
+                    <svg className="w-4 h-4 text-brand shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                     </svg>
                     {item}
@@ -291,8 +291,8 @@ export default function GuideLamalPage() {
                   'Chirurgie esthétique (sauf reconstruction médicalement justifiée)',
                   'Chambre privée à l\'hôpital',
                 ].map((item, i) => (
-                  <li key={i} className="flex gap-3 text-[16px] text-slate">
-                    <svg className="w-4 h-4 text-slate/40 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <li key={i} className="flex gap-3 items-center text-[16px] text-slate">
+                    <svg className="w-4 h-4 text-slate/40 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
                     </svg>
                     {item}
@@ -309,8 +309,8 @@ export default function GuideLamalPage() {
                     { label: 'Soins ambulatoires', text: 'médicaments non remboursés, optique, psychothérapie, maternité et activités sportives' },
                     { label: 'Médecines douces', text: 'acupuncture, homéopathie, naturopathie et autres' },
                   ].map(({ label, text }, i) => (
-                    <li key={i} className="flex gap-3 text-[16px]">
-                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-brand shrink-0" aria-hidden="true" />
+                    <li key={i} className="flex gap-3 items-center text-[16px]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-brand shrink-0" aria-hidden="true" />
                       <span><strong>{label}&nbsp;:</strong> {text}</span>
                     </li>
                   ))}

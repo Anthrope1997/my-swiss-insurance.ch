@@ -201,7 +201,7 @@ export default function ModelesPage() {
             <p className="text-2xl font-semibold text-ink mb-3">En bref</p>
             <ul className="space-y-3">
               {enBref.map((phrase, i) => (
-                <li key={i} className="flex gap-2.5 text-[16px] text-slate leading-relaxed">
+                <li key={i} className="flex gap-2.5 items-center text-[16px] text-slate leading-relaxed">
                   <span className="text-brand font-bold shrink-0 mt-0.5" aria-hidden="true">•</span>
                   <span>{phrase}</span>
                 </li>
@@ -289,8 +289,8 @@ export default function ModelesPage() {
                         <p className="text-[16px] font-semibold text-slate uppercase tracking-wide mb-2">Avantages</p>
                         <ul className="space-y-1.5">
                           {m.avantages.map((a, i) => (
-                            <li key={i} className="flex gap-2 text-[16px] text-slate">
-                              <svg className="w-3.5 h-3.5 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <li key={i} className="flex gap-2 items-center text-[16px] text-slate">
+                              <svg className="w-3.5 h-3.5 text-brand shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                               </svg>
                               {a}
@@ -302,8 +302,8 @@ export default function ModelesPage() {
                         <p className="text-[16px] font-semibold text-slate uppercase tracking-wide mb-2">Contraintes</p>
                         <ul className="space-y-1.5">
                           {m.inconvenients.map((c, i) => (
-                            <li key={i} className="flex gap-2 text-[16px] text-slate">
-                              <svg className="w-3.5 h-3.5 text-slate/50 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <li key={i} className="flex gap-2 items-center text-[16px] text-slate">
+                              <svg className="w-3.5 h-3.5 text-slate/50 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                               </svg>
                               {c}

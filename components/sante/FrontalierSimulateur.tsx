@@ -160,7 +160,7 @@ export default function FrontalierSimulateur() {
         <p className="text-[16px] text-slate leading-relaxed mb-4">{resultat.description}</p>
         <ul className="space-y-2 mb-5">
           {resultat.points.map((p, i) => (
-            <li key={i} className="flex gap-2.5 text-[13px] text-slate">
+            <li key={i} className="flex gap-2.5 items-center text-[13px] text-slate">
               <span className={`${c.text} font-bold shrink-0`}>{c.icon}</span>
               {p}
             </li>

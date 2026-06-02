@@ -280,8 +280,8 @@ export default function GuideLamalPage() {
                   'Médicaments sur la Liste des spécialités (LS)',
                   'Soins infirmiers à domicile (spitex)',
                 ].map((item, i) => (
-                  <li key={i} className="flex gap-3 text-[16px] text-slate">
-                    <svg className="w-4 h-4 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <li key={i} className="flex gap-3 items-center text-[16px] text-slate">
+                    <svg className="w-4 h-4 text-brand shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                     </svg>
                     {item}
@@ -296,8 +296,8 @@ export default function GuideLamalPage() {
                   'Chirurgie, soins intensifs, réhabilitation',
                   'Maternité (accouchement, soins pré et post-partum)',
                 ].map((item, i) => (
-                  <li key={i} className="flex gap-3 text-[16px] text-slate">
-                    <svg className="w-4 h-4 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <li key={i} className="flex gap-3 items-center text-[16px] text-slate">
+                    <svg className="w-4 h-4 text-brand shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                     </svg>
                     {item}

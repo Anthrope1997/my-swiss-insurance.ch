@@ -122,7 +122,7 @@ const guidesAssocies = [
 ]
 
 const checkIcon = (
-  <svg className="w-4 h-4 text-brand mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <svg className="w-4 h-4 text-brand shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
   </svg>
 )
@@ -164,7 +164,7 @@ export default function FranchisePage() {
             <p className="text-2xl font-semibold text-ink mb-3">En bref</p>
             <ul className="space-y-3">
               {enBref.map((phrase, i) => (
-                <li key={i} className="flex gap-2.5 text-[16px] text-slate leading-relaxed">
+                <li key={i} className="flex gap-2.5 items-center text-[16px] text-slate leading-relaxed">
                   <span className="text-brand font-bold shrink-0 mt-0.5" aria-hidden="true">•</span>
                   <span>{phrase}</span>
                 </li>
@@ -225,7 +225,7 @@ export default function FranchisePage() {
                     'Vous la choisissez une fois par an, avant le 30 novembre',
                     'Plus la franchise est élevée, plus la prime mensuelle est basse',
                   ].map((item, i) => (
-                    <li key={i} className="flex gap-3 text-[16px] text-slate">{checkIcon}{item}</li>
+                    <li key={i} className="flex gap-3 items-center text-[16px] text-slate">{checkIcon}{item}</li>
                   ))}
                 </ul>
               </div>
@@ -238,7 +238,7 @@ export default function FranchisePage() {
                     'Automatique, non modifiable',
                     'Coût maximum total : franchise + CHF 700 par an',
                   ].map((item, i) => (
-                    <li key={i} className="flex gap-3 text-[16px] text-slate">{checkIcon}{item}</li>
+                    <li key={i} className="flex gap-3 items-center text-[16px] text-slate">{checkIcon}{item}</li>
                   ))}
                 </ul>
               </div>

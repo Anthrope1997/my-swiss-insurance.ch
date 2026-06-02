@@ -135,7 +135,7 @@ export default function FrontalierItaliePage() {
             <p className="text-2xl font-semibold text-ink mb-3">En bref</p>
             <ul className="space-y-3">
               {enBref.map((phrase, i) => (
-                <li key={i} className="flex gap-2.5 text-[16px] text-slate leading-relaxed">
+                <li key={i} className="flex gap-2.5 items-center text-[16px] text-slate leading-relaxed">
                   <span className="text-brand font-bold shrink-0 mt-0.5" aria-hidden="true">•</span>
                   <span>{phrase}</span>
                 </li>
@@ -178,7 +178,7 @@ export default function FrontalierItaliePage() {
                       'Grisons (partie italophone, val Poschiavo, Bregaglia)',
                       'Valais (moins fréquent, frontière col du Simplon)',
                     ].map((c, i) => (
-                      <li key={i} className="flex gap-2">
+                      <li key={i} className="flex gap-2 items-center">
                         <span className="text-brand font-bold shrink-0">•</span>{c}
                       </li>
                     ))}
