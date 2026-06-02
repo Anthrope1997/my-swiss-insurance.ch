@@ -289,7 +289,7 @@ export default function GuideLamalPage() {
                   'Lunettes et lentilles',
                   'Médecine alternative (sauf si prescrite par un médecin agréé)',
                   'Chirurgie esthétique (sauf reconstruction médicalement justifiée)',
-                  'Chambre privée ou semi-privée à l\'hôpital',
+                  'Chambre privée à l\'hôpital',
                 ].map((item, i) => (
                   <li key={i} className="flex gap-3 text-[16px] text-slate">
                     <svg className="w-4 h-4 text-slate/40 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
