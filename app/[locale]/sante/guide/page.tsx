@@ -287,7 +287,7 @@ export default function GuideLamalPage() {
                 {[
                   'Soins dentaires (sauf accident ou maladie grave)',
                   'Lunettes et lentilles',
-                  'Médecine alternative (sauf si prescrite par un médecin agréé)',
+                  'Médecine douce (sauf si prescrite par un médecin agréé)',
                   'Chirurgie esthétique (sauf reconstruction médicalement justifiée)',
                   'Chambre privée à l\'hôpital',
                 ].map((item, i) => (
