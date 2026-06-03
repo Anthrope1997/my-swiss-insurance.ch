@@ -89,8 +89,8 @@ const comparaison = [
 
 const heroStats = [
   { value: '4',                       label: 'Catégories de complémentaires',       sub: '22 assureurs agréés en 2026' },
-  { value: 'Dès CHF 34/mois',        label: 'Pour une complémentaire complète',  sub: 'Adulte 35 ans, en bonne santé' },
   { value: 'Primes variables',         label: 'En fonction de votre état de santé', sub: 'De votre âge, canton et situation familiale' },
+  { value: 'Dès CHF 34/mois',        label: 'Pour une complémentaire complète',  sub: 'Adulte 35 ans, en bonne santé' },
 ]
 
 const toc = [
