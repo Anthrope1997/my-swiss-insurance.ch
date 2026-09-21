@@ -11,12 +11,12 @@ import { formatChf } from '@/lib/shared/formatters'
 export const metadata: Metadata = {
   title: 'Primes LAMal 2026 : comparez et économisez',
   description:
-    'Comparez les primes LAMal 2026 gratuitement. Jusqu\'à CHF 5 604 d\'économie par an. 34 caisses, données OFSP officielles, résultat immédiat.',
+    'Comparez les primes LAMal 2026 gratuitement. Jusqu\'à CHF 2 916 d\'écart entre caisses par an. 34 caisses, données OFSP officielles, résultat immédiat.',
   alternates: { canonical: 'https://my-swiss-insurance.ch/sante' },
   openGraph: {
     title: 'Primes LAMal 2026 : comparez et économisez',
     description:
-      'Jusqu\'à CHF 5 604 d\'économie par an. Comparez gratuitement 34 caisses LAMal. Données OFSP 2026.',
+      'Jusqu\'à CHF 2 916 d\'écart entre caisses par an. Comparez gratuitement 34 caisses LAMal. Données OFSP 2026.',
     url: 'https://my-swiss-insurance.ch/sante',
     type: 'website',
   },
@@ -29,7 +29,7 @@ const faqItems = [
   },
   {
     question: 'Combien peut-on économiser en changeant de caisse LAMal ?',
-    answer: "Jusqu'à CHF 5 604 par an pour un adulte de 35 ans (toutes franchises et modèles confondus, source OFSP 2026). Les 34 caisses agréées proposent les mêmes prestations de base à des prix très différents selon le canton.",
+    answer: "Jusqu'à CHF 2 916 par an entre la caisse la moins chère et la plus chère, à franchise, modèle et couverture accident identiques (source OFSP 2026). Les 34 caisses agréées proposent les mêmes prestations de base à des prix très différents selon le canton.",
   },
   {
     question: 'Qui a droit à un subside LAMal en Suisse ?',
@@ -63,7 +63,7 @@ const webSiteSchema = {
 // ── Données ──────────────────────────────────────────────────────────────────
 
 const stats = [
-  { value: `CHF ${formatChf(economieMax() * 12)}/an`,     label: 'Économie maximale réalisable'            , sub: 'Assurance LAMal, adulte 35 ans' },
+  { value: `CHF ${formatChf(economieMax() * 12)}/an`,     label: 'Ecart maximal entre caisses'            , sub: 'Assurance LAMal, même profil' },
   { value: `CHF ${formatChf(economieMoyenne() * 12)}/an`, label: 'Économie moyenne réalisable'             ,  sub: 'Assurance LAMal, adulte 35 ans' },
   { value: `CHF ${formatChf(subsideMoyen() * 12)}/an`,    label: 'Subside cantonal moyen',      sub: '28% des résidents en bénéficient'   },
 ]
@@ -157,7 +157,7 @@ export default function LamalPage() {
 
           <p className="text-[16px] text-slate leading-relaxed mb-8">
             Toutes les caisses couvrent les mêmes prestations de base : seul le prix change,
-            jusqu’à <strong>CHF 5 604 par an d’écart</strong> pour un même profil.
+            jusqu’à <strong>CHF 2 916 par an d’écart</strong> pour un même profil.
             Comparez les assureurs, ajustez votre franchise et adaptez votre modèle d’assurance
             à votre situation pour réduire votre prime.
           </p>
@@ -248,7 +248,7 @@ export default function LamalPage() {
                 Les 34 caisses LAMal couvrent toutes les mêmes prestations de base : seul le prix de votre prime change d&apos;une caisse à l&apos;autre.
               </p>
               <p className="text-2xl font-bold text-brand leading-none mb-0.5">CHF {formatChf(economieMax() * 12)}</p>
-              <p className="text-[16px] text-slate mb-6">d&apos;économie maximale en Suisse par an</p>
+              <p className="text-[16px] text-slate mb-6">d&apos;écart maximal entre caisses en Suisse</p>
               <Link href="/sante/comparateur" className="flex items-center gap-1 mt-auto text-brand text-[16px] font-medium">
                 Comparer les primes
                 <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200"

@@ -278,11 +278,11 @@ export default function ComparateurClient() {
             Comparateur de primes LAMal 2026
           </h1>
           <p className="text-[18px] text-slate leading-relaxed mb-10">
-            Toutes les caisses couvrent les mêmes prestations de base : seul le prix change, jusqu’à CHF 5 604 par an d’écart pour un même profil. Comparez les assureurs, ajustez votre franchise et adaptez votre modèle d’assurance à votre situation pour réduire votre prime.
+            Toutes les caisses couvrent les mêmes prestations de base : seul le prix change, jusqu’à CHF 2 916 par an d’écart pour un même profil. Comparez les assureurs, ajustez votre franchise et adaptez votre modèle d’assurance à votre situation pour réduire votre prime.
           </p>
           <HeroStats stats={[
             { value: '34 caisses',    label: 'Comparées en temps réel',       sub: 'Agréées par l’OFSP'              },
-            { value: 'CHF 5 604/an', label: 'Économie maximale réalisable', sub: 'Assurance LAMal, adulte 35 ans'   },
+            { value: "CHF 2'916/an", label: 'Ecart maximal entre caisses', sub: 'Assurance LAMal, même profil'   },
             { value: 'CHF 4 020/an', label: 'Économie moyenne réalisable',  sub: 'Assurance LAMal, adulte 35 ans'   },
           ]} className="mb-8" />
         </div>

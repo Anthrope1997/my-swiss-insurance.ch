@@ -11,11 +11,11 @@ export const metadata: Metadata = {
   title: 'Économisez sur votre assurance maladie suisse en 2026',
   robots: { index: false, follow: false },
   description:
-    "Comparez les primes LAMal 2026 gratuitement. Jusqu'à CHF 5 604 d'économie par an. 34 caisses, données OFSP officielles, résultat immédiat.",
+    "Comparez les primes LAMal 2026 gratuitement. Jusqu'à CHF 2 916 d'écart entre caisses par an. 34 caisses, données OFSP officielles, résultat immédiat.",
   alternates: { canonical: 'https://my-swiss-insurance.ch' },
   openGraph: {
     title: 'Économisez sur votre assurance maladie suisse en 2026',
-    description: "Jusqu'à CHF 5 604 d'économie par an. Comparez gratuitement 34 caisses LAMal. Données OFSP 2026.",
+    description: "Jusqu'à CHF 2 916 d'écart entre caisses par an. Comparez gratuitement 34 caisses LAMal. Données OFSP 2026.",
     url: 'https://my-swiss-insurance.ch',
     type: 'website',
   },
@@ -26,7 +26,7 @@ const faqSchema = {
   '@type': 'FAQPage',
   mainEntity: [
     { '@type': 'Question', name: "L'assurance maladie est-elle obligatoire en Suisse ?", acceptedAnswer: { '@type': 'Answer', text: "Oui, la LAMal rend l'assurance maladie obligatoire pour tout résident en Suisse depuis 1996. L'affiliation doit intervenir dans les 3 mois suivant l'arrivée." } },
-    { '@type': 'Question', name: 'Combien peut-on économiser en changeant de caisse LAMal ?', acceptedAnswer: { '@type': 'Answer', text: "Jusqu'à CHF 5 604 par an pour un adulte de 35 ans (tous modèles et franchises confondus, source OFSP 2026). Les 34 caisses agréées proposent les mêmes prestations de base à des prix très différents selon le canton." } },
+    { '@type': 'Question', name: 'Combien peut-on économiser en changeant de caisse LAMal ?', acceptedAnswer: { '@type': 'Answer', text: "Jusqu'à CHF 2 916 par an entre la caisse la moins chère et la plus chère, à franchise, modèle et couverture accident identiques (source OFSP 2026). Les 34 caisses agréées proposent les mêmes prestations de base à des prix très différents selon le canton." } },
     { '@type': 'Question', name: 'Qui a droit à un subside LAMal en Suisse ?', acceptedAnswer: { '@type': 'Answer', text: "25 à 30 % de la population suisse bénéficie d'une réduction individuelle des primes (subside). Les conditions varient selon le canton et le revenu déterminant." } },
   ],
 }

@@ -6,10 +6,10 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 export const metadata: Metadata = {
   title: 'Comparateur caisses maladie LAMal 2026 : Primes par canton',
   description:
-    "Comparez les primes LAMal 2026 par code postal. Trouvez la caisse maladie la moins chère selon votre profil, franchise et modèle. Données officielles OFSP, jusqu'à CHF 5 604 d'économie par an.",
+    "Comparez les primes LAMal 2026 par code postal. Trouvez la caisse maladie la moins chère selon votre profil, franchise et modèle. Données officielles OFSP, jusqu'à CHF 2 916 d'écart entre caisses par an.",
   openGraph: {
     title: 'Comparateur de caisses maladie LAMal 2026',
-    description: "Primes LAMal 2026 par canton : comparez et économisez jusqu'à CHF 5 604 par an.",
+    description: "Primes LAMal 2026 par canton : comparez et économisez jusqu'à CHF 2 916 par an.",
     url: 'https://my-swiss-insurance.ch/sante/comparateur',
     type: 'article',
   },

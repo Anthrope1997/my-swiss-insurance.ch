@@ -5,7 +5,9 @@
  *   - Profil de référence : adulte 35 ans (naissance 1990), sans couverture accident
  *   - Min / Max          : valeur extrême parmi toutes les offres des régions concernées
  *   - Moyenne            : moyenne des prix par région, pondérée par la population (age_25_plus)
- *   - Économie caisse    : écart max − min par région (même profil), agrégé selon la même logique
+ *   - Économie caisse max: écart max − min entre assureurs à franchise/modèle/accident fixés
+ *                          (seul l'assureur varie), recherche exhaustive du meilleur profil
+ *   - Économie caisse min/moyenne : écart max − min par région toutes offres confondues
  *   - Break-even         : calculé sur les primes moyennes pondérées
  *   - Économie modèle    : écart entre la moyenne BASE et la moyenne du modèle alternatif
  *   - Subside moyen      : subsideMensuelMax canton pondéré par la population cantonale
@@ -184,9 +186,57 @@ export function economieMin(opts: Opts = {}): number {
   return Math.round(Math.min(...scope(opts).map(r => r.max - r.min)))
 }
 
-/** Économie mensuelle maximale réalisable en changeant de caisse (CHF/mois). */
+function allFranchises(): number[] {
+  return Array.from(new Set(getPrimes().map(p => p.franchise))).sort((a, b) => a - b)
+}
+
+function allModeles(): string[] {
+  return Array.from(new Set(getPrimes().map(p => p.modele_categorie)))
+}
+
+/**
+ * Écart mensuel maximal entre assureurs à profil strictement identique (CHF/mois).
+ * Seuls les assureurs varient : franchise, modèle et couverture accident sont fixés
+ * pour chaque comparaison. Recherche exhaustive sur toutes les combinaisons franchise ×
+ * modèle × accident (ou restreinte par `opts`) pour trouver le plus grand écart national.
+ * Quand un assureur propose plusieurs produits dans la même modele_categorie (ex. offres
+ * télémédecine), le moins cher est retenu — comme le ferait un assuré.
+ */
 export function economieMax(opts: Opts = {}): number {
-  return Math.round(Math.max(...scope(opts).map(r => r.max - r.min)))
+  const { canton, franchise, modele, avecAccident } = opts
+  const franchises = franchise !== undefined ? [franchise] : allFranchises()
+  const modeles = modele !== undefined ? [modele] : allModeles()
+  const accidents = avecAccident !== undefined ? [avecAccident] : [false, true]
+  const regionPop = getRegionPop()
+
+  let best = 0
+  for (const f of franchises) {
+    for (const m of modeles) {
+      for (const a of accidents) {
+        const filtered = getPrimes().filter(p =>
+          p.annee_naissance === ADULTE_NAISSANCE &&
+          p.franchise === f &&
+          p.modele_categorie === m &&
+          p.avec_accident === a,
+        )
+        const byRegion = new Map<string, Map<string, number>>()
+        for (const p of filtered) {
+          if (!byRegion.has(p.region_id)) byRegion.set(p.region_id, new Map())
+          const rm = byRegion.get(p.region_id)!
+          const cur = rm.get(p.assureur)
+          if (cur === undefined || p.prime_nette < cur) rm.set(p.assureur, p.prime_nette)
+        }
+        for (const [rid, assureurMap] of byRegion) {
+          if (canton && regionPop.get(rid)?.canton !== canton) continue
+          const vals = Array.from(assureurMap.values())
+          if (vals.length < 2) continue
+          const eco = Math.max(...vals) - Math.min(...vals)
+          if (eco > best) best = eco
+        }
+      }
+    }
+  }
+  return Math.round(best)
 }
 
 /** Économie mensuelle moyenne pondérée par la population (CHF/mois). */

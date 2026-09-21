@@ -154,8 +154,8 @@ const enBref = [
     <strong className="font-medium text-ink">34 caisses agréées</strong>
     {" couvrent les mêmes soins de base, seul le prix de la prime change."}</>,
   <>{"Économisez jusqu'à "}
-    <strong className="font-medium text-ink">CHF 5 604 par an</strong>
-    {" sur votre assurance LAMal en comparant les assureurs, les franchises et les modèles d'assurance disponibles."}</>,
+    <strong className="font-medium text-ink">CHF 2 916 par an</strong>
+    {" en changeant de caisse, à franchise, modèle et couverture accident identiques."}</>,
   <>{"Vous pouvez aussi avoir droit à un subside selon votre situation : "}
     <strong className="font-medium text-ink">28 % des résidents en bénéficient</strong>
     {". Cette subvention cantonale réduit votre prime LAMal et représente en moyenne "}
