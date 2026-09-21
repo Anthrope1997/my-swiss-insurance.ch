@@ -150,7 +150,7 @@ const hmoMoyPct = Math.round(modeleEconomieMoyenne('HMO') / _primeMoyGuide * 100
 const divMoyPct = Math.round(modeleEconomieMoyenne('DIV') / _primeMoyGuide * 100)
 
 const heroStats = [
-  { value: `CHF ${formatChf(economieMoyenneCaisseIdentiqueAdultes().totalAnnuel)}/an`, label: 'Économie moyenne en passant à la caisse la moins chère', sub: 'Adultes dès 19 ans, tous modèles et franchises, à profil identique' },
+  { value: `CHF ${formatChf(economieMoyenneCaisseIdentiqueAdultes().totalAnnuel)}/an`, label: 'Économie moyenne réalisable', sub: 'Assurance LAMal, même profil adulte' },
   { value: '6',          label: 'Niveaux de franchise',     sub: 'De CHF 300 à CHF 2 500 pour un adulte'                     },
   { value: '4',          label: 'Modèles de soins',        sub: `Jusqu’à ${modeleMaxPct} % d’économie réalisable` },
 ]

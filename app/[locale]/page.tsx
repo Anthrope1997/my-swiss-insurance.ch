@@ -70,7 +70,7 @@ const webSiteSchema = {
 // ── Données ──────────────────────────────────────────────────────────────────
 
 const stats = [
-  { value: `CHF ${ecartMaxFmt}`, label: 'Écart maximal entre caisses', sub: 'Adultes dès 19 ans, à profil identique' },
+  { value: `CHF ${ecartMaxFmt}`, label: 'Écart maximal entre caisses', sub: 'Assurance LAMal, même profil adulte' },
   { value: '34',        label: 'Caisses agréées',            sub: 'données OFSP 2026'        },
   { value: '28 %',      label: 'Bénéficiaires de subsides',  sub: 'de la population suisse'  },
 ]

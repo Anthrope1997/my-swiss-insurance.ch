@@ -288,8 +288,8 @@ export default function ComparateurClient({ ecartMaxAnnuel, economieMoyenneAnnue
           </p>
           <HeroStats stats={[
             { value: '34 caisses',    label: 'Comparées en temps réel',       sub: 'Agréées par l’OFSP'              },
-            { value: `CHF ${formatChf(ecartMaxAnnuel)}/an`,          label: 'Écart maximal entre caisses', sub: 'Adultes dès 19 ans, à profil identique'   },
-            { value: `CHF ${formatChf(economieMoyenneAnnuelle)}/an`,               label: 'Économie moyenne en passant à la caisse la moins chère', sub: 'Adultes dès 19 ans, tous modèles et franchises, à profil identique' },
+            { value: `CHF ${formatChf(ecartMaxAnnuel)}/an`,          label: 'Écart maximal entre caisses', sub: 'Assurance LAMal, même profil adulte'   },
+            { value: `CHF ${formatChf(economieMoyenneAnnuelle)}/an`,               label: 'Économie moyenne réalisable', sub: 'Assurance LAMal, même profil adulte' },
           ]} className="mb-8" />
         </div>
       </section>

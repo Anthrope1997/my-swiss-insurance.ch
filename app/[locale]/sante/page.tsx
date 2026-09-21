@@ -66,8 +66,8 @@ const ecartMax = ecartMaxProfil()
 const economieMoyenneCaisse = economieMoyenneCaisseIdentiqueAdultes()
 
 const stats = [
-  { value: `CHF ${formatChf(ecartMax.montantAnnuel)}/an`,              label: 'Écart maximal entre caisses'                              , sub: 'Adultes dès 19 ans, à profil identique' },
-  { value: `CHF ${formatChf(economieMoyenneCaisse.totalAnnuel)}/an`,   label: 'Économie moyenne en passant à la caisse la moins chère', sub: 'Adultes dès 19 ans, tous modèles et franchises, à profil identique' },
+  { value: `CHF ${formatChf(ecartMax.montantAnnuel)}/an`,              label: 'Écart maximal entre caisses' , sub: 'Assurance LAMal, même profil adulte' },
+  { value: `CHF ${formatChf(economieMoyenneCaisse.totalAnnuel)}/an`,   label: 'Économie moyenne réalisable' , sub: 'Assurance LAMal, même profil adulte' },
   { value: "CHF 2'421/an",                                             label: 'Subsides cantonal moyen',     sub: '28% des résidents en bénéficient'   },
 ]
 

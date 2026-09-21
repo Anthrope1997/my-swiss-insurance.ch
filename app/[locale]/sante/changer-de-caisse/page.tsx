@@ -83,7 +83,7 @@ const economieMoyenneCaisse = economieMoyenneCaisseIdentiqueAdultes()
 const heroStats = [
   { value: '30 novembre',  label: 'Date limite de résiliation', sub: 'Démarche gratuite et déléguable'        },
   { value: '1er janvier',  label: 'Date de prise d\'effet',    sub: 'De votre nouvelle assurance LAMal'      },
-  { value: `CHF ${formatChf(economieMoyenneCaisse.totalAnnuel)}/an`, label: 'Économie moyenne en passant à la caisse la moins chère', sub: 'Adultes dès 19 ans, tous modèles et franchises, à profil identique' },
+  { value: `CHF ${formatChf(economieMoyenneCaisse.totalAnnuel)}/an`, label: 'Économie moyenne réalisable', sub: 'Assurance LAMal, même profil adulte' },
 ]
 
 const toc = [
