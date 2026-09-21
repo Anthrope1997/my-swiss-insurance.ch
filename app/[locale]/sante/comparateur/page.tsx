@@ -2,7 +2,12 @@ import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import ComparateurClient from '@/components/sante/ComparateurClient'
 import Breadcrumb from '@/components/ui/Breadcrumb'
-import { ecartMaxProfil, economieMoyenneCaisseIdentiqueAdultes } from '@/lib/sante/formules'
+import { ecartMaxProfil, economieMoyenneCaisseIdentiqueAdultes, primeMinParCanton, economieMax } from '@/lib/sante/formules'
+
+const cantonTable = primeMinParCanton()
+const ecartMaxRegionMensuel = economieMax({ franchise: 300, modele: 'BASE', avecAccident: false })
+const primeMinZG = cantonTable.find(c => c.code === 'ZG')!.primeArrondie
+const primeMinGE = cantonTable.find(c => c.code === 'GE')!.primeArrondie
 
 export const metadata: Metadata = {
   title: 'Comparateur caisses maladie LAMal 2026 : Primes par canton',
@@ -36,7 +41,7 @@ const faqSchema = {
       name:    "Quelle est la caisse maladie la moins chère en Suisse ?",
       acceptedAnswer: {
         '@type': 'Answer',
-        text:    "La caisse la moins chère dépend de votre canton, de votre âge et du modèle choisi. Les primes débutent à CHF 403 par mois à Zoug et atteignent CHF 710 par mois à Genève pour un adulte avec franchise de CHF 300 et modèle standard.",
+        text:    `La caisse la moins chère dépend de votre canton, de votre âge et du modèle choisi. Pour un adulte avec franchise de CHF 300 et modèle standard, la prime la moins chère débute à CHF ${primeMinZG} par mois à Zoug et à CHF ${primeMinGE} à Genève. Les écarts entre caisses dans une même région atteignent jusqu'à CHF ${ecartMaxRegionMensuel} par mois.`,
       },
     },
     {
@@ -83,6 +88,8 @@ export default function ComparateurPage() {
         <ComparateurClient
           ecartMaxAnnuel={ecartMaxProfil().montantAnnuel}
           economieMoyenneAnnuelle={economieMoyenneCaisseIdentiqueAdultes().totalAnnuel}
+          cantonTable={cantonTable}
+          ecartMaxRegionMensuel={ecartMaxRegionMensuel}
         />
       </Suspense>
     </>

@@ -12,6 +12,7 @@ import LeadFormModal from '@/components/ui/LeadFormModal'
 import UnifiedCombobox from '@/components/ui/UnifiedCombobox'
 import fr from '@/dictionaries/fr.json'
 import { formatChf } from '@/lib/shared/formatters'
+import type { PrimeMinCanton } from '@/lib/sante/formules'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -46,58 +47,6 @@ const MODELE_LABELS: Record<Modele, string> = {
 }
 
 // ─── Data ───────────────────────────────────────────────────────────────────
-
-const cantonTable = [
-  { canton: 'Zoug',                code: 'ZG', prime: 403.06, economie: 700,  slug: null },
-  { canton: 'Appenzell Rh.-Int.', code: 'AI', prime: 424.35, economie: 700,  slug: null },
-  { canton: 'Nidwald',             code: 'NW', prime: 459.98, economie: 750,  slug: null },
-  { canton: 'Uri',                 code: 'UR', prime: 463.33, economie: 750,  slug: null },
-  { canton: 'Obwald',              code: 'OW', prime: 467.13, economie: 750,  slug: null },
-  { canton: 'Schwyz',              code: 'SZ', prime: 484.88, economie: 800,  slug: null },
-  { canton: 'Saint-Gall',          code: 'SG', prime: 495.59, economie: 850,  slug: null },
-  { canton: 'Glaris',              code: 'GL', prime: 498.01, economie: 850,  slug: null },
-  { canton: 'Lucerne',             code: 'LU', prime: 499.87, economie: 850,  slug: null },
-  { canton: 'Appenzell Rh.-Ext.', code: 'AR', prime: 508.83, economie: 850,  slug: null },
-  { canton: 'Thurgovie',           code: 'TG', prime: 508.64, economie: 850,  slug: null },
-  { canton: 'Grisons',             code: 'GR', prime: 517.47, economie: 900,  slug: null },
-  { canton: 'Fribourg',            code: 'FR', prime: 522.27, economie: 1099, slug: 'fribourg' },
-  { canton: 'Valais',              code: 'VS', prime: 527.58, economie: 1445, slug: 'valais' },
-  { canton: 'Argovie',             code: 'AG', prime: 527.98, economie: 900,  slug: null },
-  { canton: 'Zurich',              code: 'ZH', prime: 530.65, economie: 950,  slug: null },
-  { canton: 'Schaffhouse',         code: 'SH', prime: 535.68, economie: 950,  slug: null },
-  { canton: 'Soleure',             code: 'SO', prime: 560.35, economie: 1000, slug: null },
-  { canton: 'Berne',               code: 'BE', prime: 578.26, economie: 1000, slug: null },
-  { canton: 'Bâle-Campagne',       code: 'BL', prime: 625.02, economie: 1050, slug: null },
-  { canton: 'Jura',                code: 'JU', prime: 633.21, economie: 1390, slug: 'jura' },
-  { canton: 'Vaud',                code: 'VD', prime: 637.64, economie: 1347, slug: 'vaud' },
-  { canton: 'Neuchâtel',           code: 'NE', prime: 663.19, economie: 1747, slug: 'neuchatel' },
-  { canton: 'Bâle-Ville',          code: 'BS', prime: 668.40, economie: 1150, slug: null },
-  { canton: 'Tessin',              code: 'TI', prime: 686.10, economie: 1200, slug: null },
-  { canton: 'Genève',              code: 'GE', prime: 710.41, economie: 5653, slug: 'geneve' },
-]
-
-const faqItems = [
-  {
-    question: 'Quelle est la caisse maladie la moins chère en Suisse ?',
-    answer: "La caisse la moins chère dépend de votre canton, de votre âge et du modèle choisi. Pour un adulte avec franchise de CHF 300 et modèle standard, les primes débutent à CHF 403 par mois à Zoug et atteignent CHF 710 par mois à Genève. Les écarts entre caisses dans une même région atteignent jusqu'à CHF 229 par mois.",
-  },
-  {
-    question: 'Les prestations sont-elles identiques dans toutes les caisses ?',
-    answer: "Oui. Pour la LAMal de base, les prestations sont strictement identiques chez tous les assureurs agréés par l'OFSP. Seules les primes, la qualité du service client et les options complémentaires diffèrent.",
-  },
-  {
-    question: 'Comment économiser sur sa prime LAMal ?',
-    answer: "Trois leviers principaux : choisir un modèle alternatif (médecin de famille, centre médical, télémédecine) pour jusqu'à 24% de réduction selon la caisse et le canton ; augmenter sa franchise si vous êtes en bonne santé ; changer de caisse chaque année avant le 30 novembre.",
-  },
-  {
-    question: 'Frontalier ou expatrié, suis-je concerné par la LAMal ?',
-    answer: "Les frontaliers travaillant en Suisse ont en principe le choix entre la LAMal suisse et une assurance dans leur pays de résidence. Ce droit d'option doit être exercé dans les trois mois suivant le début de l'activité. Les expatriés résidant en Suisse sont soumis à l'obligation d'affiliation dans les 90 jours suivant leur arrivée, sauf exceptions prévues par les accords bilatéraux.",
-  },
-  {
-    question: 'Quelle est la différence entre une franchise de CHF 300 et CHF 2 500 ?',
-    answer: "Avec une franchise de CHF 300, vous payez moins lors des soins (l'assurance prend en charge après CHF 300 de frais par an) mais votre prime mensuelle est plus élevée. Avec une franchise de CHF 2 500, vous assumez davantage de frais médicaux en cas de maladie, mais votre prime est nettement plus basse. Ce choix est avantageux si vous êtes en bonne santé et consultez peu. En règle générale, le point mort se situe autour de CHF 1 000 à CHF 1 500 de frais médicaux annuels.",
-  },
-]
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -141,10 +90,38 @@ function InfoTooltip({ text }: { text: string }) {
 interface ComparateurClientProps {
   ecartMaxAnnuel: number
   economieMoyenneAnnuelle: number
+  cantonTable: PrimeMinCanton[]
+  ecartMaxRegionMensuel: number
 }
 
-export default function ComparateurClient({ ecartMaxAnnuel, economieMoyenneAnnuelle }: ComparateurClientProps) {
+export default function ComparateurClient({ ecartMaxAnnuel, economieMoyenneAnnuelle, cantonTable, ecartMaxRegionMensuel }: ComparateurClientProps) {
   const searchParams = useSearchParams()
+
+  const primeMinZG = cantonTable.find(c => c.code === 'ZG')?.primeArrondie ?? 0
+  const primeMinGE = cantonTable.find(c => c.code === 'GE')?.primeArrondie ?? 0
+
+  const faqItems = [
+    {
+      question: 'Quelle est la caisse maladie la moins chère en Suisse ?',
+      answer: `La caisse la moins chère dépend de votre canton, de votre âge et du modèle choisi. Pour un adulte avec franchise de CHF 300 et modèle standard, la prime la moins chère débute à CHF ${primeMinZG} par mois à Zoug et à CHF ${primeMinGE} à Genève. Les écarts entre caisses dans une même région atteignent jusqu'à CHF ${ecartMaxRegionMensuel} par mois.`,
+    },
+    {
+      question: 'Les prestations sont-elles identiques dans toutes les caisses ?',
+      answer: "Oui. Pour la LAMal de base, les prestations sont strictement identiques chez tous les assureurs agréés par l'OFSP. Seules les primes, la qualité du service client et les options complémentaires diffèrent.",
+    },
+    {
+      question: 'Comment économiser sur sa prime LAMal ?',
+      answer: "Trois leviers principaux : choisir un modèle alternatif (médecin de famille, centre médical, télémédecine) pour jusqu'à 24% de réduction selon la caisse et le canton ; augmenter sa franchise si vous êtes en bonne santé ; changer de caisse chaque année avant le 30 novembre.",
+    },
+    {
+      question: 'Frontalier ou expatrié, suis-je concerné par la LAMal ?',
+      answer: "Les frontaliers travaillant en Suisse ont en principe le choix entre la LAMal suisse et une assurance dans leur pays de résidence. Ce droit d'option doit être exercé dans les trois mois suivant le début de l'activité. Les expatriés résidant en Suisse sont soumis à l'obligation d'affiliation dans les 90 jours suivant leur arrivée, sauf exceptions prévues par les accords bilatéraux.",
+    },
+    {
+      question: 'Quelle est la différence entre une franchise de CHF 300 et CHF 2 500 ?',
+      answer: "Avec une franchise de CHF 300, vous payez moins lors des soins (l'assurance prend en charge après CHF 300 de frais par an) mais votre prime mensuelle est plus élevée. Avec une franchise de CHF 2 500, vous assumez davantage de frais médicaux en cas de maladie, mais votre prime est nettement plus basse. Ce choix est avantageux si vous êtes en bonne santé et consultez peu. En règle générale, le point mort se situe autour de CHF 1 000 à CHF 1 500 de frais médicaux annuels.",
+    },
+  ]
 
   // — Calculator state (initialized from URL params when present) —
   const [npa, setNpa]               = useState(() => searchParams.get('npa') ?? '')
@@ -600,11 +577,13 @@ export default function ComparateurClient({ ecartMaxAnnuel, economieMoyenneAnnue
         <div className="container-xl">
 
           <h2 className="article-h2 !mt-0">
-            Quelle est la prime LAMal dans votre canton ?
+            Quelle est la prime LAMal la moins chère dans votre canton ?
           </h2>
           <p className="article-p mb-8">
-            Primes de référence pour un adulte de 35 ans, modèle standard, franchise de CHF 300, sans couverture accident.
-            Les écarts entre caisses au sein d&apos;un même canton peuvent atteindre plusieurs centaines de francs par mois.
+            Prime mensuelle la moins chère du canton, pour un adulte de 35 ans, modèle standard,
+            franchise de CHF 300, sans couverture accident. La prime dépend de votre région et de
+            votre caisse : les écarts entre caisses au sein d&apos;une même région peuvent atteindre
+            CHF {ecartMaxRegionMensuel} par mois.
           </p>
 
           {/* Tableau cantons avec barres */}
@@ -625,10 +604,11 @@ export default function ComparateurClient({ ecartMaxAnnuel, economieMoyenneAnnue
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between gap-2 mb-1">
                           <span className="text-[16px] font-medium truncate text-ink">
-                            {row.canton}
+                            {row.nom}
                           </span>
-                          <span className="text-[16px] font-semibold shrink-0 text-ink">
-                            CHF {fmtChf(row.prime)}
+                          <span className="text-[16px] shrink-0 text-ink">
+                            <span className="font-normal text-slate/60">dès</span>{' '}
+                            <span className="font-semibold">CHF {formatChf(row.primeArrondie)}</span>
                           </span>
                         </div>
                         <div className="h-1.5 bg-edge rounded-full overflow-hidden">
@@ -645,7 +625,10 @@ export default function ComparateurClient({ ecartMaxAnnuel, economieMoyenneAnnue
             )
           })()}
 
-          <p className="text-[13px] text-slate/60 mb-6">Source : OFSP 2026.</p>
+          <p className="text-[13px] text-slate/60 mb-6">
+            Source : primes 2026 de l&apos;OFSP (priminfo.ch), prime mensuelle avant redistribution,
+            minimum sur l&apos;ensemble des régions de prime du canton.
+          </p>
         </div>
       </section>
 

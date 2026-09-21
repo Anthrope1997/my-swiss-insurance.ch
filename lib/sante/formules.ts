@@ -52,6 +52,7 @@ interface PrimeRecord {
   modele_categorie: string
   assureur: string
   prime_nette: number
+  prime_mensuelle: number
 }
 
 interface RegionStats {
@@ -636,3 +637,56 @@ export function modeleEconomieMoyenne(modele: ModeleAlt, franchise = DEFAULT_FRA
 // par bénéficiaire — non dérivable de primes.json/cantons.ts (qui ne contiennent
 // que les plafonds cantonaux). Codé en dur dans les pages concernées.
 // Source : https://sozialesicherheit.ch/fr/assurance-maladie-des-primes-en-fonction-du-revenu/
+
+// ─── Prime minimale par canton ─────────────────────────────────────────────────
+//
+// Prime la moins chère de chaque canton (CHF/mois) : minimum, sur toutes les
+// régions de prime et toutes les caisses du canton, de prime_mensuelle (prime
+// brute OFSP, colonne « Prime » de priminfo.ch — pas prime_nette) pour le profil
+// de référence adulte (naissance 1990), franchise CHF 300, modèle BASE, sans
+// couverture accident. Vérifiable avec scripts/verifier_prime_min_canton.py.
+
+const CANTON_NOMS: Record<string, string> = {
+  ZG: 'Zoug', AI: 'Appenzell Rh.-Int.', SG: 'Saint-Gall', SZ: 'Schwyz', UR: 'Uri',
+  GR: 'Grisons', OW: 'Obwald', LU: 'Lucerne', NW: 'Nidwald', VS: 'Valais',
+  AR: 'Appenzell Rh.-Ext.', ZH: 'Zurich', TG: 'Thurgovie', SH: 'Schaffhouse',
+  GL: 'Glaris', BE: 'Berne', AG: 'Argovie', FR: 'Fribourg', SO: 'Soleure',
+  BL: 'Bâle-Campagne', VD: 'Vaud', TI: 'Tessin', JU: 'Jura', NE: 'Neuchâtel',
+  BS: 'Bâle-Ville', GE: 'Genève',
+}
+
+export interface PrimeMinCanton {
+  code: string
+  nom: string
+  prime: number          // CHF/mois, valeur exacte non arrondie
+  primeArrondie: number  // Math.round(prime)
+}
+
+let _primeMinParCanton: PrimeMinCanton[] | null = null
+
+/**
+ * Prime la moins chère de chaque canton (26 cantons), triée par prime
+ * croissante. Résultat mis en cache au niveau module.
+ */
+export function primeMinParCanton(): PrimeMinCanton[] {
+  if (_primeMinParCanton) return _primeMinParCanton
+
+  const filtered = getPrimes().filter(p =>
+    p.annee_naissance === ADULTE_NAISSANCE &&
+    p.franchise === DEFAULT_FRANCHISE &&
+    p.modele_categorie === DEFAULT_MODELE &&
+    p.avec_accident === false,
+  )
+
+  const minByCanton = new Map<string, number>()
+  for (const p of filtered) {
+    const cur = minByCanton.get(p.canton)
+    if (cur === undefined || p.prime_mensuelle < cur) minByCanton.set(p.canton, p.prime_mensuelle)
+  }
+
+  _primeMinParCanton = Array.from(minByCanton.entries())
+    .map(([code, prime]) => ({ code, nom: CANTON_NOMS[code] ?? code, prime, primeArrondie: Math.round(prime) }))
+    .sort((a, b) => a.prime - b.prime)
+
+  return _primeMinParCanton
+}
