@@ -5,7 +5,7 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
 import HeroStats from '@/components/ui/HeroStats'
 import AuthorBio from '@/components/ui/AuthorBio'
-import { ecartMaxProfil, economieMoyenneCaisseIdentiqueAdultes, MODELE_LABELS } from '@/lib/sante/formules'
+import { ecartMaxProfil, economieMoyenneCaisseIdentiqueAdultes } from '@/lib/sante/formules'
 import { formatChf } from '@/lib/shared/formatters'
 
 export const metadata: Metadata = {
@@ -166,45 +166,7 @@ export default function LamalPage() {
           </p>
 
           {/* Stats */}
-          <HeroStats stats={stats} className="mb-4" />
-
-          <details className="mb-10 text-[16px] text-slate/60 max-w-2xl">
-            <summary className="cursor-pointer underline decoration-dotted">Comment c&apos;est calculé</summary>
-            <div className="mt-3 space-y-2">
-              <p>
-                <strong>Écart maximal entre caisses</strong> : le plus grand écart trouvé en Suisse
-                entre la prime la plus haute et la plus basse, à franchise, modèle et couverture
-                accident strictement identiques (seul l&apos;assureur change). Profil du maximum :{' '}
-                {ecartMax.profil.tranche === 'adulte' ? 'adulte' : 'jeune adulte'}, région de{' '}
-                {ecartMax.profil.ville} ({ecartMax.profil.canton}), franchise de CHF{' '}
-                {ecartMax.profil.franchise}, modèle {MODELE_LABELS[ecartMax.profil.modele]},{' '}
-                {ecartMax.profil.avecAccident ? 'avec' : 'sans'} couverture accident :{' '}
-                {ecartMax.profil.nbAssureurs} assureurs comparés, de CHF{' '}
-                {formatChf(ecartMax.profil.primeMin)} ({ecartMax.profil.assureurMin}) à CHF{' '}
-                {formatChf(ecartMax.profil.primeMax)} ({ecartMax.profil.assureurMax}). C&apos;est
-                un maximum trouvé sur des milliers de profils, pas une situation typique.
-              </p>
-              <p>
-                <strong>Économie moyenne</strong> : pour chaque profil (région de prime, tranche
-                d&apos;âge, franchise, modèle, couverture accident), on compare la prime la moins
-                chère à la moyenne des primes de ce profil, puis on pondère le résultat par la
-                population de chaque région et tranche d&apos;âge. Exemple à Genève, adulte,
-                franchise de CHF 300, modèle standard, sans accident : 21 assureurs, prime moyenne
-                CHF 710, la moins chère (Assura) à CHF 634 — écart de CHF 77 par mois. Par tranche
-                d&apos;âge : adulte CHF {formatChf(economieMoyenneCaisse.parAge.adulte)}/an, jeune
-                adulte CHF {formatChf(economieMoyenneCaisse.parAge.jeuneAdulte)}/an.
-              </p>
-              <p>
-                Source : primes LAMal 2026 (OFSP, priminfo.ch). Population par commune : fichier
-                LAMal data 08.2025.xlsx, chiffres 2021. Périmètre : adultes dès 19 ans (adulte et
-                jeune adulte), enfants exclus.
-              </p>
-              <p>
-                Limite : moyenne simple des assureurs, non pondérée par leurs parts de marché.
-                Tous les profils comptent de façon identique.
-              </p>
-            </div>
-          </details>
+          <HeroStats stats={stats} className="mb-10" />
 
         </div>
       </section>
