@@ -47,17 +47,6 @@ const MODELE_LABELS: Record<Modele, string> = {
 
 // ─── Data ───────────────────────────────────────────────────────────────────
 
-const assureurs = [
-  { name: 'SWICA',         part: '20.5', note: 'Leader en médecine intégrative' },
-  { name: 'Helsana',       part: '18.0', note: 'Application mobile avancée, nombreuses options' },
-  { name: 'Groupe Mutuel', part: '12.8', note: 'Très présent en Suisse romande' },
-  { name: 'CSS',           part: '12.1', note: 'Large réseau, forte présence nationale' },
-  { name: 'Visana',        part: '12.0', note: 'Forte présence romande et alémanique' },
-  { name: 'Sanitas',       part: '6.8',  note: 'Forte en télémédecine et services digitaux' },
-  { name: 'Concordia',     part: '5.0',  note: 'Bon service, réseau médecin de famille étendu' },
-  { name: 'Assura',        part: '3.1',  note: 'Souvent la moins chère, service digital' },
-]
-
 const cantonTable = [
   { canton: 'Zoug',                code: 'ZG', prime: 403.06, economie: 700,  slug: null },
   { canton: 'Appenzell Rh.-Int.', code: 'AI', prime: 424.35, economie: 700,  slug: null },
@@ -603,57 +592,6 @@ export default function ComparateurClient({ ecartMaxAnnuel, economieMoyenneAnnue
               </>
             )}
           </div>
-        </div>
-      </section>
-
-      {/* ── PARTS DE MARCHÉ ───────────────────────────────────────────────── */}
-      <section id="assureurs" className="bg-white border-b border-edge py-16">
-        <div className="container-xl">
-
-          <h2 className="article-h2 !mt-0">
-            Quels assureurs dominent le marché suisse ?
-          </h2>
-          <p className="article-p mb-10">
-            8 groupes se partagent la totalité du marché de l&apos;assurance maladie obligatoire en Suisse.
-            Les prestations LAMal sont strictement identiques chez tous les assureurs agréés.
-            La différence porte uniquement sur la prime et la qualité du service.
-          </p>
-
-          {/* Grille top 4 */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
-            {assureurs.slice(0, 4).map(a => (
-              <div key={a.name} className="bg-white border border-edge rounded-xl p-5">
-                <p className="font-semibold text-ink text-[16px] mb-1">{a.name}</p>
-                <p className="text-2xl font-bold text-ink mb-2">{a.part}%</p>
-                <p className="text-[13px] text-slate leading-snug">{a.note}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Tableau complet */}
-          <div className="border border-edge rounded-[8px] overflow-hidden">
-            <table className="stripe-table w-full">
-              <thead>
-                <tr>
-                  <th className="text-left whitespace-nowrap">Assureur</th>
-                  <th className="text-left whitespace-nowrap">Part de marché</th>
-                  <th className="hidden sm:table-cell text-left whitespace-nowrap">Caractéristiques</th>
-                </tr>
-              </thead>
-              <tbody>
-                {assureurs.map(a => (
-                  <tr key={a.name}>
-                    <td className="font-semibold text-ink">{a.name}</td>
-                    <td className="font-medium text-brand">{a.part}%</td>
-                    <td className="hidden sm:table-cell text-slate">{a.note}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className="mt-3 text-[12px] text-slate/60">
-            Source : FINMA 2024. Ce tableau représente les parts de marché des assureurs maladie en Suisse.
-          </p>
         </div>
       </section>
 
