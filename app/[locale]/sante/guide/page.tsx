@@ -6,7 +6,7 @@ import Link from 'next/link'
 import AuthorBio from '@/components/ui/AuthorBio'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import HeroStats from '@/components/ui/HeroStats'
-import { breakEven, primeMoyenne, economieMoyenneCaisseIdentiqueAdultes, ecartMaxProfil, economieMax, modeleEconomieMax, modeleEconomieMoyenne } from '@/lib/sante/formules'
+import { breakEven, primeMoyenne, economieMoyenneCaisseIdentiqueAdultes, ecartMaxProfil, economieMax, modeleEconomieMax, modeleEconomieMoyenne, primeMinParCanton } from '@/lib/sante/formules'
 import { nationalBreakEven, nationalBreakEvenJA, nationalBreakEvenEnfant, nationalAvgPrime } from '@/lib/sante/calcul-franchise'
 import { formatChf } from '@/lib/shared/formatters'
 
@@ -84,19 +84,7 @@ const faqSchema = {
   })),
 }
 
-const CANTON_NAMES: Record<string, string> = {
-  GE: 'Genève',    TI: 'Tessin',             BS: 'Bâle-Ville',        NE: 'Neuchâtel',
-  VD: 'Vaud',      JU: 'Jura',               BL: 'Bâle-Campagne',     BE: 'Berne',
-  SO: 'Soleure',   SH: 'Schaffhouse',         ZH: 'Zurich',            AG: 'Argovie',
-  VS: 'Valais',    FR: 'Fribourg',            GR: 'Grisons',           AR: 'Appenzell Rh.-Ext.',
-  TG: 'Thurgovie', LU: 'Lucerne',             GL: 'Glaris',            SG: 'Saint-Gall',
-  SZ: 'Schwyz',    OW: 'Obwald',              UR: 'Uri',               NW: 'Nidwald',
-  AI: 'Appenzell Rh.-Int.', ZG: 'Zoug',
-}
-
-const premiums = Object.entries(CANTON_NAMES)
-  .map(([code, name]) => ({ code, name, prime: primeMoyenne({ canton: code }) }))
-  .sort((a, b) => b.prime - a.prime)
+const primesCanton = primeMinParCanton()
 
 const franchises = [
   { montant: 300,  prime: 638.70, economie: 0,      ecAnn: 0,    breakEven: '-',          conseil: 'Recommandé si frais médicaux dépassent CHF 1 891 par an' },
@@ -105,17 +93,6 @@ const franchises = [
   { montant: 1500, prime: 573.60, economie: 65.10,  ecAnn: 781,  breakEven: 'CHF 1 168',  conseil: 'Bon équilibre pour personnes saines' },
   { montant: 2000, prime: 546.50, economie: 92.20,  ecAnn: 1106, breakEven: 'CHF 1 529',  conseil: 'Recommandé sans maladie chronique' },
   { montant: 2500, prime: 519.40, economie: 119.30, ecAnn: 1432, breakEven: 'CHF 1 891',  conseil: 'Optimal pour adultes très sains' },
-]
-
-const assureurs = [
-  { name: 'CSS',       part: '14.1%', note: 'Plus grande caisse suisse, large réseau' },
-  { name: 'Helsana',   part: '13.5%', note: 'Application mobile avancée, nombreuses options' },
-  { name: 'SWICA',     part: '10.2%', note: 'Leader en médecine intégrative' },
-  { name: 'Visana',    part: '9.1%',  note: 'Forte présence Suisse romande et alémanique' },
-  { name: 'Sanitas',   part: '7.9%',  note: 'Forte en télémédecine et en services numériques' },
-  { name: 'Assura',    part: '7.2%',  note: 'Souvent la moins chère, service numérique' },
-  { name: 'Concordia', part: '6.8%',  note: 'Bon service, réseau médecin de famille étendu' },
-  { name: 'KPT',       part: '4.2%',  note: 'Compétitive, bonne qualité de service' },
 ]
 
 const economies = [
@@ -129,13 +106,12 @@ const toc = [
   { id: 'definition', label: "1. Qu'est-ce que la LAMal ?" },
   { id: 'couverture', label: '2. Ce que couvre la LAMal' },
   { id: 'primes',     label: '3. Primes 2026 par canton' },
-  { id: 'assureurs',  label: '4. Principaux assureurs' },
-  { id: 'franchise',  label: '5. Choisir sa franchise' },
-  { id: 'modeles',    label: '6. Les 4 modèles' },
-  { id: 'economies',  label: '7. Économies possibles' },
-  { id: 'changer',    label: '8. Comment changer de caisse' },
-  { id: 'subsides',   label: '9. Subsides' },
-  { id: 'faq',        label: '10. FAQ' },
+  { id: 'franchise',  label: '4. Choisir sa franchise' },
+  { id: 'modeles',    label: '5. Les 4 modèles' },
+  { id: 'economies',  label: '6. Économies possibles' },
+  { id: 'changer',    label: '7. Comment changer de caisse' },
+  { id: 'subsides',   label: '8. Subsides' },
+  { id: 'faq',        label: '9. FAQ' },
 ]
 
 const modeleMaxPct = Math.round(
@@ -166,7 +142,7 @@ const enBref = [
     <strong className="font-medium text-ink">28 % des résidents en bénéficient</strong>
     {", soit environ 2,5 millions de personnes. Cette subvention cantonale réduit votre prime LAMal et représente en moyenne "}
     <strong className="font-medium text-ink">CHF 2'421 par an</strong>
-    {" par bénéficiaire (source : OFSP, via sozialesicherheit.ch)."}</>,
+    {" par bénéficiaire."}</>,
 ]
 
 export default function GuideLamalPage() {
@@ -329,41 +305,51 @@ export default function GuideLamalPage() {
             <section id="primes">
               <h2 className="article-h2">3. Primes LAMal 2026 par canton</h2>
               <p className="article-p">
-                Primes moyennes indicatives 2026 pour un <strong>adulte (26 ans et +)</strong>,
-                modèle standard, franchise de CHF 300. Les primes effectives varient selon l'assureur.
+                Prime mensuelle la moins chère du canton, pour un <strong>adulte (26 ans et +)</strong>,
+                modèle standard, franchise de CHF 300, sans couverture accident.
               </p>
 
-              <div className="overflow-x-auto border border-edge rounded-[8px]">
-                <table className="stripe-table w-full">
-                  <thead>
-                    <tr>
-                      <th className="text-left whitespace-nowrap">Canton</th>
-                      <th className="text-left whitespace-nowrap">Prime par mois</th>
-                      <th className="text-left whitespace-nowrap">Prime par an</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {premiums.map((c) => (
-                      <tr key={c.code}>
-                        <td className="font-medium text-ink whitespace-nowrap">
-                          <div className="flex items-center gap-4">
-                            <span className="inline-flex items-center justify-center w-10 py-0.5 rounded text-[16px] font-bold bg-navy text-white shrink-0 text-center">
-                              {c.code}
-                            </span>
-                            {c.name}
+              {(() => {
+                const maxP = primesCanton[primesCanton.length - 1].prime
+                return (
+                  <div className="space-y-1 mb-4">
+                    {primesCanton.map((row) => {
+                      const barPct = Math.round((row.prime / maxP) * 100)
+                      return (
+                        <div
+                          key={row.code}
+                          className="flex items-center gap-3 px-4 py-2.5 rounded-lg bg-white border border-edge"
+                        >
+                          <span className="w-10 shrink-0 text-center py-0.5 rounded text-[16px] font-bold bg-navy text-white">
+                            {row.code}
+                          </span>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center justify-between gap-2 mb-1">
+                              <span className="text-[16px] font-medium truncate text-ink">
+                                {row.nom}
+                              </span>
+                              <span className="text-[16px] shrink-0 text-ink">
+                                <span className="font-normal text-slate/60">dès</span>{' '}
+                                <span className="font-semibold">CHF {formatChf(row.primeArrondie)}</span>
+                              </span>
+                            </div>
+                            <div className="h-1.5 bg-edge rounded-full overflow-hidden">
+                              <div
+                                className="h-full rounded-full bg-brand"
+                                style={{ width: `${barPct}%` }}
+                              />
+                            </div>
                           </div>
-                        </td>
-                        <td className="font-semibold text-ink whitespace-nowrap">CHF {c.prime.toLocaleString('fr-CH')}</td>
-                        <td className="text-slate whitespace-nowrap">
-                          CHF {(c.prime * 12).toLocaleString('fr-CH', { maximumFractionDigits: 0 }).replace(/['\u2019\u202F]/g, ' ')}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                )
+              })()}
+
               <p className="text-[16px] text-slate/60 mt-3">
-                Adulte 35 ans, modèle standard, franchise de CHF 300, données OFSP 2026.
+                Source : primes 2026 de l'OFSP (priminfo.ch), prime mensuelle avant redistribution,
+                minimum sur l'ensemble des régions de prime du canton.
               </p>
 
               <div className="mt-6">
@@ -373,45 +359,9 @@ export default function GuideLamalPage() {
               </div>
             </section>
 
-            {/* 4 — Assureurs */}
-            <section id="assureurs">
-              <h2 className="article-h2">4. Principaux assureurs LAMal en Suisse</h2>
-              <p className="article-p">
-                34 caisses sont agréées par l'OFSP. Les prestations de base sont identiques
-                chez tous les assureurs. Seules les primes, la qualité du service et les options
-                complémentaires diffèrent. Comparez toujours les primes dans votre canton.
-              </p>
-              <div className="overflow-x-auto border border-edge rounded-[8px] mb-4">
-                <table className="stripe-table w-full">
-                  <thead>
-                    <tr>
-                      <th className="text-left whitespace-nowrap">Assureur</th>
-                      <th className="text-left whitespace-nowrap">Part de marché</th>
-                      <th className="text-left whitespace-nowrap hidden sm:table-cell">Caractéristiques</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {assureurs.map((a) => (
-                      <tr key={a.name}>
-                        <td className="font-semibold text-ink whitespace-nowrap">{a.name}</td>
-                        <td className="font-medium text-brand whitespace-nowrap">{a.part}</td>
-                        <td className="hidden sm:table-cell">{a.note}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              <KeyFact>
-                La caisse la plus avantageuse dépend de votre âge, de votre modèle d&apos;assurance et de votre franchise.
-                Ces trois leviers déterminent quelle caisse offre la prime la moins chère selon votre situation,
-                avec des écarts qui peuvent atteindre jusqu&apos;à CHF 180 par mois pour un adulte.
-              </KeyFact>
-
-            </section>
-
-            {/* 5 — Franchise */}
+            {/* 4 — Franchise */}
             <section id="franchise">
-              <h2 className="article-h2">5. Choisir sa franchise LAMal</h2>
+              <h2 className="article-h2">4. Choisir sa franchise LAMal</h2>
               <p className="article-p">
                 Choisir la bonne franchise est l&apos;un des leviers les plus efficaces pour réduire votre prime LAMal.
                 Pour un adulte sans frais médicaux, en passant de la franchise de CHF 300 à la franchise de CHF 2 500, vous économisez en moyenne{' '}
@@ -452,7 +402,7 @@ export default function GuideLamalPage() {
 
             {/* 6 — Modèles */}
             <section id="modeles">
-              <h2 className="article-h2">6. Choisir son modèle d'assurance LAMal</h2>
+              <h2 className="article-h2">5. Choisir son modèle d'assurance LAMal</h2>
               <p className="article-p">
                 Chaque modèle impose des contraintes différentes sur l'accès aux soins.
                 Les modèles alternatifs réduisent la prime en échange d'une porte d'entrée obligatoire.
@@ -508,7 +458,7 @@ export default function GuideLamalPage() {
 
             {/* 7 — Économies */}
             <section id="economies">
-              <h2 className="article-h2">7. Économies possibles en changeant de caisse</h2>
+              <h2 className="article-h2">6. Économies possibles en changeant de caisse</h2>
               <p className="article-p">
                 Certains cantons sont divisés en plusieurs régions de prime. Les écarts de
                 primes entre caisses au sein d'une même région sont significatifs. Voici l'économie
@@ -540,7 +490,7 @@ export default function GuideLamalPage() {
 
             {/* 8 — Changer */}
             <section id="changer">
-              <h2 className="article-h2">8. Comment changer de caisse maladie ?</h2>
+              <h2 className="article-h2">7. Comment changer de caisse maladie ?</h2>
 
               <p className="article-p">
                 Le changement ordinaire se fait au 1er janvier, sur résiliation envoyée avant le 30 novembre.
@@ -601,7 +551,7 @@ export default function GuideLamalPage() {
 
             {/* 9 — Subsides */}
             <section id="subsides">
-              <h2 className="article-h2">9. Subsides LAMal : qui y a droit ?</h2>
+              <h2 className="article-h2">8. Subsides LAMal : qui y a droit ?</h2>
               <p className="article-p">
                 Les <strong>subsides de primes</strong> sont des aides financières versées par les cantons
                 aux personnes dont les revenus sont modestes. 28 % de la population suisse en bénéficient.
@@ -632,7 +582,7 @@ export default function GuideLamalPage() {
 
             {/* 10 — FAQ */}
             <section id="faq" className="border-t border-edge pt-8">
-              <FAQ items={faqItems} title="10. Questions fréquentes sur la LAMal" />
+              <FAQ items={faqItems} title="9. Questions fréquentes sur la LAMal" />
             </section>
 
             {/* Formulaire contact */}
