@@ -102,7 +102,7 @@ const guides = [
       </svg>
     ),
     title: "Les 4 modèles d'assurance",
-    desc: "Modèles standard, médecin de famille, centre médical, télémédecine : jusqu'à 22 % d'économie sur vos primes",
+    desc: "Modèles standard, médecin de famille, centre médical, télémédecine",
     href: '/sante/modeles',
   },
   {
