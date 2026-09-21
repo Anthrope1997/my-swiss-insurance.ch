@@ -77,7 +77,7 @@ export default function HomePageV2() {
           </h1>
 
           <p className="text-[17px] leading-relaxed mb-10" style={{ color: P.textBody }}>
-            En Suisse, toutes les caisses couvrent les mêmes soins. Seul le prix change.
+            En Suisse, toutes les caisses couvrent les mêmes soins. Seul le montant des primes change.
             L'écart atteint{' '}
             <strong className="font-semibold" style={{ color: P.navy }}>CHF 5 604 par an</strong>{' '}
             à Genève pour un même profil. Nos guides vous aident à comprendre, comparer et décider.

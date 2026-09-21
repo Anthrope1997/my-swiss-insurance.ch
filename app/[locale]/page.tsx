@@ -198,8 +198,8 @@ export default function HomePage() {
           </h1>
 
           <p className="text-[16px] text-slate leading-relaxed mb-8 max-w-2xl">
-            En Suisse, toutes les caisses couvrent les mêmes prestations de base. Seul le prix
-            diffère, jusqu'à CHF 2 916 par an d'écart pour un même profil.
+            En Suisse, toutes les caisses couvrent les mêmes prestations de base. Seul le montant
+            des primes diffère, jusqu'à CHF 2 916 par an d'écart pour un même profil.
             Comparez gratuitement et trouvez la caisse la moins chère pour votre situation.
           </p>
 

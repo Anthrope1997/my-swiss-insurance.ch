@@ -156,7 +156,7 @@ export default function LamalPage() {
           </h1>
 
           <p className="text-[16px] text-slate leading-relaxed mb-8">
-            Toutes les caisses couvrent les mêmes prestations de base : seul le prix change,
+            Toutes les caisses couvrent les mêmes prestations de base : seul le montant des primes change,
             jusqu’à <strong>CHF 2 916 par an d’écart</strong> pour un même profil.
             Comparez les assureurs, ajustez votre franchise et adaptez votre modèle d’assurance
             à votre situation pour réduire votre prime.
