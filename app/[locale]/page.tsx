@@ -3,16 +3,21 @@ import Link from 'next/link'
 import UnifiedLeadForm from '@/components/ui/UnifiedLeadForm'
 import CantonSearch from '@/components/ui/CantonSearch'
 import HeroStats from '@/components/ui/HeroStats'
+import { ecartMaxProfil } from '@/lib/sante/formules'
+import { formatChf } from '@/lib/shared/formatters'
+
+const ecartMax = ecartMaxProfil()
+const ecartMaxFmt = formatChf(ecartMax.montantAnnuel)
 
 export const metadata: Metadata = {
   title: 'Économisez sur votre assurance maladie suisse en 2026',
   description:
-    'Comparez les primes LAMal 2026 gratuitement. Jusqu\'à CHF 2 916 d\'écart entre caisses par an. 34 caisses, données OFSP officielles, résultat immédiat.',
+    `Comparez les primes LAMal 2026 gratuitement. Jusqu'à CHF ${ecartMaxFmt} d'écart entre caisses par an, à profil identique. 34 caisses, données OFSP officielles, résultat immédiat.`,
   alternates: { canonical: 'https://my-swiss-insurance.ch' },
   openGraph: {
     title: 'Économisez sur votre assurance maladie suisse en 2026',
     description:
-      'Jusqu\'à CHF 2 916 d\'écart entre caisses par an. Comparez gratuitement 34 caisses LAMal. Données OFSP 2026.',
+      `Jusqu'à CHF ${ecartMaxFmt} d'écart entre caisses par an, à profil identique. Comparez gratuitement 34 caisses LAMal. Données OFSP 2026.`,
     url: 'https://my-swiss-insurance.ch',
     type: 'website',
   },
@@ -35,7 +40,7 @@ const faqSchema = {
       name: 'Combien peut-on économiser en changeant de caisse LAMal ?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Jusqu\'à CHF 2 916 par an entre la caisse la moins chère et la plus chère, à franchise, modèle et couverture accident identiques (source OFSP 2026). Les 34 caisses agréées proposent les mêmes prestations de base à des prix très différents selon le canton.',
+        text: `Jusqu'à CHF ${ecartMaxFmt} par an entre la caisse la moins chère et la plus chère, pour un adulte dès 19 ans, à franchise, modèle et couverture accident identiques (source OFSP 2026). Les 34 caisses agréées proposent les mêmes prestations de base à des prix très différents selon le canton.`,
       },
     },
     {
@@ -65,7 +70,7 @@ const webSiteSchema = {
 // ── Données ──────────────────────────────────────────────────────────────────
 
 const stats = [
-  { value: "CHF 2'916", label: 'Ecart maximal entre caisses', sub: 'Assurance LAMal, même profil' },
+  { value: `CHF ${ecartMaxFmt}`, label: 'Écart maximal entre caisses', sub: 'Adultes dès 19 ans, à profil identique' },
   { value: '34',        label: 'Caisses agréées',            sub: 'données OFSP 2026'        },
   { value: '28 %',      label: 'Bénéficiaires de subsides',  sub: 'de la population suisse'  },
 ]
@@ -199,7 +204,7 @@ export default function HomePage() {
 
           <p className="text-[16px] text-slate leading-relaxed mb-8 max-w-2xl">
             En Suisse, toutes les caisses couvrent les mêmes prestations de base. Seul le montant
-            des primes diffère, jusqu'à CHF 2 916 par an d'écart pour un même profil.
+            des primes diffère, jusqu'à CHF {ecartMaxFmt} par an d'écart pour un même profil, adultes dès 19 ans.
             Comparez gratuitement et trouvez la caisse la moins chère pour votre situation.
           </p>
 

@@ -11,6 +11,7 @@ import HeroStats from '@/components/ui/HeroStats'
 import LeadFormModal from '@/components/ui/LeadFormModal'
 import UnifiedCombobox from '@/components/ui/UnifiedCombobox'
 import fr from '@/dictionaries/fr.json'
+import { formatChf } from '@/lib/shared/formatters'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -148,7 +149,12 @@ function InfoTooltip({ text }: { text: string }) {
 
 // ─── Main component ──────────────────────────────────────────────────────────
 
-export default function ComparateurClient() {
+interface ComparateurClientProps {
+  ecartMaxAnnuel: number
+  economieMoyenneAnnuelle: number
+}
+
+export default function ComparateurClient({ ecartMaxAnnuel, economieMoyenneAnnuelle }: ComparateurClientProps) {
   const searchParams = useSearchParams()
 
   // — Calculator state (initialized from URL params when present) —
@@ -278,12 +284,12 @@ export default function ComparateurClient() {
             Comparateur de primes LAMal 2026
           </h1>
           <p className="text-[18px] text-slate leading-relaxed mb-10">
-            Toutes les caisses couvrent les mêmes prestations de base : seul le montant des primes change, jusqu’à CHF 2 916 par an d’écart pour un même profil. Comparez les assureurs, ajustez votre franchise et adaptez votre modèle d’assurance à votre situation pour réduire votre prime.
+            Toutes les caisses couvrent les mêmes prestations de base : seul le montant des primes change, jusqu’à CHF 3 377 par an d’écart pour un même profil, adultes dès 19 ans. Comparez les assureurs, ajustez votre franchise et adaptez votre modèle d’assurance à votre situation pour réduire votre prime.
           </p>
           <HeroStats stats={[
             { value: '34 caisses',    label: 'Comparées en temps réel',       sub: 'Agréées par l’OFSP'              },
-            { value: "CHF 2'916/an", label: 'Ecart maximal entre caisses', sub: 'Assurance LAMal, même profil'   },
-            { value: 'CHF 4 020/an', label: 'Économie moyenne réalisable',  sub: 'Assurance LAMal, adulte 35 ans'   },
+            { value: `CHF ${formatChf(ecartMaxAnnuel)}/an`,          label: 'Écart maximal entre caisses', sub: 'Adultes dès 19 ans, à profil identique'   },
+            { value: `CHF ${formatChf(economieMoyenneAnnuelle)}/an`,               label: 'Économie moyenne en passant à la caisse la moins chère', sub: 'Adultes dès 19 ans, tous modèles et franchises, à profil identique' },
           ]} className="mb-8" />
         </div>
       </section>

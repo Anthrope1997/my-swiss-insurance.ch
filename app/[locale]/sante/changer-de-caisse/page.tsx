@@ -6,6 +6,8 @@ import Link from 'next/link'
 import AuthorBio from '@/components/ui/AuthorBio'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import HeroStats from '@/components/ui/HeroStats'
+import { economieMoyenneCaisseIdentiqueAdultes } from '@/lib/sante/formules'
+import { formatChf } from '@/lib/shared/formatters'
 
 export const metadata: Metadata = {
   title: 'Changer de caisse maladie en Suisse : Guide résiliation LAMal 2026',
@@ -76,10 +78,12 @@ const faqSchema = {
   })),
 }
 
+const economieMoyenneCaisse = economieMoyenneCaisseIdentiqueAdultes()
+
 const heroStats = [
   { value: '30 novembre',  label: 'Date limite de résiliation', sub: 'Démarche gratuite et déléguable'        },
   { value: '1er janvier',  label: 'Date de prise d\'effet',    sub: 'De votre nouvelle assurance LAMal'      },
-  { value: 'CHF 4 020/an', label: 'Économie moyenne réalisable', sub: 'Assurance LAMal, adulte 35 ans'      },
+  { value: `CHF ${formatChf(economieMoyenneCaisse.totalAnnuel)}/an`, label: 'Économie moyenne en passant à la caisse la moins chère', sub: 'Adultes dès 19 ans, tous modèles et franchises, à profil identique' },
 ]
 
 const toc = [
@@ -123,7 +127,7 @@ export default function ChangerDeCaissePage() {
             Comment changer d&apos;assurance maladie LAMal en 2026 ?
           </h1>
           <p className="text-[16px] text-slate max-w-2xl leading-relaxed mb-10">
-            Vous pouvez changer d&apos;assureur LAMal chaque année et économiser en moyenne CHF 4 020 par an sur vos primes. Voici la procédure complète pour effectuer cette démarche.
+            Vous pouvez changer d&apos;assureur LAMal chaque année et économiser en moyenne environ CHF {formatChf(economieMoyenneCaisse.totalAnnuel)} par an en passant à la caisse la moins chère (adultes dès 19 ans). Voici la procédure complète pour effectuer cette démarche.
           </p>
 
           <HeroStats stats={heroStats} className="mb-8" />

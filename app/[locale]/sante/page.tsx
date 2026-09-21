@@ -5,18 +5,18 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
 import HeroStats from '@/components/ui/HeroStats'
 import AuthorBio from '@/components/ui/AuthorBio'
-import { economieMax, economieMoyenne } from '@/lib/sante/formules'
+import { ecartMaxProfil, economieMoyenneCaisseIdentiqueAdultes, MODELE_LABELS } from '@/lib/sante/formules'
 import { formatChf } from '@/lib/shared/formatters'
 
 export const metadata: Metadata = {
   title: 'Primes LAMal 2026 : comparez et économisez',
   description:
-    'Comparez les primes LAMal 2026 gratuitement. Jusqu\'à CHF 2 916 d\'écart entre caisses par an. 34 caisses, données OFSP officielles, résultat immédiat.',
+    'Comparez les primes LAMal 2026 gratuitement. Jusqu\'à CHF 3 377 d\'écart entre caisses par an, à profil identique. 34 caisses, données OFSP officielles, résultat immédiat.',
   alternates: { canonical: 'https://my-swiss-insurance.ch/sante' },
   openGraph: {
     title: 'Primes LAMal 2026 : comparez et économisez',
     description:
-      'Jusqu\'à CHF 2 916 d\'écart entre caisses par an. Comparez gratuitement 34 caisses LAMal. Données OFSP 2026.',
+      'Jusqu\'à CHF 3 377 d\'écart entre caisses par an, à profil identique. Comparez gratuitement 34 caisses LAMal. Données OFSP 2026.',
     url: 'https://my-swiss-insurance.ch/sante',
     type: 'website',
   },
@@ -29,7 +29,7 @@ const faqItems = [
   },
   {
     question: 'Combien peut-on économiser en changeant de caisse LAMal ?',
-    answer: "Jusqu'à CHF 2 916 par an entre la caisse la moins chère et la plus chère, à franchise, modèle et couverture accident identiques (source OFSP 2026). Les 34 caisses agréées proposent les mêmes prestations de base à des prix très différents selon le canton.",
+    answer: "Jusqu'à CHF 3 377 par an entre la caisse la moins chère et la plus chère, pour un adulte dès 19 ans, à franchise, modèle et couverture accident identiques (source OFSP 2026). Les 34 caisses agréées proposent les mêmes prestations de base à des prix très différents selon le canton.",
   },
   {
     question: 'Qui a droit à un subside LAMal en Suisse ?',
@@ -62,10 +62,13 @@ const webSiteSchema = {
 
 // ── Données ──────────────────────────────────────────────────────────────────
 
+const ecartMax = ecartMaxProfil()
+const economieMoyenneCaisse = economieMoyenneCaisseIdentiqueAdultes()
+
 const stats = [
-  { value: `CHF ${formatChf(economieMax() * 12)}/an`,     label: 'Ecart maximal entre caisses'            , sub: 'Assurance LAMal, même profil' },
-  { value: `CHF ${formatChf(economieMoyenne() * 12)}/an`, label: 'Économie moyenne réalisable'             ,  sub: 'Assurance LAMal, adulte 35 ans' },
-  { value: "CHF 2'421/an",                                label: 'Subsides cantonal moyen',     sub: '28% des résidents en bénéficient'   },
+  { value: `CHF ${formatChf(ecartMax.montantAnnuel)}/an`,              label: 'Écart maximal entre caisses'                              , sub: 'Adultes dès 19 ans, à profil identique' },
+  { value: `CHF ${formatChf(economieMoyenneCaisse.totalAnnuel)}/an`,   label: 'Économie moyenne en passant à la caisse la moins chère', sub: 'Adultes dès 19 ans, tous modèles et franchises, à profil identique' },
+  { value: "CHF 2'421/an",                                             label: 'Subsides cantonal moyen',     sub: '28% des résidents en bénéficient'   },
 ]
 
 const guides = [
@@ -157,13 +160,51 @@ export default function LamalPage() {
 
           <p className="text-[16px] text-slate leading-relaxed mb-8">
             Toutes les caisses couvrent les mêmes prestations de base : seul le montant des primes change,
-            jusqu’à <strong>CHF 2 916 par an d’écart</strong> pour un même profil.
+            jusqu’à <strong>CHF 3 377 par an d’écart</strong> pour un même profil, adultes dès 19 ans.
             Comparez les assureurs, ajustez votre franchise et adaptez votre modèle d’assurance
             à votre situation pour réduire votre prime.
           </p>
 
           {/* Stats */}
-          <HeroStats stats={stats} className="mb-10" />
+          <HeroStats stats={stats} className="mb-4" />
+
+          <details className="mb-10 text-[16px] text-slate/60 max-w-2xl">
+            <summary className="cursor-pointer underline decoration-dotted">Comment c&apos;est calculé</summary>
+            <div className="mt-3 space-y-2">
+              <p>
+                <strong>Écart maximal entre caisses</strong> : le plus grand écart trouvé en Suisse
+                entre la prime la plus haute et la plus basse, à franchise, modèle et couverture
+                accident strictement identiques (seul l&apos;assureur change). Profil du maximum :{' '}
+                {ecartMax.profil.tranche === 'adulte' ? 'adulte' : 'jeune adulte'}, région de{' '}
+                {ecartMax.profil.ville} ({ecartMax.profil.canton}), franchise de CHF{' '}
+                {ecartMax.profil.franchise}, modèle {MODELE_LABELS[ecartMax.profil.modele]},{' '}
+                {ecartMax.profil.avecAccident ? 'avec' : 'sans'} couverture accident :{' '}
+                {ecartMax.profil.nbAssureurs} assureurs comparés, de CHF{' '}
+                {formatChf(ecartMax.profil.primeMin)} ({ecartMax.profil.assureurMin}) à CHF{' '}
+                {formatChf(ecartMax.profil.primeMax)} ({ecartMax.profil.assureurMax}). C&apos;est
+                un maximum trouvé sur des milliers de profils, pas une situation typique.
+              </p>
+              <p>
+                <strong>Économie moyenne</strong> : pour chaque profil (région de prime, tranche
+                d&apos;âge, franchise, modèle, couverture accident), on compare la prime la moins
+                chère à la moyenne des primes de ce profil, puis on pondère le résultat par la
+                population de chaque région et tranche d&apos;âge. Exemple à Genève, adulte,
+                franchise de CHF 300, modèle standard, sans accident : 21 assureurs, prime moyenne
+                CHF 710, la moins chère (Assura) à CHF 634 — écart de CHF 77 par mois. Par tranche
+                d&apos;âge : adulte CHF {formatChf(economieMoyenneCaisse.parAge.adulte)}/an, jeune
+                adulte CHF {formatChf(economieMoyenneCaisse.parAge.jeuneAdulte)}/an.
+              </p>
+              <p>
+                Source : primes LAMal 2026 (OFSP, priminfo.ch). Population par commune : fichier
+                LAMal data 08.2025.xlsx, chiffres 2021. Périmètre : adultes dès 19 ans (adulte et
+                jeune adulte), enfants exclus.
+              </p>
+              <p>
+                Limite : moyenne simple des assureurs, non pondérée par leurs parts de marché.
+                Tous les profils comptent de façon identique.
+              </p>
+            </div>
+          </details>
 
         </div>
       </section>
@@ -247,7 +288,7 @@ export default function LamalPage() {
               <p className="text-[16px] text-slate leading-relaxed mb-3">
                 Les 34 caisses LAMal couvrent toutes les mêmes prestations de base : seul le prix de votre prime change d&apos;une caisse à l&apos;autre.
               </p>
-              <p className="text-2xl font-bold text-brand leading-none mb-0.5">CHF {formatChf(economieMax() * 12)}</p>
+              <p className="text-2xl font-bold text-brand leading-none mb-0.5">CHF {formatChf(ecartMax.montantAnnuel)}</p>
               <p className="text-[16px] text-slate mb-6">d&apos;écart maximal entre caisses en Suisse</p>
               <Link href="/sante/comparateur" className="flex items-center gap-1 mt-auto text-brand text-[16px] font-medium">
                 Comparer les primes

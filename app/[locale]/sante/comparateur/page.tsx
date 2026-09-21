@@ -2,14 +2,15 @@ import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import ComparateurClient from '@/components/sante/ComparateurClient'
 import Breadcrumb from '@/components/ui/Breadcrumb'
+import { ecartMaxProfil, economieMoyenneCaisseIdentiqueAdultes } from '@/lib/sante/formules'
 
 export const metadata: Metadata = {
   title: 'Comparateur caisses maladie LAMal 2026 : Primes par canton',
   description:
-    "Comparez les primes LAMal 2026 par code postal. Trouvez la caisse maladie la moins chère selon votre profil, franchise et modèle. Données officielles OFSP, jusqu'à CHF 2 916 d'écart entre caisses par an.",
+    "Comparez les primes LAMal 2026 par code postal. Trouvez la caisse maladie la moins chère selon votre profil, franchise et modèle. Données officielles OFSP, jusqu'à CHF 3 377 d'écart entre caisses par an, à profil identique.",
   openGraph: {
     title: 'Comparateur de caisses maladie LAMal 2026',
-    description: "Primes LAMal 2026 par canton : comparez et économisez jusqu'à CHF 2 916 par an.",
+    description: "Primes LAMal 2026 par canton : comparez et économisez jusqu'à CHF 3 377 par an, à profil identique.",
     url: 'https://my-swiss-insurance.ch/sante/comparateur',
     type: 'article',
   },
@@ -79,7 +80,10 @@ export default function ComparateurPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <Suspense>
-        <ComparateurClient />
+        <ComparateurClient
+          ecartMaxAnnuel={ecartMaxProfil().montantAnnuel}
+          economieMoyenneAnnuelle={economieMoyenneCaisseIdentiqueAdultes().totalAnnuel}
+        />
       </Suspense>
     </>
   )

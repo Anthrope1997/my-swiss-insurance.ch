@@ -4,18 +4,23 @@ import UnifiedLeadForm from '@/components/ui/UnifiedLeadForm'
 import CantonSearch from '@/components/ui/CantonSearch'
 import { Inter } from 'next/font/google'
 import './sf-theme.css'
+import { ecartMaxProfil } from '@/lib/sante/formules'
+import { formatChf } from '@/lib/shared/formatters'
 
 const inter = Inter({ subsets: ['latin'] })
+
+const ecartMax = ecartMaxProfil()
+const ecartMaxFmt = formatChf(ecartMax.montantAnnuel)
 
 export const metadata: Metadata = {
   title: 'Économisez sur votre assurance maladie suisse en 2026',
   robots: { index: false, follow: false },
   description:
-    "Comparez les primes LAMal 2026 gratuitement. Jusqu'à CHF 2 916 d'écart entre caisses par an. 34 caisses, données OFSP officielles, résultat immédiat.",
+    `Comparez les primes LAMal 2026 gratuitement. Jusqu'à CHF ${ecartMaxFmt} d'écart entre caisses par an, à profil identique. 34 caisses, données OFSP officielles, résultat immédiat.`,
   alternates: { canonical: 'https://my-swiss-insurance.ch' },
   openGraph: {
     title: 'Économisez sur votre assurance maladie suisse en 2026',
-    description: "Jusqu'à CHF 2 916 d'écart entre caisses par an. Comparez gratuitement 34 caisses LAMal. Données OFSP 2026.",
+    description: `Jusqu'à CHF ${ecartMaxFmt} d'écart entre caisses par an, à profil identique. Comparez gratuitement 34 caisses LAMal. Données OFSP 2026.`,
     url: 'https://my-swiss-insurance.ch',
     type: 'website',
   },
@@ -26,7 +31,7 @@ const faqSchema = {
   '@type': 'FAQPage',
   mainEntity: [
     { '@type': 'Question', name: "L'assurance maladie est-elle obligatoire en Suisse ?", acceptedAnswer: { '@type': 'Answer', text: "Oui, la LAMal rend l'assurance maladie obligatoire pour tout résident en Suisse depuis 1996. L'affiliation doit intervenir dans les 3 mois suivant l'arrivée." } },
-    { '@type': 'Question', name: 'Combien peut-on économiser en changeant de caisse LAMal ?', acceptedAnswer: { '@type': 'Answer', text: "Jusqu'à CHF 2 916 par an entre la caisse la moins chère et la plus chère, à franchise, modèle et couverture accident identiques (source OFSP 2026). Les 34 caisses agréées proposent les mêmes prestations de base à des prix très différents selon le canton." } },
+    { '@type': 'Question', name: 'Combien peut-on économiser en changeant de caisse LAMal ?', acceptedAnswer: { '@type': 'Answer', text: `Jusqu'à CHF ${ecartMaxFmt} par an entre la caisse la moins chère et la plus chère, pour un adulte dès 19 ans, à franchise, modèle et couverture accident identiques (source OFSP 2026). Les 34 caisses agréées proposent les mêmes prestations de base à des prix très différents selon le canton.` } },
     { '@type': 'Question', name: 'Qui a droit à un subside LAMal en Suisse ?', acceptedAnswer: { '@type': 'Answer', text: "25 à 30 % de la population suisse bénéficie d'une réduction individuelle des primes (subside). Les conditions varient selon le canton et le revenu déterminant." } },
   ],
 }

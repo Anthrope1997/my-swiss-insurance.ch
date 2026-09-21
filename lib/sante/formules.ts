@@ -8,6 +8,23 @@
  *   - Économie caisse max: écart max − min entre assureurs à franchise/modèle/accident fixés
  *                          (seul l'assureur varie), recherche exhaustive du meilleur profil
  *   - Économie caisse min/moyenne : écart max − min par région toutes offres confondues
+ *   - Économie moyenne (multi-âges) : voir economieMoyenneCaisseIdentique() — écart moyen
+ *                          entre assureurs à profil strictement identique (région × âge ×
+ *                          franchise × modèle × accident), pondéré par population, sur les
+ *                          3 tranches d'âge. economieMoyenneCaisseIdentiqueAdultes() restreint
+ *                          ce calcul aux adultes dès 19 ans (adulte + jeune adulte, sans
+ *                          enfant), en réutilisant le même cache région-âge.
+ *   - Écart maximal (adultes) : voir ecartMaxProfil() — recherche exhaustive du plus grand
+ *                          écart max−min entre assureurs, adultes + jeunes adultes uniquement,
+ *                          renvoie aussi le détail du profil trouvé (région, franchise, modèle,
+ *                          accident, assureurs min/max).
+ *   - Tous les calculs d'écart ci-dessus utilisent prime_nette (= prime_mensuelle − un
+ *     remboursement fixe de CHF 5.15, identique sur toutes les lignes). Comme cette
+ *     constante s'annule dans toute soustraction, les écarts sont rigoureusement
+ *     identiques avec prime_nette ou prime_mensuelle — seules les valeurs absolues
+ *     illustratives (ex. primes affichées dans l'exemple de Genève) en dépendent.
+ *     Vérifiable avec scripts/verifier_stats_publiques.py (et son prédécesseur
+ *     scripts/verifier_economie_moyenne.py).
  *   - Break-even         : calculé sur les primes moyennes pondérées
  *   - Économie modèle    : écart entre la moyenne BASE et la moyenne du modèle alternatif
  *   - Subside moyen      : codé en dur (CHF 2'421/an, source sozialesicherheit.ch) — hors périmètre de ce fichier
@@ -244,6 +261,307 @@ export function economieMoyenne(opts: Opts = {}): number {
   return Math.round(weightedMean(rs.map(r => r.max - r.min), rs.map(r => r.pop)))
 }
 
+// ─── Économie moyenne à profil identique, multi-âges ──────────────────────────
+//
+// economieMoyenne() ci-dessus mélange franchise/modèle/accident dans un même
+// écart région (comme le faisait economieMax() avant sa correction). Cette
+// fonction calcule au contraire un écart moyen entre assureurs à profil
+// strictement identique, méthodologie :
+//
+//   1. Profil = région de prime × tranche d'âge × franchise × modèle × accident
+//      (42 régions × 3 tranches d'âge × 48 combinaisons franchise/modèle/accident
+//      = 6 048 profils). On ne compare jamais deux profils différents entre eux.
+//   2. Dans chaque profil, on garde la prime la moins chère de chaque assureur
+//      (un assureur peut avoir plusieurs produits dans un même profil).
+//   3. Écart du profil = moyenne des primes des assureurs − prime la moins chère.
+//   4. Écart d'une région pour une tranche d'âge = moyenne simple des écarts de
+//      ses 48 profils.
+//   5. Écart national = moyenne des écarts région-âge pondérée par la population
+//      de la tranche d'âge dans la région, sur toutes les régions et les trois
+//      tranches d'âge (ou une seule tranche pour la ventilation par âge).
+//   6. Économie annuelle = écart national (CHF/mois) × 12, arrondi une seule
+//      fois à la fin — jamais d'arrondi intermédiaire sur le mensuel.
+//
+// Résultats attendus (primes 2026) : adulte ≈ CHF 506/an, jeune adulte ≈ CHF 603/an,
+// enfant ≈ CHF 251/an, tous âges confondus ≈ CHF 465/an. Reproductible indépendamment
+// avec scripts/verifier_economie_moyenne.py.
+
+type TrancheAge = 'adulte' | 'jeuneAdulte' | 'enfant'
+
+const NAISSANCE_PAR_TRANCHE: Record<TrancheAge, number> = {
+  adulte: ADULTE_NAISSANCE,
+  jeuneAdulte: 2005,
+  enfant: 2015,
+}
+
+interface PopParAge { adulte: number; jeuneAdulte: number; enfant: number }
+
+let _regionPopParAge: Map<string, PopParAge> | null = null
+
+function getRegionPopParAge(): Map<string, PopParAge> {
+  if (!_regionPopParAge) {
+    const raw = JSON.parse(
+      readFileSync(join(process.cwd(), 'data/sante/regions.json'), 'utf-8'),
+    ) as Record<string, {
+      region_id: string
+      communes: Array<{ population: { age_0_18: number; age_19_25: number; age_25_plus: number } }>
+    }>
+
+    _regionPopParAge = new Map()
+    for (const r of Object.values(raw)) {
+      const pop = r.communes.reduce(
+        (s, c) => ({
+          adulte: s.adulte + c.population.age_25_plus,
+          jeuneAdulte: s.jeuneAdulte + c.population.age_19_25,
+          enfant: s.enfant + c.population.age_0_18,
+        }),
+        { adulte: 0, jeuneAdulte: 0, enfant: 0 },
+      )
+      _regionPopParAge.set(r.region_id, pop)
+    }
+  }
+  return _regionPopParAge
+}
+
+// Étapes 1-4 (partagées par toutes les agrégations ci-dessous) : écart par
+// profil, puis écart région-âge (clé "region:tranche"). Calculé une seule
+// fois pour les 3 tranches d'âge — les fonctions publiques ne font ensuite
+// que sélectionner et pondérer un sous-ensemble de tranches (étape 5).
+let _ecartRegionAge: Map<string, number> | null = null
+
+function getEcartRegionAge(): Map<string, number> {
+  if (_ecartRegionAge) return _ecartRegionAge
+
+  const franchises = allFranchises()
+  const modeles = allModeles()
+  const accidents = [false, true]
+
+  const ecartsParProfil = new Map<string, number[]>()
+
+  for (const tranche of Object.keys(NAISSANCE_PAR_TRANCHE) as TrancheAge[]) {
+    const naissance = NAISSANCE_PAR_TRANCHE[tranche]
+    for (const f of franchises) {
+      for (const m of modeles) {
+        for (const a of accidents) {
+          const filtered = getPrimes().filter(p =>
+            p.annee_naissance === naissance &&
+            p.franchise === f &&
+            p.modele_categorie === m &&
+            p.avec_accident === a,
+          )
+          const byRegion = new Map<string, Map<string, number>>()
+          for (const p of filtered) {
+            if (!byRegion.has(p.region_id)) byRegion.set(p.region_id, new Map())
+            const rm = byRegion.get(p.region_id)!
+            const cur = rm.get(p.assureur)
+            if (cur === undefined || p.prime_nette < cur) rm.set(p.assureur, p.prime_nette)
+          }
+          for (const [rid, assureurMap] of byRegion) {
+            const vals = Array.from(assureurMap.values())
+            if (vals.length < 1) continue
+            const mean = vals.reduce((s, v) => s + v, 0) / vals.length
+            const eco = mean - Math.min(...vals)
+            const key = `${rid}:${tranche}`
+            if (!ecartsParProfil.has(key)) ecartsParProfil.set(key, [])
+            ecartsParProfil.get(key)!.push(eco)
+          }
+        }
+      }
+    }
+  }
+
+  _ecartRegionAge = new Map<string, number>()
+  for (const [key, ecarts] of ecartsParProfil) {
+    _ecartRegionAge.set(key, ecarts.reduce((s, v) => s + v, 0) / ecarts.length)
+  }
+  return _ecartRegionAge
+}
+
+// Étape 5 : écart national pondéré par population, sur les tranches passées
+function ecartNationalMensuel(tranches: TrancheAge[]): number {
+  const popParAge = getRegionPopParAge()
+  const ecartRegionAge = getEcartRegionAge()
+  let num = 0
+  let den = 0
+  for (const [key, eco] of ecartRegionAge) {
+    const [rid, tranche] = key.split(':') as [string, TrancheAge]
+    if (!tranches.includes(tranche)) continue
+    const pop = popParAge.get(rid)?.[tranche] ?? 0
+    num += pop * eco
+    den += pop
+  }
+  return den ? num / den : 0
+}
+
+export interface EconomieMoyenneCaisse {
+  totalAnnuel: number
+  parAge: Record<TrancheAge, number>
+}
+
+let _economieMoyenneCaisse: EconomieMoyenneCaisse | null = null
+
+/**
+ * Économie annuelle moyenne réalisable en passant à la caisse la moins chère,
+ * à profil strictement identique (franchise, modèle, couverture accident et
+ * tranche d'âge fixés — seul l'assureur varie), sur les 3 tranches d'âge
+ * (adulte, jeune adulte, enfant). Voir méthodologie ci-dessus.
+ * Résultat mis en cache au niveau module (un seul calcul par build).
+ */
+export function economieMoyenneCaisseIdentique(): EconomieMoyenneCaisse {
+  if (_economieMoyenneCaisse) return _economieMoyenneCaisse
+
+  // Étape 6 : × 12 puis un seul arrondi, par statistique
+  _economieMoyenneCaisse = {
+    totalAnnuel: Math.round(ecartNationalMensuel(['adulte', 'jeuneAdulte', 'enfant']) * 12),
+    parAge: {
+      adulte: Math.round(ecartNationalMensuel(['adulte']) * 12),
+      jeuneAdulte: Math.round(ecartNationalMensuel(['jeuneAdulte']) * 12),
+      enfant: Math.round(ecartNationalMensuel(['enfant']) * 12),
+    },
+  }
+  return _economieMoyenneCaisse
+}
+
+export interface EconomieMoyenneCaisseAdultes {
+  totalAnnuel: number
+  parAge: { adulte: number; jeuneAdulte: number }
+}
+
+let _economieMoyenneCaisseAdultes: EconomieMoyenneCaisseAdultes | null = null
+
+/**
+ * Identique à economieMoyenneCaisseIdentique(), mais restreinte aux adultes
+ * dès 19 ans (adulte + jeune adulte, sans les enfants). Réutilise le même
+ * calcul région-âge en cache (getEcartRegionAge()) — pas de recalcul lourd.
+ */
+export function economieMoyenneCaisseIdentiqueAdultes(): EconomieMoyenneCaisseAdultes {
+  if (_economieMoyenneCaisseAdultes) return _economieMoyenneCaisseAdultes
+
+  _economieMoyenneCaisseAdultes = {
+    totalAnnuel: Math.round(ecartNationalMensuel(['adulte', 'jeuneAdulte']) * 12),
+    parAge: {
+      adulte: Math.round(ecartNationalMensuel(['adulte']) * 12),
+      jeuneAdulte: Math.round(ecartNationalMensuel(['jeuneAdulte']) * 12),
+    },
+  }
+  return _economieMoyenneCaisseAdultes
+}
+
+// ─── Écart maximal entre assureurs, à profil identique, adultes dès 19 ans ────
+//
+// economieMax() ci-dessus reste inchangée : elle porte uniquement sur les
+// adultes 26+ (ADULTE_NAISSANCE) et sert aux tableaux par canton de
+// sante/guide/page.tsx (economieMax({ canton })). La fonction ci-dessous est
+// un calcul séparé, sur les adultes ET jeunes adultes (19 ans et plus, sans
+// les enfants), qui renvoie en plus le détail du profil trouvé pour pouvoir
+// l'afficher sous la tuile. Recherche exhaustive sur toutes les combinaisons
+// région × tranche d'âge × franchise × modèle × accident.
+
+export interface EcartMaxProfilDetail {
+  tranche: 'adulte' | 'jeuneAdulte'
+  region: string
+  ville: string
+  canton: string
+  franchise: number
+  modele: string
+  avecAccident: boolean
+  nbAssureurs: number
+  assureurMin: string
+  primeMin: number
+  assureurMax: string
+  primeMax: number
+}
+
+let _regionVilles: Map<string, string> | null = null
+
+function getRegionVilles(): Map<string, string> {
+  if (!_regionVilles) {
+    const raw = JSON.parse(
+      readFileSync(join(process.cwd(), 'data/sante/regions.json'), 'utf-8'),
+    ) as Record<string, { region_id: string; ville: string }>
+    _regionVilles = new Map(Object.values(raw).map(r => [r.region_id, r.ville]))
+  }
+  return _regionVilles
+}
+
+export interface EcartMaxProfil {
+  montantAnnuel: number
+  profil: EcartMaxProfilDetail
+}
+
+let _ecartMaxProfil: EcartMaxProfil | null = null
+
+export function ecartMaxProfil(): EcartMaxProfil {
+  if (_ecartMaxProfil) return _ecartMaxProfil
+
+  const franchises = allFranchises()
+  const modeles = allModeles()
+  const accidents = [false, true]
+  const tranches: { tranche: 'adulte' | 'jeuneAdulte'; naissance: number }[] = [
+    { tranche: 'adulte', naissance: NAISSANCE_PAR_TRANCHE.adulte },
+    { tranche: 'jeuneAdulte', naissance: NAISSANCE_PAR_TRANCHE.jeuneAdulte },
+  ]
+
+  const regionPop = getRegionPop()
+  const regionVilles = getRegionVilles()
+  let bestEco = 0
+  let best: EcartMaxProfilDetail | null = null
+
+  for (const { tranche, naissance } of tranches) {
+    for (const f of franchises) {
+      for (const m of modeles) {
+        for (const a of accidents) {
+          const filtered = getPrimes().filter(p =>
+            p.annee_naissance === naissance &&
+            p.franchise === f &&
+            p.modele_categorie === m &&
+            p.avec_accident === a,
+          )
+          const byRegion = new Map<string, Map<string, number>>()
+          for (const p of filtered) {
+            if (!byRegion.has(p.region_id)) byRegion.set(p.region_id, new Map())
+            const rm = byRegion.get(p.region_id)!
+            const cur = rm.get(p.assureur)
+            if (cur === undefined || p.prime_nette < cur) rm.set(p.assureur, p.prime_nette)
+          }
+          for (const [rid, assureurMap] of byRegion) {
+            if (assureurMap.size < 2) continue
+            let assureurMin = ''
+            let primeMinVal = Infinity
+            let assureurMax = ''
+            let primeMaxVal = -Infinity
+            for (const [assureur, prix] of assureurMap) {
+              if (prix < primeMinVal) { primeMinVal = prix; assureurMin = assureur }
+              if (prix > primeMaxVal) { primeMaxVal = prix; assureurMax = assureur }
+            }
+            const eco = primeMaxVal - primeMinVal
+            if (eco > bestEco) {
+              bestEco = eco
+              best = {
+                tranche,
+                region: rid,
+                ville: regionVilles.get(rid) ?? rid,
+                canton: regionPop.get(rid)?.canton ?? rid.slice(0, 2),
+                franchise: f,
+                modele: m,
+                avecAccident: a,
+                nbAssureurs: assureurMap.size,
+                assureurMin,
+                primeMin: primeMinVal,
+                assureurMax,
+                primeMax: primeMaxVal,
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  _ecartMaxProfil = { montantAnnuel: Math.round(bestEco * 12), profil: best! }
+  return _ecartMaxProfil
+}
+
 // ─── Break-even franchises ────────────────────────────────────────────────────
 
 /**
@@ -270,6 +588,14 @@ export function breakEven(opts: { canton?: string; Fa?: number; Fb?: number } = 
 //   DIV = Télémédecine (catégorie "Diverse" OFSP — majoritairement telmed)
 
 export type ModeleAlt = 'HAM' | 'HMO' | 'DIV'
+
+/** Libellés lisibles des modele_categorie de primes.json, pour l'affichage. */
+export const MODELE_LABELS: Record<string, string> = {
+  BASE: 'standard',
+  HAM: 'médecin de famille',
+  HMO: 'centre médical',
+  DIV: 'télémédecine',
+}
 
 function modeleEcoPairs(
   modele: ModeleAlt,

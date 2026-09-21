@@ -6,7 +6,7 @@ import Link from 'next/link'
 import AuthorBio from '@/components/ui/AuthorBio'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import HeroStats from '@/components/ui/HeroStats'
-import { breakEven, primeMoyenne, economieMoyenne, economieMax, modeleEconomieMax, modeleEconomieMoyenne } from '@/lib/sante/formules'
+import { breakEven, primeMoyenne, economieMoyenneCaisseIdentiqueAdultes, ecartMaxProfil, economieMax, modeleEconomieMax, modeleEconomieMoyenne } from '@/lib/sante/formules'
 import { nationalBreakEven, nationalBreakEvenJA, nationalBreakEvenEnfant, nationalAvgPrime } from '@/lib/sante/calcul-franchise'
 import { formatChf } from '@/lib/shared/formatters'
 
@@ -150,7 +150,7 @@ const hmoMoyPct = Math.round(modeleEconomieMoyenne('HMO') / _primeMoyGuide * 100
 const divMoyPct = Math.round(modeleEconomieMoyenne('DIV') / _primeMoyGuide * 100)
 
 const heroStats = [
-  { value: `CHF ${formatChf(economieMoyenne() * 12)}/an`, label: 'Économie moyenne réalisable', sub: 'Assurance LAMal, adulte 35 ans' },
+  { value: `CHF ${formatChf(economieMoyenneCaisseIdentiqueAdultes().totalAnnuel)}/an`, label: 'Économie moyenne en passant à la caisse la moins chère', sub: 'Adultes dès 19 ans, tous modèles et franchises, à profil identique' },
   { value: '6',          label: 'Niveaux de franchise',     sub: 'De CHF 300 à CHF 2 500 pour un adulte'                     },
   { value: '4',          label: 'Modèles de soins',        sub: `Jusqu’à ${modeleMaxPct} % d’économie réalisable` },
 ]
@@ -160,7 +160,7 @@ const enBref = [
     <strong className="font-medium text-ink">34 caisses agréées</strong>
     {" couvrent les mêmes soins de base, seul le prix de la prime change."}</>,
   <>{"Économisez jusqu'à "}
-    <strong className="font-medium text-ink">{`CHF ${formatChf(economieMax() * 12)} par an`}</strong>
+    <strong className="font-medium text-ink">{`CHF ${formatChf(ecartMaxProfil().montantAnnuel)} par an`}</strong>
     {" sur votre assurance LAMal en comparant les assureurs, les franchises et les modèles d'assurance disponibles."}</>,
   <>{"Vous pouvez aussi avoir droit à un subside selon votre situation : "}
     <strong className="font-medium text-ink">28 % des résidents en bénéficient</strong>

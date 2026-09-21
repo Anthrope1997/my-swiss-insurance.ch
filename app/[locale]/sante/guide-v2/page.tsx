@@ -6,6 +6,8 @@ import Link from 'next/link'
 import AuthorBio from '@/components/ui/AuthorBio'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import { nationalBreakEven, cantonBreakEven } from '@/lib/sante/calcul-franchise'
+import { ecartMaxProfil } from '@/lib/sante/formules'
+import { formatChf } from '@/lib/shared/formatters'
 import { Inter } from 'next/font/google'
 import '../../home-v2/sf-theme.css'
 
@@ -149,13 +151,15 @@ const toc = [
   { id: 'faq',        label: '10. FAQ' },
 ]
 
+const ecartMax = ecartMaxProfil()
+
 const enBref = [
   <>{"L'assurance LAMal est obligatoire pour toute personne résidant en Suisse. Les "}
     <strong className="font-medium text-ink">34 caisses agréées</strong>
     {" couvrent les mêmes soins de base, seul le prix de la prime change."}</>,
   <>{"Économisez jusqu'à "}
-    <strong className="font-medium text-ink">CHF 2 916 par an</strong>
-    {" en changeant de caisse, à franchise, modèle et couverture accident identiques."}</>,
+    <strong className="font-medium text-ink">{`CHF ${formatChf(ecartMax.montantAnnuel)} par an`}</strong>
+    {" en changeant de caisse, adultes dès 19 ans, à franchise, modèle et couverture accident identiques."}</>,
   <>{"Vous pouvez aussi avoir droit à un subside selon votre situation : "}
     <strong className="font-medium text-ink">28 % des résidents en bénéficient</strong>
     {". Cette subvention cantonale réduit votre prime LAMal et représente en moyenne "}
