@@ -10,7 +10,7 @@
  *   - Économie caisse min/moyenne : écart max − min par région toutes offres confondues
  *   - Break-even         : calculé sur les primes moyennes pondérées
  *   - Économie modèle    : écart entre la moyenne BASE et la moyenne du modèle alternatif
- *   - Subside moyen      : subsideMensuelMax canton pondéré par la population cantonale
+ *   - Subside moyen      : codé en dur (CHF 2'421/an, source sozialesicherheit.ch) — hors périmètre de ce fichier
  *
  * Source des données :
  *   - data/sante/primes.json   → tarifs OFSP 2026 par région / assureur / profil / franchise / modèle
@@ -23,7 +23,6 @@
 
 import { readFileSync } from 'fs'
 import { join } from 'path'
-import { cantonBySlug } from '@/data/sante/cantons'
 
 // ─── Types internes ───────────────────────────────────────────────────────────
 
@@ -306,31 +305,8 @@ export function modeleEconomieMoyenne(modele: ModeleAlt, franchise = DEFAULT_FRA
 }
 
 // ─── Subside moyen ────────────────────────────────────────────────────────────
-
-/**
- * Subside mensuel moyen pondéré par la population cantonale (CHF/mois).
- * Source : subsideMensuelMax de cantons.ts pour les 26 cantons.
- * Le code canton est dérivé de l'identifiant de la première région (ex. "VD1" → "VD").
- */
-export function subsideMoyen(): number {
-  // Population par canton = somme des populations de ses régions
-  const regionPop = getRegionPop()
-  const cantonPop = new Map<string, number>()
-  for (const { canton, pop } of regionPop.values()) {
-    cantonPop.set(canton, (cantonPop.get(canton) ?? 0) + pop)
-  }
-
-  const subs: number[] = []
-  const pops: number[] = []
-
-  for (const c of Object.values(cantonBySlug)) {
-    const max = c.subside?.subsideMensuelMax
-    if (!max) continue
-    const code = c.regions[0]?.id.slice(0, 2)
-    const pop = code ? (cantonPop.get(code) ?? 0) : 0
-    subs.push(max)
-    pops.push(pop)
-  }
-
-  return Math.round(weightedMean(subs, pops))
-}
+//
+// Le subside moyen réellement versé (CHF 2'421/an, 2023) est une donnée nationale
+// par bénéficiaire — non dérivable de primes.json/cantons.ts (qui ne contiennent
+// que les plafonds cantonaux). Codé en dur dans les pages concernées.
+// Source : https://sozialesicherheit.ch/fr/assurance-maladie-des-primes-en-fonction-du-revenu/

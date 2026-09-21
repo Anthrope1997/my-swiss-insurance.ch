@@ -6,7 +6,7 @@ import Link from 'next/link'
 import AuthorBio from '@/components/ui/AuthorBio'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import HeroStats from '@/components/ui/HeroStats'
-import { breakEven, primeMoyenne, economieMoyenne, economieMax, subsideMoyen, modeleEconomieMax, modeleEconomieMoyenne } from '@/lib/sante/formules'
+import { breakEven, primeMoyenne, economieMoyenne, economieMax, modeleEconomieMax, modeleEconomieMoyenne } from '@/lib/sante/formules'
 import { nationalBreakEven, nationalBreakEvenJA, nationalBreakEvenEnfant, nationalAvgPrime } from '@/lib/sante/calcul-franchise'
 import { formatChf } from '@/lib/shared/formatters'
 
@@ -164,9 +164,9 @@ const enBref = [
     {" sur votre assurance LAMal en comparant les assureurs, les franchises et les modèles d'assurance disponibles."}</>,
   <>{"Vous pouvez aussi avoir droit à un subside selon votre situation : "}
     <strong className="font-medium text-ink">28 % des résidents en bénéficient</strong>
-    {", soit environ 2,5 millions de personnes. Cette subvention cantonale réduit votre prime LAMal et représente en moyenne une économie de "}
-    <strong className="font-medium text-ink">{`CHF ${formatChf(subsideMoyen() * 12)} par an`}</strong>
-    {"."}</>,
+    {", soit environ 2,5 millions de personnes. Cette subvention cantonale réduit votre prime LAMal et représente en moyenne "}
+    <strong className="font-medium text-ink">CHF 2'421 par an</strong>
+    {" par bénéficiaire (source : OFSP, via sozialesicherheit.ch)."}</>,
 ]
 
 export default function GuideLamalPage() {

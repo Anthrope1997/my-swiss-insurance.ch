@@ -7,8 +7,6 @@ import AuthorBio from '@/components/ui/AuthorBio'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import SubsidesSimulatorFull from '@/components/sante/SubsidesSimulatorFull'
 import HeroStats from '@/components/ui/HeroStats'
-import { subsideMoyen } from '@/lib/sante/formules'
-import { formatChf } from '@/lib/shared/formatters'
 
 export const metadata: Metadata = {
   title: 'Simulateur de subsides LAMal 2026 : Estimez votre aide cantonale',
@@ -105,7 +103,7 @@ export default function SubsidesPage() {
           </p>
 
           <HeroStats stats={[
-            { value: `CHF ${formatChf(subsideMoyen() * 12)}/an`, label: 'Subside cantonal moyen',      sub: 'Soit CHF 415/mois'               },
+            { value: "CHF 2'421/an",                              label: 'Subsides cantonal moyen',     sub: 'Soit CHF 202/mois'               },
             { value: '2,5 millions',                              label: 'Bénéficiaires en Suisse',     sub: 'Soit 28 % des résidents'         },
             { value: '26 cantons',                                label: 'Accordent des subsides',      sub: 'Critères et montants variables'      },
           ]} className="mb-8" />

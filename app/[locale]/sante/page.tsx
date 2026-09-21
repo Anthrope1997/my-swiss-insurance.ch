@@ -5,7 +5,7 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'
 import HeroStats from '@/components/ui/HeroStats'
 import AuthorBio from '@/components/ui/AuthorBio'
-import { economieMax, economieMoyenne, subsideMoyen } from '@/lib/sante/formules'
+import { economieMax, economieMoyenne } from '@/lib/sante/formules'
 import { formatChf } from '@/lib/shared/formatters'
 
 export const metadata: Metadata = {
@@ -65,7 +65,7 @@ const webSiteSchema = {
 const stats = [
   { value: `CHF ${formatChf(economieMax() * 12)}/an`,     label: 'Ecart maximal entre caisses'            , sub: 'Assurance LAMal, même profil' },
   { value: `CHF ${formatChf(economieMoyenne() * 12)}/an`, label: 'Économie moyenne réalisable'             ,  sub: 'Assurance LAMal, adulte 35 ans' },
-  { value: `CHF ${formatChf(subsideMoyen() * 12)}/an`,    label: 'Subside cantonal moyen',      sub: '28% des résidents en bénéficient'   },
+  { value: "CHF 2'421/an",                                label: 'Subsides cantonal moyen',     sub: '28% des résidents en bénéficient'   },
 ]
 
 const guides = [
