@@ -90,7 +90,7 @@ const guides = [
           d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
       </svg>
     ),
-    title: 'Choisir sa franchise',
+    title: 'Sélectionner sa franchise',
     desc: 'Trouvez la franchise la plus avantageuse en fonction de vos frais médicaux',
     href: '/sante/franchise',
   },
@@ -101,7 +101,7 @@ const guides = [
           d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
       </svg>
     ),
-    title: "Les 4 modèles d'assurance",
+    title: 'Choisir son modèle',
     desc: "Modèles standard, médecin de famille, centre médical, télémédecine",
     href: '/sante/modeles',
   },
