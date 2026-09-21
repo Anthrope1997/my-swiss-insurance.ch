@@ -99,7 +99,7 @@ export default function SubsidesPage() {
             Simulateur de subsides LAMal 2026
           </h1>
           <p className="text-[16px] text-slate max-w-2xl leading-relaxed mb-10">
-            Vérifiez votre éligibilité et estimez le montant de vos subsides pour votre assurance LAMal. Ils peuvent s&apos;élever jusqu&apos;à CHF 7 716 par an, soit CHF 643 par mois.
+            Vérifiez votre éligibilité et estimez le montant de vos subsides pour votre assurance LAMal.
           </p>
 
           <HeroStats stats={[
