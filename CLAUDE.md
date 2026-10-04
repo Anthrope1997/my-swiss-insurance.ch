@@ -55,7 +55,7 @@ Pour connecter Google Sheets :
 
 | Skill | Fichier | Rôle |
 |---|---|---|
-| UI Designer | `skills/UI_designer.skill` | Design system, composants, templates, règles visuelles et éditoriales |
-| Copywriter | `skills/Copywriter.skill` | Ton, style, règles d'écriture, vocabulaire |
-| Critical User | `skills/Critical_user.skill` | Persona Michel — audit contenu et formatting avant mise en production |
-| Architecture | `skills/architecture.skill` | Structure fichiers, URLs, composants, données, checklist d'audit |
+| UI Designer | `docs/skills/UI_designer.skill` | Design system, composants, templates, règles visuelles et éditoriales |
+| Copywriter | `docs/skills/Copywriter.skill` | Ton, style, règles d'écriture, vocabulaire |
+| Critical User | `docs/skills/Critical_user.skill` | Persona Michel — audit contenu et formatting avant mise en production |
+| Architecture | `docs/skills/architecture.skill` | Structure fichiers, URLs, composants, données, checklist d'audit |
