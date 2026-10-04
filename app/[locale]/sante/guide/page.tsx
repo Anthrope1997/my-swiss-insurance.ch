@@ -6,15 +6,22 @@ import Link from 'next/link'
 import AuthorBio from '@/components/ui/AuthorBio'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import HeroStats from '@/components/ui/HeroStats'
-import { breakEven, primeMoyenne, economieMoyenneCaisseIdentiqueAdultes, ecartMaxProfil, economieMax, modeleEconomieMax, modeleEconomieMoyenne, primeMinParCanton } from '@/lib/sante/formules'
-import { nationalBreakEven, nationalBreakEvenJA, nationalBreakEvenEnfant, nationalAvgPrime } from '@/lib/sante/calcul-franchise'
+import { breakEven, primeMoyenne, economieMoyenneCaisseIdentiqueAdultes, ecartMaxProfil, economieMax, modeleEconomieAdultes, primeMinParCanton } from '@/lib/sante/formules'
+import { nationalBreakEven, nationalBreakEvenJA, nationalBreakEvenEnfant } from '@/lib/sante/calcul-franchise'
 import { formatChf } from '@/lib/shared/formatters'
 
 const seuilAdulte       = nationalBreakEven()
 const seuilJA           = nationalBreakEvenJA()
 const seuilEnfant       = nationalBreakEvenEnfant()
-const economieAnnuelle  = Math.round((nationalAvgPrime(300) - nationalAvgPrime(2500)) * 12)
-const economieMensuelle = Math.round(nationalAvgPrime(300) - nationalAvgPrime(2500))
+// Économie franchise CHF 300 → CHF 2 500 : prime BASE moyenne pondérée par
+// population (primeMoyenne, source primes.json/regions.json), adulte, sans
+// accident — même source et même méthodologie (prime nette, pondération par
+// population) que le reste du site, au lieu de la moyenne simple par canton
+// utilisée auparavant (nationalAvgPrime / data/sante/cantons.ts).
+const primeF300Moyenne  = primeMoyenne({ franchise: 300,  modele: 'BASE', avecAccident: false })
+const primeF2500Moyenne = primeMoyenne({ franchise: 2500, modele: 'BASE', avecAccident: false })
+const economieMensuelle = Math.round(primeF300Moyenne - primeF2500Moyenne)
+const economieAnnuelle  = Math.round((primeF300Moyenne - primeF2500Moyenne) * 12)
 
 export const metadata: Metadata = {
   title: 'Guide complet LAMal 2026 : Primes, franchises, modèles et subsides',
@@ -114,16 +121,19 @@ const toc = [
   { id: 'faq',        label: '9. FAQ' },
 ]
 
-const modeleMaxPct = Math.round(
-  Math.max(modeleEconomieMax('HMO'), modeleEconomieMax('DIV'), modeleEconomieMax('HAM')) / primeMoyenne() * 100
-)
-const _primeMoyGuide = primeMoyenne()
-const hamMaxPct = Math.round(modeleEconomieMax('HAM') / _primeMoyGuide * 100)
-const hmoMaxPct = Math.round(modeleEconomieMax('HMO') / _primeMoyGuide * 100)
-const divMaxPct = Math.round(modeleEconomieMax('DIV') / _primeMoyGuide * 100)
-const hamMoyPct = Math.round(modeleEconomieMoyenne('HAM') / _primeMoyGuide * 100)
-const hmoMoyPct = Math.round(modeleEconomieMoyenne('HMO') / _primeMoyGuide * 100)
-const divMoyPct = Math.round(modeleEconomieMoyenne('DIV') / _primeMoyGuide * 100)
+// Économie de modèle, adultes dès 19 ans, dénominateur = prime BASE moyenne
+// sur le même périmètre exact (voir modeleEconomieAdultes dans formules.ts) —
+// plus de division par une primeMoyenne() toutes franchises/modèles confondus.
+const hamEcoGuide = modeleEconomieAdultes('HAM')
+const hmoEcoGuide = modeleEconomieAdultes('HMO')
+const divEcoGuide = modeleEconomieAdultes('DIV')
+const modeleMaxPct = Math.max(hamEcoGuide.maxPct, hmoEcoGuide.maxPct, divEcoGuide.maxPct)
+const hamMaxPct = hamEcoGuide.maxPct
+const hmoMaxPct = hmoEcoGuide.maxPct
+const divMaxPct = divEcoGuide.maxPct
+const hamMoyPct = hamEcoGuide.moyennePct
+const hmoMoyPct = hmoEcoGuide.moyennePct
+const divMoyPct = divEcoGuide.moyennePct
 
 const heroStats = [
   { value: `CHF ${formatChf(economieMoyenneCaisseIdentiqueAdultes().totalAnnuel)}/an`, label: 'Économie moyenne réalisable', sub: 'Assurance LAMal, même profil adulte' },
@@ -348,7 +358,7 @@ export default function GuideLamalPage() {
               })()}
 
               <p className="text-[16px] text-slate/60 mt-3">
-                Source : primes 2026 de l'OFSP (priminfo.ch), prime mensuelle avant redistribution,
+                Source : primes 2026 de l'OFSP (priminfo.ch), prime nette (après remboursement),
                 minimum sur l'ensemble des régions de prime du canton.
               </p>
 
@@ -478,12 +488,12 @@ export default function GuideLamalPage() {
                 ))}
               </div>
               <p className="text-[16px] text-slate/60 mb-6">
-                Profil : adulte 35 ans, modèle standard, franchise de CHF 300.
+                Profil : adulte dès 19 ans, meilleure combinaison franchise/modèle disponible dans le canton.
               </p>
               <KeyFact>
-                Ces chiffres sont des estimations reposant sur les écarts de primes constatés en 2026
-                pour un adulte, modèle standard, franchise de CHF 300. Les économies réelles dépendent
-                de votre situation individuelle.
+                Ces chiffres sont des estimations reposant sur les écarts de primes constatés en 2026,
+                pour la combinaison franchise/modèle la plus favorable trouvée dans chaque canton
+                (adulte dès 19 ans). Les économies réelles dépendent de votre situation individuelle.
               </KeyFact>
 
             </section>
@@ -526,8 +536,8 @@ export default function GuideLamalPage() {
               <ol className="space-y-4 mb-6">
                 {[
                   { n: '1', t: 'Comparez les primes', d: 'Dès octobre, comparez sur priminfo.ch ou via notre service.' },
-                  { n: '2', t: 'Inscrivez-vous à la nouvelle caisse', d: 'Elle gère souvent la résiliation à votre place.' },
-                  { n: '3', t: 'Envoyez la résiliation', d: 'Lettre recommandée à votre ancien assureur avant le 30 novembre.' },
+                  { n: '2', t: 'Inscrivez-vous à la nouvelle caisse', d: 'Elle gère souvent la résiliation à votre place — vérifiez-le avec elle.' },
+                  { n: '3', t: 'Si besoin, résiliez vous-même', d: "Si votre nouvelle caisse ne s'en charge pas : lettre recommandée à votre ancien assureur avant le 30 novembre." },
                   { n: '4', t: "Recevez votre carte d'assuré", d: "Valide dès le 1er janvier de l'année suivante." },
                 ].map((s) => (
                   <li key={s.n} className="flex gap-4">

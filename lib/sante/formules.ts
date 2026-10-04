@@ -6,7 +6,8 @@
  *   - Min / Max          : valeur extrême parmi toutes les offres des régions concernées
  *   - Moyenne            : moyenne des prix par région, pondérée par la population (age_25_plus)
  *   - Économie caisse max: écart max − min entre assureurs à franchise/modèle/accident fixés
- *                          (seul l'assureur varie), recherche exhaustive du meilleur profil
+ *                          (seul l'assureur varie), recherche exhaustive du meilleur profil,
+ *                          adultes dès 19 ans (adulte + jeune adulte, sans enfant)
  *   - Économie caisse min/moyenne : écart max − min par région toutes offres confondues
  *   - Économie moyenne (multi-âges) : voir economieMoyenneCaisseIdentique() — écart moyen
  *                          entre assureurs à profil strictement identique (région × âge ×
@@ -18,15 +19,20 @@
  *                          écart max−min entre assureurs, adultes + jeunes adultes uniquement,
  *                          renvoie aussi le détail du profil trouvé (région, franchise, modèle,
  *                          accident, assureurs min/max).
- *   - Tous les calculs d'écart ci-dessus utilisent prime_nette (= prime_mensuelle − un
- *     remboursement fixe de CHF 5.15, identique sur toutes les lignes). Comme cette
- *     constante s'annule dans toute soustraction, les écarts sont rigoureusement
- *     identiques avec prime_nette ou prime_mensuelle — seules les valeurs absolues
- *     illustratives (ex. primes affichées dans l'exemple de Genève) en dépendent.
- *     Vérifiable avec scripts/verifier_stats_publiques.py (et son prédécesseur
- *     scripts/verifier_economie_moyenne.py).
+ *   - Toutes les fonctions ci-dessus (prime min par canton, écarts entre caisses, économies
+ *     de modèle) utilisent prime_nette (= prime_mensuelle − un remboursement forfaitaire de
+ *     CHF 5.15, identique sur toutes les lignes) — jamais prime_mensuelle brute. Pour les
+ *     écarts, la constante s'annule dans la soustraction donc le choix n'a pas d'impact ; pour
+ *     les valeurs absolues (prime min par canton, prime BASE moyenne), c'est en revanche la
+ *     convention retenue pour tout le site. Vérifiable avec scripts/verifier_stats_publiques.py
+ *     (et son prédécesseur scripts/verifier_economie_moyenne.py).
  *   - Break-even         : calculé sur les primes moyennes pondérées
- *   - Économie modèle    : écart entre la moyenne BASE et la moyenne du modèle alternatif
+ *   - Économie modèle    : voir modeleEconomieAdultes() — écart entre la prime BASE et la
+ *                          prime du modèle alternatif, adultes dès 19 ans (adulte + jeune
+ *                          adulte), pondéré par la population de la tranche. Le % est calculé
+ *                          avec pour dénominateur la prime BASE moyenne sur ce même périmètre
+ *                          exact (même franchise, mêmes tranches d'âge) — jamais une prime
+ *                          moyenne toutes franchises/modèles confondus.
  *   - Subside moyen      : codé en dur (CHF 2'421/an, source sozialesicherheit.ch) — hors périmètre de ce fichier
  *
  * Source des données :
@@ -71,6 +77,19 @@ export const DEFAULT_FRANCHISE = 300
 export const DEFAULT_MODELE = 'BASE'
 
 const QP = 0.1  // taux de quote-part LAMal
+
+// Tranches d'âge utilisées pour toutes les statistiques « adultes dès 19 ans »
+// (économie caisse max/moyenne, écart maximal, économie de modèle) — exclut les
+// enfants, cohérent avec la méthodologie retenue sur /sante et /sante/comparateur.
+export type TrancheAge = 'adulte' | 'jeuneAdulte' | 'enfant'
+
+export const NAISSANCE_PAR_TRANCHE: Record<TrancheAge, number> = {
+  adulte: ADULTE_NAISSANCE,
+  jeuneAdulte: 2005,
+  enfant: 2015,
+}
+
+const TRANCHES_ADULTES_19_PLUS = [NAISSANCE_PAR_TRANCHE.adulte, NAISSANCE_PAR_TRANCHE.jeuneAdulte]
 
 // ─── Chargement des données (cache module) ────────────────────────────────────
 
@@ -212,12 +231,15 @@ function allModeles(): string[] {
 }
 
 /**
- * Écart mensuel maximal entre assureurs à profil strictement identique (CHF/mois).
- * Seuls les assureurs varient : franchise, modèle et couverture accident sont fixés
- * pour chaque comparaison. Recherche exhaustive sur toutes les combinaisons franchise ×
- * modèle × accident (ou restreinte par `opts`) pour trouver le plus grand écart national.
- * Quand un assureur propose plusieurs produits dans la même modele_categorie (ex. offres
- * télémédecine), le moins cher est retenu — comme le ferait un assuré.
+ * Écart mensuel maximal entre assureurs à profil strictement identique (CHF/mois),
+ * pour les adultes dès 19 ans (adulte + jeune adulte, sans enfant — cohérent avec
+ * ecartMaxProfil() et economieMoyenneCaisseIdentiqueAdultes()). Seuls les assureurs
+ * varient : franchise, modèle et couverture accident sont fixés pour chaque
+ * comparaison. Recherche exhaustive sur toutes les combinaisons tranche d'âge ×
+ * franchise × modèle × accident (ou restreinte par `opts`) pour trouver le plus
+ * grand écart national. Quand un assureur propose plusieurs produits dans la même
+ * modele_categorie (ex. offres télémédecine), le moins cher est retenu — comme le
+ * ferait un assuré.
  */
 export function economieMax(opts: Opts = {}): number {
   const { canton, franchise, modele, avecAccident } = opts
@@ -227,28 +249,30 @@ export function economieMax(opts: Opts = {}): number {
   const regionPop = getRegionPop()
 
   let best = 0
-  for (const f of franchises) {
-    for (const m of modeles) {
-      for (const a of accidents) {
-        const filtered = getPrimes().filter(p =>
-          p.annee_naissance === ADULTE_NAISSANCE &&
-          p.franchise === f &&
-          p.modele_categorie === m &&
-          p.avec_accident === a,
-        )
-        const byRegion = new Map<string, Map<string, number>>()
-        for (const p of filtered) {
-          if (!byRegion.has(p.region_id)) byRegion.set(p.region_id, new Map())
-          const rm = byRegion.get(p.region_id)!
-          const cur = rm.get(p.assureur)
-          if (cur === undefined || p.prime_nette < cur) rm.set(p.assureur, p.prime_nette)
-        }
-        for (const [rid, assureurMap] of byRegion) {
-          if (canton && regionPop.get(rid)?.canton !== canton) continue
-          const vals = Array.from(assureurMap.values())
-          if (vals.length < 2) continue
-          const eco = Math.max(...vals) - Math.min(...vals)
-          if (eco > best) best = eco
+  for (const naissance of TRANCHES_ADULTES_19_PLUS) {
+    for (const f of franchises) {
+      for (const m of modeles) {
+        for (const a of accidents) {
+          const filtered = getPrimes().filter(p =>
+            p.annee_naissance === naissance &&
+            p.franchise === f &&
+            p.modele_categorie === m &&
+            p.avec_accident === a,
+          )
+          const byRegion = new Map<string, Map<string, number>>()
+          for (const p of filtered) {
+            if (!byRegion.has(p.region_id)) byRegion.set(p.region_id, new Map())
+            const rm = byRegion.get(p.region_id)!
+            const cur = rm.get(p.assureur)
+            if (cur === undefined || p.prime_nette < cur) rm.set(p.assureur, p.prime_nette)
+          }
+          for (const [rid, assureurMap] of byRegion) {
+            if (canton && regionPop.get(rid)?.canton !== canton) continue
+            const vals = Array.from(assureurMap.values())
+            if (vals.length < 2) continue
+            const eco = Math.max(...vals) - Math.min(...vals)
+            if (eco > best) best = eco
+          }
         }
       }
     }
@@ -286,14 +310,6 @@ export function economieMoyenne(opts: Opts = {}): number {
 // Résultats attendus (primes 2026) : adulte ≈ CHF 506/an, jeune adulte ≈ CHF 603/an,
 // enfant ≈ CHF 251/an, tous âges confondus ≈ CHF 465/an. Reproductible indépendamment
 // avec scripts/verifier_economie_moyenne.py.
-
-type TrancheAge = 'adulte' | 'jeuneAdulte' | 'enfant'
-
-const NAISSANCE_PAR_TRANCHE: Record<TrancheAge, number> = {
-  adulte: ADULTE_NAISSANCE,
-  jeuneAdulte: 2005,
-  enfant: 2015,
-}
 
 interface PopParAge { adulte: number; jeuneAdulte: number; enfant: number }
 
@@ -450,13 +466,14 @@ export function economieMoyenneCaisseIdentiqueAdultes(): EconomieMoyenneCaisseAd
 
 // ─── Écart maximal entre assureurs, à profil identique, adultes dès 19 ans ────
 //
-// economieMax() ci-dessus reste inchangée : elle porte uniquement sur les
-// adultes 26+ (ADULTE_NAISSANCE) et sert aux tableaux par canton de
-// sante/guide/page.tsx (economieMax({ canton })). La fonction ci-dessous est
-// un calcul séparé, sur les adultes ET jeunes adultes (19 ans et plus, sans
-// les enfants), qui renvoie en plus le détail du profil trouvé pour pouvoir
-// l'afficher sous la tuile. Recherche exhaustive sur toutes les combinaisons
-// région × tranche d'âge × franchise × modèle × accident.
+// economieMax() ci-dessus porte elle aussi sur les adultes dès 19 ans (adulte +
+// jeune adulte) et sert aux tableaux par canton de sante/guide/page.tsx
+// (economieMax({ canton })) ainsi qu'au comparateur (economieMax({ franchise,
+// modele, avecAccident })). La fonction ci-dessous est un calcul séparé, sans
+// restriction de canton ni de franchise/modèle/accident, qui renvoie en plus
+// le détail du profil trouvé pour pouvoir l'afficher sous la tuile. Recherche
+// exhaustive sur toutes les combinaisons région × tranche d'âge × franchise ×
+// modèle × accident.
 
 export interface EcartMaxProfilDetail {
   tranche: 'adulte' | 'jeuneAdulte'
@@ -598,37 +615,72 @@ export const MODELE_LABELS: Record<string, string> = {
   DIV: 'télémédecine',
 }
 
-function modeleEcoPairs(
+/**
+ * Paires (écart, prime BASE, population) par région × tranche d'âge (adulte +
+ * jeune adulte dès 19 ans, sans enfant), à franchise fixée. Le poids de
+ * population est celui de la tranche concernée dans la région (getRegionPopParAge),
+ * pas la population totale — cohérent avec getEcartRegionAge() utilisée par
+ * economieMoyenneCaisseIdentiqueAdultes().
+ */
+function modeleEcoPairsAdultes(
   modele: ModeleAlt,
   franchise: number,
-): { eco: number; pop: number }[] {
-  const base = computeRegionStats(franchise, 'BASE', ADULTE_NAISSANCE, false)
-  const alt  = computeRegionStats(franchise, modele, ADULTE_NAISSANCE, false)
-  const altMap = new Map(alt.map(r => [r.region_id, r]))
+): { eco: number; baseMean: number; pop: number }[] {
+  const popParAge = getRegionPopParAge()
+  const pairs: { eco: number; baseMean: number; pop: number }[] = []
 
-  return base
-    .map(r => {
+  for (const tranche of ['adulte', 'jeuneAdulte'] as const) {
+    const naissance = NAISSANCE_PAR_TRANCHE[tranche]
+    const base = computeRegionStats(franchise, 'BASE', naissance, false)
+    const alt  = computeRegionStats(franchise, modele, naissance, false)
+    const altMap = new Map(alt.map(r => [r.region_id, r]))
+
+    for (const r of base) {
       const a = altMap.get(r.region_id)
-      if (!a) return null
-      return { eco: r.mean - a.mean, pop: r.pop }
-    })
-    .filter((x): x is { eco: number; pop: number } => x !== null)
+      if (!a) continue
+      const pop = popParAge.get(r.region_id)?.[tranche] ?? 0
+      pairs.push({ eco: r.mean - a.mean, baseMean: r.mean, pop })
+    }
+  }
+  return pairs
 }
 
-/** Économie mensuelle minimale en passant au modèle alternatif (CHF/mois). */
-export function modeleEconomieMin(modele: ModeleAlt, franchise = DEFAULT_FRANCHISE): number {
-  return Math.round(Math.min(...modeleEcoPairs(modele, franchise).map(x => x.eco)))
+export interface ModeleEconomieAdultes {
+  maxChf: number        // CHF/mois, meilleur cas sur toutes les régions × tranches (adulte+jeuneAdulte)
+  moyenneChf: number     // CHF/mois, moyenne pondérée par population sur le même périmètre
+  baseMoyenneChf: number // prime BASE moyenne pondérée, même périmètre — dénominateur des %
+  maxPct: number         // maxChf / baseMoyenneChf
+  moyennePct: number     // moyenneChf / baseMoyenneChf
 }
 
-/** Économie mensuelle maximale en passant au modèle alternatif (CHF/mois). */
-export function modeleEconomieMax(modele: ModeleAlt, franchise = DEFAULT_FRANCHISE): number {
-  return Math.round(Math.max(...modeleEcoPairs(modele, franchise).map(x => x.eco)))
-}
+const _modeleEconomieAdultesCache = new Map<string, ModeleEconomieAdultes>()
 
-/** Économie mensuelle moyenne pondérée en passant au modèle alternatif (CHF/mois). */
-export function modeleEconomieMoyenne(modele: ModeleAlt, franchise = DEFAULT_FRANCHISE): number {
-  const pairs = modeleEcoPairs(modele, franchise)
-  return Math.round(weightedMean(pairs.map(p => p.eco), pairs.map(p => p.pop)))
+/**
+ * Économie réalisable en passant au modèle alternatif, pour les adultes dès
+ * 19 ans (adulte + jeune adulte), à franchise fixée. Remplace
+ * modeleEconomieMax/modeleEconomieMoyenne (restreintes à l'adulte 35 ans) et le
+ * calcul de % par primeMoyenne() (qui mélangeait toutes franchises/modèles) :
+ * ici le dénominateur est la prime BASE moyenne pondérée sur le même périmètre
+ * exact que le numérateur (même franchise, mêmes tranches d'âge).
+ */
+export function modeleEconomieAdultes(modele: ModeleAlt, franchise = DEFAULT_FRANCHISE): ModeleEconomieAdultes {
+  const key = `${modele}:${franchise}`
+  if (_modeleEconomieAdultesCache.has(key)) return _modeleEconomieAdultesCache.get(key)!
+
+  const pairs = modeleEcoPairsAdultes(modele, franchise)
+  const baseMoyenne = weightedMean(pairs.map(p => p.baseMean), pairs.map(p => p.pop))
+  const ecoMoyenne  = weightedMean(pairs.map(p => p.eco), pairs.map(p => p.pop))
+  const ecoMax      = Math.max(...pairs.map(p => p.eco))
+
+  const result: ModeleEconomieAdultes = {
+    maxChf: Math.round(ecoMax),
+    moyenneChf: Math.round(ecoMoyenne),
+    baseMoyenneChf: Math.round(baseMoyenne),
+    maxPct: Math.round(ecoMax / baseMoyenne * 100),
+    moyennePct: Math.round(ecoMoyenne / baseMoyenne * 100),
+  }
+  _modeleEconomieAdultesCache.set(key, result)
+  return result
 }
 
 // ─── Subside moyen ────────────────────────────────────────────────────────────
@@ -641,10 +693,11 @@ export function modeleEconomieMoyenne(modele: ModeleAlt, franchise = DEFAULT_FRA
 // ─── Prime minimale par canton ─────────────────────────────────────────────────
 //
 // Prime la moins chère de chaque canton (CHF/mois) : minimum, sur toutes les
-// régions de prime et toutes les caisses du canton, de prime_mensuelle (prime
-// brute OFSP, colonne « Prime » de priminfo.ch — pas prime_nette) pour le profil
-// de référence adulte (naissance 1990), franchise CHF 300, modèle BASE, sans
-// couverture accident. Vérifiable avec scripts/verifier_prime_min_canton.py.
+// régions de prime et toutes les caisses du canton, de prime_nette (prime après
+// le remboursement forfaitaire OFSP de CHF 5.15 — cohérent avec le reste du
+// fichier, qui utilise prime_nette partout) pour le profil de référence adulte
+// (naissance 1990), franchise CHF 300, modèle BASE, sans couverture accident.
+// Vérifiable avec scripts/verifier_prime_min_canton.py.
 
 const CANTON_NOMS: Record<string, string> = {
   ZG: 'Zoug', AI: 'Appenzell Rh.-Int.', SG: 'Saint-Gall', SZ: 'Schwyz', UR: 'Uri',
@@ -681,7 +734,7 @@ export function primeMinParCanton(): PrimeMinCanton[] {
   const minByCanton = new Map<string, number>()
   for (const p of filtered) {
     const cur = minByCanton.get(p.canton)
-    if (cur === undefined || p.prime_mensuelle < cur) minByCanton.set(p.canton, p.prime_mensuelle)
+    if (cur === undefined || p.prime_nette < cur) minByCanton.set(p.canton, p.prime_nette)
   }
 
   _primeMinParCanton = Array.from(minByCanton.entries())

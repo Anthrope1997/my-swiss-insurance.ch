@@ -1,12 +1,9 @@
 'use client'
 
 import { useRef, useLayoutEffect, useState } from 'react'
-import { nationalAvgPrime, nationalBreakEven } from '@/lib/sante/calcul-franchise'
+import { nationalBreakEven } from '@/lib/sante/calcul-franchise'
 
-// Primes moyennes nationales — caisse la moins chère par franchise, moyennée sur les cantons
-const PRIME_300  = nationalAvgPrime(300)
-const PRIME_2500 = nationalAvgPrime(2500)
-const SEUIL      = nationalBreakEven()
+const SEUIL = nationalBreakEven()
 
 function totalAnnuel(prime: number, franchise: number, frais: number): number {
   return (
@@ -54,9 +51,6 @@ function curvePath(prime: number, franchise: number): string {
   return pts.join(' ')
 }
 
-const PATH_F2500 = curvePath(PRIME_2500, 2500)
-const PATH_F300  = curvePath(PRIME_300, 300)
-
 const cL      = PAD.l
 const cR      = PAD.l + CHART_W
 const cT      = PAD.t
@@ -86,9 +80,6 @@ function mcurvePath(prime: number, franchise: number): string {
   return pts.join(' ')
 }
 
-const M_PATH_F2500 = mcurvePath(PRIME_2500, 2500)
-const M_PATH_F300  = mcurvePath(PRIME_300, 300)
-
 const mCL      = MPAD.l
 const mCR      = MPAD.l + MCHART_W
 const mCT      = MPAD.t
@@ -101,8 +92,13 @@ const mRightCx = mmapX((SEUIL + X_MAX) / 2)
 const Y_TICKS = [4000, 5000, 6000, 7000, 8000]
 const X_TICKS = [0, 1000, 2000, 3000, 4000]
 
+interface FranchiseChartProps {
+  primeF300: number   // CHF/mois, prime BASE moyenne pondérée (primeMoyenne() — formules.ts)
+  primeF2500: number  // idem, franchise CHF 2 500
+}
+
 // ─── Composant React ──────────────────────────────────────────────────────────
-export default function FranchiseChart() {
+export default function FranchiseChart({ primeF300, primeF2500 }: FranchiseChartProps) {
   const [frais, setFrais]               = useState(0)
   const [displayWidth, setDisplayWidth] = useState<number | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -136,15 +132,15 @@ export default function FranchiseChart() {
   const aRightCx= isMobile ? mRightCx: rightCx
   const aMapX   = isMobile ? mmapX   : mapX
   const aMapY   = isMobile ? mmapY   : mapY
-  const aPathF2500 = isMobile ? M_PATH_F2500 : PATH_F2500
-  const aPathF300  = isMobile ? M_PATH_F300  : PATH_F300
+  const aPathF2500 = isMobile ? mcurvePath(primeF2500, 2500) : curvePath(primeF2500, 2500)
+  const aPathF300  = isMobile ? mcurvePath(primeF300, 300)   : curvePath(primeF300, 300)
   const aLeftPad   = isMobile ? MPAD.l : PAD.l
   const aRightPad  = isMobile ? MPAD.r : PAD.r
 
   const annotY    = aMapY(3700)
   const sliderX   = aMapX(frais)
-  const dotY2500  = aMapY(totalAnnuel(PRIME_2500, 2500, frais))
-  const dotY300   = aMapY(totalAnnuel(PRIME_300, 300, frais))
+  const dotY2500  = aMapY(totalAnnuel(primeF2500, 2500, frais))
+  const dotY300   = aMapY(totalAnnuel(primeF300, 300, frais))
 
   // Labels axe Y : "CHF 8 000" sur desktop, "8k" sur mobile
   const fmtYLabel    = (v: number) => isMobile ? `${v / 1000}k` : fmtCHF(v)

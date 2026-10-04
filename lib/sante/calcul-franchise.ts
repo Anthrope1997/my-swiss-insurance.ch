@@ -45,14 +45,6 @@ export function cantonBreakEven(slug: string): number | null {
   return breakEven(f300.primeMois, f2500.primeMois, 300)
 }
 
-/** Prime mensuelle moyenne nationale à un niveau de franchise donné (adulte). */
-export function nationalAvgPrime(franchise: number): number {
-  const vals = Object.values(cantonBySlug)
-    .map(c => c.franchiseTable.find(r => r.franchise === franchise)?.primeMois)
-    .filter((v): v is number => v !== undefined)
-  return vals.reduce((s, v) => s + v, 0) / vals.length
-}
-
 /** Seuil d'équilibre F300 vs F2500 moyen national (adulte 26 ans et plus). */
 export function nationalBreakEven(): number {
   const vals = Object.keys(cantonBySlug)

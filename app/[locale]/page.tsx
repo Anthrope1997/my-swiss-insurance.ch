@@ -3,11 +3,16 @@ import Link from 'next/link'
 import UnifiedLeadForm from '@/components/ui/UnifiedLeadForm'
 import CantonSearch from '@/components/ui/CantonSearch'
 import HeroStats from '@/components/ui/HeroStats'
-import { ecartMaxProfil } from '@/lib/sante/formules'
+import { ecartMaxProfil, modeleEconomieAdultes } from '@/lib/sante/formules'
 import { formatChf } from '@/lib/shared/formatters'
 
 const ecartMax = ecartMaxProfil()
 const ecartMaxFmt = formatChf(ecartMax.montantAnnuel)
+const modeleMaxPctHome = Math.max(
+  modeleEconomieAdultes('HAM').maxPct,
+  modeleEconomieAdultes('HMO').maxPct,
+  modeleEconomieAdultes('DIV').maxPct,
+)
 
 export const metadata: Metadata = {
   title: 'Économisez sur votre assurance maladie suisse en 2026',
@@ -106,7 +111,7 @@ const guides = [
       </svg>
     ),
     title: 'Les 4 modèles d\'assurance',
-    desc: 'Standard, médecin de famille, centre médical, télémédecine : jusqu\'à 22 % d\'économie sur la prime',
+    desc: `Standard, médecin de famille, centre médical, télémédecine : jusqu'à ${modeleMaxPctHome} % d'économie sur la prime`,
     href: '/sante/modeles',
   },
   {

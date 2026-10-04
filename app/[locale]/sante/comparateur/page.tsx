@@ -2,20 +2,27 @@ import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import ComparateurClient from '@/components/sante/ComparateurClient'
 import Breadcrumb from '@/components/ui/Breadcrumb'
-import { ecartMaxProfil, economieMoyenneCaisseIdentiqueAdultes, primeMinParCanton, economieMax } from '@/lib/sante/formules'
+import { ecartMaxProfil, economieMoyenneCaisseIdentiqueAdultes, primeMinParCanton, economieMax, modeleEconomieAdultes } from '@/lib/sante/formules'
 
 const cantonTable = primeMinParCanton()
 const ecartMaxRegionMensuel = economieMax({ franchise: 300, modele: 'BASE', avecAccident: false })
 const primeMinZG = cantonTable.find(c => c.code === 'ZG')!.primeArrondie
 const primeMinGE = cantonTable.find(c => c.code === 'GE')!.primeArrondie
+const modeleMaxPctComparateur = Math.max(
+  modeleEconomieAdultes('HAM').maxPct,
+  modeleEconomieAdultes('HMO').maxPct,
+  modeleEconomieAdultes('DIV').maxPct,
+)
+
+const ecartMaxRegionAnnuel = ecartMaxRegionMensuel * 12
 
 export const metadata: Metadata = {
   title: 'Comparateur caisses maladie LAMal 2026 : Primes par canton',
   description:
-    "Comparez les primes LAMal 2026 par code postal. Trouvez la caisse maladie la moins chère selon votre profil, franchise et modèle. Données officielles OFSP, jusqu'à CHF 3 377 d'écart entre caisses par an, à profil identique.",
+    `Comparez les primes LAMal 2026 par code postal. Trouvez la caisse maladie la moins chère selon votre profil, franchise et modèle. Données officielles OFSP, jusqu'à CHF ${ecartMaxRegionAnnuel.toLocaleString('fr-CH')} d'écart entre caisses par an, à profil identique.`,
   openGraph: {
     title: 'Comparateur de caisses maladie LAMal 2026',
-    description: "Primes LAMal 2026 par canton : comparez et économisez jusqu'à CHF 3 377 par an, à profil identique.",
+    description: `Primes LAMal 2026 par canton : comparez et économisez jusqu'à CHF ${ecartMaxRegionAnnuel.toLocaleString('fr-CH')} par an, à profil identique.`,
     url: 'https://my-swiss-insurance.ch/sante/comparateur',
     type: 'article',
   },
@@ -41,7 +48,7 @@ const faqSchema = {
       name:    "Quelle est la caisse maladie la moins chère en Suisse ?",
       acceptedAnswer: {
         '@type': 'Answer',
-        text:    `La caisse la moins chère dépend de votre canton, de votre âge et du modèle choisi. Pour un adulte avec franchise de CHF 300 et modèle standard, la prime la moins chère débute à CHF ${primeMinZG} par mois à Zoug et à CHF ${primeMinGE} à Genève. Les écarts entre caisses dans une même région atteignent jusqu'à CHF ${ecartMaxRegionMensuel} par mois.`,
+        text:    `La caisse la moins chère dépend de votre canton, de votre âge et du modèle choisi. Pour un adulte avec franchise de CHF 300 et modèle standard, la prime la moins chère débute à CHF ${primeMinZG} par mois à Zoug et à CHF ${primeMinGE} à Genève. Pour un adulte dès 19 ans, les écarts entre caisses dans une même région atteignent jusqu'à CHF ${ecartMaxRegionMensuel} par mois.`,
       },
     },
     {
@@ -57,7 +64,7 @@ const faqSchema = {
       name:    "Comment économiser sur sa prime LAMal ?",
       acceptedAnswer: {
         '@type': 'Answer',
-        text:    "Choisissez un modèle alternatif (médecin de famille, centre médical, télémédecine) pour jusqu'à 22% de réduction, augmentez votre franchise si vous êtes en bonne santé, et changez de caisse avant le 30 novembre.",
+        text:    `Choisissez un modèle alternatif (médecin de famille, centre médical, télémédecine) pour jusqu'à ${modeleMaxPctComparateur}% de réduction, augmentez votre franchise si vous êtes en bonne santé, et changez de caisse avant le 30 novembre.`,
       },
     },
     {

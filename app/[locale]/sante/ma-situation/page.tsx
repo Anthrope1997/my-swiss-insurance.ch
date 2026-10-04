@@ -6,6 +6,13 @@ import FAQ from '@/components/ui/FAQ'
 import Link from 'next/link'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import HeroStats from '@/components/ui/HeroStats'
+import { modeleEconomieAdultes } from '@/lib/sante/formules'
+
+const modeleMaxPctSituation = Math.max(
+  modeleEconomieAdultes('HAM').maxPct,
+  modeleEconomieAdultes('HMO').maxPct,
+  modeleEconomieAdultes('DIV').maxPct,
+)
 
 export const metadata: Metadata = {
   title: 'LAMal selon votre situation professionnelle en 2026',
@@ -340,7 +347,7 @@ export default function MaSituationPage() {
                   },
                   {
                     titre: 'Modèle standard recommandé au départ',
-                    desc: "Le temps de trouver un médecin de famille de confiance et de vous orienter dans le système suisse, commencez par le modèle standard. Vous pourrez basculer vers un modèle alternatif (télémédecine, centre médical, médecin de famille) dès le 1er janvier suivant, avec des économies de prime allant jusqu'à 22 %.",
+                    desc: `Le temps de trouver un médecin de famille de confiance et de vous orienter dans le système suisse, commencez par le modèle standard. Vous pourrez basculer vers un modèle alternatif (télémédecine, centre médical, médecin de famille) dès le 1er janvier suivant, avec des économies de prime allant jusqu'à ${modeleMaxPctSituation} %.`,
                   },
                   {
                     titre: 'Frontalier ou détaché en Suisse ?',

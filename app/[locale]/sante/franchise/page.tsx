@@ -8,7 +8,8 @@ import FAQ from '@/components/ui/FAQ'
 import Link from 'next/link'
 import AuthorBio from '@/components/ui/AuthorBio'
 import HeroStats from '@/components/ui/HeroStats'
-import { nationalBreakEven, nationalBreakEvenJA, nationalBreakEvenEnfant, nationalAvgPrime } from '@/lib/sante/calcul-franchise'
+import { nationalBreakEven, nationalBreakEvenJA, nationalBreakEvenEnfant } from '@/lib/sante/calcul-franchise'
+import { primeMoyenne } from '@/lib/sante/formules'
 
 export const metadata: Metadata = {
   title: "Franchise LAMal 2026 : quel montant choisir",
@@ -36,8 +37,13 @@ const articleSchema = {
 const seuil       = nationalBreakEven()
 const seuilJA     = nationalBreakEvenJA()
 const seuilEnfant = nationalBreakEvenEnfant()
-const economieMoy = Math.round((nationalAvgPrime(300) - nationalAvgPrime(2500)) * 12)
-const pctEconomie = Math.round((nationalAvgPrime(300) - nationalAvgPrime(2500)) / nationalAvgPrime(300) * 100)
+// Même source et méthode que /sante/guide (primeMoyenne, prime nette pondérée
+// par population) — évite d'afficher un chiffre différent pour la même
+// économie de franchise selon la page.
+const primeF300Moyenne  = primeMoyenne({ franchise: 300,  modele: 'BASE', avecAccident: false })
+const primeF2500Moyenne = primeMoyenne({ franchise: 2500, modele: 'BASE', avecAccident: false })
+const economieMoy = Math.round((primeF300Moyenne - primeF2500Moyenne) * 12)
+const pctEconomie = Math.round((primeF300Moyenne - primeF2500Moyenne) / primeF300Moyenne * 100)
 const fmtChf = (n: number) => n.toLocaleString('fr-CH')
 
 const faqItems = [
@@ -302,7 +308,7 @@ export default function FranchisePage() {
               Coût annuel moyen par franchise de l&apos;assurance LAMal la moins chère pour un adulte
             </p>
             <div className="hidden md:block">
-              <FranchiseChart />
+              <FranchiseChart primeF300={primeF300Moyenne} primeF2500={primeF2500Moyenne} />
             </div>
 
             <KeyFact>

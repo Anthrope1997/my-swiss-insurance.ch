@@ -6,20 +6,22 @@ import Link from 'next/link'
 import AuthorBio from '@/components/ui/AuthorBio'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import HeroStats from '@/components/ui/HeroStats'
-import { modeleEconomieMax, modeleEconomieMoyenne, primeMoyenne } from '@/lib/sante/formules'
+import { modeleEconomieAdultes } from '@/lib/sante/formules'
 import { formatChf } from '@/lib/shared/formatters'
 
-const _base = primeMoyenne()
-const hamMaxPct = Math.round(modeleEconomieMax('HAM') / _base * 100)   // 18
-const hmoMaxPct = Math.round(modeleEconomieMax('HMO') / _base * 100)   // 22
-const divMaxPct = Math.round(modeleEconomieMax('DIV') / _base * 100)   // 18
-const hamMoyPct = Math.round(modeleEconomieMoyenne('HAM') / _base * 100)  // 11
-const hmoMoyPct = Math.round(modeleEconomieMoyenne('HMO') / _base * 100)  // 14
-const divMoyPct = Math.round(modeleEconomieMoyenne('DIV') / _base * 100)  // 11
+const hamEco = modeleEconomieAdultes('HAM')
+const hmoEco = modeleEconomieAdultes('HMO')
+const divEco = modeleEconomieAdultes('DIV')
+const hamMaxPct = hamEco.maxPct
+const hmoMaxPct = hmoEco.maxPct
+const divMaxPct = divEco.maxPct
+const hamMoyPct = hamEco.moyennePct
+const hmoMoyPct = hmoEco.moyennePct
+const divMoyPct = divEco.moyennePct
 const maxModelPct   = Math.max(hamMaxPct, hmoMaxPct, divMaxPct)
-const maxModelAnnuel = Math.round(Math.max(modeleEconomieMax('HMO'), modeleEconomieMax('DIV'), modeleEconomieMax('HAM')) * 12)
-const moyModelAnnuel = Math.round((modeleEconomieMoyenne('HAM') + modeleEconomieMoyenne('HMO') + modeleEconomieMoyenne('DIV')) / 3 * 12)
-const moyModelPct = Math.round((hamMoyPct + hmoMoyPct + divMoyPct) / 3)        // 12
+const maxModelAnnuel = Math.round(Math.max(hmoEco.maxChf, divEco.maxChf, hamEco.maxChf) * 12)
+const moyModelAnnuel = Math.round((hamEco.moyenneChf + hmoEco.moyenneChf + divEco.moyenneChf) / 3 * 12)
+const moyModelPct = Math.round((hamMoyPct + hmoMoyPct + divMoyPct) / 3)
 
 export const metadata: Metadata = {
   title: 'Modèles LAMal 2026 : standard, médecin de famille, centre médical, télémédecine',
