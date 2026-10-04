@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { tousLesProduits } from '@/data/sante/complementaire'
-import type { ProfilType, FamilleComplementaire } from '@/data/sante/complementaire'
+import { tousLesProduits } from '@/datasets/data/sante/lca'
+import type { ProfilType, FamilleComplementaire } from '@/datasets/data/sante/lca'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 

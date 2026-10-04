@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import NeedHelpSection from '@/components/ui/NeedHelpSection'
 import FranchiseChart from '@/components/ui/FranchiseChart'
-import FranchiseSimulator from '@/components/lamal/FranchiseSimulator'
+import FranchiseSimulator from '@/components/sante/FranchiseSimulator'
 import KeyFact from '@/components/ui/KeyFact'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import FAQ from '@/components/ui/FAQ'

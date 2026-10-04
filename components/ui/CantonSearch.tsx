@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { CANTONS as RAW_CANTONS } from '@/data/general/cantons'
+import { CANTONS as RAW_CANTONS } from '@/datasets/data/general/cantons'
 
 const CANTONS = RAW_CANTONS.map(c => ({
   nom:  c.nomCourt ?? c.nom,

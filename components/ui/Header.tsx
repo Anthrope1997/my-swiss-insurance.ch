@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import LeadFormModal from '@/components/ui/LeadFormModal'
-import ShieldIcon from '@/components/shared/ShieldIcon'
+import ShieldIcon from '@/components/ui/ShieldIcon'
 import fr from '@/dictionaries/fr.json'
 
 const menuSections: {

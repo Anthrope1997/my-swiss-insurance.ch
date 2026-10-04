@@ -36,9 +36,9 @@
  *   - Subside moyen      : codé en dur (CHF 2'421/an, source sozialesicherheit.ch) — hors périmètre de ce fichier
  *
  * Source des données :
- *   - data/sante/primes.json   → tarifs OFSP 2026 par région / assureur / profil / franchise / modèle
- *   - data/sante/regions.json  → population par région de prime (source OFS)
- *   - data/sante/cantons.ts    → subsideMensuelMax par canton
+ *   - datasets/data/sante/lamal/primes/2026/primes_2026.json   → tarifs OFSP 2026 par région / assureur / profil / franchise / modèle
+ *   - datasets/data/sante/lamal/regions/2026/regions_2026.json  → population par région de prime (source OFS)
+ *   - datasets/data/sante/lamal/cantons/2026/cantons_2026.ts    → subsideMensuelMax par canton
  *
  * Toutes les fonctions sont serveur-only (lecture fichier au build time).
  * Les données sont mises en cache au niveau module — un seul chargement par build.
@@ -99,7 +99,7 @@ let _regionPop: Map<string, { canton: string; pop: number }> | null = null
 function getPrimes(): PrimeRecord[] {
   if (!_primes) {
     _primes = JSON.parse(
-      readFileSync(join(process.cwd(), 'data/sante/primes.json'), 'utf-8'),
+      readFileSync(join(process.cwd(), 'datasets/data/sante/lamal/primes/2026/primes_2026.json'), 'utf-8'),
     ) as PrimeRecord[]
   }
   return _primes
@@ -108,7 +108,7 @@ function getPrimes(): PrimeRecord[] {
 function getRegionPop(): Map<string, { canton: string; pop: number }> {
   if (!_regionPop) {
     const raw = JSON.parse(
-      readFileSync(join(process.cwd(), 'data/sante/regions.json'), 'utf-8'),
+      readFileSync(join(process.cwd(), 'datasets/data/sante/lamal/regions/2026/regions_2026.json'), 'utf-8'),
     ) as Record<string, { region_id: string; canton: string; communes: Array<{ population: { age_25_plus: number } }> }>
 
     _regionPop = new Map()
@@ -318,7 +318,7 @@ let _regionPopParAge: Map<string, PopParAge> | null = null
 function getRegionPopParAge(): Map<string, PopParAge> {
   if (!_regionPopParAge) {
     const raw = JSON.parse(
-      readFileSync(join(process.cwd(), 'data/sante/regions.json'), 'utf-8'),
+      readFileSync(join(process.cwd(), 'datasets/data/sante/lamal/regions/2026/regions_2026.json'), 'utf-8'),
     ) as Record<string, {
       region_id: string
       communes: Array<{ population: { age_0_18: number; age_19_25: number; age_25_plus: number } }>
@@ -495,7 +495,7 @@ let _regionVilles: Map<string, string> | null = null
 function getRegionVilles(): Map<string, string> {
   if (!_regionVilles) {
     const raw = JSON.parse(
-      readFileSync(join(process.cwd(), 'data/sante/regions.json'), 'utf-8'),
+      readFileSync(join(process.cwd(), 'datasets/data/sante/lamal/regions/2026/regions_2026.json'), 'utf-8'),
     ) as Record<string, { region_id: string; ville: string }>
     _regionVilles = new Map(Object.values(raw).map(r => [r.region_id, r.ville]))
   }

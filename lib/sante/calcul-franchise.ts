@@ -10,7 +10,7 @@
  *   ⟹  frais_seuil = ((prime_Fa − prime_Fb) × 12 + 0.9 × Fa) / 0.9
  */
 
-import { cantonBySlug } from '@/data/sante/cantons'
+import { cantonBySlug } from '@/datasets/data/sante/lamal/cantons/2026/cantons_2026'
 
 const QP = 0.1  // taux de quote-part LAMal
 

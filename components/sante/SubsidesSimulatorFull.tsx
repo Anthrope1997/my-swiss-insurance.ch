@@ -6,7 +6,7 @@ import {
   calculerSubsideGE, calculerSubsideVS, calculerSubsideNE,
   calculerSubsideVD, calculerSubsideJU, calculerSubsideFR,
 } from '@/lib/sante/calcul-subside'
-import { SUBSIDES_2026, type CantonSubside2026 } from '@/data/sante/cantons'
+import { SUBSIDES_2026, type CantonSubside2026 } from '@/datasets/data/sante/lamal/cantons/2026/cantons_2026'
 import LeadFormModal from '@/components/ui/LeadFormModal'
 import UnifiedCombobox from '@/components/ui/UnifiedCombobox'
 import fr from '@/dictionaries/fr.json'

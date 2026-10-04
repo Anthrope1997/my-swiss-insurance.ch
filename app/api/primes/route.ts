@@ -51,21 +51,21 @@ let npaCache: Record<string, string> | null = null
 let regionsCache: Record<string, Region> | null = null
 
 function dataPath(filename: string) {
-  return path.join(process.cwd(), 'data', 'sante', filename)
+  return path.join(process.cwd(), 'datasets', 'data', 'sante', 'lamal', filename)
 }
 
 function getPrimes(): PrimeRow[] {
-  if (!primesCache) primesCache = JSON.parse(fs.readFileSync(dataPath('primes.json'), 'utf-8'))
+  if (!primesCache) primesCache = JSON.parse(fs.readFileSync(dataPath('primes/2026/primes_2026.json'), 'utf-8'))
   return primesCache!
 }
 
 function getNpaMap(): Record<string, string> {
-  if (!npaCache) npaCache = JSON.parse(fs.readFileSync(dataPath('npa_to_region.json'), 'utf-8'))
+  if (!npaCache) npaCache = JSON.parse(fs.readFileSync(dataPath('regions/2026/npa-region_2026.json'), 'utf-8'))
   return npaCache!
 }
 
 function getRegions(): Record<string, Region> {
-  if (!regionsCache) regionsCache = JSON.parse(fs.readFileSync(dataPath('regions.json'), 'utf-8'))
+  if (!regionsCache) regionsCache = JSON.parse(fs.readFileSync(dataPath('regions/2026/regions_2026.json'), 'utf-8'))
   return regionsCache!
 }
 

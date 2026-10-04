@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import ShieldIcon from '@/components/shared/ShieldIcon'
+import ShieldIcon from '@/components/ui/ShieldIcon'
 import fr from '@/dictionaries/fr.json'
 
 const columns: {

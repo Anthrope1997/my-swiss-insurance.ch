@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { CANTONS, CANTON_NOMS } from '@/data/general/cantons'
+import { CANTONS, CANTON_NOMS } from '@/datasets/data/general/cantons'
 
 export const CANTON_NAMES = CANTON_NOMS
 

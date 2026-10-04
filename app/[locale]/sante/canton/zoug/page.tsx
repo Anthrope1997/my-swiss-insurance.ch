@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import CantonPage from '@/components/sante/CantonPage'
-import { cantonBySlug } from '@/data/sante/cantons'
+import { cantonBySlug } from '@/datasets/data/sante/lamal/cantons/2026/cantons_2026'
 
 const canton = cantonBySlug['zoug']
 

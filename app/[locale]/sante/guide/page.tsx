@@ -17,7 +17,7 @@ const seuilEnfant       = nationalBreakEvenEnfant()
 // population (primeMoyenne, source primes.json/regions.json), adulte, sans
 // accident — même source et même méthodologie (prime nette, pondération par
 // population) que le reste du site, au lieu de la moyenne simple par canton
-// utilisée auparavant (nationalAvgPrime / data/sante/cantons.ts).
+// utilisée auparavant (nationalAvgPrime / datasets/data/sante/lamal/cantons/2026/cantons_2026.ts).
 const primeF300Moyenne  = primeMoyenne({ franchise: 300,  modele: 'BASE', avecAccident: false })
 const primeF2500Moyenne = primeMoyenne({ franchise: 2500, modele: 'BASE', avecAccident: false })
 const economieMensuelle = Math.round(primeF300Moyenne - primeF2500Moyenne)

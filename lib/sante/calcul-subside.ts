@@ -9,10 +9,10 @@ import {
   type Situation,
   type SubsideResult,
   type TauxVS,
-} from '@/data/sante/cantons'
+} from '@/datasets/data/sante/lamal/cantons/2026/cantons_2026'
 
 // Re-export des types utilisés par les composants
-export type { Situation, SubsideResult } from '@/data/sante/cantons'
+export type { Situation, SubsideResult } from '@/datasets/data/sante/lamal/cantons/2026/cantons_2026'
 
 // Cantons avec formule officielle précise
 export type Canton = 'GE' | 'VD' | 'NE' | 'FR' | 'JU' | 'VS'

@@ -2,7 +2,7 @@
 const nextConfig = {
   output: 'standalone',
   outputFileTracingIncludes: {
-    '/api/primes': ['./data/sante/*.json'],
+    '/api/primes': ['./datasets/data/sante/lamal/**/*.json'],
   },
   async redirects() {
     return [
